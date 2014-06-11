@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QSocket类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QSocket类参考<br><small>[<a href="network.html">网络模块</a>]</small></h1>
+
+<p>QSocket类提供了一个有缓冲的TCP连接。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qsocket-h.html">qsocket.h</a>&gt;</tt>
+<p>继承了<a href="qobject.html">QObject</a>和<a href="qiodevice.html">QIODevice</a>。
+<p><a href="qsocket-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>enum <a href="#Error-enum"><b>Error</b></a> { ErrConnectionRefused, ErrHostNotFound, ErrSocketRead }</div></li>
+<li><div class=fn><a href="#QSocket"><b>QSocket</b></a> ( QObject&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>virtual <a href="#~QSocket"><b>~QSocket</b></a> ()</div></li>
+<li><div class=fn>enum <a href="#State-enum"><b>State</b></a> { Idle, HostLookup, Connecting, Connected, Closing, Connection = Connected }</div></li>
+<li><div class=fn>State <a href="#state"><b>state</b></a> () const</div></li>
+<li><div class=fn>int <a href="#socket"><b>socket</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setSocket"><b>setSocket</b></a> ( int&nbsp;socket )</div></li>
+<li><div class=fn>QSocketDevice * <a href="#socketDevice"><b>socketDevice</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#setSocketDevice"><b>setSocketDevice</b></a> ( QSocketDevice&nbsp;*&nbsp;device )</div></li>
+<li><div class=fn>virtual void <a href="#connectToHost"><b>connectToHost</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;host, Q_UINT16&nbsp;port )</div></li>
+<li><div class=fn>QString <a href="#peerName"><b>peerName</b></a> () const</div></li>
+<li><div class=fn>virtual bool <a href="#open"><b>open</b></a> ( int&nbsp;m )</div></li>
+<li><div class=fn>virtual void <a href="#close"><b>close</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#flush"><b>flush</b></a> ()</div></li>
+<li><div class=fn>virtual Offset <a href="#size"><b>size</b></a> () const</div></li>
+<li><div class=fn>virtual Offset <a href="#at"><b>at</b></a> () const</div></li>
+<li><div class=fn>virtual bool <a href="#at-2"><b>at</b></a> ( Offset&nbsp;index )</div></li>
+<li><div class=fn>virtual bool <a href="#atEnd"><b>atEnd</b></a> () const</div></li>
+<li><div class=fn>Q_ULONG <a href="#bytesAvailable"><b>bytesAvailable</b></a> () const</div></li>
+<li><div class=fn>Q_ULONG <a href="#waitForMore"><b>waitForMore</b></a> ( int&nbsp;msecs ) const</div></li>
+<li><div class=fn>Q_ULONG <a href="#bytesToWrite"><b>bytesToWrite</b></a> () const</div></li>
+<li><div class=fn>virtual Q_LONG <a href="#readBlock"><b>readBlock</b></a> ( char&nbsp;*&nbsp;data, Q_ULONG&nbsp;maxlen )</div></li>
+<li><div class=fn>virtual Q_LONG <a href="#writeBlock"><b>writeBlock</b></a> ( const&nbsp;char&nbsp;*&nbsp;data, Q_ULONG&nbsp;len )</div></li>
+<li><div class=fn>virtual int <a href="#getch"><b>getch</b></a> ()</div></li>
+<li><div class=fn>virtual int <a href="#putch"><b>putch</b></a> ( int&nbsp;ch )</div></li>
+<li><div class=fn>virtual int <a href="#ungetch"><b>ungetch</b></a> ( int&nbsp;ch )</div></li>
+<li><div class=fn>bool <a href="#canReadLine"><b>canReadLine</b></a> () const</div></li>
+<li><div class=fn>virtual QString <a href="#readLine"><b>readLine</b></a> ()</div></li>
+<li><div class=fn>Q_UINT16 <a href="#port"><b>port</b></a> () const</div></li>
+<li><div class=fn>Q_UINT16 <a href="#peerPort"><b>peerPort</b></a> () const</div></li>
+<li><div class=fn>QHostAddress <a href="#address"><b>address</b></a> () const</div></li>
+<li><div class=fn>QHostAddress <a href="#peerAddress"><b>peerAddress</b></a> () const</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#hostFound"><b>hostFound</b></a> ()</div></li>
+<li><div class=fn>void <a href="#connected"><b>connected</b></a> ()</div></li>
+<li><div class=fn>void <a href="#connectionClosed"><b>connectionClosed</b></a> ()</div></li>
+<li><div class=fn>void <a href="#delayedCloseFinished"><b>delayedCloseFinished</b></a> ()</div></li>
+<li><div class=fn>void <a href="#readyRead"><b>readyRead</b></a> ()</div></li>
+<li><div class=fn>void <a href="#bytesWritten"><b>bytesWritten</b></a> ( int&nbsp;nbytes )</div></li>
+<li><div class=fn>void <a href="#error"><b>error</b></a> ( int )</div></li>
+</ul>
+<h2>保护槽</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#sn_read"><b>sn_read</b></a> ( bool&nbsp;force = FALSE )</div></li>
+<li><div class=fn>virtual void <a href="#sn_write"><b>sn_write</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+
+QSocket类提供了一个有缓冲的TCP连接。
+<p> 
+<p> 它提供一个完全非阻塞的<a href="qiodevice.html">QIODevice</a>，使用套接字特征代码来修改和扩展了QIODevice的应用编程接口。
+<p> 你和可能常常调用的<a href="#connectToHost">connectToHost</a>()、<a href="#bytesAvailable">bytesAvailable</a>()、<a href="#canReadLine">canReadLine</a>()这些函数并且它们继承了QIODevice。
+<p> connectToHost()是一个最常用的函数。就像它的名字那样，它打开一个被命名的主机的连接。
+<p> 绝大多数网络协议是基于包的或者基于行的。canReadLine()可以识别一个连接中是否包含一个完全不可读的的行，并且bytesAvailable()返回可以被读取的字节数量。
+<p> 信号<a href="#error">error</a>()、<a href="#connected">connected</a>()、<a href="#readyRead">readyRead</a>()和<a href="#connectionClosed">connectionClosed</a>()通知你连接的进展。还有一些不太常用的信号。当connectToHost()已经完成它的DNS查找并且正在开始它的TCP连接时，<a href="#hostFound">hostFound</a>()被发射。当<a href="#close">close</a>()成功时，<a href="#delayedCloseFinished">delayedCloseFinished</a>()被发射。当QSocket把它的“写”队列中的数据移到TCP运行中。
+<p> 还有几个套接字的访问函数：<a href="#state">state</a>()返回这个对象是否空闲，是否正在做DNS查找，是否正在连接，还是一个正在操作的连接，等等。<a href="#address">address</a>()和<a href="#port">port</a>()返回连接所使用的IP地址和端口。<a href="#peerAddress">peerAddress</a>()和<a href="#peerPort">peerPort</a>()函数返回自身所用到的IP地址和端口并且<a href="#peerName">peerName</a>()返回自身所用的名称（通常是被传送给<a href="#connectToHost">connectToHost</a>()的名字）。<a href="#socket">socket</a>() 返回这个套接字所用到的<a href="qsocketdevice.html">QSocketDevice</a>的指针。
+<p> QSocket继承了<a href="qiodevice.html">QIODevice</a>并且重新实现了一些函数。通常你可以把它作为QIODevice来写，并且绝大多数情况也可以作为QIODevice来读。但匹配的不够完美，因为QIODevice应用编程接口是为同一个机器可以控制的设备而设计的，而异步的端对端网络连接和这个不太一样。例如，没有什么可以和<a href="qiodevice.html#size">QIODevice::size</a>()确切地匹配。<a href="#open">open</a>()、<a href="#close">close</a>()、<a href="#flush">flush</a>()、<a href="#size">size</a>()、<a href="#at">at</a>()、<a href="#atEnd">atEnd</a>()、<a href="#readBlock">readBlock</a>()、<a href="#writeBlock">writeBlock</a>()、<a href="#getch">getch</a>()、<a href="#putch">putch</a>()、<a href="#ungetch">ungetch</a>()和<a href="#readLine">readLine</a>()的文档详细地描述了不同点。
+<p> <p>也可以参考<a href="qsocketdevice.html">QSocketDevice</a>、<a href="qhostaddress.html">QHostAddress</a>、<a href="qsocketnotifier.html">QSocketNotifier</a>和<a href="io.html">输入/输出和网络</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="Error-enum"></a>QSocket::Error</h3>
+<p> 这个枚举变量指定了可能的错误：
+<ul>
+<li><tt>QSocket::ErrConnectionRefused</tt> - 如果连接被拒绝
+<li><tt>QSocket::ErrHostNotFound</tt> - 如果主机没有被找到
+<li><tt>QSocket::ErrSocketRead</tt> - 如果读取套接字失败
+</ul>
+
+<h3 class=fn><a name="State-enum"></a>QSocket::State</h3>
+<p> 这个枚举变量定义了连接状态：
+<ul>
+<li><tt>QSocket::Idle</tt> - 如果没有连接
+<li><tt>QSocket::HostLookup</tt> - 在DNS查找期间
+<li><tt>QSocket::Connecting</tt> - 在TCP连接建立期间
+<li><tt>QSocket::Connected</tt> - 当存在一个可操作的连接时
+<li><tt>QSocket::Closing</tt> - 如果这个套接字正在关闭，但是还没有被关闭。
+</ul>
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QSocket"></a>QSocket::QSocket ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+创建一个<a href="#State-enum">QSocket::Idle</a>状态的QSocket对象。
+<p> <em>parent</em>和<em>name</em>参数被传递给<a href="qobject.html">QObject</a>的构造函数。
+
+<h3 class=fn><a name="~QSocket"></a>QSocket::~QSocket ()<tt> [虚]</tt>
+</h3>
+销毁这个套接字。如果需要关闭连接。
+<p>也可以参考<a href="#close">close</a>()。
+
+<h3 class=fn><a href="qhostaddress.html">QHostAddress</a> <a name="address"></a>QSocket::address () const
+</h3>  
+返回这个套接字的主机地址。（这通常就是主机的主IP地址，但是对于到localhost的连接可能是127.0.0.1。）
+
+<h3 class=fn><a href="qiodevice.html#Offset">Offset</a> <a name="at"></a>QSocket::at () const<tt> [虚]</tt>
+</h3>
+返回当前的读索引。因为QSocket是一个顺序设备，当前读索引总是0。
+
+<p>Reimplemented from <a href="qiodevice.html#at">QIODevice</a>.
+<h3 class=fn>bool <a name="at-2"></a>QSocket::at ( <a href="qiodevice.html#Offset">Offset</a>&nbsp;index )<tt> [虚]</tt>
+</h3>  
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 向前移动读索引到<em>index</em>并且如果操作成功返回真。向前移动读索引意味着忽略进入的数据。
+<p>从<a href="qiodevice.html#at-2">QIODevice</a>中重新实现的。
+
+<h3 class=fn>bool <a name="atEnd"></a>QSocket::atEnd () const<tt> [虚]</tt>
+</h3>
+如果没有更多的数据可以读取，返回真，否则返回假。
+<p>从<a href="qiodevice.html#atEnd">QIODevice</a>中重新实现的。
+
+<h3 class=fn>Q_ULONG <a name="bytesAvailable"></a>QSocket::bytesAvailable () const
+</h3>
+返回可以读取的进入数据的字节数，也就是输入缓存的大小。等于<a href="#size">size</a>()。
+<p> <p>也可以参考<a href="#bytesToWrite">bytesToWrite</a>()。
+<p>实例：<a href="networkprotocol-example.html#x606">network/networkprotocol/nntp.cpp</a>。
+
+<h3 class=fn>Q_ULONG <a name="bytesToWrite"></a>QSocket::bytesToWrite () const
+</h3>
+返回正在等待被写的数据的字节数，也就是输出缓存的大小。
+<p> <p>也可以参考<a href="#bytesAvailable">bytesAvailable</a>()。
+
+<h3 class=fn>void <a name="bytesWritten"></a>QSocket::bytesWritten ( int&nbsp;nbytes )<tt> [信号]</tt>
+</h3>
+<p> 当数据被实际写到网络时，这个信号被发射。<em>nbytes</em>参数指定了多少字节被写了。
+<p> <a href="#bytesToWrite">bytesToWrite</a>()函数常常会在相同的上下文中被使用，并且它说明了还有多少数量的缓存字节数要写。
+<p> <p>也可以参考<a href="#writeBlock">writeBlock</a>()和<a href="#bytesToWrite">bytesToWrite</a>()。
+
+<h3 class=fn>bool <a name="canReadLine"></a>QSocket::canReadLine () const
+</h3> 
+如果这一次可以从这个套接字中读取一个完整行的文本，返回真，否则返回假。
+<p> 注意如果本地出乎意料地关闭连接，这个函数返回假。这也就是说这样的循环不会工作：
+<p> <pre>
+    while( !socket-&gt;canReadLine() ) // 错了。
+        ...
+  </pre>
+ 
+<p> <p>也可以参考<a href="#readLine">readLine</a>()。
+<p>实例：<a href="clientserver-example.html#x780">network/clientserver/client/client.cpp</a>、<a href="httpd-example.html#x639">network/httpd/httpd.cpp</a>、<a href="mail-example.html#x755">network/mail/smtp.cpp</a>和<a href="networkprotocol-example.html#x607">network/networkprotocol/nntp.cpp</a>。
+
+<h3 class=fn>void <a name="close"></a>QSocket::close ()<tt> [虚]</tt>
+</h3>
+关闭这个套接字。
+<p> 读缓存被清空。
+<p> 如果输出缓存是空的，状态被设置为<a href="#State-enum">QSocket::Idle</a>并且连接被立即终止。如果输出缓存中还有数据要写，QSocket进入<a href="#State-enum">QSocket::Closing</a>状态并且等待这些数据被写完。当所有的输出数据被写完，状态被设置为<a href="#State-enum">QSocket::Idle</a>并且连接被终止。在这时，<a href="#delayedCloseFinished">delayedCloseFinished</a>() 喜好被发射。
+<p> <p>也可以参考<a href="#state">state</a>()和<a href="#bytesToWrite">bytesToWrite</a>()。
+<p>实例：<a href="clientserver-example.html#x781">network/clientserver/client/client.cpp</a>、<a href="httpd-example.html#x640">network/httpd/httpd.cpp</a>和<a href="networkprotocol-example.html#x608">network/networkprotocol/nntp.cpp</a>。
+<p>从<a href="qiodevice.html#close">QIODevice</a>中重新实现的。
+
+<h3 class=fn>void <a name="connectToHost"></a>QSocket::connectToHost ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;host, Q_UINT16&nbsp;port )<tt> [虚]</tt>
+</h3>  
+试图连接主机<em>host</em>的指定端口<em>port</em>并且立即返回。
+<p> 任何连接或者正在进行的连接被立即关闭，并且QSocket进入<a href="#State-enum">HostLookup</a> 状态。当查找成功，它发射<a href="#hostFound">hostFound</a>()，开始一个TCP连接并且进入<a href="#State-enum">Connecting</a>状态。最后，当连接成功时，它发射<a href="#connected">connected</a>()并且进入<a href="#State-enum">Connected</a>状态。如果在任何一个地方出现错误，它发射<a href="#error">error</a>()。
+<p> <em>host</em>可以是一个字符串形式的IP地址，也可以是一个DNS名称。如果需要QSocket将会进行一个普通的DNS查找。注意<em>port</em>是本地字节顺序，不像其它库那样。
+<p> <p>也可以参考<a href="#state">state</a>()。
+<p>实例：<a href="clientserver-example.html#x782">network/clientserver/client/client.cpp</a>、<a href="mail-example.html#x756">network/mail/smtp.cpp</a>和<a href="networkprotocol-example.html#x609">network/networkprotocol/nntp.cpp</a>。
+
+<h3 class=fn>void <a name="connected"></a>QSocket::connected ()<tt> [信号]</tt>
+</h3>
+<p> 在<a href="#connectToHost">connectToHost</a>()已经被调用并且连接已经被成功建立之后，这个信号被发射。
+<p> <p>也可以参考<a href="#connectToHost">connectToHost</a>()和<a href="#connectionClosed">connectionClosed</a>()。
+<p>实例：<a href="clientserver-example.html#x783">network/clientserver/client/client.cpp</a>、<a href="mail-example.html#x757">network/mail/smtp.cpp</a>和<a href="networkprotocol-example.html#x610">network/networkprotocol/nntp.cpp</a>。
+
+<h3 class=fn>void <a name="connectionClosed"></a>QSocket::connectionClosed ()<tt> [信号]</tt>
+</h3>
+<p> 当另一端已经关闭这个连接时，这个信号被发射。在连接被关闭之后，读缓存中也许还包含被可读的缓存的输入数据。
+<p> <p>也可以参考<a href="#connectToHost">connectToHost</a>()和<a href="#close">close</a>()。
+<p>实例：<a href="clientserver-example.html#x784">network/clientserver/client/client.cpp</a>和<a href="networkprotocol-example.html#x611">network/networkprotocol/nntp.cpp</a>。
+
+<h3 class=fn>void <a name="delayedCloseFinished"></a>QSocket::delayedCloseFinished ()<tt> [信号]</tt>
+</h3>
+<p> 当一个延时的关闭被完成时，这个信号被发射。
+<p> 如果你调用<a href="#close">close</a>()并且输出缓存中还有数据要写，QSocket进入<a href="#State-enum">QSocket::Closing</a>状态并且立即返回。然后它将会继续要套接字写知道所有的数据被写完。然后，<a href="#delayedCloseFinished">delayedCloseFinished</a>()信号被发射。
+<p> <p>也可以参考<a href="#close">close</a>()。
+<p>实例：<a href="clientserver-example.html#x785">network/clientserver/client/client.cpp</a>和<a href="httpd-example.html#x641">network/httpd/httpd.cpp</a>。
+
+<h3 class=fn>void <a name="error"></a>QSocket::error ( int )<tt> [信号]</tt>
+</h3>
+<p> 在错误发生之后，信号被发射。参数就是<a href="#Error-enum">Error</a>的值。
+<p>实例：<a href="clientserver-example.html#x786">network/clientserver/client/client.cpp</a>和<a href="networkprotocol-example.html#x612">network/networkprotocol/nntp.cpp</a>。
+
+<h3 class=fn>void <a name="flush"></a>QSocket::flush ()<tt> [虚]</tt>
+</h3>
+纯虚函数<a href="qiodevice.html#flush">QIODevice::flush</a>()的实现。
+<p>从<a href="qiodevice.html#flush">QIODevice</a>中重新实现的。
+
+<h3 class=fn>int <a name="getch"></a>QSocket::getch ()<tt> [虚]</tt>
+</h3>
+从内部的读缓存中读取单一的字节/字符。返回读取的字节/字符，或者如果没有什么可以读取的，返回-1。
+<p> <p>也可以参考<a href="#bytesAvailable">bytesAvailable</a>()和<a href="#putch">putch</a>()。
+<p>从<a href="qiodevice.html#getch">QIODevice</a>中重新实现的。
+
+<h3 class=fn>void <a name="hostFound"></a>QSocket::hostFound ()<tt> [信号]</tt>
+</h3>
+<p> 在<a href="#connectToHost">connectToHost</a>()已经被调用并且主机查找已经成功之后，这个信号被发射。
+<p> <p>也可以参考<a href="#connected">connected</a>()。
+<p>实例：<a href="networkprotocol-example.html#x613">network/networkprotocol/nntp.cpp</a>。
+
+<h3 class=fn>bool <a name="open"></a>QSocket::open ( int&nbsp;m )<tt> [虚]</tt>
+</h3>
+使用指定的<a href="qiodevice.html">QIODevice</a>文件模式<em>m</em>打开套接字。当被需要的时候会被自动调用并且你不应该自己调用它。
+<p>也可以参考<a href="#close">close</a>()。
+<p>从<a href="qiodevice.html#open">QIODevice</a>中重新实现的。
+
+<h3 class=fn><a href="qhostaddress.html">QHostAddress</a> <a name="peerAddress"></a>QSocket::peerAddress () const
+</h3>
+返回为<a href="#connectToHost">connectToHost</a>()函数指定名称的主机地址。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="peerName"></a>QSocket::peerName () const
+</h3>
+返回为<a href="#connectToHost">connectToHost</a>()函数指定主机名称。如果没有被设置，返回一个空字符串。
+<p>实例：<a href="mail-example.html#x758">network/mail/smtp.cpp</a>。
+
+<h3 class=fn>Q_UINT16 <a name="peerPort"></a>QSocket::peerPort () const
+</h3>  
+返回本地的主机端口号，通常是为<a href="#connectToHost">connectToHost</a>()函数指定的。如果没有被设置，返回0。
+<p> 注意Qt总是使用本地字节顺序，也就是在Qt中67就是67，不需要调用htons()。
+
+<h3 class=fn>Q_UINT16 <a name="port"></a>QSocket::port () const
+</h3>  
+返回这个套接字的主机端口号，使用本地字节顺序。
+
+<h3 class=fn>int <a name="putch"></a>QSocket::putch ( int&nbsp;ch )<tt> [虚]</tt>
+</h3>
+写字符<em>ch</em>到输出缓存。
+<p> 返回<em>ch</em>，或者如果发生错误，返回-1。
+<p> <p>也可以参考<a href="#getch">getch</a>()。
+<p>从<a href="qiodevice.html#putch">QIODevice</a>中重新实现的。
+
+<h3 class=fn>Q_LONG <a name="readBlock"></a>QSocket::readBlock ( char&nbsp;*&nbsp;data, Q_ULONG&nbsp;maxlen )<tt> [虚]</tt>
+</h3>
+从套接字中读取最多<em>maxlen</em>字节到<em>data</em>中并且返回读取的字节数。如果发生错误，返回-1。
+<p>实例：<a href="networkprotocol-example.html#x614">network/networkprotocol/nntp.cpp</a>。
+<p>从<a href="qiodevice.html#readBlock">QIODevice</a>中重新实现的。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="readLine"></a>QSocket::readLine ()<tt> [虚]</tt>
+</h3>
+返回包含终止新行符（\n）的一行文本。如果<a href="#canReadLine">canReadLine</a>()返回假，返回“”。
+<p> <p>也可以参考<a href="#canReadLine">canReadLine</a>()。
+<p>实例：<a href="clientserver-example.html#x787">network/clientserver/client/client.cpp</a>、<a href="httpd-example.html#x642">network/httpd/httpd.cpp</a>、<a href="mail-example.html#x759">network/mail/smtp.cpp</a>和<a href="networkprotocol-example.html#x615">network/networkprotocol/nntp.cpp</a>。
+
+<h3 class=fn>void <a name="readyRead"></a>QSocket::readyRead ()<tt> [信号]</tt>
+</h3>
+<p> 当有进入的数据可以被读取时，这个信号被发射。
+<p> 每一次有新进入的数据时，这个信号都被发射一次。记住新进入的数据只被报告一次，也就是，如果你没有读取全部数据，这个信号不会被再次发射，除非新的数据到达这个套接字。
+<p> <p>也可以参考<a href="#readBlock">readBlock</a>()、<a href="#readLine">readLine</a>()和<a href="#bytesAvailable">bytesAvailable</a>()。
+<p>实例：<a href="clientserver-example.html#x788">network/clientserver/client/client.cpp</a>、<a href="httpd-example.html#x643">network/httpd/httpd.cpp</a>、<a href="mail-example.html#x760">network/mail/smtp.cpp</a>和<a href="networkprotocol-example.html#x616">network/networkpotocol/nntp.cpp</a>。
+
+<h3 class=fn>void <a name="setSocket"></a>QSocket::setSocket ( int&nbsp;socket )<tt> [虚]</tt>
+</h3>
+设置套接字使用<em>socket</em>并且<a href="#state">state</a>()为<a href="#State-enum">Connected</a>。这个套接字应该已经被连接。
+<p> 这允许我们使用QSocket类作为一个其它套接字类型（也就是在Unix下的Unix领域套接字）的包装。
+<p>实例：<a href="httpd-example.html#x644">network/httpd/httpd.cpp</a>。
+
+<h3 class=fn>void <a name="setSocketDevice"></a>QSocket::setSocketDevice ( <a href="qsocketdevice.html">QSocketDevice</a>&nbsp;*&nbsp;device )<tt> [虚]</tt>
+</h3>
+设置内部套接字设备为<em>device</em>。传递一个0的<em>device</em>将导致这个内部套接字设备被使用。在使用新的<em>device</em>之前，任何已经存在的连接将被取消连接。
+<p> 新的设备在被关联到一个QSocket之前应该没有被连接，在设置套接字调用<a href="#connectToHost">connectToHost</a>()之后进行连接。
+<p> 如果你继承<a href="qsocketdevice.html">QSocketDevice</a>并且想使用QSocket应用编程接口，例如，实现Unix领域套接字，这个函数很有用。
+
+<h3 class=fn><a href="qiodevice.html#Offset">Offset</a> <a name="size"></a>QSocket::size () const<tt> [虚]</tt>
+</h3>  
+立即返回可以读取的进入数据的字节数（就像<a href="#bytesAvailable">bytesAvailable</a>()一样）。
+<p>在<a href="qiodevice.html#size">QIODevice</a>中重新实现的。
+
+<h3 class=fn>void <a name="sn_read"></a>QSocket::sn_read ( bool&nbsp;force = FALSE )<tt> [虚 保护 槽]</tt>
+</h3>
+处理套接字读通知的内部槽。
+<p> 这个函数通常只能被进入一次（也就是，不是递归调用）。如果参数<em>force</em>为真，这个函数被执行，但是没有<a href="#readyRead">readyRead</a>()信号被发射。这种方式对于<a href="#waitForMore">waitForMore</a>()函数很有用，所以在一个连接到readyRead()信号的槽中调用waitForMore()是可能的。
+
+<h3 class=fn>void <a name="sn_write"></a>QSocket::sn_write ()<tt> [虚 保护 槽]</tt>
+</h3>
+处理套接字写通知的内部操。
+
+<h3 class=fn>int <a name="socket"></a>QSocket::socket () const
+</h3>
+返回套接字数，或者如果这个时候没有套接字，返回-1。
+
+<h3 class=fn><a href="qsocketdevice.html">QSocketDevice</a>&nbsp;* <a name="socketDevice"></a>QSocket::socketDevice ()
+</h3>
+返回内部套接字设备的指针。
+<p> 通常不需要直接操作这个套接字设备，因为这个类对于绝大多数应用程序不需要设置。
+
+<h3 class=fn><a href="qsocket.html#State-enum">State</a> <a name="state"></a>QSocket::state () const
+</h3>
+返回这个套接字连接的当前状态。
+<p> <p>也可以参考<a href="#State-enum">QSocket::State</a>。
+<p>实例：<a href="clientserver-example.html#x789">network/clientserver/client/client.cpp</a>和<a href="networkprotocol-example.html#x617">network/networkprotocol/nntp.cpp</a>。
+
+<h3 class=fn>int <a name="ungetch"></a>QSocket::ungetch ( int&nbsp;ch )<tt> [虚]</tt>
+</h3>
+虚函数<a href="qiodevice.html#ungetch">QIODevice::ungetch</a>()的实现预先考虑写缓存中的字符<em>ch</em>，这样下一次读取把这个字符作为输出的第一个字符。
+<p>从<a href="qiodevice.html#ungetch">QIODevice</a>中重新实现的。
+
+<h3 class=fn>Q_ULONG <a name="waitForMore"></a>QSocket::waitForMore ( int&nbsp;msecs ) const
+</h3>
+为了得到更多的可用数据，等待<em>msecs</em>毫秒。
+<p> 如果<em>msecs</em>为-1，这个调用将会不确定地阻塞。
+<p> 这个一个阻塞调用并且应该在事件驱动的应用程序中避免使用。
+<p> 返回可以使用的字节数。
+<p> <p>也可以参考<a href="#bytesAvailable">bytesAvailable</a>()。
+
+<h3 class=fn>Q_LONG <a name="writeBlock"></a>QSocket::writeBlock ( const&nbsp;char&nbsp;*&nbsp;data, Q_ULONG&nbsp;len )<tt> [虚]</tt>
+</h3>
+从<em>data</em>中向套接字中写入<em>len</em>字节并且返回所写的字节数。如果发生错误，返回-1。
+<p>实例：<a href="networkprotocol-example.html#x618">network/networkprotocol/nntp.cpp</a>。
+<p>从<a href="qiodevice.html#writeBlock">QIODevice</a>中重新实现的。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

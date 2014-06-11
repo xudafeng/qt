@@ -1,0 +1,80 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>主体很容易</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>主体很容易</h1>
+
+
+<p> 
+<p> （<tt>main.cpp</tt>。）
+<p> 
+
+<pre>    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include "chartform.h"
+
+    int main( int argc, char *argv[] )
+    {
+        <a href="qapplication.html">QApplication</a> app( argc, argv );
+
+        <a href="qstring.html">QString</a> filename;
+    <a name="x2405"></a>    if ( app.<a href="qapplication.html#argc">argc</a>() &gt; 1 ) {
+    <a name="x2406"></a>        filename = app.<a href="qapplication.html#argv">argv</a>()[1];
+    <a name="x2411"></a>        if ( !filename.<a href="qstring.html#endsWith">endsWith</a>( ".cht" ) )
+                filename = <a href="qstring.html#QString-null">QString::null</a>;
+        }
+
+        ChartForm *cf = new ChartForm( filename );
+    <a name="x2409"></a>    app.<a href="qapplication.html#setMainWidget">setMainWidget</a>( cf );
+        cf-&gt;<a href="qwidget.html#show">show</a>();
+    <a name="x2408"></a>    app.<a href="qobject.html#connect">connect</a>( &amp;app, SIGNAL(<a href="qapplication.html#lastWindowClosed">lastWindowClosed</a>()), cf, SLOT(fileQuit()) );
+
+    <a name="x2407"></a>    return app.<a href="qapplication.html#exec">exec</a>();
+    }
+</pre>
+<p> 我们把main()函数保持得很简单，很小。我们创建一个<a href="qapplication.html">QApplication</a>对象并且传递给它命令行参数。我们也允许用户通过<tt>chart mychart.cht</tt>来调用程序，所以如果他们已经添加了一个文件名，我们就把它传递给构造函数。图表窗口中的大多数行为我们将在下一步进行评论。
+<p> <p align=right>
+<a href="tutorial2-03.html">&laquo; 数据元素</a> |
+<a href="tutorial2.html">目录</a> |
+<a href="tutorial2-05.html">实现图形用户界面 &raquo;</a>
+</p>
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>
+

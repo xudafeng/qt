@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QGrid类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QGrid类参考</h1>
+
+<p>QGrid类提供了一些简单的对它的子对象的几何位置管理。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qgrid-h.html">qgrid.h</a>&gt;</tt>
+<p>继承了<a href="qframe.html">QFrame</a>。
+<p><a href="qgrid-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QGrid"><b>QGrid</b></a> ( int&nbsp;n, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = 0 )</div></li>
+<li><div class=fn><a href="#QGrid-2"><b>QGrid</b></a> ( int&nbsp;n, Orientation&nbsp;orient, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = 0 )</div></li>
+<li><div class=fn>void <a href="#setSpacing"><b>setSpacing</b></a> ( int&nbsp;space )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QGrid类提供了一些简单的对它的子对象的几何位置管理。
+<p> 
+<p> 这个网格把它的子窗口部件放到一个单行或者单列中。如果你想有一个多行多列的网格，请使用<a href="qgridlayout.html">QGridLayout</a>。
+<p> 行<em>或者</em>列的数量在构造函数中规定了。这个网格的所有子对象将会被遵循它们的<a href="qwidget.html#sizeHint">sizeHint</a>()和<a href="qwidget.html#sizePolicy">sizePolicy</a>()来被放置和规定大小。
+<p> 使用<a href="qframe.html#setMargin">setMargin</a>()来为网格自身添加四周的空间，并且使用<a href="#setSpacing">setSpacing</a>()为窗口部件之间增加空间。
+<p> <img src=qgrid-m.png>
+<p> <p>也可以参考<a href="qvbox.html">QVBox</a>、<a href="qhbox.html">QHBox</a>、<a href="qgridlayout.html">QGridLayout</a>、<a href="appearance.html">窗口部件的外观和风格</a>和<a href="geomanagement.html">布局管理器</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QGrid"></a>QGrid::QGrid ( int&nbsp;n, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = 0 )
+</h3>
+构造一个父对象为<em>parent</em>、名称为<em>name</em>、列数为<em>n</em>的网格窗口部件。窗口部件标记<em>f</em>被传递给<a href="qframe.html">QFrame</a>的构造函数。
+
+<h3 class=fn><a name="QGrid-2"></a>QGrid::QGrid ( int&nbsp;n, <a href="qt.html#Orientation-enum">Orientation</a>&nbsp;orient, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = 0 )
+</h3>
+构造一个父对象为<em>parent</em>、名称为<em>name</em>的网格窗口部件。如果<em>orient</em>是<a href="qt.html#Orientation-enum">Horizontal</a>，<em>n</em>指定的是列数。如果<em>orient</em>是<a href="qt.html#Orientation-enum">Vertical</a>，<em>n</em>指定的是行数。窗口部件标记<em>f</em>被传递给<a href="qframe.html">QFrame</a>的构造函数。
+
+<h3 class=fn>void <a name="setSpacing"></a>QGrid::setSpacing ( int&nbsp;space )
+</h3>
+设置子窗口部件之间的空间为<em>space</em>。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

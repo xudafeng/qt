@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QDateTime类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QDateTime类参考</h1>
+
+<p>QDateTime类提供了日期和时间功能。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qdatetime-h.html">qdatetime.h</a>&gt;</tt>
+<p><a href="qdatetime-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QDateTime"><b>QDateTime</b></a> ()</div></li>
+<li><div class=fn><a href="#QDateTime-2"><b>QDateTime</b></a> ( const&nbsp;QDate&nbsp;&amp;&nbsp;date )</div></li>
+<li><div class=fn><a href="#QDateTime-3"><b>QDateTime</b></a> ( const&nbsp;QDate&nbsp;&amp;&nbsp;date, const&nbsp;QTime&nbsp;&amp;&nbsp;time )</div></li>
+<li><div class=fn>bool <a href="#isNull"><b>isNull</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isValid"><b>isValid</b></a> () const</div></li>
+<li><div class=fn>QDate <a href="#date"><b>date</b></a> () const</div></li>
+<li><div class=fn>QTime <a href="#time"><b>time</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setDate"><b>setDate</b></a> ( const&nbsp;QDate&nbsp;&amp;&nbsp;date )</div></li>
+<li><div class=fn>void <a href="#setTime"><b>setTime</b></a> ( const&nbsp;QTime&nbsp;&amp;&nbsp;time )</div></li>
+<li><div class=fn>void <a href="#setTime_t"><b>setTime_t</b></a> ( uint&nbsp;secsSince1Jan1970UTC )</div></li>
+<li><div class=fn>QString <a href="#toString-2"><b>toString</b></a> ( Qt::DateFormat&nbsp;f = Qt::TextDate ) const</div></li>
+<li><div class=fn>QString <a href="#toString"><b>toString</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;format ) const</div></li>
+<li><div class=fn>QDateTime <a href="#addDays"><b>addDays</b></a> ( int&nbsp;ndays ) const</div></li>
+<li><div class=fn>QDateTime <a href="#addMonths"><b>addMonths</b></a> ( int&nbsp;nmonths ) const</div></li>
+<li><div class=fn>QDateTime <a href="#addYears"><b>addYears</b></a> ( int&nbsp;nyears ) const</div></li>
+<li><div class=fn>QDateTime <a href="#addSecs"><b>addSecs</b></a> ( int&nbsp;nsecs ) const</div></li>
+<li><div class=fn>int <a href="#daysTo"><b>daysTo</b></a> ( const&nbsp;QDateTime&nbsp;&amp;&nbsp;dt ) const</div></li>
+<li><div class=fn>int <a href="#secsTo"><b>secsTo</b></a> ( const&nbsp;QDateTime&nbsp;&amp;&nbsp;dt ) const</div></li>
+<li><div class=fn>bool <a href="#operator-eq-eq"><b>operator==</b></a> ( const&nbsp;QDateTime&nbsp;&amp;&nbsp;dt ) const</div></li>
+<li><div class=fn>bool <a href="#operator!-eq"><b>operator!=</b></a> ( const&nbsp;QDateTime&nbsp;&amp;&nbsp;dt ) const</div></li>
+<li><div class=fn>bool <a href="#operator-lt"><b>operator&lt;</b></a> ( const&nbsp;QDateTime&nbsp;&amp;&nbsp;dt ) const</div></li>
+<li><div class=fn>bool <a href="#operator-lt-eq"><b>operator&lt;=</b></a> ( const&nbsp;QDateTime&nbsp;&amp;&nbsp;dt ) const</div></li>
+<li><div class=fn>bool <a href="#operator-gt"><b>operator&gt;</b></a> ( const&nbsp;QDateTime&nbsp;&amp;&nbsp;dt ) const</div></li>
+<li><div class=fn>bool <a href="#operator-gt-eq"><b>operator&gt;=</b></a> ( const&nbsp;QDateTime&nbsp;&amp;&nbsp;dt ) const</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>QDateTime <a href="#currentDateTime"><b>currentDateTime</b></a> ()</div></li>
+<li><div class=fn>QDateTime <a href="#fromString"><b>fromString</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;s, Qt::DateFormat&nbsp;f = Qt::TextDate )</div></li>
+</ul>
+<h2>相关函数</h2>
+<ul>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt"><b>operator&lt;&lt;</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, const&nbsp;QDateTime&nbsp;&amp;&nbsp;dt )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt"><b>operator&gt;&gt;</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, QDateTime&nbsp;&amp;&nbsp;dt )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QDateTime类提供了日期和时间功能。
+<p> 
+
+<p> QDateTime对象包含一个日历日期和一个时钟时间（一个“日期时间”）。它是<a href="qdate.html">QDate</a>和<a href="qtime.html">QTime</a>两个类的组合。它可以从系统时钟中读取当前日期时间。它提供比较日期时间和操作日期时间的函数，比如加上一定数量的秒、天、月或年。
+<p> QDateTime对象通常可以由明白地给定的日期和时间来创建，或者使用静态函数<a href="#currentDateTime">currentDateTime</a>()让QDateTime对象包含系统时钟的日期时间。日期时间也可以由<a href="#setDate">setDate</a>()和<a href="#setTime">setTime</a>()来改变。日期时间也可以通过使用<a href="#setTime_t">setTime_t</a>()函数来得到一个POSIX标准的时间，它表示的是自从1970年1月1日00:00:00以来的秒数。<a href="#fromString">fromString</a>()函数通过一个给定的字符串和在字符串中日期时间格式的间隔说明就可以返回一个QDateTime。
+<p> <a href="#date">date</a>()和<a href="#time">time</a>()函数提供了对日期和时间的访问。<a href="#toString">toString</a>()提供了文本格式的相同信息。
+<p> QDateTime提供了一整套的操作符来比较两个QDateTime对象，在这里小于表示早一些，大于表示晚一些。
+<p> 你可以使用<a href="#addSecs">addSecs</a>()或<a href="#addDays">addDays</a>()给一个日期增加（或减少）一个给定的秒数或天数。相似地你可以使用<a href="#addMonths">addMonths</a>()和<a href="#addYears">addYears</a>()。<a href="#daysTo">daysTo</a>()函数返回两个日期时间之间的天数，sectTo()返回两个日期时间之间的秒数。
+<p> 日期时间对象的范围由<a href="qdate.html">QDate</a>和<a href="qtime.html">QTime</a>对象的范围约束。
+<p> <p>也可以参考<a href="qdate.html">QDate</a>、<a href="qtime.html">QTime</a>、<a href="qdatetimeedit.html">QDateTimeEdit</a>和<a href="time.html">时间和日期</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QDateTime"></a>QDateTime::QDateTime ()
+</h3>
+<p> 构造一个零日期时间（比如，零日期和零时间）。一个零日期时间是无效的，因为零日期是无效的。
+<p> <p>也可以参考<a href="#isValid">isValid</a>()。
+
+<h3 class=fn><a name="QDateTime-2"></a>QDateTime::QDateTime ( const&nbsp;<a href="qdate.html">QDate</a>&nbsp;&amp;&nbsp;date )
+</h3>
+构造一个日期为<em>date</em>和零时间（00:00:00.000）的日期时间。
+
+<h3 class=fn><a name="QDateTime-3"></a>QDateTime::QDateTime ( const&nbsp;<a href="qdate.html">QDate</a>&nbsp;&amp;&nbsp;date, const&nbsp;<a href="qtime.html">QTime</a>&nbsp;&amp;&nbsp;time )
+</h3>
+构造一个日期为<em>date</em>和时间为<em>time</em>的日期时间。
+
+<h3 class=fn><a href="qdatetime.html">QDateTime</a> <a name="addDays"></a>QDateTime::addDays ( int&nbsp;ndays ) const
+</h3>
+返回这个日期时间对象<em>ndays</em>天之后的一个日期时间对象（或者<em>ndays</em>天之前的，如果它是一个负数）。
+<p> <p>也可以参考<a href="#daysTo">daysTo</a>()、<a href="#addMonths">addMonths</a>()、<a href="#addYears">addYears</a>()和<a href="#addSecs">addSecs</a>()。
+
+<h3 class=fn><a href="qdatetime.html">QDateTime</a> <a name="addMonths"></a>QDateTime::addMonths ( int&nbsp;nmonths ) const
+</h3>
+返回这个日期时间对象<em>nmonths</em>月之后的一个日期时间对象（或者<em>nmonths</em>月之前的，如果它是一个负数）。
+<p> <p>也可以参考<a href="#daysTo">daysTo</a>()、<a href="#addDays">addDays</a>()、<a href="#addYears">addYears</a>()和<a href="#addSecs">addSecs</a>()。
+
+<h3 class=fn><a href="qdatetime.html">QDateTime</a> <a name="addSecs"></a>QDateTime::addSecs ( int&nbsp;nsecs ) const
+</h3>
+返回这个日期时间对象<em>nsecs</em>秒之后的一个日期时间对象（或者<em>nsecs</em>秒之前的，如果它是一个负数）。
+<p> <p>也可以参考<a href="#secsTo">secsTo</a>()、<a href="#addDays">addDays</a>()、<a href="#addMonths">addMonths</a>()和<a href="#addYears">addYears</a>()。
+<p>实例：<a href="listviews-example.html#x323">listviews/listviews.cpp</a>。
+
+<h3 class=fn><a href="qdatetime.html">QDateTime</a> <a name="addYears"></a>QDateTime::addYears ( int&nbsp;nyears ) const
+</h3>
+返回这个日期时间对象<em>nyears</em>年之后的一个日期时间对象（或者<em>nyears</em>年之前的，如果它是一个负数）。
+<p> <p>也可以参考<a href="#daysTo">daysTo</a>()、<a href="#addDays">addDays</a>()、<a href="#addMonths">addMonths</a>()和<a href="#addSecs">addSecs</a>()。
+
+<h3 class=fn><a href="qdatetime.html">QDateTime</a> <a name="currentDateTime"></a>QDateTime::currentDateTime ()<tt> [静态]</tt>
+</h3>
+返回当前日期时间，来自于系统时钟。
+<p> <p>也可以参考<a href="qdate.html#currentDate">QDate::currentDate</a>()和<a href="qtime.html#currentTime">QTime::currentTime</a>()。
+<p>实例：<a href="listviews-example.html#x324">listviews/listviews.cpp</a>。
+
+<h3 class=fn><a href="qdate.html">QDate</a> <a name="date"></a>QDateTime::date () const
+</h3>
+<p> 返回日期时间的日期部分。
+<p> <p>也可以参考<a href="#setDate">setDate</a>()和<a href="#time">time</a>()。
+
+<h3 class=fn>int <a name="daysTo"></a>QDateTime::daysTo ( const&nbsp;<a href="qdatetime.html">QDateTime</a>&nbsp;&amp;&nbsp;dt ) const
+</h3>
+返回这个日期时间到<em>dt</em>的天数（如果<em>dt</em>早于这个日期时间，返回的为负数）。
+<p> <p>也可以参考<a href="#addDays">addDays</a>()和<a href="#secsTo">secsTo</a>()。
+
+<h3 class=fn><a href="qdatetime.html">QDateTime</a> <a name="fromString"></a>QDateTime::fromString ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;s, <a href="qt.html#DateFormat-enum">Qt::DateFormat</a>&nbsp;f = Qt::TextDate )<tt> [静态]</tt>
+</h3>
+通过给定的字符串<em>s</em>，使用格式<em>f</em>，返回这个QDateTime，或者如果这是不可能的话返回一个无效的日期时间。
+<p> 注意Qt::LocalDate在这里不能使用。
+<p> 注意Qt::TextDate：它被推荐使用英语中的月的缩写格式（比如Jan）。本地的月名称也可以被使用，但这取决于用户的本地设置。
+
+<h3 class=fn>bool <a name="isNull"></a>QDateTime::isNull () const
+</h3>
+<p> 如果日期和时间都是零，返回真，否则返回假。一个零日期时间是无效的。
+<p> <p>也可以参考<a href="qdate.html#isNull">QDate::isNull</a>()和<a href="qtime.html#isNull">QTime::isNull</a>()。
+
+<h3 class=fn>bool <a name="isValid"></a>QDateTime::isValid () const
+</h3>
+<p> 如果日期和时间都是有效的，返回真，否则返回假。
+<p> <p>也可以参考<a href="qdate.html#isValid">QDate::isValid</a>()和<a href="qtime.html#isValid">QTime::isValid</a>()。
+
+<h3 class=fn>bool <a name="operator!-eq"></a>QDateTime::operator!= ( const&nbsp;<a href="qdatetime.html">QDateTime</a>&nbsp;&amp;&nbsp;dt ) const
+</h3>
+如果这个日期时间不等于<em>dt</em>，返回真，否则返回假。
+<p> <p>也可以参考<a href="#operator-eq-eq">operator==</a>()。
+
+<h3 class=fn>bool <a name="operator-lt"></a>QDateTime::operator&lt; ( const&nbsp;<a href="qdatetime.html">QDateTime</a>&nbsp;&amp;&nbsp;dt ) const
+</h3>
+如果这个日期时间早于<em>dt</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-lt-eq"></a>QDateTime::operator&lt;= ( const&nbsp;<a href="qdatetime.html">QDateTime</a>&nbsp;&amp;&nbsp;dt ) const
+</h3>
+如果这个日期时间不晚于<em>dt</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-eq-eq"></a>QDateTime::operator== ( const&nbsp;<a href="qdatetime.html">QDateTime</a>&nbsp;&amp;&nbsp;dt ) const
+</h3>
+如果这个日期时间等于<em>dt</em>，返回真，否则返回假。
+<p> <p>也可以参考<a href="#operator!-eq">operator!=</a>()。
+
+<h3 class=fn>bool <a name="operator-gt"></a>QDateTime::operator&gt; ( const&nbsp;<a href="qdatetime.html">QDateTime</a>&nbsp;&amp;&nbsp;dt ) const
+</h3>
+如果这个日期时间晚于<em>dt</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-gt-eq"></a>QDateTime::operator&gt;= ( const&nbsp;<a href="qdatetime.html">QDateTime</a>&nbsp;&amp;&nbsp;dt ) const
+</h3>
+如果这个日期时间不早于<em>dt</em>，返回真，否则返回假。
+
+<h3 class=fn>int <a name="secsTo"></a>QDateTime::secsTo ( const&nbsp;<a href="qdatetime.html">QDateTime</a>&nbsp;&amp;&nbsp;dt ) const
+</h3>
+返回从这个日期到<em>dt</em>的秒数（如果<em>dt</em>早于这个日期，返回的为负数）。
+<p> 实例：
+<pre>
+    QDateTime dt = QDateTime::<a href="#currentDateTime">currentDateTime</a>();
+    QDateTime xmas( QDate(dt.year(),12,24), QTime(17,00) );
+    <a href="qapplication.html#qDebug">qDebug</a>( "There are %d seconds to Christmas", dt.<a href="#secsTo">secsTo</a>(xmas) ); // 离圣诞节还有多少秒
+  </pre>
+ 
+<p> <p>也可以参考<a href="#addSecs">addSecs</a>()、<a href="#daysTo">daysTo</a>()和<a href="qtime.html#secsTo">QTime::secsTo</a>()。
+
+<h3 class=fn>void <a name="setDate"></a>QDateTime::setDate ( const&nbsp;<a href="qdate.html">QDate</a>&nbsp;&amp;&nbsp;date )
+</h3>
+<p> 设置日期时间的日期部分为<em>date</em>。
+<p> <p>也可以参考<a href="#date">date</a>()和<a href="#setTime">setTime</a>()。
+
+<h3 class=fn>void <a name="setTime"></a>QDateTime::setTime ( const&nbsp;<a href="qtime.html">QTime</a>&nbsp;&amp;&nbsp;time )
+</h3>
+<p> 设置日期时间的时间部分为<em>time</em>。
+<p> <p>也可以参考<a href="#time">time</a>()和<a href="#setDate">setDate</a>()。
+
+<h3 class=fn>void <a name="setTime_t"></a>QDateTime::setTime_t ( uint&nbsp;secsSince1Jan1970UTC )
+</h3>
+通过给定的从1970年1月1日00:00:00（通用协调时间）所过的秒来设置本地时间的日期和时间。在不支持时区的系统上，这个函数的行为就好像本地时间是通用协调时间一样。
+<p> 注意Microsoft Windows只支持一定范围的<em>secsSince1Jan1970UTC</em>的值。
+
+<h3 class=fn><a href="qtime.html">QTime</a> <a name="time"></a>QDateTime::time () const
+</h3>
+<p> 返回日期时间的时间部分。
+<p> <p>也可以参考<a href="#setTime">setTime</a>()和<a href="#date">date</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="toString"></a>QDateTime::toString ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;format ) const
+</h3>  
+返回一个字符串的日期时间。<em>format</em>参数决定了结果字符串的格式。
+<p> 这些是可能用到的日期表达式：
+<p> <ul>
+<li> <em>d</em> - 没有前置0的数字的天（1－31）
+<li> <em>dd</em> - 前置0的数字的天（01－31）
+<li> <em>ddd</em> - 缩写的日名称（Mon－Sun）。使用<a href="qdate.html#shortDayName">QDate::shortDayName</a>()。
+<li> <em>dddd</em> - 长的日名称（Monday－Sunday）。使用<a href="qdate.html#longDayName">QDate::longDayName</a>()。
+<li> <em>M</em> - 没有前置0的数字的月（1－12）
+<li> <em>MM</em> - 前置0的数字的月（01－12）
+<li> <em>MMM</em> - 缩写的月名称（Jan－Dec）。使用<a href="qdate.html#shortMonthName">QDate::shortMonthName</a>()。
+<li> <em>MMMM</em> - 长的月名称（January－December）。使用<a href="qdate.html#longMonthName">QDate::longMonthName</a>()。
+<li> <em>yy</em> - 两位数字的年（00－99）
+<li> <em>yyyy</em> - 四位数字的年（0000-9999）
+</ul>
+<p> 这些是可能用到的时间表达式：
+<p> <ul>
+<li> <em>h</em> - 没有前置0的数字的小时（0－23或者如果显示AM/PM时，1－12）
+<li> <em>hh</em> - 前置0的数字的小时（00－23或者如果显示AM/PM时，01－12）
+<li> <em>m</em> - 没有前置0的数字的分钟（0－59）
+<li> <em>mm</em> - 前置0的数字的分钟（00－59）
+<li> <em>s</em> - 没有前置0的数字的秒（0－59）
+<li> <em>ss</em> - 前置0的数字的秒（00－59）
+<li> <em>z</em> - 没有前置0的数字的毫秒（0－999）
+<li> <em>zzz</em> - 前置0的数字的毫秒（000－999）
+<li> <em>AP</em> - 切换为AM/PM显示。<em>AP</em>将被“AM”或“PM”替换。
+<li> <em>ap</em> - 切换为am/pm显示。<em>ap</em>将被“am”或“pm”替换。
+</ul>
+<p> 所有其他输入字符都将被忽略。
+<p> 格式字符串实例（假设这个QDateTime为2001年5月21日14:13:09）
+<p> <ul>
+<li> “dd.MM.yyyy”的结果将是“21.05.2001”
+<li> “ddd MMMM d yy”的结果将是“Tue May 21 01”
+<li> “hh:mm:ss.zzz”的结果将是“14:13:09.042”
+<li> “h:m:s ap”的结果将是“2:13:9 pm”
+</ul>
+<p> <p>也可以参考<a href="qdate.html#toString">QDate::toString</a>()和<a href="qtime.html#toString">QTime::toString</a>()。
+
+<p> 
+<h3 class=fn><a href="qstring.html">QString</a> <a name="toString-2"></a>QDateTime::toString ( <a href="qt.html#DateFormat-enum">Qt::DateFormat</a>&nbsp;f = Qt::TextDate ) const
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回一个字符串的日期时间。<em>f</em>参数决定了结果字符串的格式。
+<p> 如果<em>f</em>是Qt::TextDate，字符串格式是“Wed May 20 03:40:13
+1998”（使用<a href="qdate.html#shortDayName">shortDayName</a>()、<a href="qdate.html#shortMonthName">shortMonthName</a>()和<a href="qtime.html#toString">QTime::toString</a>()函数来生成本地指定的字符串）。
+<p> 如果<em>f</em>是Qt::ISODate，字符串格式遵循ISO 8601表示日期和时间的说明，也就是YYYY-MM-DDTHH:MM:SS。
+<p> 如果<em>f</em>是Qt::LocalDate，字符串格式依赖于系统的本地设置。
+<p> 如果<em>f</em>是无效的，<a href="#toString">toString</a>()返回一个空字符串。
+<p> <p>也可以参考<a href="qdate.html#toString">QDate::toString</a>()和<a href="qtime.html#toString">QTime::toString</a>()。
+
+<p> 
+<hr><h2>相关函数</h2>
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt"></a>operator&lt;&lt; ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, const&nbsp;<a href="qdatetime.html">QDateTime</a>&nbsp;&amp;&nbsp;dt )
+</h3>
+写日期时间<em>dt</em>到流<em>s</em>中。
+<p> <p>也可以参考<a href="datastreamformat.html">QDataStream操作符的格式</a>。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt"></a>operator&gt;&gt; ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, <a href="qdatetime.html">QDateTime</a>&nbsp;&amp;&nbsp;dt )
+</h3>
+从流<em>s</em>中读取一个日期时间到<em>dt</em>。
+<p> <p>也可以参考<a href="datastreamformat.html">QDataStream操作符的格式</a>。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

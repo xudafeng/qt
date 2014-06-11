@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>qmake教程</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<p align="right">[<a href="qmake-manual-3.html">上一章：10分钟学会使用qmake</a>] [<a href="qmake-manual.html">qmake首页</a>] [<a href="qmake-manual-5.html">下一章：qmake概念</a>]</p>
+<h2 align="center">qmake教程</h2>
+<h3><a name="1"></a>qmake教程介绍</h3>
+<p>这个教程可以教会你如何使用<em>qmake</em>。我们建议你看完这个教程之后读一下<em>qmake</em>手册。</p>
+<h3><a name="2"></a>开始很简单</h3>
+<p>让我们假设你已经完成了你的应用程序的一个基本实现，并且你已经创建了下述文件：</p>
+<ul><li><p>hello.cpp</p>
+<li><p>hello.h</p>
+<li><p>main.cpp</p>
+</ul>
+<p>你可以在<em>qt/qmake/example</em>中发现这些文件。你对这个应用程序的配置仅仅知道的另一件事是它是用Qt写的。首先，使用你所喜欢的纯文本编辑器，在<em>qt/qmake/tutorial</em>中创建一个叫做<em>hello.pro</em>的文件。你所要做的第一件事是添加一些行来告诉<em>qmake</em>关于你所开发的项目中的源文件和头文件这一部分。</p>
+<p>我们先把源文件添加到项目文件中。为了做到这点，你需要使用SOURCES变量。只要用<em>SOURCES +=</em>来开始一行，并且把hello.cpp放到它后面。你需要写成这样：</p>
+<pre>
+    SOURCES += hello.cpp
+</pre>
+<p>我们对项目中的每一个源文件都这样做，直到结束：</p>
+<pre>
+    SOURCES += hello.cpp
+    SOURCES += main.cpp
+</pre>
+<p>如果你喜欢使用像Make一样风格的语法，你也可以写成这样，一行写一个源文件，并用反斜线结尾，然后再起新的一行：</p>
+<pre>
+    SOURCES = hello.cpp \
+	      main.cpp
+</pre>
+<p>现在源文件已经被列到项目文件中了，头文件也必须添加。添加的方式和源文件一样，除了变量名是HEADERS。</p>
+<p>当你做完这些时，你的项目文件就像现在这样：</p>
+<pre>
+    HEADERS += hello.h
+    SOURCES += hello.cpp 
+    SOURCES += main.cpp 
+</pre>
+<p>目标名称是自动设置的，它被设置为和项目文件一样的名称，但是为了适合平台所需要的后缀。举例来说，加入项目文件叫做“hello.pro”，在Windows上的目标名称应该是“hello.exe”，在Unix上应该是“hello”。如果你想设置一个不同的名字，你可以在项目文件中设置它：</p>
+<pre>
+    TARGET = helloworld
+</pre>
+<p>最后一步是设置<em>CONFIG</em>变量。因为这是一个Qt应用程序，我们需要把“qt”放到CONFIG这一行中，这样<em>qmake</em>才会在连接的时候添加相关的库，并且保证<em>moc</em>和<em>uic</em>的连编行也被包含到Makefile中。</p>
+<p>最终完成的项目文件应该是这样的：</p>
+<pre>
+    CONFIG += qt
+    HEADERS += hello.h
+    SOURCES += hello.cpp
+    SOURCES += main.cpp 
+</pre>
+<p>你现在可以使用<em>qmake</em>来为你的应用程序生成Makefile。在你的应用程序目录中，在命令行下输入：</p>
+<pre>
+    qmake -o Makefile hello.pro
+</pre>
+<p>然后根据你所使用的编译器输入<em>make</em>或者<em>nmake</em>。</p>
+<h3><a name="3"></a>使应用程序可以调试</h3>
+<p>应用程序的发布版本不包含任何调试符号或者其它调试信息。在开发过程中，生成一个含有相关信息的应用程序的调试版本是很有用处的。通过在项目文件的CONFIG变量中添加“debug”就可以很简单地实现。</p>
+<p>例如：</p>
+<pre>
+    CONFIG += qt debug
+    HEADERS += hello.h
+    SOURCES += hello.cpp
+    SOURCES += main.cpp 
+</pre>
+<p>像前面一样使用<em>qmake</em>来生成一个Makefile并且你就能够调试你的应用程序了。</p>
+<h3><a name="4"></a>添加特定平台的源文件</h3>
+<p>在编了几个小时的程序之后，你也许开始为你的应用程序编写与平台相关的部分，并且决定根据平台的不同编写不同的代码。所以现在你有两个信文件要包含到你的项目文件中－<em>hello_win.cpp</em>和<em>hello_x11.cpp</em>。我们不能仅仅把这两个文件放到<em>SOURCES</em>变量中，因为那样的话会把这两个文件都加到Makefile中。所以我们在这里需要做的是根据<em>qmake</em>所运行的平台来使用相应的作用域来进行处理。</p>
+<p>为Windows平台添加的依赖平台的文件的简单的作用域看起来就像这样：</p>
+<pre>
+    win32 {
+	SOURCES += hello_win.cpp
+    }
+</pre>
+<p>所以如果<em>qmake</em>运行在Windows上的时候，它就会把<em>hello_win.cpp</em>添加到源文件列表中。如果<em>qmake</em>运行在其它平台上的时候，它会很简单地把这部分忽略。现在接下来我们要做的就是添加一个X11依赖文件的作用域。</p>
+<p>当你做完了这部分，你的项目文件应该和这样差不多：</p>
+<pre>
+    CONFIG += qt debug
+    HEADERS += hello.h
+    SOURCES += hello.cpp
+    SOURCES += main.cpp 
+    win32 {
+	SOURCES += hello_win.cpp
+    }
+    x11 {
+	SOURCES += hello_x11.cpp
+    }
+</pre>
+<p>像前面一样使用<em>qmake</em>来生成Makefile。</p>
+<h3><a name="5"></a>如果一个文件不存在，停止qmake</h3>
+<p>如果某一个文件不存在的时候，你也许不想生成一个Makefile。我们可以通过使用exists()函数来检查一个文件是否存在。我们可以通过使用error()函数把正在运行的<em>qmake</em>停下来。这和作用域的工作方式一样。只要很简单地用这个函数来替换作用域条件。对main.cpp文件的检查就像这样：</p>
+<pre>
+    !exists( main.cpp ) {
+	error( "No main.cpp file found" )
+    }
+</pre>
+<p>“!”用来否定这个测试，比如，如果文件存在，<tt>exists( main.cpp )</tt>是真，如果文件不存在，<tt>!exists( main.cpp )</tt>是真。</p>
+<pre>
+    CONFIG += qt debug
+    HEADERS += hello.h
+    SOURCES += hello.cpp
+    SOURCES += main.cpp 
+    win32 {
+	SOURCES += hello_win.cpp
+    }
+    x11 {
+	SOURCES += hello_x11.cpp
+    }
+    !exists( main.cpp ) {
+	error( "No main.cpp file found" )
+    }
+</pre>
+<p>像前面一样使用<em>qmake</em>来生成Makefile。如果你临时改变<em>main.cpp</em>的名称，你会看到信息，并且<em>qmake</em>会停止处理。</p>
+<h3><a name="6"></a>检查多于一个的条件</h3>
+<p>假设你使用Windows并且当你在命令行运行你的应用程序的时候你想能够看到qDebug()语句。除非你在连编你的程序的时候使用console设置，你不会看到输出。我们可以很容易地把<em>console</em>添加到CONFIG行中，这样在Windows下，Makefile就会有这个设置。但是如果告诉你我们只是想在当我们的应用程序运行在Windows下<em>并且</em>当<em>debug</em>已经在CONFIG行中的时候，添加<em>console</em>。这需要两个嵌套的作用域；只要生成一个作用域，然后在它里面再生成另一个。把设置放在最里面的作用域里，就像这样：</p>
+<pre>
+    win32 {
+	debug {
+	    CONFIG += console
+	}
+    }
+</pre>
+<p>嵌套的作用域可以使用冒号连接起来，所以最终的项目文件看起来像这样：</p>
+<pre>
+    CONFIG += qt debug
+    HEADERS += hello.h
+    SOURCES += hello.cpp
+    SOURCES += main.cpp 
+    win32 {
+	SOURCES += hello_win.cpp
+    }
+    x11 {
+	SOURCES += hello_x11.cpp
+    }
+    !exists( main.cpp ) {
+	error( "No main.cpp file found" )
+    }
+    win32:debug {
+	CONFIG += console
+    }
+</pre>
+<p>就这些了！你现在已经完成了<em>qmake</em>的教程，并且已经准备好为你的开发项目写项目文件了。</p>
+<!-- eof -->
+<p align="right">[<a href="qmake-manual-3.html">上一章：10分钟学会使用qmake</a>] [<a href="qmake-manual.html">qmake首页</a>] [<a href="qmake-manual-5.html">下一章：qmake概念</a>]</p>
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

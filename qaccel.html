@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Translator" content="allexit">
+
+<title>QAccel类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QAccel类参考</h1>
+
+<p>QAccel类用来处理键盘的加速键和快捷键。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qaccel-h.html">qaccel.h</a>&gt;</tt>
+<p>继承了<a href="qobject.html">QObject</a>。
+<p><a href="qaccel-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QAccel"><b>QAccel</b></a> ( QWidget&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QAccel-2"><b>QAccel</b></a> ( QWidget&nbsp;*&nbsp;watch, QObject&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#~QAccel"><b>~QAccel</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#isEnabled"><b>isEnabled</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setEnabled"><b>setEnabled</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>uint <a href="#count"><b>count</b></a> () const</div></li>
+<li><div class=fn>int <a href="#insertItem"><b>insertItem</b></a> ( const&nbsp;QKeySequence&nbsp;&amp;&nbsp;key, int&nbsp;id = -1 )</div></li>
+<li><div class=fn>void <a href="#removeItem"><b>removeItem</b></a> ( int&nbsp;id )</div></li>
+<li><div class=fn>void <a href="#clear"><b>clear</b></a> ()</div></li>
+<li><div class=fn>QKeySequence <a href="#key"><b>key</b></a> ( int&nbsp;id )</div></li>
+<li><div class=fn>int <a href="#findKey"><b>findKey</b></a> ( const&nbsp;QKeySequence&nbsp;&amp;&nbsp;key ) const</div></li>
+<li><div class=fn>bool <a href="#isItemEnabled"><b>isItemEnabled</b></a> ( int&nbsp;id ) const</div></li>
+<li><div class=fn>void <a href="#setItemEnabled"><b>setItemEnabled</b></a> ( int&nbsp;id, bool&nbsp;enable )</div></li>
+<li><div class=fn>bool <a href="#connectItem"><b>connectItem</b></a> ( int&nbsp;id, const&nbsp;QObject&nbsp;*&nbsp;receiver, const&nbsp;char&nbsp;*&nbsp;member )</div></li>
+<li><div class=fn>bool <a href="#disconnectItem"><b>disconnectItem</b></a> ( int&nbsp;id, const&nbsp;QObject&nbsp;*&nbsp;receiver, const&nbsp;char&nbsp;*&nbsp;member )</div></li>
+<li><div class=fn>void <a href="#repairEventFilter"><b>repairEventFilter</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setWhatsThis"><b>setWhatsThis</b></a> ( int&nbsp;id, const&nbsp;QString&nbsp;&amp;&nbsp;text )</div></li>
+<li><div class=fn>QString <a href="#whatsThis"><b>whatsThis</b></a> ( int&nbsp;id ) const</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#activated"><b>activated</b></a> ( int&nbsp;id )</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>QKeySequence <a href="#shortcutKey"><b>shortcutKey</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;str )</div></li>
+<li><div class=fn>QString keyToString ( QKeySequence&nbsp;k ) &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>QKeySequence stringToKey ( const&nbsp;QString&nbsp;&amp;&nbsp;s ) &nbsp;<em>(obsolete)</em></div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual bool <a href="#eventFilter"><b>eventFilter</b></a> ( QObject&nbsp;*&nbsp;o, QEvent&nbsp;*&nbsp;e )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描</h2>
+
+
+QAccel类用来处理键盘的加速键和快捷键。
+<p> 
+<p> 键盘加速键是在某个组合键按下的时候出发一个动作，加速键可以处理窗口部件和它子部件里所有的键盘动作所以它不会被<a href="focus.html#keyboard-focus">键盘焦点</a>所影响。 
+<p> 在大多数情况下，你不需要直接使用这个类。使用<a href="qaction.html">QAction</a>类建立的具有加速键的动作可以同时在菜单和工具栏里使用。如果你的兴趣只是在菜单里使用<a href="qmenudata.html#insertItem">QMenuData::insertItem</a>()或者<a href="qmenudata.html#setAccel">QMenuData::setAccel</a>()建立只作用在菜单里的加速键。那么许多窗口部件可以自动的生成加速键，比如<a href="qbutton.html">QButton</a>、<a href="qgroupbox.html">QGroupBox</a>、<a href="qlabel.html">QLabel</a>（使用<a href="qlabel.html#setBuddy">QLabel::setBuddy</a>()）、<a href="qmenubar.html">QMenuBar</a>和<a href="qtabbar.html">QTabBar</a>。实例：
+<pre>
+        <a href="qpushbutton.html">QPushButton</a> p( "&amp;Exit", parent ); // 自动使用快捷键ALT+Key_E
+        <a href="qpopupmenu.html">QPopupMenu</a> *fileMenu = new fileMenu( parent );
+        fileMenu-&gt;<a href="qmenudata.html#insertItem">insertItem</a>( "Undo", parent, SLOT(undo()), CTRL+Key_Z );
+    </pre>
+ 
+<p> QAccel包括一个加速键的列表，这个列表里的项目可以使用<a href="#insertItem">insertItem</a>()、<a href="#removeItem">removeItem</a>()、<a href="#clear">clear</a>()、<a href="#key">key</a>()和<a href="#findKey">findKey</a>()。
+<p>每一个加速键项目是由一个标示符和 <a href="qkeysequence.html">QKeySequence</a>组成。一个单独的键组是由一个键盘码组合上改变符形成的(<a href="qt.html#Modifier-enum">SHIFT</a>，<a href="qt.html#Modifier-enum">CTRL</a>，<a href="qt.html#Modifier-enum">ALT</a> 或者 <a href="qt.html#Modifier-enum">UNICODE_ACCEL</a>)。例如，<tt>CTRL + Key_p</tt>可以作为文本打印的快捷键。这个键的键盘码在<a href="qnamespace-h.html">qnamespace.h</a>里列出。还有，使用<a href="qt.html#Modifier-enum">UNICODE_ACCEL</a>可以使字符以统一码（unicode）的形式表现出来。例如 <tt>UNICODE_ACCEL + 'A'</tt> 所给出的加速键和<a href="qt.html#Key-enum">Key_A</a>是一样的。 
+<p>当一个加速键被按下的时候，信号 <a href="#activated">activated</a>()会伴随着这个加速键项目的标示被发出。加速键项目也可以单独的被连接，所以两个不同的键可以在两个不同的槽里被激活(参考 <a href="#connectItem">connectItem</a>() 和 <a href="#disconnectItem">disconnectItem</a>())。
+<p>使用 <a href="#setEnabled">setEnabled</a>() 可以允许或禁止所有的的加速键的项目，<a href="#setItemEnabled">setItemEnabled</a>() 则可以允许或禁止单独的项目。只有QAccel和这个项目本身被允许的时候，这个项目才可以被激活。 
+<p>当用户在What's This模式的情况下按下加速键的时候，函数 <a href="#setWhatsThis">setWhatsThis</a>() 会提供一个帮助文本。
+<p>QAccel对象把键事件发送给包含有<em>parent</em>的 <a href="qwidget.html#topLevelWidget">QWidget::topLevelWidget</a>() ，并由此发给这个窗口里的所有子部件。当<em>parent</em>被删除的时候，所有的加速键也同时被删除，然后销毁所有的相关的键事件。
+<p>实例：
+<pre>
+        QAccel *a = new QAccel( myWindow );        // 在myWindow里建立加速键
+        a-&gt;<a href="#connectItem">connectItem</a>( a-&gt;<a href="#insertItem">insertItem</a>(Key_P+CTRL), // 添加Ctrl+P加速键
+                        myWindow,                  // 连接到myWindow的
+                        SLOT(printDoc()) );        // printDoc()槽
+    </pre>
+ 
+<p> <p>也可以参考<a href="qkeyevent.html">QKeyEvent</a>、<a href="qwidget.html#keyPressEvent">QWidget::keyPressEvent</a>()、<a href="qmenudata.html#setAccel">QMenuData::setAccel</a>()、<a href="qbutton.html#accel-prop">QButton::accel</a>、<a href="qlabel.html#setBuddy">QLabel::setBuddy</a>()、<a href="qkeysequence.html">QKeySequence</a>、<a href="guibooks.html#fowler">GUI Design Handbook: Keyboard Shortcuts</a>和<a href="misc.html">杂项类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QAccel"></a>QAccel::QAccel ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+<p>通过<em>name</em>和<em>parent</em>构造QAccel的对象。加速键是在<em>parent</em>上操作的。
+
+<h3 class=fn><a name="QAccel-2"></a>QAccel::QAccel ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;watch, <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+<p>构造QAccel对象，这个对象是通过调用<em>name</em>构造的，作用在<em>watch</em>上，是<em>parent</em>的子。
+<p>对于一般的程序，这个构造函数是不需要的。
+
+<h3 class=fn><a name="~QAccel"></a>QAccel::~QAccel ()
+</h3>
+<p>析构加速键对象并释放所有分配的资源。
+
+<h3 class=fn>void <a name="activated"></a>QAccel::activated ( int&nbsp;id )<tt> [信号]</tt>
+</h3>
+<p>当加速键被按下的时候这个信号产生。<em>id</em> 是个数字，用来表明某个特定的加速键项目。
+
+<h3 class=fn>void <a name="clear"></a>QAccel::clear ()
+</h3>
+<p>清空所有的加速键项目。
+
+<h3 class=fn>bool <a name="connectItem"></a>QAccel::connectItem ( int&nbsp;id, const&nbsp;<a href="qobject.html">QObject</a>&nbsp;*&nbsp;receiver, const&nbsp;char&nbsp;*&nbsp;member )
+</h3>
+<p>把加速键项目的<em>id</em>连接到<em>receiver</em>的<em>member</em>槽里。
+<p> <pre>
+        a-&gt;connectItem( 201, mainView, SLOT(quit()) );
+    </pre>
+ 
+<p>当然，你也可以发送一个信号作为 <em>member</em>。
+<p>也可以参考<a href="#disconnectItem">disconnectItem</a>()。
+<p>例子: <a href="tutorial1-14.html#x2424">t14/gamebrd.cpp</a>。
+
+<h3 class=fn>uint <a name=count></a>QAccel::count () const </h3>
+<p>返回在这个加速键对象里所有加速键项目的数目。 
+<h3 class=fn>bool <a name=disconnectItem></a>QAccel::disconnectItem ( int&nbsp;id, const&nbsp;<a href="qobject.html">QObject</a>&nbsp;*&nbsp;receiver, const&nbsp;char&nbsp;*&nbsp;member ) </h3>
+<p>通过调用<em>member</em>把使用<em>id</em>标示的加速键项目从<em>receiver</em>里断开。 
+<p>参考 <a href="#connectItem">connectItem</a>()。 
+<h3 class=fn>bool <a name=eventFilter></a>QAccel::eventFilter ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;o, <a href="qevent.html">QEvent</a>&nbsp;*&nbsp;e )<tt> [虚拟 保护]</tt></h3>
+<p>处理用于顶级部件的加速键事件。<em>e </em>是产生在对象 <em>o </em>上的事件。 
+<p>由 <a href="qobject.html#eventFilter">QObject</a> 继承并执行。 
+<h3 class=fn>int <a name=findKey></a>QAccel::findKey ( const&nbsp;<a href="qkeysequence.html">QKeySequence</a>&nbsp;&amp;&nbsp;key ) const </h3>
+<p>返回由键码 <em>key</em>制定的加速键项目的标示，-1表明这个项目没有被找到。 
+<h3 class=fn>int <a name=insertItem></a>QAccel::insertItem ( const&nbsp;<a href="qkeysequence.html">QKeySequence</a>&nbsp;&amp;&nbsp;key, int&nbsp;id = -1 ) </h3>
+<p>插入加速键项目并返回这个项目的标示符。 
+<p><em>key </em> 是键码和混合了SHIFT，CTRL 和 ALT的选项。<em>id </em> 是加速键项目标示符。 
+<p>如果 <em>id </em> 是负的，那么这个项目就被会被分配一个唯一的小于-1的负标示符。 
+<p>
+	<pre>
+        QAccel *a = new QAccel( myWindow )；        // 在myWindow里建立accels
+        a-&gt;<a href="#insertItem">insertItem</a>( CTRL + Key_p, 200 )；        // Ctrl+p, 打印文本
+        a-&gt;<a href="#insertItem">insertItem</a>( ALT + Key_X, 201 )；         // Alt+X, 退出
+        a-&gt;<a href="#insertItem">insertItem</a>( UNICODE_ACCEL + 'q', 202 )； // 统一码 'q', 退出
+        a-&gt;<a href="#insertItem">insertItem</a>( <a href="qt.html#Key-enum">Key_D</a> )；                    // 得到小于－1的唯一负标示符
+        a-&gt;<a href="#insertItem">insertItem</a>( CTRL + SHIFT + Key_p )；     // 得到小于－1的唯一负标示符
+  </pre>
+<p>例子： <a href="tutorial1-14.html#x2425">t14/gamebrd.cpp</a>。 
+<h3 class=fn>bool <a name=isEnabled></a>QAccel::isEnabled () const </h3>
+<p>如果加速键被允许激活，返回TRUE，否则FALSE。 
+<p>参考 <a href="#setEnabled">setEnabled</a>() 和 <a href="#isItemEnabled">isItemEnabled</a>()。 
+<h3 class=fn>bool <a name=isItemEnabled></a>QAccel::isItemEnabled ( int&nbsp;id ) const </h3>
+<p>如果以<em>id</em>表明的这个加速键项目是被允许激活的，返回TRUE，如果是被禁止的或没有找到这个项目，返回FALSE。 
+<p>参考 <a href="#setItemEnabled">setItemEnabled</a>() 和 <a href="#isEnabled">isEnabled</a>()。 
+<h3 class=fn><a href="qkeysequence.html">QKeySequence</a> <a name=key></a>QAccel::key ( int&nbsp;id ) </h3>
+<p>返回以标示符<em>id</em>指明的加速键项目的键组，如果这个标示符没有被找到，返回无效的键组(0)。 
+<h3 class=fn><a href="qstring.html">QString</a> <a name=keyToString></a>QAccel::keyToString ( <a href="qkeysequence.html">QKeySequence</a>&nbsp;k )<tt> [静态]</tt> </h3>
+<p><b>这个函数已经不再使用了。</b> 它存在的目的是使以前的源代码还可以工作。我们强烈建议，在新的代码里不要使用它。 
+<p>建立一个针对于键 <em>k </em>的加速键字符串。比如，CTRL+Key_O就给出"Ctrl+O"。"Ctrl"等等这一些的字符串（使用 <a href="qobject.html#tr">QObject::tr</a>()) 在"QAccel"上下文里被翻译。 
+<p>这个函数是多余的。把<a href="qkeysequence.html">QKeySequence</a> <em>k </em>进行类型转换成 <a href="qstring.html">QString</a> 也可以达到同样的效果。 
+<h3 class=fn>void <a name=removeItem></a>QAccel::removeItem ( int&nbsp;id ) </h3>
+<p>去除标示符 <em>id </em>所标示的加速键项目。 
+<h3 class=fn>void <a name=repairEventFilter></a>QAccel::repairEventFilter () </h3>
+<p>确信加速键获得正确的事件过滤器。这个函数是自动被调用的，你不应该在应用程序里调用它。 
+<h3 class=fn>void <a name=setEnabled></a>QAccel::setEnabled ( bool&nbsp;enable ) </h3>
+<p>如果 <em>enable </em> 是TRUE，就把加速键设为允许被激活，如果 <em>enable </em>是FALSE就禁止它。 
+<p>单独的键可以通过使用 <a href="#setItemEnabled">setItemEnabled</a>() 设置允许或禁止被激活。如果要操作某个键，那么这个键必须在被允许的QAccel里并切实是被允许激活的。 
+<p>参考 <a href="#isEnabled">isEnabled</a>() 和 <a href="#setItemEnabled">setItemEnabled</a>()。 
+<h3 class=fn>void <a name=setItemEnabled></a>QAccel::setItemEnabled ( int&nbsp;id, bool&nbsp;enable ) </h3>
+<p>如果 <em>enable </em>是TRUE，允许标示符 <em>id </em>所标示的加速键项目可以被激活。 
+<p>如果 <em>enable </em>是FALSE，就禁止这个 <em>id </em>标示的项目。 
+<p>如果要操作某项目，那么这个项目必须是被允许的并且存在于一个被运行的QAccel里。 
+<p>参考 <a href="#isItemEnabled">isItemEnabled</a>() 和 <a href="#isEnabled">isEnabled</a>()。 
+<h3 class=fn>void <a name=setWhatsThis></a>QAccel::setWhatsThis ( int&nbsp;id, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text ) </h3>
+<p>为 <em>id </em>标示的加速键项目设定What's This帮助文本，这个文本设定给 <em>text </em>。 
+<p>当应用程序处于What's This模式并在用户按下加速键的时候，这个文本显示。 
+<p>如果要在菜单里设置What's This帮助（不管有没有加速键），使用<a href="qmenudata.html#setWhatsThis">QMenuData::setWhatsThis</a>().  
+<p>参考 <a href="#whatsThis">whatsThis</a>()，<a href="qwhatsthis.html#inWhatsThisMode">QWhatsThis::inWhatsThisMode</a>()，<a href="qmenudata.html#setWhatsThis">QMenuData::setWhatsThis</a>() 和 <a href="qaction.html#whatsThis-prop">QAction::whatsThis</a>。 
+<h3 class=fn><a href="qkeysequence.html">QKeySequence</a> <a name=shortcutKey></a>QAccel::shortcutKey ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;str )<tt> [静态]</tt> </h3>
+<p>返回 <em>str </em>里的快捷键组，如果 <em>str </em>没有快捷键组，返回无效的键组(0)。 
+<p>比如，<a href="#shortcutKey">shortcutKey</a>("E&amp;xit") 返回ALT+Key_X, shortcutKey("&amp;Quit") 返回 ALT+Key_Q 和 shortcutKey("Quit") 返回 0。(在没有继承Qt名字空间类的代码里，你必须像这样写Qt::ALT+Qt::Key_Q.) 
+<p>我们用英语提供了一个<a href="accelerators.html">通用加速键列表</a>。在发布这个列表的时候，Microsofu和Open Group并没有表示要推出针对于其他语言的版本 
+<h3 class=fn><a href="qkeysequence.html">QKeySequence</a> <a name=stringToKey></a>QAccel::stringToKey ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;s )<tt> [静态]</tt> </h3>
+<p><b>这个函数已不再使用了。</b> 它存在的目的是使以前的源代码还可以工作。我们强烈建议，在新的代码里不要使用它。 
+<p>返回字符串 <em>s </em>里里加速键码。例如"Ctrl+O" 给出CTRL+UNICODE_ACCEL+'O'。这些字符串"Ctrl"，"Shift"，"Alt"都是被识别的，如同它们在"QAccel"上下文里（使用( <a href="qobject.html#tr">QObject::tr</a>())）被翻译过来的意思一样。如果 <em>s </em>不是被识别的，返回0。
+<p>这个函数的典型是使用方法是伴随着 <a href="qobject.html#tr">tr</a>()的使用，这样，加速键就可以直接通过翻译被取代。
+<p>
+	<pre>
+	      <a href="qpopupmenu.html">QpopupMenu</a> *file = new <a href="qpopupmenu.html">QpopupMenu</a>( this )；
+        file-&gt;<a href="qmenudata.html#insertItem">insertItem</a>( p1, tr("&amp;Open..."), this, SLOT(open())，
+        QAccel::<a href="#stringToKey">stringToKey</a>(<a href="qobject.html#tr">tr</a>("Ctrl+O", "File|Open")) )；
+  </pre>
+ 
+<p>注意<tt>"File|Open"</tt>的翻译注释，它实际上没有任何的意思，它只是为人工的翻译提供了一个上下文的帮助。 
+<p>这个函数是多余的，从字符串 <em>s </em>里构造一个<a href="qkeysequence.html">QKeySequence</a>可以达到同样的效果。 
+<p>参考<a href="qobject.html#tr">QObject::tr</a>() 和 <a href="i18n.html">Internationalization with Qt</a>。 
+<p>例子：<a href="i18n-example.html#x1910">i18n/mywidget.cpp</a>。 
+<h3 class=fn><a href="qstring.html">QString</a> <a name=whatsThis></a>QAccel::whatsThis ( int&nbsp;id ) const </h3>
+<p>返回某个特定项目 <em>id </em>的What's This 帮助文本或者如果没有文本被提供的时候，返回 <a href="qstring.html#QString-null">QString::null</a> 
+<p>参考<a href="#setWhatsThis">setWhatsThis</a>()。 
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:allexit</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

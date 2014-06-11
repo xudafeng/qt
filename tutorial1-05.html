@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt教程一 —— 第五章：组装积木</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt教程一 —— 第五章：组装积木</h1>
+
+ 
+<p> <center><img src="t5.png" alt="Screenshot of tutorial five"></center> 
+<p> 这个例子显示了创建几个窗口部件并用信号和槽把它们连接起来，和如何处理重新定义大小事件。
+<p> <pre>/****************************************************************
+**
+** Qt教程一 - 5
+**
+****************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a href="qslider-h.html">qslider.h</a>&gt;
+#include &lt;<a href="qlcdnumber-h.html">qlcdnumber.h</a>&gt;
+#include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+
+#include &lt;<a href="qvbox-h.html">qvbox.h</a>&gt;
+
+class MyWidget : public <a href="qvbox.html">QVBox</a>
+{
+public:
+    MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+};
+
+
+<a name="f550"></a>MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qvbox.html">QVBox</a>( parent, name )
+{
+    <a href="qpushbutton.html">QPushButton</a> *quit = new <a href="qpushbutton.html">QPushButton</a>( "Quit", this, "quit" );
+    quit-&gt;<a href="qwidget.html#setFont">setFont</a>( QFont( "Times", 18, QFont::Bold ) );
+
+    <a href="qobject.html#connect">connect</a>( quit, SIGNAL(<a href="qbutton.html#clicked">clicked</a>()), qApp, SLOT(<a href="qapplication.html#quit">quit</a>()) );
+
+    <a href="qlcdnumber.html">QLCDNumber</a> *lcd  = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "lcd" );
+
+    <a href="qslider.html">QSlider</a> * slider = new <a href="qslider.html">QSlider</a>( Horizontal, this, "slider" );
+    slider-&gt;<a href="qrangecontrol.html#setRange">setRange</a>( 0, 99 );
+    slider-&gt;<a href="qslider.html#setValue">setValue</a>( 0 );
+
+    <a href="qobject.html#connect">connect</a>( slider, SIGNAL(<a href="qslider.html#valueChanged">valueChanged</a>(int)), lcd, SLOT(<a href="qlcdnumber.html#display">display</a>(int)) );
+}
+
+int main( int argc, char **argv )
+{
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+    MyWidget w;
+    a.<a href="qapplication.html#setMainWidget">setMainWidget</a>( &amp;w );
+    w.<a href="qwidget.html#show">show</a>();
+    return a.<a href="qapplication.html#exec">exec</a>();
+}
+</pre>
+
+
+
+<p> <h2> 一行一行地解说
+</h2>
+<a name="1"></a><p> <pre>    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+    #include &lt;<a href="qslider-h.html">qslider.h</a>&gt;
+    #include &lt;<a href="qlcdnumber-h.html">qlcdnumber.h</a>&gt;
+    #include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+
+    #include &lt;<a href="qvbox-h.html">qvbox.h</a>&gt;
+</pre>
+<p> 这里显示的是三个新的被包含的头文件。qslider.h和qlcdnumber.h在这里是因为我们使用了两个新的窗口部件，<a href="qslider.html">QSlider</a>和<a href="qlcdnumber.html">QLCDNumber</a>。qvbox.h在这里是因为我们使用了Qt的自动布局支持。
+<p> <pre>    class MyWidget : public <a href="qvbox.html">QVBox</a>
+    {
+    public:
+        MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+    };
+</pre>
+<p> <a name="constructor"></a>
+<pre>    MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qvbox.html">QVBox</a>( parent, name )
+    {
+</pre>
+<p> MyWidget现在继承了<a href="qvbox.html">QVBox</a>，而不是<a href="qwidget.html">QWidget</a>。我们通过这种方式来使用QVBox的布局（它可以把它的子窗口部件垂直地放在自己里面）。重新定义大小自动地被QVBox处理，因此现在也就被MyWidget处理了。
+<p> <pre>        <a href="qlcdnumber.html">QLCDNumber</a> *lcd  = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "lcd" );
+</pre>
+<p> <tt>lcd</tt>是一个QLCDNumber，一个可以按像LCD的方式显示数字的窗口部件。这个实例被设置为显示两个数字，并且是<em>this</em>的子窗口部件。它被命名为“lcd”。
+<p> <pre>        <a href="qslider.html">QSlider</a> * slider = new <a href="qslider.html">QSlider</a>( Horizontal, this, "slider" );
+    <a name="x2247"></a>    slider-&gt;<a href="qrangecontrol.html#setRange">setRange</a>( 0, 99 );
+    <a name="x2248"></a>    slider-&gt;<a href="qslider.html#setValue">setValue</a>( 0 );
+</pre>
+<p> <a href="qslider.html">QSlider</a>是一个经典的滑块，用户可以通过在拖动一个东西在一定范围内调节一个整数数值的方式来使用这个窗口部件。这里我们创建了一个水平的滑块，设置它的范围是0~99（包括0和99，参见<a href="qrangecontrol.html#setRange">QSlider::setRange</a>()文档）并且它的初始值是0。
+<p> <pre>    <a name="x2249"></a><a name="x2246"></a>    <a href="qobject.html#connect">connect</a>( slider, SIGNAL(<a href="qslider.html#valueChanged">valueChanged</a>(int)), lcd, SLOT(<a href="qlcdnumber.html#display">display</a>(int)) );
+</pre>
+<p> 这里我们是用了<a href="signalsandslots.html">信号/槽机制</a>把滑块的valueChanged()信号和LCD数字的display()槽连接起来了。
+<p> 无论什么时候滑块的值发生了变化，它都会通过发射valueChanged()信号来广播这个新的值。因为这个信号已经和LCD数字的display()槽连接起来了，当信号被广播的时候，这个槽就被调用了。这两个对象中的任何一个都不知道对方。这就是组件编程的本质。
+<p> 槽是和普通C++成员函数的方式不同，但有着普通C++成员函数的方位规则。
+<p> <h2> 行为
+</h2>
+<a name="2"></a><p> LCD数字反应了你对滑块做的一切，并且这个窗口部件很好地处理了重新定义大小事件。注意当窗口被重新定义大小（因为它可以）的时候，LDC数字窗口部件也改变了大小，但是其它的还是和原来一样（因为如果它们变化了，看起来好像很傻）。
+<p> （请看<a href="tutorial1-01.html#compiling">编译</a>来学习如何创建一个makefile和连编应用程序。）
+<p> <h2> 练习
+</h2>
+<a name="3"></a><p> 试着改变LCD数字，添加更多的数字或者<a href="qlcdnumber.html#setMode">改变模式</a>。你甚至可以添加四个按钮来设置基数。
+<p> 你也可以改变滑块的范围。
+<p> 也许使用<a href="qspinbox.html">QSpinBox</a>比滑块更好？
+<p> 试着当LCD数字溢出的时候使这个应用程序退出。
+<p> 现在你可以进行<a href="tutorial1-06.html">第六章</a>了。
+<p> [<a href="tutorial1-04.html">上一章</a>]
+[<a href="tutorial1-06.html">下一章</a>]
+[<a href="tutorial.html">教程一主页</a>]
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

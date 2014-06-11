@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>安装Qt/X11</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>安装Qt/X11</h1>
+
+ 
+<p> 你可能需要root帐号，这取决于你要安装Qt的路径的权限。
+<p> <ol type=1>
+<li>  如果你还没有解开压缩包的话，请解开：
+<p> <pre>
+    cd /usr/local
+    gunzip qt-x11-version.tar.gz    # 对这个包进行解压速
+    tar xf qt-x11-version.tar       # 对这个包进行解包
+</pre>
+ 
+<p> 这样就会创建一个包含主要的包中文件的/usr/local/qt-<em>version</em>目录。
+<p> 把qt-<em>version</em>重新命名为qt（或者建立一个链接）：
+<p> <pre>
+    mv qt-version qt
+</pre>
+ 
+<p> 这里假设Qt要被安装到/usr/local/qt路径下。
+<p> <li>  在你的主目录下的.profile文件（或者.login文件，取决于你的shell）中设置一些环境变量。如果它们并不存在的话，就创建它们。
+<p> <ul>
+<li> QTDIR -- 你安装Qt的路径
+<li> PATH -- 用来定位<a href="moc.html#moc">moc</a>程序和其它Qt工具
+<li> MANPATH -- 访问Qt man格式帮助文档的路径
+<li> LD_LIBRARY_PATH -- 共享Qt库的路径
+</ul>
+<p> 就像下面这样做：
+<p> 在.profile文件（如果你的shell是bash、ksh、zsh或者sh）中，添加下面这些行：
+<p> <pre>
+    QTDIR=/usr/local/qt
+    PATH=$QTDIR/bin:$PATH
+    MANPATH=$QTDIR/man:$MANPATH
+    LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
+
+    export QTDIR PATH MANPATH LD_LIBRARY_PATH
+</pre>
+ 
+<p> 在.login文件（如果你的shell是csh或者tcsh的情况下），添加下面这些行：
+<p> <pre>
+    setenv QTDIR /usr/local/qt
+    setenv PATH $QTDIR/bin:$PATH
+    setenv MANPATH $QTDIR/man:$MANPATH
+    setenv LD_LIBRARY_PATH $QTDIR/lib:$LD_LIBRARY_PATH
+</pre>
+ 
+<p> 做完这些之后，你需要重新登录，或者在继续工作之前重新指定你的配置文件，这样至少$QTDIR被设置了。否则的话安装程序就会给出一个错误信息并且不再进行下去了。
+<p> <li>  安装你的许可证文件。对于自由版本，你不需要一个许可证文件。对于专业版和企业版，你就需要安装一个和你的发行版一致的许可证文件。
+<p> <li>  编译Qt库，并且连编实例程序、教程和工具（比如Qt设计器），就像下面这样。
+<p> 输入：
+<pre>
+    ./configure
+</pre>
+ 
+<p> 这样的话就为你的机器配置Qt库。注意在默认条件下GIF文件支持选项是关闭的。运行./configure -help就会得到配置选项的一个列表。阅读PLATFORMS文件能够得到被支持的平台的列表。
+<p> 生成库和编译所有的例程和教程：
+<pre>
+    make
+</pre>
+ 
+如果你有问题，请看<a href="http://www.trolltech.com/platforms/">http://www.trolltech.com/platforms/</a>。
+<p> <li>  在很少的情况下，如果你使用了共享库，在这个地方你也许需要运行/sbin/ldconfig或者其它相似的东西。
+<p> 如果你在运行实例程序的时候遇到问题，比如消息如下
+<pre>
+    can't load library 'libqt.so.2'
+</pre>
+ 
+你也许需要在配置文件中给定一个qt库的定位，并且以root的身份在你的系统中运行/sbin/ldconfig。并且你不要忘记了在上面的第二步中提到的设置一个LD_LIBRARY_PATH环境变量。
+<p> <li>  在线的HTML文档被安装到了/usr/local/qt/doc/html/，主页面是/usr/local/qt/doc/html/index.html。man帮助文档被安装到了/usr/local/qt/doc/man/。
+</ol>
+<p> 你已经做完了。Qt已经安装完毕。
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

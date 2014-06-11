@@ -1,0 +1,407 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QButton类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QButton类参考</h1>
+
+<p>QButton类是按钮窗口部件的抽象基类，提供了按钮所共有的功能。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qbutton-h.html">qbutton.h</a>&gt;</tt>
+<p>继承了<a href="qwidget.html">QWidget</a>。
+<p>被<a href="qcheckbox.html">QCheckBox</a>、<a href="qpushbutton.html">QPushButton</a>、<a href="qradiobutton.html">QRadioButton</a>和<a href="qtoolbutton.html">QToolButton</a>继承。
+<p><a href="qbutton-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QButton"><b>QButton</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = 0 )</div></li>
+<li><div class=fn><a href="#~QButton"><b>~QButton</b></a> ()</div></li>
+<li><div class=fn>QString <a href="#text"><b>text</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setText"><b>setText</b></a> ( const QString &amp; )</div></li>
+<li><div class=fn>const QPixmap * <a href="#pixmap"><b>pixmap</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setPixmap"><b>setPixmap</b></a> ( const QPixmap &amp; )</div></li>
+<li><div class=fn>QKeySequence <a href="#accel"><b>accel</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setAccel"><b>setAccel</b></a> ( const QKeySequence &amp; )</div></li>
+<li><div class=fn>bool <a href="#isToggleButton"><b>isToggleButton</b></a> () const</div></li>
+<li><div class=fn>enum <a href="#ToggleType-enum"><b>ToggleType</b></a> { SingleShot, Toggle, Tristate }</div></li>
+<li><div class=fn>ToggleType <a href="#toggleType"><b>toggleType</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setDown"><b>setDown</b></a> ( bool )</div></li>
+<li><div class=fn>bool <a href="#isDown"><b>isDown</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isOn"><b>isOn</b></a> () const</div></li>
+<li><div class=fn>enum <a href="#ToggleState-enum"><b>ToggleState</b></a> { Off, NoChange, On }</div></li>
+<li><div class=fn>ToggleState <a href="#state"><b>state</b></a> () const</div></li>
+<li><div class=fn>bool autoResize () const &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>void setAutoResize ( bool ) &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>bool <a href="#autoRepeat"><b>autoRepeat</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setAutoRepeat"><b>setAutoRepeat</b></a> ( bool )</div></li>
+<li><div class=fn>bool <a href="#isExclusiveToggle"><b>isExclusiveToggle</b></a> () const</div></li>
+<li><div class=fn>QButtonGroup * <a href="#group"><b>group</b></a> () const</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>void <a href="#animateClick"><b>animateClick</b></a> ()</div></li>
+<li><div class=fn>void <a href="#toggle"><b>toggle</b></a> ()</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#pressed"><b>pressed</b></a> ()</div></li>
+<li><div class=fn>void <a href="#released"><b>released</b></a> ()</div></li>
+<li><div class=fn>void <a href="#clicked"><b>clicked</b></a> ()</div></li>
+<li><div class=fn>void <a href="#toggled"><b>toggled</b></a> ( bool&nbsp;on )</div></li>
+<li><div class=fn>void <a href="#stateChanged"><b>stateChanged</b></a> ( int&nbsp;state )</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>QKeySequence <a href="#accel-prop"><b>accel</b></a>&nbsp;- 与按钮有关的快捷键</div></li>
+<li><div class=fn>bool <a href="#autoRepeat-prop"><b>autoRepeat</b></a>&nbsp;- 是否能够自动重复</div></li>
+<li><div class=fn>bool autoResize&nbsp;- 是否能够自动重定义大小&nbsp;<em>（废弃的）</em></div></li>
+<li><div class=fn>bool <a href="#down-prop"><b>down</b></a>&nbsp;- 按钮是否被按下</div></li>
+<li><div class=fn>bool <a href="#exclusiveToggle-prop"><b>exclusiveToggle</b></a>&nbsp;- 按钮是否是排它的&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>bool <a href="#on-prop"><b>on</b></a>&nbsp;- 按钮是否被切换&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>QPixmap <a href="#pixmap-prop"><b>pixmap</b></a>&nbsp;- 在按钮上显示的像素映射</div></li>
+<li><div class=fn>QString <a href="#text-prop"><b>text</b></a>&nbsp;- 在按钮上显示的文本</div></li>
+<li><div class=fn>bool <a href="#toggleButton-prop"><b>toggleButton</b></a>&nbsp;- 按钮是否是一个切换按钮&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>ToggleState <a href="#toggleState-prop"><b>toggleState</b></a>&nbsp;- 按钮是否被切换&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>ToggleType <a href="#toggleType-prop"><b>toggleType</b></a>&nbsp;- 按钮的切换类型&nbsp;<em>（只读）</em></div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>void <a href="#setToggleButton"><b>setToggleButton</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>virtual void <a href="#setToggleType"><b>setToggleType</b></a> ( ToggleType&nbsp;type )</div></li>
+<li><div class=fn>void <a href="#setOn"><b>setOn</b></a> ( bool&nbsp;on )</div></li>
+<li><div class=fn>virtual void <a href="#setState"><b>setState</b></a> ( ToggleState&nbsp;s )</div></li>
+<li><div class=fn>virtual bool <a href="#hitButton"><b>hitButton</b></a> ( const&nbsp;QPoint&nbsp;&amp;&nbsp;pos ) const</div></li>
+<li><div class=fn>virtual void <a href="#drawButton"><b>drawButton</b></a> ( QPainter * )</div></li>
+<li><div class=fn>virtual void <a href="#drawButtonLabel"><b>drawButtonLabel</b></a> ( QPainter * )</div></li>
+<li><div class=fn>virtual void <a href="#paintEvent"><b>paintEvent</b></a> ( QPaintEvent * )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+<p> QButton类是按钮窗口部件的抽象基类，提供了按钮所共有的功能。
+<p> 
+<p> <b>如果你想创建一个按钮，请使用<a href="qpushbutton.html">QPushButton</a>。</b>
+<p> QButton类实现了一个<em>抽象</em>按钮，并且让它的子类来指定如何回复用户的行为和如何画按钮。
+<p> QButton提供了推动和切换按钮。<a href="qradiobutton.html">QRadioButton</a>和<a href="qcheckbox.html">QCheckBox</a>类只提供了切换按钮，QPushButton和<a href="qtoolbutton.html">QToolButton</a>提供了切换按钮和推动按钮。
+<p> 任何按钮都可以有一个文本的或者像素映射的标签。<a href="#setText">setText</a>()设置按钮为一个文本按钮并且<a href="#setPixmap">setPixmap</a>()设置它为一个像素映射按钮。文本/像素映射的使用中需要创建当按钮被取消使用时所需的“失效的”外观。
+<p> QButton提供了按钮所要用到的绝大多数状态：
+<ul>
+<li> <a href="#isDown">isDown</a>()决定按钮是否被<em>按</em>下。
+<li> <a href="#isOn">isOn</a>()决定按钮是否是<em>开的</em>。只有切换按钮才能被切换为开或关（请看下面）。
+<li> <a href="qwidget.html#isEnabled">isEnabled</a>()决定按钮是否可以被用户按下。
+<li> <a href="#setAutoRepeat">setAutoRepeat</a>()决定如果用户按下按钮，按钮是否可以自动回复。
+<li> <a href="#setToggleButton">setToggleButton</a>()决定按钮是否是一个切换按钮。
+</ul>
+<p> isDown()和isOn()的不同点如下：
+当用户点击一个切换按钮并且把它切换为开，按钮首先被<em>按下</em>并且然后被释放变为<em>开</em>状态。当用户再次点击（切换为关），按钮首先移动到被<em>按下</em>状态，然后变为<em>关</em>状态（isOn()和isDown()都为假）。
+<p> 默认按钮（在很多对话框中被使用的）由<a href="qpushbutton.html#setDefault">QPushButton::setDefault</a>()和<a href="qpushbutton.html#setAutoDefault">QPushButton::setAutoDefault</a>()提供。
+<p> QButton提供五个信号：
+<ol type=1>
+<li> 当鼠标光标在按钮内，鼠标左键被按下时，<a href="#pressed">pressed</a>()被发送。
+<li> 当鼠标左键被释放时，<a href="#released">released</a>()被发送。
+<li> 当按钮首先被按下然后又被释放或者快捷键被按下，或者当<a href="#animateClick">animateClick</a>()被调用时，<a href="#clicked">clicked</a>()被发送。
+<li> 当切换按钮的状态变化时，<a href="#toggled">toggled</a>(bool)被发送。
+<li> 当一个三态切换按钮的状态变化时，<a href="#stateChanged">stateChanged</a>(int)被发送。
+</ol>
+<p> 如果一个文本按钮的文本中有“&amp;”，QButton会创建一个自动快捷键。下面的代码创建一个标签为“Rock &amp; Roll”（c下面有下划线）的推动按钮。这个按钮有一个自动快捷键，Alt+C：
+<p> <pre>
+    <a href="qpushbutton.html">QPushButton</a> *p = new <a href="qpushbutton.html">QPushButton</a>( "Ro&amp;ck &amp;&amp; Roll", this );
+  </pre>
+ 
+<p> 在这个实例中，当用户按下Alt+C时，按钮将会调用animateClick()。
+<p> 你也可以使用<a href="#setAccel">setAccel</a>()函数来设置一个定制的快捷键。这个对于绝大多数像素映射按钮是很有用的，因为它们没有自动快捷键。
+<p> <pre>
+    <a href="qpushbutton.html">QPushButton</a> *p;
+    p-&gt;<a href="#setPixmap">setPixmap</a>( QPixmap("print.png") );
+    p-&gt;<a href="#setAccel">setAccel</a>( ALT+Key_F7 );
+  </pre>
+ 
+<p> Qt所提供的所有按钮（<a href="qpushbutton.html">QPushButton</a>、<a href="qtoolbutton.html">QToolButton</a>、<a href="qcheckbox.html">QCheckBox</a>和<a href="qradiobutton.html">QRadioButton</a>）都能够既显示文本也显示像素映射。
+<p> 为了继承QButton，你至少不得不重新实现<a href="#drawButton">drawButton</a>()（绘制按钮的外形）和<a href="#drawButtonLabel">drawButtonLabel</a>()（绘制它的文本或像素映射）。通常也被建议重新实现<a href="qwidget.html#sizeHint">sizeHint</a>()，并且有时也被建议重新实现<a href="#hitButton">hitButton</a>()（为了决定一个按钮按下是否在按钮内）。
+<p> 为了减少闪烁，<a href="#paintEvent">QButton::paintEvent</a>()设置drawButton()中所要画的一个像素映射。你不用在QButton的子类中重新实现<a href="#paintEvent">paintEvent</a>()，除非你想接管全部的绘制工作。
+<p> <p>也可以参考<a href="qbuttongroup.html">QButtonGroup</a>和<a href="abstractwidgets.html">抽象窗口部件类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="ToggleState-enum"></a>QButton::ToggleState</h3> 
+<p> 这个枚举类型定义了一个切换按钮在任何时候的状态。可能的值如下：
+<ul>
+<li><tt>QButton::Off</tt> - 按钮在“关”状态
+<li><tt>QButton::NoChange</tt> - 按钮在默认/未改变状态
+<li><tt>QButton::On</tt> - 按钮在“开”状态
+</ul>
+<h3 class=fn><a name="ToggleType-enum"></a>QButton::ToggleType</h3> 
+<p> 这个枚举类型定义了按钮对一个鼠标/键盘按下可以做什么响应：
+<ul>
+<li><tt>QButton::SingleShot</tt> - 按下按钮导致一个行为，然后按钮返回一个未按下状态。
+<li><tt>QButton::Toggle</tt> - 按下按钮，在<a href="#ToggleState-enum">On</a>和<a href="#ToggleState-enum">Off</a>状态中切换。
+<li><tt>QButton::Tristate</tt> - 按下按钮，在<a href="#ToggleState-enum">On</a>、<a href="#ToggleState-enum">Off</a>和<a href="#ToggleState-enum">NoChange</a>状态中循环。
+</ul><p> 
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QButton"></a>QButton::QButton ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = 0 )
+</h3>
+构造一个父对象为<em>parent</em>并且名称为<em>name</em>，使用窗口部件标记<em>f</em>的标准按钮。
+<p> 如果<em>parent</em>是一个<a href="qbuttongroup.html">QButtonGroup</a>，这个构造函数将调用<a href="qbuttongroup.html#insert">QButtonGroup::insert</a>()。
+
+<h3 class=fn><a name="~QButton"></a>QButton::~QButton ()
+</h3> 
+销毁这个按钮。
+
+<h3 class=fn><a href="qkeysequence.html">QKeySequence</a> <a name="accel"></a>QButton::accel () const
+</h3><p>
+返回这个按钮的相关快捷键。详细情况请参考<a href="qbutton.html#accel-prop">“accel”</a>属性。
+
+<h3 class=fn>void <a name="animateClick"></a>QButton::animateClick ()<tt> [槽]</tt>
+</h3>
+执行一个自动点击：按钮被按下并且在一小段时间后被释放。
+<p> <a href="#pressed">pressed</a>()、<a href="#released">released</a>()、<a href="#clicked">clicked</a>()、<a href="#toggled">toggled</a>()和<a href="#stateChanged">stateChanged</a>()信号在适当的时候被发送。
+<p> 如果按钮是<a href="qwidget.html#setEnabled">失效的</a>，这个函数将不做任何事情。
+<p> <p>也可以参考<a href="#accel-prop">accel</a>。
+
+<h3 class=fn>bool <a name="autoRepeat"></a>QButton::autoRepeat () const
+</h3><p>
+如果autoRepeat生效，返回真，否则返回假。详细情况请参考<a href="qbutton.html#autoRepeat-prop">“autoRepeat”</a>属性。
+
+<h3 class=fn>bool <a name="autoResize"></a>QButton::autoResize () const
+</h3><p>
+如果autoResize生效，返回真，否则返回假。详细情况请参考<a href="qbutton.html#autoResize-prop">“autoResize”</a>属性。
+
+<h3 class=fn>void <a name="clicked"></a>QButton::clicked ()<tt> [信号]</tt>
+</h3>
+<p> 当按钮被激活时（比如，当鼠标光标在按钮中，按钮首先被按下并且然后被释放），或者当快捷键被按下时，或者<a href="#animateClick">animateClick</a>()被调用时，这个信号被发送。如果你调用<a href="#setDown">setDown</a>()，这个信号<em>不</em>被发送。
+<p> 如果你想把几个按钮连接到同一个槽中，<a href="qbuttongroup.html#clicked">QButtonGroup::clicked</a>()信号可以做这样的工作。
+<p> <p>也可以参考<a href="#pressed">pressed</a>()、<a href="#released">released</a>()、<a href="#toggled">toggled</a>()、<a href="#autoRepeat-prop">autoRepeat</a>和<a href="#down-prop">down</a>。
+<p>实例：<a href="simple-qfont-demo-walkthrough.html#x2109">fonts/simple-qfont-demo/viewer.cpp</a>、<a href="listbox-example.html#x1309">listbox/listbox.cpp</a>、<a href="clientserver-example.html#x777">network/clientserver/client/client.cpp</a>、<a href="ftpclient-example.html#x649">network/ftpclient/ftpmainwindow.cpp</a>、<a href="richtext-example.html#x581">richtext/richtext.cpp</a>、<a href="tutorial1-02.html#x2277">t2/main.cpp</a>和<a href="tutorial1-04.html#x2293">t4/main.cpp</a>。
+
+<h3 class=fn>void <a name="drawButton"></a>QButton::drawButton ( <a href="qpainter.html">QPainter</a>&nbsp;* )<tt> [虚 保护]</tt>
+</h3>
+绘制按钮。默认实现是不做任何事。
+<p> 这个虚函数是通过子类的重新实现来绘制真正的按钮。这些重新实现被假定同时在同一点调用<a href="#drawButtonLabel">drawButtonLabel</a>()。
+<p> <p>也可以参考<a href="#drawButtonLabel">drawButtonLabel</a>()和<a href="#paintEvent">paintEvent</a>()。
+
+<h3 class=fn>void <a name="drawButtonLabel"></a>QButton::drawButtonLabel ( <a href="qpainter.html">QPainter</a>&nbsp;* )<tt> [虚 保护]</tt>
+</h3>
+绘制按钮文本或者像素映射。
+<p> 这个虚函数是通过子类的重新实现来绘制真正的按钮。它是由<a href="#drawButton">drawButton</a>()调用的。
+<p> <p>也可以参考<a href="#drawButton">drawButton</a>()和<a href="#paintEvent">paintEvent</a>()。
+
+<h3 class=fn><a href="qbuttongroup.html">QButtonGroup</a>&nbsp;* <a name="group"></a>QButton::group () const
+</h3> 
+返回这个按钮所属的按钮组的指针。
+<p> 如果这个按钮不是任何一个<a href="qbuttongroup.html">QButtonGroup</a>的成员，这个函数返回0。
+<p> <p>也可以参考<a href="qbuttongroup.html">QButtonGroup</a>。
+
+<h3 class=fn>bool <a name="hitButton"></a>QButton::hitButton ( const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;pos ) const<tt> [虚 保护]</tt>
+</h3>
+如果<em>pos</em>在可以点击的按钮的矩形中，返回真，或者如果在外面返回假。
+<p> 默认情况下，可点击区域是整个窗口部件。尽管子类可以重新实现它。
+
+<h3 class=fn>bool <a name="isDown"></a>QButton::isDown () const
+</h3><p>
+如果按钮被按下，返回真，否则返回假。详细情况请参考<a href="qbutton.html#down-prop">“down”</a>属性。
+
+<h3 class=fn>bool <a name="isExclusiveToggle"></a>QButton::isExclusiveToggle () const
+</h3><p>
+如果按钮是排它的，返回真，否则返回假。详细情况请参考<a href="qbutton.html#exclusiveToggle-prop">“exclusiveToggle”</a>属性。
+
+<h3 class=fn>bool <a name="isOn"></a>QButton::isOn () const
+</h3><p>
+如果按钮被切换，返回真，否则返回假。详细情况请参考<a href="qbutton.html#on-prop">“on”</a>属性。
+
+<h3 class=fn>bool <a name="isToggleButton"></a>QButton::isToggleButton () const
+</h3><p>
+如果按钮是一个切换按钮，返回真，否则返回假。详细情况请参考<a href="qbutton.html#toggleButton-prop">“toggleButton”</a>属性。
+
+<h3 class=fn>void <a name="paintEvent"></a>QButton::paintEvent ( <a href="qpaintevent.html">QPaintEvent</a>&nbsp;* )<tt> [虚 保护]</tt>
+</h3>
+<a href="#drawButtonLabel">drawButtonLabel</a>().
+处理按钮的绘制事件。小的和有代表性的复杂按钮被使用双缓存绘制来减少闪烁。实际的绘制是在虚函数<a href="#drawButton">drawButton</a>()和<a href="#drawButtonLabel">drawButtonLabel</a>()中完成的。
+<p> <p>也可以参考<a href="#drawButton">drawButton</a>()和<a href="#drawButtonLabel">drawButtonLabel</a>()。
+<p>从<a href="qwidget.html#paintEvent">QWidget</a>中重新实现的。
+
+<h3 class=fn>const&nbsp;<a href="qpixmap.html">QPixmap</a>&nbsp;* <a name="pixmap"></a>QButton::pixmap () const
+</h3><p>
+返回按钮中所显示的像素映射。详细情况请参考<a href="qbutton.html#pixmap-prop">“pixmap”</a>属性。
+
+<h3 class=fn>void <a name="pressed"></a>QButton::pressed ()<tt> [信号]</tt>
+</h3>
+当按钮被按下的时候，这个信号被发送。
+<p> <p>也可以参考<a href="#released">released</a>()和<a href="#clicked">clicked</a>()。
+<p>实例：<a href="httpd-example.html#x636">network/httpd/httpd.cpp</a>和<a href="popup-example.html#x1572">popup/popup.cpp</a>。
+
+<h3 class=fn>void <a name="released"></a>QButton::released ()<tt> [信号]</tt>
+</h3>
+当按钮被释放的时候，这个信号被发送。
+<p> <p>也可以参考<a href="#pressed">pressed</a>()、<a href="#clicked">clicked</a>()和<a href="#toggled">toggled</a>()。
+
+<h3 class=fn>void <a name="setAccel"></a>QButton::setAccel ( const&nbsp;<a href="qkeysequence.html">QKeySequence</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3><p>
+设置按钮的相关快捷键。详细情况请参考<a href="qbutton.html#accel-prop">“accel”</a>属性。
+
+<h3 class=fn>void <a name="setAutoRepeat"></a>QButton::setAutoRepeat ( bool )<tt> [虚]</tt>
+</h3><p>
+设置autoRepeat是否生效。详细情况请参考<a href="qbutton.html#autoRepeat-prop">“autoRepeat”</a>属性。
+
+<h3 class=fn>void <a name="setAutoResize"></a>QButton::setAutoResize ( bool )
+</h3><p>
+设置autoResize是否生效。详细情况请参考<a href="qbutton.html#autoResize-prop">“autoResize”</a>属性。
+
+<h3 class=fn>void <a name="setDown"></a>QButton::setDown ( bool )<tt> [虚]</tt>
+</h3><p>
+设置按钮是否被按下。详细情况请参考<a href="qbutton.html#down-prop">“down”</a>属性。
+
+<h3 class=fn>void <a name="setOn"></a>QButton::setOn ( bool&nbsp;on )<tt> [protected]</tt>
+</h3> 
+<p> 当<em>on</em>为真，设置这个按钮的状态为开，否则为关。
+<p> <p>也可以参考<a href="#toggleState-prop">toggleState</a>。
+
+<h3 class=fn>void <a name="setPixmap"></a>QButton::setPixmap ( const&nbsp;<a href="qpixmap.html">QPixmap</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3>
+<p>设置按钮上显示的像素映射。详细情况请参考<a href="qbutton.html#pixmap-prop">“pixmap”</a>属性。
+
+<h3 class=fn>void <a name="setState"></a>QButton::setState ( <a href="qbutton.html#ToggleState-enum">ToggleState</a>&nbsp;s )<tt> [虚 保护]</tt>
+</h3>
+<p> 设置按钮的状态为<em>s</em>。<em>s</em>可以为<a href="#ToggleState-enum">Off</a>、<a href="#ToggleState-enum">NoChange</a>或<a href="#ToggleState-enum">On</a>。
+
+<h3 class=fn>void <a name="setText"></a>QButton::setText ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3>
+<p>设置按钮上显示的文本。详细情况请参考<a href="qbutton.html#text-prop">“text”</a>属性。
+
+<h3 class=fn>void <a name="setToggleButton"></a>QButton::setToggleButton ( bool&nbsp;b )<tt> [protected]</tt>
+</h3>
+<p> 如果<em>b</em>为真，这个按钮变为一个切换按钮，如果<em>b</em>为假，这个按钮变为一个普通按钮。
+<p> <p>也可以参考<a href="#toggleButton-prop">toggleButton</a>。
+
+<h3 class=fn>void <a name="setToggleType"></a>QButton::setToggleType ( <a href="qbutton.html#ToggleType-enum">ToggleType</a>&nbsp;type )<tt> [虚 保护]</tt>
+</h3>
+设置按钮的切换类型为<em>type</em>。
+<p> <em>type</em>可以被设置为<a href="#ToggleType-enum">SingleShot</a>、<a href="#ToggleType-enum">Toggle</a>和<tt>TriState</tt>。
+
+<h3 class=fn><a href="qbutton.html#ToggleState-enum">ToggleState</a> <a name="state"></a>QButton::state () const
+</h3>
+<p>如果按钮是被切换的，返回真，否则返回假。详细情况请参考<a href="qbutton.html#toggleState-prop">“toggleState”</a>属性。
+
+<h3 class=fn>void <a name="stateChanged"></a>QButton::stateChanged ( int&nbsp;state )<tt> [信号]</tt>
+</h3>
+只要切换按钮改变状态，这个信号就被发送。如果按钮是开的，<em>state</em>为2，如果是<a href="qcheckbox.html#setTristate">“未改变”状态</a>，为1，或者如果按钮是关的，为0。
+<p> 这也许是一个用户行为的结果，<a href="#toggle">toggle</a>()槽激活，或者因为<a href="#setState">setState</a>()或<a href="#setOn">setOn</a>()被调用。
+<p> <p>也可以参考<a href="#clicked">clicked</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text"></a>QButton::text () const
+</h3>
+<p>返回按钮上所显示的文本。详细情况请参考<a href="qbutton.html#text-prop">“text”</a>属性。
+
+<h3 class=fn>void <a name="toggle"></a>QButton::toggle ()<tt> [槽]</tt>
+</h3>
+切换一个切换按钮的状态。
+<p>也可以参考<a href="#on-prop">on</a>、<a href="#setOn">setOn</a>()、<a href="#toggled">toggled</a>()和<a href="#toggleButton-prop">toggleButton</a>。
+
+<h3 class=fn><a href="qbutton.html#ToggleType-enum">ToggleType</a> <a name="toggleType"></a>QButton::toggleType () const
+</h3>
+<p>返回按钮的切换类型。详细情况请参考<a href="qbutton.html#toggleType-prop">“toggleType”</a>属性。
+
+<h3 class=fn>void <a name="toggled"></a>QButton::toggled ( bool&nbsp;on )<tt> [信号]</tt>
+</h3>
+只要切换按钮改变状态，这个信号就被发送。如果按钮是开的，<em>on</em>为真，或者如果按钮是关的，<em>on</em>为假。
+<p> 这也许是一个用户行为的结果，<a href="#toggle">toggle</a>()槽被激活，或者因为<a href="#setOn">setOn</a>()被调用。
+<p> <p>也可以参考<a href="#clicked">clicked</a>()。
+<p>实例：<a href="listbox-example.html#x1310">listbox/listbox.cpp</a>。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn><a href="qkeysequence.html">QKeySequence</a> <a name="accel-prop"></a>accel</h3> 
+<p>这个属性保存的是按钮相关的快捷键。
+<p>如果没有快捷键被设置，这个属性为0。如果你设置这个属性为0，那么任何当前的快捷键都被删除。
+<p>使用<a href="#setAccel">setAccel</a>()来设置这个属性值并且使用<a href="#accel">accel</a>()来得到这个属性值。
+
+<h3 class=fn>bool <a name="autoRepeat-prop"></a>autoRepeat</h3>
+<p>这个属性保存的是autoRepeat是否生效。
+<p>如果autoRepeat生效，那么如果按钮是按下的，<a href="#clicked">clicked</a>()信号会被定期发送。这个属性对切换按钮没有效果。autoRepeat默认是关闭的。
+<p>使用<a href="#setAutoRepeat">setAutoRepeat</a>()来设置这个属性值并且使用<a href="#autoRepeat">autoRepeat</a>()来得到这个属性值。
+
+<h3 class=fn>bool <a name="autoResize-prop"></a>autoResize</h3> 
+<p>这个属性保存的是autoResize是否生效。
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 如果autoResize生效，那么只要内容发生改变，按钮就会重新定义自己的大小。
+<p>使用<a href="#setAutoResize">setAutoResize</a>()来设置这个属性值并且使用<a href="#autoResize">autoResize</a>()来得到这个属性值。
+
+<h3 class=fn>bool <a name="down-prop"></a>down</h3> 
+<p>这个属性保存的是按钮是否被按下。
+<p>如果这个属性为真，按钮就被设置为被按下。如果你设置这个属性为真，信号<a href="#pressed">pressed</a>()和<a href="#clicked">clicked</a>()就不会被发送。这个属性默认为假。
+<p>使用<a href="#setDown">setDown</a>()来设置这个属性值并且使用<a href="#isDown">isDown</a>()来得到这个属性值。
+
+<h3 class=fn>bool <a name="exclusiveToggle-prop"></a>exclusiveToggle</h3> 
+<p>这个属性保存的是按钮是否是排它的。
+<p>如果这个属性为真并且这个按钮在一个<a href="qbuttongroup.html">QButtonGroup</a>里，这个按钮只有在其它按钮之一被切换为开的时候，它自己才能被切换为关。这个属性默认为假。
+<p>使用<a href="#isExclusiveToggle">isExclusiveToggle</a>()来得到这个属性值。
+
+<h3 class=fn>bool <a name="on-prop"></a>on</h3> 
+<p>这个属性保存的是按钮是否被切换。
+<p>这个属性只有对于切换按钮才能被设置。
+<p>使用<a href="#isOn">isOn</a>()来得到这个属性值。
+
+<h3 class=fn><a href="qpixmap.html">QPixmap</a> <a name="pixmap-prop"></a>pixmap</h3> 
+<p>这个属性保存的是按钮上显示的像素映射。
+<p>如果像素映射是单色的（比如，它是一个<a href="qbitmap.html">QBitmap</a>或者它的<a href="qpixmap.html#depth">深度</a>为1）并且没有掩码，这个属性将设置像素映射为它自己的掩码。这样的目的是为了绘制对于切换按钮是很重要的透明位图。
+<p> 如果没有像素映射被设置，<a href="#pixmap">pixmap</a>()返回0。
+<p>使用<a href="#setPixmap">setPixmap</a>()来设置这个属性值并且使用<a href="#pixmap">pixmap</a>()来得到这个属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text-prop"></a>text</h3> 
+<p>这个属性保存的是按钮上显示的文本。
+<p>如果按钮没有文本，这个属性将返回一个零字符串。如果文本中有一个“&amp;”，那么一个使用紧随“&amp;”之后的字母的快捷键将被创建。
+<p> 没有默认文本。
+<p>使用<a href="#setText">setText</a>()来设置这个属性值并且使用<a href="#text">text</a>().来得到这个属性值。
+
+<h3 class=fn>bool <a name="toggleButton-prop"></a>toggleButton</h3> 
+<p>这个属性保存的是按钮是否是切换按钮。
+<p>默认值为假。
+<p>使用<a href="#isToggleButton">isToggleButton</a>()来得到这个属性值。
+
+<h3 class=fn><a href="qbutton.html#ToggleState-enum">ToggleState</a> <a name="toggleState-prop"></a>toggleState</h3> <p>这个属性保存的是按钮是否被切换。
+<p>如果这个属性被改变，那么它不会导致按钮被重新绘制。
+<p>使用<a href="#state">state</a>()来得到这个属性值。
+
+<h3 class=fn><a href="qbutton.html#ToggleType-enum">ToggleType</a> <a name="toggleType-prop"></a>toggleType</h3> <p>这个属性保存的是按钮的切换类型。
+<p>默认切换类型是SingleShot。
+<p>使用<a href="#toggleType">toggleType</a>()来得到这个属性值。
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QValidator类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QValidator类参考</h1>
+
+<p>QValidator类提供了对输入文本的验证。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qvalidator-h.html">qvalidator.h</a>&gt;</tt>
+<p>继承了<a href="qobject.html">QObject</a>。
+<p>被<a href="qintvalidator.html">QIntValidator</a>、<a href="qdoublevalidator.html">QDoubleValidator</a>和<a href="qregexpvalidator.html">QRegExpValidator</a>继承。
+<p><a href="qvalidator-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QValidator"><b>QValidator</b></a> ( QObject&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#~QValidator"><b>~QValidator</b></a> ()</div></li>
+<li><div class=fn>enum <a href="#State-enum"><b>State</b></a> { Invalid, Intermediate, Valid = Intermediate, Acceptable }</div></li>
+<li><div class=fn>virtual State <a href="#validate"><b>validate</b></a> ( QString&nbsp;&amp;&nbsp;input, int&nbsp;&amp;&nbsp;pos ) const = 0</div></li>
+<li><div class=fn>virtual void <a href="#fixup"><b>fixup</b></a> ( QString&nbsp;&amp;&nbsp;input ) const</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+<p> QValidator类提供了对输入文本的验证。
+<p> 
+<p> 这个类本身是抽象类。两个子类<a href="qintvalidator.html">QIntValidator</a>和<a href="qdoublevalidator.html">QDoubleValidator</a>提供了基本的数字范围检查，并且<a href="qregexpvalidator.html">QRegExpValidator</a>提供了一个使用自定义<a href="qregexp.html#regular-expression">正则表达式</a>的普通检查。
+<p> 如果内置的验证器还不够的话，你可以继承QValidator。这个类有两个虚函数：<a href="#validate">validate</a>()和<a href="#fixup">fixup</a>()。
+<p> <a href="#validate">validate</a>()必须被每个子类重新实现。它根据参数是否有效（子类中来定义这个有效）返回<a href="#State-enum">Invalid</a>、<a href="#State-enum">Intermediate</a>或<a href="#State-enum">Acceptable</a>。
+<p> 这三种状态需要一些解释。<a href="#State-enum">Invalid</a>是指字符串<em>明显地</em>无效。<a href="#State-enum">Intermediate</a>是不太明显的——当字符串在不完整的时候（还在被编辑），这个有效的概念是要小心对待的。QValidator把<a href="#State-enum">Intermediate</a>定义为一个字符串的属性，既不是明显地无效也不是作为最终结果可以接受的。<a href="#State-enum">Acceptable</a>意味着作为最终结果这个字符串是可以接受的。在一个<a href="#State-enum">Acceptable</a>字符串被输入的过程中任何似是而非的中间状态都是<a href="#State-enum">Intermediate</a>。
+<p> 这里是一些实例：
+<p> <ul>
+<p> <li> 对于一个接受从0到999的整数的行编辑，包括边界，42和666都是<a href="#State-enum">Acceptable</a>，空字符串和1114是<a href="#State-enum">Intermediate</a>并且asdf是<a href="#State-enum">Invalid</a>。
+<p> <li> 对于一个用来接受URL的可以编辑的组合框，任何格式正确的URL都是<a href="#State-enum">Acceptable</a>，“http://www.trolltech.com/,”是<a href="#State-enum">Intermediate</a>（它可能是被剪切过来的，所以后面有一个逗号），空字符串是有效的（用户可以可以选择和删除所有文本来准备输入一个新的URL）并且“http:///./”是<a href="#State-enum">Invalid</a>。
+<p> <li> 对于一个接受长度的微调框，“11cm”和“1in”是<a href="#State-enum">Acceptable</a>，“11”和空字符串是<a href="#State-enum">Intermediate</a>并且“http://www.trolltech.com”和“hour”是<a href="#State-enum">Invalid</a>。
+<p> </ul>
+<p> <a href="#fixup">fixup</a>()为提供了可以修改一些用户错误的验证器。默认实现是什么也不做。例如<a href="qlineedit.html">QLineEdit</a>，如果用户按下回车键并且内容并不有效，这种情况下fixup()可以做些事情了。这样就允许一些<a href="#State-enum">Invalid</a>字符串也可以被变为<a href="#State-enum">Acceptable</a>。
+<p> QValidator通常被QLineEdit、<a href="qspinbox.html">QSpinBox</a>和<a href="qcombobox.html">QComboBox</a>使用。
+<p>请参考<a href="misc.html">杂项类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="State-enum"></a>QValidator::State</h3> 
+<p> 这个枚举类型定义了一个被验证的字符串所存在的状态。现在有三个状态：
+<ul>
+<li><tt>QValidator::Invalid</tt> - 这个字符串是<em>明显地</em>有效。
+<li><tt>QValidator::Intermediate</tt> - 这个字符串在被输入的过程中是似是而非的中间状态。
+<li><tt>QValidator::Acceptable</tt> - 这个字符串作为最终结果是可以接受的，也就是说是有效的。
+</ul>
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QValidator"></a>QValidator::QValidator ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+设置被这个验证器使用的内部数据结构。在这个时候还没有人任何数据。<em>parent</em>和<em>name</em>参数被传递给<a href="qobject.html">QObject</a>的构造函数。
+
+<h3 class=fn><a name="~QValidator"></a>QValidator::~QValidator ()
+</h3>
+销毁这个验证器，释放任何存储和其它被使用的资源。
+
+<h3 class=fn>void <a name="fixup"></a>QValidator::fixup ( <a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;input ) const<tt> [虚]</tt>
+</h3>
+<p> 这个函数会根据这个验证器的规则试图改变<em>input</em>来使之有效。它不需要结果是有效的字符串——这个函数的调用者必须在调用之后重新测试，默认是什么也不做。
+<p> 这个函数的重新实现要改变<em>input</em>，尽管它们可能不生成有效字符串。例如，一个ISBN验证器也许想删除除了数字和“-”之外的任何字符，尽管结果不是一个有效的ISBN，一个姓氏验证器也许想要删除字符串开始和结尾的空白符号，尽管结果字符串并不存在于被接受的姓氏列表中。
+
+<h3 class=fn><a href="qvalidator.html#State-enum">State</a> <a name="validate"></a>QValidator::validate ( <a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;input, int&nbsp;&amp;&nbsp;pos ) const<tt> [纯 虚]</tt>
+</h3>
+<p> 如果根据这个验证器的规则，<em>input</em>是有效的，这个纯虚函数返回<a href="#State-enum">Invalid</a>，如果看起来再编辑一下就会使结果变为可以接受（例如用户向一个接受10到99的窗口部件中输入了“4”），那么返回<a href="#State-enum">Intermediate</a>，如果输入是有效的，就返回<a href="#State-enum">Acceptable</a>。
+<p> 如果需要的话，这个函数可以改变<em>input</em>和<em>pos</em>（光标位置）。
+
+<p>在<a href="qintvalidator.html#validate">QIntValidator</a>、<a href="qdoublevalidator.html#validate">QDoubleValidator</a>和<a href="qregexpvalidator.html#validate">QRegExpValidator</a>中被重新实现。
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

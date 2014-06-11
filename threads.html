@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt中的线程支持</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt中的线程支持</h1>
+
+ 
+<p> Qt对线程提供了支持，基本形式有独立于平台的线程类、线程安全方式的事件传递和一个全局Qt库互斥量允许你可以从不同的线程调用Qt方法。
+<p> 这个文档是提供给那些对多线程编程有丰富的知识和经验的听众的。推荐阅读：
+<ul>
+<li> <a href="http://www.amazon.com/exec/obidos/ASIN/0134436989/trolltech/t">Threads Primer: A Guide to Multithreaded Programming</a>
+<li> <a href="http://www.amazon.com/exec/obidos/ASIN/0131900676/trolltech/t">Thread Time: The Multithreaded Programming Guide</a>
+<li> <a href="http://www.amazon.com/exec/obidos/ASIN/1565921151/trolltech/t">Pthreads Programming: A POSIX Standard for Better Multiprocessing (O'Reilly Nutshell)</a>
+<li> <a href="http://www.amazon.com/exec/obidos/ASIN/1565922964/trolltech/t">Win32 Multithreaded Programming</a>
+</ul>
+<p> <b>警告：</b>所有的GUI类（比如，<a href="qwidget.html">QWidget</a>和它的子类），操作系统核心类（比如，<a href="qprocess.html">QProcess</a>）和网络类都<em>不</em>是线程安全的。
+<p> <a href="qregexp.html">QRegExp</a>使用一个静态缓存并且也不是线程安全的，即使通过使用<a href="qmutex.html">QMutex</a>来保护的QRegExp对象。
+<p> 
+<p> <h2> 启用线程支持
+</h2>
+<a name="1"></a><p> 在Windows上安装Qt时，在一些编译器上线程支持是一个选项。
+<p> 在Mac OS X和Unix上，线程支持可以当你在运行<tt>configure</tt>脚本时添加<tt>-thread</tt>选项就可以生效了。在Unix平台上，多线程程序必须用特殊的方式连接，比如使用特殊的libc，安装程序将会创建另外一个库<tt>libqt-mt</tt>并且因此线程程序必须和这个库进行连接（使用<tt>-lqt-mt</tt>）而不是标准的Qt库。
+<p> 在两个平台上，你都应该定义宏<tt>QT_THREAD_SUPPORT</tt>来编译（比如，编译时使用<tt>-DQT_THREAD_SUPPORT</tt>）。在Windows上，这个通常可以在<tt>qconfig.h</tt>写一个条目来解决。
+<p> <h2> 线程类
+</h2>
+<a name="2"></a><p> 最重要的类是<a href="qthread.html">QThread</a>，也就是说要开始一个新的线程，就是开始执行你重新实现的<a href="qthread.html#run">QThread::run</a>()。这和Java的线程类很相似。
+<p> 为了写线程程序，在两个线程同时希望访问同一个数据时，对数据进行保护是很必要的。因此这里也有一个<a href="qmutex.html">QMutex</a>类，一个线程可以锁定互斥量，并且在它锁定之后，其它线程就不能再锁定这个互斥量了，试图这样做的线程都会被阻塞直到互斥量被释放。例如：
+<p> <pre>
+    class MyClass
+    {
+    public:
+        void doStuff( int );
+
+    private:
+        <a href="qmutex.html">QMutex</a> mutex;
+        int a;
+        int b;
+    };
+
+    // 这里设置a为c，b为c*2。
+
+    void MyClass::doStuff( int c )
+    {
+        mutex.<a href="qmutex.html#lock">lock</a>();
+        a = c;
+        b = c * 2;
+        mutex.<a href="qmutex.html#unlock">unlock</a>();
+    } 
+</pre>
+ 
+<p> 这保证了同一时间只有一个线程可以进入MyClass::doStuff()，所以<tt>b</tt>将永远等于<tt>c * 2</tt>。
+<p> 另外一个线程也需要在一个给定的条件下等待其它线程的唤醒，<a href="qwaitcondition.html">QWaitCondition</a>类就被提供了。线程等待的条件QWaitCondition指出发生了什么事情，阻塞将一直持续到这种事情发生。当某种事情发生了，<a href="qwaitcondition.html">QWaitCondition</a>可以唤醒等待这一事件的线程之一或全部。（这和POSIX线程条件变量是具有相同功能的并且它也是Unix上的一种实现。）例如：
+<p> <pre>
+    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+
+    // 全局条件变量
+    <a href="qwaitcondition.html">QWaitCondition</a> mycond;
+
+    // Worker类实现
+    class Worker : public <a href="qpushbutton.html">QPushButton</a>, public QThread
+    {
+        <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>
+
+    public:
+        Worker(QWidget *parent = 0, const char *name = 0)
+            : <a href="qpushbutton.html">QPushButton</a>(parent, name)
+        {
+            setText("Start Working");
+
+            // 连接从QPushButton继承来的信号和我们的slotClicked()方法
+            connect(this, SIGNAL(clicked()), SLOT(slotClicked()));
+
+            // 调用从QThread继承来的start()方法……这将立即开始线程的执行
+            QThread::<a href="qthread.html#start">start</a>();
+        }
+
+    public slots:
+        void slotClicked()
+        {
+            // 唤醒等待这个条件变量的一个线程
+            mycond.<a href="qwaitcondition.html#wakeOne">wakeOne</a>();
+        }
+
+    protected:
+        void run()
+        {
+            // 这个方法将被新创建的线程调用……
+
+            while ( TRUE ) {
+                // 锁定应用程序互斥锁，并且设置窗口标题来表明我们正在等待开始工作
+                qApp-&gt;<a href="qapplication.html#lock">lock</a>();
+                setCaption( "Waiting" );
+                qApp-&gt;<a href="qapplication.html#unlock">unlock</a>();
+
+                // 等待直到我们被告知可以继续
+                mycond.<a href="qwaitcondition.html#wait">wait</a>();
+
+                // 如果我们到了这里，我们已经被另一个线程唤醒……让我们来设置标题来表明我们正在工作
+                qApp-&gt;<a href="qapplication.html#lock">lock</a>();
+                setCaption( "Working!" );
+                qApp-&gt;<a href="qapplication.html#unlock">unlock</a>();
+
+                // 这可能会占用一些时间，几秒、几分钟或者几小时等等，因为这个一个和GUI线程分开的线程，在处理事件时，GUI线程不会停下来……
+                do_complicated_thing();
+            }
+        }
+    };
+
+	// 主线程——所有的GUI事件都由这个线程处理。
+    int main( int argc, char **argv )
+    {
+        <a href="qapplication.html">QApplication</a> app( argc, argv );
+
+        // 创建一个worker……当我们这样做的时候，这个worker将在一个线程中运行
+        Worker firstworker( 0, "worker" );
+
+        app.<a href="qapplication.html#setMainWidget">setMainWidget</a>( &amp;worker );
+        worker.show();
+
+        return app.<a href="qapplication.html#exec">exec</a>();
+    }
+  </pre>
+ 
+<p> 只要你按下按钮，这个程序就会唤醒worker线程，这个线程将会进行并且做一些工作并且然后会回来继续等待被告知做更多的工作。如果当按钮被按下时，worker线程正在工作，那么就什么也不会发生。当线程完成了工作并且再次调用<a href="qwaitcondition.html#wait">QWaitCondition::wait</a>()，然后它就会被开始。
+<p> <h2> 线程安全的事件传递
+</h2>
+<a name="3"></a><p> 在Qt中，一个线程总是一个事件线程——确实是这样的，线程从窗口系统中拉出事件并且把它们分发给窗口部件。静态方法QThread::postEvent从线程中传递事件，而不同于事件线程。事件线程被唤醒并且事件就像一个普通窗口系统事件那样在事件线程中被分发。例如，你可以强制一个窗口部件通过如下这样做的一个不同的线程来进行重绘：
+<p> <pre>
+    <a href="qwidget.html">QWidget</a> *mywidget;
+    QThread::<a href="qthread.html#postEvent">postEvent</a>( mywidget, new <a href="qpaintevent.html">QPaintEvent</a>( QRect(0, 0, 100, 100) ) );
+  </pre>
+ 
+<p> 这（异步地）将使mywidget重绘一块100*100的正方形区域。
+<p> <h2> Qt库互斥量
+</h2>
+<a name="4"></a><p> Qt库互斥量提供了从线程而不是事件线程中调用Qt方法的一种方法。例如：
+<p> <pre>
+  <a href="qapplication.html">QApplication</a> *qApp;
+  <a href="qwidget.html">QWidget</a> *mywidget;
+
+  qApp-&gt;<a href="qapplication.html#lock">lock</a>();
+
+  mywidget-&gt;<a href="qwidget.html#setGeometry">setGeometry</a>(0,0,100,100);
+
+  <a href="qpainter.html">QPainter</a> p;
+  p.<a href="qpainter.html#begin">begin</a>(mywidget);
+  p.<a href="qpainter.html#drawLine">drawLine</a>(0,0,100,100);
+  p.<a href="qpainter.html#end">end</a>();
+
+  qApp-&gt;<a href="qapplication.html#unlock">unlock</a>();
+  </pre>
+ 
+<p> 在Qt中没有使用互斥量而调用一个函数通常情况下结果将是不可预知的。从另外一个线程中调用Qt的一个GUI相关函数需要使用Qt库互斥量。在这种情况下，所有可能最终访问任何图形或者窗口系统资源的都是GUI相关的。使用容器类，字符串或者输入/输出类，如果对象只被一个线程使用就不需要任何互斥量了。
+<p> <h2> 告诫
+</h2>
+<a name="5"></a><p> 当进行线程编程时，需要注意的一些事情：
+<ul>
+<li> 当使用Qt库互斥量的时候不要做任何阻塞操作。这将会冻结事件循环。
+<p> <li> 确认你锁定一个递归<a href="qmutex.html">QMutex</a>的次数和解锁的次数一样，不能多也不能少。
+<p> <li> 在调用除了Qt容器和工具类的任何东西之前锁定Qt应用程序互斥量。
+<p> <li> 谨防<a href="shclass.html#implicitly-shared">隐含地共享</a>类，你应该避免在线程之间使用操作符=()来复制它们。这将会在Qt的未来主要的或次要的发行版本中进行改进。
+<p> <li> 谨防那些没有被设计为线程安全的Qt类，例如，<a href="qptrlist.html">QPtrList</a>的应用程序接口就不是线程安全的并且如果不同的线程需要遍历一个QPtrList，它们应该在调用<a href="qptrlist.html#first">QPtrList::first</a>()之前锁定并且在到达终点之后解锁，而不是在<a href="qptrlist.html#next">QPtrList::next</a>()的前后进行锁定和解锁。
+<p> <li> 确认只在GUI线程中创建的继承和使用了<a href="qwidget.html">QWidget</a>、<a href="qtimer.html">QTimer</a>和<a href="qsocketnotifier.html">QSocketNotifier</a>的对象。在一些平台上，在某个不是GUI线程的线程中创建这样的对象将永远不会接受到底层窗口系统的事件。
+<p> <li> 和上面很相似，只在GUI线程中使用QNetwork类。一个经常被问到的问题是一个<a href="qsocket.html">QSocket</a>是否可以在多线程中使用。这不是必须得，因为所有的QNetwork类都是异步的。
+<p> <li> 不要在不是GUI线程的线程中试图调用processEvents()函数。这也包括<a href="qdialog.html#exec">QDialog::exec</a>()、<a href="qpopupmenu.html#exec">QPopupMenu::exec</a>()、<a href="qapplication.html#processEvents">QApplication::processEvents</a>()和其它一些。
+<p> <li> 在你的应用程序中，不要把普通的Qt库和支持线程的Qt库混合使用。这也就是说如果你的程序使用了支持线程的Qt库，你就不应该连接普通的Qt库、动态的载入普通Qt库或者动态地连接其它依赖普通Qt库的库或者插件。在一些系统上，这样做会导致Qt库中使用的静态数据变得不可靠了。
+<p> </ul>
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

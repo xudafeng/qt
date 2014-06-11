@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Format of the QDataStream Operators</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>Format of the QDataStream Operators</h1>
+
+
+
+<p> The <a href="qdatastream.html">QDataStream</a> allows you to serialize some of the Qt data types.
+The table below lists the data types that <a href="qdatastream.html">QDataStream</a> can serialize
+and how they are represented.
+<p> <ul>
+<li> Q_INT8
+<ul>
+<li> signed byte
+</ul>
+<li> Q_INT16
+<ul>
+<li> signed 16 bit integer
+</ul>
+<li> Q_INT32
+<ul>
+<li> signed 32 bit integer
+</ul>
+<li> Q_UINT8
+<ul>
+<li> unsigned byte
+</ul>
+<li> Q_UINT16
+<ul>
+<li> unsigned 16 bit integer
+</ul>
+<li> Q_UINT32
+<ul>
+<li> unsigned 32 bit integer
+</ul>
+<li> float
+<ul>
+<li> 32-bit floating point number using the standard IEEE-754 format
+</ul>
+<li> double
+<ul>
+<li> 64-bit floating point number using the standard IEEE-754 format
+</ul>
+<li> char *
+<ul>
+<li> The size of the string including the terminating 0 (Q_UINT32)
+<li> The string bytes including the terminating 0
+</ul>
+The null string is represented as <tt>(Q_UINT32) 0</tt>.
+<li> <a href="qbitarray.html">QBitArray</a>
+<ul>
+<li> The array size (Q_UINT32)
+<li> The array bits, i.e. (size + 7)/8 bytes
+</ul>
+<li> <a href="qbrush.html">QBrush</a>
+<ul>
+<li> The brush style (Q_UINT8)
+<li> The brush color (<a href="qcolor.html">QColor</a>)
+<li> If style is CustomPattern, the brush pixmap (<a href="qpixmap.html">QPixmap</a>)
+</ul>
+<li> <a href="qbytearray.html">QByteArray</a>
+<ul>
+<li> The array size (Q_UINT32)
+<li> The array bytes, i.e. size bytes
+</ul>
+<li> <a href="qcstring.html">QCString</a>
+<ul>
+<li> The size of the string including the terminating 0 (Q_UINT32)
+<li> The string bytes including the terminating 0
+</ul>
+The null string is represented as <tt>(Q_UINT32) 0</tt>.
+<li> <a href="qcolor.html">QColor</a>
+<ul><li> RGB value serialized as a Q_UINT32 </ul>
+<li> <a href="qcolorgroup.html">QColorGroup</a>
+<ul>
+<li> foreground (QBrush)
+<li> button (QBrush)
+<li> light (QBrush)
+<li> midLight (QBrush)
+<li> dark (QBrush)
+<li> mid (QBrush)
+<li> text (QBrush)
+<li> brightText (QBrush)
+<li> ButtonText (QBrush)
+<li> base (QBrush)
+<li> background (QBrush)
+<li> shadow (QBrush)
+<li> highlight (QBrush)
+<li> highlightedText (<a href="qbrush.html">QBrush</a>)
+</ul>
+<li> <a href="qcursor.html">QCursor</a>
+<ul>
+<li> Shape id (Q_INT16)
+<li> If shape is BitmapCursor: The bitmap (QPixmap), mask (<a href="qpixmap.html">QPixmap</a>) and hot spot (<a href="qpoint.html">QPoint</a>)
+</ul>
+<li> <a href="qdate.html">QDate</a>
+<ul>
+<li> Julian day (Q_UINT32)
+</ul>
+<li> <a href="qdatetime.html">QDateTime</a>
+<ul>
+<li> Date (QDate)
+<li> Time (<a href="qtime.html">QTime</a>)
+</ul>
+<li> <a href="qfont.html">QFont</a>
+<ul>
+<li> The point size (Q_INT16)
+<li> The style hint (Q_UINT8)
+<li> The char set (Q_UINT8)
+<li> The weight (Q_UINT8)
+<li> The font bits (Q_UINT8)
+</ul>
+<li> <a href="qimage.html">QImage</a>
+<ul>
+<li> Save it as a PNG image.
+</ul>
+<li> <a href="qmap.html">QMap</a>
+<ul>
+<li> The number of items (Q_UINT32)
+<li> For all items, the key and value
+</ul>
+<li> <a href="qpalette.html">QPalette</a>
+<ul>
+<li> active (<a href="qcolorgroup.html">QColorGroup</a>)
+<li> disabled (QColorGroup)
+<li> inactive (QColorGroup)
+</ul>
+<li> <a href="qpen.html">QPen</a>
+<ul>
+<li> The pen styles (Q_UINT8)
+<li> The pen width (Q_UINT8)
+<li> The pen color (<a href="qcolor.html">QColor</a>)
+</ul>
+<li> <a href="qpicture.html">QPicture</a>
+<ul>
+<li> The size of the picture data (Q_UINT32)
+<li> The raw bytes of picture data (char)
+</ul>
+<li> <a href="qpixmap.html">QPixmap</a>
+<ul>
+<li> Save it as a PNG image.
+</ul>
+<li> <a href="qpoint.html">QPoint</a>
+<ul>
+<li> The x coordinate (Q_INT32)
+<li> The y coordinate (Q_INT32)
+</ul>
+<li> <a href="qpointarray.html">QPointArray</a>
+<ul>
+<li> The array size (Q_UINT32)
+<li> The array points (QPoint)
+</ul>
+<li> <a href="qrect.html">QRect</a>
+<ul>
+<li> left (Q_INT32)
+<li> top (Q_INT32)
+<li> right (Q_INT32)
+<li> bottom (Q_INT32)
+</ul>
+<li> <a href="qregion.html">QRegion</a>
+<ul>
+<li> The size of the data, i.e. 8 + 16 * (number of rectangles) (Q_UINT32)
+<li> QRGN_RECTS (Q_INT32)
+<li> The number of rectangles (Q_UINT32)
+<li> The rectangles in sequential order (QRect)
+</ul>
+<li> <a href="qsize.html">QSize</a>
+<ul>
+<li> width (Q_INT32)
+<li> height (Q_INT32)
+</ul>
+<li> <a href="qstring.html">QString</a>
+<ul>
+<li> If the string is null: 0xffffffff (Q_UINT32)
+<li> Otherwise: The string length (Q_UINT32) followed by the
+data in UTF-16
+</ul>
+<li> <a href="qtime.html">QTime</a>
+<ul>
+<li> Milliseconds since midnight (Q_UINT32)
+</ul>
+<li> <a href="qvaluelist.html">QValueList</a>
+<ul>
+<li> The number of list elements (Q_UINT32)
+<li> All the elements in sequential order
+</ul>
+<li> <a href="qvariant.html">QVariant</a>
+<ul>
+<li> The type of the data (Q_UINT32)
+<li> The data of the specified type
+</ul>
+<li> <a href="qwmatrix.html">QWMatrix</a>
+<ul>
+<li> m11 (double)
+<li> m12 (double)
+<li> m21 (double)
+<li> m22 (double)
+<li> dx (double)
+<li> dy (double)
+</ul>
+</ul>
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

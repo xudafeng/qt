@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Translator" content="farfareast">
+
+<title>Qt插件HOWTO</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt插件HOWTO</h1>
+
+
+<p>Qt提供了一个简单地插件接口，可以轻松地生成作为独立组件的定制数据库驱动、图象格式、文本编解码器（text codec）、风格（style）和部件。
+<p> <b>警告：</b>Qt 3.0.5对插件的一些方面做了改变，具体涉及到装载、路径操作和库版本。这些变化的结果是，Qt 3.0.4及以前版本编译的插件<b><em>都不能</em></b>用于Qt 3.0.5及以后版本。
+<p>写一个插件通过以下方式完成：写适当的插件基类的子类，实现几个函数，再添加一个宏。
+<p>一共有五个插件基类。派生的插件缺省保存于标准插件目录。
+<p> <center><table cellpadding="4" cellspacing="2" border="0">
+<tr bgcolor="#a2c511">
+<th valign="top">基类
+<th valign="top">缺省路径
+<tr bgcolor="#f0f0f0">
+<td valign="top"><a href="qimageformatplugin.html">QImageFormatPlugin</a>
+<td valign="top"><tt>$QTDIR/plugins/imageformats</tt>
+<tr bgcolor="#d0d0d0">
+<td valign="top"><a href="qsqldriverplugin.html">QSqlDriverPlugin</a>
+<td valign="top"><tt>$QTDIR/plugins/sqldrivers</tt>
+<tr bgcolor="#f0f0f0">
+<td valign="top"><a href="qstyleplugin.html">QStylePlugin</a>
+<td valign="top"><tt>$QTDIR/plugins/styles</tt>
+<tr bgcolor="#d0d0d0">
+<td valign="top"><a href="qtextcodecplugin.html">QTextCodecPlugin</a>
+<td valign="top"><tt>$QTDIR/plugins/codecs</tt>
+<tr bgcolor="#f0f0f0">
+<td valign="top"><a href="qwidgetplugin.html">QWidgetPlugin</a>
+<td valign="top"><tt>$QTDIR/plugins/designer</tt>
+</table></center>
+<p>假设你有一个新的风格类，叫做'MyStyle'，你要把它做成插件的形式。需要的代码直截了当：
+<pre>
+    class MyStylePlugin : public <a href="qstyleplugin.html">QStylePlugin</a>
+    {
+    public:
+        MyStylePlugin() {}
+        ~MyStylePlugin() {}
+
+        <a href="qstringlist.html">QStringList</a> keys() const { 
+            return QStringList() &lt;&lt; "MyStyle"; 
+        }
+
+        <a href="qstyle.html">QStyle</a>* create( const <a href="qstring.html">QString</a>&amp; key ) { 
+            if ( key == "MyStyle" ) 
+                return new MyStyle;
+            return 0;
+        }
+    };
+
+    Q_EXPORT_PLUGIN( MyStylePlugin )
+</pre>
+
+<p>构造器和解构器不需要做什么，空的就可以。有两个虚函数一定要实现。第一个是keys()，它返回在插件中实现的类的一个字符串列表。（我们在上面的例子中刚刚实现了一个类。）第二个是一个函数，它返回所要的类的一个对象（或者0，如果插件被要求生成一个不存在的类的对象）。对于<a href="qstyleplugin.html">QStylePlugin</a>来说，这第二个函数叫做create()。
+<p>可以在一个插件里实现任意数目的插件子类，只要他们都是由同一个基类，比如说，QStylePlugin，派生出来的。
+<p>对于数据库驱动、图象格式、定制部件和文本编解码器，不需要显式的对象生成过程。Qt会按需求查找并生成他们。风格则是例外，因为你可能想以代码显式地设置一个风格。应用一个风格，可以使用类似代码：
+<pre>
+    QApplication::<a href="qapplication.html#setStyle">setStyle</a>( QStyleFactory::<a href="qstylefactory.html#create">create</a>( "MyStyle" ) );
+</pre>
+ 
+<p>有的插件类还需要实现其他函数。关于一个<a href="qwidgetplugin.html">QWidgetPlugin</a>的完全例子，可参见<a href="designer-manual.html">Qt设计器手册</a>中'生成定制部件'一章的'生成定制部件'节。这个例子实现了额外的函数，以把该插件集成到<em>Qt设计器</em>中去。<a href="qwidgetfactory.html">QWidgetFactory</a>类提供了关于QWidgetPlugin的附加信息。
+<p>关于每种类型的插件必须要实现哪些虚拟函数，详见该类的文档。
+<p>Qt的应用自动辨识哪些插件可用，因为插件都是保存在标准插件子目录下的。为此，应用不需要任何查找和装载插件的代码，既然Qt已自动处理了。
+<p>插件的缺省目录是<tt>$QTDIR/plugins</tt>，每种类型的插件在那种类型的子目录下，比如说，<tt>风格（styles）</tt>。如果你想要你的应用使用插件但不要标准插件路径，可以让你的安装程序决定你要为插件使用的路径，然后保存该路径，比如说使用<a href="qsettings.html">QSettings</a>，以使应用在运行时可以读取。之后应用可以用该路径调用<a href="qapplication.html#addLibraryPath">QApplication::addLibraryPath</a>()，就可以使用你的插件了。注意，路径的最后部分，也就是说，<tt>styles</tt>、<tt>widgets</tt>等等，不能改变。
+<p>应用包括一个插件的正规方法是，要么把插件与应用一起编译，要么把插件编译为<tt>DLL</tt>（或者<tt>so</tt>或者其他平台指定的库类型），像其他库那样使用。如果要让插件可装载，一个方法是，生成一个应用下的子目录，例如，<tt>appdir/plugins/designer</tt>，把插件放置到该目录下。
+<p> <h2>装载与校验插件
+</h2>
+<a name="1"></a><p>在装载插件时，Qt库做了一些稳健的检查，以确定插件是否可以装载和使用。这一点保证了多重版本的能力和分头所安装的Qt库的配置。
+<ul>
+<li>与高一点的主版本和／或次版本的Qt库链接的插件，不能被低的主版本和／或次版本的库所装载。（译者注：补丁版本不限）
+<p> <em>原因解释：</em>
+<p>依靠新的Qt库而链接的插件可能使用了一些旧版本没有的新特性。Trolltech有一项政策：只在次级发布（minor release）之间添加新特性和API，这就是为什么本测试只看主版本号和次版本号，不看补丁级版本号的缘故。
+<p> <li>依靠<em>带有</em>线程支持的Qt库而链接的插件，只能被<em>带有</em>线程支持的Qt库所装载。
+<p> <em>原因解释：</em>
+<p>线程和非线程的Qt库有不同的名称。<em>带有</em>线程支持的库装载一个依靠<em>不带有</em>线程支持的Qt库而链接的插件，将会导致在内存中同时有同一库的两个版本。在UNIX系统中，这会导致非线程Qt库被装载。这时，Qt库中的所有静态对象的构造器都会被调用第二次，但是它们是对已经在内存中的对象进行操作。没有办法绕过这一点，因为这是对象二进制格式的一个特征：已经被线程Qt库定义的静态符号，不能在被非线程Qt库被装载的时候被替换或者拷贝。
+<p> <li>依靠<em>不带有</em>线程支持的Qt库而链接的插件，只能被<em>不带有</em>线程支持的Qt库所装载。
+<p> <em>原因解释：</em>
+<p>参见上面的解释。
+<p> <li>从Qt 3.0.5开始，Qt库与所有插件都使用<em>联编关键字（build key）</em>来联编。Qt库中的联编关键字被与插件中的联编关键字对照，如果相符，插件就被装载。如果联编关键字不符，Qt库就拒绝装载该插件。
+<p> <em>原因解释：</em>
+<p>参见下面对于build key的解释。
+</ul>
+<p> <h2>联编关键字（build key）
+</h2>
+<a name="2"></a><p>联编关键字包含一下信息：
+<ul>
+<li>体系结构（Architecture）、操作系统和编译器。
+<p> <em>原因解释：</em>
+<p>在同一编译器的不同版本并不产生二进制兼容代码的场合，编译器的版本也体现在联编关键字里。
+<p> <li>Qt的配置。这个配置是一个列表，包括了影响库中可用到的API的那些缺少的特性。
+<p> <em>原因解释：</em>
+<p>两个同一版本的Qt库的不同配置不是二进制兼容的。装载插件的Qt库使用这个（缺少的）特性列表来判断插件是不是二进制兼容的。
+<p> <em>注意：</em>也存在这种情况，插件可以使用在两个不同配置里可用到的特性。但是，编写插件的开发者需要知道，哪些特性在他们的插件和Qt的公用工具类中都在被使用。Qt库在装载插件时会需要复杂的特性与依赖性的查询确认。这些需求给开发者添了一个不必要的负担，也增加了装载插件的系统开销。为了减少开发时间，降低应用的运行时消耗，可以使用对联编关键字的简单字符串比较。
+<p> <li>可选地，可以在配置脚本命令行指定一个附加的字符串。
+<p> <em>原因解释：</em>
+<p>在发布带有应用的Qt库的二进制时，这给开发者提供了一个办法，来编写只能被插件以之链接的那个库所装载的插件。
+</ul>
+<p> <h2>插件与线程应用
+</h2>
+<a name="3"></a><p>如果你想联编一个使用线程Qt库的插件（不管插件本身是否使用线程），你必须使用线程环境。具体说来，你必须用线程Qt库链接插件，必须用该库联编<a href="designer-manual.html">Qt设计器</a>。你用于插件的<tt>.pro</tt>文件必须包括这一行：
+<pre>
+    CONFIG += thread
+</pre>
+
+<p> <b>警告：</b>不要在应用中混用一般的Qt库与线程Qt库。如果你的应用使用了线程Qt库，你不应该用一般Qt库链接你的插件，也不应该动态装载一般Qt库或者动态装载依赖一般Qt库的另一个库，比如一个插件。在一些系统中，混用线程与非线程库或者插件会破坏（corrupt）Qt库中使用的静态数据。
+<p> 
+
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:farfareast</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

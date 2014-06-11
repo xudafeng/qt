@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<!-- /tmp/qt-3.0-reggie-22931/qt-win-commercial-3.0.4/src/sql/qsqlquery.cpp:77 -->
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Translator" content="tipy">
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QSqlQuery类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" 
+border="0"></td></tr></table>
+<h1 align=center>QSqlQuery类参考<br><small>[<a href="sql.html">sql模块</a>]</small></h1>
+
+<p>QSqlQuery类提供了一种执行和操纵SQL语句的方式。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qsqlquery-h.html">qsqlquery.h</a>&gt;</tt>
+<p>被<a href="qsqlcursor.html">QSqlCursor</a>继承。
+<p><a href="qsqlquery-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QSqlQuery"><b>QSqlQuery</b></a> ( QSqlResult&nbsp;*&nbsp;r )</div></li>
+<li><div class=fn><a href="#QSqlQuery-2"><b>QSqlQuery</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;query = QString::null, QSqlDatabase&nbsp;*&nbsp;db = 0 )</div></li>
+<li><div class=fn><a href="#QSqlQuery-3"><b>QSqlQuery</b></a> ( const&nbsp;QSqlQuery&nbsp;&amp;&nbsp;other )</div></li>
+<li><div class=fn>QSqlQuery &amp; <a href="#operator-eq"><b>operator=</b></a> ( const&nbsp;QSqlQuery&nbsp;&amp;&nbsp;other )</div></li>
+<li><div class=fn>virtual <a href="#~QSqlQuery"><b>~QSqlQuery</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#isValid"><b>isValid</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isActive"><b>isActive</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isNull"><b>isNull</b></a> ( int&nbsp;field ) const</div></li>
+<li><div class=fn>int <a href="#at"><b>at</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#lastQuery"><b>lastQuery</b></a> () const</div></li>
+<li><div class=fn>int <a href="#numRowsAffected"><b>numRowsAffected</b></a> () const</div></li>
+<li><div class=fn>QSqlError <a href="#lastError"><b>lastError</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isSelect"><b>isSelect</b></a> () const</div></li>
+<li><div class=fn>int <a href="#size"><b>size</b></a> () const</div></li>
+<li><div class=fn>const QSqlDriver * <a href="#driver"><b>driver</b></a> () const</div></li>
+<li><div class=fn>const QSqlResult * <a href="#result"><b>result</b></a> () const</div></li>
+<li><div class=fn>virtual bool <a href="#exec"><b>exec</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;query )</div></li>
+<li><div class=fn>virtual QVariant <a href="#value"><b>value</b></a> ( int&nbsp;i ) const</div></li>
+<li><div class=fn>virtual bool <a href="#seek"><b>seek</b></a> ( int&nbsp;i, bool&nbsp;relative = FALSE )</div></li>
+<li><div class=fn>virtual bool <a href="#next"><b>next</b></a> ()</div></li>
+<li><div class=fn>virtual bool <a href="#prev"><b>prev</b></a> ()</div></li>
+<li><div class=fn>virtual bool <a href="#first"><b>first</b></a> ()</div></li>
+<li><div class=fn>virtual bool <a href="#last"><b>last</b></a> ()</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#beforeSeek"><b>beforeSeek</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#afterSeek"><b>afterSeek</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+ 
+
+
+<p> QSqlQuery类提供了一种执行和操纵SQL语句的方式。
+<p> 
+<p> QSqlQuery包括了所有的功能，像在一个<a href="qsqldatabase.html">QSqlDatabase</a>上执行SQL查询创建、导航和索取数据等等。 它可以执行DML（数据操作语言）语句，比如 <tt>SELECT</tt>, <tt>INSERT</tt>, <tt>UPDATE</tt> 和 <tt>DELETE</tt>, 还可以执行DDL（数据定义语言）语句，比如：<tt>CREATE TABLE</tt>。 不仅如此，它还可以用于执行特定数据库而不是标准SQL语句的指令(比如  <tt>SET DATESTYLE=ISO</tt> 用于 PostgreSQL).
+<p> 成功执行一SQL语句设置query为活动状态（ <a href="#isActive">isActive</a>() 返回TRUE）否则查询置为非活动状态。无论那种情况，执行一条新的 SQL 语句之后，查询都被定位在一个无效的记录上；所以在数据被获取之前，查询都必须被导航到一个有效的记录上 （<a href="#isValid">isValid</a>()可以确定查询是否处在一个有效的记录上）。
+<p> 在记录之间进行导航用以下一条函数:
+<p> <ul>
+<li><a href="#next">next</a>()
+<li><a href="#prev">prev</a>()
+<li><a href="#first">first</a>()
+<li><a href="#last">last</a>()
+<li><tt></tt><a href="#seek">seek</a>(int)
+</ul>
+<p> 这些函数允许程序员向前、向后或随心所欲地在查询返回的记录之间移动。一旦一个处于活动状态的查询 被定位在一个有效的记录上时，就可以通过<a href="#value">value</a>()获取数据。所有的数据都被用QVariants从SQL后端转换过来。
+<p> 比如：
+<p> <pre>
+    QSqlQuery query( "select name from customer" );
+    while ( query.<a href="#next">next</a>() ) {
+        <a href="qstring.html">QString</a> name = query.<a href="#value">value</a>(0).toString();
+        doSomething( name );
+    }
+    </pre>
+ 
+<p> 要获得从一个查询中返回的数据，用value()方法。由SELECT语句返回的数据中的每个域可以通过指定一个索引来访问，索引从0开始。没有一个方法可以通过指定名字来定位域的，因为这不能得到可能确认。（请看<a href="qsqlcursor.html">QSqlCursor</a>，它提供一个更加有弹性的接口用于从一个表单中选择数据或在一个数据库中查看数据）。
+<p> <p>也可以参考<a href="qsqldatabase.html">QSqlDatabase</a>、<a href="qsqlcursor.html">QSqlCursor</a>、<a href="qvariant.html">QVariant</a>和<a href="database.html">数据库类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QSqlQuery"></a>QSqlQuery::QSqlQuery ( <a href="qsqlresult.html">QSqlResult</a>&nbsp;*&nbsp;r )
+</h3>  
+创建一个QSqlQuery对象，用<a href="qsqlresult.html">QSqlResult</a> <em>r</em> 用于和一个数据库进行通信。
+
+<h3 class=fn><a name="QSqlQuery-2"></a>QSqlQuery::QSqlQuery ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;query = QString::null, <a href="qsqldatabase.html">QSqlDatabase</a>&nbsp;*&nbsp;db = 0 )
+</h3>  
+用 SQL <em>query</em> 和数据库<em>db</em>创建一个QSqlQuery对象。如果<em>db</em>为0（默认），则使用程序的默认数据库。
+<p> <p>也可以参考<a href="qsqldatabase.html">QSqlDatabase</a>。
+
+<h3 class=fn><a name="QSqlQuery-3"></a>QSqlQuery::QSqlQuery ( const&nbsp;<a href="qsqlquery.html">QSqlQuery</a>&nbsp;&amp;&nbsp;other )
+</h3>
+构建一个<em>other</em>的副本。
+
+<h3 class=fn><a name="~QSqlQuery"></a>QSqlQuery::~QSqlQuery ()<tt> [virtual]</tt>
+</h3> 
+清空此对象并释放所有的资源。
+
+<h3 class=fn>void <a name="afterSeek"></a>QSqlQuery::afterSeek ()<tt> [virtual protected]</tt>
+</h3> 
+保护虚函数，当内部记录指针被移动到一个新的记录时被调用。默认的操作什么都不做。
+
+<h3 class=fn>int <a name="at"></a>QSqlQuery::at () const
+</h3> 
+返回查询的当前的内部位置。第一个记录的位置是0。如果位置是无效的，一个描述无效位置的QSql::Location将返回。
+<p> <p>S也可以参考 <a href="#isValid">isValid</a>()。
+<p>例子： <a href="sql.html#x2220">sql/overview/navigating/main.cpp</a>。
+
+<h3 class=fn>void <a name="beforeSeek"></a>QSqlQuery::beforeSeek ()<tt> [virtual protected]</tt>
+</h3>  
+保护虚函数，内部记录指针被移动到一个新的记录之前被调用。默认的操作什么都不做。
+
+<h3 class=fn>const&nbsp;<a href="qsqldriver.html">QSqlDriver</a>&nbsp;* <a name="driver"></a>QSqlQuery::driver () const
+</h3> 
+返回一个指向与查询对应的数据库驱动的指针。
+
+<h3 class=fn>bool <a name="exec"></a>QSqlQuery::exec ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;query )<tt> [virtual]</tt>
+</h3> 
+执行 SQL <em>query</em>。如果查询成功了便设置查询的状态为活动，并且返回TRUE。否则返回false并且查询变为非活动状态。 <em>query</em> 语句必须必须符合数据数据库的语法要求，比如说，标准的SQL。
+<p> 执行之后，查询被定位在一个无效的记录上，所以在获得数据之前，必须先导航到一个有效的记录上。
+<p> 注意：执行exec()之后，查询的最后错误会被得新设置。
+<p> <p>也可以参考 <a href="#isActive">isActive</a>()、<a href="#isValid">isValid</a>()、<a href="#next">next</a>()、<a href="#prev">prev</a>()、<a href="#first">first</a>()、<a href="#last">last</a>() 和 <a href="#seek">seek</a>()。
+<p>例子： <a href="sql.html#x2208">sql/overview/basicbrowsing/main.cpp</a>、<a href="sql.html#x2212">sql/overview/basicbrowsing2/main.cpp</a> 和 <a href="sql.html#x2217">sql/overview/basicdatamanip/main.cpp</a>。
+
+<h3 class=fn>bool <a name="first"></a>QSqlQuery::first ()<tt> [virtual]</tt>
+</h3> 检索结果集中的第一个记录，如果有效的话，还将定位查询在检索的记录上。注意，在调用这个函数之前，结果集必须处于一个有效的状态，并且 <a href="#isSelect">isSelect</a>() 必须返回TRUE，否则它将什么都不做，返回FALSE。成功执行返回TRUE。如果不成功，查询被设置到一个无效的位置上，并返回FALSE。
+<p>例子： <a href="sql.html#x2221">sql/overview/navigating/main.cpp</a>。
+
+<h3 class=fn>bool <a name="isActive"></a>QSqlQuery::isActive () const
+</h3>  
+如果查询当前是处于一个活动的状态返回 TRUE，否则返回 FALSE。
+<p>例子：<a href="sql.html#x2209">sql/overview/basicbrowsing/main.cpp</a>、<a href="sql.html#x2213">sql/overview/basicbrowsing2/main.cpp</a>、<a href="sql.html#x2218">sql/overview/basicdatamanip/main.cpp</a>、<a href="sql.html#x2222">sql/overview/navigating/main.cpp</a> 和 <a href="sql.html#x2226">sql/overview/retrieve1/main.cpp</a>。
+
+<h3 class=fn>bool <a name="isNull"></a>QSqlQuery::isNull ( int&nbsp;field ) const
+</h3>  
+如果<em>field</em> 当前为 NULL 返回，否则返回 FALSE 。在调用这个函数之前，查询必须是活动的并且被定位在一个有效的记录上，否则将返回 FALSE 。注意，对于一些驱动来说，<a href="#isNull">isNull</a>() 不会返回准确的信息，直到尝试去检索数据。
+<p> <p>也可以参考  <a href="#isActive">isActive</a>()、<a href="#isValid">isValid</a>() 和 <a href="#value">value</a>()。
+
+<h3 class=fn>bool <a name="isSelect"></a>QSqlQuery::isSelect () const
+</h3>  
+如果当前的查询是 SELECT 语句返回TRUE，否则返回 FALSE。
+
+<h3 class=fn>bool <a name="isValid"></a>QSqlQuery::isValid () const
+</h3> 
+如果查询当前处在一个有效的记录上返回TRUE，否则返回FALSE。
+
+<h3 class=fn>bool <a name="last"></a>QSqlQuery::last ()<tt> [virtual]</tt>
+</h3> R检索结果集中的最后一个记录，如果有效的话，将定位查询在检索的记录上。注意，在调用这个函数之前，结果集必须处于有效的状态，而且 <a href="#isSelect">isSelect</a>() 必须返回 TRUE。否则它将什么都不做还返回 FALSE。如果成功将返回 TRUE。如果失败查询被定位到一个无效的位置上并且返回FALSE。 
+<p>例子：<a href="sql.html#x2223">sql/overview/navigating/main.cpp</a>。
+
+<h3 class=fn><a href="qsqlerror.html">QSqlError</a> <a name="lastError"></a>QSqlQuery::lastError () const
+</h3>  
+返回最后产生的错误信息。
+<p> <p>也可以参考 <a href="qsqlerror.html">QSqlError</a>。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="lastQuery"></a>QSqlQuery::lastQuery () const
+</h3> 
+返回当前正被使用的查询的文本，如果没有查询文本则返回 <a href="qstring.html#QString-null">QString::null</a>。
+
+<h3 class=fn>bool <a name="next"></a>QSqlQuery::next ()<tt> [virtual]</tt>
+</h3> 在结果集中检索下一个记录，如果有效，定位查询在被检索的记录上。注意，在调用这个函数之前，结果集必须处于有效的状态，而且 <a href="#isSelect">isSelect</a>() 必须返回 TRUE。否则它将什么都不做返回 FALSE。
+<p> 应用以下一些规则：
+<p> <ul>
+<li>如果如果集被定位在第一个记录之前，刚刚执行完一个查询就处于这种状态，那么可以用此函数来检索第一个记录。
+<li>如果如果集被定位在最后一个记录之后，那么什么都不会改变，返回FALSE。
+<li> 如果结果集被定位在中间，此函数可以检索下一个记录。
+</ul>
+<p> 如果记录不能被检索，结果集将被定位在最后一个记录之后，并返回 FALSE 。如果记录成功检索，那么返回 TRUE 。
+<p> <p>也可以参考 <a href="#at">at</a>()和<a href="#isValid">isValid</a>()。
+<p>例子： <a href="sql.html#x2210">sql/overview/basicbrowsing/main.cpp</a>、<a href="sql.html#x2214">sql/overview/basicbrowsing2/main.cpp</a>、<a href="sql.html#x2227">sql/overview/retrieve1/main.cpp</a>、<a href="sql.html#x2312">sql/overview/subclass3/main.cpp</a>、<a href="sql.html#x2316">sql/overview/subclass4/main.cpp</a>、<a href="sql.html#x2319">sql/overview/subclass5/main.cpp</a>和<a href="sqltable-example.html#x2564">sql/sqltable/main.cpp</a>。
+
+<h3 class=fn>int <a name="numRowsAffected"></a>QSqlQuery::numRowsAffected () const
+</h3>  
+返回有多少行记录被结果集的 SQL 语句影响了，如果不能确定将返回 -1 。注意，对于 SELECT语句，此值等同于 <a href="#size">size</a>()如果查询处于非活动状态（<a href="#isActive">isActive</a>()返回FALSE），将反回 -1。
+<p> <p>也可以参考 <a href="#size">size</a>() 和 <a href="qsqldriver.html#hasFeature">QSqlDriver::hasFeature</a>()。
+<p>例子： <a href="sql.html#x2215">sql/overview/basicbrowsing2/main.cpp</a> 和 <a href="sql.html#x2219">sql/overview/basicdatamanip/main.cpp</a>。
+
+<h3 class=fn><a href="qsqlquery.html">QSqlQuery</a>&nbsp;&amp; <a name="operator-eq"></a>QSqlQuery::operator= ( const&nbsp;<a href="qsqlquery.html">QSqlQuery</a>&nbsp;&amp;&nbsp;other )
+</h3>
+分配<em>other</em> 给查询。
+
+<h3 class=fn>bool <a name="prev"></a>QSqlQuery::prev ()<tt> [virtual]</tt>
+</h3> 在结果集中检索前一个记录，如果有效，查询被这位在检索的记录上。注意，在调用这个函数之前，结果集必须处于有效的状态，而且 <a href="#isSelect">isSelect</a>() 必须返回 TRUE。否则它将什么都不做返回 FALSE。
+<p> 应用以下一些规则：
+<p> <ul>
+<li>如果结果集被定位在第一个记录之前，什么都不会改变，返回 FALSE。
+<li>如果结果集被定位在最后一个记录之后，调用此函数可以检索到最后一个记录。
+<li>如果结果集被定位在中间位置，调用此函数可以检索前一个记录。
+</ul>
+<p> 如果记录不能被检索，结果集将被定位在第一个记录之前，并返回 FALSE 。如果记录成功检索，那么返回 TRUE 。
+<p> <p>也可以参考 <a href="#at">at</a>()。
+
+<h3 class=fn>const&nbsp;<a href="qsqlresult.html">QSqlResult</a>&nbsp;* <a name="result"></a>QSqlQuery::result () const
+</h3> 
+返回查询对应的指针。
+
+<h3 class=fn>bool <a name="seek"></a>QSqlQuery::seek ( int&nbsp;i, bool&nbsp;relative = FALSE )<tt> [virtual]</tt>
+</h3> 
+检索位置为 <em>i</em>（偏移） 的记录，如果有效，查询被定位在检索的记录上。第一个记录在位置0上。注意，在调用这个函数之前，查询必须处于活动状态，而且
+<a href="#isSelect">isSelect</a>() 必须返回TRUE。
+<p> 应用以下一些规则：
+<p> 如果 <em>relative</em>  为FALSE（默认）, 应用以下规则：
+<p> <ul>
+<li> 如果<em>i</em> 是负的，结果集被定位在第一个记录之前，并返回 FALSE。
+<li> 否则，将定位查询到位置
+<em>i</em> 。如果位置 <em>i</em> 上的记录不能被检索，结果集被定位到最后一个记录之后返回FALSE。如果记录被成功检索，返回TRUE。
+</ul>
+<p> 如果 <em>relative</em>为TRUE，应用以下规则：
+<p> <ul>
+<li> 如果结果集当前处于第一个记录之前，或者就在第一个记录之上，而且 <em>i</em> 是负的，那么什么都不会改变，FALSE 将被返回。
+<li> 如果结果集处于在最后一个记录之后，而且 
+<em>i</em> 是负的，那么什么都不改变，返回 FALSE。
+<li>如果结果集处于中间的某个位置，相对偏移量 <em>i</em>  移动结果集在0 之下，那么结果集将定位在第一个记录之前，返回FALSE。
+<li> 否则，调用此函数将向前移动结果集到记录 <em>i</em> （或者向后移动到记录<em>i</em>如果<em>i</em>
+是负的）。如果记录偏移量 <em>i</em>不能被检索，当那么<em>i</em> >=0时，结果集将被定位在最后一个记录之后（或者当<em>i</em>是负时，在第一个记录之前），返回 FALSE。如果记录成功检索，返回TRUE。
+</ul>
+<p>例子： <a href="sql.html#x2224">sql/overview/navigating/main.cpp</a>。
+
+<h3 class=fn>int <a name="size"></a>QSqlQuery::size () const
+</h3>  
+返回结果集的大小，（多少行被返回），如果大小不能确定或者数据库不支持报告查询大小的信息时返回-1。注意，对于那些非 SELECT 语句（<a href="#isSelect">isSelect</a>()返回FALSE）， <a href="#size">size</a>() 将返回 -1，如果查询处于非活动状态（<a href="#isActive">isActive</a>()返回FALSE），将返回-1。
+<p> 想得一个非 SELECT 语句影响的行数，用 <a href="#numRowsAffected">numRowsAffected</a>()。
+<p> <p>也可以参考  <a href="#isActive">isActive</a>()、<a href="#numRowsAffected">numRowsAffected</a>() 和 <a href="qsqldriver.html#hasFeature">QSqlDriver::hasFeature</a>()。
+<p>例子 <a href="sql.html#x2225">sql/overview/navigating/main.cpp</a>。
+
+<h3 class=fn><a href="qvariant.html">QVariant</a> <a name="value"></a>QSqlQuery::value ( int&nbsp;i ) const<tt> [virtual]</tt>
+</h3> 
+返回域  <em>i</em> 的值（基于0）。
+<p> 用<tt>SELECT</tt> 语句的文本，域被从左到右编号，比如：在"select forename, surname from people"，域0是forename 而域1 是surname。推荐使用 
+<tt>SELECT *</tt> * 语句，因为这样的话查询中的域没有定义。
+<p>如果域 <em>i</em> 不存在的话，如果查询处于非活动状态，或查询被定位在一个无效的记录上，一个无效的<a href="qvariant.html">QVariant被返回。
+<p> <p>也可以参考 <a href="#prev">prev</a>()、<a href="#next">next</a>()、<a href="#first">first</a>()、<a href="#last">last</a>()、<a href="#seek">seek</a>()、<a href="#isActive">isActive</a>()和<a href="#isValid">isValid</a>()。
+<p>例子： <a href="sql.html#x2211">sql/overview/basicbrowsing/main.cpp</a>、<a href="sql.html#x2216">sql/overview/basicbrowsing2/main.cpp</a>、<a href="sql.html#x2228">sql/overview/retrieve1/main.cpp</a>、<a href="sql.html#x2313">sql/overview/subclass3/main.cpp</a>、<a href="sql.html#x2317">sql/overview/subclass4/main.cpp</a>、<a href="sql.html#x2320">sql/overview/subclass5/main.cpp</a>和<a href="sqltable-example.html#x2565">sql/sqltable/main.cpp</a>。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:tipy</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

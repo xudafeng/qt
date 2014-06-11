@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>写你自己的布局管理器</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>写你自己的布局管理器</h1>
+
+  
+<p> 这里我们提供了一个详细的例子。CardLayout类是从同名的Java布局管理器得到的灵感。它把项目（窗口部件或者嵌套的布局）布置到彼此的顶端，每个项目通过<a href="qlayout.html#spacing">QLayout::spacing</a>()偏移的。
+<p> 要写自己的布局类，你必须像下面这样定义：
+<ul>
+<li> 一个用来存放被布局处理的项目的数据结构。每一个项目就是一个<a href="qlayoutitem.html">QLayoutItem</a>。我们将在例子中使用一个<a href="qptrlist.html">QPtrList</a>。
+<li> <a href="qlayout.html#addItem">addItem()</a>，如何向布局中添加一个项目。
+<li> <a href="qlayout.html#setGeometry">setGeometry()</a>，如何构成一个布局。
+<li> <a href="qlayoutitem.html#sizeHint">sizeHint()</a>，布局优先选用的大小。
+<li> <a href="qlayout.html#iterator">iterator()</a>，如何迭代布局。
+</ul>
+<p> 在绝大多数情况下，你也需要实现<a href="qlayout.html#minimumSize">minimumSize</a>()。
+<p> <h2> card.h
+</h2>
+<a name="1"></a><p> <pre>
+#ifndef CARD_H
+#define CARD_H
+
+#include &lt;<a href="qlayout-h.html">qlayout.h</a>&gt;
+#include &lt;<a href="qptrlist-h.html">qptrlist.h</a>&gt;
+
+class CardLayout : public <a href="qlayout.html">QLayout</a>
+{
+public:
+    CardLayout( <a href="qwidget.html">QWidget</a> *parent, int dist )
+        : <a href="qlayout.html">QLayout</a>( parent, 0, dist ) { }
+    CardLayout( <a href="qlayout.html">QLayout</a>* parent, int dist)
+        : <a href="qlayout.html">QLayout</a>( parent, dist ) { }
+    CardLayout( int dist )
+        : <a href="qlayout.html">QLayout</a>( dist ) { }
+    ~CardLayout();
+
+    void addItem(QLayoutItem *item);
+    <a href="qsize.html">QSize</a> sizeHint() const;
+    <a href="qsize.html">QSize</a> minimumSize() const;
+    <a href="qlayoutiterator.html">QLayoutIterator</a> iterator();
+    void setGeometry(const <a href="qrect.html">QRect</a> &amp;rect);
+
+private:
+    <a href="qptrlist.html">QPtrList</a>&lt;QLayoutItem&gt; list;
+};
+
+#endif
+</pre>
+ 
+<p> <h3> card.cpp
+</h3>
+<a name="1-1"></a><p> <pre>
+#include "card.h"
+</pre>
+ 
+<p> 首先我们为布局定义一个迭代。布局迭代被布局系统用作内部处理图形窗口部件删除操作的。它们也可以被提供给应用程序员。
+<p> 这里有两个两个不同的相关类：<a href="qlayoutiterator.html">QLayoutIterator</a>是一个可以提供给应用程序员可见的类，它是<a href="shclass.html#explicitly-shared">明确地被共享</a>。QLayoutIterator包括一个可以做任何事情地<a href="qglayoutiterator.html">QGLayoutIterator</a>。我们必须生成一个知道如何迭代我们地布局类的QGLayoutIterator的子类。
+<p> 在这种情况下，我们选择一个简单的实现：我们把一个整数索引和指针存储到一个列表中。每一个<a href="qglayoutiterator.html">QGLayoutIterator</a>的子类都必须实现<a href="qglayoutiterator.html#current">current</a>()、<a href="qglayoutiterator.html#next">next</a>()和<a href="qglayoutiterator.html#takeCurrent">takeCurrent</a>()，还有一个构造函数。在我们的例子中我们不需要析构函数。
+<p> <pre>
+class CardLayoutIterator : public <a href="qglayoutiterator.html">QGLayoutIterator</a>
+{
+public:
+    CardLayoutIterator( <a href="qptrlist.html">QPtrList</a>&lt;QLayoutItem&gt; *l )
+        : idx( 0 ), list( l ) { }
+
+    <a href="qlayoutitem.html">QLayoutItem</a> *current()
+    { return idx &lt; int(list-&gt;<a href="qptrlist.html#count">count</a>()) ? list-&gt;<a href="qptrlist.html#at">at</a>(idx) : 0;  }
+
+    <a href="qlayoutitem.html">QLayoutItem</a> *next()
+    { idx++; return current(); }
+
+    <a href="qlayoutitem.html">QLayoutItem</a> *takeCurrent()
+    { return list-&gt;<a href="qptrlist.html#take">take</a>( idx ); }
+
+private:
+    int idx;
+    <a href="qptrlist.html">QPtrList</a>&lt;QLayoutItem&gt; *list;
+};
+</pre>
+ 
+<p> 我们必须实现QLayout:iterator()返回一个这个布局的<a href="qlayoutiterator.html">QLayoutIterator</a>。
+<p> <pre>
+QLayoutIterator CardLayout::iterator()
+{       
+    return QLayoutIterator( new CardLayoutIterator(&amp;list) );
+}
+</pre>
+ 
+<p> addItem()实现了布局项目的默认布置策略。它必须被实现。它被<a href="qlayout.html#add">QLayout::add</a>()使用，被把一个布局作为父布局的<a href="qlayout.html">QLayout</a>的构造函数使用，并且它被用来实现<a href="qlayout.html#autoAdd">自动添加</a>这一特性。如果你的布局有需要参数的高级布置选项，你将必须提供像<a href="qgridlayout.html#addMultiCell">QGridLayout::addMultiCell</a>()一样的额外的访问函数。
+<p> <pre>
+void CardLayout::addItem( <a href="qlayoutitem.html">QLayoutItem</a> *item )
+{
+    list.append( item );
+}
+</pre>
+ 
+<p> 布局对项目的增加负有责任。因为<a href="qlayoutitem.html">QLayoutItem</a>不继承<a href="qobject.html">QObject</a>，我们必须人工地删除这些项目。<a href="qlayout.html#deleteAllItems">QLayout::deleteAllItems</a>()函数使用我们前面定义的迭代来删除布局中的所有项目。
+<p> <pre>
+CardLayout::~CardLayout()
+{
+    deleteAllItems();
+}
+</pre>
+ 
+<p> setGeometry()函数实际上执行了这个布局。作为参数提供的矩形不包括margin()。如果相关的话，项目之间的距离请使用spacing()。
+<p> <pre>
+void CardLayout::setGeometry( const <a href="qrect.html">QRect</a> &amp;rect )
+{
+    QLayout::<a href="qlayout.html#setGeometry">setGeometry</a>( rect );
+
+    <a href="qptrlistiterator.html">QPtrListIterator</a>&lt;QLayoutItem&gt; it( list );
+    if (it.<a href="qptrlistiterator.html#count">count</a>() == 0)
+        return;
+
+    <a href="qlayoutitem.html">QLayoutItem</a> *o;
+
+    int i = 0;
+
+    int w = rect.<a href="qrect.html#width">width</a>() - ( list.count() - 1 ) * spacing();
+    int h = rect.<a href="qrect.html#height">height</a>() - ( list.count() - 1 ) * spacing();
+
+    while ( (o = it.<a href="qptrlistiterator.html#current">current</a>()) != 0 ) {
+        ++it;
+        <a href="qrect.html">QRect</a> geom( rect.<a href="qrect.html#x">x</a>() + i * spacing(), rect.<a href="qrect.html#y">y</a>() + i * spacing(),
+                    w, h );
+        o-&gt;<a href="qlayoutitem.html#setGeometry">setGeometry</a>( geom );
+        ++i;
+    }
+}
+</pre>
+ 
+<p> sizeHint()和minimumSize()通常情况下在实现中非常相似。这两个函数返回的大小应该包括spacing()，但不包括margin()。
+<p> <pre>
+QSize CardLayout::sizeHint() const
+{
+    <a href="qsize.html">QSize</a> s( 0, 0 );
+    int n = list.count();
+    if ( n &gt; 0 )
+        s = QSize( 100, 70 ); // start with a nice default size
+    <a href="qptrlistiterator.html">QPtrListIterator</a>&lt;QLayoutItem&gt; it( list );
+    <a href="qlayoutitem.html">QLayoutItem</a> *o;
+    while ( (o = it.<a href="qptrlistiterator.html#current">current</a>()) != 0 ) {
+        ++it;
+        s = s.<a href="qsize.html#expandedTo">expandedTo</a>( o-&gt;<a href="qlayoutitem.html#minimumSize">minimumSize</a>() );
+    }
+    return s + n * QSize( spacing(), spacing() );
+}
+
+QSize CardLayout::minimumSize() const
+{
+    <a href="qsize.html">QSize</a> s( 0, 0 );
+    int n = list.count();
+    <a href="qptrlistiterator.html">QPtrListIterator</a>&lt;QLayoutItem&gt; it( list );
+    <a href="qlayoutitem.html">QLayoutItem</a> *o;
+    while ( (o = it.<a href="qptrlistiterator.html#current">current</a>()) != 0 ) {
+        ++it;
+        s = s.<a href="qsize.html#expandedTo">expandedTo</a>( o-&gt;<a href="qlayoutitem.html#minimumSize">minimumSize</a>() );
+    }
+    return s + n * QSize( spacing(), spacing() );
+}
+</pre>
+ 
+<p> <h2> 更多的注释
+</h2>
+<a name="2"></a><p> 这个布局没有实现heightForWidth()。
+<p> 我们忽略了<a href="qlayoutitem.html#isEmpty">QLayoutItem::isEmpty</a>()，这也就是说这个布局将会把隐藏的窗口部件显示出来。
+<p> 对于复杂的布局，通过存储计算结果可以使速度得到很大的提高。在这种情况下，实现<a href="qlayoutitem.html#invalidate">QLayoutItem::invalidate</a>()来把被存储的数据弄脏。
+<p> 调用<a href="qlayoutitem.html#sizeHint">QLayoutItem::sizeHint</a>()，其它的也许更浪费时间，如果你在同一个函数中再一次稍晚的情况下需要这个值，你应该把它存储成局部变量。
+<p> 你不应该在同一个函数中对同一项目调用<a href="qlayoutitem.html#setGeometry">QLayoutItem::setGeometry</a>()两次。如果这个项目有几个子窗口部件的话，它会很浪费时间，因为它将不得不每次都执行一个完整的布局。相反，计算几何位置并且设置它。（这不仅仅是应用于布局，如果你实现了你自己的resizeEvent()你应该做同样的事情。）
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

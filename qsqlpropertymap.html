@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>QSqlPropertyMap Class</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>QSqlPropertyMap Class Reference<br><small>[<a href="sql.html">sql module</a>]</small></h1>
+
+<p>The QSqlPropertyMap class is used to map widgets to SQL fields.
+<a href="#details">More...</a>
+<p><tt>#include &lt;<a href="qsqlpropertymap-h.html">qsqlpropertymap.h</a>&gt;</tt>
+<p><a href="qsqlpropertymap-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><div class=fn><a href="#QSqlPropertyMap"><b>QSqlPropertyMap</b></a> ()</div></li>
+<li><div class=fn>virtual <a href="#~QSqlPropertyMap"><b>~QSqlPropertyMap</b></a> ()</div></li>
+<li><div class=fn>QVariant <a href="#property"><b>property</b></a> ( QWidget&nbsp;*&nbsp;widget )</div></li>
+<li><div class=fn>virtual void <a href="#setProperty"><b>setProperty</b></a> ( QWidget&nbsp;*&nbsp;widget, const&nbsp;QVariant&nbsp;&amp;&nbsp;value )</div></li>
+<li><div class=fn>void <a href="#insert"><b>insert</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;classname, const&nbsp;QString&nbsp;&amp;&nbsp;property )</div></li>
+<li><div class=fn>void <a href="#remove"><b>remove</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;classname )</div></li>
+</ul>
+<h2>Static Public Members</h2>
+<ul>
+<li><div class=fn>QSqlPropertyMap * <a href="#defaultMap"><b>defaultMap</b></a> ()</div></li>
+<li><div class=fn>void <a href="#installDefaultMap"><b>installDefaultMap</b></a> ( QSqlPropertyMap&nbsp;*&nbsp;map )</div></li>
+</ul>
+<hr><a name="details"></a><h2>Detailed Description</h2>
+
+
+
+
+The QSqlPropertyMap class is used to map widgets to SQL fields.
+<p> The SQL module uses Qt <a href="properties.html">object properties</a>
+to insert and extract values from editor widgets.
+<p> This class is used to map editors to SQL fields. This works by
+associating SQL editor class names to the properties used to insert
+and extract values to/from the editor.
+<p> For example, a <a href="qlineedit.html">QLineEdit</a> can be used to edit text strings and other
+data types in QDataTables or QSqlForms. Several properties are
+defined in QLineEdit, but only the <em>text</em> property is used to
+insert and extract text from a QLineEdit. Both <a href="qdatatable.html">QDataTable</a> and <a href="qsqlform.html">QSqlForm</a>
+use the global QSqlPropertyMap for inserting and extracting values
+to and from an editor widget.  The global property map defines
+several common widgets and properties that are suitable for many
+applications.  You can add and remove widget properties to suit your
+specific needs.
+<p> If you want to use custom editors with your QDataTable or QSqlForm,
+you have to install your own QSqlPropertyMap for that table or form.
+Example:
+<p> <pre>
+  QSqlPropertyMap *myMap  = new QSqlPropertyMap();
+  <a href="qsqlform.html">QSqlForm</a>        *myForm = new <a href="qsqlform.html">QSqlForm</a>( this );
+  MyEditor         myEditor( this );
+
+  // Set the QSqlForm's record buffer to the update buffer of
+  // a pre-existing QSqlCursor called 'cur'.
+  myForm-&gt;<a href="qsqlform.html#setRecord">setRecord</a>( cur-&gt;primeUpdate() );
+
+  // Install the customized map
+  myMap-&gt;<a href="#insert">insert</a>( "MyEditor", "content" );
+  myForm-&gt;<a href="qsqlform.html#installPropertyMap">installPropertyMap</a>( myMap ); // myForm now owns myMap
+  ...
+  // Insert a field into the form that uses a myEditor to edit the
+  // field 'somefield'
+  myForm-&gt;<a href="qsqlform.html#insert">insert</a>( &amp;myEditor, "somefield" );
+
+  // Update myEditor with the value from the mapped database field
+  myForm-&gt;<a href="qsqlform.html#readFields">readFields</a>();
+  ...
+  // Let the user edit the form
+  ...
+  // Update the database fields with the values in the form
+  myForm-&gt;<a href="qsqlform.html#writeFields">writeFields</a>();
+  ...
+  </pre>
+ 
+<p> You can also replace the global QSqlPropertyMap that is used by
+default. (Bear in mind that QSqlPropertyMap takes ownership of the new
+default map.)
+<p> <pre>
+  QSqlPropertyMap *myMap = new QSqlPropertyMap;
+
+  myMap-&gt;<a href="#insert">insert</a>( "MyEditor", "content" );
+  QSqlPropertyMap::<a href="#installDefaultMap">installDefaultMap</a>( myMap );
+  ...
+  </pre>
+ 
+<p> <p>See also <a href="qdatatable.html">QDataTable</a>, <a href="qsqlform.html">QSqlForm</a>, <a href="qsqleditorfactory.html">QSqlEditorFactory</a> and <a href="database.html">Database Classes</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class=fn><a name="QSqlPropertyMap"></a>QSqlPropertyMap::QSqlPropertyMap ()
+</h3>
+<p> Constructs a QSqlPropertyMap.
+<p> The default property mappings used by Qt widgets are:
+<ul>
+<li>QButton -- text
+<li>QCheckBox -- checked
+<li>QComboBox -- currentItem
+<li>QDateEdit -- date
+<li>QDateTimeEdit -- dateTime
+<li>QDial -- value
+<li>QLabel -- text
+<li>QLCDNumber -- value
+<li>QLineEdit -- text
+<li>QListBox -- currentItem
+<li>QMultiLineEdit -- text
+<li>QPushButton -- text
+<li>QRadioButton -- text
+<li>QScrollBar -- value
+<li>QSlider -- value
+<li>QSpinBox -- value
+<li>QTextBrowser -- source
+<li>QTextEdit -- text
+<li>QTextView -- text
+<li>QTimeEdit -- time
+</ul>
+<p> 
+<h3 class=fn><a name="~QSqlPropertyMap"></a>QSqlPropertyMap::~QSqlPropertyMap ()<tt> [virtual]</tt>
+</h3>
+<p> Destroys the QSqlPropertyMap.
+<p> Note that if the QSqlPropertyMap is installed with
+installPropertyMap() the object it was installed into, e.g. the
+<a href="qsqlform.html">QSqlForm</a>, takes ownership and will delete the QSqlPropertyMap when
+necessary.
+
+<h3 class=fn><a href="qsqlpropertymap.html">QSqlPropertyMap</a>&nbsp;* <a name="defaultMap"></a>QSqlPropertyMap::defaultMap ()<tt> [static]</tt>
+</h3>
+<p> Returns the application global QSqlPropertyMap.
+
+<h3 class=fn>void <a name="insert"></a>QSqlPropertyMap::insert ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;classname, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;property )
+</h3>
+<p> Insert a new classname/property pair, which is used for custom SQL
+field editors. There <em>must</em> be a Q_PROPERTY clause in the <em>classname</em>
+class declaration for the <em>property</em>.
+<p> 
+<p>Example: <a href="sql.html#x2238">sql/overview/custom1/main.cpp</a>.
+<h3 class=fn>void <a name="installDefaultMap"></a>QSqlPropertyMap::installDefaultMap ( <a href="qsqlpropertymap.html">QSqlPropertyMap</a>&nbsp;*&nbsp;map )<tt> [static]</tt>
+</h3>
+<p> Replaces the global default property map with <em>map</em>. All <a href="qdatatable.html">QDataTable</a> and
+<a href="qsqlform.html">QSqlForm</a> instantiations will use this new map for inserting and
+extracting values to and from editors. <em>QSqlPropertyMap takes
+ownership of <em>map</em>, and destroys it when it is no longer needed. </em>
+
+<h3 class=fn><a href="qvariant.html">QVariant</a> <a name="property"></a>QSqlPropertyMap::property ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;widget )
+</h3>  Returns the mapped property of <em>widget</em> as a <a href="qvariant.html">QVariant</a>.
+<p> 
+<h3 class=fn>void <a name="remove"></a>QSqlPropertyMap::remove ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;classname )
+</h3>  Removes <em>classname</em> from the map.
+<p> 
+<h3 class=fn>void <a name="setProperty"></a>QSqlPropertyMap::setProperty ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;widget, const&nbsp;<a href="qvariant.html">QVariant</a>&nbsp;&amp;&nbsp;value )<tt> [virtual]</tt>
+</h3>
+<p> Sets the property of <em>widget</em> to <em>value</em>.
+<p> 
+<!-- eof -->
+<hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>.
+Copyright &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>. All Rights Reserved.<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

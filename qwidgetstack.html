@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QWidgetStack类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QWidgetStack类参考</h1>
+
+<p>QWidgetStack类提供了一个只有最上面的窗口部件是用户可视的窗口部件的栈。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qwidgetstack-h.html">qwidgetstack.h</a>&gt;</tt>
+<p>继承了<a href="qframe.html">QFrame</a>。
+<p><a href="qwidgetstack-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QWidgetStack"><b>QWidgetStack</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#~QWidgetStack"><b>~QWidgetStack</b></a> ()</div></li>
+<li><div class=fn>int <a href="#addWidget"><b>addWidget</b></a> ( QWidget&nbsp;*&nbsp;w, int&nbsp;id = -1 )</div></li>
+<li><div class=fn>void <a href="#removeWidget"><b>removeWidget</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+<li><div class=fn>QWidget * <a href="#widget"><b>widget</b></a> ( int&nbsp;id ) const</div></li>
+<li><div class=fn>int <a href="#id"><b>id</b></a> ( QWidget&nbsp;*&nbsp;widget ) const</div></li>
+<li><div class=fn>QWidget * <a href="#visibleWidget"><b>visibleWidget</b></a> () const</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>void <a href="#raiseWidget"><b>raiseWidget</b></a> ( int&nbsp;id )</div></li>
+<li><div class=fn>void <a href="#raiseWidget-2"><b>raiseWidget</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#aboutToShow"><b>aboutToShow</b></a> ( int )</div></li>
+<li><div class=fn>void <a href="#aboutToShow-2"><b>aboutToShow</b></a> ( QWidget * )</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#setChildGeometries"><b>setChildGeometries</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述n</h2>
+ 
+<p> QWidgetStack类提供了一个只有最上面的窗口部件是用户可视的窗口部件的栈。
+<p> 
+<p> 应用程序程序员可以在任何时候使用<a href="#raiseWidget">raiseWidget</a>()把任何一个窗口部件移到栈顶，并且使用<a href="#addWidget">addWidget</a>()和<a href="#removeWidget">removeWidget</a>()来添加或者移除窗口部件。
+<p> <a href="#visibleWidget">visibleWidget</a>()是raiseWidget()的<em>获取</em>对应函数，它返回当前在栈顶的窗口部件的指针。
+<p> QWidgetStack也提供了通过应用程序指定的整数标识来维护这些窗口部件。你也可以使用<a href="#id">id</a>()来从窗口部件指针转换到标识并且使用<a href="#widget">widget</a>()来从标识转换到窗口部件指针。这些数字标识是唯一的（每一个QWidgetStack，而不是全局的），但是QWidgetStack不会给它们添加额外的东西。
+<p> 默认窗口部件栈是没有框架的，但是你可以使用通常的<a href="qframe.html">QFrame</a>函数（比如<a href="qframe.html#setFrameStyle">setFrameStyle</a>()）来添加一个框架。
+<p> QWidgetStack提供一个信号<a href="#aboutToShow">aboutToShow</a>()，在一个被管理的窗口部件被显示之前，这个信号被发射。
+<p> <p>也可以参考<a href="qtabdialog.html">QTabDialog</a>、<a href="qtabbar.html">QTabBar</a>、<a href="qframe.html">QFrame</a>和<a href="organizers.html">组织者</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QWidgetStack"></a>QWidgetStack::QWidgetStack ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>  
+构造一个父对象为<em>parent</em>、名称为<em>name</em>的空窗口部件栈。
+
+<h3 class=fn><a name="~QWidgetStack"></a>QWidgetStack::~QWidgetStack ()
+</h3> 
+销毁这个对象并且释放所有已分配的资源。
+
+<h3 class=fn>void <a name="aboutToShow"></a>QWidgetStack::aboutToShow ( int )<tt> [信号]</tt>
+</h3> 
+<p> 如果一个被管理的窗口部件的标识不等于-1，在它被显示之前，这个信号被发射。那个参数是窗口部件的数字标识。
+
+<h3 class=fn>void <a name="aboutToShow-2"></a>QWidgetStack::aboutToShow ( <a href="qwidget.html">QWidget</a>&nbsp;* )<tt> [信号]</tt>
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 在一个被管理的窗口部件被显示之前，这个信号被发射。那个参数是窗口部件的指针。
+
+<h3 class=fn>int <a name="addWidget"></a>QWidgetStack::addWidget ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w, int&nbsp;id = -1 )
+</h3>  
+把窗口部件<em>w</em>添加到这个窗口部件栈中，标识为<em>id</em>。
+<p> 如果你传递一个id &gt;= 0，这个标识就被使用。如果你传递一个-1的标识（默认），这个窗口部件将会被自动标识。如果你传递一个-1，一个负整数将被生成。没有窗口部件有-1的标识。
+<p> 如果<em>w</em>不是这个QWidgetStack的子对象，QWidgetStack会使用<a href="qwidget.html#reparent">reparent</a>()来移动它。
+<p>实例：<a href="xform-example.html#x1477">xform/xform.cpp</a>。
+
+<h3 class=fn>int <a name="id"></a>QWidgetStack::id ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;widget ) const
+</h3>  
+返回<em>widget</em>的标识，如果<em>widget</em>为0或者不被这个窗口部件栈管理，这个函数返回-1。
+<p> <p>也可以参考<a href="#widget">widget</a>()和<a href="#addWidget">addWidget</a>()。
+
+<h3 class=fn>void <a name="raiseWidget"></a>QWidgetStack::raiseWidget ( int&nbsp;id )<tt> [槽]</tt>
+</h3>  
+升起标识为<em>id</em>的窗口部件到这个窗口部件栈的栈顶。
+<p> <p>也可以参考<a href="#visibleWidget">visibleWidget</a>()。
+<p>实例：<a href="xform-example.html#x1478">xform/xform.cpp</a>。
+
+<h3 class=fn>void <a name="raiseWidget-2"></a>QWidgetStack::raiseWidget ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )<tt> [槽]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 升起窗口部件<em>w</em>到这个窗口部件栈的栈顶。
+
+<h3 class=fn>void <a name="removeWidget"></a>QWidgetStack::removeWidget ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )
+</h3>  
+从窗口部件栈中移除窗口部件<em>w</em>。不删除<em>w</em>。如果<em>w</em>为当前可视窗口部件，没有其它窗口部件会替代的。
+<p>也可以参考<a href="#visibleWidget">visibleWidget</a>()和<a href="#raiseWidget">raiseWidget</a>()。
+
+<h3 class=fn>void <a name="setChildGeometries"></a>QWidgetStack::setChildGeometries ()<tt> [虚 保护]</tt>
+</h3>  
+安排子窗口的几何形状。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="visibleWidget"></a>QWidgetStack::visibleWidget () const
+</h3> 
+返回当前可视窗口部件的指针（栈顶的那一个），或者如果当前没有被显示的，返回0。
+<p> <p>也可以参考<a href="#aboutToShow">aboutToShow</a>()、<a href="#id">id</a>()和<a href="#raiseWidget">raiseWidget</a>()。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="widget"></a>QWidgetStack::widget ( int&nbsp;id ) const
+</h3>  
+返回标识为<em>id</em>的窗口部件。如果这个窗口部件栈不管理标识为<em>id</em>的窗口部件，这个函数返回0。
+<p> <p>也可以参考<a href="#id">id</a>()和<a href="#addWidget">addWidget</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

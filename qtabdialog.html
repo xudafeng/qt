@@ -1,0 +1,386 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QTabDialog类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QTabDialog类参考</h1>
+
+<p>QTabDialog类提供了一个被标签的窗口部件的栈。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qtabdialog-h.html">qtabdialog.h</a>&gt;</tt>
+<p>继承了<a href="qdialog.html">QDialog</a>。
+<p><a href="qtabdialog-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QTabDialog"><b>QTabDialog</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;modal = FALSE, WFlags&nbsp;f = 0 )</div></li>
+<li><div class=fn><a href="#~QTabDialog"><b>~QTabDialog</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#setFont"><b>setFont</b></a> ( const&nbsp;QFont&nbsp;&amp;&nbsp;font )</div></li>
+<li><div class=fn>void <a href="#addTab"><b>addTab</b></a> ( QWidget&nbsp;*&nbsp;child, const&nbsp;QString&nbsp;&amp;&nbsp;label )</div></li>
+<li><div class=fn>void <a href="#addTab-2"><b>addTab</b></a> ( QWidget&nbsp;*&nbsp;child, const&nbsp;QIconSet&nbsp;&amp;&nbsp;iconset, const&nbsp;QString&nbsp;&amp;&nbsp;label )</div></li>
+<li><div class=fn>void <a href="#addTab-3"><b>addTab</b></a> ( QWidget&nbsp;*&nbsp;child, QTab&nbsp;*&nbsp;tab )</div></li>
+<li><div class=fn>void <a href="#insertTab"><b>insertTab</b></a> ( QWidget&nbsp;*&nbsp;child, const&nbsp;QString&nbsp;&amp;&nbsp;label, int&nbsp;index = -1 )</div></li>
+<li><div class=fn>void <a href="#insertTab-2"><b>insertTab</b></a> ( QWidget&nbsp;*&nbsp;child, const&nbsp;QIconSet&nbsp;&amp;&nbsp;iconset, const&nbsp;QString&nbsp;&amp;&nbsp;label, int&nbsp;index = -1 )</div></li>
+<li><div class=fn>void <a href="#insertTab-3"><b>insertTab</b></a> ( QWidget&nbsp;*&nbsp;child, QTab&nbsp;*&nbsp;tab, int&nbsp;index = -1 )</div></li>
+<li><div class=fn>void <a href="#changeTab-2"><b>changeTab</b></a> ( QWidget&nbsp;*&nbsp;w, const&nbsp;QString&nbsp;&amp;&nbsp;label )</div></li>
+<li><div class=fn>void <a href="#changeTab"><b>changeTab</b></a> ( QWidget&nbsp;*&nbsp;w, const&nbsp;QIconSet&nbsp;&amp;&nbsp;iconset, const&nbsp;QString&nbsp;&amp;&nbsp;label )</div></li>
+<li><div class=fn>bool <a href="#isTabEnabled"><b>isTabEnabled</b></a> ( QWidget&nbsp;*&nbsp;w ) const</div></li>
+<li><div class=fn>void <a href="#setTabEnabled"><b>setTabEnabled</b></a> ( QWidget&nbsp;*&nbsp;w, bool&nbsp;enable )</div></li>
+<li><div class=fn>bool isTabEnabled ( const&nbsp;char&nbsp;*&nbsp;name ) const &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>void setTabEnabled ( const&nbsp;char&nbsp;*&nbsp;name, bool&nbsp;enable ) &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>void <a href="#showPage"><b>showPage</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+<li><div class=fn>void <a href="#removePage"><b>removePage</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+<li><div class=fn>QString <a href="#tabLabel"><b>tabLabel</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+<li><div class=fn>QWidget * <a href="#currentPage"><b>currentPage</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setDefaultButton"><b>setDefaultButton</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text )</div></li>
+<li><div class=fn>void <a href="#setDefaultButton-2"><b>setDefaultButton</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#hasDefaultButton"><b>hasDefaultButton</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setHelpButton"><b>setHelpButton</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text )</div></li>
+<li><div class=fn>void <a href="#setHelpButton-2"><b>setHelpButton</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#hasHelpButton"><b>hasHelpButton</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setCancelButton"><b>setCancelButton</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text )</div></li>
+<li><div class=fn>void <a href="#setCancelButton-2"><b>setCancelButton</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#hasCancelButton"><b>hasCancelButton</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setApplyButton"><b>setApplyButton</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text )</div></li>
+<li><div class=fn>void <a href="#setApplyButton-2"><b>setApplyButton</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#hasApplyButton"><b>hasApplyButton</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setOkButton"><b>setOkButton</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text )</div></li>
+<li><div class=fn>void <a href="#setOkButton-2"><b>setOkButton</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#hasOkButton"><b>hasOkButton</b></a> () const</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#aboutToShow"><b>aboutToShow</b></a> ()</div></li>
+<li><div class=fn>void <a href="#applyButtonPressed"><b>applyButtonPressed</b></a> ()</div></li>
+<li><div class=fn>void <a href="#cancelButtonPressed"><b>cancelButtonPressed</b></a> ()</div></li>
+<li><div class=fn>void <a href="#defaultButtonPressed"><b>defaultButtonPressed</b></a> ()</div></li>
+<li><div class=fn>void <a href="#helpButtonPressed"><b>helpButtonPressed</b></a> ()</div></li>
+<li><div class=fn>void <a href="#currentChanged"><b>currentChanged</b></a> ( QWidget * )</div></li>
+<li><div class=fn>void selected ( const QString &amp; ) &nbsp;<em>（废弃）</em></div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>void <a href="#setTabBar"><b>setTabBar</b></a> ( QTabBar&nbsp;*&nbsp;tb )</div></li>
+<li><div class=fn>QTabBar * <a href="#tabBar"><b>tabBar</b></a> () const</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+<p> QTabDialog类提供了一个被标签的窗口部件的栈。
+<p> 
+<p> 被标签的对话框就是一个在里面有几个“标签页”是可用的对话框。通过点击标签页的标签或者通过按下被指出的Alt+<em>letter</em>键组合，用户可以选择他们想使用的标签页。
+<p> QTabDialog提供了一个由标签组成的单一一排在上面组成的标签栏，每一个标签都有一个关联的窗口部件包含着那个标签的标签页。另外，QTabDialog提供了一个OK按钮和下述几个可选按钮：Apply、Cancel、Defaults和Help。
+<p> 使用QTabDialog的常用方法是在构造函数中像下面这样做：
+<ol type=1>
+<li> 创建一个QTabDialog。
+<li> 为标签对话框中的每一个页面创建一个<a href="qwidget.html">QWidget</a>，把它们的自对象插入进去，为它们设置几何形状管理，并且使用<a href="#addTab">addTab</a>()（或者<a href="#insertTab">insertTab</a>()）来为它设置一个标签和键盘快捷键。
+<li> 使用<a href="#setOkButton">setOkButton</a>()、<a href="#setApplyButton">setApplyButton</a>()、setDefaultsButton()、<a href="#setCancelButton">setCancelButton</a>()和<a href="#setHelpButton">setHelpButton</a>()为标签对话框设置按钮。
+<li> 连接信号和槽。
+</ol>
+<p> 如果你没有调用addTab()，你已经创建的页面将不是可见的。不要把你提供给QWidget构造函数的对象名称和你提供给addTab()的标签弄混，addTab()中的是出现在窗口部件的标签伤得用户可视名称并且可以有一个快捷键，而窗口部件的名称主要用语调试。
+<p> 几乎所有应用程序不得不把<a href="#applyButtonPressed">applyButtonPressed</a>()信号连接到什么上，当OK或者Apply被点击时，applyButtonPressed()被发射，并且你的槽必须复制对话框的状态到应用程序中。
+<p> 这里有其它几个可能有用的信号：
+<ul>
+<li> <a href="#cancelButtonPressed">cancelButtonPressed</a>() is emitted when the user clicks Cancel.
+当用户点击Cancel时，<a href="#cancelButtonPressed">cancelButtonPressed</a>()被发射。
+<li> 当用户点击Defaults时，<a href="#defaultButtonPressed">defaultButtonPressed</a>()被发射，它被连接的槽应该重置这个对话框为应用程序的默认值。
+<li> 当用户点击Help时，<a href="#helpButtonPressed">helpButtonPressed</a>()被发射。
+<li> 在<a href="qdialog.html#show">show</a>()开始时，<a href="#aboutToShow">aboutToShow</a>()被发射，如果在标签对话框的创建和show()被调用的时候之间有应用程序的状态发生改变的机会，你必须把这个信号连接到重置对话框状态的槽上。
+<li> 当用户选择一个页时，<a href="#currentChanged">currentChanged</a>()被发射。
+</ul>
+<p> 每个标签在任何给定的时间都可以是生效的或者失效的（请参考<a href="#setTabEnabled">setTabEnabled</a>()）。如果一个标签生效，标签文本就会被绘制为黑色并且用户可以选择这个标签。如果一个标签失效，标签文本就会被一种不同的方式绘制并且用户也就不可以选择它了。注意，尽管一个标签是失效的，这页仍是可见的，例如，如果所有的标签都变为失效了。
+<p> 你可以使用<a href="#changeTab">changeTab</a>()来改变标签的文本和图标集。标签页可以用<a href="#removePage">removePage</a>()移除并且用<a href="#showPage">showPage</a>()显示。当前页由<a href="#currentPage">currentPage</a>()给定。
+<p> QTabDialog不支持在侧面或者底下的标签，你也不能设置或者重新找回可见的页。如果你需要比QTabDialog提供的更多的功能，可以考虑考虑使用可以放置QTabWidget的<a href="qtabbar.html">QTabBar</a>的<a href="qdialog.html">QDialog</a>。
+<p> QTabDialog的绝大部分功能是由<a href="qtabwidget.html">QTabWidget</a>提供的。
+<p> <img src=qtabdlg-m.png> <img src=qtabdlg-w.png>
+<p> <p>也可以参考<a href="qdialog.html">QDialog</a>和<a href="dialogs.html">对话框类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QTabDialog"></a>QTabDialog::QTabDialog ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;modal = FALSE, WFlags&nbsp;f = 0 )
+</h3>
+构造一个只有OK按钮的QTabDialog。<em>parent</em>、<em>name</em>、<em>modal</em>和<a href="qt.html#WidgetFlags">窗口部件标记</a><em>f</em>参数被传递给<a href="qdialog.html">QDialog</a>的构造函数。
+
+<h3 class=fn><a name="~QTabDialog"></a>QTabDialog::~QTabDialog ()
+</h3>
+销毁这个标签对话框。
+
+<h3 class=fn>void <a name="aboutToShow"></a>QTabDialog::aboutToShow ()<tt> [信号]</tt>
+</h3>
+<p> 当设置对话框的内容的状态的时候，这个信号被<a href="qdialog.html#show">show</a>()发射。对话框应该反映当它出现的时候应用程序的当前状态，如果在你调用<a href="#QTabDialog">QTabDialog::QTabDialog</a>()和<a href="qdialog.html#show">QTabDialog::show</a>()之间，有改变应用程序的状态的可能性的话，你应该在一个槽中设置对话框的状态并且把它和这个信号连接起来。
+<p> 这主要适用于保持隐藏的QTabDialog对象，而不是那些被创建、被显示然后被删除的。
+<p> <p>也可以参考<a href="#applyButtonPressed">applyButtonPressed</a>()、<a href="qdialog.html#show">show</a>()和<a href="#cancelButtonPressed">cancelButtonPressed</a>()。
+
+<h3 class=fn>void <a name="addTab"></a>QTabDialog::addTab ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;child, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label )
+</h3>
+把另外一个标签和页添加到这个标签视中。
+<p> 新的页是<em>child</em>，标签文本是<em>label</em>。注意窗口部件名称（你提供给窗口部件构造函数和给<a href="#setTabEnabled">setTabEnabled</a>()的，例如）和标签文本的不同。这个窗口部件名称用于应用程序内部并且是不变的，而标签文本是被显示在屏幕上并且可以根据语言和其它因素变化的。
+<p> 如果标签的<em>label</em>包含“&amp;”，那么在“&amp;”后面的字符就会被用作这个标签的快捷键，例如，如果标签为“Bro&wse”，那么Alt+W就变成了快捷键，它会使焦点移到这个标签的。
+<p> 如果在<a href="qdialog.html#show">show</a>()之后调用<a href="#addTab">addTab</a>()，屏幕将会闪烁并且用户也许会困惑。
+<p> <p>也可以参考<a href="#insertTab">insertTab</a>()。
+
+<h3 class=fn>void <a name="addTab-2"></a>QTabDialog::addTab ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;child, const&nbsp;<a href="qiconset.html">QIconSet</a>&nbsp;&amp;&nbsp;iconset, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label )
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 这个版本的函数显示<em>child</em>标签上的<em>iconset</em>和<em>label</em>。
+
+<h3 class=fn>void <a name="addTab-3"></a>QTabDialog::addTab ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;child, <a href="qtab.html">QTab</a>&nbsp;*&nbsp;tab )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 这是一个添加标签的底层方法，和其它<a href="#addTab">addTab</a>()方法相似。如果你正在使用<a href="#setTabBar">setTabBar</a>()来设置一个<a href="qtabbar.html">QTabBar</a>继承类并且为<a href="qtab.html">QTab</a>的子类重载<a href="qtabbar.html#paint">QTabBar::paint</a>()函数，这个方法就很有用了。
+<p> <em>child</em>是要被放置到新标签页的窗口部件。<em>tab</em>就是要显示在标签页上的标签——通常它显示一个标签文本或者一个图标来标识标签页。
+
+<h3 class=fn>void <a name="applyButtonPressed"></a>QTabDialog::applyButtonPressed ()<tt> [信号]</tt>
+</h3>
+<p> 当Apply或者OK按钮之一被点击时，这个信号被发射。
+<p> 它应该被连接到一个（或几个）根据对话框状态改变应用程序状态的槽。
+<p> <p>也可以参考<a href="#cancelButtonPressed">cancelButtonPressed</a>()、<a href="#defaultButtonPressed">defaultButtonPressed</a>()和<a href="#setApplyButton">setApplyButton</a>()。
+
+<h3 class=fn>void <a name="cancelButtonPressed"></a>QTabDialog::cancelButtonPressed ()<tt> [信号]</tt>
+</h3>
+<p> 当Cancel按钮被点击时，这个信号被发射。它自动被连接到将会隐藏对话框的<a href="qdialog.html#reject">QDialog::reject</a>()。
+<p> Cancel按钮一点也不会改变应用程序的状态，所以你应该不需要把它和任何槽连接起来。
+<p> <p>也可以参考<a href="#applyButtonPressed">applyButtonPressed</a>()、<a href="#defaultButtonPressed">defaultButtonPressed</a>()和<a href="#setCancelButton">setCancelButton</a>()。
+
+<h3 class=fn>void <a name="changeTab"></a>QTabDialog::changeTab ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w, const&nbsp;<a href="qiconset.html">QIconSet</a>&nbsp;&amp;&nbsp;iconset, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label )
+</h3>
+改变标签页<em>w</em>的图标集和标签文本分别为<em>iconset</em>和<em>label</em>。
+
+<h3 class=fn>void <a name="changeTab-2"></a>QTabDialog::changeTab ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 为标签页<em>w</em>定义新的<em>label</em>。
+
+<h3 class=fn>void <a name="currentChanged"></a>QTabDialog::currentChanged ( <a href="qwidget.html">QWidget</a>&nbsp;* )<tt> [信号]</tt>
+</h3> 
+<p> 只要当前页发生改变，这个信号就被发射。
+<p> <p>也可以参考<a href="#currentPage">currentPage</a>()、<a href="#showPage">showPage</a>()和<a href="#tabLabel">tabLabel</a>()。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="currentPage"></a>QTabDialog::currentPage () const
+</h3>  
+返回当前正在被标签对话框显示的页的指针。标签对话框会尽它最大努力来保证这个值不会为0（但是如果你也足够努力的话，它可能就是了）。
+
+<h3 class=fn>void <a name="defaultButtonPressed"></a>QTabDialog::defaultButtonPressed ()<tt> [信号]</tt>
+</h3>
+<p> 当Defaults按钮被按下时，这个信号被发射。它应该重置对话框（但不是应用程序）为“出厂默认设置”。
+<p> 直到用户点击Apply或者OK之前，应用程序的状态不应改变。
+<p> <p>也可以参考<a href="#applyButtonPressed">applyButtonPressed</a>()、<a href="#cancelButtonPressed">cancelButtonPressed</a>()和<a href="#setDefaultButton">setDefaultButton</a>()。
+
+<h3 class=fn>bool <a name="hasApplyButton"></a>QTabDialog::hasApplyButton () const
+</h3>
+如果标签对话框已经有了一个Apply按钮，返回真，否则返回假。
+<p> <p>也可以参考<a href="#setApplyButton">setApplyButton</a>()、<a href="#applyButtonPressed">applyButtonPressed</a>()、<a href="#hasCancelButton">hasCancelButton</a>()和<a href="#hasDefaultButton">hasDefaultButton</a>()。
+
+<h3 class=fn>bool <a name="hasCancelButton"></a>QTabDialog::hasCancelButton () const
+</h3>
+如果标签对话框已经有了一个Cancel按钮，返回真，否则返回假。
+<p> <p>也可以参考<a href="#setCancelButton">setCancelButton</a>()、<a href="#cancelButtonPressed">cancelButtonPressed</a>()、<a href="#hasApplyButton">hasApplyButton</a>()和<a href="#hasDefaultButton">hasDefaultButton</a>()。
+
+<h3 class=fn>bool <a name="hasDefaultButton"></a>QTabDialog::hasDefaultButton () const
+</h3>
+如果标签对话框已经有了一个Defaults按钮，返回真，否则返回假。
+<p> <p>也可以参考<a href="#setDefaultButton">setDefaultButton</a>()、<a href="#defaultButtonPressed">defaultButtonPressed</a>()、<a href="#hasApplyButton">hasApplyButton</a>()和<a href="#hasCancelButton">hasCancelButton</a>()。
+
+<h3 class=fn>bool <a name="hasHelpButton"></a>QTabDialog::hasHelpButton () const
+</h3>
+如果标签对话框已经有了一个Help按钮，返回真，否则返回假。
+<p> <p>也可以参考<a href="#setHelpButton">setHelpButton</a>()、<a href="#helpButtonPressed">helpButtonPressed</a>()、<a href="#hasApplyButton">hasApplyButton</a>()和<a href="#hasCancelButton">hasCancelButton</a>()。
+
+<h3 class=fn>bool <a name="hasOkButton"></a>QTabDialog::hasOkButton () const
+</h3>
+如果标签对话框已经有了一个OK按钮，返回真，否则返回假。
+<p> <p>也可以参考<a href="#setOkButton">setOkButton</a>()、<a href="#hasApplyButton">hasApplyButton</a>()、<a href="#hasCancelButton">hasCancelButton</a>()和<a href="#hasDefaultButton">hasDefaultButton</a>()。
+
+<h3 class=fn>void <a name="helpButtonPressed"></a>QTabDialog::helpButtonPressed ()<tt> [信号]</tt>
+</h3>
+<p> 当Help按钮被按下时，这个信号被发射。它可以用来呈现关于如何使用这个对话框的信息。
+<p> <p>也可以参考<a href="#applyButtonPressed">applyButtonPressed</a>()、<a href="#cancelButtonPressed">cancelButtonPressed</a>()和<a href="#setHelpButton">setHelpButton</a>()。
+
+<h3 class=fn>void <a name="insertTab"></a>QTabDialog::insertTab ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;child, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label, int&nbsp;index = -1 )
+</h3>
+在标签视中插入另一个标签和页。
+<p> 新的页是<em>child</em>，标签文本是<em>label</em>。注意窗口部件名称（你提供给窗口部件构造函数和给<a href="#setTabEnabled">setTabEnabled</a>()的，例如）和标签文本的不同。这个窗口部件名称用于应用程序内部并且是不变的，而标签文本是被显示在屏幕上并且可以根据语言和其它因素变化的。
+<p> 如果标签的<em>label</em>包含“&amp;”，那么在“&amp;”后面的字符就会被用作这个标签的快捷键，例如，如果标签为“Bro&wse”，那么Alt+W就变成了快捷键，它会使焦点移到这个标签的。
+<p> 如果<em>index</em>没有被指定，那么这个标签只是被简单添加。否则它就会被插入在特定位置。
+<p> 如果在<a href="qdialog.html#show">show</a>()之后调用<a href="#insertTab">insertTab</a>()，屏幕将会闪烁并且用户也许会困惑。
+<p> <p>也可以参考<a href="#addTab">addTab</a>()。
+
+<h3 class=fn>void <a name="insertTab-2"></a>QTabDialog::insertTab ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;child, const&nbsp;<a href="qiconset.html">QIconSet</a>&nbsp;&amp;&nbsp;iconset, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label, int&nbsp;index = -1 )
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 这个版本的函数显示<em>child</em>标签上的<em>iconset</em>和<em>label</em>。
+
+<h3 class=fn>void <a name="insertTab-3"></a>QTabDialog::insertTab ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;child, <a href="qtab.html">QTab</a>&nbsp;*&nbsp;tab, int&nbsp;index = -1 )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 这是一个添加标签的底层方法，和其它<a href="#insertTab">insertTab</a>()方法相似。如果你正在使用<a href="#setTabBar">setTabBar</a>()来设置一个<a href="qtabbar.html">QTabBar</a>继承类并且为<a href="qtab.html">QTab</a>的子类重载<a href="qtabbar.html#paint">QTabBar::paint</a>()函数，这个方法就很有用了。
+<p> <em>child</em>是要被放置到新标签页的窗口部件。<em>tab</em>就是要显示在标签页上的标签——通常它显示一个标签文本或者一个图标来标识标签页。<em>index</em>是这个标签页应该被插入的位置。
+
+<h3 class=fn>bool <a name="isTabEnabled"></a>QTabDialog::isTabEnabled ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w ) const
+</h3>
+如果页<em>w</em>是生效的，返回真，否则返回假。
+<p> <p>也可以参考<a href="#setTabEnabled">setTabEnabled</a>()和<a href="qwidget.html#enabled-prop">QWidget::enabled</a>。
+
+<h3 class=fn>bool <a name="isTabEnabled-2"></a>QTabDialog::isTabEnabled ( const&nbsp;char&nbsp;*&nbsp;name ) const
+</h3> 
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 如果对象名称为<em>name</em>的页是生效的，返回真，否则返回假。
+<p> 如果<em>name</em>为0或者没有这样一个名称的页，<a href="#isTabEnabled">isTabEnabled</a>()返回假。
+<p> <p>也可以参考<a href="#setTabEnabled">setTabEnabled</a>()和<a href="qwidget.html#enabled-prop">QWidget::enabled</a>。
+
+<h3 class=fn>void <a name="removePage"></a>QTabDialog::removePage ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )
+</h3> 
+从窗口部件栈中移除页<em>w</em>。但不删除<em>w</em>。
+<p>也可以参考<a href="#showPage">showPage</a>()、<a href="qtabwidget.html#removePage">QTabWidget::removePage</a>()和<a href="qwidgetstack.html#removeWidget">QWidgetStack::removeWidget</a>()。
+
+<h3 class=fn>void <a name="selected"></a>QTabDialog::selected ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [信号]</tt>
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 只要一个标签被选择（升起），这个信号就被发射，包括在第一个<a href="qdialog.html#show">show</a>()期间。
+<p> <p>也可以参考<a href="qwidget.html#raise">raise</a>()。
+
+<h3 class=fn>void <a name="setApplyButton"></a>QTabDialog::setApplyButton ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text )
+</h3>
+把Apply按钮添加到对话框。按钮文本被设置为<em>text</em>。
+<p> Apply按钮应该把对话框中的当前设置提交给应用程序，并且保持对话框是可视的。
+<p> 当Apply被点击时，<a href="#applyButtonPressed">applyButtonPressed</a>()信号被发射。
+<p> 如果<em>text</em>为<a href="qstring.html#operator!">零字符串</a>，就没有按钮被显示。
+<p> <p>也可以参考<a href="#setCancelButton">setCancelButton</a>()、<a href="#setDefaultButton">setDefaultButton</a>()和<a href="#applyButtonPressed">applyButtonPressed</a>()。
+
+<h3 class=fn>void <a name="setApplyButton-2"></a>QTabDialog::setApplyButton ()
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 把Apply按钮添加到对话框。按钮文本被设置为本地化的“Apply”。
+
+<h3 class=fn>void <a name="setCancelButton"></a>QTabDialog::setCancelButton ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text )
+</h3>
+把Cancel按钮添加到对话框。按钮文本被设置为<em>text</em>。
+<p> Cancel按钮也应该把标签视被弹出之前的设置返回给应用程序，或者如果用户已经点击了Apply，就把最近一次Apply的状态立即返回。
+<p> 当Cancel被点击时，<a href="#cancelButtonPressed">cancelButtonPressed</a>()信号被发射。同时对话框被关闭。
+<p> 如果<em>text</em>为<a href="qstring.html#operator!">零字符串</a>，就没有按钮被显示。
+<p> <p>也可以参考<a href="#setApplyButton">setApplyButton</a>()、<a href="#setDefaultButton">setDefaultButton</a>()和<a href="#cancelButtonPressed">cancelButtonPressed</a>()。
+
+<h3 class=fn>void <a name="setCancelButton-2"></a>QTabDialog::setCancelButton ()
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 把Cancel按钮添加到对话框。按钮文本被设置为本地化的“Cancel”。
+
+<h3 class=fn>void <a name="setDefaultButton"></a>QTabDialog::setDefaultButton ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text )
+</h3>
+把Defaults按钮添加到对话框。按钮文本被设置为<em>text</em>。
+<p> Defaults按钮应该把对话框（但不是应用程序）设置回应用程序的默认值。
+<p> 当Defaults被点击时，<a href="#defaultButtonPressed">defaultButtonPressed</a>()信号被发射。
+<p> 如果<em>text</em>为<a href="qstring.html#operator!">零字符串</a>，就没有按钮被显示。
+<p> <p>也可以参考<a href="#setApplyButton">setApplyButton</a>()、<a href="#setCancelButton">setCancelButton</a>()和<a href="#defaultButtonPressed">defaultButtonPressed</a>()。
+
+<h3 class=fn>void <a name="setDefaultButton-2"></a>QTabDialog::setDefaultButton ()
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 把Defaults按钮添加到对话框。按钮文本被设置为本地化的“Defaults”。
+
+<h3 class=fn>void <a name="setFont"></a>QTabDialog::setFont ( const&nbsp;<a href="qfont.html">QFont</a>&nbsp;&amp;&nbsp;font )<tt> [虚]</tt>
+</h3>
+设置标签的字体为<em>font</em>。
+<p> 如果窗口部件是可视的，显示会立即更新字体。根据旧字体和新字体的大小，也许会导致一些几何形状的变化。
+<p>从<a href="qwidget.html#setFont">QWidget</a>中重新实现。
+
+<h3 class=fn>void <a name="setHelpButton"></a>QTabDialog::setHelpButton ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text )
+</h3>
+把Help按钮添加到对话框。按钮文本被设置为<em>text</em>。
+<p> 当Help被点击时，<a href="#helpButtonPressed">helpButtonPressed</a>()信号被发射。
+<p> 如果<em>text</em>为<a href="qstring.html#operator!">零字符串</a>，就没有按钮被显示。
+<p> <p>也可以参考<a href="#setApplyButton">setApplyButton</a>()、<a href="#setCancelButton">setCancelButton</a>()和<a href="#helpButtonPressed">helpButtonPressed</a>()。
+
+<h3 class=fn>void <a name="setHelpButton-2"></a>QTabDialog::setHelpButton ()
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 把Help按钮添加到对话框。按钮文本被设置为本地化的“Help”。
+
+<h3 class=fn>void <a name="setOkButton"></a>QTabDialog::setOkButton ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text )
+</h3>
+把OK按钮添加到对话框。按钮文本被设置为<em>text</em>。
+当OK按钮被点击时，<a href="#applyButtonPressed">applyButtonPressed</a>()信号被发射，并且把对话框中的当前设置提交给应用程序。然后对话框关闭。
+<p> 如果<em>text</em>为<a href="qstring.html#operator!">零字符串</a>，就没有按钮被显示。
+<p> <p>也可以参考<a href="#setCancelButton">setCancelButton</a>()、<a href="#setDefaultButton">setDefaultButton</a>()和<a href="#applyButtonPressed">applyButtonPressed</a>()。
+
+<h3 class=fn>void <a name="setOkButton-2"></a>QTabDialog::setOkButton ()
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 把OK按钮添加到对话框。按钮文本被设置为本地化的“OK”。
+
+<h3 class=fn>void <a name="setTabBar"></a>QTabDialog::setTabBar ( <a href="qtabbar.html">QTabBar</a>&nbsp;*&nbsp;tb )<tt> [保护]</tt>
+</h3>
+替换对话框上面的<a href="qtabbar.html">QTabBar</a>为给定的标签栏<em>tb</em>。注意这必须在任何标签被添加<em>之前</em>调用，否则行为是不确定的。
+<p>也可以参考<a href="#tabBar">tabBar</a>()。
+
+<h3 class=fn>void <a name="setTabEnabled"></a>QTabDialog::setTabEnabled ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w, bool&nbsp;enable )
+</h3>
+如果<em>enable</em>为真，页<em>w</em>就生效，否则<em>w</em>就失效。页的标签被适当地重新绘制。
+<p> <a href="qtabwidget.html">QTabWidget</a>在内部使用<a href="qwidget.html#setEnabled">QWidget::setEnabled</a>()，而不是保留一个不同的标记。
+<p> 注意失效的标签和标签页可以是可视的。如果这个页已经可视，QTabWidget不会隐藏它，如果所有的页都是失效地，QTabWidget将会显示其中一个。
+<p> <p>也可以参考<a href="#isTabEnabled">isTabEnabled</a>()和<a href="qwidget.html#enabled-prop">QWidget::enabled</a>。
+
+<h3 class=fn>void <a name="setTabEnabled-2"></a>QTabDialog::setTabEnabled ( const&nbsp;char&nbsp;*&nbsp;name, bool&nbsp;enable )
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 找到对象名称为<em>name</em>的页，根据<em>enable</em>的值来使它生效/失效并且适当地重新绘制页的标签。
+<p> <a href="qtabwidget.html">QTabWidget</a>在内部使用<a href="qwidget.html#setEnabled">QWidget::setEnabled</a>()，而不是保留一个不同的标记。
+<p> 注意失效的标签和标签页可以是可视的。如果这个页已经可视，QTabWidget不会隐藏它，如果所有的页都是失效地，QTabWidget将会显示其中一个。
+<p> 因为标签文本也许在多语言应用程序中是变化的，所以使用对象名称（而不是标签文本）。
+<p> <p>也可以参考<a href="#isTabEnabled">isTabEnabled</a>()和<a href="qwidget.html#enabled-prop">QWidget::enabled</a>。
+
+<h3 class=fn>void <a name="showPage"></a>QTabDialog::showPage ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )
+</h3>  
+确保窗口部件<em>w</em>被显示。这主要用于快捷键。
+<p> <b>警告：</b> 如果没有仔细使用，这个函数很容易让用户惊奇或者混乱。
+<p> <p>也可以参考<a href="qtabbar.html#currentTab-prop">QTabBar::currentTab</a>。
+
+<h3 class=fn><a href="qtabbar.html">QTabBar</a>&nbsp;* <a name="tabBar"></a>QTabDialog::tabBar () const<tt> [保护]</tt>
+</h3>
+返回当前设置的<a href="qtabbar.html">QTabBar</a>。
+<p>也可以参考<a href="#setTabBar">setTabBar</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="tabLabel"></a>QTabDialog::tabLabel ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )
+</h3>  
+返回<em>w</em>页的标签文本。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

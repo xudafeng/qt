@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QScrollBar类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QScrollBar类参考</h1>
+
+<p>QScrollBar窗口部件提供了水平的或垂直的滚动条。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qscrollbar-h.html">qscrollbar.h</a>&gt;</tt>
+<p>继承了<a href="qwidget.html">QWidget</a>和<a href="qrangecontrol.html">QRangeControl</a>。
+<p><a href="qscrollbar-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QScrollBar"><b>QScrollBar</b></a> ( QWidget&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QScrollBar-2"><b>QScrollBar</b></a> ( Orientation&nbsp;orientation, QWidget&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QScrollBar-3"><b>QScrollBar</b></a> ( int&nbsp;minValue, int&nbsp;maxValue, int&nbsp;lineStep, int&nbsp;pageStep, int&nbsp;value, Orientation&nbsp;orientation, QWidget&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>virtual void <a href="#setOrientation"><b>setOrientation</b></a> ( Orientation )</div></li>
+<li><div class=fn>Orientation <a href="#orientation"><b>orientation</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setTracking"><b>setTracking</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>bool <a href="#tracking"><b>tracking</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#draggingSlider"><b>draggingSlider</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setPalette"><b>setPalette</b></a> ( const&nbsp;QPalette&nbsp;&amp;&nbsp;p )</div></li>
+<li><div class=fn>int <a href="#minValue"><b>minValue</b></a> () const</div></li>
+<li><div class=fn>int <a href="#maxValue"><b>maxValue</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setMinValue"><b>setMinValue</b></a> ( int )</div></li>
+<li><div class=fn>void <a href="#setMaxValue"><b>setMaxValue</b></a> ( int )</div></li>
+<li><div class=fn>int <a href="#lineStep"><b>lineStep</b></a> () const</div></li>
+<li><div class=fn>int <a href="#pageStep"><b>pageStep</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setLineStep"><b>setLineStep</b></a> ( int )</div></li>
+<li><div class=fn>void <a href="#setPageStep"><b>setPageStep</b></a> ( int )</div></li>
+<li><div class=fn>int <a href="#value"><b>value</b></a> () const</div></li>
+<li><div class=fn>int <a href="#sliderStart"><b>sliderStart</b></a> () const</div></li>
+<li><div class=fn>QRect <a href="#sliderRect"><b>sliderRect</b></a> () const</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>void <a href="#setValue"><b>setValue</b></a> ( int )</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#valueChanged"><b>valueChanged</b></a> ( int&nbsp;value )</div></li>
+<li><div class=fn>void <a href="#sliderPressed"><b>sliderPressed</b></a> ()</div></li>
+<li><div class=fn>void <a href="#sliderMoved"><b>sliderMoved</b></a> ( int&nbsp;value )</div></li>
+<li><div class=fn>void <a href="#sliderReleased"><b>sliderReleased</b></a> ()</div></li>
+<li><div class=fn>void <a href="#nextLine"><b>nextLine</b></a> ()</div></li>
+<li><div class=fn>void <a href="#prevLine"><b>prevLine</b></a> ()</div></li>
+<li><div class=fn>void <a href="#nextPage"><b>nextPage</b></a> ()</div></li>
+<li><div class=fn>void <a href="#prevPage"><b>prevPage</b></a> ()</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>bool <a href="#draggingSlider-prop"><b>draggingSlider</b></a>&nbsp;- 用户是否已经在滑块上点击鼠标并且正在移动它&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>int <a href="#lineStep-prop"><b>lineStep</b></a>&nbsp;- 当前线步</div></li>
+<li><div class=fn>int <a href="#maxValue-prop"><b>maxValue</b></a>&nbsp;- 滚动条的当前最大值</div></li>
+<li><div class=fn>int <a href="#minValue-prop"><b>minValue</b></a>&nbsp;- 滚动条的当前最小值</div></li>
+<li><div class=fn>Orientation <a href="#orientation-prop"><b>orientation</b></a>&nbsp;- 滚动条的方位</div></li>
+<li><div class=fn>int <a href="#pageStep-prop"><b>pageStep</b></a>&nbsp;- 当前页步</div></li>
+<li><div class=fn>bool <a href="#tracking-prop"><b>tracking</b></a>&nbsp;- 滚动条跟踪是否生效</div></li>
+<li><div class=fn>int <a href="#value-prop"><b>value</b></a>&nbsp;- 滚动条的当前值</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#hideEvent"><b>hideEvent</b></a> ( QHideEvent * )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+<p> QScrollBar窗口部件提供了水平的或垂直的滚动条。
+<p> 
+<p> 滚动条允许用户控制一个程序可定义范围内的值并且给用户一个<a href="qrangecontrol.html">范围控制</a>的当前值得可视化表示。
+<p> 滚动条包含四个分别的控制：
+<ul>
+<li> <em>line-up</em>和<em>line-down</em>控制是用户可以用来向上或向下移动线步的小按钮。“线”的意思是可以配置的。在编辑器和列表框中，它是指一行文本，在一个图片查看器中它也许是指20个像素。
+<li> <em>slider</em>是表示滚动条的当前值的把手，用户可以拖动它来改变值。滚动条的这部分有时被称作“拇指”。
+<li> <em>page-up/page-down</em>控制是滑块滑行的区域（滚动条的背景）。点击这里让滚动条向点击的方向移动。“页”的意思也是可以配置的：在编辑器和列表框中，它是指和这个窗口部件空间相同的行数。
+</ul>
+<p> QScrollBar只有几个自己的函数，它多数依赖于<a href="qrangecontrol.html">QRangeControl</a>。最有用的函数是<a href="#setValue">setValue</a>()直接设置滚动条的值，<a href="qrangecontrol.html#addPage">addPage</a>()、<a href="qrangecontrol.html#addLine">addLine</a>()、<a href="qrangecontrol.html#subtractPage">subtractPage</a>()和<a href="qrangecontrol.html#subtractLine">subtractLine</a>()模拟点击的效果（对于快捷键很有用），<a href="qrangecontrol.html#setSteps">setSteps</a>()定义<a href="#pageStep">pageStep</a>()和<a href="#lineStep">lineStep</a>()的值，并且<a href="qrangecontrol.html#setRange">setRange</a>()设置滚动条的<a href="#minValue">minValue</a>()和<a href="#maxValue">maxValue</a>()。QScrollBar有一个方便的可以设置这些属性的构造函数。
+<p> 一些图形用户界面风格（例如，提供的Windows和Motif风格）也使用pageStep()的值来计算滑块的大小。
+<p> 除了来自<a href="qrangecontrol.html">QRangeControl</a>的访问函数之外，QScrollBar还有完整的一套信号：
+<ul>
+<li> <a href="#valueChanged">valueChanged</a>() - 当滚动条的值已经发生改变时，被发射。
+<a href="#tracking">tracking</a>()决定在用户操作期间，这个信号是否被发射。
+<li> <a href="#sliderPressed">sliderPressed</a>() - 当用户开始拖动滑块时，被发射。
+<li> <a href="#sliderMoved">sliderMoved</a>() - 当用户拖动滑块时，被发射。
+<li> <a href="#sliderReleased">sliderReleased</a>() - 当用户释放滑块时，被发射。
+<li> <a href="#nextLine">nextLine</a>() - 当滚动条已经向下或向右移动了一个线步时，被发射。线步在QRangeControl中被定义。
+<li> <a href="#prevLine">prevLine</a>() - 当滚动条已经向上或向左移动了一个线步时，被发射。
+<li> <a href="#nextPage">nextPage</a>() - 当滚动条已经向下或向右移动了一个页步时，被发射。
+<li> <a href="#prevPage">prevPage</a>() - 当滚动条已经向上或向左移动了一个页步时，被发射。
+</ul>
+<p> QScrollBar只提供整数范围。注意尽管QScrollBar可以处理很大的数字，当前屏幕上的滚动条不能有效地控制超过100000像素的范围。除此以外，它使用户使用键盘或者鼠标来控制这个滚动条都很困难。
+<p> 滚动条可以被键盘控制，但是它的默认<a href="qwidget.html#focusPolicy">focusPolicy</a>()是<a href="qwidget.html#FocusPolicy-enum">NoFocus</a>。使用<a href="qwidget.html#setFocusPolicy">setFocusPolicy</a>()来让<a href="focus.html#keyboard-focus">键盘焦点</a>生效。对于绑定键的列表，请参考<a href="qwidget.html#keyPressEvent">keyPressEvent</a>()。
+<p> 如果你需要在一个界面上添加滚动条，请考虑使用<a href="qscrollview.html">QScrollView</a>类，它封装了滚动条的常用方法。
+<p> <img src=qscrbar-m.png> <img src=qscrbar-w.png>
+<p> <p>也可以参考<a href="qslider.html">QSlider</a>、<a href="qspinbox.html">QSpinBox</a>、<a href="qscrollview.html">QScrollView</a>、<a href="guibooks.html#fowler">GUI Design Handbook: Scroll Bar</a>和<a href="basic.html">基本窗口部件</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QScrollBar"></a>QScrollBar::QScrollBar ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个垂直的滚动条。
+<p> <em>parent</em>和<em>name</em>参数被发送给<a href="qwidget.html">QWidget</a>的构造函数。
+
+<h3 class=fn><a name="QScrollBar-2"></a>QScrollBar::QScrollBar ( <a href="qt.html#Orientation-enum">Orientation</a>&nbsp;orientation, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个滚动条。
+<p> <em>orientation</em>必须是Qt::Vertical或Qt::Horizontal。
+<p> <em>parent</em>和<em>name</em>参数被发送给<a href="qwidget.html">QWidget</a>的构造函数。
+
+<h3 class=fn><a name="QScrollBar-3"></a>QScrollBar::QScrollBar ( int&nbsp;minValue, int&nbsp;maxValue, int&nbsp;lineStep, int&nbsp;pageStep, int&nbsp;value, <a href="qt.html#Orientation-enum">Orientation</a>&nbsp;orientation, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个滚动条，它的值不能小于<em>minValue</em>或者大于<em>maxValue</em>，线步大小为<em>lineStep</em>并且页步大小为<em>pageStep</em>，它的值被初始化为<em>value</em>（它被使用<a href="qrangecontrol.html#bound">bound</a>()保证在范围之内）。
+<p> 如果<em>orientation</em>是<a href="qt.html#Orientation-enum">Vertical</a>，滚动条是垂直的并且如果它是<a href="qt.html#Orientation-enum">Horizontal</a>，则滚动条是水平的。
+<p> <em>parent</em>和<em>name</em>参数被发送给<a href="qwidget.html">QWidget</a>的构造函数。
+
+<h3 class=fn>bool <a name="draggingSlider"></a>QScrollBar::draggingSlider () const
+</h3>
+<p>如果用户已经在滑块上点击鼠标并且现在正在拖动它，返回真，否则返回假。详细情况请参考<a href="qscrollbar.html#draggingSlider-prop">“draggingSlider”</a>属性。
+
+<h3 class=fn>void <a name="hideEvent"></a>QScrollBar::hideEvent ( <a href="qhideevent.html">QHideEvent</a>&nbsp;* )<tt> [虚 保护]</tt>
+</h3>
+当滚动条被隐藏时，这个函数被调用。
+<p>从<a href="qwidget.html#hideEvent">QWidget</a>中重新实现的。
+
+<h3 class=fn>int <a name="lineStep"></a>QScrollBar::lineStep () const
+</h3>
+<p>返回当前线步。详细情况请参考<a href="qscrollbar.html#lineStep-prop">“lineStep”</a>属性。
+
+<h3 class=fn>int <a name="maxValue"></a>QScrollBar::maxValue () const
+</h3>
+<p>返回滚动条的当前最大值。详细情况请参考<a href="qscrollbar.html#maxValue-prop">“maxValue”</a>属性。
+
+<h3 class=fn>int <a name="minValue"></a>QScrollBar::minValue () const
+</h3>
+<p><p>返回滚动条的当前最小值。详细情况请参考<a href="qscrollbar.html#minValue-prop">“minValue”</a>>属性。
+
+<h3 class=fn>void <a name="nextLine"></a>QScrollBar::nextLine ()<tt> [信号]</tt>
+</h3>
+当滚动条向下或向右滚动一个线步时，这个信号被发射。
+
+<h3 class=fn>void <a name="nextPage"></a>QScrollBar::nextPage ()<tt> [信号]</tt>
+</h3>
+当滚动条向下或向右滚动一个页步时，这个信号被发射。
+
+<h3 class=fn><a href="qt.html#Orientation-enum">Orientation</a> <a name="orientation"></a>QScrollBar::orientation () const
+</h3>
+<p>返回滚动条的方向。详细情况请参考<a href="qscrollbar.html#orientation-prop">“orientation”</a>属性。
+
+<h3 class=fn>int <a name="pageStep"></a>QScrollBar::pageStep () const
+</h3>
+<p>返回当前页步。详细情况请参考<a href="qscrollbar.html#pageStep-prop">“pageStep”</a>属性。
+
+<h3 class=fn>void <a name="prevLine"></a>QScrollBar::prevLine ()<tt> [信号]</tt>
+</h3>
+当滚动条向上或向左滚动一个线步时，这个信号被发射。
+
+<h3 class=fn>void <a name="prevPage"></a>QScrollBar::prevPage ()<tt> [信号]</tt>
+</h3>
+当滚动条向上或向左滚动一个页步时，这个信号被发射。
+
+<h3 class=fn>void <a name="setLineStep"></a>QScrollBar::setLineStep ( int )
+</h3>
+<p>设置当前线步。详细情况请参考<a href="qscrollbar.html#lineStep-prop">“lineStep”</a>属性。
+
+<h3 class=fn>void <a name="setMaxValue"></a>QScrollBar::setMaxValue ( int )
+</h3>
+<p>设置滚动条的当前最大值。详细情况请参考<a href="qscrollbar.html#maxValue-prop">“maxValue”</a>属性。
+
+<h3 class=fn>void <a name="setMinValue"></a>QScrollBar::setMinValue ( int )
+</h3>
+<p><p>设置滚动条的当前最小值。详细情况请参考<a href="qscrollbar.html#minValue-prop">“minValue”</a>属性。
+
+<h3 class=fn>void <a name="setOrientation"></a>QScrollBar::setOrientation ( <a href="qt.html#Orientation-enum">Orientation</a> )<tt> [虚]</tt>
+</h3>
+<p>设置滚动条的方位。详细情况请参考<a href="qscrollbar.html#orientation-prop">“orientation”</a>属性。
+
+<h3 class=fn>void <a name="setPageStep"></a>QScrollBar::setPageStep ( int )
+</h3>
+<p>设置当前页步。详细情况请参考<a href="qscrollbar.html#pageStep-prop">“pageStep”</a>属性。
+
+<h3 class=fn>void <a name="setPalette"></a>QScrollBar::setPalette ( const&nbsp;<a href="qpalette.html">QPalette</a>&nbsp;&amp;&nbsp;p )<tt> [虚]</tt>
+</h3>
+重新实现了虚函数<a href="qwidget.html#setPalette">QWidget::setPalette</a>()。
+<p> 对于使用调色板<em>p</em>的Motif风格的滚动条，设置背景色为中间的颜色。
+<p>从<a href="qwidget.html#setPalette">QWidget</a>中重新实现的。
+
+<h3 class=fn>void <a name="setTracking"></a>QScrollBar::setTracking ( bool&nbsp;enable )<tt> [虚]</tt>
+</h3>
+<p>设置滚动条跟踪是否生效为<em>enable</em>。详细情况请参考<a href="qscrollbar.html#tracking-prop">“tracking”</a>属性。
+
+<h3 class=fn>void <a name="setValue"></a>QScrollBar::setValue ( int )<tt> [slot]</tt>
+</h3>
+<p>设置当前滚动条的值。详细情况请参考<a href="qscrollbar.html#value-prop">“value”</a>属性。
+
+<h3 class=fn>void <a name="sliderMoved"></a>QScrollBar::sliderMoved ( int&nbsp;value )<tt> [信号]</tt>
+</h3>
+<p> 当滑块被用户移动时，这个信号被发射，新滚动条的值<em>value</em>作为参数。
+<p> 即使当跟踪被关闭，这个信号也被发射。
+<p> <p>也可以参考<a href="#tracking-prop">tracking</a>、<a href="#valueChanged">valueChanged</a>()、<a href="#nextLine">nextLine</a>()、<a href="#prevLine">prevLine</a>()、<a href="#nextPage">nextPage</a>()和<a href="#prevPage">prevPage</a>()。
+
+<h3 class=fn>void <a name="sliderPressed"></a>QScrollBar::sliderPressed ()<tt> [信号]</tt>
+</h3>
+当用户使用鼠标按下滑块时，这个信号被发射。
+
+<h3 class=fn><a href="qrect.html">QRect</a> <a name="sliderRect"></a>QScrollBar::sliderRect () const
+</h3>
+返回滚动条滑块的范围。
+<p>也可以参考<a href="#sliderStart">sliderStart</a>()。
+
+<h3 class=fn>void <a name="sliderReleased"></a>QScrollBar::sliderReleased ()<tt> [信号]</tt>
+</h3>
+当用户使用鼠标释放滑块时，这个信号被发射。
+
+<h3 class=fn>int <a name="sliderStart"></a>QScrollBar::sliderStart () const
+</h3>
+返回滚动条滑块开始的像素位置。
+<p> 这对于垂直滚动条相当于<a href="#sliderRect">sliderRect</a>().<a href="qwidget.html#y">y</a>()，对于水平滚动条相当于sliderRect().<a href="qwidget.html#x">x</a>()。
+
+<h3 class=fn>bool <a name="tracking"></a>QScrollBar::tracking () const
+</h3>
+<p>如果滚动条跟踪是生效的，返回真，否则返回假。详细情况请参考<a href="qscrollbar.html#tracking-prop">“tracking”</a>属性。
+
+<h3 class=fn>int <a name="value"></a>QScrollBar::value () const
+</h3>
+<p>返回当前滚动条的值。详细情况请参考<a href="qscrollbar.html#value-prop">“value”</a>属性。
+
+<h3 class=fn>void <a name="valueChanged"></a>QScrollBar::valueChanged ( int&nbsp;value )<tt> [信号]</tt>
+</h3>
+当滚动条的值已经改变时，这个信号被发射，新滚动条的值<em>value</em>作为参数。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>bool <a name="draggingSlider-prop"></a>draggingSlider</h3>
+<p>这个属性保存的是用户是否已经在滑块上点击鼠标并且正在移动它。
+<p>通过<a href="#draggingSlider">draggingSlider</a>()来获得属性值。
+
+<h3 class=fn>int <a name="lineStep-prop"></a>lineStep</h3>
+<p>这个属性保存的是当前线步。
+<p>当设置线步时，如果新的线步与原来的设置不同，虚函数<a href="qrangecontrol.html#stepChange">stepChange</a>()将被调用。
+<p> <p>也可以参考<a href="qrangecontrol.html#setSteps">setSteps</a>()、<a href="qrangecontrol.html#pageStep">QRangeControl::pageStep</a>()和<a href="qrangecontrol.html#setRange">setRange</a>()。
+<p>通过<a href="#setLineStep">setLineStep</a>()设置属性值并且通过<a href="#lineStep">lineStep</a>()来获得属性值。
+
+<h3 class=fn>int <a name="maxValue-prop"></a>maxValue</h3>
+<p>这个属性保存的是滚动条的当前最大值。
+<p>当设置这个属性时，如果需要，<a href="#minValue-prop">QScrollBar::minValue</a>被调整，这样使范围仍有效。
+<p> <p>也可以参考<a href="qrangecontrol.html#setRange">setRange</a>()。
+<p>通过<a href="#setMaxValue">setMaxValue</a>()设置属性值并且通过<a href="#maxValue">maxValue</a>()来获得属性值。
+
+<h3 class=fn>int <a name="minValue-prop"></a>minValue</h3>
+<p>这个属性保存的是滚动条的当前最小值。
+<p><p>当设置这个属性时，如果需要，<a href="#maxValue-prop">QScrollBar::maxValue</a>被调整，这样使范围仍有效。
+<p> <p>也可以参考<a href="qrangecontrol.html#setRange">setRange</a>()。
+<p>通过<a href="#setMinValue">setMinValue</a>()设置属性值并且通过<a href="#minValue">minValue</a>()来获得属性值。
+
+<h3 class=fn><a href="qt.html#Orientation-enum">Orientation</a> <a name="orientation-prop"></a>orientation</h3>
+<p>这个属性保存的是滚动条的方位。
+<p>这个方位必须是<a href="qt.html#Orientation-enum">Qt::Vertical</a>（默认）或<a href="qt.html#Orientation-enum">Qt::Horizontal</a>。
+<p>通过<a href="#setOrientation">setOrientation</a>()设置属性值并且通过<a href="#orientation">orientation</a>()来获得属性值。
+
+<h3 class=fn>int <a name="pageStep-prop"></a>pageStep</h3>
+<p>这个属性保存的是当前页步。
+<p><p>当设置页步时，如果新的页步与原来的设置不同，虚函数<a href="qrangecontrol.html#stepChange">stepChange</a>()将被调用。
+<p> <p>也可以参考<a href="qrangecontrol.html#setSteps">QRangeControl::setSteps</a>()、<a href="#lineStep-prop">lineStep</a>和<a href="qrangecontrol.html#setRange">setRange</a>()。
+<p>通过<a href="#setPageStep">setPageStep</a>()设置属性值并且通过<a href="#pageStep">pageStep</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="tracking-prop"></a>tracking</h3>
+<p>这个属性保存的是滚动条跟踪是否生效。
+<p>如果跟踪生效（默认），当滑块正在被拖动时，滚动条发射<a href="#valueChanged">valueChanged</a>()信号。如果失效，只有当用户在移动滑块之后释放鼠标按键时，滚动条发射valueChanged()信号。
+<p>通过<a href="#setTracking">setTracking</a>()设置属性值并且通过<a href="#tracking">tracking</a>()来获得属性值。
+
+<h3 class=fn>int <a name="value-prop"></a>value</h3>
+<p>这个属性保存的是滚动条的当前值。
+<p>通过<a href="#setValue">setValue</a>()设置属性值并且通过<a href="#value">value</a>()来获得属性值。
+<p><p>也可以参考<a href="qrangecontrol.html#value">QRangeControl::value</a>()和<a href="qrangecontrol.html#prevValue">prevValue</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

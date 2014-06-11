@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QToolBar类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QToolBar类参考</h1>
+
+<p>QToolBar类提供乐意可以包含工具按钮这类的窗口部件的可移动的面板。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qtoolbar-h.html">qtoolbar.h</a>&gt;</tt>
+<p>继承了<a href="qdockwindow.html">QDockWindow</a>。
+<p><a href="qtoolbar-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>QToolBar ( const&nbsp;QString&nbsp;&amp;&nbsp;label, QMainWindow *, ToolBarDock = DockTop, bool&nbsp;newLine = FALSE, const&nbsp;char&nbsp;*&nbsp;name = 0 ) &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn><a href="#QToolBar-2"><b>QToolBar</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;label, QMainWindow&nbsp;*&nbsp;mainWindow, QWidget&nbsp;*&nbsp;parent, bool&nbsp;newLine = FALSE, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = 0 )</div></li>
+<li><div class=fn><a href="#QToolBar-3"><b>QToolBar</b></a> ( QMainWindow&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>void <a href="#addSeparator"><b>addSeparator</b></a> ()</div></li>
+<li><div class=fn>QMainWindow * <a href="#mainWindow"><b>mainWindow</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setStretchableWidget"><b>setStretchableWidget</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+<li><div class=fn>virtual void <a href="#setLabel"><b>setLabel</b></a> ( const QString &amp; )</div></li>
+<li><div class=fn>QString <a href="#label"><b>label</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#clear"><b>clear</b></a> ()</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>QString <a href="#label-prop"><b>label</b></a>&nbsp;- 工具条的标签</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+ 
+<p> QToolBar类提供乐意可以包含工具按钮这类的窗口部件的可移动的面板。
+<p> 
+<p> 工具条是包含一套控制的面板，通常表现为小图标。它用于提供常用命令或者选项的快速访问。在<a href="qmainwindow.html">QMainWindow</a>里面，用户可以锚接区域里面或者之间拖动工具条。工具条也可以被拖动出任何锚接区域而作为顶级窗口自由浮动。
+<p> QToolBar是<a href="qdockwindow.html">QDockWindow</a>的特殊化，并且提供QDockWindow的所有功能。
+<p> 为了使用QToolBar，你可以简单的把QToolBar创建为QMainWindow的子对象，从左到右（或者从上到下）创建许多<a href="qtoolbutton.html">QToolButton</a>窗口部件（或者其他窗口部件）并且当你想要一个分隔符，请调用<a href="#addSeparator">addSeparator</a>()。当工具条被浮动时，标题会使用在构造函数中给定的标签。这个可以通过<a href="#setLabel">setLabel</a>()来改变。
+<p> 
+
+<pre>        QToolBar * fileTools = new QToolBar( this, "file operations" );
+        fileTools-&gt;<a href="#setLabel">setLabel</a>( "File Operations" );
+        fileOpenAction-&gt;<a href="qaction.html#addTo">addTo</a>( fileTools );
+        fileSaveAction-&gt;<a href="qaction.html#addTo">addTo</a>( fileTools );
+</pre>
+<p> 这是从<a href="simple-application-example.html">application/application.cpp</a>实例中提取出来的，显示了把新的工具条创建为<a href="qmainwindow.html">QMainWindow</a>的子对象并且添加两个QAction。
+<p> 你可以在工具条中使用绝大多数窗口部件，最常用的时QToolButton和<a href="qcombobox.html">QComboBox</a>。
+<p> 注意如果你在一个已经可视的QToolBar上创建一个新的窗口部件，这个窗口部件可以在没有明显调用<a href="qwidget.html#show">show</a>()的情况下就会自动变为可视（这和Qt中其他窗口部件容器不一样）。总之，请为你放入可视的QToolBar的所有窗口部件明显地调用show()，这个行为也许在未来会被确定下来。
+<p> QToolBar，像QDockWindow一样，可以被定位在QDockArea中或者像顶级窗口一样浮动。QMainWindow提供了四个QDockArea（上、下、左、右）。当你创建一个新工具条（像上述实例一样）作为QMainWindow的子对象时，这个工具条会被添加到上面的锚接区域。你可以通过调用<a href="qmainwindow.html#moveDockWindow">QMainWindow::moveDockWindow</a>()把它移动到其它锚接区域（或者浮动起来）。QDockarea在<a href="qdockarea.html#lines">行</a>中布局它们的窗口。
+<p> 如果主窗口被重新定义大小，这样工具条所占的区域会变小以至于不能显示所有窗口部件，这时一个小箭头按钮（看起来像指向右的V形符号，“&#187;”）将会根据工具条的方向显示在工具条的右面或者下面。点击这个按钮将会弹出一个菜单来显示那些“过剩的”项。
+<p> 通常工具条将会得到它所需要的空间。可是，通过<a href="qdockwindow.html#setHorizontalStretchable">setHorizontalStretchable</a>()、<a href="qdockwindow.html#setVerticalStretchable">setVerticalStretchable</a>()或
+<a href="#setStretchableWidget">setStretchableWidget</a>()，你可以告诉主窗口在指定的方向延伸工具条来填充所有可用的空间。
+<p> 工具条在水平方向或者垂直方向（详细情况请参考<a href="qdockwindow.html#orientation">orientation</a>()）上排列它的按钮。通常<a href="qdockarea.html">QDockArea</a>将会为你设置正确的方向，但是你可以使用<a href="qdockwindow.html#setOrientation">setOrientation</a>()来自己设置它并且通过连接到<a href="qdockwindow.html#orientationChanged">orientationChanged</a>()信号来跟踪任何变化。
+<p> 你可以使用<a href="#clear">clear</a>()方法来移除工具条的所有条目。
+<p> <center><img src="qdockwindow.png" alt="Toolbar (dock window)"></center> <blockquote><p align="center"><em> 一个浮动的QToolbar（锚接窗口）
+</em></p>
+</blockquote><p> <p>也可以参考<a href="qtoolbutton.html">QToolButton</a>、<a href="qmainwindow.html">QMainWindow</a>、<a href="http://www.iarchitect.com/visual.htm">Parts of Isys on Visual Design</a>、<a href="guibooks.html#fowler">图形用户界面设计手册：工具条</a>和<a href="application.html">主窗口和相关类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QToolBar"></a>QToolBar::QToolBar ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label, <a href="qmainwindow.html">QMainWindow</a>&nbsp;*, ToolBarDock = DockTop, bool&nbsp;newLine = FALSE, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+
+<h3 class=fn><a name="QToolBar-2"></a>QToolBar::QToolBar ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label, <a href="qmainwindow.html">QMainWindow</a>&nbsp;*&nbsp;mainWindow, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, bool&nbsp;newLine = FALSE, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = 0 )
+</h3>
+<p> 构造一个空的水平工具条。
+<p> 工具条是<em>parent</em>的子对象并且被<em>mainWindow</em>管理。<em>label</em>和<em>newLine</em> 参数被直接传递给<a href="qmainwindow.html#addDockWindow">QMainWindow::addDockWindow</a>()。<em>name</em>是对象名称并且<em>f</em>是窗口部件标记。
+<p> 如果你想创建已经取消锚接正在浮动的工具条或者状态条中的工具条时请使用这个构造函数。
+
+<h3 class=fn><a name="QToolBar-3"></a>QToolBar::QToolBar ( <a href="qmainwindow.html">QMainWindow</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 构造一个在<em>parent</em>的上面锚接区域中的父对象为<em>parent</em>并且名称为<em>name</em>的空工具条。没有任何标签并且不需要一个新行。
+
+<h3 class=fn>void <a name="addSeparator"></a>QToolBar::addSeparator ()
+</h3>  
+在工具条的右面/下面添加一个分隔符。
+<p>实例：<a href="canvas-chart-example.html#x2613">chart/chartform.cpp</a>、<a href="fileiconview-example.html#x891">fileiconview/mainwindow.cpp</a>、<a href="helpviewer-example.html#x1036">helpviewer/helpwindow.cpp</a>、<a href="qfd-example.html#x1993">qfd/fontdisplayer.cpp</a>和<a href="scribble-example.html#x964">scribble/scribble.cpp</a>。
+
+<h3 class=fn>void <a name="clear"></a>QToolBar::clear ()<tt> [虚]</tt>
+</h3> 
+删除工具条的所有子窗口部件。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="label"></a>QToolBar::label () const
+</h3>
+<p>返回工具条的标签。详细情况请参考<a href="qtoolbar.html#label-prop">“label”</a>属性。
+
+<h3 class=fn><a href="qmainwindow.html">QMainWindow</a>&nbsp;* <a name="mainWindow"></a>QToolBar::mainWindow () const
+</h3>  
+返回一个管理这个工具条的<a href="qmainwindow.html">QMainWindow</a>的指针。
+
+<h3 class=fn>void <a name="setLabel"></a>QToolBar::setLabel ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3>
+<p>设置工具条的标签。详细情况请参考<a href="qtoolbar.html#label-prop">“label”</a>属性。
+
+<h3 class=fn>void <a name="setStretchableWidget"></a>QToolBar::setStretchableWidget ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )<tt> [虚]</tt>
+</h3> 
+如果这个工具条被需要延伸，设置窗口部件<em>w</em>被延伸。
+<p> 因为<a href="qmainwindow.html">QMainWindow</a>正确调整它里面的锚接区域，或者因为这个工具条的<a href="qdockwindow.html#isVerticalStretchable">isVerticalStretchable</a>()或者<a href="qdockwindow.html#isHorizontalStretchable">isHorizontalStretchable</a>()被设置为真，这个延伸的请求也许会发生。
+<p> 如果你调用这个函数并且工具条还不是可延伸的，setStretchable()被调用。
+<p> <p>也可以参考<a href="qmainwindow.html#rightJustification-prop">QMainWindow::rightJustification</a>、<a href="qdockwindow.html#setVerticalStretchable">setVerticalStretchable</a>()和<a href="qdockwindow.html#setHorizontalStretchable">setHorizontalStretchable</a>()。
+<p>实例：<a href="fileiconview-example.html#x892">fileiconview/mainwindow.cpp</a>和<a href="helpviewer-example.html#x1037">helpviewer/helpwindow.cpp</a>。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn><a href="qstring.html">QString</a> <a name="label-prop"></a>label</h3>
+<p>这个属性保存的是工具条的标签。
+<p>如果工具条被浮动，标签就变为工具条窗口的标题。这里没有默认标签文本。
+<p>通过<a href="#setLabel">setLabel</a>()设置属性值并且通过<a href="#label">label</a>()来获得属性值。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

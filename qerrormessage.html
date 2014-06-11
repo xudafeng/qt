@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QErrorMessage类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QErrorMessage类参考</h1>
+
+<p>QErrorMessage类提供了错误消息显示对话框。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qerrormessage-h.html">qerrormessage.h</a>&gt;</tt>
+<p>继承了<a href="qdialog.html">QDialog</a>。
+<p><a href="qerrormessage-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QErrorMessage"><b>QErrorMessage</b></a> ( QWidget&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#~QErrorMessage"><b>~QErrorMessage</b></a> ()</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>void <a href="#message"><b>message</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;m )</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>QErrorMessage * <a href="#qtHandler"><b>qtHandler</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+ 
+<p> QErrorMessage类提供了错误消息显示对话框。
+<p> 基本上是<a href="qlabel.html">QLabel</a>和记住什么不显示的“show this message again”检查框。
+<p> 这里是使用这个类的两种方法：
+<ol type=1>
+<li> 对于产品应用程序。在这种情况下，这个类可以用来显示你不需要用户看到超过一次的信息。像这样使用QErrorMessage，你用手工的方式创建对话框并且调用<a href="#message">message</a>()槽，或者把信号和它连接起来。
+<p> <li> 对于开发人员。在这种情况下，静态的<a href="#qtHandler">qtHandler</a>()使用<a href="qapplication.html#qInstallMsgHandler">qInstallMsgHandler</a>()安装一个消息处理器并且创建一个用来显示<a href="qapplication.html#qDebug">qDebug</a>()、<a href="qapplication.html#qWarning">qWarning</a>()和<a href="qapplication.html#qFatal">qFatal</a>()的QErrorMessage。
+</ol>
+<p> 在这两种情况下，QErrorMessage将把没有处理的信息排队，并且按顺序显示它们（或者不显示），只要用户在看到每一条消息之后按下Enter或者点击OK。
+<p> <center><img src="qerrormessage.png"></center> 
+<p> <p>也可以参考<a href="qmessagebox.html">QMessageBox</a>、<a href="qstatusbar.html#message">QStatusBar::message</a>()、<a href="dialogs.html">对话框类</a>和<a href="misc.html">杂项类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QErrorMessage"></a>QErrorMessage::QErrorMessage ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>  
+构造并安装一个错误处理器窗口。父对象<em>parent</em>和名称<em>name</em>都被传递给<a href="qdialog.html">QDialog</a>的构造函数。
+
+<h3 class=fn><a name="~QErrorMessage"></a>QErrorMessage::~QErrorMessage ()
+</h3> 
+销毁这个对象并且释放任何已经分配的资源。特别地，“do not show again”消息列表也被删除。
+
+<h3 class=fn>void <a name="message"></a>QErrorMessage::message ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;m )<tt> [槽]</tt>
+</h3> 
+显示消息<em>m</em>并且立即返回。如果用户要求<em>m</em>不被显示，这个函数将什么都不做。
+<p> 通常，<em>m</em>只被立即显示，但是如果存在未处理的消息，<em>m</em>将被排到队列中，稍后会显示。
+
+<h3 class=fn><a href="qerrormessage.html">QErrorMessage</a>&nbsp;* <a name="qtHandler"></a>QErrorMessage::qtHandler ()<tt> [静态]</tt>
+</h3>  
+返回输出默认Qt消息的QErrorMessage对象的指针。如果没有这样的对象存在，这个函数创建一个这样的对象。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

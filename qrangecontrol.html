@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QRangeControl类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QRangeControl类参考</h1>
+
+<p>QRangeControl类提供了一个范围内的一个整数值。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qrangecontrol-h.html">qrangecontrol.h</a>&gt;</tt>
+<p>由<a href="qdial.html">QDial</a>、<a href="qscrollbar.html">QScrollBar</a>、<a href="qslider.html">QSlider</a>和<a href="qspinbox.html">QSpinBox</a>继承。
+<p><a href="qrangecontrol-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QRangeControl"><b>QRangeControl</b></a> ()</div></li>
+<li><div class=fn><a href="#QRangeControl-2"><b>QRangeControl</b></a> ( int&nbsp;minValue, int&nbsp;maxValue, int&nbsp;lineStep, int&nbsp;pageStep, int&nbsp;value )</div></li>
+<li><div class=fn>virtual <a href="#~QRangeControl"><b>~QRangeControl</b></a> ()</div></li>
+<li><div class=fn>int <a href="#value"><b>value</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setValue"><b>setValue</b></a> ( int&nbsp;value )</div></li>
+<li><div class=fn>void <a href="#addPage"><b>addPage</b></a> ()</div></li>
+<li><div class=fn>void <a href="#subtractPage"><b>subtractPage</b></a> ()</div></li>
+<li><div class=fn>void <a href="#addLine"><b>addLine</b></a> ()</div></li>
+<li><div class=fn>void <a href="#subtractLine"><b>subtractLine</b></a> ()</div></li>
+<li><div class=fn>int <a href="#minValue"><b>minValue</b></a> () const</div></li>
+<li><div class=fn>int <a href="#maxValue"><b>maxValue</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setRange"><b>setRange</b></a> ( int&nbsp;minValue, int&nbsp;maxValue )</div></li>
+<li><div class=fn>void <a href="#setMinValue"><b>setMinValue</b></a> ( int&nbsp;minVal )</div></li>
+<li><div class=fn>void <a href="#setMaxValue"><b>setMaxValue</b></a> ( int&nbsp;maxVal )</div></li>
+<li><div class=fn>int <a href="#lineStep"><b>lineStep</b></a> () const</div></li>
+<li><div class=fn>int <a href="#pageStep"><b>pageStep</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setSteps"><b>setSteps</b></a> ( int&nbsp;lineStep, int&nbsp;pageStep )</div></li>
+<li><div class=fn>int <a href="#bound"><b>bound</b></a> ( int&nbsp;v ) const</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>int <a href="#positionFromValue"><b>positionFromValue</b></a> ( int&nbsp;logical_val, int&nbsp;span ) const</div></li>
+<li><div class=fn>int <a href="#valueFromPosition"><b>valueFromPosition</b></a> ( int&nbsp;pos, int&nbsp;span ) const</div></li>
+<li><div class=fn>void <a href="#directSetValue"><b>directSetValue</b></a> ( int&nbsp;value )</div></li>
+<li><div class=fn>int <a href="#prevValue"><b>prevValue</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#valueChange"><b>valueChange</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#rangeChange"><b>rangeChange</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#stepChange"><b>stepChange</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QRangeControl类提供了一个范围内的一个整数值。
+<p> 
+<p> 尽管QRangeControl最初始是为了<a href="qscrollbar.html">QScrollBar</a>窗口部件而设计的，但它也可以和像<a href="qslider.html">QSlider</a>和<a href="qspinbox.html">QSpinBox</a>这样的其它窗口部件关联使用。这里是这个类中五个主要概念：
+<p> <ol type=1>
+<p> <li> 当前值。这是QRangeControl所维护的一个有限制的整数。<a href="#value">value</a>()返回这个值，并且可以通过包括<a href="#setValue">setValue</a>()的几个函数来设置它。
+<p> <li> 最小值。这是value()可以返回的最小值。<a href="#minValue">minValue</a>()可以返回这个值，并且可以通过<a href="#setRange">setRange</a>()或构造函数来设置它。
+<p> <li> 最大值。这是value()可以返回的最大值。<a href="#maxValue">maxValue</a>()可以返回这个值，并且可以通过<a href="#setRange">setRange</a>()或构造函数来设置它。
+<p> <li> 线步。这是QRangeControl所提供的比较小的两个自然步的差并且通常与用户按下方向键进行关联。线步可以由<a href="#lineStep">lineStep</a>()返回并且可以使用<a href="#setSteps">setSteps</a>()来设置。<a href="#addLine">addLine</a>()和<a href="#subtractLine">subtractLine</a>()这两个函数分别地用来给当前值增加或减少lineStep()。
+<p> <li> 页步。这是QRangeControl所提供的比较大的两个自然步的差并且通常与用户按下PageUp或PageDown进行关联。页步可以由<a href="#pageStep">pageStep</a>()返回并且可以使用<a href="#setSteps">setSteps</a>()来设置。<a href="#addPage">addPage</a>()和<a href="#substractPage">substractPage</a>()这两个函数分别地用来给当前值增加或减少pageStep()。
+<p> </ol>
+<p> 单位（1）可以被看做事第三种步长。<a href="#setValue">setValue</a>()可以让你设置当前值为允许范围内的任何一个整数，对于<em>n</em>这一整数值，而不仅仅是<a href="#minValue">minValue</a>() + <em>n</em> * lineStep()。一些窗口部件也允许用户设置为任意值，而其它的也许只提供了lineStep()或pageStep()的倍数。
+<p> QRangeControl提供了适用于在屏幕上表示范围控制的更新和信号的发射的三个虚函数，叫做<a href="#valueChange">valueChange</a>()、<a href="#rangeChange">rangeChange</a>()和<a href="#stepChange">stepChange</a>()。
+<p> QRangeControl也提供了一个叫做<a href="#bound">bound</a>()的函数，它可以强制任意整数变为这个范围控制所允许的范围中。
+<p> 我们建议所有继承QRangeControl的窗口部件都至少提供一个叫做valueChanged()的信号，一些窗口部件也许需要提供addStep()、<a href="#addPage">addPage</a>()、substractStep()和substractPage()做为槽。
+<p> 注意如果你计划实现一个使用QRangeControl的窗口部件，你不得不使用多重继承，因为QRangeControl并不是继承于<a href="qwidget.html">QWidget</a>的。
+<p>也可以参考<a href="misc.html">杂项类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QRangeControl"></a>QRangeControl::QRangeControl ()
+</h3>
+构造一个最小值为0、最大值为99、线步为1、页步为10并且初始值为0的范围控制。
+
+<h3 class=fn><a name="QRangeControl-2"></a>QRangeControl::QRangeControl ( int&nbsp;minValue, int&nbsp;maxValue, int&nbsp;lineStep, int&nbsp;pageStep, int&nbsp;value )
+</h3>
+构造一个最小值为<em>minValue</em>、最大值为<em>maxValue</em>、线步为<em>lineStep</em>、页步为<em>pageStep</em>并且初始值为<em>value</em>（已经使用<a href="#bound">bound</a>()被保证在允许范围内）的范围控制。
+
+<h3 class=fn><a name="~QRangeControl"></a>QRangeControl::~QRangeControl ()<tt> [虚]</tt>
+</h3>
+销毁这个范围控制。
+
+<h3 class=fn>void <a name="addLine"></a>QRangeControl::addLine ()
+</h3>
+与<tt>setValue( value() + lineStep() )</tt>相同。
+<p> 如果值发生改变，那么<a href="#valueChange">valueChange</a>()被调用。
+<p> <p>也可以参考<a href="#subtractLine">subtractLine</a>()、<a href="#addPage">addPage</a>()和<a href="#setValue">setValue</a>()。
+
+<h3 class=fn>void <a name="addPage"></a>QRangeControl::addPage ()
+</h3>
+与<tt>setValue( value() + pageStep() )</tt>相同。
+<p> 如果值发生改变，那么<a href="#valueChange">valueChange</a>()被调用。
+<p> <p>也可以参考<a href="#subtractPage">subtractPage</a>()、<a href="#addLine">addLine</a>()和<a href="#setValue">setValue</a>()。
+
+<h3 class=fn>int <a name="bound"></a>QRangeControl::bound ( int&nbsp;v ) const
+</h3>  
+强制值<em>v</em>进入从<a href="#minValue">minValue</a>()到<a href="#maxValue">maxValue</a>()所确定的范围内，并且返回结果。
+<p> 这个函数的提供可以让你很容易地强制转换其它数值而不是<a href="#value">value</a>()进入允许范围。你不需要为了QRangeControl本身而调用它。
+<p> <p>也可以参考<a href="#setValue">setValue</a>()、<a href="#value">value</a>()、<a href="#minValue">minValue</a>()和<a href="#maxValue">maxValue</a>()。
+
+<h3 class=fn>void <a name="directSetValue"></a>QRangeControl::directSetValue ( int&nbsp;value )<tt> [保护]</tt>
+</h3>
+不调用<a href="#valueChange">valueChange</a>()而直接设置范围控制的值为<em>value</em>。
+<p> 强制新<em>value</em>进入合法范围。
+<p> 你将很少用到这个函数。可是，如果你想在valueChange()的重载函数中改变范围控制的值，而<a href="#setValue">setValue</a>()将会再次调用valueChange()，这时你就必须使用<a href="#directSetValue">directSetValue</a>()来替代它。
+<p> <p>也可以参考<a href="#setValue">setValue</a>()。
+
+<h3 class=fn>int <a name="lineStep"></a>QRangeControl::lineStep () const
+</h3>
+<p> 返回当前线步。
+<p> <p>也可以参考<a href="#setSteps">setSteps</a>()和<a href="#pageStep">pageStep</a>()。
+
+<h3 class=fn>int <a name="maxValue"></a>QRangeControl::maxValue () const
+</h3>
+<p> 返回当前范围的最大值。
+<p> <p>也可以参考<a href="#setMaxValue">setMaxValue</a>()、<a href="#setRange">setRange</a>()和<a href="#minValue">minValue</a>()。
+
+<h3 class=fn>int <a name="minValue"></a>QRangeControl::minValue () const
+</h3>
+<p> 返回当前范围的最小值。
+<p> <p>也可以参考<a href="#setMinValue">setMinValue</a>()、<a href="#setRange">setRange</a>()和<a href="#maxValue">maxValue</a>()。
+
+<h3 class=fn>int <a name="pageStep"></a>QRangeControl::pageStep () const
+</h3>
+<p> 返回当前页步。
+<p> <p>也可以参考<a href="#setSteps">setSteps</a>()和<a href="#lineStep">lineStep</a>()。
+
+<h3 class=fn>int <a name="positionFromValue"></a>QRangeControl::positionFromValue ( int&nbsp;logical_val, int&nbsp;span ) const<tt> [保护]</tt>
+</h3>
+把<em>logical_val</em>转换为一个象素位置。<a href="#minValue">minValue</a>()映射为0，<a href="#maxValue">maxValue</a>()映射为<em>span</em>并且其它值就被均匀地分布在两者之间。
+<p> 这个函数可以处理整个整数范围而不会溢出。
+<p> 当绘制一个范围控制时，比如在屏幕上的<a href="qscrollbar.html">QScrollBar</a>，调用这个函数是很有用的。
+<p> <p>也可以参考<a href="#valueFromPosition">valueFromPosition</a>()。
+
+<h3 class=fn>int <a name="prevValue"></a>QRangeControl::prevValue () const<tt> [保护]</tt>
+</h3>
+<p> 返回范围控制的上一个值。“上一个值”指的是在最后一次值的变化之前出现的值。设置一个新的范围也许会影响到值，因为这个值被强制在特定的范围之内。当范围控制被初始创建时，这个值和<a href="#value">value</a>()一样。
+<p> 如果你调用<a href="#setRange">setRange</a>()导致当前值发生改变得话，<a href="#prevValue">prevValue</a>()可能在当前合法范围之外。例如，如果一个范围是[0, 1000]并且当前值为500，setRange(0, 400)将会使value()返回400并且prevValue()返回500。
+<p> <p>也可以参考<a href="#value">value</a>()和<a href="#setRange">setRange</a>()。
+
+<h3 class=fn>void <a name="rangeChange"></a>QRangeControl::rangeChange ()<tt> [虚 保护]</tt>
+</h3>
+只要范围控制的范围发生改变，这个虚函数就会被调用。当范围发生改变时，你想被通知的话，你可以重新实现它。默认实现是什么都不做。
+<p> 注意在范围发生改变之后，这个方法才被调用。
+<p> <p>也可以参考<a href="#setRange">setRange</a>()、<a href="#valueChange">valueChange</a>()和<a href="#stepChange">stepChange</a>()。
+<p>在<a href="qdial.html#rangeChange">QDial</a>、<a href="qslider.html#rangeChange">QSlider</a>和<a href="qspinbox.html#rangeChange">QSpinBox</a>中被重新实现。
+
+<h3 class=fn>void <a name="setMaxValue"></a>QRangeControl::setMaxValue ( int&nbsp;maxVal )
+</h3>
+设置范围的当前最大值为<em>maxVal</em>。
+<p> 如果需要，需要<a href="#minValue">minValue</a>()将会被调整来确保范围仍然有效。
+<p> <p>也可以参考<a href="#maxValue">maxValue</a>()和<a href="#setMinValue">setMinValue</a>()。
+
+<h3 class=fn>void <a name="setMinValue"></a>QRangeControl::setMinValue ( int&nbsp;minVal )
+</h3>
+设置范围的当前最小值为<em>minValue</em>。
+<p> 如果需要，需要<a href="#maxValue">maxValue</a>()将会被调整来确保范围仍然有效。
+<p> <p>也可以参考<a href="#minValue">minValue</a>()和<a href="#setMaxValue">setMaxValue</a>()。
+
+<h3 class=fn>void <a name="setRange"></a>QRangeControl::setRange ( int&nbsp;minValue, int&nbsp;maxValue )
+</h3>
+设置范围控制的最小值为<em>minValue</em>，最大值为<em>maxValue</em>。
+<p> 如果新的最小值和最大值中的一个或两个与原先设定的不同，调用虚函数<a href="#rangeChange">rangeChange</a>()。如果因为当前值在新的范围之外，它需要被调整，那么调用虚函数<a href="#valueChange">valueChange</a>()。
+<p> 如果<em>maxValue</em>小于<em>minValue</em>，<em>minValue</em>变为合法的。
+<p> <p>也可以参考<a href="#minValue">minValue</a>()和<a href="#maxValue">maxValue</a>()。
+<p>实例：<a href="listbox-example.html#x1324">listbox/listbox.cpp</a>、<a href="tutorial1-12.html#x2374">t12/lcdrange.cpp</a>、<a href="tutorial1-05.html#x2302">t5/main.cpp</a>、<a href="tutorial1-06.html#x2312">t6/main.cpp</a>、 <a href="tutorial1-08.html#x2321">t8/lcdrange.cpp</a>和<a href="xform-example.html#x1451">xform/xform.cpp</a>。
+
+<h3 class=fn>void <a name="setSteps"></a>QRangeControl::setSteps ( int&nbsp;lineStep, int&nbsp;pageStep )
+</h3>
+设置范围控制的线步为<em>lineStep</em>，页步为<em>pageStep</em>。
+<p> 如果新的线步和/或页步与以前的设定不同，调用虚函数<a href="#stepChange">stepChange</a>()。
+<p> <p>也可以参考<a href="#lineStep">lineStep</a>()、<a href="#pageStep">pageStep</a>()和<a href="#setRange">setRange</a>()。
+
+<h3 class=fn>void <a name="setValue"></a>QRangeControl::setValue ( int&nbsp;value )
+</h3>
+设定范围控制的值为<em>value</em>，并且强制它变为在合法范围内的值。
+<p> 如果新的值和以前的值不同，调用虚函数<a href="#valueChange">valueChange</a>()。旧的值也可以通过<a href="#prevValue">prevValue</a>()得到。
+<p> <p>也可以参考<a href="#value">value</a>().
+
+<h3 class=fn>void <a name="stepChange"></a>QRangeControl::stepChange ()<tt> [虚 保护]</tt>
+</h3>
+只要范围控制的线步/页步设置发生变化，这个虚函数就被调用。如果你需要在步长发生变化时，你想被通知的话，你可以重新实现它。默认实现是什么都不做。
+<p> 注意在步长设置被改变之后，这个方法才被调用。
+<p> <p>也可以参考<a href="#setSteps">setSteps</a>()、<a href="#rangeChange">rangeChange</a>()和<a href="#valueChange">valueChange</a>()。
+
+<h3 class=fn>void <a name="subtractLine"></a>QRangeControl::subtractLine ()
+</h3>
+与<tt>setValue( value() - lineStep() )</tt>相同。
+<p> 如果值发生改变，那么<a href="#valueChange">valueChange</a>()被调用。
+<p> <p>也可以参考<a href="#addLine">addLine</a>()、<a href="#subtractPage">subtractPage</a>()和<a href="#setValue">setValue</a>()。
+
+<h3 class=fn>void <a name="subtractPage"></a>QRangeControl::subtractPage ()
+</h3>
+与<tt>setValue( value() - pageStep() )</tt>相同。
+<p> 如果值发生改变，那么<a href="#valueChange">valueChange</a>()被调用。
+<p> <p>也可以参考<a href="#addPage">addPage</a>()、<a href="#subtractLine">subtractLine</a>()和<a href="#setValue">setValue</a>()。
+
+<h3 class=fn>int <a name="value"></a>QRangeControl::value () const
+</h3>
+<p> 返回当前范围控制的值。这个值已经被保证在[minValue(), <a href="#maxValue">maxValue</a>()]范围内。
+<p> <p>也可以参考<a href="#setValue">setValue</a>()和<a href="#prevValue">prevValue</a>()。
+
+<h3 class=fn>void <a name="valueChange"></a>QRangeControl::valueChange ()<tt> [虚 保护]</tt>
+</h3>
+只要值发生变化，这个虚函数就被调用。如果你需要在值发生变化时，你想被通知的话，你可以重新实现它。默认实现是什么都不做。
+<p> 注意在值发生变化之后，这个方法才被调用。以前的值可以通过<a href="#prevValue">prevValue</a>()来得到。
+<p> <p>也可以参考<a href="#setValue">setValue</a>()、<a href="#addPage">addPage</a>()、<a href="#subtractPage">subtractPage</a>()、<a href="#addLine">addLine</a>()、<a href="#subtractLine">subtractLine</a>()、<a href="#rangeChange">rangeChange</a>()和<a href="#stepChange">stepChange</a>()。
+<p>在<a href="qdial.html#valueChange">QDial</a>、<a href="qslider.html#valueChange">QSlider</a>和<a href="qspinbox.html#valueChange">QSpinBox</a>中被重新实现。
+
+<h3 class=fn>int <a name="valueFromPosition"></a>QRangeControl::valueFromPosition ( int&nbsp;pos, int&nbsp;span ) const<tt> [保护]</tt>
+</h3>
+把像素位置<em>pos</em>转换为值。0映射为<a href="#minValue">minValue</a>()，<em>span</em>映射为<a href="#maxValue">maxValue</a>()，并且其它值被平均分布在这两者之间。
+<p> 这个函数可以用来操作整个整数范围而不会溢出。
+<p> 当你真正实现一个范围控制窗口部件时，比如<a href="qscrollbar.html">QScrollBar</a>和想处理鼠标按下事件时，调用这个函数是很有用的。这个函数会映射屏幕坐标为合法值。
+<p> <p>也可以参考<a href="#positionFromValue">positionFromValue</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

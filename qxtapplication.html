@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>QXtApplication Class</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>QXtApplication Class Reference</h1>
+
+<p>The QXtApplication class facilitates the mixing of Xt/Motif and Qt widgets.
+<p>This class is part of the <b>Qt Xt/Motif Extension</b>.
+<a href="#details">More...</a>
+<p><tt>#include &lt;<a href="qxt-h.html">qxt.h</a>&gt;</tt>
+<p>Inherits <a href="qapplication.html">QApplication</a>.
+<p><a href="qxtapplication-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><div class=fn><a href="#QXtApplication"><b>QXtApplication</b></a> ( int&nbsp;&amp;&nbsp;argc, char&nbsp;**&nbsp;argv, const&nbsp;char&nbsp;*&nbsp;appclass = 0, XrmOptionDescRec&nbsp;*&nbsp;options = 0, int&nbsp;num_options = 0, const&nbsp;char&nbsp;**&nbsp;resources = 0 )</div></li>
+<li><div class=fn><a href="#QXtApplication-2"><b>QXtApplication</b></a> ( Display&nbsp;*&nbsp;display, HANDLE&nbsp;visual = 0, HANDLE&nbsp;colormap = 0 )</div></li>
+<li><div class=fn><a href="#QXtApplication-3"><b>QXtApplication</b></a> ( Display&nbsp;*&nbsp;display, int&nbsp;argc, char&nbsp;**&nbsp;argv, HANDLE&nbsp;visual = 0, HANDLE&nbsp;colormap = 0 )</div></li>
+<li><div class=fn><a href="#~QXtApplication"><b>~QXtApplication</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>Detailed Description</h2>
+<p> This class is defined in the <b>Qt Xt/Motif Extension</b>, which can be found in the <tt>qt/extensions</tt> directory. It is not included in the main Qt API.
+<p>
+
+The QXtApplication class facilitates the mixing of Xt/Motif and Qt widgets.
+<p> 
+<p> The QXtApplication and <a href="qxtwidget.html">QXtWidget</a> classes allow old Xt or Motif widgets
+to be used in new Qt applications.  They also allow Qt widgets to
+be used in primarily Xt/Motif applications.  The facility is intended
+to aid migration from Xt/Motif to the more comfortable Qt system.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class=fn><a name="QXtApplication"></a>QXtApplication::QXtApplication ( int&nbsp;&amp;&nbsp;argc, char&nbsp;**&nbsp;argv, const&nbsp;char&nbsp;*&nbsp;appclass = 0, XrmOptionDescRec&nbsp;*&nbsp;options = 0, int&nbsp;num_options = 0, const&nbsp;char&nbsp;**&nbsp;resources = 0 )
+</h3>
+Constructs a <a href="qapplication.html">QApplication</a> and initializes the Xt toolkit.
+The <em>appclass</em>, <em>options</em>, <em>num_options</em>, and <em>resources</em>
+arguments are passed on to XtAppSetFallbackResources and
+XtDisplayInitialize.
+<p> Use this constructor when writing a new Qt application which
+needs to use some existing Xt/Motif widgets.
+<p> The <em>argc</em> and <em>argv</em> arguments are passed to the QApplication
+constructor.
+
+<h3 class=fn><a name="QXtApplication-2"></a>QXtApplication::QXtApplication ( Display&nbsp;*&nbsp;display, HANDLE&nbsp;visual = 0, HANDLE&nbsp;colormap = 0 )
+</h3>
+Constructs a <a href="qapplication.html">QApplication</a> from the <em>display</em> of an already-initialized
+Xt application.  If <em>visual</em> and <em>colormap</em> are non-zero, the application
+will use those as the default Visual and Colormap contexts.
+<p> Use this constructor when introducing Qt widgets into an existing
+Xt/Motif application.
+
+<h3 class=fn><a name="QXtApplication-3"></a>QXtApplication::QXtApplication ( Display&nbsp;*&nbsp;display, int&nbsp;argc, char&nbsp;**&nbsp;argv, HANDLE&nbsp;visual = 0, HANDLE&nbsp;colormap = 0 )
+</h3>
+This is an overloaded member function, provided for convenience. It behaves essentially like the above function.
+<p> Constructs a <a href="qapplication.html">QApplication</a> from the <em>display</em> of an already-initialized
+Xt application.  If <em>visual</em> and <em>colormap</em> are non-zero, the application
+will use those as the default Visual and Colormap contexts.
+<p> Use this constructor when introducing Qt widgets into an existing
+Xt/Motif application.
+<p> The <em>argc</em> and <em>argv</em> arguments are passed to the QApplication
+constructor.
+
+<h3 class=fn><a name="~QXtApplication"></a>QXtApplication::~QXtApplication ()
+</h3>
+Destructs the application.  Does not close the Xt toolkit.
+
+<!-- eof -->
+<hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>.
+Copyright &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>. All Rights Reserved.<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

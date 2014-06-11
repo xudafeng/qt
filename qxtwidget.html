@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>QXtWidget Class</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>QXtWidget Class Reference</h1>
+
+<p>The QXtWidget class allows mixing of Xt/Motif and Qt widgets.
+<p>This class is part of the <b>Qt Xt/Motif Extension</b>.
+<a href="#details">More...</a>
+<p><tt>#include &lt;<a href="qxt-h.html">qxt.h</a>&gt;</tt>
+<p>Inherits <a href="qwidget.html">QWidget</a>.
+<p><a href="qxtwidget-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><div class=fn><a href="#QXtWidget"><b>QXtWidget</b></a> ( const&nbsp;char&nbsp;*&nbsp;name, Widget&nbsp;parent, bool&nbsp;managed = FALSE )</div></li>
+<li><div class=fn><a href="#QXtWidget-2"><b>QXtWidget</b></a> ( const&nbsp;char&nbsp;*&nbsp;name, WidgetClass&nbsp;widget_class, QWidget&nbsp;*&nbsp;parent = 0, ArgList&nbsp;args = 0, Cardinal&nbsp;num_args = 0, bool&nbsp;managed = FALSE )</div></li>
+<li><div class=fn><a href="#~QXtWidget"><b>~QXtWidget</b></a> ()</div></li>
+<li><div class=fn>Widget <a href="#xtWidget"><b>xtWidget</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isActiveWindow"><b>isActiveWindow</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setActiveWindow"><b>setActiveWindow</b></a> ()</div></li>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><div class=fn>virtual bool <a href="#x11Event"><b>x11Event</b></a> ( XEvent&nbsp;*&nbsp;e )</div></li>
+</ul>
+<hr><a name="details"></a><h2>Detailed Description</h2>
+<p> This class is defined in the <b>Qt Xt/Motif Extension</b>, which can be found in the <tt>qt/extensions</tt> directory. It is not included in the main Qt API.
+<p>
+
+The QXtWidget class allows mixing of Xt/Motif and Qt widgets.
+<p> 
+<p> QXtWidget acts as a bridge between Xt and Qt. For utilizing old
+Xt widgets, it can be a <a href="qwidget.html">QWidget</a>
+based on a Xt widget class. For including Qt widgets in an existing
+Xt/Motif application, it can be a special Xt widget class that is
+a QWidget.  See the constructors for the different behaviors.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class=fn><a name="QXtWidget"></a>QXtWidget::QXtWidget ( const&nbsp;char&nbsp;*&nbsp;name, Widget&nbsp;parent, bool&nbsp;managed = FALSE )
+</h3>
+Constructs a QXtWidget of the special Xt widget class known as
+"QWidget" to the resource manager.
+<p> Use this constructor to utilize Qt widgets in an Xt/Motif
+application.  The QXtWidget is a <a href="qwidget.html">QWidget</a>, so you can create
+subwidgets, layouts, etc. using Qt functionality.
+<p> The <em>name</em> is the object name passed to the QWidget constructor.
+The widget's parent is <em>parent</em>.
+<p> If the <em>managed</em> parameter is TRUE and <em>parent</em> in not null,
+XtManageChild it used to manage the child.
+
+<h3 class=fn><a name="QXtWidget-2"></a>QXtWidget::QXtWidget ( const&nbsp;char&nbsp;*&nbsp;name, WidgetClass&nbsp;widget_class, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, ArgList&nbsp;args = 0, Cardinal&nbsp;num_args = 0, bool&nbsp;managed = FALSE )
+</h3>
+Constructs a QXtWidget of the given <em>widget_class</em> called <em>name</em>.
+<p> Use this constructor to utilize Xt or Motif widgets in a Qt
+application.  The QXtWidget looks and behaves
+like the Xt class, but can be used like any <a href="qwidget.html">QWidget</a>.
+<p> Note that Xt requires that the most top level Xt widget is a shell.
+This means, if <em>parent</em> is a QXtWidget, the <em>widget_class</em> can be
+of any kind. If there isn't a parent or the parent is just a normal
+QWidget, <em>widget_class</em> should be something like <tt>topLevelShellWidgetClass</tt>.
+<p> The arguments, <em>args</em>, <em>num_args</em> are passed on to XtCreateWidget.
+<p> If the <em>managed</em> parameter is TRUE and <em>parent</em> in not null,
+XtManageChild it used to manage the child.
+
+<h3 class=fn><a name="~QXtWidget"></a>QXtWidget::~QXtWidget ()
+</h3>
+Destructs the QXtWidget.
+
+<h3 class=fn>bool <a name="isActiveWindow"></a>QXtWidget::isActiveWindow () const
+</h3>
+Different from <a href="qwidget.html#isActiveWindow">QWidget::isActiveWindow</a>()
+
+<h3 class=fn>void <a name="setActiveWindow"></a>QXtWidget::setActiveWindow ()<tt> [virtual]</tt>
+</h3>
+Implement a degree of focus handling for Xt widgets.
+
+<p>Reimplemented from <a href="qwidget.html#setActiveWindow">QWidget</a>.
+<h3 class=fn>bool <a name="x11Event"></a>QXtWidget::x11Event ( XEvent&nbsp;*&nbsp;e )<tt> [virtual protected]</tt>
+</h3>
+Reimplemented to produce the Xt effect of getting focus when the
+mouse enters the widget. The event is passed in <em>e</em>.
+<p> <p><b>This function is under development and is subject to change.</b>
+<p> 
+<p>Reimplemented from <a href="qwidget.html#x11Event">QWidget</a>.
+<h3 class=fn>Widget <a name="xtWidget"></a>QXtWidget::xtWidget () const
+</h3>
+
+<p> Returns the Xt widget equivalent for the Qt widget.
+
+<p>Examples: <a href="mainlyMotif-editor-example.html#x2569">mainlyMotif/editor.cpp</a> and <a href="mainlyXt-editor-example.html#x2558">mainlyXt/editor.cpp</a>.
+<!-- eof -->
+<hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>.
+Copyright &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>. All Rights Reserved.<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

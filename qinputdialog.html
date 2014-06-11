@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QInputDialog类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QInputDialog类参考</h1>
+
+<p>QInputDialog类提供了从用户那里得到一个单一值的简单方便的对话框。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qinputdialog-h.html">qinputdialog.h</a>&gt;</tt>
+<p>继承了<a href="qdialog.html">QDialog</a>。
+<p><a href="qinputdialog-members.html">所有成员函数的列表。</a>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>QString <a href="#getText"><b>getText</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;label, QLineEdit::EchoMode&nbsp;mode = QLineEdit::Normal, const&nbsp;QString&nbsp;&amp;&nbsp;text = QString::null, bool&nbsp;*&nbsp;ok = 0, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>int <a href="#getInteger"><b>getInteger</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;label, int&nbsp;num = 0, int&nbsp;from = -2147483647, int&nbsp;to = 2147483647, int&nbsp;step = 1, bool&nbsp;*&nbsp;ok = 0, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>double <a href="#getDouble"><b>getDouble</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;label, double&nbsp;num = 0, double&nbsp;from = -2147483647, double&nbsp;to = 2147483647, int&nbsp;decimals = 1, bool&nbsp;*&nbsp;ok = 0, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>QString <a href="#getItem"><b>getItem</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;label, const&nbsp;QStringList&nbsp;&amp;&nbsp;list, int&nbsp;current = 0, bool&nbsp;editable = TRUE, bool&nbsp;*&nbsp;ok = 0, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QInputDialog类提供了从用户那里得到一个单一值的简单方便的对话框。
+<p> 输入值可以是字符串、数字或者列表中的一项。必须设置标签来告诉用户应该输入什么。
+<p> 这里有四个方便的函数被提供：<a href="#getText">getText</a>()、<a href="#getInteger">getInteger</a>()、<a href="#getDouble">getDouble</a>()和<a href="#getItem">getItem</a>()。所有这些函数都可以按相似的方式使用，例如：
+<pre>
+  bool ok = FALSE;
+  <a href="qstring.html">QString</a> text = QInputDialog::<a href="#getText">getText</a>(
+                    <a href="qobject.html#tr">tr</a>( "Application name" ),
+                    <a href="qobject.html#tr">tr</a>( "Please enter your name" ),
+                    QLineEdit::Normal, <a href="qstring.html#QString-null">QString::null</a>, &amp;ok, this );
+  if ( ok &amp;&amp; !text.<a href="qstring.html#isEmpty">isEmpty</a>() )
+      ;// 用户输入一些东西并且按下OK
+  else
+      ;// 用户不输入任何东西或者按下Cancel
+  </pre>
+ 
+<p> <center><img src="inputdialogs.png" alt="Input Dialogs"></center> 
+<p> <p>也可以参考<a href="dialogs.html">对话框类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn>double <a name="getDouble"></a>QInputDialog::getDouble ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label, double&nbsp;num = 0, double&nbsp;from = -2147483647, double&nbsp;to = 2147483647, int&nbsp;decimals = 1, bool&nbsp;*&nbsp;ok = 0, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )<tt> [静态]</tt>
+</h3>
+从用户那里得到浮点数的静态方便函数。<em>caption</em>是这个对话框在标题栏显示的文本。<em>label</em>是显示给用户的文本（它应该告诉用户应该输入什么）。<em>num</em>是这个行编辑中所要设置的默认的浮点数值。<em>from</em>和<em>to</em>是最小值和最大值，用户应该在这个范围内进行选择并且<em>decimals</em>小数点后面小数的最大位数。
+<p> 对话框的父对象为<em>parent</em>、名称为<em>name</em>。如果<em>ok</em>参数为非零，则如果用户点击OK，<em>*</em><em>ok</em>被设置为真，并且如果用户点击Cancel，就被设置为假。对话框将是模式的。
+<p> 这个函数返回用户输入的浮点数。
+<p> 像这样使用这个静态函数：
+<p> <pre>
+  bool ok = FALSE;
+  double res = QInputDialog::<a href="#getDouble">getDouble</a>(
+                <a href="qobject.html#tr">tr</a>( "Application name" ),
+                <a href="qobject.html#tr">tr</a>( "Please enter a decimal number" ),
+                33.7, 0, 1000, 2, &amp;ok, this );
+  if ( ok )
+      ;// 用户输入一些东西并且按下OK
+  else
+      ;// 用户按下Cancel
+  </pre>
+ 
+
+<h3 class=fn>int <a name="getInteger"></a>QInputDialog::getInteger ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label, int&nbsp;num = 0, int&nbsp;from = -2147483647, int&nbsp;to = 2147483647, int&nbsp;step = 1, bool&nbsp;*&nbsp;ok = 0, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )<tt> [静态]</tt>
+</h3>
+从用户那里得到整数的静态方便函数。<em>caption</em>是这个对话框在标题栏显示的文本。<em>label</em>是显示给用户的文本（它应该告诉用户应该输入什么）。<em>num</em>是微调框中所要设置的默认整数。<em>from</em>和<em>to</em>是最小值和最大值，用户应该在这个范围内进行选择并且<em>step</em>是用户通过点击上下箭头增加或者减少的数值。
+<p> 对话框的父对象为<em>parent</em>、名称为<em>name</em>。如果<em>ok</em>参数为非零，则如果用户点击OK，<em>*</em><em>ok</em>被设置为真，并且如果用户点击Cancel，就被设置为假。对话框将是模式的。
+<p> 这个函数返回用户输入的整数。
+<p> 像这样使用这个静态函数：
+<p> <pre>
+  bool ok = FALSE;
+  int res = QInputDialog::<a href="#getInteger">getInteger</a>(
+                <a href="qobject.html#tr">tr</a>( "Application name" ),
+                <a href="qobject.html#tr">tr</a>( "Please enter a number" ), 22, 0, 1000, 2, &amp;ok, this );
+  if ( ok )
+      ;// 用户输入一些东西并且按下OK
+  else
+      ;// 用户按下Cancel
+  </pre>
+ 
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="getItem"></a>QInputDialog::getItem ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label, const&nbsp;<a href="qstringlist.html">QStringList</a>&nbsp;&amp;&nbsp;list, int&nbsp;current = 0, bool&nbsp;editable = TRUE, bool&nbsp;*&nbsp;ok = 0, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )<tt> [静态]</tt>
+</h3>
+让用户从一个字符串列表中选择一项的静态方便函数。<em>caption</em>是这个对话框在标题栏显示的文本。<em>label</em>是显示给用户的文本（它应该告诉用户应该输入什么）。<em>list</em>是插入到组合框中的字符串列表，并且<em>current</em>是指哪一项为当前项。如果<em>editable</em>为真，则用户可以输入自己的文本，如果<em>editable</em>为假，则用户只能选择已有的项中的一项。
+<p> 对话框的父对象为<em>parent</em>、名称为<em>name</em>。如果<em>ok</em>参数为非零，则如果用户点击OK，<em>*</em><em>ok</em>被设置为真，并且如果用户点击Cancel，就被设置为假。对话框将是模式的。
+<p> 这个函数返回当前项的文本，或者如果<em>editable</em>为真，就是组合框的当前文本。
+<p> 像这样使用这个静态函数：
+<p> <pre>
+  <a href="qstringlist.html">QStringList</a> lst;
+  lst &lt;&lt; "First" &lt;&lt; "Second" &lt;&lt; "Third" &lt;&lt; "Fourth" &lt;&lt; "Fifth";
+  bool ok = FALSE;
+  <a href="qstring.html">QString</a> res = QInputDialog::<a href="#getItem">getItem</a>(
+                    <a href="qobject.html#tr">tr</a>( "Application name" ),
+                    <a href="qobject.html#tr">tr</a>( "Please select an item" ), lst, 1, TRUE, &amp;ok, this );
+  if ( ok )
+      ;// 用户选择一项并且按下OK
+  else
+      ;// 用户按下Cancel
+  </pre>
+ 
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="getText"></a>QInputDialog::getText ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label, <a href="qlineedit.html#EchoMode-enum">QLineEdit::EchoMode</a>&nbsp;mode = QLineEdit::Normal, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text = QString::null, bool&nbsp;*&nbsp;ok = 0, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )<tt> [静态]</tt>
+</h3>
+从用户那里得到一个字符串的静态方便函数。<em>caption</em>是这个对话框在标题栏显示的文本。<em>label</em>是显示给用户的文本（它应该告诉用户应该输入什么）。<em>text</em>是放置在行编辑中的默认文本。<em>mode</em>是行编辑的回显模式。
+<p> 对话框的父对象为<em>parent</em>、名称为<em>name</em>。如果<em>ok</em>参数为非零，则如果用户点击OK，<em>*</em><em>ok</em>被设置为真，并且如果用户点击Cancel，就被设置为假。对话框将是模式的。
+<p> 这个函数返回用户在行编辑中输入的文本。如果没有输入，就返回空字符串。
+<p> 像这样使用这个静态函数：
+<p> <pre>
+  bool ok = FALSE;
+  <a href="qstring.html">QString</a> text = QInputDialog::<a href="#getText">getText</a>(
+                    <a href="qobject.html#tr">tr</a>( "Application name" ),
+                    <a href="qobject.html#tr">tr</a>( "Please enter your name" ),
+                    QLineEdit::Normal, <a href="qstring.html#QString-null">QString::null</a>, &amp;ok, this );
+  if ( ok &amp;&amp; !text.<a href="qstring.html#isEmpty">isEmpty</a>() )
+      ;// 用户输入一些东西并且按下OK
+  else
+      ;// 用户不输入任何东西或者按下Cancel
+  </pre>
+<p>实例：<a href="ftpclient-example.html#x657">network/ftpclient/ftpmainwindow.cpp</a>。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

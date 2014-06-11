@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>设置选项</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>设置选项</h1>
+
+
+<p> 
+<p> <center><img src="chart-options.png" alt="The options dialog"></center> 
+<p> 我们提供了一个选项对话框，这样用户就可以在一个地方对所有的数据组设置选项。
+<p> （由<tt>optionsform.h</tt>展开。）
+<p> 
+
+<pre>    class OptionsForm : public <a href="qdialog.html">QDialog</a>
+    {
+        <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>
+    public:
+        OptionsForm( <a href="qwidget.html">QWidget</a>* parent = 0, const char* name = "options form",
+                     bool modal = FALSE, WFlags f = 0 );
+        ~OptionsForm() {}
+
+        <a href="qfont.html">QFont</a> font() const { return m_font; }
+        void setFont( <a href="qfont.html">QFont</a> font );
+
+        <a href="qlabel.html">QLabel</a> *chartTypeTextLabel;
+        <a href="qcombobox.html">QComboBox</a> *chartTypeComboBox;
+        <a href="qpushbutton.html">QPushButton</a> *fontPushButton;
+        <a href="qlabel.html">QLabel</a> *fontTextLabel;
+        <a href="qframe.html">QFrame</a> *addValuesFrame;
+        <a href="qbuttongroup.html">QButtonGroup</a> *addValuesButtonGroup;
+        <a href="qradiobutton.html">QRadioButton</a> *noRadioButton;
+        <a href="qradiobutton.html">QRadioButton</a> *yesRadioButton;
+        <a href="qradiobutton.html">QRadioButton</a> *asPercentageRadioButton;
+        <a href="qlabel.html">QLabel</a> *decimalPlacesTextLabel;
+        <a href="qspinbox.html">QSpinBox</a> *decimalPlacesSpinBox;
+        <a href="qpushbutton.html">QPushButton</a> *okPushButton;
+        <a href="qpushbutton.html">QPushButton</a> *cancelPushButton;
+
+    protected slots:
+        void chooseFont();
+
+    protected:
+        <a href="qvboxlayout.html">QVBoxLayout</a> *optionsFormLayout;
+        <a href="qhboxlayout.html">QHBoxLayout</a> *chartTypeLayout;
+        <a href="qhboxlayout.html">QHBoxLayout</a> *fontLayout;
+        <a href="qvboxlayout.html">QVBoxLayout</a> *addValuesFrameLayout;
+        <a href="qvboxlayout.html">QVBoxLayout</a> *addValuesButtonGroupLayout;
+        <a href="qhboxlayout.html">QHBoxLayout</a> *decimalPlacesLayout;
+        <a href="qhboxlayout.html">QHBoxLayout</a> *buttonsLayout;
+
+    private:
+        <a href="qfont.html">QFont</a> m_font;
+    };
+</pre>
+<p> 这个对话框的布局比设置数据视窗要更复杂一些，但是我们只需要一个单一的槽。不像“聪明的”设置数据视窗那样，这是一个“哑的”对话框，它只向窗口部件的调用者提供了读和写。调用者有责任基于用户所作的改变更新事物。
+<p> （由<tt>optionsform.cpp</tt>展开。）
+<p> 
+
+<pre>    #include "images/options_horizontalbarchart.xpm"
+    #include "images/options_piechart.xpm"
+    #include "images/options_verticalbarchart.xpm"
+</pre>
+<p> 我们包含了一些在图表类型组合框中要使用的图片。
+<p> <h2> 构造函数
+</h2>
+<a name="1"></a><p> <pre>    OptionsForm::OptionsForm( <a href="qwidget.html">QWidget</a>* parent, const char* name,
+                              bool modal, WFlags f )
+        : <a href="qdialog.html">QDialog</a>( parent, name, modal, f )
+    {
+        <a href="qwidget.html#setCaption">setCaption</a>( "Chart -- Options" );
+        <a href="qwidget.html#resize">resize</a>( 320, 290 );
+</pre>
+<p> 我们把所有的参数传递给<a href="qdialog.html">QDialog</a>构造函数，设置一个题目并且设置一个初始大小。
+<p> 视窗的布局将是一个包含图表类型标签和组合框的水平盒子布局，并且对于字体按钮和字体标签、小数点位置标签和微调框也是相似的。按钮也会被放在一个水平布局中，但是还会有一个间隔来把它们移到右边。显示值的单选按钮将会竖直地排列在一个框架中。所有地这些都被放在一个竖直盒子布局中。
+<p> <pre>        optionsFormLayout = new <a href="qvboxlayout.html">QVBoxLayout</a>( this, 11, 6 );
+</pre>
+<p> 所有的窗口部件都被放在视窗的竖直盒子布局中。
+<p> <pre>        chartTypeLayout = new <a href="qhboxlayout.html">QHBoxLayout</a>( 0, 0, 6 );
+</pre>
+<p> 图表类型标签和组合框将被并排放置。
+<p> <pre>        chartTypeTextLabel = new <a href="qlabel.html">QLabel</a>( "&amp;Chart Type", this );
+    <a name="x2481"></a>    chartTypeLayout-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( chartTypeTextLabel );
+
+        chartTypeComboBox = new <a href="qcombobox.html">QComboBox</a>( false, this );
+    <a name="x2483"></a>    chartTypeComboBox-&gt;<a href="qcombobox.html#insertItem">insertItem</a>( QPixmap( options_piechart ), "Pie Chart" );
+        chartTypeComboBox-&gt;<a href="qcombobox.html#insertItem">insertItem</a>( QPixmap( options_verticalbarchart ),
+                                       "Vertical Bar Chart" );
+        chartTypeComboBox-&gt;<a href="qcombobox.html#insertItem">insertItem</a>( QPixmap( options_horizontalbarchart ),
+                                       "Horizontal Bar Chart" );
+        chartTypeLayout-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( chartTypeComboBox );
+    <a name="x2480"></a>    optionsFormLayout-&gt;<a href="qboxlayout.html#addLayout">addLayout</a>( chartTypeLayout );
+</pre>
+<p> 我们创建图表类型标签（带有一个加速键，稍后我们会把它和图表类型组合框联系起来）。我们也创建一个图表类型组合框，用图片和文本来填充它。我们把它们两个添加到水平布局中，并把水平布局添加到视窗的竖直布局中。
+<p> <pre>        fontLayout = new <a href="qhboxlayout.html">QHBoxLayout</a>( 0, 0, 6 );
+
+        fontPushButton = new <a href="qpushbutton.html">QPushButton</a>( "&amp;Font...", this );
+        fontLayout-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( fontPushButton );
+        <a href="qspaceritem.html">QSpacerItem</a>* spacer = new <a href="qspaceritem.html">QSpacerItem</a>( 0, 0,
+                                               QSizePolicy::Expanding,
+                                               QSizePolicy::Minimum );
+    <a name="x2479"></a>    fontLayout-&gt;<a href="qboxlayout.html#addItem">addItem</a>( spacer );
+
+        fontTextLabel = new <a href="qlabel.html">QLabel</a>( this ); // 必须由调用者通过setFont()来设置
+        fontLayout-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( fontTextLabel );
+        optionsFormLayout-&gt;<a href="qboxlayout.html#addLayout">addLayout</a>( fontLayout );
+</pre>
+<p> 我们创建一个水平盒子布局用来保存字体按钮和字体标签。字体按钮是被直接加入的。我们添加了一个间隔用来增加效果。字体文本标签被初始化为空（因为我们不知道用户正在使用什么字体）。
+<p> <pre>        addValuesFrame = new <a href="qframe.html">QFrame</a>( this );
+    <a name="x2490"></a>    addValuesFrame-&gt;<a href="qframe.html#setFrameShape">setFrameShape</a>( QFrame::StyledPanel );
+    <a name="x2489"></a>    addValuesFrame-&gt;<a href="qframe.html#setFrameShadow">setFrameShadow</a>( QFrame::Sunken );
+        addValuesFrameLayout = new <a href="qvboxlayout.html">QVBoxLayout</a>( addValuesFrame, 11, 6 );
+
+        addValuesButtonGroup = new <a href="qbuttongroup.html">QButtonGroup</a>( "Show Values", addValuesFrame );
+    <a name="x2491"></a>    addValuesButtonGroup-&gt;<a href="qgroupbox.html#setColumnLayout">setColumnLayout</a>(0, Qt::Vertical );
+    <a name="x2497"></a>    addValuesButtonGroup-&gt;<a href="qwidget.html#layout">layout</a>()-&gt;setSpacing( 6 );
+        addValuesButtonGroup-&gt;<a href="qwidget.html#layout">layout</a>()-&gt;setMargin( 11 );
+        addValuesButtonGroupLayout = new <a href="qvboxlayout.html">QVBoxLayout</a>(
+                                            addValuesButtonGroup-&gt;<a href="qwidget.html#layout">layout</a>() );
+    <a name="x2494"></a>    addValuesButtonGroupLayout-&gt;<a href="qlayoutitem.html#setAlignment">setAlignment</a>( Qt::AlignTop );
+
+        noRadioButton = new <a href="qradiobutton.html">QRadioButton</a>( "&amp;No", addValuesButtonGroup );
+    <a name="x2495"></a>    noRadioButton-&gt;<a href="qradiobutton.html#setChecked">setChecked</a>( true );
+        addValuesButtonGroupLayout-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( noRadioButton );
+
+        yesRadioButton = new <a href="qradiobutton.html">QRadioButton</a>( "&amp;Yes", addValuesButtonGroup );
+        addValuesButtonGroupLayout-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( yesRadioButton );
+
+        asPercentageRadioButton = new <a href="qradiobutton.html">QRadioButton</a>( "As &amp;Percentage",
+                                                    addValuesButtonGroup );
+        addValuesButtonGroupLayout-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( asPercentageRadioButton );
+        addValuesFrameLayout-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( addValuesButtonGroup );
+</pre>
+<p> 用户也许选择显示它们自己的标签或者在每一个标签的末尾加上值，或者加上百分比。
+<p> 我们创建一个框架来存放单选按钮并且为它们创建了一个布局。我们创建了一个按钮组（这样Qt就可以自动地处理专有的单选按钮行为了）。接下来我们创建单选按钮，并把“No”作为默认值。
+<p> 小数位标签和微调框被放在另一个水平布局中，并且按钮和设置数据视窗中的按钮的排布方式非常相似。
+<p> <pre>        <a href="qobject.html#connect">connect</a>( fontPushButton, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ), this, SLOT( chooseFont() ) );
+        <a href="qobject.html#connect">connect</a>( okPushButton, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ), this, SLOT( <a href="qdialog.html#accept">accept</a>() ) );
+        <a href="qobject.html#connect">connect</a>( cancelPushButton, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ), this, SLOT( <a href="qdialog.html#reject">reject</a>() ) );
+</pre>
+<p> 我们只需要三个连接：
+<ol type=1>
+<li> 当用户点击字体按钮时，我们执行我们自己的chooseFont()槽。
+<li> 如果用户点击OK，我们调用<a href="qdialog.html#accept">QDialog::accept</a>()，它会让调用者来从对话框的窗口部件中读取数据并且执行任何必要的动作。
+<li> 如果用户点击Cancel，我们调用<a href="qdialog.html#reject">QDialog::reject</a>()。
+</ol>
+<p> <pre>    <a name="x2492"></a>    chartTypeTextLabel-&gt;<a href="qlabel.html#setBuddy">setBuddy</a>( chartTypeComboBox );
+        decimalPlacesTextLabel-&gt;<a href="qlabel.html#setBuddy">setBuddy</a>( decimalPlacesSpinBox );
+</pre>
+<p> 我们使用setBuddy()函数来连接窗口部件和标签的加速键。
+<p> <h2> 槽
+</h2>
+<a name="2"></a><p> <pre>    void OptionsForm::chooseFont()
+    {
+        bool ok;
+    <a name="x2488"></a>    <a href="qfont.html">QFont</a> font = QFontDialog::<a href="qfontdialog.html#getFont">getFont</a>( &amp;ok, m_font, this );
+        if ( ok )
+            <a href="qwidget.html#setFont">setFont</a>( font );
+    }
+</pre>
+<p> 当用户点击Font按钮时，这个槽被调用。它简单地调用静态的<a href="qfontdialog.html#getFont">QFontDialog::getFont</a>()来获得用户选择的字体。如果他们选择了一个字体，我们调用我们的setFont()槽在字体标签中提供一个字体的文本描述。
+<p> <pre>    void OptionsForm::<a href="qwidget.html#setFont">setFont</a>( <a href="qfont.html">QFont</a> font )
+    {
+    <a name="x2485"></a>    <a href="qstring.html">QString</a> label = font.<a href="qfont.html#family">family</a>() + " " +
+    <a name="x2487"></a>                    QString::<a href="qstring.html#number">number</a>( font.<a href="qfont.html#pointSize">pointSize</a>() ) + "pt";
+    <a name="x2484"></a>    if ( font.<a href="qfont.html#bold">bold</a>() )
+            label += " Bold";
+    <a name="x2486"></a>    if ( font.<a href="qfont.html#italic">italic</a>() )
+            label += " Italic";
+        fontTextLabel-&gt;<a href="qlabel.html#setText">setText</a>( label );
+        m_font = font;
+    }
+</pre>
+<p> 这个函数在字体标签中显示一个被选字体的文本描述，并且在<tt>m_font</tt>成员中保存一个字体的拷贝。我们需要这个字体为成员，这样我们就会为chooseFont()提供一个默认字体。
+<p> <p align=right>
+<a href="tutorial2-08.html">&laquo; Taking Data</a> |
+<a href="tutorial2.html">目录</a> |
+<a href="tutorial2-10.html">项目文件 &raquo;</a>
+</p>
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

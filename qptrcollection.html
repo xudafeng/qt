@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QPtrCollection类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QPtrCollection类参考</h1>
+
+<p>QPtrCollection类是绝大多数基于指针的Qt集合的基类。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qptrcollection-h.html">qptrcollection.h</a>&gt;</tt>
+<p>Inherited by <a href="qasciidict.html">QAsciiDict</a>, <a href="qcache.html">QCache</a>, <a href="qdict.html">QDict</a>, <a href="qintdict.html">QIntDict</a>, <a href="qptrlist.html">QPtrList</a>, <a href="qptrdict.html">QPtrDict</a> and <a href="qptrvector.html">QPtrVector</a>.
+<p><a href="qptrcollection-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>bool <a href="#autoDelete"><b>autoDelete</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setAutoDelete"><b>setAutoDelete</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>virtual uint <a href="#count"><b>count</b></a> () const = 0</div></li>
+<li><div class=fn>virtual void <a href="#clear"><b>clear</b></a> () = 0</div></li>
+<li><div class=fn>typedef void&nbsp;*&nbsp;<a href="#Item"><b>Item</b></a></div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn><a href="#QPtrCollection"><b>QPtrCollection</b></a> ()</div></li>
+<li><div class=fn><a href="#QPtrCollection-2"><b>QPtrCollection</b></a> ( const&nbsp;QPtrCollection&nbsp;&amp;&nbsp;source )</div></li>
+<li><div class=fn>virtual <a href="#~QPtrCollection"><b>~QPtrCollection</b></a> ()</div></li>
+<li><div class=fn>virtual Item <a href="#newItem"><b>newItem</b></a> ( Item&nbsp;d )</div></li>
+<li><div class=fn>virtual void <a href="#deleteItem"><b>deleteItem</b></a> ( Item&nbsp;d ) = 0</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QPtrCollection类是绝大多数基于指针的Qt集合的基类。
+<p> 
+
+<p> QPtrCollection类是Qt<a href="collection.html">集合类</a><a href="qdict.html">QDict</a>、<a href="qptrlist.html">QPtrList</a>等等的基类。Qt也包括基于值的集合，比如<a href="qvaluelist.html">QValueList</a>、<a href="qmap.html">QMap</a>等等。
+<p> QPtrCollection仅仅知道集合内对象的数量和删除策略（请参考<a href="#setAutoDelete">setAutoDelete</a>()）。
+<p> 集合的实现是使用<a href="#Item">Item</a>（一般集合项）类型，它是一个<tt>void*</tt>。创建实际集合的模板类抛出<a href="#Item">Item</a>为所需的类型。
+<p>也可以参考<a href="collection.html">集合类</a>和<a href="tools.html">非GUI类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="Item"></a>QPtrCollection::Item</h3> 
+<p> 这个类型是QPtrCollection中一般的“项”。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QPtrCollection"></a>QPtrCollection::QPtrCollection ()<tt> [保护]</tt>
+</h3>
+<p> 构造一个集合。构造函数是保护的，因为QPtrCollection是抽象类。
+
+<h3 class=fn><a name="QPtrCollection-2"></a>QPtrCollection::QPtrCollection ( const&nbsp;<a href="qptrcollection.html">QPtrCollection</a>&nbsp;&amp;&nbsp;source )<tt> [保护]</tt>
+</h3>
+<p> 构造一个<a href="#autoDelete">autoDelete</a>()设置为假，<em>source</em>的一份复制。这个构造函数是保护的，因为QPtrCollection是抽象类。
+<p> 注意如果<em>source</em>中autoDelete设置为打开的，复制它将会导致内存泄漏、读取被释放的内存或者两者都有的风险。
+
+<h3 class=fn><a name="~QPtrCollection"></a>QPtrCollection::~QPtrCollection ()<tt> [虚 保护]</tt>
+</h3>
+销毁这个集合。这个析构函数是保护的，因为QPtrCollection是抽象类。
+
+<h3 class=fn>bool <a name="autoDelete"></a>QPtrCollection::autoDelete () const
+</h3>
+<p> 返回自动删除选项的设置。默认值为FALSE。
+<p> <p>也可以参考<a href="#setAutoDelete">setAutoDelete</a>()。
+
+<h3 class=fn>void <a name="clear"></a>QPtrCollection::clear ()<tt> [纯虚]</tt>
+</h3>
+从集合中移除所有的对象。如果自动删除被设置为生效，这些对象将被删除。
+<p>也可以参考<a href="#setAutoDelete">setAutoDelete</a>()。
+<p>在<a href="qasciidict.html#clear">QAsciiDict</a>、<a href="qcache.html#clear">QCache</a>、<a href="qdict.html#clear">QDict</a>、<a href="qintdict.html#clear">QIntDict</a>、<a href="qptrlist.html#clear">QPtrList</a>、<a href="qptrdict.html#clear">QPtrDict</a>和<a href="qptrvector.html#clear">QPtrVector</a>中被重新实现。
+
+<h3 class=fn>uint <a name="count"></a>QPtrCollection::count () const<tt> [纯虚]</tt>
+</h3>
+返回集合中对象的数量。
+<p>在<a href="qasciidict.html#count">QAsciiDict</a>、<a href="qcache.html#count">QCache</a>、<a href="qdict.html#count">QDict</a>、<a href="qintdict.html#count">QIntDict</a>、<a href="qptrlist.html#count">QPtrList</a>、<a href="qptrdict.html#count">QPtrDict</a>和<a href="qptrvector.html#count">QPtrVector</a>中被重新实现。
+
+<h3 class=fn>void <a name="deleteItem"></a>QPtrCollection::deleteItem ( <a href="qptrcollection.html#Item">Item</a>&nbsp;d )<tt> [纯虚 保护]</tt>
+</h3>
+如果你想能够删除集合中的项，请实现这个函数。
+<p> 删除一个要从集合中移除的项。
+<p> 这个函数不得不在集合模板类中重新实现，并且必须<em>只能</em>在自动删除生效的情况下删除<em>d</em>这一项。
+<p> <b>警告：</b>如果你重新实现这个函数，你也必须重新实现析构函数并且在你的析构函数中调用虚函数<a href="#clear">clear</a>()。这是由于C++中虚函数和析构函数工作的方式：被继承类的虚函数不能被一个析构函数调用。如果你不这么做，当容器被破坏时，你的<a href="#deleteItem">deleteItem</a>()函数将不会被调用。
+<p> <p>也可以参考<a href="#newItem">newItem</a>()和<a href="#setAutoDelete">setAutoDelete</a>()。
+
+<h3 class=fn><a href="qptrcollection.html#Item">Item</a> <a name="newItem"></a>QPtrCollection::newItem ( <a href="qptrcollection.html#Item">Item</a>&nbsp;d )<tt> [虚 保护]</tt>
+</h3>
+虚函数创建一个要被插入到集合中的对象的复制。
+<p> 默认的实现是返回<em>d</em>指针，比如，没有复制被完成。
+<p> 在几何模板类中这个函数极少被重新实现。对被插入的东西做复制不是共有的实践。
+<p> <p>也可以参考<a href="#deleteItem">deleteItem</a>()。
+
+<h3 class=fn>void <a name="setAutoDelete"></a>QPtrCollection::setAutoDelete ( bool&nbsp;enable )
+</h3>
+<p> 如果<em>enable</em>为真，设置集合可以自动删除它的内容，并且如果<em>enable</em>为假，就永远不能删除它们。
+<p> 如果自动删除被打开，当集合自己被删除时，集合中的所有项也都要被删除。如果集合有的仅仅是指向项的指针，这个很有用。
+<p> 为了安全，默认设置是假。如果你把它打开，对于集合的复制你要注意些——你自己也许会发现两个集合删除同一个项。
+<p> 注意在子类中自动删除设置也许会影响其它函数。例如，一个有remove()函数的子类将会从它的数据结构中移除这个项，并且如果自动删除生效，也将会删除这个项。
+<p> <p>也可以参考<a href="#autoDelete">autoDelete</a>()。
+<p>实例：<a href="grapher-nsplugin-example.html#x2777">grapher/grapher.cpp</a>、<a href="scribble-example.html#x945">scribble/scribble.cpp</a>和<a href="bigtable-example.html#x1489">table/bigtable/main.cpp</a>。
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

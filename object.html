@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>Qt对象模型</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt对象模型</h1>
+
+ 
+<p> 标准的C++对象模型为对象范例提供了十分有效的运行时刻支持。但是这种C++对象
+模型的静态性质在一定的问题领域是不够灵活的。图形用户界面编程就是一个同时
+需要运行时刻的效率和高水平的灵活性的领域。Qt通过结合C++的速度为这一领域
+提供了Qt对象模型的灵活性。
+<p> Qt把下面这些特性添加到了C++当中：
+<p> <ul>
+<li> 一种关于无缝对象通讯被称为<a href="signalsandslots.html">信号和槽</a>的非常强大的机制，
+<li> 可查询和可设计的<a href="properties.html">属性</a>，
+<li> 强大的<a href="eventsandfilters.html">事件和事件过滤器</a>，
+<li> 根据上下文进行<a href="i18n.html">国际化的字符串翻译</a>，
+<li> 完善的时间间隔驱动的<a href="timers.html">计时器</a>使得在一个事件
+驱动的图形界面程序中很好地集成许多任务成为可能。
+<li> 以一种自然的方式组织对象所有权的分层次和可查询的<a href="objecttrees.html">对象树</a>。
+<li> 被守护的指针，<a href="qguardedptr.html">QGuardedPtr</a>，当参考对象被破坏时，可以自动地设置为无效，
+不像正常的C++指针在它们的对象被破坏的时候变成了“摇摆指针”。
+</ul>
+<p> 许多Qt的特性是基于<a href="qobject.html">QObject</a>的继承，通过标准C++技术实现的。其他的，
+比如对象通讯机制和虚拟属性系统，都需要Qt自己的<a href="moc.html">元对象编译器(moc)</a> 
+提供的<a href="metaobjects.html">元对象系统</a>。
+<p> 元对象系统是一种可以使语言更加适用于真正的组件图形用户界面程序的C++扩展。
+尽管模板也可以用来扩展C++，元对象系统提供给标准C++而模板所不能提供的益处，
+请看<a href="templates.html">为什么Qt不用模板来实现信号和槽？</a>。
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

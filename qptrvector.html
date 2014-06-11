@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QPtrVector类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QPtrVector类参考</h1>
+
+<p>QPtrVector类是提供矢量（数组）的模板集合类。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qptrvector-h.html">qptrvector.h</a>&gt;</tt>
+<p>继承了<a href="qptrcollection.html">QPtrCollection</a>。
+<p><a href="qptrvector-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QPtrVector"><b>QPtrVector</b></a> ()</div></li>
+<li><div class=fn><a href="#QPtrVector-2"><b>QPtrVector</b></a> ( uint&nbsp;size )</div></li>
+<li><div class=fn><a href="#QPtrVector-3"><b>QPtrVector</b></a> ( const&nbsp;QPtrVector&lt;type&gt;&nbsp;&amp;&nbsp;v )</div></li>
+<li><div class=fn><a href="#~QPtrVector"><b>~QPtrVector</b></a> ()</div></li>
+<li><div class=fn>QPtrVector&lt;type&gt; &amp; <a href="#operator-eq"><b>operator=</b></a> ( const&nbsp;QPtrVector&lt;type&gt;&nbsp;&amp;&nbsp;v )</div></li>
+<li><div class=fn>bool <a href="#operator-eq-eq"><b>operator==</b></a> ( const&nbsp;QPtrVector&lt;type&gt;&nbsp;&amp;&nbsp;v ) const</div></li>
+<li><div class=fn>type ** <a href="#data"><b>data</b></a> () const</div></li>
+<li><div class=fn>uint <a href="#size"><b>size</b></a> () const</div></li>
+<li><div class=fn>virtual uint <a href="#count"><b>count</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isEmpty"><b>isEmpty</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isNull"><b>isNull</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#resize"><b>resize</b></a> ( uint&nbsp;size )</div></li>
+<li><div class=fn>bool <a href="#insert"><b>insert</b></a> ( uint&nbsp;i, const&nbsp;type&nbsp;*&nbsp;d )</div></li>
+<li><div class=fn>bool <a href="#remove"><b>remove</b></a> ( uint&nbsp;i )</div></li>
+<li><div class=fn>type * <a href="#take"><b>take</b></a> ( uint&nbsp;i )</div></li>
+<li><div class=fn>virtual void <a href="#clear"><b>clear</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#fill"><b>fill</b></a> ( const&nbsp;type&nbsp;*&nbsp;d, int&nbsp;size = -1 )</div></li>
+<li><div class=fn>void <a href="#sort"><b>sort</b></a> ()</div></li>
+<li><div class=fn>int <a href="#bsearch"><b>bsearch</b></a> ( const&nbsp;type&nbsp;*&nbsp;d ) const</div></li>
+<li><div class=fn>int <a href="#findRef"><b>findRef</b></a> ( const&nbsp;type&nbsp;*&nbsp;d, uint&nbsp;i = 0 ) const</div></li>
+<li><div class=fn>int <a href="#find"><b>find</b></a> ( const&nbsp;type&nbsp;*&nbsp;d, uint&nbsp;i = 0 ) const</div></li>
+<li><div class=fn>uint <a href="#containsRef"><b>containsRef</b></a> ( const&nbsp;type&nbsp;*&nbsp;d ) const</div></li>
+<li><div class=fn>uint <a href="#contains"><b>contains</b></a> ( const&nbsp;type&nbsp;*&nbsp;d ) const</div></li>
+<li><div class=fn>type * <a href="#operator[]"><b>operator[]</b></a> ( int&nbsp;i ) const</div></li>
+<li><div class=fn>type * <a href="#at"><b>at</b></a> ( uint&nbsp;i ) const</div></li>
+<li><div class=fn>void <a href="#toList"><b>toList</b></a> ( QGList&nbsp;*&nbsp;list ) const</div></li>
+</ul>
+<h2>重要继承成员</h2>
+<ul>
+<li><div class=fn>bool <a href="#autoDelete"><b>autoDelete</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setAutoDelete"><b>setAutoDelete</b></a> ( bool&nbsp;enable )</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual int <a href="#compareItems"><b>compareItems</b></a> ( QPtrCollection::Item&nbsp;d1, QPtrCollection::Item&nbsp;d2 )</div></li>
+<li><div class=fn>virtual QDataStream &amp; <a href="#read"><b>read</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, QPtrCollection::Item&nbsp;&amp;&nbsp;item )</div></li>
+<li><div class=fn>virtual QDataStream &amp; <a href="#write"><b>write</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, QPtrCollection::Item&nbsp;item ) const</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+<p>QPtrVector类是提供矢量（数组）的模板集合类。
+<p> 
+<p> 
+<p> <a href="qvaluevector.html">QValueVector</a>是可以替代这个类的的一个可兼容STL的的选择。
+<p> QPtrVector被设计为一个模板类。定义一个模板实例QPtrVector&lt;X&gt;就创建了一个操作X（X*）指针的矢量。
+<p> 矢量和数组是相同的。QPtrVector和<a href="qmemarray.html">QMemArray</a>的主要不同就是QPtrVector存储元素的指针，而QMemArray存储元素自身（比如，QMemArray是基于类的并且QPtrVector是基于指针的）。
+<p> 可以使用<a href="#insert">insert</a>()或<a href="#fill">fill</a>()把项添加到矢量中。可以使用<a href="#remove">remove</a>()来移除项。你可以使用<a href="#at">at</a>()得到一个指定索引位置的项的指针。
+<p> 除非是相反的状态，如果<a href="qptrcollection.html#setAutoDelete">自动删除</a>生效，所有从矢量中移除项的函数也都会将它们指向的元素删除。默认情况下，自动删除是失效的，请参考<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()。这个行为可以通过在子类中重新实现虚函数<a href="qptrcollection.html#deleteItem">deleteItem</a>()来改变。
+<p> 比较项的函数（比如<a href="#find">find</a>()和<a href="#sort">sort</a>()）也都使用虚函数<a href="#compareItems">compareItems</a>()。这个函数的默认实现只是比较指针值。在子类中中心实现compareItems()来获得基于项的内容的搜索和排序。你可以使用<a href="#findRef">findRef</a>()在矢量中执行一个对指针的线性搜索，或者使用<a href="#bsearch">bsearch</a>()在一个排好序的矢量中执行一个二进制搜索。你可以使用<a href="#contains">contains</a>()或<a href="#containsRef">containsRef</a>()来统计一个项在矢量中出现的次数。
+<p> <p>也可以参考<a href="qmemarray.html">QMemArray</a>和<a href="tools.html">非GUI类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QPtrVector"></a>QPtrVector::QPtrVector ()
+</h3>
+<p> 构造一个零矢量。
+<p> <p>也可以参考<a href="#isNull">isNull</a>()。
+
+<h3 class=fn><a name="QPtrVector-2"></a>QPtrVector::QPtrVector ( uint&nbsp;size )
+</h3>
+<p> 构造一个空间为<em>size</em>项的矢量。如果<em>size</em>==0，构造一个零矢量。
+<p> 矢量中所有<em>size</em>个位置都被初始化为0。
+<p> <p>也可以参考<a href="#size">size</a>()、<a href="#resize">resize</a>()和<a href="#isNull">isNull</a>()。
+
+<h3 class=fn><a name="QPtrVector-3"></a>QPtrVector::QPtrVector ( const&nbsp;<a href="qptrvector.html">QPtrVector</a>&lt;type&gt;&nbsp;&amp;&nbsp;v )
+</h3>
+<p> 构造一个<em>v</em>的复制。只有指针被复制（比如，<a href="shclass.html#shallow-copy">浅复制</a>）。
+
+<h3 class=fn><a name="~QPtrVector"></a>QPtrVector::~QPtrVector ()
+</h3>
+<p> 从矢量中移除所有的项，并且销毁矢量自己。
+<p> <p>也可以参考<a href="#clear">clear</a>()。
+
+<h3 class=fn>type * <a name="at"></a>QPtrVector::at ( uint&nbsp;i ) const
+</h3>
+<p> 返回在<em>i</em>位置的项，或者如果在那个位置没有项，返回0。<em>i</em>必须小于<a href="#size">size</a>()。
+
+<h3 class=fn>bool <a name="autoDelete"></a>QPtrCollection::autoDelete () const
+</h3>
+<p> 返回自动删除选项的设置。默认为假。
+<p> <p>也可以参考<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()。
+
+<h3 class=fn>int <a name="bsearch"></a>QPtrVector::bsearch ( const&nbsp;type&nbsp;*&nbsp;d ) const
+</h3>
+<p> 在一个排好序的数组中，使用二进制搜索找到<em>d</em>第一次出现的位置。对于一个排好序的数组，这个比做线性搜索的<a href="#find">find</a>()要快很多。
+<p> 返回<em>d</em>的位置，或者如果<em>d</em>没有被找到返回-1。<em>d</em>必须不能为0。
+<p> 比较项使用虚函数<a href="#compareItems">compareItems</a>()。
+<p> <p>也可以参考<a href="#sort">sort</a>()和<a href="#find">find</a>()。
+
+<h3 class=fn>void <a name="clear"></a>QPtrVector::clear ()<tt> [虚]</tt>
+</h3>
+<p> 从矢量中删除所有项，并且销毁矢量自己。
+<p> 矢量变为一个零矢量。
+<p> <p>也可以参考<a href="#isNull">isNull</a>()。
+<p>从<a href="qptrcollection.html#clear">QPtrCollection</a>中重新实现的。
+
+<h3 class=fn>int <a name="compareItems"></a>QPtrVector::compareItems ( <a href="qptrcollection.html#Item">QPtrCollection::Item</a>&nbsp;d1, <a href="qptrcollection.html#Item">QPtrCollection::Item</a>&nbsp;d2 )<tt> [虚 保护]</tt>
+</h3>
+<p> 这个虚函数比较两个列表项：
+<p> 返回：
+<ul>
+<li> 如果<em>d1</em>==<em>d2</em>，返回0
+<li> 如果<em>d1</em>!=<em>d2</em>，返回非0
+</ul>
+<p> 这个函数返回<em>int</em>而不是<em>bool</em>，这样重新实现就可以返回3个值并且用来进行排序：
+<ul>
+<li> 如果<em>d1</em>==<em>d2</em>，返回0
+<li> 如果<em>d1</em>&gt;<em>d2</em>，返回&gt;0（正整数）
+<li> 如果<em>d1</em>&lt;<em>d2</em>，返回&lt;0（负整数）
+</ul>
+<p> <a href="#sort">sort</a>()和<a href="#bsearch">bsearch</a>()函数需要<a href="#compareItems">compareItems</a>()像这里所描述的那样被实现。
+<p> 这个函数不应该修改矢量因为一些常量函数会调用compareItems()。
+
+<h3 class=fn>uint <a name="contains"></a>QPtrVector::contains ( const&nbsp;type&nbsp;*&nbsp;d ) const
+</h3>
+<p> 返回矢量中项<em>d</em>出现的次数。
+<p> 比较项使用虚函数<a href="#compareItems">compareItems</a>()。
+<p> <p>也可以参考<a href="#containsRef">containsRef</a>()。
+
+<h3 class=fn>uint <a name="containsRef"></a>QPtrVector::containsRef ( const&nbsp;type&nbsp;*&nbsp;d ) const
+</h3>
+<p> 返回矢量中项指针<em>d</em>出现的次数。
+<p> 这个函数<em>不</em>使用<a href="#compareItems">compareItems</a>()来比较项。
+<p> <p>也可以参考<a href="#findRef">findRef</a>()。
+
+<h3 class=fn>uint <a name="count"></a>QPtrVector::count () const<tt> [虚]</tt>
+</h3>
+<p> 返回矢量中项的数量。如果<a href="#count">count</a>()==0，这个矢量为空。
+<p> <p>也可以参考<a href="#isEmpty">isEmpty</a>()和<a href="#size">size</a>()。
+<p>从<a href="qptrcollection.html#count">QPtrCollection</a>中重新实现。
+
+<h3 class=fn>type ** <a name="data"></a>QPtrVector::data () const
+</h3>
+返回指向实际矢量数据（type*的数组）的指针。
+<p> 如果<a href="#data">data</a>()==0（零指针），矢量为零矢量。
+<p> <p>也可以参考<a href="#isNull">isNull</a>()。
+
+<h3 class=fn>bool <a name="fill"></a>QPtrVector::fill ( const&nbsp;type&nbsp;*&nbsp;d, int&nbsp;size = -1 )
+</h3>
+<p> 在矢量的所有位置插入项<em>d</em>。任何存在的项都被移除。如果<em>d</em>为0，这个矢量变为空。
+<p> 如果<em>size</em>>=0，矢量首先被重新定义大小为<em>size</em>。默认情况下，<em>size</em>为-1。
+<p> 如果成功，返回真，或者如果内存不能被分配（只有在重定义大小被需要的时候），返回假。
+<p> <p>也可以参考<a href="#resize">resize</a>()、<a href="#insert">insert</a>()和<a href="#isEmpty">isEmpty</a>()。
+
+<h3 class=fn>int <a name="find"></a>QPtrVector::find ( const&nbsp;type&nbsp;*&nbsp;d, uint&nbsp;i = 0 ) const
+</h3>
+<p> 在矢量中使用线性搜索找到项<em>d</em>第一次出现的位置。这个搜索从<em>i</em>位置开始，<em>i</em>必须小于<a href="#size">size</a>()。<em>i</em>默认为0，比如，搜索从矢量的开始处开始。
+<p> 返回<em>d</em>的位置，或者如果<em>d</em>没有被找到，返回-1。
+<p> 比较项使用虚函数<a href="#compareItems">compareItems</a>()。
+<p> 使用更快的<a href="#bsearch">bsearch</a>()来搜索一个排好序的矢量。
+<p> <p>也可以参考<a href="#findRef">findRef</a>()和<a href="#bsearch">bsearch</a>()。
+
+<h3 class=fn>int <a name="findRef"></a>QPtrVector::findRef ( const&nbsp;type&nbsp;*&nbsp;d, uint&nbsp;i = 0 ) const
+</h3>
+<p> 在矢量中使用线性搜索找到项指针<em>d</em>第一次出现的位置。这个搜索从<em>i</em>位置开始，<em>i</em>必须小于<a href="#size">size</a>()。<em>i</em>默认为0，比如，搜索从矢量的开始处开始。
+<p> 返回<em>d</em>的位置，或者如果<em>d</em>没有被找到，返回-1。
+<p> 这个函数<em>不</em>使用<a href="#compareItems">compareItems</a>()来比较项。
+<p> 使用更快的<a href="#bsearch">bsearch</a>()来搜索一个排好序的矢量。
+<p> <p>也可以参考<a href="#find">find</a>()和<a href="#bsearch">bsearch</a>()。
+
+<h3 class=fn>bool <a name="insert"></a>QPtrVector::insert ( uint&nbsp;i, const&nbsp;type&nbsp;*&nbsp;d )
+</h3>
+<p> 设置矢量中的位置<em>i</em>来包含项<em>d</em>。<em>i</em>必须小于<a href="#size">size</a>()。在<em>i</em>位置的任何以前的元素被移除了。
+<p> <p>也可以参考<a href="#at">at</a>()。
+
+<h3 class=fn>bool <a name="isEmpty"></a>QPtrVector::isEmpty () const
+</h3>
+<p> 如果矢量为空，返回真，否则返回假。
+<p> <p>也可以参考<a href="#count">count</a>()。
+
+<h3 class=fn>bool <a name="isNull"></a>QPtrVector::isNull () const
+</h3>
+<p> 如果矢量为零，返回真，否则返回假。
+<p> 一个零矢量中<a href="#size">size</a>()== 0并且<a href="#data">data</a>()==0。
+<p> <p>也可以参考<a href="#size">size</a>()。
+
+<h3 class=fn><a href="qptrvector.html">QPtrVector</a>&lt;type&gt;&nbsp;&amp; <a name="operator-eq"></a>QPtrVector::operator= ( const&nbsp;<a href="qptrvector.html">QPtrVector</a>&lt;type&gt;&nbsp;&amp;&nbsp;v )
+</h3>
+<p> 把<em>v</em>赋值给这个矢量并且返回这个矢量的引用。
+<p> 这个矢量首先被清空并且然后<em>v</em>所有的项都被复制到矢量中。只有指针被复制（比如，<a href="shclass.html#shallow-copy">浅复制</a>）。
+<p> <p>也可以参考<a href="#clear">clear</a>()。
+
+<h3 class=fn>bool <a name="operator-eq-eq"></a>QPtrVector::operator== ( const&nbsp;<a href="qptrvector.html">QPtrVector</a>&lt;type&gt;&nbsp;&amp;&nbsp;v ) const
+</h3>
+如果这个矢量和<em>v</em>相等，返回真，否则返回假。
+
+<h3 class=fn>type * <a name="operator[]"></a>QPtrVector::operator[] ( int&nbsp;i ) const
+</h3>
+<p> 返回在位置<em>i</em>的项，或者如果在那个位置没有项，返回0。<em>i</em>必须小于<a href="#size">size</a>()。
+<p> 等于<a href="#at">at</a>( <em>i</em> )。
+<p> <p>也可以参考<a href="#at">at</a>()。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="read"></a>QPtrVector::read ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, <a href="qptrcollection.html#Item">QPtrCollection::Item</a>&nbsp;&amp;&nbsp;item )<tt> [虚 保护]</tt>
+</h3>
+<p> 从流<em>s</em>中读入一个矢量项<em>item</em>并且返回流的引用。
+<p> 默认实现是设置<em>item</em>为0。
+<p> <p>也可以参考<a href="#write">write</a>()。
+
+<h3 class=fn>bool <a name="remove"></a>QPtrVector::remove ( uint&nbsp;i )
+</h3>
+<p> 如果有的话，移除矢量中位置<em>i</em>的项。<em>i</em>必须小于<a href="#size">size</a>()。
+<p> 只要<em>i</em>不超出范围，就返回真。
+<p> <p>也可以参考<a href="#take">take</a>()和<a href="#at">at</a>()。
+
+<h3 class=fn>bool <a name="resize"></a>QPtrVector::resize ( uint&nbsp;size )
+</h3>
+重定义（扩大或缩小）矢量的大小为<em>size</em>。如果<em>size</em>==0，数组变为零数组。
+<p> 矢量中在<em>size</em>位置的或者超出的任何项被一出了。新的位置被初始化为0。
+<p> 如果成功，返回真，或者如果内存不能被分配，返回假。
+<p> <p>也可以参考<a href="#size">size</a>()和<a href="#isNull">isNull</a>()。
+
+<h3 class=fn>void <a name="setAutoDelete"></a>QPtrCollection::setAutoDelete ( bool&nbsp;enable )
+</h3>
+<p> 如果<em>enable</em>为真，设置集合自动删除它的内容并且如果<em>enable</em>为假，就从不删除它们。
+<p> 如果自动删除被打开，当集合被删除时，集合中的所有项都会被删除。如果集合拥有项的唯一指针，这个将是非常方便的。
+<p> 为了安全，默认设置为假。如果你把它打开，在复制集合时请注意。你也许会发现你自己的两个集合删除相同的项。
+<p> 注意在子类中自动删除设置也许会影响其它函数。例如，一个有remove()函数的子类将会从它的数据结构中移除这个项，并且如果自动删除生效，也将会删除这个项。
+<p> <p>也可以参考<a href="qptrcollection.html#autoDelete">autoDelete</a>()。
+<p>矢量：<a href="grapher-nsplugin-example.html#x2777">grapher/grapher.cpp</a>、<a href="scribble-example.html#x945">scribble/scribble.cpp</a>和<a href="bigtable-example.html#x1489">table/bigtable/main.cpp</a>。
+
+<h3 class=fn>uint <a name="size"></a>QPtrVector::size () const
+</h3>
+<p> 返回矢量的大小，比如矢量位置的数量。这也是矢量中可以保存元素的最大数量。
+<p> 如果<a href="#size">size</a>()==0，这个矢量为空矢量。
+<p> <p>也可以参考<a href="#isNull">isNull</a>()、<a href="#resize">resize</a>()和<a href="#count">count</a>()。
+
+<h3 class=fn>void <a name="sort"></a>QPtrVector::sort ()
+</h3>
+<p> 按升序排列项。任何空的位置将被放在最后面。
+<p> <p> 比较项使用虚函数<a href="#compareItems">compareItems</a>()。
+<p> <p>也可以参考<a href="#bsearch">bsearch</a>()。
+
+<h3 class=fn>type * <a name="take"></a>QPtrVector::take ( uint&nbsp;i )
+</h3>
+<p> 返回矢量中位置<em>i</em>的项，并且从矢量中移除项。<em>i</em>必须小于<a href="#size">size</a>()。如果在位置<em>i</em>没有项，返回0。
+<p> 与<a href="#remove">remove</a>()形成对照，这个函数<em>不</em>调用<a href="qptrcollection.html#deleteItem">deleteItem</a>()来比较项。
+<p> <p>也可以参考<a href="#remove">remove</a>()和<a href="#at">at</a>()。
+
+<h3 class=fn>void <a name="toList"></a>QPtrVector::toList ( QGList&nbsp;*&nbsp;list ) const
+</h3>
+<p> 复制这个矢量的所有项到列表<em>list</em>中。<em>list</em>首先被清空并且然后被添加到<em>list</em>中。
+<p> <p>也可以参考<a href="qptrlist.html">QPtrList</a>、<a href="qptrstack.html">QPtrStack</a>和<a href="qptrqueue.html">QPtrQueue</a>。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="write"></a>QPtrVector::write ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, <a href="qptrcollection.html#Item">QPtrCollection::Item</a>&nbsp;item ) const<tt> [虚 保护]</tt>
+</h3>
+<p> 写一个矢量项<em>item</em>到流<em>s</em>中并且返回流的引用。
+<p> 默认实现是不做任何事。
+<p> <p>也可以参考<a href="#read">read</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

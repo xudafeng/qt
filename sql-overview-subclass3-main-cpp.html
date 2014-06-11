@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>sql/overview/subclass3/main.cpp Example File</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>sql/overview/subclass3/main.cpp Example File</h1>
+
+ 
+<pre>/****************************************************************************
+** $Id$
+**
+** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "main.h"
+#include &lt;<a href="qdatatable-h.html">qdatatable.h</a>&gt;
+
+<a name="f23"></a>InvoiceItemCursor::InvoiceItemCursor() :
+    <a href="qsqlcursor.html">QSqlCursor</a>( "invoiceitem" )
+{
+    <a href="qsqlfieldinfo.html">QSqlFieldInfo</a> productName( "productname", QVariant::String );
+    <a href="qsqlcursor.html#append">append</a>( productName );
+    <a href="qsqlcursor.html#setCalculated">setCalculated</a>( productName.<a href="qsqlfieldinfo.html#name">name</a>(), TRUE );
+}
+
+
+QVariant InvoiceItemCursor::<a href="qsqlcursor.html#calculateField">calculateField</a>( const <a href="qstring.html">QString</a> &amp; name )
+{
+    if ( name == "productname" ) {
+        <a href="qsqlquery.html">QSqlQuery</a> query( "SELECT name FROM prices WHERE id=" +
+                     <a href="qsqlrecord.html#field">field</a>( "pricesid" )-&gt;value().toString() + ";" );
+        if ( query.<a href="qsqlquery.html#next">next</a>() )
+            return query.<a href="qsqlquery.html#value">value</a>( 0 );
+    }
+
+    return QVariant( QString::null );
+}
+
+
+int main( int argc, char *argv[] )
+{
+    <a href="qapplication.html">QApplication</a> app( argc, argv );
+
+    if ( createConnections() ) {
+        InvoiceItemCursor invoiceItemCursor;
+
+        <a href="qdatatable.html">QDataTable</a> *invoiceItemTable = new <a href="qdatatable.html">QDataTable</a>( &amp;invoiceItemCursor );
+
+        app.<a href="qapplication.html#setMainWidget">setMainWidget</a>( invoiceItemTable );
+
+        invoiceItemTable-&gt;<a href="qdatatable.html#addColumn">addColumn</a>( "productname", "Product" );
+        invoiceItemTable-&gt;<a href="qdatatable.html#addColumn">addColumn</a>( "quantity",    "Quantity" );
+        invoiceItemTable-&gt;<a href="qdatatable.html#addColumn">addColumn</a>( "paiddate",    "Paid" );
+
+        invoiceItemTable-&gt;<a href="qdatatable.html#refresh">refresh</a>();
+        invoiceItemTable-&gt;<a href="qwidget.html#show">show</a>();
+
+        return app.<a href="qapplication.html#exec">exec</a>();
+    }
+
+    return 1;
+}
+
+
+bool createConnections()
+{
+    // create the default database connection
+    <a href="qsqldatabase.html">QSqlDatabase</a> *defaultDB = QSqlDatabase::<a href="qsqldatabase.html#addDatabase">addDatabase</a>( DB_SALES_DRIVER );
+    if ( ! defaultDB ) {
+        <a href="qapplication.html#qWarning">qWarning</a>( "Failed to connect to driver" );
+        return FALSE;
+    }
+    defaultDB-&gt;<a href="qsqldatabase.html#setDatabaseName">setDatabaseName</a>( DB_SALES_DBNAME );
+    defaultDB-&gt;<a href="qsqldatabase.html#setUserName">setUserName</a>( DB_SALES_USER );
+    defaultDB-&gt;<a href="qsqldatabase.html#setPassword">setPassword</a>( DB_SALES_PASSWD );
+    defaultDB-&gt;<a href="qsqldatabase.html#setHostName">setHostName</a>( DB_SALES_HOST );
+    if ( ! defaultDB-&gt;<a href="qsqldatabase.html#open">open</a>() ) {
+        <a href="qapplication.html#qWarning">qWarning</a>( "Failed to open sales database: " +
+                  defaultDB-&gt;<a href="qsqldatabase.html#lastError">lastError</a>().driverText() );
+        <a href="qapplication.html#qWarning">qWarning</a>( defaultDB-&gt;<a href="qsqldatabase.html#lastError">lastError</a>().databaseText() );
+        return FALSE;
+    }
+
+    // create a named connection to oracle
+    <a href="qsqldatabase.html">QSqlDatabase</a> *oracle = QSqlDatabase::<a href="qsqldatabase.html#addDatabase">addDatabase</a>( DB_ORDERS_DRIVER, "ORACLE" );
+    if ( ! oracle ) {
+        <a href="qapplication.html#qWarning">qWarning</a>( "Failed to connect to oracle driver" );
+        return FALSE;
+    }
+    oracle-&gt;<a href="qsqldatabase.html#setDatabaseName">setDatabaseName</a>( DB_ORDERS_DBNAME );
+    oracle-&gt;<a href="qsqldatabase.html#setUserName">setUserName</a>( DB_ORDERS_USER );
+    oracle-&gt;<a href="qsqldatabase.html#setPassword">setPassword</a>( DB_ORDERS_PASSWD );
+    oracle-&gt;<a href="qsqldatabase.html#setHostName">setHostName</a>( DB_ORDERS_HOST );
+    if ( ! oracle-&gt;<a href="qsqldatabase.html#open">open</a>() ) {
+        <a href="qapplication.html#qWarning">qWarning</a>( "Failed to open orders database: " +
+                  oracle-&gt;<a href="qsqldatabase.html#lastError">lastError</a>().driverText() );
+        <a href="qapplication.html#qWarning">qWarning</a>( oracle-&gt;<a href="qsqldatabase.html#lastError">lastError</a>().databaseText() );
+        return FALSE;
+    }
+
+    return TRUE;
+}
+</pre><!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

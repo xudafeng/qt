@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>调试技术</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>调试技术</h1>
+
+
+
+<p> 现在我们为您的基于Qt的软件的调试提供一些有用的提示。
+<p> <h2> 命令行参数
+</h2>
+<a name="1"></a><p> 当你运行Qt程序时，你可以指定几个命令行参数来帮助你调试。
+<p> <ul>
+<li> -nograb 应用程序不再捕获<a href="qwidget.html#grabMouse">鼠标</a>或者<a href="qwidget.html#grabKeyboard">键盘</a>。当程序在Linux下运行在<tt>gdb</tt>调试器中时这个选项是默认的。
+<li> -dograb 忽略任何隐含的或明显得-nograb。即使-nograb出现在命令行的最后，-dograb也会超过-nograb生效的。
+<li> -sync 在X同步模式下运行应用程序。同步模式强迫X服务器立即执行每一个X客户端的请求，而并不能使用缓存优化。它使得程序更加容易测试并且通常会更慢。-sync模式只对X11版本的Qt有效。
+</ul>
+<p> <h2> 警告和调试消息
+</h2>
+<a name="2"></a><p> Qt包含了三个全局函数来写出警告和调试文本。
+<ul>
+<li> <a href="qapplication.html#qDebug">qDebug()</a>用来为测试及其它写调试输出。
+<li> <a href="qapplication.html#qWarning">qWarning()</a>用来在程序发生错误时写警告输出。
+<li> <a href="qapplication.html#qFatal">qFatal()</a>用来写致命错误消息并且退出。
+</ul>
+<p> 这些函数的Qt实现是在Unix/X11下把文本打印到<tt>标准错误（stderr）</tt>输出，在Windows下会打印到调试器。你可以通过安装一个消息处理器，<a href="qapplication.html#qInstallMsgHandler">qInstallMsgHandler()</a>来接收这些函数。
+<p> 当应用程序看起来或者用起来很奇怪的时候，调试函数<a href="qobject.html#dumpObjectTree">QObject::dumpObjectTree</a>()和<a href="qobject.html#dumpObjectInfo">QObject::dumpObjectInfo</a>()很有用。如果你使用了对象名称，这将会更有用，但通常情况下是没有名称的。
+<p> <h2> 调试宏
+</h2>
+<a name="3"></a><p> <a href="qglobal-h.html">qglobal.h</a>头文件包含了很多调试宏和#defines。
+<p> 两个重要的宏是：
+<ul>
+<li> <a href="qapplication.html#Q_ASSERT">Q_ASSERT(b)</a>里面的b是一个布尔表达式，当b是FALSE的时候，写出警告信息：“ASSERT: 'b' in file file.cpp (234)”。
+<li> <a href="qapplication.html#Q_CHECK_PTR">Q_CHECK_PTR(p)</a>里面的p是一个指针。如果p是空的话，写出警告信息：“In file file.cpp, line 234: Out of memory”。
+</ul>
+<p> 这些宏在检测程序错误时很有用，比如像这样：
+<pre>
+  char *alloc( int size )
+  {
+      <a href="qapplication.html#Q_ASSERT">Q_ASSERT</a>( size &gt; 0 );
+      char *p = new char[size];
+      <a href="qapplication.html#Q_CHECK_PTR">Q_CHECK_PTR</a>( p );
+      return p;
+  }
+</pre>
+ 
+<p> 如果你定义了QT_FATAL_ASSERT标记，Q_ASSERT将会调用fatal()而不是warning()，所以一个错误声明将会导致在打印错误消息后使程序退出。
+<p> 注意如果<tt>QT_CHECK_STATE</tt>未定义，Q_ASSERT宏就是一个空的表达式（参见下面）。在里面的任何代码都不会被执行。相似的，如果<tt>QT_CHECK_NULL</tt>未定义，Q_CHECK_PTR也是一个空的表达式。这里就是一个<em>不</em>应该如此使用Q_ASSERT和Q_CHECK_PTR的例子：
+<p> <pre>
+  char *alloc( int size )
+  {
+      char *p;
+      <a href="qapplication.html#Q_CHECK_PTR">Q_CHECK_PTR</a>( p = new char[size] ); // WRONG
+      return p;
+  }
+</pre>
+ 
+<p>这个问题是棘手的：仅仅在正确的检测标记被定义时，<em>p</em>才会被设置为健全的值。如果QT_CHECK_NULL标记没有被定义，代码被编译了，在Q_CHECK_PTR表达式中的代码是不会被执行的（正确地，因为它仅仅用于调试目的）并且<em>会分配</em>一个疯狂的指针。
+<p> Qt库包含了几百个内部检查，当一些错误被检测出时，会打印警告信息。
+<p> Qt中的健全测试和作为结果的警告信息是有条件的，基于不同的调试标记的状态：
+<ul>
+<li> QT_CHECK_STATE：检测一致的/期望的对象状态
+<li> QT_CHECK_RANGE：检测变量范围错误
+<li> QT_CHECK_NULL：检测危险的空指针
+<li> QT_CHECK_MATH：检测危险的数学，比如被0除
+<li> QT_NO_CHECK：关闭所有的QT_CHECK_...标记
+<li> QT_DEBUG：使调试代码生效
+<li> QT_NO_DEBUG：关闭QT_DEBUG标记
+</ul>
+<p> 默认情况下，QT_DEBUG和所有的QT_CHECK标记都是打开的。如果要关闭QT_DEBUG，请定义QT_NO_DEBUG。如果要关闭QT_CHECK标记，请定义QT_NO_CHECK。
+<p> 实例：
+<pre>
+  void f( char *p, int i )
+  {
+  #if defined(QT_CHECK_NULL)
+      if ( p == 0 )
+          <a href="qapplication.html#qWarning">qWarning</a>( "f: Null pointer not allowed" );
+  #endif
+
+  #if defined(QT_CHECK_RANGE)
+      if ( i &lt; 0 )
+          <a href="qapplication.html#qWarning">qWarning</a>( "f: The index cannot be negative" );
+  #endif
+  }
+</pre>
+ 
+<p> <h2> 普通的Bug
+</h2>
+<a name="4"></a><p> 这是一个如此普通的bug，所以要在这里提到：如果你你在类生命中包含了<a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>宏并且运行了<em><a href="moc.html#moc">moc</a></em>，但是忘记了把moc生成的对象代码连接到你的可执行程序中，你就会得到非常困惑的错误消息。
+<p> 任何一个会提示缺乏<tt>vtbl</tt>、<tt>_vtbl</tt>、<tt>__vtbl</tt>或者和这个类似的连接错误都有可能是这样的问题。
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

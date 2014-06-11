@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QButtonGroup类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QButtonGroup类参考</h1>
+
+<p>QButtonGroup窗口部件把QButton窗口部件组织在一个组中。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qbuttongroup-h.html">qbuttongroup.h</a>&gt;</tt>
+<p>继承了<a href="qgroupbox.html">QGroupBox</a>。
+<p>被<a href="qhbuttongroup.html">QHButtonGroup</a>和<a href="qvbuttongroup.html">QVButtonGroup</a>继承。
+<p><a href="qbuttongroup-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QButtonGroup"><b>QButtonGroup</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QButtonGroup-2"><b>QButtonGroup</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;title, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QButtonGroup-3"><b>QButtonGroup</b></a> ( int&nbsp;strips, Orientation&nbsp;orientation, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QButtonGroup-4"><b>QButtonGroup</b></a> ( int&nbsp;strips, Orientation&nbsp;orientation, const&nbsp;QString&nbsp;&amp;&nbsp;title, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>bool <a href="#isExclusive"><b>isExclusive</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isRadioButtonExclusive"><b>isRadioButtonExclusive</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setExclusive"><b>setExclusive</b></a> ( bool )</div></li>
+<li><div class=fn>virtual void <a href="#setRadioButtonExclusive"><b>setRadioButtonExclusive</b></a> ( bool )</div></li>
+<li><div class=fn>int <a href="#insert"><b>insert</b></a> ( QButton&nbsp;*&nbsp;button, int&nbsp;id = -1 )</div></li>
+<li><div class=fn>void <a href="#remove"><b>remove</b></a> ( QButton&nbsp;*&nbsp;button )</div></li>
+<li><div class=fn>QButton * <a href="#find"><b>find</b></a> ( int&nbsp;id ) const</div></li>
+<li><div class=fn>int <a href="#id"><b>id</b></a> ( QButton&nbsp;*&nbsp;button ) const</div></li>
+<li><div class=fn>int <a href="#count"><b>count</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setButton"><b>setButton</b></a> ( int&nbsp;id )</div></li>
+<li><div class=fn>virtual void <a href="#moveFocus"><b>moveFocus</b></a> ( int&nbsp;key )</div></li>
+<li><div class=fn>QButton * <a href="#selected"><b>selected</b></a> () const</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#pressed"><b>pressed</b></a> ( int&nbsp;id )</div></li>
+<li><div class=fn>void <a href="#released"><b>released</b></a> ( int&nbsp;id )</div></li>
+<li><div class=fn>void <a href="#clicked"><b>clicked</b></a> ( int&nbsp;id )</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>bool <a href="#exclusive-prop"><b>exclusive</b></a>&nbsp;- 按钮组是否互斥</div></li>
+<li><div class=fn>bool <a href="#radioButtonExclusive-prop"><b>radioButtonExclusive</b></a>&nbsp;- 组中的单选按钮是否互斥</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QButtonGroup窗口部件把<a href="qbutton.html">QButton</a>窗口部件组织在一个组中。
+<p> 
+<p> 按钮组窗口部件使处理一组按钮变得很容易。按钮组中的每一个按钮都有一个唯一的标识。当按钮组中的按钮被点击时，按钮组会发射一个带有这个按钮标识的<a href="#clicked">clicked</a>()信号。当你有一个相近的按钮并且你想把它们的clicked()信号连接到一个槽时，上述的信号是按钮组在这方面很有用处。
+<p> 互斥（<a href="#setExclusive">exclusive</a>）的按钮组会把所有的切换按钮关闭，除了那个被点击的。按钮组默认是不互斥的。默认情况下，尽管按钮组不是互斥的，但被插入到这个按钮组的所有单选按钮都变为互斥的。（请参考<a href="#setRadioButtonExclusive">setRadioButtonExclusive</a>()。）
+<p> 这里有两个使用按钮组的方法：
+<ul>
+<li> 按钮组是一组按钮的父窗口部件，也就是按钮组是按钮构造函数中的parent参数。按钮被按照它们被创建的顺序分配0、1、2等标识。QButtonGroup可以显示一个框架和一个标题，因为它继承了<a href="qgroupbox.html">QGroupBox</a>。
+<li> 按钮组是一个不可见的窗口部件并且被包含的按钮有其它父窗口部件。一个按钮必须使用一个有标识的<a href="#insert">insert</a>()来被手工插入到按钮组中。
+</ul>
+<p> 按钮可以使用<a href="#remove">remove</a>()从组中被移除。可以使用一个包含给定标识的<a href="#find">find</a>()来获得一个按钮的指针。使用<a href="#id">id</a>()可以得到一个按钮的标识。按钮可以通过<a href="#setButton">setButton</a>()被设置为打开。<a href="#count">count</a>()可以返回组中的按钮数。
+<p> <img src=qbttngrp-m.png> <img src=qbttngrp-w.png>
+<p> <p>也可以参考<a href="qbutton.html">QButton</a>、<a href="qpushbutton.html">QPushButton</a>、<a href="qcheckbox.html">QCheckBox</a>、<a href="qradiobutton.html">QRadioButton</a>、<a href="appearance.html">窗口部件外观和风格</a>、<a href="geomanagement.html">布局管理</a>和<a href="organizers.html">组织者</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QButtonGroup"></a>QButtonGroup::QButtonGroup ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个没有标题的按钮组。
+<p> <em>parent</em>和<em>name</em>参数被传递给<a href="qwidget.html">QWidget</a>构造函数。
+
+<h3 class=fn><a name="QButtonGroup-2"></a>QButtonGroup::QButtonGroup ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;title, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个标题为<em>title</em>的按钮组。
+<p> <em>parent</em>和<em>name</em>参数被传递给<a href="qwidget.html">QWidget</a>构造函数。
+
+<h3 class=fn><a name="QButtonGroup-3"></a>QButtonGroup::QButtonGroup ( int&nbsp;strips, <a href="qt.html#Orientation-enum">Orientation</a>&nbsp;orientation, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个没有标题的按钮组。子窗口部件会被排列在<em>strips</em>列或者行中（依赖<em>orientation</em>）。
+<p> <em>parent</em>和<em>name</em>参数被传递给<a href="qwidget.html">QWidget</a>构造函数。
+
+<h3 class=fn><a name="QButtonGroup-4"></a>QButtonGroup::QButtonGroup ( int&nbsp;strips, <a href="qt.html#Orientation-enum">Orientation</a>&nbsp;orientation, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;title, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个标题为<em>title</em>的按钮组。子窗口部件会被排列在<em>strips</em>列或者行中（依赖<em>orientation</em>）。
+<p> <em>parent</em>和<em>name</em>参数被传递给<a href="qwidget.html">QWidget</a>构造函数。
+
+<h3 class=fn>void <a name="clicked"></a>QButtonGroup::clicked ( int&nbsp;id )<tt> [信号]</tt>
+</h3>
+<p> 当组中的按钮被点击时，这个信号被发射。<em>id</em>参数是按钮的标识符。
+<p> <p>也可以参考<a href="qbutton.html#clicked">QButton::clicked</a>()和<a href="#insert">insert</a>()。
+<p>实例：<a href="drawdemo-example.html#x1164">drawdemo/drawdemo.cpp</a>和<a href="xform-example.html#x1420">xform/xform.cpp</a>。
+
+<h3 class=fn>int <a name="count"></a>QButtonGroup::count () const
+</h3>
+返回组中的按钮数。
+
+<h3 class=fn><a href="qbutton.html">QButton</a>&nbsp;* <a name="find"></a>QButtonGroup::find ( int&nbsp;id ) const
+</h3>
+找到并返回一个标识为<em>id</em>的按钮的指针。
+<p> 如果这个按钮没有被找到，返回零。
+
+<h3 class=fn>int <a name="id"></a>QButtonGroup::id ( <a href="qbutton.html">QButton</a>&nbsp;*&nbsp;button ) const
+</h3> 
+返回<em>button</em>的标识，或者如果<em>button</em>不是这个组的成员，返回-1。
+
+<h3 class=fn>int <a name="insert"></a>QButtonGroup::insert ( <a href="qbutton.html">QButton</a>&nbsp;*&nbsp;button, int&nbsp;id = -1 )
+</h3>
+把标识为<em>id</em>的<em>button</em>插入到按钮组中。返回按钮的标识。
+<p> 按钮通常是在被创建的时候把按钮组作为父对象，然后会被自动插入到按钮组中的。所以如果按钮的父对象是这个按钮组的话，就不需要手工插入了。一个例外就是当你想自己定义标识来代替默认的0、1、2等等。
+<p> 按钮会被指定标识为<em>id</em>或者一个自动生成的标识。它是这样工作的：如果<em>id</em> &gt;= 0，这个标识被指定。如果<em>id</em> == -1（默认），标识等于这个按钮组中的按钮数。如果<em>id</em>是其它负整数，比如-2，一个唯一的标识（这个负整数 &lt;= -2）被生成。没有按钮的标识为-1。
+<p> <p>也可以参考<a href="#find">find</a>(), <a href="#remove">remove</a>()和<a href="#exclusive-prop">exclusive</a>。
+<p>实例：<a href="listbox-example.html#x1311">listbox/listbox.cpp</a>和<a href="xform-example.html#x1421">xform/xform.cpp</a>。
+
+<h3 class=fn>bool <a name="isExclusive"></a>QButtonGroup::isExclusive () const
+</h3>
+<p>如果按钮组互斥，返回真，否则返回假。详细情况请参考<a href="qbuttongroup.html#exclusive-prop">“exclusive”</a>属性。
+
+<h3 class=fn>bool <a name="isRadioButtonExclusive"></a>QButtonGroup::isRadioButtonExclusive () const
+</h3>
+<p>如果组中的单选按钮互斥，返回真，否则返回假。详细情况请参考<a href="qbuttongroup.html#radioButtonExclusive-prop">“radioButtonExclusive”</a>属性。
+
+<h3 class=fn>void <a name="moveFocus"></a>QButtonGroup::moveFocus ( int&nbsp;key )<tt> [虚]</tt>
+</h3>  
+根据<em>key</em>移动<a href="focus.html#keyboard-focus">键盘焦点</a>，并且如果适当，选中新的焦点项。
+<p> 除非键盘焦点指向一个按钮组的成员并且<em>key</em>是<a href="qt.html#Key-enum">Key_Up</a>、<a href="qt.html#Key-enum">Key_Down</a>、<a href="qt.html#Key-enum">Key_Left</a>和<a href="qt.html#Key-enum">Key_Right</a>之一，否则这个函数什么都不执行。
+
+<h3 class=fn>void <a name="pressed"></a>QButtonGroup::pressed ( int&nbsp;id )<tt> [信号]</tt>
+</h3>
+当组中的按钮被按下（<a href="qbutton.html#pressed">pressed</a>）时，这个信号被发射。<em>id</em>参数是按钮的标识。
+
+<h3 class=fn>void <a name="released"></a>QButtonGroup::released ( int&nbsp;id )<tt> [信号]</tt>
+</h3>
+当组中的按钮被释放（<a href="qbutton.html#released">released</a>）时，这个信号被发射。<em>id</em>参数是按钮的标识。
+
+<h3 class=fn>void <a name="remove"></a>QButtonGroup::remove ( <a href="qbutton.html">QButton</a>&nbsp;*&nbsp;button )
+</h3>
+从按钮组中移除<em>button</em>。
+<p>也可以参考<a href="#insert">insert</a>()。
+
+<h3 class=fn><a href="qbutton.html">QButton</a>&nbsp;* <a name="selected"></a>QButtonGroup::selected () const
+</h3>
+如果真好有一个切换按钮被选择了，返回它的指针，否则返回0。
+
+<h3 class=fn>void <a name="setButton"></a>QButtonGroup::setButton ( int&nbsp;id )<tt> [虚]</tt>
+</h3>  
+设置标识为<em>id</em>的按钮为打开，如果这是一个互斥组，组中的所有其它按钮将被设置为关闭。
+
+<h3 class=fn>void <a name="setExclusive"></a>QButtonGroup::setExclusive ( bool )<tt> [虚]</tt>
+</h3>
+<p>设置按钮组是否互斥。详细情况请参考<a href="qbuttongroup.html#exclusive-prop">“exclusive”</a>属性。
+
+<h3 class=fn>void <a name="setRadioButtonExclusive"></a>QButtonGroup::setRadioButtonExclusive ( bool )<tt> [虚]</tt>
+</h3>
+<p>设置组中的单选按钮是否互斥。详细情况请参考<a href="qbuttongroup.html#radioButtonExclusive-prop">“radioButtonExclusive”</a>属性。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>bool <a name="exclusive-prop"></a>exclusive</h3> 
+<p>这个属性保存的是按钮组是否互斥。
+<p>如果这个值为真，那么组中的按钮是被切换的，并且如果要取消一个按钮的选择，你必须点击组中的另一个按钮。默认为假。
+<p>通过<a href="#setExclusive">setExclusive</a>()设置属性值并且通过<a href="#isExclusive">isExclusive</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="radioButtonExclusive-prop"></a>radioButtonExclusive</h3> 
+<p>这个属性保存的是组中的单选按钮是否互斥。
+<p>如果这个属性为真（默认），组中的单选按钮被处理为互斥的。
+<p>通过<a href="#setRadioButtonExclusive">setRadioButtonExclusive</a>()设置属性值并且通过<a href="#isRadioButtonExclusive">isRadioButtonExclusive</a>()来获得属性值。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

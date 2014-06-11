@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QWaitCondition类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QWaitCondition类参考</h1>
+
+<p>QWaitCondition类是线程之间允许等待/唤醒的条件。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qwaitcondition-h.html">qwaitcondition.h</a>&gt;</tt>
+<p><a href="qwaitcondition-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QWaitCondition"><b>QWaitCondition</b></a> ()</div></li>
+<li><div class=fn>virtual <a href="#~QWaitCondition"><b>~QWaitCondition</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#wait"><b>wait</b></a> ( unsigned&nbsp;long&nbsp;time = ULONG_MAX )</div></li>
+<li><div class=fn>bool <a href="#wait-2"><b>wait</b></a> ( QMutex&nbsp;*&nbsp;mutex, unsigned&nbsp;long&nbsp;time = ULONG_MAX )</div></li>
+<li><div class=fn>void <a href="#wakeOne"><b>wakeOne</b></a> ()</div></li>
+<li><div class=fn>void <a href="#wakeAll"><b>wakeAll</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QWaitCondition类是线程之间允许等待/唤醒的条件。
+<p> 
+
+<p> QWaitConditions允许一个线程告诉其它线程某种条件已经满足，一个或多个线程可以等待一个由<a href="#wakeOne">wakeOne</a>()或<a href="#wakeAll">wakeAll</a>()设定的条件QWaitCondition。使用wakeOne()会唤醒一种随机选择的事件或者wakeAll()会把它们全部唤醒。比如，假定每次用户按下一个键，我们有三个任务要同时执行，每个任务都可以放到一个线程中，每个线程的run()都应该是这样：
+<p> <pre>
+  QWaitCondition key_pressed;
+
+  for (;;) {
+     key_pressed.<a href="#wait">wait</a>(); // 这是一个QWaitCondition全局变量
+     // 键被按下，做一些有趣的事
+     do_something();
+  }
+  </pre>
+ 
+<p> 第四个线程回去读键按下并且每当它接收到一个的时候唤醒其它三个线程，就像这样：
+<p> <pre>
+  QWaitCondition key_pressed;
+
+  for (;;) {
+     getchar();
+	 // 在key_pressed中导致引起任何一个线程。<a href="#wait">wait</a>()将会从这个方法中返回并继续执行
+     key_pressed.<a href="#wakeAll">wakeAll</a>();
+  }
+  </pre>
+ 
+<p> 注意这三个线程被唤醒的顺序是未定义的，并且当键被按下时，这些线程中的一个或多个还在do_something()，它们将不会被唤醒（因为它们现在没有等待条件变量）并且这个任务也就不会针对这次按键执行操作。这种情况是可以避免得，比如，就像下面这样做：
+<p> <pre>
+  <a href="qmutex.html">QMutex</a> mymutex;
+  QWaitCondition key_pressed;
+  int mycount=0;
+
+  // 工人线程代码
+  for (;;) {
+     key_pressed.<a href="#wait">wait</a>(); // 这是一个QWaitCondition全局变量
+     mymutex.<a href="qmutex.html#lock">lock</a>();
+     mycount++;
+     mymutex.<a href="qmutex.html#unlock">unlock</a>();
+     do_something();
+     mymutex.<a href="qmutex.html#lock">lock</a>();
+     mycount--;
+     mymutex.<a href="qmutex.html#unlock">unlock</a>();
+  }
+
+  // 读取按键线程代码
+  for (;;) {
+     getchar();
+     mymutex.<a href="qmutex.html#lock">lock</a>();
+     // 睡眠，直到没有忙碌的工作线程才醒来。
+     while( count &gt; 0 ) {
+       mymutex.<a href="qmutex.html#unlock">unlock</a>();
+       sleep( 1 );
+       mymutex.<a href="qmutex.html#lock">lock</a>();
+     }
+     mymutex.<a href="qmutex.html#unlock">unlock</a>();
+     key_pressed.<a href="#wakeAll">wakeAll</a>();
+  }
+  </pre>
+ 
+<p> 互斥量是必须的，因为两个线程试图同时对同一个变量进行修改的结果是不可预知的。
+<p> <p>也可以参考<a href="environment.html">环境类</a>和<a href="thread.html">线程类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QWaitCondition"></a>QWaitCondition::QWaitCondition ()
+</h3>
+构造一个新的事件信号传输，比如，等待条件，对象。
+
+<h3 class=fn><a name="~QWaitCondition"></a>QWaitCondition::~QWaitCondition ()<tt> [虚]</tt>
+</h3>
+删除这个事件信号传输，比如，等待条件，对象。
+
+<h3 class=fn>bool <a name="wait"></a>QWaitCondition::wait ( unsigned&nbsp;long&nbsp;time = ULONG_MAX )
+</h3>
+在线程事件对象上等待。调用这个的线程将会阻塞，直到下列条件之一满足时才醒来：
+<ul>
+<li> 另一个线程使用<a href="#wakeOne">wakeOne</a>()或<a href="#wakeAll">wakeAll</a>()传输信号给它。在这种情况下，这个函数将返回真。
+<li> <em>time</em>毫秒过去了。如果<em>time</em>为ULONG_MAX（默认值），那么这个等待将永远不会超时（这个事件必须被传输）。如果等待的事件超时，这个函数将会返回假。
+</ul>
+<p> <p>也可以参考<a href="#wakeOne">wakeOne</a>()和<a href="#wakeAll">wakeAll</a>()。
+
+<h3 class=fn>bool <a name="wait-2"></a>QWaitCondition::wait ( <a href="qmutex.html">QMutex</a>&nbsp;*&nbsp;mutex, unsigned&nbsp;long&nbsp;time = ULONG_MAX )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 释放锁定的<em>mutex</em>并且在线程事件对象上等待。<em>mutex</em>必须由调用线程初始锁定的。如果<em>mutex</em>没有在锁定状态，这个函数立即返回。如果<em>mutex</em>是一个递归互斥量，这个函数立即返回。<em>mutex</em>将被解锁，并且调用线程将会阻塞，直到下列条件之一满足时才醒来：
+<ul>
+<li> 另一个线程使用<a href="#wakeOne">wakeOne</a>()或<a href="#wakeAll">wakeAll</a>()传输信号给它。在这种情况下，这个函数将返回真。
+<li> <em>time</em>毫秒过去了。如果<em>time</em>为ULONG_MAX（默认值），那么这个等待将永远不会超时（这个事件必须被传输）。如果等待的事件超时，这个函数将会返回假。
+</ul>
+<p> 互斥量将以同样的锁定状态返回。这个函数提供的是允许从锁定状态到等待状态的原子转换。
+<p> <p>也可以参考<a href="#wakeOne">wakeOne</a>()和<a href="#wakeAll">wakeAll</a>()。
+
+<h3 class=fn>void <a name="wakeAll"></a>QWaitCondition::wakeAll ()
+</h3>
+这将会唤醒所有等待QWaitCondition的线程。这些线程被唤醒的顺序依赖于操组系统的调度策略，并且不能被控制或预知。
+<p> <p>也可以参考<a href="#wakeOne">wakeOne</a>()。
+
+<h3 class=fn>void <a name="wakeOne"></a>QWaitCondition::wakeOne ()
+</h3>
+这将会唤醒所有等待QWaitCondition的线程中的一个线程。这个被唤醒的线程依赖于操组系统的调度策略，并且不能被控制或预知。
+<p> <p>也可以参考<a href="#wakeAll">wakeAll</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

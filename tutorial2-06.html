@@ -1,0 +1,297 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>画布控制</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>画布控制</h1>
+
+
+<p> 
+<p> 我们在画布上画饼形区域（或者条形图表条），和所有的标签。画布是通过画布视图来呈现给用户的。drawElements()函数被调用从而在需要的时候重新绘制画布。
+<p> （由<tt>chartform_canvas.cpp</tt>展开。）
+<p> <h2> drawElements()
+</h2>
+<a name="1"></a><p> 
+
+<pre>    void ChartForm::drawElements()
+    {
+        <a href="qcanvasitemlist.html">QCanvasItemList</a> list = m_canvas-&gt;allItems();
+        for ( QCanvasItemList::iterator it = list.<a href="qvaluelist.html#begin">begin</a>(); it != list.<a href="qvaluelist.html#end">end</a>(); ++it )
+            delete *it;
+</pre>
+<p> 我们在drawElements()中所作的第一件事是删除所有已经存在的画布条目。
+<p> <pre>            // 360 * 16为一个饼形，Qt中使用的是16倍的度数（就是它的一个圆周为360x16）
+        int scaleFactor = m_chartType == PIE ? 5760 :
+                            m_chartType == VERTICAL_BAR ? m_canvas-&gt;height() :
+                                m_canvas-&gt;width();
+</pre>
+<p> 接下来我们根据要绘制的图表的种类来计算比例因子。
+<p> <pre>        double biggest = 0.0;
+        int count = 0;
+        double total = 0.0;
+        static double scales[MAX_ELEMENTS];
+
+        for ( int i = 0; i &lt; MAX_ELEMENTS; ++i ) {
+            if ( m_elements[i].isValid() ) {
+                double value = m_elements[i].value();
+                count++;
+                total += value;
+                if ( value &gt; biggest )
+                    biggest = value;
+                scales[i] = m_elements[i].value() * scaleFactor;
+            }
+        }
+
+        if ( count ) {
+                // 第二个循环是因为总量和最大的
+            for ( int i = 0; i &lt; MAX_ELEMENTS; ++i )
+                if ( m_elements[i].isValid() )
+                    if ( m_chartType == PIE )
+                        scales[i] = (m_elements[i].value() * scaleFactor) / total;
+                    else
+                        scales[i] = (m_elements[i].value() * scaleFactor) / biggest;
+</pre>
+<p> 我们需要知道这里有多少值、最大的值和值的总和，这样我们就可以正确地按比例创建饼形区域或条形了。我们把比例值存放在<tt>scales</tt>数组中。
+<p> <pre>            switch ( m_chartType ) {
+                case PIE:
+                    drawPieChart( scales, total, count );
+                    break;
+                case VERTICAL_BAR:
+                    drawVerticalBarChart( scales, total, count );
+                    break;
+                case HORIZONTAL_BAR:
+                    drawHorizontalBarChart( scales, total, count );
+                    break;
+            }
+        }
+</pre>
+<p> 既然我们已经知道了必需的信息，那我们就调用相关绘制函数，传递比例值、总量和计数。
+<p> <pre>        m_canvas-&gt;update();
+</pre>
+<p> 最终我们使用update()更新画布来使所有的变化可视。
+<p> <h3> drawHorizontalBarChart()
+</h3>
+<a name="1-1"></a><p> 我们来回顾一下刚才的这个绘制函数，看到了画布条目如何被生成并放置到画布上，因为这个教程是关于Qt的，而不是关于绘制图表的好的（或者坏的）算法。
+<p> <pre>    void ChartForm::drawHorizontalBarChart(
+            const double scales[], double total, int count )
+    {
+</pre>
+<p> 画水平条形图我们需要一个比例值的数组、总量（这样我们就可以在需要的时候计算并且画出百分比）和这一组值的计数。
+<p> <pre>        double width = m_canvas-&gt;width();
+        double height = m_canvas-&gt;height();
+        int proheight = int(height / count);
+        int y = 0;
+</pre>
+<p> 我们重新得到画布的宽度和高度并且计算比例高度（<tt>proheight</tt>）。我们把初始的<tt>y</tt>位置设为0。
+<p> <pre>        <a href="qpen.html">QPen</a> pen;
+    <a name="x2425"></a>    pen.<a href="qpen.html#setStyle">setStyle</a>( NoPen );
+</pre>
+<p> 我们创建一个用来绘制每一个条形（矩形）的画笔，我们把它设置为<tt>NoPen</tt>，这样就不会画出边框。
+<p> <pre>        for ( int i = 0; i &lt; MAX_ELEMENTS; ++i ) {
+            if ( m_elements[i].isValid() ) {
+                int extent = int(scales[i]);
+</pre>
+<p> 我们在元素矢量中迭代每一个元素，忽略无效的元素。每个条的宽度（它的长度）很简单地就是它的比例值。
+<p> <pre>                <a href="qcanvasrectangle.html">QCanvasRectangle</a> *rect = new <a href="qcanvasrectangle.html">QCanvasRectangle</a>(
+                                                0, y, extent, proheight, m_canvas );
+    <a name="x2422"></a>            rect-&gt;<a href="qcanvaspolygonalitem.html#setBrush">setBrush</a>( QBrush( m_elements[i].valueColor(),
+                                        BrushStyle(m_elements[i].valuePattern()) ) );
+    <a name="x2423"></a>            rect-&gt;<a href="qcanvaspolygonalitem.html#setPen">setPen</a>( pen );
+    <a name="x2420"></a>            rect-&gt;<a href="qcanvasitem.html#setZ">setZ</a>( 0 );
+    <a name="x2421"></a>            rect-&gt;<a href="qcanvasitem.html#show">show</a>();
+</pre>
+<p> 我们为每个条形创建一个新的<a href="qcanvasrectangle.html">QCanvasRectangle</a>，它的x位置为0（因为这是一个水平条形图，每个条形都从左边开始），y值从0开始，随着每一个要画的条形的高度增长，一直到我们要画的条形和画布的高度。然后我们设置条形的画刷为用户为元素指定的颜色和样式，设置画笔为我们先前生成的画笔（比如，设置为<tt>NoPen</tt>）并且我们把条形的Z轴顺序设置为0。最后我们调用show()在画布上绘制条形。
+<p> <pre>                <a href="qstring.html">QString</a> label = m_elements[i].label();
+    <a name="x2426"></a>            if ( !label.<a href="qstring.html#isEmpty">isEmpty</a>() || m_addValues != NO ) {
+                    double proX = m_elements[i].proX( HORIZONTAL_BAR );
+                    double proY = m_elements[i].proY( HORIZONTAL_BAR );
+                    if ( proX &lt; 0 || proY &lt; 0 ) {
+                        proX = 0;
+                        proY = y / height;
+                    }
+</pre>
+<p> 如果用户已经为元素指定了标签或者要求把值（或者百分比）显示出来，我们也要画一个画布文本条目。我们创建我们自己的CanvasText类（请看后面），因为我们想存储每一个画布文本条目中对应元素的索引（在元素矢量中）。我们从元素中得出x和y的比例值。如果其中之一&lt; 0，那么他们还没有被用户定位，所以你必须计算它们的位置。我们标签的x值为0（左）并且y值为条形图的顶部（这样标签的左上角就会在x,y位置）。
+<p> <pre>                    label = valueLabel( label, m_elements[i].value(), total );
+</pre>
+<p> 然后我们调用一个助手函数valueLabel()，它可以返回一个包含标签文本的字符串。（如果用户已经设置相应的选项，valueLabel()函数添加值或者百分比到这个文本的标签。）
+<p> <pre>                    CanvasText *text = new CanvasText( i, label, m_font, m_canvas );
+    <a name="x2424"></a>                text-&gt;<a href="qcanvastext.html#setColor">setColor</a>( m_elements[i].labelColor() );
+    <a name="x2418"></a>                text-&gt;<a href="qcanvasitem.html#setX">setX</a>( proX * width );
+    <a name="x2419"></a>                text-&gt;<a href="qcanvasitem.html#setY">setY</a>( proY * height );
+                    text-&gt;<a href="qcanvasitem.html#setZ">setZ</a>( 1 );
+                    text-&gt;<a href="qcanvasitem.html#show">show</a>();
+                    m_elements[i].setProX( HORIZONTAL_BAR, proX );
+                    m_elements[i].setProY( HORIZONTAL_BAR, proY );
+</pre>
+<p> 然后我们创建一个CanvasText条目，传递给它在元素矢量中这个元素的索引和所要使用的标签、字体和画布。我们设置文本条目的颜色为用户指定的颜色并且设置条目的x和y位置和画布的宽高成比例。我们设置Z轴顺序为1，这样文本条目总是在条形（Z轴顺序为0）的上面（前面）。我们调用show()函数在画布上绘制文本条目，并且设置元素的相对x和y位置。
+<p> <pre>                }
+                y += proheight;
+</pre>
+<p> 在绘制完条形和可能存在的标签之后，我们给y增加一定比例的高度用来准备绘制下一个元素。
+<p> <pre>            }
+        }
+    }
+</pre>
+<p> <h2> <a href="qcanvastext.html">QCanvasText</a>的子类
+</h2>
+<a name="2"></a><p> （由<tt>canvastext.h</tt>展开。）
+<p> 
+
+<pre>    class CanvasText : public <a href="qcanvastext.html">QCanvasText</a>
+    {
+    public:
+        enum { CANVAS_TEXT = 1100 };
+
+        CanvasText( int index, QCanvas *canvas )
+            : <a href="qcanvastext.html">QCanvasText</a>( canvas ), m_index( index ) {}
+        CanvasText( int index, const <a href="qstring.html">QString</a>&amp; text, QCanvas *canvas )
+            : <a href="qcanvastext.html">QCanvasText</a>( text, canvas ), m_index( index ) {}
+        CanvasText( int index, const <a href="qstring.html">QString</a>&amp; text, QFont font, QCanvas *canvas )
+            : <a href="qcanvastext.html">QCanvasText</a>( text, font, canvas ), m_index( index ) {}
+
+        int index() const { return m_index; }
+        void setIndex( int index ) { m_index = index; }
+
+        int rtti() const { return CANVAS_TEXT; }
+
+    private:
+        int m_index;
+    };
+</pre>
+<p> 我们的CanvasText子类是<a href="qcanvastext.html">QCanvasText</a>的一个非常简单的特化。我们所做的一切只是添加一个私有成员<tt>m_index</tt>，它用来保存和这个文本相关的元素的元素矢量索引，并且提供为这个值提供一个读和写函数。
+<p> <h2> <a href="qcanvasview.html">QCanvasView</a>的子类
+</h2>
+<a name="3"></a><p> （由<tt>canvasview.h</tt>展开。）
+<p> 
+
+<pre>    class CanvasView : public <a href="qcanvasview.html">QCanvasView</a>
+    {
+        <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>
+    public:
+        CanvasView( <a href="qcanvas.html">QCanvas</a> *canvas, ElementVector *elements,
+                    <a href="qwidget.html">QWidget</a>* parent = 0, const char* name = "canvas view",
+                    WFlags f = 0 )
+            : <a href="qcanvasview.html">QCanvasView</a>( canvas, parent, name, f ),
+              m_elements( elements ) {}
+
+    protected:
+        void viewportResizeEvent( <a href="qresizeevent.html">QResizeEvent</a> *e );
+        void contentsMousePressEvent( <a href="qmouseevent.html">QMouseEvent</a> *e );
+        void contentsMouseMoveEvent( <a href="qmouseevent.html">QMouseEvent</a> *e );
+        void contentsContextMenuEvent( <a href="qcontextmenuevent.html">QContextMenuEvent</a> *e );
+
+    private:
+        <a href="qcanvasitem.html">QCanvasItem</a> *m_movingItem;
+        <a href="qpoint.html">QPoint</a> m_pos;
+        ElementVector *m_elements;
+    };
+</pre>
+<p> 我们需要继承<a href="qcanvasview.html">QCanvasView</a>，这样我们就能处理：
+<ol type=1>
+<li> 上下文菜单请求。
+<li> 视窗重定义大小。
+<li> 用户拖拽标签到任意位置。
+</ol>
+<p> 为了支持这些，我们存储一个到正在被移动的画布条目的指针和它的最终位置。我们也存储一个到元素矢量的指针。
+<p> <h3> 上下文菜单请求
+</h3>
+<a name="3-1"></a><p> （由<tt>canvasview.cpp</tt>展开。）
+<p> 
+
+<pre>    <a name="x2434"></a>void CanvasView::<a href="qscrollview.html#contentsContextMenuEvent">contentsContextMenuEvent</a>( <a href="qcontextmenuevent.html">QContextMenuEvent</a> * )
+    {
+    <a name="x2429"></a>    ((ChartForm*)<a href="qobject.html#parent">parent</a>())-&gt;optionsMenu-&gt;exec( QCursor::<a href="qcursor.html#pos">pos</a>() );
+    }
+</pre>
+<p> 当用户调用一个上下文菜单（比如在绝大多数平台通过右键点击），我们把画布视图的父对象（是一个ChartForm）转化为正确的类型，然后用exec()在光标位置执行选项菜单。
+<p> <h3> 视窗重定义大小
+</h3>
+<a name="3-2"></a><p> <pre>    <a name="x2437"></a>void CanvasView::<a href="qscrollview.html#viewportResizeEvent">viewportResizeEvent</a>( <a href="qresizeevent.html">QResizeEvent</a> *e )
+    {
+    <a name="x2433"></a>    <a href="qcanvasview.html#canvas">canvas</a>()-&gt;resize( e-&gt;<a href="qresizeevent.html#size">size</a>().width(), e-&gt;<a href="qresizeevent.html#size">size</a>().height() );
+        ((ChartForm*)<a href="qobject.html#parent">parent</a>())-&gt;drawElements();
+    }
+</pre>
+<p> 为了改变大小我们简单地改变花布的大小，画布视图就会呈现在视窗客户端区域的宽高中，然后调用drawElements()函数来重新绘制图表。因为drawElements()画的每一件都和画布的宽高有关，所以图表就会被正确地绘制。
+<p> <h3> 拖拽标签到任意位置
+</h3>
+<a name="3-3"></a><p> 当用户想把标签拖拽到他们点击的位置时，就应该拖拽它并在新的位置释放它。
+<p> <pre>    <a name="x2436"></a>void CanvasView::<a href="qscrollview.html#contentsMousePressEvent">contentsMousePressEvent</a>( <a href="qmouseevent.html">QMouseEvent</a> *e )
+    {
+    <a name="x2430"></a>    <a href="qcanvasitemlist.html">QCanvasItemList</a> list = <a href="qcanvasview.html#canvas">canvas</a>()-&gt;collisions( e-&gt;<a href="qmouseevent.html#pos">pos</a>() );
+    <a name="x2439"></a><a name="x2438"></a>    for ( QCanvasItemList::iterator it = list.<a href="qvaluelist.html#begin">begin</a>(); it != list.<a href="qvaluelist.html#end">end</a>(); ++it )
+            if ( (*it)-&gt;rtti() == CanvasText::CANVAS_TEXT ) {
+                m_movingItem = *it;
+                m_pos = e-&gt;<a href="qmouseevent.html#pos">pos</a>();
+                return;
+            }
+        m_movingItem = 0;
+    }
+</pre>
+<p> 当用户点击鼠标时，我们创建一个鼠标点击“碰撞”（如果有的话）的画布条目的列表。然后我们迭代这个列表并且如果我们发现一个<tt>CanvasText</tt>条目，我们就把它设置为移动的条目并且记录下它的位置。否则我们设置为不移动条目。
+<p> <pre>    <a name="x2435"></a>void CanvasView::<a href="qscrollview.html#contentsMouseMoveEvent">contentsMouseMoveEvent</a>( <a href="qmouseevent.html">QMouseEvent</a> *e )
+    {
+        if ( m_movingItem ) {
+            <a href="qpoint.html">QPoint</a> offset = e-&gt;<a href="qmouseevent.html#pos">pos</a>() - m_pos;
+    <a name="x2432"></a><a name="x2431"></a>        m_movingItem-&gt;moveBy( offset.<a href="qpoint.html#x">x</a>(), offset.<a href="qpoint.html#y">y</a>() );
+            m_pos = e-&gt;<a href="qmouseevent.html#pos">pos</a>();
+            ChartForm *form = (ChartForm*)<a href="qobject.html#parent">parent</a>();
+            form-&gt;setChanged( true );
+            int chartType = form-&gt;chartType();
+            CanvasText *item = (CanvasText*)m_movingItem;
+            int i = item-&gt;index();
+            (*m_elements)[i].setProX( chartType, item-&gt;x() / canvas()-&gt;width() );
+            (*m_elements)[i].setProY( chartType, item-&gt;y() / canvas()-&gt;height() );
+            <a href="qcanvasview.html#canvas">canvas</a>()-&gt;update();
+        }
+    }
+</pre>
+<p> 当用户拖拽鼠标的时候，移动事件就产生了。如果那里是一个可移动条目，我们从鼠标最后的位置和可移动条目原来的位置计算出位移。我们将新的位置记录为最后的位置。因为图表现在改变了，所以我们调用setChanged()，这样当用户试图退出或者读入已存在的图表时或者创建新的图表，就会被提示是否保存。我们也分别地更新当前图表类型的元素的x和y的比例位置为当前x和y与宽和高的比例。我们知道要更新哪个元件因为当我们创建每个画布文本条目的时候，我们传给它一个这个元素所对应的位置索引。我们继承了<a href="qcanvastext.html">QCanvasText</a>，这样我们就可以设置和读取这个索引值。最后我们调用update()来重绘画布。
+<p> <center><table cellpadding="4" cellspacing="2" border="0">
+<tr bgcolor="#f0f0f0">
+<td valign="top"><a href="qcanvas.html">QCanvas</a>没有任何视觉效果。为了看到画布的内容，你必须创建一个<a href="qcanvasview.html">QCanvasView</a>来呈现画布。如果条目被show()显示，它们就会出现在画布视图中，然后，只有当<a href="qcanvas.html#update">QCanvas::update</a>()被调用的时候。默认情况下QCanva的背景是白色，并且会在画布上绘制默认的形状，比如<a href="qcanvasrectangle.html">QCanvasRectangle</a>、<a href="qcanvasellipse.html">QCanvasEllipse</a>等等，因为它们被白色填充，所以非常推荐使用一个非白色的画刷颜色！
+</table></center>
+<p> <p align=right>
+<a href="tutorial2-05.html">&laquo; 实现图形用户界面</a> |
+<a href="tutorial2.html">目录</a> |
+<a href="tutorial2-07.html">文件处理 &raquo;</a>
+</p>
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

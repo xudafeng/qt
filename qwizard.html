@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QWizard类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QWizard类参考</h1>
+
+<p>QWizard类提供了一个向导对话框的框架。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qwizard-h.html">qwizard.h</a>&gt;</tt>
+<p>继承了<a href="qdialog.html">QDialog</a>。
+<p><a href="qwizard-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QWizard"><b>QWizard</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;modal = FALSE, WFlags&nbsp;f = 0 )</div></li>
+<li><div class=fn><a href="#~QWizard"><b>~QWizard</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#addPage"><b>addPage</b></a> ( QWidget&nbsp;*&nbsp;page, const&nbsp;QString&nbsp;&amp;&nbsp;title )</div></li>
+<li><div class=fn>virtual void <a href="#insertPage"><b>insertPage</b></a> ( QWidget&nbsp;*&nbsp;page, const&nbsp;QString&nbsp;&amp;&nbsp;title, int&nbsp;index )</div></li>
+<li><div class=fn>virtual void <a href="#removePage"><b>removePage</b></a> ( QWidget&nbsp;*&nbsp;page )</div></li>
+<li><div class=fn>QString <a href="#title"><b>title</b></a> ( QWidget&nbsp;*&nbsp;page ) const</div></li>
+<li><div class=fn>void <a href="#setTitle"><b>setTitle</b></a> ( QWidget&nbsp;*&nbsp;page, const&nbsp;QString&nbsp;&amp;&nbsp;title )</div></li>
+<li><div class=fn>QFont <a href="#titleFont"><b>titleFont</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setTitleFont"><b>setTitleFont</b></a> ( const QFont &amp; )</div></li>
+<li><div class=fn>virtual void <a href="#showPage"><b>showPage</b></a> ( QWidget&nbsp;*&nbsp;page )</div></li>
+<li><div class=fn>QWidget * <a href="#currentPage"><b>currentPage</b></a> () const</div></li>
+<li><div class=fn>QWidget * <a href="#page"><b>page</b></a> ( int&nbsp;index ) const</div></li>
+<li><div class=fn>int <a href="#pageCount"><b>pageCount</b></a> () const</div></li>
+<li><div class=fn>int <a href="#indexOf"><b>indexOf</b></a> ( QWidget&nbsp;*&nbsp;page ) const</div></li>
+<li><div class=fn>virtual bool <a href="#appropriate"><b>appropriate</b></a> ( QWidget&nbsp;*&nbsp;page ) const</div></li>
+<li><div class=fn>virtual void <a href="#setAppropriate"><b>setAppropriate</b></a> ( QWidget&nbsp;*&nbsp;page, bool&nbsp;appropriate )</div></li>
+<li><div class=fn>QPushButton * <a href="#backButton"><b>backButton</b></a> () const</div></li>
+<li><div class=fn>QPushButton * <a href="#nextButton"><b>nextButton</b></a> () const</div></li>
+<li><div class=fn>QPushButton * <a href="#finishButton"><b>finishButton</b></a> () const</div></li>
+<li><div class=fn>QPushButton * <a href="#cancelButton"><b>cancelButton</b></a> () const</div></li>
+<li><div class=fn>QPushButton * <a href="#helpButton"><b>helpButton</b></a> () const</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#setBackEnabled"><b>setBackEnabled</b></a> ( QWidget&nbsp;*&nbsp;page, bool&nbsp;enable )</div></li>
+<li><div class=fn>virtual void <a href="#setNextEnabled"><b>setNextEnabled</b></a> ( QWidget&nbsp;*&nbsp;page, bool&nbsp;enable )</div></li>
+<li><div class=fn>virtual void <a href="#setFinishEnabled"><b>setFinishEnabled</b></a> ( QWidget&nbsp;*&nbsp;page, bool&nbsp;enable )</div></li>
+<li><div class=fn>virtual void <a href="#setHelpEnabled"><b>setHelpEnabled</b></a> ( QWidget&nbsp;*&nbsp;page, bool&nbsp;enable )</div></li>
+<li><div class=fn>virtual void setFinish ( QWidget *, bool ) &nbsp;<em>（废弃）</em></div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#helpClicked"><b>helpClicked</b></a> ()</div></li>
+<li><div class=fn>void <a href="#selected"><b>selected</b></a> ( const QString &amp; )</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>QFont <a href="#titleFont-prop"><b>titleFont</b></a>&nbsp;- 页标题使用的字体</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#layOutButtonRow"><b>layOutButtonRow</b></a> ( QHBoxLayout&nbsp;*&nbsp;layout )</div></li>
+<li><div class=fn>virtual void <a href="#layOutTitleRow"><b>layOutTitleRow</b></a> ( QHBoxLayout&nbsp;*&nbsp;layout, const&nbsp;QString&nbsp;&amp;&nbsp;title )</div></li>
+</ul>
+<h2>保护槽</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#back"><b>back</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#next"><b>next</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#help"><b>help</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+<p> QWizard类提供了一个向导对话框的框架。
+<p> 
+<p> 向导就是包含一组顺序的对话框页面的特定类型的输入对话框。向导的目的是让用户一步一步地完成一个过程。向导对于复杂或者偶尔发生的并且人们发现它很难学会或者执行的任务很有用处。
+<p> QWizard会根据当前页在顺序中的位置提供页面标题和显示Next、Back、Finish、Cancel和Help推动按钮。
+<p> 创建并且组装继承于<a href="qwidget.html">QWidget</a>的对话框页面并且使用<a href="#addPage">addPage</a>()把它们添加到这个向导中。使用<a href="#insertPage">insertPage</a>()可以把一个对话框页添加到页顺序的特定位置中。使用<a href="#removePage">removePage</a>()可以移除页顺序中的一页。
+<p> 使用<a href="#currentPage">currentPage</a>()来得到当前显示页的指针。<a href="#page">page</a>()返回在页顺序中特定位置的页的指针。
+<p> 使用<a href="#pageCount">pageCount</a>()可以得到页顺序中的页的总量。<a href="#indexOf">indexOf</a>()将会返回一个页在页顺序中的索引。
+<p> QWizard根据（或者没有）<a href="#setAppropriate">setAppropriate</a>()的当前上下文来提供标记页面的功能。这个思想就是根据用户在前面的页面输入的内容，一个页面也许是无关的并且应该被忽略。
+<p> 使用比较多的有较少选项的简单页面比使用比较少的复杂页面更是一个好的设计所要考虑的。
+<p> 这里是可用的实例代码：<a href="wizard-wizard-cpp.html">wizard/wizard.cpp</a>、<a href="wizard-wizard-h.html">wizard/wizard.h</a>。
+<p> <center><img src="qwizard.png" alt="A QWizard page"></center> <blockquote><p align="center"><em> 一个QWizard页
+</em></p>
+</blockquote><p> <p>也可以参考<a href="abstractwidgets.html">抽象窗口部件类</a>、<a href="dialogs.html">对话框类</a>和<a href="organizers.html">组织者</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QWizard"></a>QWizard::QWizard ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;modal = FALSE, WFlags&nbsp;f = 0 )
+</h3>  
+构造一个空的向导对话框。<em>parent</em>、<em>name</em>、<em>modal</em>和<em>f</em>参数被传递给<a href="qdialog.html">QDialog</a>构造函数。
+
+<h3 class=fn><a name="~QWizard"></a>QWizard::~QWizard ()
+</h3>
+销毁这个对象并且释放任何已经分配的资源，包括所有的页和控制器。
+
+<h3 class=fn>void <a name="addPage"></a>QWizard::addPage ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;title )<tt> [虚]</tt>
+</h3>  
+把<em>page</em>添加到页顺序的末尾，标题为<em>title</em>。
+
+<h3 class=fn>bool <a name="appropriate"></a>QWizard::appropriate ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page ) const<tt> [虚]</tt>
+</h3>
+当Next按钮被点击时被调用的，如果<em>page</em>和当前上下文中显示的是相关的，这个虚函数返回真，否则它就会被QWizard忽略并返回假。默认实现是返回使用<a href="#setAppropriate">setAppropriate</a>()设置的值。最终默认值为真。
+<p> <b>警告：</b> 如果没有页面和当前上下文相关，向导中的最后一页会被显示。
+
+<h3 class=fn>void <a name="back"></a>QWizard::back ()<tt> [虚 保护 槽]</tt>
+</h3>
+当用户点击Back按钮时被调用，这个函数显示在顺序中前面的相关页面。
+<p> <p>也可以参考<a href="#appropriate">appropriate</a>()。
+
+<h3 class=fn><a href="qpushbutton.html">QPushButton</a>&nbsp;* <a name="backButton"></a>QWizard::backButton () const
+</h3>
+返回对话框Back按钮的指针。
+<p> 默认情况下，这个按钮会被连接到<a href="#back">back</a>()槽，它是虚的，这样你可以在QWizard的子类中重新实现它。
+
+<h3 class=fn><a href="qpushbutton.html">QPushButton</a>&nbsp;* <a name="cancelButton"></a>QWizard::cancelButton () const
+</h3>
+返回对话框的Cancel按钮的指针。
+<p> 默认情况下，这个按钮会被连接到<a href="qdialog.html#reject">QDialog::reject</a>()槽，它是虚的，这样你可以在QWizard的子类中重新实现它。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="currentPage"></a>QWizard::currentPage () const
+</h3>  
+返回在页顺序中当前页的指针。尽管向导会尽全力确保这个值不会为0，但如果你也足够尽力的话，它就有可能是了。
+
+<h3 class=fn><a href="qpushbutton.html">QPushButton</a>&nbsp;* <a name="finishButton"></a>QWizard::finishButton () const
+</h3>
+返回对话框的Finish按钮的指针。
+<p> 默认情况下，这个按钮会被连接到<a href="qdialog.html#accept">QDialog::accept</a>()槽，它是虚的，这样你可以在QWizard的子类中重新实现它。
+
+<h3 class=fn>void <a name="help"></a>QWizard::help ()<tt> [虚 保护 槽]</tt>
+</h3>  
+当用户点击Help按钮时被调用，这个函数发射<a href="#helpClicked">helpClicked</a>()信号。
+
+<h3 class=fn><a href="qpushbutton.html">QPushButton</a>&nbsp;* <a name="helpButton"></a>QWizard::helpButton () const
+</h3>
+返回对话框的Help按钮的指针。
+<p> 默认情况下，这个按钮会被连接到<a href="#help">help</a>()槽，它是虚的，这样你可以在QWizard的子类中重新实现它。
+
+<h3 class=fn>void <a name="helpClicked"></a>QWizard::helpClicked ()<tt> [信号]</tt>
+</h3>
+<p> 当用户点击Help按钮时，这个信号被发射。
+
+<h3 class=fn>int <a name="indexOf"></a>QWizard::indexOf ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page ) const
+</h3>
+返回页<em>page</em>的位置。如果这个页不是向导的一部分，-1被返回。
+
+<h3 class=fn>void <a name="insertPage"></a>QWizard::insertPage ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;title, int&nbsp;index )<tt> [虚]</tt>
+</h3>
+把<em>page</em>插入到页顺序的<em>index</em>位置，标题为<em>title</em>。如果<em>index</em>为-1，这个页会被添加到向导的页顺序的末尾。
+
+<h3 class=fn>void <a name="layOutButtonRow"></a>QWizard::layOutButtonRow ( <a href="qhboxlayout.html">QHBoxLayout</a>&nbsp;*&nbsp;layout )<tt> [虚 保护]</tt>
+</h3>  
+这个虚函数是负责添加底部的分割器和下面的按钮。
+<p> <em>layout</em>是整个向导的垂直布局。
+
+<h3 class=fn>void <a name="layOutTitleRow"></a>QWizard::layOutTitleRow ( <a href="qhboxlayout.html">QHBoxLayout</a>&nbsp;*&nbsp;layout, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;title )<tt> [虚 保护]</tt>
+</h3>
+这个虚函数是负责布局上面的标题行并且在标题和向导页之间添加垂直分割器的。<em>layout</em>是向导的垂直布局，并且<em>title</em>是这页的标题。每次<em>title</em>改变时，这个函数都被调用。
+
+<h3 class=fn>void <a name="next"></a>QWizard::next ()<tt> [虚 保护 槽]</tt>
+</h3>
+当用户点击Next按钮，这个函数显示在页顺序中后面的相关页。
+<p> <p>也可以参考<a href="#appropriate">appropriate</a>()。
+
+<h3 class=fn><a href="qpushbutton.html">QPushButton</a>&nbsp;* <a name="nextButton"></a>QWizard::nextButton () const
+</h3>
+返回对话框的Next按钮的指针。
+<p> 默认情况下，这个按钮会被连接到<a href="#next">next</a>()槽，它是虚的，这样你可以在QWizard的子类中重新实现它。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="page"></a>QWizard::page ( int&nbsp;index ) const
+</h3>
+返回在页顺序中<em>index</em>位置的页的指针，或者如果<em>index</em>超出范围，返回0。第一页的索引是0。
+
+<h3 class=fn>int <a name="pageCount"></a>QWizard::pageCount () const
+</h3>  
+返回向导中的页数。
+
+<h3 class=fn>void <a name="removePage"></a>QWizard::removePage ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page )<tt> [虚]</tt>
+</h3>
+从页顺序中移除<em>page</em>但不删除它。如果<em>page</em>当前正被显示，QWizard将会显示它前面的一页，或者如果它是第一页就显示第一页。
+
+<h3 class=fn>void <a name="selected"></a>QWizard::selected ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [信号]</tt>
+</h3>
+<p> 当当前页发生变化，这个信号被发射。参数包含被选择页的标题。
+
+<h3 class=fn>void <a name="setAppropriate"></a>QWizard::setAppropriate ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page, bool&nbsp;appropriate )<tt> [虚]</tt>
+</h3>
+如果<em>appropriate</em>为真，那么页<em>page</em>别考虑为和当前上下文相关的并且应该在页顺序中被显示，否则<em>page</em>就不会在页顺序中被显示。
+<p> <p>也可以参考<a href="#appropriate">appropriate</a>()。
+
+<h3 class=fn>void <a name="setBackEnabled"></a>QWizard::setBackEnabled ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page, bool&nbsp;enable )<tt> [虚 槽]</tt>
+</h3>
+如果<em>enable</em>为真，页<em>page</em>有一个Back按钮，否则<em>page</em>就没有Back按钮。默认所有页都有这个按钮。
+
+<h3 class=fn>void <a name="setFinish"></a>QWizard::setFinish ( <a href="qwidget.html">QWidget</a>&nbsp;*, bool )<tt> [虚 槽]</tt>
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 使用setFinishEnabled替代。
+
+<h3 class=fn>void <a name="setFinishEnabled"></a>QWizard::setFinishEnabled ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page, bool&nbsp;enable )<tt> [虚 槽]</tt>
+</h3>
+如果<em>enable</em>为真，页<em>page</em>有一个Finish按钮，否则<em>page</em>就没有Finish按钮。默认所有页都<em>没有</em>这个按钮。
+
+<h3 class=fn>void <a name="setHelpEnabled"></a>QWizard::setHelpEnabled ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page, bool&nbsp;enable )<tt> [虚 槽]</tt>
+</h3>
+如果<em>enable</em>为真，页<em>page</em>有一个Help按钮，否则<em>page</em>就没有Help按钮。默认所有页都有这个按钮。
+
+<h3 class=fn>void <a name="setNextEnabled"></a>QWizard::setNextEnabled ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page, bool&nbsp;enable )<tt> [虚 槽]</tt>
+</h3>
+如果<em>enable</em>为真，页<em>page</em>有一个Next按钮，否则<em>Next</em>就没有Help按钮。默认所有页都有这个按钮。
+
+<h3 class=fn>void <a name="setTitle"></a>QWizard::setTitle ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;title )
+</h3>  
+设置页<em>page</em>的标题为<em>title</em>。
+
+<h3 class=fn>void <a name="setTitleFont"></a>QWizard::setTitleFont ( const&nbsp;<a href="qfont.html">QFont</a>&nbsp;&amp; )
+</h3>
+<p>设置页标题所用的字体。详细情况请参考<a href="qwizard.html#titleFont-prop">“titleFont”</a>属性。
+
+<h3 class=fn>void <a name="showPage"></a>QWizard::showPage ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page )<tt> [虚]</tt>
+</h3>  
+让<em>page</em>为当前页并且发射<a href="#selected">selected</a>()信号。
+<p>实例：<a href="wizard-example.html#x15">wizard/wizard.cpp</a>。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="title"></a>QWizard::title ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;page ) const
+</h3>  
+返回页<em>page</em>的标题。
+
+<h3 class=fn><a href="qfont.html">QFont</a> <a name="titleFont"></a>QWizard::titleFont () const
+</h3>
+<p>返回页标题所有的字体。详细情况请参考<a href="qwizard.html#titleFont-prop">“titleFont”</a>属性。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn><a href="qfont.html">QFont</a> <a name="titleFont-prop"></a>titleFont</h3>
+<p>这个属性保存的是页标题使用的字体。
+<p>默认是<a href="qapplication.html#font">QApplication::font</a>()。
+<p>通过<a href="#setTitleFont">setTitleFont</a>()设置属性值并且通过<a href="#titleFont">titleFont</a>()来获得属性值。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

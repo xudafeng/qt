@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QDoubleValidator类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QDoubleValidator类参考</h1>
+
+<p>QDoubleValidator类提供了对浮点数的范围检查。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qvalidator-h.html">qvalidator.h</a>&gt;</tt>
+<p>继承了<a href="qvalidator.html">QValidator</a>。
+<p><a href="qdoublevalidator-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QDoubleValidator"><b>QDoubleValidator</b></a> ( QObject&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QDoubleValidator-2"><b>QDoubleValidator</b></a> ( double&nbsp;bottom, double&nbsp;top, int&nbsp;decimals, QObject&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#~QDoubleValidator"><b>~QDoubleValidator</b></a> ()</div></li>
+<li><div class=fn>virtual QValidator::State <a href="#validate"><b>validate</b></a> ( QString&nbsp;&amp;&nbsp;input, int &amp; ) const</div></li>
+<li><div class=fn>virtual void <a href="#setRange"><b>setRange</b></a> ( double&nbsp;minimum, double&nbsp;maximum, int&nbsp;decimals = 0 )</div></li>
+<li><div class=fn>void <a href="#setBottom"><b>setBottom</b></a> ( double )</div></li>
+<li><div class=fn>void <a href="#setTop"><b>setTop</b></a> ( double )</div></li>
+<li><div class=fn>void <a href="#setDecimals"><b>setDecimals</b></a> ( int )</div></li>
+<li><div class=fn>double <a href="#bottom"><b>bottom</b></a> () const</div></li>
+<li><div class=fn>double <a href="#top"><b>top</b></a> () const</div></li>
+<li><div class=fn>int <a href="#decimals"><b>decimals</b></a> () const</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>double <a href="#bottom-prop"><b>bottom</b></a>&nbsp;- 验证器可接受的最小值</div></li>
+<li><div class=fn>int <a href="#decimals-prop"><b>decimals</b></a>&nbsp;- 验证器可接受的小数点后数字的最大位数</div></li>
+<li><div class=fn>double <a href="#top-prop"><b>top</b></a>&nbsp;- 验证器可接受的最大值</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+<p> QDoubleValidator类提供了对浮点数的范围检查。
+<p> 
+<p> QDoubleValidator提供了一个上限、一个下限和一个小数点后数字位数的限制。它没有提供<a href="qvalidator.html#fixup">fixup</a>()函数。
+<p> 你可以通过调用<a href="#setRange">setRange</a>()或者<a href="#setBottom">setBottom</a>()和<a href="#setTop">setTop</a>()来设置可接受的范围。可以通过调用<a href="#setDecimals">setDecimals</a>()设置小数的位数。<a href="#validate">validate</a>()函数返回验证状态。
+<p> <p>请参考<a href="qintvalidator.html">QIntValidator</a>、<a href="qregexpvalidator.html">QRegExpValidator</a>和<a href="misc.html">杂项类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QDoubleValidator"></a>QDoubleValidator::QDoubleValidator ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个父对象为<em>parent</em>、名称为<em>name</em>的接受任何双精度实数的验证器。
+
+<h3 class=fn><a name="QDoubleValidator-2"></a>QDoubleValidator::QDoubleValidator ( double&nbsp;bottom, double&nbsp;top, int&nbsp;decimals, <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个一个父对象为<em>parent</em>、名称为<em>name</em>的接受从<em>bottom</em>到<em>top</em>，最多<em>decimals</em>小数的双精度实数的验证器。
+
+<h3 class=fn><a name="~QDoubleValidator"></a>QDoubleValidator::~QDoubleValidator ()
+</h3>
+销毁这个验证器，释放所有已经使用的资源。
+
+<h3 class=fn>double <a name="bottom"></a>QDoubleValidator::bottom () const
+</h3>
+<p>返回验证器可接受的最小值。详细情况请参考<a href="qdoublevalidator.html#bottom-prop">“bottom”</a>属性。
+
+<h3 class=fn>int <a name="decimals"></a>QDoubleValidator::decimals () const
+</h3>
+<p>返回验证器可接受的小数点后数字的最大位数。详细情况请参考<a href="qdoublevalidator.html#decimals-prop">“decimals”</a>属性。
+
+<h3 class=fn>void <a name="setBottom"></a>QDoubleValidator::setBottom ( double )
+</h3>
+<p>设置验证器可接受的最小值。详细情况请参考<a href="qdoublevalidator.html#bottom-prop">“bottom”</a>属性。
+
+<h3 class=fn>void <a name="setDecimals"></a>QDoubleValidator::setDecimals ( int )
+</h3>
+<p>设置验证器可接受的小数点后数字的最大位数。详细情况请参考<a href="qdoublevalidator.html#decimals-prop">“decimals”</a>属性。
+
+<h3 class=fn>void <a name="setRange"></a>QDoubleValidator::setRange ( double&nbsp;minimum, double&nbsp;maximum, int&nbsp;decimals = 0 )<tt> [虚]</tt>
+</h3>
+设置验证器可以接受从<em>minimum</em>到<em>maximum</em>（包括边界），小数点后数字的最大位数为<em>decimals</em>的双精度实数。
+
+<h3 class=fn>void <a name="setTop"></a>QDoubleValidator::setTop ( double )
+</h3>
+<p>设置验证器可接受的最大值。详细情况请参考<a href="qdoublevalidator.html#top-prop">“top”</a>属性。
+
+<h3 class=fn>double <a name="top"></a>QDoubleValidator::top () const
+</h3>
+<p>返回验证器可接受的最大值。详细情况请参考<a href="qdoublevalidator.html#top-prop">“top”</a>属性。
+
+<h3 class=fn><a href="qvalidator.html#State-enum">QValidator::State</a> <a name="validate"></a>QDoubleValidator::validate ( <a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;input, int &amp; ) const<tt> [虚]</tt>
+</h3>
+如果字符串<em>input</em>包含在正确范围内并且格式正确的双精度实数，返回<a href="qvalidator.html#State-enum">Acceptable</a>。
+<p> 如果<em>input</em>包含在范围之外的或者格式错误的双精度实数，例如为空或者小数位数超过范围，返回<a href="qvalidator.html#State-enum">Intermediate</a>。
+<p> 如果<em>input</em>不是双精度实数，返回<a href="qvalidator.html#State-enum">Invalid</a>。
+<p>从 <a href="qvalidator.html#validate">QValidator</a>中重新实现的。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>double <a name="bottom-prop"></a>bottom</h3> 
+<p>这个属性保存的是验证器可接受的最小值。
+<p>通过<a href="#setBottom">setBottom</a>()可以设置属性值并且通过<a href="#bottom">bottom</a>()返回属性值。
+<p><p>也可以参考<a href="#setRange">setRange</a>()。
+
+<h3 class=fn>int <a name="decimals-prop"></a>decimals</h3> 
+<p>这个属性保存的是可接受的小数点后数字的最大位数。
+<p>通过<a href="#setDecimals">setDecimals</a>()可以设置属性值并且通过<a href="#decimals">decimals</a>()返回属性值。
+<p><p>也可以参考<a href="#setRange">setRange</a>()。
+
+<h3 class=fn>double <a name="top-prop"></a>top</h3> 
+<p>这个属性保存的是验证器可接受的最大值。
+<p>通过<a href="#setTop">setTop</a>()可以设置属性值并且通过<a href="#top">top</a>()返回属性值。
+<p><p>也可以参考<a href="#setRange">setRange</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

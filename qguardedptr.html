@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QGuardedPtr类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QGuardedPtr类参考</h1>
+
+<p>QGuardedPtr类是一个提供被监视的QObject的指针的模板类。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qguardedptr-h.html">qguardedptr.h</a>&gt;</tt>
+<p><a href="qguardedptr-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QGuardedPtr"><b>QGuardedPtr</b></a> ()</div></li>
+<li><div class=fn><a href="#QGuardedPtr-2"><b>QGuardedPtr</b></a> ( T&nbsp;*&nbsp;p )</div></li>
+<li><div class=fn><a href="#QGuardedPtr-3"><b>QGuardedPtr</b></a> ( const&nbsp;QGuardedPtr&lt;T&gt;&nbsp;&amp;&nbsp;p )</div></li>
+<li><div class=fn><a href="#~QGuardedPtr"><b>~QGuardedPtr</b></a> ()</div></li>
+<li><div class=fn>QGuardedPtr&lt;T&gt; &amp; <a href="#operator-eq"><b>operator=</b></a> ( const&nbsp;QGuardedPtr&lt;T&gt;&nbsp;&amp;&nbsp;p )</div></li>
+<li><div class=fn>QGuardedPtr&lt;T&gt; &amp; <a href="#operator-eq-2"><b>operator=</b></a> ( T&nbsp;*&nbsp;p )</div></li>
+<li><div class=fn>bool <a href="#operator-eq-eq"><b>operator==</b></a> ( const&nbsp;QGuardedPtr&lt;T&gt;&nbsp;&amp;&nbsp;p ) const</div></li>
+<li><div class=fn>bool <a href="#operator!-eq"><b>operator!=</b></a> ( const&nbsp;QGuardedPtr&lt;T&gt;&nbsp;&amp;&nbsp;p ) const</div></li>
+<li><div class=fn>bool <a href="#isNull"><b>isNull</b></a> () const</div></li>
+<li><div class=fn>T * <a href="#operator--gt"><b>operator-&gt;</b></a> () const</div></li>
+<li><div class=fn>T &amp; <a href="#operator*"><b>operator*</b></a> () const</div></li>
+<li><div class=fn><a href="#operator-T-*"><b>operator T *</b></a> () const</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QGuardedPtr类是一个提供被监视的QObject的指针的模板类。
+<p> 
+
+<p> 一个被监视的指针，<tt>QGuardedPtr&lt;X&gt;</tt>行为就和一个普通的C++指针<tt>X*</tt>一样，除了当被引用的对象被销毁时，它能够自动地被设置为0（不像普通的C++指针，在这种情况下就变成了“摇摆的指针”）。<tt>X</tt>必须是<a href="qobject.html">QObject</a>的子类。
+<p> 只要你需要存储一个被其它的所拥有的并且有可能在你还保留它的引用的时候它已经被销毁了的QObject的指针的时候，被监视的指针就是有用的。你可以安全地测试指针的有效性。
+<p> 实例：
+<pre>
+        QGuardedPtr&lt;QFrame&gt; label = new <a href="qlabel.html">QLabel</a>( 0,"label" );
+        label-&gt;setText( "I like guarded pointers" );
+
+        delete (QLabel*) label; // 模拟某人销毁了这个标签
+
+        if ( label)
+            label-&gt;show();
+        else
+            <a href="qapplication.html#qDebug">qDebug</a>("The label has been destroyed");
+    </pre>
+ 
+<p> 这个程序将会输出
+<pre>
+        The label has been destroyed
+    </pre>
+ 
+而不是解除引用的<tt>label-&gt;show()</tt>的一个无效地址。
+<p> QGuardedPtr提供的函数和操作符和普通的未被监视的指针提供的一样，除了指针的算术运算（++、--、-和+），它们通常只对数组对象有用。把它们用作普通的指针，你就不需要再都这份类文档了。
+<p> 为了创建被监视的指针，你可以通过一个X*或者另一个同类型的被监视的指针来构造和赋值。你可以用<a href="#operator-eq-eq">operator==</a>()来比较它们是不是相等，用<a href="#operator!-eq">operator!=</a>()来比较它们是不是不等，或者用<a href="#isNull">isNull</a>()来测试它是否为零。并且你可以使用<tt>*x</tt>或<tt>x-&gt;member</tt>符号来解除引用。
+<p> 被监视的指针会自动地抛出X*，所以你可以自由地混合被监视的和未被监视的指针。这也就是说如果你有一个QGuardedPtr<QWidget>，你可以把它传递给一个需要<a href="qwidget.html">QWidget</a>*的函数。因为这个原因，在声明函数中使用一个QGuardedPtr作为参数，没有多少价值，所以请使用普通的指针。当你长时间保存一个指针的时候，请使用QGuardedPtr。
+<p> 请再次注意<em>X</em>类必须继承<a href="qobject.html">QObject</a>，否则会得到一个编译或者链接错误。
+<p>也可以参考<a href="objectmodel.html">对象模型</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QGuardedPtr"></a>QGuardedPtr::QGuardedPtr ()
+</h3>
+<p> 构造一个为0的被监视的指针。
+<p> <p>也可以参考<a href="#isNull">isNull</a>()。
+
+<h3 class=fn><a name="QGuardedPtr-2"></a>QGuardedPtr::QGuardedPtr ( T&nbsp;*&nbsp;p )
+</h3>
+<p> 构造一个和<em>p</em>指向相同对象的被监视的指针。
+
+<h3 class=fn><a name="QGuardedPtr-3"></a>QGuardedPtr::QGuardedPtr ( const&nbsp;<a href="qguardedptr.html">QGuardedPtr</a>&lt;T&gt;&nbsp;&amp;&nbsp;p )
+</h3>
+<p> 从另一个被监视的指针复制过来。被构造的被监视指针和<em>p</em>指向相同对象（也许它为0）。
+
+<h3 class=fn><a name="~QGuardedPtr"></a>QGuardedPtr::~QGuardedPtr ()
+</h3>
+<p> 销毁这个被监视的指针。就像一个普通的指针一样，销毁被监视的指针并<em>不</em>销毁所指向的对象。
+
+<h3 class=fn>bool <a name="isNull"></a>QGuardedPtr::isNull () const
+</h3>
+<p> 如果被引用的对象已经被销毁或者没有被引用的对象，返回真，否则返回假。
+
+<h3 class=fn><a name="operator-T-*"></a>QGuardedPtr::operator T * () const
+</h3>
+<p> 抛出操作符，实现了指针语义。因为这个函数，你可以通过把一个QGuardedPtr&lt;X&gt;传递给一个需要X*的函数。
+
+<h3 class=fn>bool <a name="operator!-eq"></a>QGuardedPtr::operator!= ( const&nbsp;<a href="qguardedptr.html">QGuardedPtr</a>&lt;T&gt;&nbsp;&amp;&nbsp;p ) const
+</h3>
+<p> 不等于操作符，实现了指针语义。和<a href="#operator-eq-eq">operator==</a>()相反。如果<em>p</em>和这个被监视的指针指向的不是同一个对象，返回真，否则返回假。
+
+<h3 class=fn>T &amp; <a name="operator*"></a>QGuardedPtr::operator* () const
+</h3>
+<p> 解除引用操作符，实现了指针语义。使用这个操作符就像你对普通的C++指针做的一样。
+
+<h3 class=fn>T * <a name="operator--gt"></a>QGuardedPtr::operator-&gt; () const
+</h3>
+<p> 重载箭头操作符，实现了指针语义。使用这个操作符就像你对普通的C++指针做的一样。
+
+<h3 class=fn><a href="qguardedptr.html">QGuardedPtr</a>&lt;T&gt;&nbsp;&amp; <a name="operator-eq"></a>QGuardedPtr::operator= ( const&nbsp;<a href="qguardedptr.html">QGuardedPtr</a>&lt;T&gt;&nbsp;&amp;&nbsp;p )
+</h3>
+<p> 赋值操作符。这个被监视的指针就会和<em>p</em>一样指向相同的对象。
+
+<h3 class=fn><a href="qguardedptr.html">QGuardedPtr</a>&lt;T&gt;&nbsp;&amp; <a name="operator-eq-2"></a>QGuardedPtr::operator= ( T&nbsp;*&nbsp;p )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 赋值操作符。这个被监视的指针就会和<em>p</em>一样指向相同的对象。
+
+<h3 class=fn>bool <a name="operator-eq-eq"></a>QGuardedPtr::operator== ( const&nbsp;<a href="qguardedptr.html">QGuardedPtr</a>&lt;T&gt;&nbsp;&amp;&nbsp;p ) const
+</h3>
+<p> 等于操作符，实现了传统的指针语义。如果<em>p</em>和这个被监视的指针都是0，或者如果<em>p</em>和这个被监视的指针都指向相同的对象，返回真，否则返回假。
+<p> <p>也可以参考<a href="#operator!-eq">operator!=</a>().
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

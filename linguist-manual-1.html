@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>介绍</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<p align="right">[<a href="linguist-manual.html">Qt语言学家首页</a>] [<a href="linguist-manual-2.html">下一章：发布管理器</a>]</p>
+<h2 align="center">介绍</h2>
+<p>Qt提供对于把应用程序翻译为本地语言的极好的支持。本指南解释了在翻译应用程序的时候每个角色如何使用Qt的翻译工具。本指南从一些必须考虑的的方面的一个简要的概述开始，接下来的各章将针对每个角色和所提供的工具支持。</p>
+<p><a href="linguist-manual-2.html">第二章：发布管理器</a>针对的是对程序发布负全部责任的人。他们将主要来协调软件工程师和翻译人员的工作。这一章说明了两个工具的用法。<a href="linguist-manual-2.html#2">lupdate</a>工具用来同步源程序和翻译。<a href="linguist-manual-2.html#3">lrelease</a>工具用来创建在发布应用程序时要用到的实时翻译文件。</p>
+<p><a href="linguist-manual-3.html">第三章：翻译人员</a>针对的是翻译人员。它说明了<em>Qt语言学家</em>这个工具的用法。不需要比开始一个程序更多的计算机知识的能力，并且需要使用文本编辑器或者文字处理软件。</p>
+<p><a href="linguist-manual-4.html">第四章：程序员</a>针对的是Qt程序员。它解释了如何创建可以使用翻译文本的Qt应用程序。它也对翻译人员如何识别短语出现的上下文提供了指导。这一章的三个小教程覆盖了程序员所要做的一切事情。</p>
+<h3><a name="1"></a>翻译过程的概述</h3>
+<p>应用程序中要被翻译的绝大多数文本都是单个词或者短语。这些通常出现在窗口标题、菜单条目、弹出帮助文本（气球帮助）和按钮、复选框和单选按钮的标签。</p>
+<p>程序员把需要翻译的短语按照他们自己的语言，使用一种简单但特殊的语法放到源代码中。Qt工具为帮助翻译人员对每个短语提供了上下文信息，并且程序员能够在需要的时候为短语添加额外的上下文信息。发布管理器从源代码中生成一套翻译文件并且传递给翻译人员。翻译人员使用<em>Qt语言学家</em>打开这个翻译文件，输入他们的翻译并且把结果保存为翻译文件再传递给发布管理器。发布管理器再为应用程序的使用把这些已经提供的翻译文件生成为更加快速紧凑的版本。这个工具被设计用于当应用程序的变化和发展的重复的周期，能够保存已有的翻译并且能够很容易的标明需要翻译的新的内容。<em>Qt语言学家</em>也提供了一个短语工具书来帮助确保多个应用程序和项目的翻译的一致性。</p>
+<p>由于人类语言的细微差别和复杂性，翻译人员和程序员必须注意以下一些问题：</p>
+<ul><li><p>一个词也许需要根据上下文来翻译成不同的形式，比如英语中的<em>open</em>可能就会变成如下形式：德语中的<em>&ouml;ffnen</em>，“open file”（中文中的“打开文件”）或者德语中的<em>aufbauen</em>，“open internet connection”（中文中的“开打互联网连接”）。</p>
+<li><p>键盘快捷键可能需要改变，但是没有介绍冲突，比如英文中的“&amp;Quit”变成了挪威文中的不再含有“Q”的“Avslutt”。我们不能改变这个正在使用中的字母——除非我们改变几个快捷键。</p>
+<li><p>短语中包含变量，比如，“The 25 files selected will take 63 seconds to process”，运行时被程序自动的插入的两个数字也许需要重新叙述，因为在不同的语言中词序不同，所以变量的位置也许需要变化。</p>
+</ul><p>这个Qt翻译工具对这些问题提供了简单清晰的解决方案。</p>
+<p><hr></p>
+<p>关于这个教程如果有任何注释和建议请写信到<a href="mailto:doc@trolltech.com?subject=Translation_Tutorial">Qt文档小组</a>。工具中的bug请寄到<a href="mailto:qt-bugs@trolltech.com?subject=Translation_Tutorial">qt-bugs</a>。</p>
+<!-- eof -->
+<p align="right">[<a href="linguist-manual.html">Qt语言学家首页</a>] [<a href="linguist-manual-2.html">下一章：发布管理器</a>]</p>
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

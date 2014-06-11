@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QStatusBar类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QStatusBar类参考</h1>
+
+<p> QStatusBar类提供了一个适合呈现状态信息的水平条。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qstatusbar-h.html">qstatusbar.h</a>&gt;</tt>
+<p>Inherits <a href="qwidget.html">QWidget</a>。
+<p><a href="qstatusbar-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QStatusBar"><b>QStatusBar</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>virtual <a href="#~QStatusBar"><b>~QStatusBar</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#addWidget"><b>addWidget</b></a> ( QWidget&nbsp;*&nbsp;widget, int&nbsp;stretch = 0, bool&nbsp;permanent = FALSE )</div></li>
+<li><div class=fn>virtual void <a href="#removeWidget"><b>removeWidget</b></a> ( QWidget&nbsp;*&nbsp;widget )</div></li>
+<li><div class=fn>void <a href="#setSizeGripEnabled"><b>setSizeGripEnabled</b></a> ( bool )</div></li>
+<li><div class=fn>bool <a href="#isSizeGripEnabled"><b>isSizeGripEnabled</b></a> () const</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>void <a href="#message"><b>message</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;message )</div></li>
+<li><div class=fn>void <a href="#message-2"><b>message</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;message, int&nbsp;ms )</div></li>
+<li><div class=fn>void <a href="#clear"><b>clear</b></a> ()</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>bool <a href="#sizeGripEnabled-prop"><b>sizeGripEnabled</b></a>&nbsp;- 在状态条右下方的QSizeGrip是否有效</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#paintEvent"><b>paintEvent</b></a> ( QPaintEvent * )</div></li>
+<li><div class=fn>void <a href="#reformat"><b>reformat</b></a> ()</div></li>
+<li><div class=fn>void <a href="#hideOrShow"><b>hideOrShow</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+<p> QStatusBar类提供了一个适合呈现状态信息的水平条。
+<p> 
+<p> 每一个状态指示器都会落在下面这三种类别之内：
+<p> <ul>
+<li> <em>临时的</em> - 暂时地占用状态条的大部分。例如，用于解释工具提示文本或者菜单条目。
+<li> <em>正常的</em> - 占用状态条的一部分并且也可能被临时的信息隐藏。例如，用于在字处理器中显示页数和行数。
+<li> <em>永久的</em> - 从不被隐藏。用于重要的模式指示，例如，一些程序把大小写指示器放在状态条中。
+</ul>
+<p> QStatusBar让你能够显示上述所有类型的指示信息。
+<p> 为了显示<em>临时的</em>消息，请调用<a href="#message">message</a>()（可以把一个合适的信号和它连接起来）。如果要移除一个临时的消息，调用<a href="#clear">clear</a>()。这里有两类消息：一类消息一直显示到下一个clear()或mesage()被调用才消失，并且另一种是有时间限制的：
+<p> <pre>
+     <a href="qobject.html#connect">connect</a>( loader, SIGNAL(progressMessage(const <a href="qstring.html">QString</a>&amp;)),
+              statusBar(), SLOT(<a href="#message">message</a>(const <a href="qstring.html">QString</a>&amp;)) );
+
+     statusBar()-&gt;message("Loading...");  // 初始消息
+     loader.loadStuff();                  // 发射进程消息
+     statusBar()-&gt;message("Done.", 2000); // 显示2秒的最后消息
+  </pre>
+ 
+<p> <em>正常的</em>和<em>永久的</em>消息通过创建一个小窗口部件并且然后通过<a href="#addWidget">addWidget</a>()把它添加到状态条中来被显示。<a href="qlabel.html">QLabel</a>、<a href="qprogressbar.html">QProgressBar</a>或者甚至<a href="qtoolbutton.html">QToolButton</a>这些窗口部件对于添加到状态条都是很有用的。<a href="#removeWidget">removeWidget</a>()用于移除窗口部件。
+<p> <pre>
+     statusBar()-&gt;addWidget(new MyReadWriteIndication(statusBar()));
+  </pre>
+ 
+<p> 默认情况下，QStatusBar在右下角提供了一个<a href="qsizegrip.html">QSizeGrip</a>。你可以使用<a href="#setSizeGripEnabled">setSizeGripEnabled</a>(FALSE)来使它失效。
+<p> <img src=qstatusbar-m.png> <img src=qstatusbar-w.png>
+<p> <p>也可以参考<a href="qtoolbar.html">QToolBar</a>、<a href="qmainwindow.html">QMainWindow</a>、<a href="qlabel.html">QLabel</a>、<a href="guibooks.html#fowler">图形用户界面设计手册：状态条</a>、<a href="application.html">主窗口和相关类</a>和<a href="helpsystem.html">帮助系统</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QStatusBar"></a>QStatusBar::QStatusBar ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个父对象为<em>parent</em>、名称为<em>name</em>并且有一个大小控制的状态条。
+<p> <p>也可以参考<a href="#sizeGripEnabled-prop">sizeGripEnabled</a>。
+
+<h3 class=fn><a name="~QStatusBar"></a>QStatusBar::~QStatusBar ()<tt> [虚]</tt>
+</h3>
+销毁这个状态条并且释放任何已经分配的资源和子窗口部件。
+
+<h3 class=fn>void <a name="addWidget"></a>QStatusBar::addWidget ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;widget, int&nbsp;stretch = 0, bool&nbsp;permanent = FALSE )<tt> [虚]</tt>
+</h3>
+把<em>widget</em>添加到这个状态条。
+<p> 如果<em>permanent</em>为真，<em>widget</em>就是永久可视的并且如果<em>permanent</em>为假，它也可以被临时的消息遮挡。默认为假。
+<p> 如果<em>permanent</em>为真，<em>widget</em>被定位在状态条的最右面。如果<em>permanent</em>为假（默认），<em>widget</em>被调节到第一个永久窗口部件的左面。
+<p> <em>stretch</em>用于在状态条变大或者变小时为<em>widget</em>计算一个合适的大小。默认为0是指使用最小的空间。
+<p> 这个函数可以导致一些闪烁。
+<p> <p>也可以参考<a href="#removeWidget">removeWidget</a>()。
+
+<h3 class=fn>void <a name="clear"></a>QStatusBar::clear ()<tt> [槽]</tt>
+</h3>
+移除正在被显示的任何临时的消息。
+<p> <p>也可以参考<a href="#message">message</a>()。
+
+<h3 class=fn>void <a name="hideOrShow"></a>QStatusBar::hideOrShow ()<tt> [保护]</tt>
+</h3>
+确保右面的窗口部件是可视的。被<a href="#message">message</a>()和<a href="#clear">clear</a>()使用。
+
+<h3 class=fn>bool <a name="isSizeGripEnabled"></a>QStatusBar::isSizeGripEnabled () const
+</h3>
+<p>如果在状态条右下方的<a href="qsizegrip.html">QSizeGrip</a>是生效的，返回真，否则返回假。详细情况请参考<a href="qstatusbar.html#sizeGripEnabled-prop">“sizeGripEnabled”</a>属性。
+
+<h3 class=fn>void <a name="message"></a>QStatusBar::message ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;message )<tt> [槽]</tt>
+</h3>
+隐藏正常状态指示器并且显示<em>message</em>，直到<a href="#clear">clear</a>()或者另一个<a href="#message">message</a>()被调用。
+<p> <p>也可以参考<a href="#clear">clear</a>()。
+
+<h3 class=fn>void <a name="message-2"></a>QStatusBar::message ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;message, int&nbsp;ms )<tt> [槽]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 隐藏正常状态指示器并且显示<em>message</em><em>ms</em>毫秒，或者直到<a href="#clear">clear</a>()或者另一个<a href="#message">message</a>()被调用，看哪一个先发生了。
+
+<h3 class=fn>void <a name="paintEvent"></a>QStatusBar::paintEvent ( <a href="qpaintevent.html">QPaintEvent</a>&nbsp;* )<tt> [虚 保护]</tt>
+</h3>
+如果适当，显示临时的消息。
+<p>从<a href="qwidget.html#paintEvent">QWidget</a>中重新实现。
+
+<h3 class=fn>void <a name="reformat"></a>QStatusBar::reformat ()<tt> [保护]</tt>
+</h3>  
+改变状态条的外观来说明项的变化。特殊的子类可能需要这个，但是几何形状管理将通常要注意任何需要的重新整理。
+
+<h3 class=fn>void <a name="removeWidget"></a>QStatusBar::removeWidget ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;widget )<tt> [虚]</tt>
+</h3>
+从状态条中移除<em>widget</em>。
+<p> 这个函数可能导致一些闪烁。
+<p> 注意<em>widget</em>没有被删除。
+<p> <p>也可以参考<a href="#addWidget">addWidget</a>()。
+
+<h3 class=fn>void <a name="setSizeGripEnabled"></a>QStatusBar::setSizeGripEnabled ( bool )
+</h3>
+<p>设置在状态条右下方的<a href="qsizegrip.html">QSizeGrip</a>是否生效。详细情况请参考<a href="qstatusbar.html#sizeGripEnabled-prop">“sizeGripEnabled”</a>属性。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>bool <a name="sizeGripEnabled-prop"></a>sizeGripEnabled</h3>
+<p>这个属性保存的是在状态条右下方的<a href="qsizegrip.html">QSizeGrip</a>是否有效。
+<p>可以让状态条右下方的QSizeGrip生效或者失效。默认它是生效的。
+<p>通过<a href="#setSizeGripEnabled">setSizeGripEnabled</a>()设置属性值并且通过<a href="#isSizeGripEnabled">isSizeGripEnabled</a>()来获得属性值。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,524 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QMessageBox类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QMessageBox类参考</h1>
+
+<p>QMessageBox类提供了一个有一条简短消息、一个图标和一些按钮的模式对话框。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qmessagebox-h.html">qmessagebox.h</a>&gt;</tt>
+<p>继承了<a href="qdialog.html">QDialog</a>。
+<p><a href="qmessagebox-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>enum <a href="#Icon-enum"><b>Icon</b></a> { NoIcon = 0, Information = 1, Warning = 2, Critical = 3 }</div></li>
+<li><div class=fn><a href="#QMessageBox"><b>QMessageBox</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QMessageBox-2"><b>QMessageBox</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;text, Icon&nbsp;icon, int&nbsp;button0, int&nbsp;button1, int&nbsp;button2, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;modal = TRUE, WFlags&nbsp;f = WStyle_DialogBorder )</div></li>
+<li><div class=fn><a href="#~QMessageBox"><b>~QMessageBox</b></a> ()</div></li>
+<li><div class=fn>QString <a href="#text"><b>text</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setText"><b>setText</b></a> ( const QString &amp; )</div></li>
+<li><div class=fn>Icon <a href="#icon"><b>icon</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setIcon"><b>setIcon</b></a> ( Icon )</div></li>
+<li><div class=fn>const QPixmap * <a href="#iconPixmap"><b>iconPixmap</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setIconPixmap"><b>setIconPixmap</b></a> ( const QPixmap &amp; )</div></li>
+<li><div class=fn>QString <a href="#buttonText"><b>buttonText</b></a> ( int&nbsp;button ) const</div></li>
+<li><div class=fn>void <a href="#setButtonText"><b>setButtonText</b></a> ( int&nbsp;button, const&nbsp;QString&nbsp;&amp;&nbsp;text )</div></li>
+<li><div class=fn>virtual void <a href="#adjustSize"><b>adjustSize</b></a> ()</div></li>
+<li><div class=fn>TextFormat <a href="#textFormat"><b>textFormat</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setTextFormat"><b>setTextFormat</b></a> ( TextFormat )</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>int <a href="#information"><b>information</b></a> ( QWidget&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;text, int&nbsp;button0, int&nbsp;button1 = 0, int&nbsp;button2 = 0 )</div></li>
+<li><div class=fn>int <a href="#information-2"><b>information</b></a> ( QWidget&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;text, const&nbsp;QString&nbsp;&amp;&nbsp;button0Text = QString::null, const&nbsp;QString&nbsp;&amp;&nbsp;button1Text = QString::null, const&nbsp;QString&nbsp;&amp;&nbsp;button2Text = QString::null, int&nbsp;defaultButtonNumber = 0, int&nbsp;escapeButtonNumber = -1 )</div></li>
+<li><div class=fn>int <a href="#warning"><b>warning</b></a> ( QWidget&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;text, int&nbsp;button0, int&nbsp;button1, int&nbsp;button2 = 0 )</div></li>
+<li><div class=fn>int <a href="#warning-2"><b>warning</b></a> ( QWidget&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;text, const&nbsp;QString&nbsp;&amp;&nbsp;button0Text = QString::null, const&nbsp;QString&nbsp;&amp;&nbsp;button1Text = QString::null, const&nbsp;QString&nbsp;&amp;&nbsp;button2Text = QString::null, int&nbsp;defaultButtonNumber = 0, int&nbsp;escapeButtonNumber = -1 )</div></li>
+<li><div class=fn>int <a href="#critical"><b>critical</b></a> ( QWidget&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;text, int&nbsp;button0, int&nbsp;button1, int&nbsp;button2 = 0 )</div></li>
+<li><div class=fn>int <a href="#critical-2"><b>critical</b></a> ( QWidget&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;text, const&nbsp;QString&nbsp;&amp;&nbsp;button0Text = QString::null, const&nbsp;QString&nbsp;&amp;&nbsp;button1Text = QString::null, const&nbsp;QString&nbsp;&amp;&nbsp;button2Text = QString::null, int&nbsp;defaultButtonNumber = 0, int&nbsp;escapeButtonNumber = -1 )</div></li>
+<li><div class=fn>void <a href="#about"><b>about</b></a> ( QWidget&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;text )</div></li>
+<li><div class=fn>void <a href="#aboutQt"><b>aboutQt</b></a> ( QWidget&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;caption = QString::null )</div></li>
+<li><div class=fn>int message ( const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;text, const&nbsp;QString&nbsp;&amp;&nbsp;buttonText = QString::null, QWidget&nbsp;*&nbsp;parent = 0, const char * = 0 ) &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>bool query ( const&nbsp;QString&nbsp;&amp;&nbsp;caption, const&nbsp;QString&nbsp;&amp;&nbsp;text, const&nbsp;QString&nbsp;&amp;&nbsp;yesButtonText = QString::null, const&nbsp;QString&nbsp;&amp;&nbsp;noButtonText = QString::null, QWidget&nbsp;*&nbsp;parent = 0, const char * = 0 ) &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>QPixmap standardIcon ( Icon&nbsp;icon, GUIStyle&nbsp;style ) &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>QPixmap <a href="#standardIcon"><b>standardIcon</b></a> ( Icon&nbsp;icon )</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>Icon <a href="#icon-prop"><b>icon</b></a>&nbsp;- 消息框的图标</div></li>
+<li><div class=fn>QPixmap <a href="#iconPixmap-prop"><b>iconPixmap</b></a>&nbsp;- 当前图标</div></li>
+<li><div class=fn>QString <a href="#text-prop"><b>text</b></a>&nbsp;- 被显示的消息框文本</div></li>
+<li><div class=fn>TextFormat <a href="#textFormat-prop"><b>textFormat</b></a>&nbsp;- 消息框中被显示的文本的格式</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QMessageBox类提供了一个有一条简短消息、一个图标和一些按钮的模式对话框。
+<p> 消息框用于提供情报信息并且问一些简单的问题。
+<p> QMessageBox提供了一个不同信息的范围，大致按两个轴进行排列：严重程度和复杂程度。
+<p> 按严重程度分：
+<center><table cellpadding="4" cellspacing="2" border="0">
+<tr bgcolor="#f0f0f0">
+<td valign="top"><img src="qmessagebox-info.png">
+<td valign="top">信息
+<td valign="top">用于普通操作的一部分的消息框
+<tr bgcolor="#d0d0d0">
+<td valign="top"><img src="qmessagebox-warn.png">
+<td valign="top">警告
+<td valign="top">用于告诉用户一些不常出现的错误的消息框
+<tr bgcolor="#f0f0f0">
+<td valign="top"><img src="qmessagebox-crit.png">
+<td valign="top">严重
+<td valign="top">用于告诉用户严重的错误的消息框
+</table></center>
+<p> 对于每一个严重程度，消息框都有不同的图标。
+<p> 按复杂程度分为一个按钮（确定）的简单消息、或者用于提问的两个或者甚至三个按钮。
+<p> 还有一些用于常用情况的静态函数。
+<p> 实例：
+<p> 如果程序不能找到一个支持文件，但是能在没有它的情况在做得很好：
+<p> <pre>
+QMessageBox::<a href="#information">information</a>( this, "Application name",
+    "Unable to find the user preferences file.\n"
+    "The factory default will be used instead." );
+</pre>
+ 
+<p> <a href="#warning">warning</a>()可以用于告诉用户一些不常出现的错误，或者不容易被修复的错误：
+<p> <pre>
+switch( QMessageBox::<a href="#warning">warning</a>( this, "Application name",
+        "Could not connect to the &lt;mumble&gt; server.\n"
+        "This program can't function correctly "
+        "without the server.\n\n",
+        "Retry",
+        "Quit", 0, 0, 1 ) )
+    case 0: // 用户点击“再试”或者按下回车键
+        // 再次尝试
+        break;
+    case 1: // 用户点击“退出”或者按下Esc键
+        // 退出
+        break;
+}
+</pre>
+ 
+<p> 所有消息框的消息的文本部分都可以是多信息文本或者一般文本。如果拟制定一个多信息文本格式字符串，它将会被使用默认样式单来呈现。详细情况请参考<a href="qstylesheet.html#defaultSheet">QStyleSheet::defaultSheet</a>()。对于包含XML元字符的特定字符串，自动多信息文本检测可能会失败，会把一般文本不正确地解释为多信息文本。在这种情况下，可以使用<a href="qstylesheet.html#convertFromPlainText">QStyleSheet::convertFromPlainText</a>()来把你的一般文本字符串转化为在视觉上一致的多信息文本或者明确地通过<a href="#setTextFormat">setTextFormat</a>()设置文本格式。
+<p> 注意微软视窗用户界面指南强烈建议在把应用程序名称作为这个窗口的标题。
+<p> 下面是更多的关于如何使用静态成员函数地实例。在这些实例之后，你将会找到非静态成员函数的概述。
+<p> 退出程序是正常操作的一部分。如果存在没有保存地数据，用户可能应该被被询问他们是否想保存数据。例如：
+<p> <pre>
+switch( QMessageBox::<a href="#information">information</a>( this, "Application name here",
+        "The document contains unsaved changes\n"
+        "Do you want to save the changes before exiting?",
+        "&amp;Save", "&amp;Discard", "Cancel",
+        0,      // Enter == button 0
+        2 ) ) { // Escape == button 2
+    case 0: // Save被点击或者Alt+S被按下或者Enter被按下。
+        // 保存
+        break;
+    case 1: // Discard被点击或者Alt+D被按下。
+        // 不保存但退出
+        break;
+    case 2: // Cancel被点击或者Alt+C被按下或者Escape被按下。
+        // 不退出
+        break;
+}
+</pre>
+ 
+<p> 为了和微软的建议一致，应用程序的名称被作为窗口标题。Escape按钮撤销整个退出操作，并且按下Enter导致在退出发生之前这些变化被保存。
+<p> 磁盘已满错误是不常见的（在完美的世界中，它们是存在的）并且它们通常很难变为正确。这个实例使用了预定义的按钮来替换了写在代码中的按钮文本：
+<p> <pre>
+switch( QMessageBox::<a href="#warning">warning</a>( this, "Application name here",
+        "Could not save the user preferences,\n"
+        "because the disk is full.  You can delete\n"
+        "some files and press Retry, or you can\n"
+        "abort the Save Preferences operation.",
+        QMessageBox::Retry | QMessageBox::Default,
+        QMessageBox::Abort | QMessageBox::Escape )) {
+    case QMessageBox::Retry: // Retry被点击或者Enter被按下。
+        // 再次尝试
+        break;
+    case QMessageBox::Abort: // Abort被点击或者Escape被按下。
+        // 放弃
+        break;
+}
+</pre>
+ 
+<p> <a href="#critical">critical</a>()函数应用被用于保留严重错误。在这个实例中，errorDetails是<a href="qstring.html">QString</a>或者const char*，并且QString被用于连接几个字符串：
+<p> <pre>
+QMessageBox::<a href="#critical">critical</a>( 0, "Application name here",
+        QString("An internal error occurred. Please ") +
+        "call technical support at 123456789 and report\n"+
+        "these numbers:\n\n" + errorDetails +
+        "\n\n&lt;Application&gt; will now exit." );
+</pre>
+ 
+<p> 在这个实例中，一个“OK”按钮被显示。
+<p> QMessageBox提供了一个非常简单的关于框，可以显示你提供的适当的图标和文本。
+<p> <pre>
+QMessageBox::<a href="#about">about</a>( this, "About &lt;Application&gt;",
+        "&lt;Application&gt; is a &lt;one-paragraph blurb&gt;\n\n"
+        "Copyright 1951-2002 Such-and-such.  "
+        "&lt;License words here.&gt;\n\n"
+        "For technical support, call 123456789 or see\n"
+        "http://www.such-and-such.com/Application/\n" );
+</pre>
+ 
+<p> 更多信息请参考<a href="#about">about</a>()。
+<p> 如果你想让用户知道这个应用程序是使用Qt构建的（这样他们就会知道你使用的是高质量的工具）：你也许喜欢在帮助菜单下的“关于Qt”菜单选项来调用<a href="#aboutQt">aboutQt</a>()。
+<p> 如果没有任何标准消息框是合适地，你可以自己手工创建一个QMessageBox并且自己定义按钮文本：
+<p> <pre>
+QMessageBox mb( "Application name here",
+        "Saving the file will overwrite the original file on the disk.\n"
+        "Do you really want to save?",
+        QMessageBox::<a href="#Icon-enum">Information</a>,
+        QMessageBox::Yes | QMessageBox::Default,
+        QMessageBox::No,
+        QMessageBox::Cancel | QMessageBox::Escape );
+mb.setButtonText( QMessageBox::Yes, "Save" );
+mb.setButtonText( QMessageBox::No, "Discard" );
+switch( mb.exec() ) {
+    case QMessageBox::Yes:
+        // 保存并且退出
+        break;
+    case QMessageBox::No:
+        // 不保存退出
+        break;
+    case QMessageBox::Cancel:
+        // 不保存并且不退出
+        break;
+}
+</pre>
+ 
+<p> QMessageBox定义了两个枚举变量：Icon和没有名称的按钮类型。Icon为每一个图形用户界面风格定义了<a href="#Icon-enum">Information</a>、<a href="#Icon-enum">Warning</a>和<a href="#Icon-enum">Critical</a>图标。它被构造函数和<a href="#information">information</a>()、<a href="#warning">warning</a>()和<a href="#critical">critical</a>()静态函数使用。叫做<a href="#standardIcon">standardIcon</a>()的函数让你能够访问不同的图标。
+<p> 按钮类型有：
+<ul>
+<li> Ok - 单按钮消息框地默认值
+<li> Cancel - 注意这个<em>不是</em>自动和Escape关联的
+<li> Yes
+<li> No
+<li> Abort
+<li> Retry
+<li> Ignore
+</ul>
+<p> 按钮类型可以由上述类型和下面两个修饰成分使用或“|”来进行组合。
+<ul>
+<li> Default - 让按Enter键等于点击这个按钮。通常用于OK、Yes或者其它相似的。
+<li> Escape - 让按Escape键等于点击这个按钮。通常用于Abort、Cancel或者其它相似的。
+</ul>
+<p> <a href="#text">text</a>()、<a href="#icon">icon</a>()和<a href="#iconPixmap">iconPixmap</a>()函数提供了对消息框的当前文本和像素映射的访问。
+<p> <a href="#setButtonText">setButtonText</a>()和<a href="#buttonText">buttonText</a>()提供了对按钮的访问。<a href="#setText">setText</a>()、<a href="#setIcon">setIcon</a>()和<a href="#setIconPixmap">setIconPixmap</a>()让你能够修改它。setIcon()和setIconPixmap()的不同是前者接受QMessageBox::Icon并且用于设置标准图标，而后者接受<a href="qpixmap.html">QPixmap</a>并且用于设置自定义图标。
+<p> QMessageBox没有信号和槽。
+<p> <img src=qmsgbox-m.png> <img src=qmsgbox-w.png>
+<p> <p>也可以参考<a href="qdialog.html">QDialog</a>、<a href="http://www.iarchitect.com/errormsg.htm
+	">Isys on error messages</a>、<a href="guibooks.html#fowler">图形用户界面设计手册：消息框</a>和<a href="dialogs.html">对话框类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="Icon-enum"></a>QMessageBox::Icon</h3>
+<p> 这个枚举变量包含被提供的如下值：
+<ul>
+<li><tt>QMessageBox::NoIcon</tt> - 消息框没有任何图标。
+<li><tt>QMessageBox::Information</tt> - 一个指出这个消息没有超出普通范围的图标。
+<li><tt>QMessageBox::Warning</tt> - 一个指出这个消息是警告，但是还能被处理的图标。
+<li><tt>QMessageBox::Critical</tt> - 一个指出这个消息意味着严重问题的图标。
+</ul><p> 
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QMessageBox"></a>QMessageBox::QMessageBox ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个没有文本和一个标签为“OK”的按钮的消息框。
+<p> 如果<em>parent</em>为0，消息框变为应用程序全局的模式对话框。如果<em>parent</em>为一个窗口部件，消息框变为相对于<em>parent</em>的模式对话框。
+<p> <em>parent</em>和<em>name</em>参数被传递给<a href="qdialog.html">QDialog</a>构造函数。
+
+<h3 class=fn><a name="QMessageBox-2"></a>QMessageBox::QMessageBox ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, <a href="qmessagebox.html#Icon-enum">Icon</a>&nbsp;icon, int&nbsp;button0, int&nbsp;button1, int&nbsp;button2, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;modal = TRUE, WFlags&nbsp;f = WStyle_DialogBorder )
+</h3>
+构造一个标题为<em>caption</em>、文本为<em>text</em>、图标为<em>icon</em>并且最多为三个按钮的消息框。
+<p> <em>icon</em>必须为如下之一：
+<ul>
+<li> QMessageBox::NoIcon
+<li> QMessageBox::Information
+<li> QMessageBox::Warning
+<li> QMessageBox::Critical
+</ul>
+<p> 每一个按钮，<em>button0</em>、<em>button1</em>和<em>button2</em>为如下之一：
+<ul>
+<li> QMessageBox::NoButton
+<li> QMessageBox::Ok
+<li> QMessageBox::Cancel
+<li> QMessageBox::Yes
+<li> QMessageBox::No
+<li> QMessageBox::Abort
+<li> QMessageBox::Retry
+<li> QMessageBox::Ignore
+</ul>
+<p> 如果你的消息框少于三个按钮，QMessageBox::NoButton用于靠后的参数。
+<p> 一个按钮可以和<tt>QMessageBox::Default</tt>标记进行或运算，这使得它成为默认按钮（当Enter被按下时，它被点击）。
+<p> 一个按钮可以和<tt>QMessageBox::Escape</tt>标记进行或运算，这使得它成为撤销或者关闭按钮（当Escape被按下时，它被点击）。
+<p> 实例：
+<pre>
+QMessageBox mb( "Application Name",
+        "Hardware failure.\n\nDisk error detected\nDo you want to stop?",
+        QMessageBox::<a href="#Icon-enum">NoIcon</a>,
+        QMessageBox::Yes | QMessageBox::Default,
+        QMessageBox::No  | QMessageBox::Escape, 
+        QMessageBox::<a href="qt.html#ButtonState-enum">NoButton</a> );
+if ( mb.exec() == QMessageBox::No )
+    // 再次尝试
+</pre>
+ 
+<p> 如果<em>parent</em>为0，消息框变为应用程序全局的模式对话框。如果<em>parent</em>为一个窗口部件，消息框变为相对于<em>parent</em>的模式对话框。
+<p> 如果<em>modal</em>为真，这个消息框变为模式的，否则它变为非模式的。
+<p> <em>parent</em>、<em>name</em>、<em>modal</em>和<em>f</em>参数被传递给<a href="qdialog.html">QDialog</a>构造函数。
+<p> <p>也可以参考<a href="qwidget.html#caption-prop">caption</a>、<a href="#text-prop">text</a>和<a href="#icon-prop">icon</a>。
+
+<h3 class=fn><a name="~QMessageBox"></a>QMessageBox::~QMessageBox ()
+</h3>
+销毁这个消息框。
+
+<h3 class=fn>void <a name="about"></a>QMessageBox::about ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text )<tt> [静态]</tt>
+</h3>
+显示一个标题为<em>caption</em>并且文本为<em>text</em>的简单关于框。关于框的父对象为<em>parent</em>。
+<p> <a href="#about">about</a>()在四个位置查找合适的图标：
+<ol type=1>
+<li> 如果<a href="qwidget.html#icon">parent->icon()</a>存在，它会首先使用它。
+<li> 如果没有，它会尝试一下包含<em>parent</em>的顶级窗口部件。
+<li> 如果这个也失败了，它会尝试<a href="qapplication.html#mainWidget">主窗口部件</a>。
+<li> 作为最后的手段，它使用信息图标。
+</ol>
+<p> 关于框有一个标签为OK的单一按钮。
+<p> <p>也可以参考<a href="qwidget.html#icon-prop">QWidget::icon</a>和<a href="qapplication.html#mainWidget">QApplication::mainWidget</a>()。
+<p>实例：<a href="qaction-application-example.html#x1074">action/application.cpp</a>、<a href="simple-application-example.html#x1519">application/application.cpp</a>、<a href="canvas-chart-example.html#x2603">chart/chartform.cpp</a>、<a href="helpviewer-example.html#x995">helpviewer/helpwindow.cpp</a>、<a href="mdi-example.html#x2019">mdi/application.cpp</a>、<a href="menu-example.html#x1865">menu/menu.cpp</a>和<a href="themes-example.html#x290">themes/themes.cpp</a>。
+
+<h3 class=fn>void <a name="aboutQt"></a>QMessageBox::aboutQt ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption = QString::null )<tt> [静态]</tt>
+</h3>
+显示标题为<em>caption</em>并且放在<em>parent</em>（如果<em>parent</em>不为0）的中间关于Qt的简单消息框。这个消息包含这个应用程序正在使用的Qt的版本号。
+<p> 这个会被包含在帮助菜单中。关于实例请参考examples/menu/menu.cpp。
+<p>实例：<a href="qaction-application-example.html#x1075">action/application.cpp</a>、<a href="simple-application-example.html#x1520">application/application.cpp</a>、<a href="canvas-chart-example.html#x2604">chart/chartform.cpp</a>、<a href="helpviewer-example.html#x996">helpviewer/helpwindow.cpp</a>、<a href="menu-example.html#x1866">menu/menu.cpp</a>、<a href="themes-example.html#x291">themes/themes.cpp</a>和<a href="trivial-nsplugin-example.html#x2570">trivial/trivial.cpp</a>。
+
+<h3 class=fn>void <a name="adjustSize"></a>QMessageBox::adjustSize ()<tt> [虚]</tt>
+</h3>
+仅在<a href="qdialog.html#exec">QDialog::exec</a>()或<a href="qdialog.html#show">QDialog::show</a>()被调用之前调节消息框的大小来适合内容。
+<p> 如果消息框在显示之前已经被明显地重新定义大小，这个函数就不会被调用。
+<p>从<a href="qwidget.html#adjustSize">QWidget</a>中重新实现。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="buttonText"></a>QMessageBox::buttonText ( int&nbsp;button ) const
+</h3>
+返回消息框按钮<em>button</em>的文本，或者如果消息框没有包含这个按钮返回零。
+<p> <p>也可以参考<a href="#setButtonText">setButtonText</a>()。
+
+<h3 class=fn>int <a name="critical"></a>QMessageBox::critical ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, int&nbsp;button0, int&nbsp;button1, int&nbsp;button2 = 0 )<tt> [静态]</tt>
+</h3>
+打开一个标题为<em>caption</em>并且文本为<em>text</em>的严重消息框。这个对话框最多有三个按钮。每个按钮参数<em>button0</em>、<em>button1</em>和<em>button2</em>被设置为下列各值之一：
+<p> <ul>
+<li> QMessageBox::NoButton
+<li> QMessageBox::Ok
+<li> QMessageBox::Cancel
+<li> QMessageBox::Yes
+<li> QMessageBox::No
+<li> QMessageBox::Abort
+<li> QMessageBox::Retry
+<li> QMessageBox::Ignore
+</ul>
+<p> 如果你不想要三个按钮，设置最后一个按钮或者最后两个按钮为QMessageBox::NoButton。
+<p> 返回被点击的按钮地标识（QMessageBox::Ok或QMessageBox::No等等）。
+<p> 如果<em>parent</em>为0，消息框变为应用程序全局的模式对话框。如果<em>parent</em>为一个窗口部件，消息框变为相对于<em>parent</em>的模式对话框。
+<p> <p>也可以参考<a href="#information">information</a>()和<a href="#warning">warning</a>()。
+<p>实例：<a href="ftpclient-example.html#x664">network/ftpclient/ftpmainwindow.cpp</a>、<a href="process-example.html#x64">process/process.cpp</a>和<a href="outliner-example.html#x1906">xml/outliner/outlinetree.cpp</a>。
+
+<h3 class=fn>int <a name="critical-2"></a>QMessageBox::critical ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;button0Text = QString::null, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;button1Text = QString::null, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;button2Text = QString::null, int&nbsp;defaultButtonNumber = 0, int&nbsp;escapeButtonNumber = -1 )<tt> [静态]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 显示一个标题为<em>caption</em>、文本为<em>text</em>并且按钮分别为1、2、3的严重消息对话框。返回被点击的按钮的数字（0、1或2）。
+<p> <em>button0Text</em>为第一个按钮的文本并且它是可选的。如果<em>button0Text</em>没有被提供，“OK”（被翻译的）将被使用。<em>button1Text</em>为第二个按钮的文本并且它是可选的并且<em>button2Text</em>为第三个按钮的文本并且它是可选的。<em>defaultButtonNumber</em>（0、1或2）是默认按钮的索引，按下Return或者Enter和点击这个默认按钮是相同的。它默认为0（第一个按钮）。<em>escapeButtonNumber</em>是Escape按钮的索引，按下Escape和点击这个按钮是相同的。它默认为-1（就是按下Escape什么也不做），提供0、1或2使按下Escape等同于按下对应的按钮。
+<p> 如果<em>parent</em>为0，消息框变为应用程序全局的模式对话框。如果<em>parent</em>为一个窗口部件，消息框变为相对于<em>parent</em>的模式对话框。
+<p> <p>也可以参考<a href="#information">information</a>()和<a href="#warning">warning</a>()。
+
+<h3 class=fn><a href="qmessagebox.html#Icon-enum">Icon</a> <a name="icon"></a>QMessageBox::icon () const
+</h3>
+<p>返回消息框的图标。详细情况请参考<a href="qmessagebox.html#icon-prop">“icon”</a>属性。
+
+<h3 class=fn>const&nbsp;<a href="qpixmap.html">QPixmap</a>&nbsp;* <a name="iconPixmap"></a>QMessageBox::iconPixmap () const
+</h3>
+<p>返回当前图标。详细情况请参考<a href="qmessagebox.html#iconPixmap-prop">“iconPixmap”</a>属性。
+
+<h3 class=fn>int <a name="information"></a>QMessageBox::information ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, int&nbsp;button0, int&nbsp;button1 = 0, int&nbsp;button2 = 0 )<tt> [静态]</tt>
+</h3>
+打开一个标题为<em>caption</em>并且文本为<em>text</em>的信息消息框。这个对话框最多有三个按钮。每个按钮参数<em>button0</em>、<em>button1</em>和<em>button2</em>被设置为下列各值之一：
+<p> <ul>
+<li> QMessageBox::NoButton
+<li> QMessageBox::Ok
+<li> QMessageBox::Cancel
+<li> QMessageBox::Yes
+<li> QMessageBox::No
+<li> QMessageBox::Abort
+<li> QMessageBox::Retry
+<li> QMessageBox::Ignore
+</ul>
+<p> 如果你不想要三个按钮，设置最后一个按钮或者最后两个按钮为QMessageBox::NoButton。
+<p> 返回被点击的按钮地标识（QMessageBox::Ok或QMessageBox::No等等）。
+<p> 如果<em>parent</em>为0，消息框变为应用程序全局的模式对话框。如果<em>parent</em>为一个窗口部件，消息框变为相对于<em>parent</em>的模式对话框。
+<p> <p>也可以参考<a href="#warning">warning</a>()和<a href="#critical">critical</a>()。
+<p>实例：<a href="qaction-application-example.html#x1076">action/application.cpp</a>、<a href="simple-application-example.html#x1521">application/application.cpp</a>、<a href="canvas-chart-example.html#x2605">chart/chartform.cpp</a>、<a href="dirview-example.html#x1735">dirview/dirview.cpp</a>、<a href="fileiconview-example.html#x855">fileiconview/qfileiconview.cpp</a>、<a href="picture-example.html#x78">picture/picture.cpp</a>和<a href="qwerty-example.html#x371">qwerty/qwerty.cpp</a>。
+
+<h3 class=fn>int <a name="information-2"></a>QMessageBox::information ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;button0Text = QString::null, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;button1Text = QString::null, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;button2Text = QString::null, int&nbsp;defaultButtonNumber = 0, int&nbsp;escapeButtonNumber = -1 )<tt> [静态]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 显示一个标题为<em>caption</em>、文本为<em>text</em>并且按钮分别为1、2、3的信息消息对话框。返回被点击的按钮的数字（0、1或2）。
+<p> <em>button0Text</em>为第一个按钮的文本并且它是可选的。如果<em>button0Text</em>没有被提供，“OK”（被翻译的）将被使用。<em>button1Text</em>为第二个按钮的文本并且它是可选的并且<em>button2Text</em>为第三个按钮的文本并且它是可选的。<em>defaultButtonNumber</em>（0、1或2）是默认按钮的索引，按下Return或者Enter和点击这个默认按钮是相同的。它默认为0（第一个按钮）。<em>escapeButtonNumber</em>是Escape按钮的索引，按下Escape和点击这个按钮是相同的。它默认为-1（就是按下Escape什么也不做），提供0、1或2使按下Escape等同于按下对应的按钮。
+<p> 如果<em>parent</em>为0，消息框变为应用程序全局的模式对话框。如果<em>parent</em>为一个窗口部件，消息框变为相对于<em>parent</em>的模式对话框。
+<p> <p>也可以参考<a href="#warning">warning</a>()和<a href="#critical">critical</a>()。
+
+<h3 class=fn>int <a name="message"></a>QMessageBox::message ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;buttonText = QString::null, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const char * = 0 )<tt> [静态]</tt>
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 使用特定参数直接打开模式消息框。
+<p> 请使用<a href="#information">information</a>()、<a href="#warning">warning</a>()或<a href="#critical">critical</a>()来替代。
+<p>实例：<a href="grapher-nsplugin-example.html#x2758">grapher/grapher.cpp</a>。
+
+<h3 class=fn>bool <a name="query"></a>QMessageBox::query ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;yesButtonText = QString::null, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;noButtonText = QString::null, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const char * = 0 )<tt> [静态]</tt>
+</h3> 
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 使用有两个按钮的模式消息框询问用户。注意<em>caption</em>不总是被显示，它依赖于窗口管理器。
+<p> 请使用<a href="#information">information</a>()、<a href="#warning">warning</a>()或<a href="#critical">critical</a>()来替代。
+
+<h3 class=fn>void <a name="setButtonText"></a>QMessageBox::setButtonText ( int&nbsp;button, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text )
+</h3>
+设置消息框按钮<em>button</em>的文本为<em>text</em>。设置一个没有在消息框中出现的按钮的文本会被默默地忽略。
+<p> <p>也可以参考<a href="#buttonText">buttonText</a>()。
+
+<h3 class=fn>void <a name="setIcon"></a>QMessageBox::setIcon ( <a href="qmessagebox.html#Icon-enum">Icon</a> )
+</h3>
+<p>设置消息框的图标。详细情况请参考<a href="qmessagebox.html#icon-prop">“icon”</a>属性。
+
+<h3 class=fn>void <a name="setIconPixmap"></a>QMessageBox::setIconPixmap ( const&nbsp;<a href="qpixmap.html">QPixmap</a>&nbsp;&amp; )
+</h3>
+<p>设置当前图标。详细情况请参考<a href="qmessagebox.html#iconPixmap-prop">“iconPixmap”</a>属性。
+
+<h3 class=fn>void <a name="setText"></a>QMessageBox::setText ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )
+</h3>
+<p>设置被显示的消息框文本。详细情况请参考<a href="qmessagebox.html#text-prop">“text”</a>属性。
+
+<h3 class=fn>void <a name="setTextFormat"></a>QMessageBox::setTextFormat ( <a href="qt.html#TextFormat-enum">TextFormat</a> )
+</h3>
+<p>设置消息框中被显示的文本的格式。详细情况请参考<a href="qmessagebox.html#textFormat-prop">“textFormat”</a>属性。
+
+<h3 class=fn><a href="qpixmap.html">QPixmap</a> <a name="standardIcon"></a>QMessageBox::standardIcon ( <a href="qmessagebox.html#Icon-enum">Icon</a>&nbsp;icon )<tt> [静态]</tt>
+</h3>
+返回标准图标使用的像素映射。这允许这些像素映射用于更复杂的消息框。<em>icon</em>指定了所需图标，例如QMessageBox::Information、QMessageBox::Warning或QMessageBox::Critical。
+
+<h3 class=fn><a href="qpixmap.html">QPixmap</a> <a name="standardIcon-2"></a>QMessageBox::standardIcon ( <a href="qmessagebox.html#Icon-enum">Icon</a>&nbsp;icon, <a href="qt.html#GUIStyle-enum">GUIStyle</a>&nbsp;style )<tt> [静态]</tt>
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 返回标准图标使用的像素映射。这允许这些像素映射用于更复杂的消息框。<em>icon</em>指定了所需图标，例如QMessageBox::Information、QMessageBox::Warning或QMessageBox::Critical。
+<p> <em>style</em>不被使用。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text"></a>QMessageBox::text () const
+</h3>
+<p>返回被显示的消息框文本。详细情况请参考<a href="qmessagebox.html#text-prop">“text”</a>属性。
+
+<h3 class=fn><a href="qt.html#TextFormat-enum">TextFormat</a> <a name="textFormat"></a>QMessageBox::textFormat () const
+</h3>
+<p>返回消息框中被显示的文本的格式。详细情况请参考<a href="qmessagebox.html#textFormat-prop">“textFormat”</a>属性。
+
+<h3 class=fn>int <a name="warning"></a>QMessageBox::warning ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, int&nbsp;button0, int&nbsp;button1, int&nbsp;button2 = 0 )<tt> [静态]</tt>
+</h3>
+打开一个标题为<em>caption</em>并且文本为<em>text</em>的警告消息框。这个对话框最多有三个按钮。每个按钮参数<em>button0</em>、<em>button1</em>和<em>button2</em>被设置为下列各值之一：
+<p> <ul>
+<li> QMessageBox::NoButton
+<li> QMessageBox::Ok
+<li> QMessageBox::Cancel
+<li> QMessageBox::Yes
+<li> QMessageBox::No
+<li> QMessageBox::Abort
+<li> QMessageBox::Retry
+<li> QMessageBox::Ignore
+</ul>
+<p> 如果你不想要三个按钮，设置最后一个按钮或者最后两个按钮为QMessageBox::NoButton。
+<p> 返回被点击的按钮地标识（QMessageBox::Ok或QMessageBox::No等等）。
+<p> 如果<em>parent</em>为0，消息框变为应用程序全局的模式对话框。如果<em>parent</em>为一个窗口部件，消息框变为相对于<em>parent</em>的模式对话框。
+<p> <p>也可以参考<a href="#information">information</a>()和<a href="#critical">critical</a>()。
+<p>实例：<a href="tutorial2-05.html#x2471">chart/chartform.cpp</a>、<a href="i18n-example.html#x1929">i18n/main.cpp</a>、<a href="mail-example.html#x754">network/mail/smtp.cpp</a>、<a href="qwerty-example.html#x372">qwerty/qwerty.cpp</a>、<a href="showimg-example.html#x1271">showimg/showimg.cpp</a>和<a href="sound-example.html#x2659">sound/sound.cpp</a>。
+
+<h3 class=fn>int <a name="warning-2"></a>QMessageBox::warning ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;button0Text = QString::null, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;button1Text = QString::null, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;button2Text = QString::null, int&nbsp;defaultButtonNumber = 0, int&nbsp;escapeButtonNumber = -1 )<tt> [静态]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 显示一个标题为<em>caption</em>、文本为<em>text</em>并且按钮分别为1、2、3的警告消息对话框。返回被点击的按钮的数字（0、1或2）。
+<p> <em>button0Text</em>为第一个按钮的文本并且它是可选的。如果<em>button0Text</em>没有被提供，“OK”（被翻译的）将被使用。<em>button1Text</em>为第二个按钮的文本并且它是可选的并且<em>button2Text</em>为第三个按钮的文本并且它是可选的。<em>defaultButtonNumber</em>（0、1或2）是默认按钮的索引，按下Return或者Enter和点击这个默认按钮是相同的。它默认为0（第一个按钮）。<em>escapeButtonNumber</em>是Escape按钮的索引，按下Escape和点击这个按钮是相同的。它默认为-1（就是按下Escape什么也不做），提供0、1或2使按下Escape等同于按下对应的按钮。
+<p> 如果<em>parent</em>为0，消息框变为应用程序全局的模式对话框。如果<em>parent</em>为一个窗口部件，消息框变为相对于<em>parent</em>的模式对话框。
+<p> <p>也可以参考<a href="#information">information</a>()和<a href="#critical">critical</a>()。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn><a href="qmessagebox.html#Icon-enum">Icon</a> <a name="icon-prop"></a>icon</h3>
+<p>这个属性保存的是消息框的图标。
+<p>消息框的图标可以是如下预定义图标的一种：
+<ul>
+<li> QMessageBox::NoIcon
+<li> QMessageBox::Information
+<li> QMessageBox::Warning
+<li> QMessageBox::Critical
+</ul>
+<p> 用于显示图标的实际像素映射依赖于当前<a href="qwidget.html#style">图形用户界面风格</a>。你也可以使用<a href="#iconPixmap-prop">QMessageBox::iconPixmap</a>属性来设置自定义像素映射。默认图标为QMessageBox::NoIcon。
+<p> <p>也可以参考<a href="#iconPixmap-prop">iconPixmap</a>。
+<p>通过<a href="#setIcon">setIcon</a>()设置属性值并且通过<a href="#icon">icon</a>()来获得属性值。
+
+<h3 class=fn><a href="qpixmap.html">QPixmap</a> <a name="iconPixmap-prop"></a>iconPixmap</h3>
+<p>这个属性保存的是当前图标。
+<p>这个图标正在被这个消息框使用。注意很难绘制一个在Motif和Windows风格中看起来比较一致的像素映射，你也许需要绘制两个像素映射。
+<p> <p>也可以参考<a href="#icon-prop">icon</a>。
+<p>通过<a href="#setIconPixmap">setIconPixmap</a>()设置属性值并且通过<a href="#iconPixmap">iconPixmap</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text-prop"></a>text</h3>
+<p>This property holds the message box text to be displayed.
+这个属性保存的是被显示的消息框文本。
+<p>这个文本将被解释为一般文本或者多信息文本，根据文本格式设置（<a href="#textFormat-prop">QMessageBox::textFormat</a>）。默认设置为<a href="qt.html#TextFormat-enum">AutoText</a>，也就是说消息框将会试图自动检测文本格式。
+<p> 这个属性的默认设置是<a href="qstring.html#QString-null">QString::null</a>。
+<p> <p>也可以参考<a href="#textFormat-prop">textFormat</a>。
+<p>通过<a href="#setText">setText</a>()设置属性值并且通过<a href="#text">text</a>()来获得属性值。
+
+<h3 class=fn><a href="qt.html#TextFormat-enum">TextFormat</a> <a name="textFormat-prop"></a>textFormat</h3>
+<p>This property holds the format of the text displayed by the message box.
+这个属性保存的是消息框中被显示的文本的格式。
+<p>这是当前被消息框使用的文本格式。对于可能选项的解释请参考<a href="qt.html#TextFormat-enum">Qt::TextFormat</a>枚举变量。
+<p> 默认设置是<a href="qt.html#TextFormat-enum">AutoText</a>。
+<p> <p>也可以参考<a href="#text-prop">text</a>。
+<p>通过<a href="#setTextFormat">setTextFormat</a>()设置属性值并且通过<a href="#textFormat">textFormat</a>()来获得属性值。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

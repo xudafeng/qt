@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>10分钟学会使用qmake</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<p align="right">[<a href="qmake-manual-2.html">上一章：安装qmake</a>] [<a href="qmake-manual.html">qmake首页</a>] [<a href="qmake-manual-4.html">下一章：qmake教程</a>]</p>
+<h2 align="center">10分钟学会使用qmake</h2>
+<h3><a name="1"></a>创建一个项目文件</h3>
+<p><em>qmake</em>使用储存在项目（.pro）文件中的信息来决定Makefile文件中该生成什么。</p>
+<p>一个基本的项目文件包含关于应用程序的信息，比如，编译应用程序需要哪些文件，并且使用哪些配置设置。</p>
+<p>这里是一个简单的示例项目文件：</p>
+<pre>
+    SOURCES = hello.cpp
+    HEADERS = hello.h
+    CONFIG += qt warn_on release
+</pre>
+<p>我们将会提供一行一行的简要解释，具体细节将会在手册的后面的部分解释。</p>
+<pre>
+    SOURCES = hello.cpp
+</pre>
+<p>这一行指定了实现应用程序的源程序文件。在这个例子中，恰好只有一个文件，<em>hello.cpp</em>。大部分应用程序需要多个文件，这种情况下可以把文件列在一行中，以空格分隔，就像这样：</p>
+<pre>
+    SOURCES = hello.cpp main.cpp
+</pre>
+<p>另一种方式，每一个文件可以被列在一个分开的行里面，通过反斜线另起一行，就像这样：</p>
+<pre>
+    SOURCES = hello.cpp \
+		main.cpp
+</pre>
+<p>一个更冗长的方法是单独地列出每一个文件，就像这样：</p>
+<pre>
+    SOURCES += hello.cpp
+    SOURCES += main.cpp
+</pre>
+<p>这种方法中使用“+=”比“=”更安全，因为它只是向已有的列表中添加新的文件，而不是替换整个列表。</p>
+<p>HEADERS这一行中通常用来指定为这个应用程序创建的头文件，举例来说：</p>
+<pre>
+    HEADERS += hello.h
+</pre>
+<p>列出源文件的任何一个方法对头文件也都适用。</p>
+<p>CONFIG这一行是用来告诉<em>qmake</em>关于应用程序的配置信息。</p>
+<pre>
+    CONFIG += qt warn_on release
+</pre>
+<p>在这里使用“+=”，是因为我们添加我们的配置选项到任何一个已经存在中。这样做比使用“=”那样替换已经指定的所有选项是更安全的。</p>
+<p>CONFIG一行中的<em>qt</em>部分告诉<em>qmake</em>这个应用程序是使用Qt来连编的。这也就是说<em>qmake</em>在连接和为编译添加所需的包含路径的时候会考虑到Qt库的。</p>
+<p>CONFIG一行中的<em>warn_on</em>部分告诉<em>qmake</em>要把编译器设置为输出警告信息的。</p>
+<p>CONFIG一行中的<em>release</em>部分告诉<em>qmake</em>应用程序必须被连编为一个发布的应用程序。在开发过程中，程序员也可以使用<em>debug</em>来替换<em>release</em>，稍后会讨论这里的。</p>
+<p>项目文件就是纯文本（比如，可以使用像记事本、vim和xemacs这些编辑器）并且必须存为“.pro”扩展名。应用程序的执行文件的名称必须和项目文件的名称一样，但是扩展名是跟着平台而改变的。举例来说，一个叫做“hello.pro”的项目文件将会在Windows下生成“hello.exe”，而在Unix下生成“hello”。</p>
+<h3><a name="2"></a>生成Makefile</h3>
+<p>当你已经创建好你的项目文件，生成Makefile就很容易了，你所要做的就是先到你所生成的项目文件那里然后输入：</p>
+<p>Makefile可以像这样由“.pro”文件生成：</p>
+<pre>
+    qmake -o Makefile hello.pro 
+</pre>
+<p>对于Visual Studio的用户，<em>qmake</em>也可以生成“.dsp”文件，例如：</p>
+<pre>
+    qmake -t vcapp -o hello.dsp hello.pro
+</pre>
+<!-- eof -->
+<p align="right">[<a href="qmake-manual-2.html">上一章：安装qmake</a>] [<a href="qmake-manual.html">qmake首页</a>] [<a href="qmake-manual-4.html">下一章：qmake教程</a>]</p>
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

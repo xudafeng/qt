@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt教程一 —— 第二章：调用退出</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt教程一 —— 第二章：调用退出</h1>
+
+ 
+<p> <center><img src="t2.png" alt="Screenshot of tutorial two"></center> 
+<p> 你已经在<a href="tutorial1-01.html">第一章</a>中创建了一个窗口，我们现在使这个应用程序在用户让它退出的时候退出。
+<p> 我们也会使用一个比默认字体更好的一个字体。
+<p> <pre>/****************************************************************
+**
+** Qt教程一 - 2
+**
+****************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+
+
+int main( int argc, char **argv )
+{
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+    <a href="qpushbutton.html">QPushButton</a> quit( "Quit", 0 );
+    quit.<a href="qwidget.html#resize">resize</a>( 75, 30 );
+    quit.<a href="qwidget.html#setFont">setFont</a>( QFont( "Times", 18, QFont::Bold ) );
+
+    QObject::<a href="qobject.html#connect">connect</a>( &amp;quit, SIGNAL(<a href="qbutton.html#clicked">clicked</a>()), &amp;a, SLOT(<a href="qapplication.html#quit">quit</a>()) );
+
+    a.<a href="qapplication.html#setMainWidget">setMainWidget</a>( &amp;quit );
+    quit.<a href="qwidget.html#show">show</a>();
+    return a.<a href="qapplication.html#exec">exec</a>();
+}
+</pre>
+
+
+
+<p> <h2> 一行一行地解说
+</h2>
+<a name="1"></a><p> <pre>    #include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+</pre>
+<p> 因为这个程序使用了<a href="qfont.html">QFont</a>，所以它需要包含qfont.h。Qt的字体提取和X中提供的可怕的字体提取大为不同，字体的载入和使用都已经被高度优化了。
+<p> <pre>        <a href="qpushbutton.html">QPushButton</a> quit( "Quit", 0 );
+</pre>
+<p> 这时，按钮显示“Quit”，确切的说这就是当用户点击这个按钮时程序所要做的。这不是一个巧合。因为这个按钮是一个顶层窗口，我们还是把0作为它的父对象。
+<p> <pre>    <a name="x2224"></a>    quit.<a href="qwidget.html#resize">resize</a>( 75, 30 );
+</pre>
+<p> 我们给这个按钮选择了另外一个大小，因为这个文本比“Hello world!”小一些。我们也可以使用<a href="qfontmetrics.html">QFontMetrics</a>来设置正确的大小。
+<p> <pre>    <a name="x2225"></a>    quit.<a href="qwidget.html#setFont">setFont</a>( QFont( "Times", 18, QFont::Bold ) );
+</pre>
+<p> 这里我们给这个按钮选择了一个新字体，Times字体中的18点加粗字体。注意在这里我们调用了这个字体。
+<p> 你也可以改变整个应用程序的默认字体（使用<a href="qapplication.html#setFont">QApplication::setFont</a>()）。
+<p> <pre>    <a name="x2223"></a><a name="x2222"></a><a name="x2220"></a>    QObject::<a href="qobject.html#connect">connect</a>( &amp;quit, SIGNAL(<a href="qbutton.html#clicked">clicked</a>()), &amp;a, SLOT(<a href="qapplication.html#quit">quit</a>()) );
+</pre>
+<p> connect也许是Qt中<em>最重要</em>的特征了。注意connect()是<a href="qobject.html">QObject</a>中的一个静态函数。不要把这个函数和socket库中的connect()搞混了。
+<p> 这一行在两个Qt对象（直接或间接继承QObject对象的对象）中建立了一种单向的连接。每一个Qt对象都有<tt>signals</tt>（发送消息）和<tt>slots</tt>（接收消息）。所有窗口部件都是Qt对象。它们继承<a href="qwidget.html">QWidget</a>，而QWidget继承QObject。
+<p> 这里<em>quit</em>的<em>clicked()</em>信号和<em>a</em>的<em>quit()</em>槽连接起来了，所以当这个按钮被按下的时候，这个程序就退出了。
+<p> <a href="signalsandslots.html">信号和槽</a>文档详细描述了这一主题。
+<p> <h2> 行为
+</h2>
+<a name="2"></a><p> 当你运行这个程序的时候，你会看到这个窗口比第一章中的那个小一些，并且被一个更小的按钮充满。
+<p> （请看<a href="tutorial1-01.html#compiling">编译</a>来学习如何创建一个makefile和连编应用程序。）
+<p> <h2> 练习
+</h2>
+<a name="3"></a><p> 试着改变窗口的大小。按下按钮。注意！connect()看起来会有一些不同。
+<p> 是不是在<a href="qpushbutton.html">QPushButton</a>中还有其它的你可以连接到quit的信号？提示：QPushButton继承了<a href="qbutton.html">QButton</a>的绝大多数行为。
+<p> 现在你可以进行<a href="tutorial1-03.html">第三章</a>了。
+<p> [<a href="tutorial1-01.html">上一章</a>]
+[<a href="tutorial1-03.html">下一章</a>]
+[<a href="tutorial.html">教程一主页</a>]
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>
+

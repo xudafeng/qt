@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QWorkspace类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QWorkspace类参考</h1>
+
+<p>QWorkspace窗口部件提供了可以包含内部窗口（例如，多文档界面）的工作区窗口。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qworkspace-h.html">qworkspace.h</a>&gt;</tt>
+<p>继承了<a href="qwidget.html">QWidget</a>。
+<p><a href="qworkspace-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QWorkspace"><b>QWorkspace</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#~QWorkspace"><b>~QWorkspace</b></a> ()</div></li>
+<li><div class=fn>QWidget * <a href="#activeWindow"><b>activeWindow</b></a> () const</div></li>
+<li><div class=fn>QWidgetList <a href="#windowList"><b>windowList</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#scrollBarsEnabled"><b>scrollBarsEnabled</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setScrollBarsEnabled"><b>setScrollBarsEnabled</b></a> ( bool&nbsp;enable )</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>void <a href="#cascade"><b>cascade</b></a> ()</div></li>
+<li><div class=fn>void <a href="#tile"><b>tile</b></a> ()</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#windowActivated"><b>windowActivated</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>bool <a href="#scrollBarsEnabled-prop"><b>scrollBarsEnabled</b></a>&nbsp;- 工作区是否提供滚动条</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QWorkspace窗口部件提供了可以包含内部窗口（例如，多文档界面）的工作区窗口。
+<p> 
+<p> 一个多文档界面（MDI）应用程序有一个带菜单条的主窗口。这个窗口的中央窗口部件就是一个工作区。工作区自己包含零个、一个或多个文档窗口，每个窗口显示一个文档。
+<p> 工作区自己是一个普通Qt窗口部件。它有一个带父窗口部件和对象名称的标准构造函数。父对象通常使用<a href="qmainwindow.html">QMainWindow</a>，但也可以不是。
+<p> 文档窗口（也就是多文档界面窗口）也是普通的Qt窗口部件，它们有一个工作区作为父窗口部件。当你在一个文档窗口上调用<a href="qwidget.html#show">show</a>()、<a href="qwidget.html#hide">hide</a>()、<a href="qwidget.html#showMaximized">showMaximized</a>()、<a href="qwidget.html#setCaption">setCaption</a>()等等，它被按你所期望的有一个框架、标题、图标和图标文本来显示、隐藏等等。你可以提供窗口部件标记来用于修饰的布局或者窗口部件自身的行为。
+<p> 为了改变多文档窗口的几何形状，让这个函数调用这个窗口部件的<a href="qwidget.html#parentWidget">parentWidget</a>()是需要的，因为它将会移动或者重新定义内部窗口的大小。
+<p> 当一个文档窗口获得<a href="focus.html#keyboard-focus">键盘焦点</a>时，它被激活了。你可以使用<a href="qwidget.html#setFocus">setFocus</a>()来激活它，并且用户可以用普通的移动焦点的方式来激活它。当工作区检测到激活变化时，它发射一个<a href="#windowActivated">windowActivated</a>()信号，并且<a href="#activeWindow">activeWindow</a>()函数总是返回活动的文档窗口的指针。
+<p> 方便的<a href="#windowList">windowList</a>()函数返回所有的文档窗口的列表。例如，这对于在空中创建一个弹出菜单“<u>W</u>indows”是很有用的。
+<p> QWorkspace提供了两个内置的对子窗口的布局策略：<a href="#cascade">cascade</a>()和<a href="#tile">tile</a>()。这两个都是槽，这样你就可以很容易地把菜单项和它们连接起来了。
+<p> 如果你想让用户能够把工作的文档窗口设置的比实际工作区还大，请把scrollBarsEnabled属性设置为真。
+<p> 如果顶级窗口包含一个菜单条和一个最大化的文档窗口，QWorkspace会把文档窗口的最小化、恢复和关闭按钮从文档窗口的框架上移到工作区窗口的菜单条中。然后它会在菜单条的最左面插入一个窗口操作菜单。
+<p>也可以参考<a href="application.html">主窗口和相关类</a>和<a href="organizers.html">组织者</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QWorkspace"></a>QWorkspace::QWorkspace ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个父对象为<em>parent</em>、名称为<em>name</em>的工作区。
+
+<h3 class=fn><a name="~QWorkspace"></a>QWorkspace::~QWorkspace ()
+</h3>  
+销毁这个工作区并且释放所有已分配的资源。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="activeWindow"></a>QWorkspace::activeWindow () const
+</h3>
+返回活动窗口，或者如果没有窗口是活动的，返回0。
+<p>实例：<a href="mdi-example.html#x2059">mdi/application.cpp</a>。
+
+<h3 class=fn>void <a name="cascade"></a>QWorkspace::cascade ()<tt> [槽]</tt>
+</h3>
+层叠模式排列所有子窗口。
+<p> <p>也可以参考<a href="#tile">tile</a>()。
+<p>实例：<a href="mdi-example.html#x2060">mdi/application.cpp</a>。
+
+<h3 class=fn>bool <a name="scrollBarsEnabled"></a>QWorkspace::scrollBarsEnabled () const
+</h3>
+<p>如果工作区提供滚动条，返回真，否则返回假。详细情况请参考<a href="qworkspace.html#scrollBarsEnabled-prop">“scrollBarsEnabled”</a>属性。
+
+<h3 class=fn>void <a name="setScrollBarsEnabled"></a>QWorkspace::setScrollBarsEnabled ( bool&nbsp;enable )
+</h3>
+<p>设置工作区是否提供滚动条为<em>enable</em>。详细情况请参考<a href="qworkspace.html#scrollBarsEnabled-prop">“scrollBarsEnabled”</a>属性。
+
+<h3 class=fn>void <a name="tile"></a>QWorkspace::tile ()<tt> [槽]</tt>
+</h3>
+平铺模式排列所有子窗口。
+<p> <p>也可以参考<a href="#cascade">cascade</a>()。
+<p>实例：<a href="mdi-example.html#x2062">mdi/application.cpp</a>。
+
+<h3 class=fn>void <a name="windowActivated"></a>QWorkspace::windowActivated ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )<tt> [信号]</tt>
+</h3>
+<p> 当窗口部件<em>w</em>变为活动时，这个信号被发射。注意<em>w</em>可以为零，并且对于一个激活事件可能有超过一个的信号被发射。
+<p> <p>也可以参考<a href="#activeWindow">activeWindow</a>()和<a href="#windowList">windowList</a>()。
+
+<h3 class=fn>QWidgetList <a name="windowList"></a>QWorkspace::windowList () const
+</h3>
+返回所有窗口的列表。
+<p>实例：<a href="mdi-example.html#x2063">mdi/application.cpp</a>。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>bool <a name="scrollBarsEnabled-prop"></a>scrollBarsEnabled</h3> 
+<p>This property holds whether the workspace provides scrollbars.
+这个属性保存的是工作区是否提供滚动条。
+<p>如果这个属性被设置为真，那么重定义子窗口的大小超过工作区的可视区域的右或下边缘是可能的。工作区显示这些滚动条使用户能够访问这些窗口。如果这个属性被设置为假（默认），定义子窗口的大小超过工作区的可视区域的右或下边缘是不被允许的。
+<p>通过<a href="#setScrollBarsEnabled">setScrollBarsEnabled</a>()设置属性值并且通过<a href="#scrollBarsEnabled">scrollBarsEnabled</a>()来获得属性值。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

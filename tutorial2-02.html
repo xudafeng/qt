@@ -1,0 +1,58 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>“大图片”</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>“大图片”</h1>
+
+
+<p> 
+<p> <center><img src="chart-forms.png" alt="The chart application's dialogs"></center> 
+<p> <tt>chart</tt>程序允许用户创建、保存、载入和直观化简单的数据组。每一个用户给出的数据元素都可以被给定颜色和饼形块或条形的样式、一些标签文本和文本的位置和颜色。<tt>Element</tt>类用来代表数据元素。
+<p> 程序包含一个调入图表视窗的简单的<tt>main.cpp</tt>。这个图表视窗有一个提供访问程序功能的菜单条和工具条。程序还提供了两个对话框，一个设置选项，另一个用来创建和编辑数据组。这两个对话框都是由图表视窗的菜单选项或者工具条按钮调用的。
+<p> 图表视窗的主窗口部件是<a href="qcanvasview.html">QCanvasView</a>，它显示一个我们用来画饼形图或条形图的<a href="qcanvas.html">QCanvas</a>。我们继承QCanvasView来获得一些特定的行为。同样我们因为需要比标准类提供的稍多一些，所以我们继承了<a href="qcanvastext.html">QCanvasText</a>类（用来在画布上放置文本条目）。
+<p> 项目文件，<tt>chart.pro</tt>，用来创建可以用来连编应用程序的Makefile。
+<p> <p align=right>
+<a href="tutorial2-01.html">&laquo; 介绍</a> |
+<a href="tutorial2.html">目录</a> |
+<a href="tutorial2-03.html">数据元素 &raquo;</a>
+</p>
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

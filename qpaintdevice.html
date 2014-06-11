@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QPaintDevice类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QPaintDevice类参考</h1>
+
+<p>QPaintDevice类是所有可以绘制的对象的基类。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qpaintdevice-h.html">qpaintdevice.h</a>&gt;</tt>
+<p>由<a href="qpixmap.html">QPixmap</a>、<a href="qwidget.html">QWidget</a>、<a href="qpicture.html">QPicture</a>和<a href="qprinter.html">QPrinter</a>继承。
+<p><a href="qpaintdevice-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>virtual <a href="#~QPaintDevice"><b>~QPaintDevice</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#isExtDev"><b>isExtDev</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#paintingActive"><b>paintingActive</b></a> () const</div></li>
+<li><div class=fn>virtual HDC <b>handle</b> () const</div></li>
+<li><div class=fn>virtual Qt::HANDLE <a href="#handle"><b>handle</b></a> () const</div></li>
+<li><div class=fn>Display * <a href="#x11Display"><b>x11Display</b></a> () const</div></li>
+<li><div class=fn>int <a href="#x11Screen"><b>x11Screen</b></a> () const</div></li>
+<li><div class=fn>int <a href="#x11Depth"><b>x11Depth</b></a> () const</div></li>
+<li><div class=fn>int <a href="#x11Cells"><b>x11Cells</b></a> () const</div></li>
+<li><div class=fn>Qt::HANDLE <a href="#x11Colormap"><b>x11Colormap</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#x11DefaultColormap"><b>x11DefaultColormap</b></a> () const</div></li>
+<li><div class=fn>void * <a href="#x11Visual"><b>x11Visual</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#x11DefaultVisual"><b>x11DefaultVisual</b></a> () const</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>Display * <a href="#x11AppDisplay"><b>x11AppDisplay</b></a> ()</div></li>
+<li><div class=fn>int <a href="#x11AppScreen"><b>x11AppScreen</b></a> ()</div></li>
+<li><div class=fn>int <a href="#x11AppDepth"><b>x11AppDepth</b></a> ()</div></li>
+<li><div class=fn>int <a href="#x11AppCells"><b>x11AppCells</b></a> ()</div></li>
+<li><div class=fn>int <a href="#x11AppDpiX"><b>x11AppDpiX</b></a> ()</div></li>
+<li><div class=fn>int <a href="#x11AppDpiY"><b>x11AppDpiY</b></a> ()</div></li>
+<li><div class=fn>Qt::HANDLE <a href="#x11AppColormap"><b>x11AppColormap</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#x11AppDefaultColormap"><b>x11AppDefaultColormap</b></a> ()</div></li>
+<li><div class=fn>void * <a href="#x11AppVisual"><b>x11AppVisual</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#x11AppDefaultVisual"><b>x11AppDefaultVisual</b></a> ()</div></li>
+<li><div class=fn>void <a href="#x11SetAppDpiX"><b>x11SetAppDpiX</b></a> ( int&nbsp;dpi )</div></li>
+<li><div class=fn>void <a href="#x11SetAppDpiY"><b>x11SetAppDpiY</b></a> ( int&nbsp;dpi )</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn><a href="#QPaintDevice"><b>QPaintDevice</b></a> ( uint&nbsp;devflags )</div></li>
+<li><div class=fn>virtual bool <a href="#cmd"><b>cmd</b></a> ( int, QPainter *, QPDevCmdParam * )</div></li>
+</ul>
+<h2>相关函数</h2>
+<ul>
+<li><div class=fn>void <a href="#bitBlt"><b>bitBlt</b></a> ( QPaintDevice&nbsp;*&nbsp;dst, int&nbsp;dx, int&nbsp;dy, const&nbsp;QPaintDevice&nbsp;*&nbsp;src, int&nbsp;sx, int&nbsp;sy, int&nbsp;sw, int&nbsp;sh, Qt::RasterOp&nbsp;rop, bool&nbsp;ignoreMask )</div></li>
+<li><div class=fn>void <a href="#bitBlt-2"><b>bitBlt</b></a> ( QPaintDevice&nbsp;*&nbsp;dst, const&nbsp;QPoint&nbsp;&amp;&nbsp;dp, const&nbsp;QPaintDevice&nbsp;*&nbsp;src, const&nbsp;QRect&nbsp;&amp;&nbsp;sr, RasterOp&nbsp;rop )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QPaintDevice类是所有可以绘制的对象的基类。
+<p> 
+<p> 一个绘制设备就是一个可以使用<a href="qpainter.html">QPainter</a>来绘制的二维空间的抽象。绘画的能力由子类<a href="qwidget.html">QWidget</a>、<a href="qpixmap.html">QPixmap</a>、<a href="qpicture.html">QPicture</a>和<a href="qprinter.html">QPrinter</a>来实现。
+<p> 绘制设备的默认坐标系统的原点在左上角。X向右增加，Y向下增加。单位是一个像素。这里有几种方法在使用绘制工具时来设置用户自定义的坐标系统，比如，使用<a href="qpainter.html#setWorldMatrix">QPainter::setWorldMatrix</a>()。
+<p> 实例（在一个绘制设备上绘画）：
+<pre>
+    void MyWidget::paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * )
+    {
+        <a href="qpainter.html">QPainter</a> p;                       // 我们的绘制工具
+        p.<a href="qpainter.html#begin">begin</a>( this );                  // 开始在窗口部件上绘制
+        p.<a href="qpainter.html#setPen">setPen</a>( red );                  // 红色的外框
+        p.<a href="qpainter.html#setBrush">setBrush</a>( yellow );             // 用黄色填充
+        p.<a href="qpainter.html#drawEllipse">drawEllipse</a>( 10, 20, 100,100 ); // 在(10, 20)位置的100x100的椭圆 
+        p.<a href="qpainter.html#end">end</a>();                          // 绘制结束
+    }
+    </pre>
+ 
+<p> 位块传送是从一个绘制设备向另一个（或者它自己）复制像素的非常有用的函数。它是由全局函数<a href="#bitBlt">bitBlt</a>()实现的。
+<p> 实例：（向右滚动窗口部件内容10个像素）：
+<pre>
+    <a href="#bitBlt">bitBlt</a>( myWidget, 10, 0, myWidget );
+    </pre>
+ 
+<p> <b>警告：</b> 在任何绘制设备创建之前，Qt需要一个<a href="qapplication.html">QApplication</a>对象存在。绘制设备访问窗口系统资源，并且这些资源在一个应用程序对象没有创建之前是没有初始化的。
+<p>也可以参考<a href="graphics.html">图形类</a> and <a href="images.html">图像处理类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QPaintDevice"></a>QPaintDevice::QPaintDevice ( uint&nbsp;devflags )<tt> [保护]</tt>
+</h3>
+使用内部标记<em>devflags</em>构造一个绘制设备。这个构造函数只能由QPaintDevice的子类调用。
+
+<h3 class=fn><a name="~QPaintDevice"></a>QPaintDevice::~QPaintDevice ()<tt> [虚]</tt>
+</h3>
+销毁绘制设备并且释放窗口系统资源。
+
+<h3 class=fn>bool <a name="cmd"></a>QPaintDevice::cmd ( int, <a href="qpainter.html">QPainter</a>&nbsp;*, QPDevCmdParam * )<tt> [虚 保护]</tt>
+</h3>
+从绘制工具中解释绘画指令的内部虚函数。
+<p> 由不直接支持绘制图画的子类实现（外部绘制设备，比如，<a href="qpicture.html">QPicture</a>）。
+
+<h3 class=fn>Qt::HANDLE <a name="handle"></a>QPaintDevice::handle () const<tt> [虚]</tt>
+</h3>
+返回用于低级访问的绘制设备的窗口系统句柄。使用这个函数是不可移植的。
+<p> HANDLE的类型根据平台的不同而不同，详细情况请见<a href="qpaintdevice-h.html">qpaintdevice.h</a>和<a href="qwindowdefs-h.html">qwindowdefs.h</a>。
+<p> <p>也可以参考<a href="#x11Display">x11Display</a>()。
+
+<h3 class=fn>bool <a name="isExtDev"></a>QPaintDevice::isExtDev () const
+</h3>
+<p> 如果设备是一个外部绘制设备，返回真，否则返回假。
+<p> 外部绘制设备不能作为<a href="#bitBlt">bitBlt</a>()的源。<a href="qpicture.html">QPicture</a>和<a href="qprinter.html">QPrinter</a>是外部绘制设备。
+
+<h3 class=fn>bool <a name="paintingActive"></a>QPaintDevice::paintingActive () const
+</h3>
+<p> 如果设备正在被绘制，比如某人已经调用了<a href="qpainter.html#begin">QPainter::begin</a>()但还没有对这个设备调用<a href="qpainter.html#end">QPainter::end</a>()，返回真，否则返回假。
+<p> <p>也可以参考<a href="qpainter.html#isActive">QPainter::isActive</a>()。
+
+<h3 class=fn>int <a name="x11AppCells"></a>QPaintDevice::x11AppCells ()<tt> [静态]</tt>
+</h3>
+<p> 返回X显示全部到应用程序的颜色映射的条目的数量（仅X11下有效）。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="#x11Colormap">x11Colormap</a>()。
+
+<h3 class=fn>Qt::HANDLE <a name="x11AppColormap"></a>QPaintDevice::x11AppColormap ()<tt> [静态]</tt>
+</h3>
+<p> 返回X显示全部到应用程序的颜色映射（仅X11下有效）。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="#x11Cells">x11Cells</a>()。
+
+<h3 class=fn>bool <a name="x11AppDefaultColormap"></a>QPaintDevice::x11AppDefaultColormap ()<tt> [静态]</tt>
+</h3>
+<p> 返回X显示全部到应用程序的默认颜色映射（仅X11下有效）。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="#x11Cells">x11Cells</a>()。
+
+<h3 class=fn>bool <a name="x11AppDefaultVisual"></a>QPaintDevice::x11AppDefaultVisual ()<tt> [静态]</tt>
+</h3>
+<p> 返回X显示全部到应用程序的默认视件（Visual）（仅X11下有效）。使用这个函数是不可移植的。
+
+<h3 class=fn>int <a name="x11AppDepth"></a>QPaintDevice::x11AppDepth ()<tt> [静态]</tt>
+</h3>
+<p> 返回X显示全部到应用程序的深度（仅X11下有效）。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="qpixmap.html#defaultDepth">QPixmap::defaultDepth</a>()。
+
+<h3 class=fn>Display * <a name="x11AppDisplay"></a>QPaintDevice::x11AppDisplay ()<tt> [静态]</tt>
+</h3>
+<p> 返回X显示全部到应用程序的指针（仅X11下有效）。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="#handle">handle</a>()。
+
+<h3 class=fn>int <a name="x11AppDpiX"></a>QPaintDevice::x11AppDpiX ()<tt> [静态]</tt>
+</h3>
+返回X显示的水平DPI（仅X11下有效）。使用这个函数是不可移植的。关于可移植的访问的相关信息请看<a href="qpaintdevicemetrics.html">QPaintDeviceMetrics</a>。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="#x11AppDpiY">x11AppDpiY</a>()、<a href="#x11SetAppDpiX">x11SetAppDpiX</a>()和<a href="qpaintdevicemetrics.html#logicalDpiX">QPaintDeviceMetrics::logicalDpiX</a>()。
+
+<h3 class=fn>int <a name="x11AppDpiY"></a>QPaintDevice::x11AppDpiY ()<tt> [静态]</tt>
+</h3>
+返回X显示的垂直DPI（仅X11下有效）。使用这个函数是不可移植的。关于可移植的访问的相关信息请看<a href="qpaintdevicemetrics.html">QPaintDeviceMetrics</a>。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="#x11AppDpiX">x11AppDpiX</a>()、<a href="#x11SetAppDpiY">x11SetAppDpiY</a>()和<a href="qpaintdevicemetrics.html#logicalDpiY">QPaintDeviceMetrics::logicalDpiY</a>()。
+
+<h3 class=fn>int <a name="x11AppScreen"></a>QPaintDevice::x11AppScreen ()<tt> [静态]</tt>
+</h3>
+<p> 返回X显示全部到应用程序的屏幕数量（仅X11下有效）。使用这个函数是不可移植的。
+
+<h3 class=fn>void * <a name="x11AppVisual"></a>QPaintDevice::x11AppVisual ()<tt> [静态]</tt>
+</h3>
+<p> 返回X显示全部到应用程序的视件（Visual）（仅X11下有效）。使用这个函数是不可移植的。
+
+<h3 class=fn>int <a name="x11Cells"></a>QPaintDevice::x11Cells () const
+</h3>
+<p> 返回X显示全部到绘制设备的颜色映射的条目的数量（仅X11下有效）。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="#x11Colormap">x11Colormap</a>().
+
+<h3 class=fn>Qt::HANDLE <a name="x11Colormap"></a>QPaintDevice::x11Colormap () const
+</h3>
+<p> 返回X显示全部到绘制设备的颜色映射（仅X11下有效）。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="#x11Cells">x11Cells</a>()。
+
+<h3 class=fn>bool <a name="x11DefaultColormap"></a>QPaintDevice::x11DefaultColormap () const
+</h3>
+<p> 返回X显示全部到绘制设备的默认颜色映射（仅X11下有效）。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="#x11Cells">x11Cells</a>()。
+
+<h3 class=fn>bool <a name="x11DefaultVisual"></a>QPaintDevice::x11DefaultVisual () const
+</h3>
+<p> 返回X显示全部到绘制设备的默认视件（Visual）（仅X11下有效）。使用这个函数是不可移植的。
+
+<h3 class=fn>int <a name="x11Depth"></a>QPaintDevice::x11Depth () const
+</h3>
+<p> 返回X显示全部到绘制设备的深度（仅X11下有效）。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="qpixmap.html#defaultDepth">QPixmap::defaultDepth</a>()。
+
+<h3 class=fn>Display * <a name="x11Display"></a>QPaintDevice::x11Display () const
+</h3>
+<p> 返回X显示全部到绘制设备的指针（仅X11下有效）。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="#handle">handle</a>()。
+
+<h3 class=fn>int <a name="x11Screen"></a>QPaintDevice::x11Screen () const
+</h3>
+<p> 返回X显示全部到绘制设备的屏幕数量（仅X11下有效）。使用这个函数是不可移植的。
+
+<h3 class=fn>void <a name="x11SetAppDpiX"></a>QPaintDevice::x11SetAppDpiX ( int&nbsp;dpi )<tt> [静态]</tt>
+</h3>
+设置通过<a href="#x11AppDpiX">x11AppDpiX</a>()返回的值为<em>dpi</em>。默认情况下决定于显示配置。这个值的变化将会使字体的边缘发生变化，并且许多其它的度量标准将不被推荐。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="#x11SetAppDpiY">x11SetAppDpiY</a>()。
+
+<h3 class=fn>void <a name="x11SetAppDpiY"></a>QPaintDevice::x11SetAppDpiY ( int&nbsp;dpi )<tt> [静态]</tt>
+</h3>
+设置通过<a href="#x11AppDpiY">x11AppDpiY</a>()返回的值为<em>dpi</em>。默认情况下决定于显示配置。这个值的变化将会使字体的边缘发生变化，并且许多其它的度量标准将不被推荐。使用这个函数是不可移植的。
+<p> <p>也可以参考<a href="#x11SetAppDpiX">x11SetAppDpiX</a>()。
+
+<h3 class=fn>void * <a name="x11Visual"></a>QPaintDevice::x11Visual () const
+</h3>
+<p> 返回X显示全部到绘制设备的视件（Visual）（仅X11下有效）。使用这个函数是不可移植的。
+
+<hr><h2>相关函数</h2>
+<h3 class=fn>void <a name="bitBlt"></a>bitBlt ( <a href="qpaintdevice.html">QPaintDevice</a>&nbsp;*&nbsp;dst, int&nbsp;dx, int&nbsp;dy, const&nbsp;<a href="qpaintdevice.html">QPaintDevice</a>&nbsp;*&nbsp;src, int&nbsp;sx, int&nbsp;sy, int&nbsp;sw, int&nbsp;sh, <a href="qt.html#RasterOp-enum">Qt::RasterOp</a>&nbsp;rop, bool&nbsp;ignoreMask )
+</h3>
+<p> 把一个像素块从<em>src</em>复制到<em>dst</em>，也许根据<a href="qt.html#RasterOp">光栅操作</a><em>rop</em>来合并每一个像素。<em>sx</em>和<em>sy</em>是<em>src</em>中的左上像素，默认为(0, 0)，<em>dx</em>和<em>dy</em>是<em>dst</em>的左上位置并且<em>sw</em>和<em>sh</em>是复制块的大小（默认情况下都是<em>src</em>的）。
+<p> <em>rop</em>的最普通的值是CopyROP和XorROP，<a href="qt.html#RasterOp-enum">Qt::RasterOp</a>文档中定义了所有的可能值。
+<p> 如果<em>ignoreMask</em>是真（默认是假）并且<em>src</em>是一个遮蔽的<a href="qpixmap.html">QPixmap</a>，整个二进制块被<em>src</em>->mask()遮蔽。
+<p> 如果<em>src</em>、<em>dst</em>、<em>sw</em>或<em>sh</em>为0，<a href="#bitBlt">bitBlt</a>()不会做任何事情。如果<em>sw</em>或<em>sh</em>为负，bitBlt()的复制会从<em>sx</em>开始（分别地，<em>sy</em>）并且到<em>src</em>右端点（分别地，下）结束。
+<p> <em>src</em>必须是一个<a href="qwidget.html">QWidget</a>或者QPixmap。比如，你不能从一个<a href="qprinter.html">QPrinter</a>做块复制。如果你试图从一个不支持的设备做块复制，bitBlt()将不会做任何事情。
+<p> 如果<em>src</em>的深度比<em>dst</em>高，bitBlt()不会做任何事。如果你需要这样的操作，比如在一个8位的窗口部件绘制24位的像素映射，你必须使用drawPixmap()。
+
+<h3 class=fn>void <a name="bitBlt-2"></a>bitBlt ( <a href="qpaintdevice.html">QPaintDevice</a>&nbsp;*&nbsp;dst, const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;dp, const&nbsp;<a href="qpaintdevice.html">QPaintDevice</a>&nbsp;*&nbsp;src, const&nbsp;<a href="qrect.html">QRect</a>&nbsp;&amp;&nbsp;sr, RasterOp&nbsp;rop )
+</h3>
+<p> 这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 使用了目标点<em>dp</em>和源矩形<em>sr</em>重载<a href="#bitBlt">bitBlt</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

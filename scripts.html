@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt的文本引擎</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt的文本引擎</h1>
+
+
+
+<p> 贯穿整个库，Qt 3都使用了一个完全重新设计的文本引擎和布局引擎。
+<p> 它支持在世界范围内使用的几乎所有书写系统，包括：
+<p> <ul>
+<li> 阿拉伯语
+<li> 汉语
+<li> 古斯拉夫语 （俄语）
+<li> 希腊语
+<li> 希伯来语
+<li> 日语
+<li> 汉语
+<li> 拉丁语 （例如，英语和一些其它欧洲语言）
+<li> 泰国语
+<li> 越南语
+</ul>
+<p> 这些书写系统中的一些展示了特殊的特征：
+<p> <ul>
+<p> <li> 特殊的断行符。一些亚洲语言在词中间没有空格。断行符出现在汉语、日语和汉语的字符（也有例外）后，或者泰国语中的逻辑词的边界后。
+<p> <li> 双向书写。阿拉伯语和希伯来语是从右向左书写的，除了数字和嵌入的英文文本是从左向右书写的。准确的书写习惯在<a href="http://www.unicode.org/unicode/reports/tr9/">Unicode第9号技术报告</a>有定义。
+<p> <li> 无间距或者可区别的符号（欧洲语言中的重音或元音变音）。像越南语这样的一些语言很广泛地使用了这类符号并且同时字符中使用一些符号来澄清发音。
+<p> <li> 连字。在特殊的内容中，相互跟随的一些字符被一些使用连字符的结合体替换。最普通的例子就是在美国和欧洲的书籍排版中使用的ff和fi连字。
+<p> </ul>
+<p> 除了现在仅仅被特殊情况下的阿拉伯语支持的连字，Qt试图处理所有上面提到的特殊特征。只要你使用Qt的输入（例如，<a href="qlineedit.html">QLineEdit</a>，QTextView或者它们的继承类）和显示控制（例如，<a href="qlabel.html">QLabel</a>），你将永远不用担心这些特征。
+<p> 对于这些书写系统的支持对程序员是透明的并且完全地封装在Qt的文本引擎中。这就意味着你不需要去知道使用特殊语言的书写系统，除了下面列出的一些小事情。
+<p> <ul>
+<p> <li> <a href="qpainter.html#drawText">QPainter::drawText</a>( int x, int y, const <a href="qstring.html">QString</a> &str )将会在x和y参数确定的位置作为左边界可是写这个字符串。通常情况下给你的是左对齐的字符串。阿拉伯语和希伯来语的应用程序字符串是右对齐的，所以对于这些语言使用带有<a href="qrect.html">QRect</a>的drawText()，因为这样的话函数就会根据语言在区域中画文字了。
+<p> <li> 当你写自己的文本输入控制时，使用<a href="qfontmetrics.html#charWidth">QFontMetrics::charWidth</a>()来确定字符串中字符的宽度。在一些语言中（主要是阿拉伯语），符号的宽度和形状的变化依赖于周围的字符。写输入控制通常需要它将要使用的脚本的知识。通常最容易的方式是继承<a href="qlineedit.html">QLineEdit</a>或者QTextView。
+<p> </ul>
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

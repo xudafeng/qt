@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QIntValidator类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QIntValidator类参考</h1>
+
+<p>QIntValidator类提供了一个确保一个字符串包含一个在一定有效范围内的整数的验证器。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qvalidator-h.html">qvalidator.h</a>&gt;</tt>
+<p>继承了<a href="qvalidator.html">QValidator</a>。
+<p><a href="qintvalidator-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QIntValidator"><b>QIntValidator</b></a> ( QObject&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QIntValidator-2"><b>QIntValidator</b></a> ( int&nbsp;minimum, int&nbsp;maximum, QObject&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#~QIntValidator"><b>~QIntValidator</b></a> ()</div></li>
+<li><div class=fn>virtual QValidator::State <a href="#validate"><b>validate</b></a> ( QString&nbsp;&amp;&nbsp;input, int &amp; ) const</div></li>
+<li><div class=fn>void <a href="#setBottom"><b>setBottom</b></a> ( int )</div></li>
+<li><div class=fn>void <a href="#setTop"><b>setTop</b></a> ( int )</div></li>
+<li><div class=fn>virtual void <a href="#setRange"><b>setRange</b></a> ( int&nbsp;minimum, int&nbsp;maximum )</div></li>
+<li><div class=fn>int <a href="#bottom"><b>bottom</b></a> () const</div></li>
+<li><div class=fn>int <a href="#top"><b>top</b></a> () const</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>int <a href="#bottom-prop"><b>bottom</b></a>&nbsp;- 验证器可接受的最小值</div></li>
+<li><div class=fn>int <a href="#top-prop"><b>top</b></a>&nbsp;- 验证器可接受的最大值</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+<p> QIntValidator类提供了一个确保一个字符串包含一个在一定有效范围内的整数的验证器。
+<p> 
+<p> <a href="#validate">validate</a>()函数返回<a href="qvalidator.html#State-enum">Acceptable</a>、<a href="qvalidator.html#State-enum">Intermediate</a>或<a href="qvalidator.html#State-enum">Invalid</a>。<a href="qvalidator.html#State-enum">Acceptable</a>是指字符串是一个在指定范围内的有效整数。<a href="qvalidator.html#State-enum">Intermediate</a>是指字符串是一个有效整数，但不在指定范围内。<a href="qvalidator.html#State-enum">Invalid</a>是指字符串不是一个有效整数。
+<p> 使用实例：
+<p> <pre>
+    QIntValidator v( 0, 100, this );
+    <a href="qlineedit.html">QLineEdit</a>* edit = new <a href="qlineedit.html">QLineEdit</a>( this );
+
+    // 这个行编辑只接受从0到100的整数
+    edit-&gt;<a href="qlineedit.html#setValidator">setValidator</a>( &amp;v );
+  </pre>
+ 
+<p> 下面我们提供一些验证器的实例。实际上，它们将会像上面的例子一样和窗口部件协同使用。
+<p> <pre>
+    <a href="qstring.html">QString</a> s;
+    QIntValidator v( 0, 100, this );
+
+    s = "10";
+    v.<a href="#validate">validate</a>( s, 0 ); // 返回Acceptable
+    s = "35";
+    v.<a href="#validate">validate</a>( s, 0 ); // 返回Acceptable
+
+    s = "105";
+    v.<a href="#validate">validate</a>( s, 0 ); // 返回Intermediate
+
+    s = "-763";
+    v.<a href="#validate">validate</a>( s, 0 ); // 返回Invalid
+    s = "abc";
+    v.<a href="#validate">validate</a>( s, 0 ); // 返回Invalid
+    s = "12v";
+    v.<a href="#validate">validate</a>( s, 0 ); // 返回Invalid
+  </pre>
+ 
+<p> 最大值和最小值可以通过调用<a href="#setRange">setRange</a>()同时设置或者通过分别调用<a href="#setBottom">setBottom</a>()和<a href="#setTop">setTop</a>()来设置。
+<p> <p>也可以参考<a href="qdoublevalidator.html">QDoubleValidator</a>、<a href="qregexpvalidator.html">QRegExpValidator</a>和<a href="misc.html">杂项类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QIntValidator"></a>QIntValidator::QIntValidator ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个接受所有整数并且父对象为<em>parent</em>，名称为<em>name</em>的验证器。
+
+<h3 class=fn><a name="QIntValidator-2"></a>QIntValidator::QIntValidator ( int&nbsp;minimum, int&nbsp;maximum, <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个接受从<em>minimum</em>到<em>maximum</em>（包含边界）的整数并且父对象为<em>parent</em>，名称为<em>name</em>的验证器。
+
+<h3 class=fn><a name="~QIntValidator"></a>QIntValidator::~QIntValidator ()
+</h3>
+销毁这个验证器，释放所有已经分配的资源。
+
+<h3 class=fn>int <a name="bottom"></a>QIntValidator::bottom () const
+</h3>
+<p>返回验证器可接受的最小值。详细情况请参考<a href="qintvalidator.html#bottom-prop">“bottom”</a>属性。
+
+<h3 class=fn>void <a name="setBottom"></a>QIntValidator::setBottom ( int )
+</h3>
+<p>设置验证器可接受的最小值。详细情况请参考<a href="qintvalidator.html#bottom-prop">“bottom”</a>属性。
+
+<h3 class=fn>void <a name="setRange"></a>QIntValidator::setRange ( int&nbsp;minimum, int&nbsp;maximum )<tt> [虚]</tt>
+</h3>
+设置验证器所接受的数值的范围是从<em>minimum</em>到<em>maximum</em>（包含边界）。
+
+<h3 class=fn>void <a name="setTop"></a>QIntValidator::setTop ( int )
+</h3>
+<p>设置验证器可接受的最大值。详细情况请参考<a href="qintvalidator.html#top-prop">“top”</a>属性。
+
+<h3 class=fn>int <a name="top"></a>QIntValidator::top () const
+</h3>
+<p>返回验证器可接受的最大值。详细情况请参考<a href="qintvalidator.html#top-prop">“top”</a>属性。
+
+<h3 class=fn><a href="qvalidator.html#State-enum">QValidator::State</a> <a name="validate"></a>QIntValidator::validate ( <a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;input, int &amp; ) const<tt> [虚]</tt>
+</h3>
+如果<em>input</em>是在有效范围内的整数，返回<a href="qvalidator.html#State-enum">Acceptable</a>，如果<em>input</em>是在有效范围之外的整数，返回<a href="qvalidator.html#State-enum">Intermediate</a>并且如果<em>input</em>不是整数，返回<a href="qvalidator.html#State-enum">Invalid</a>。
+<p> <pre>
+    s = "35";
+    v.validate( s, 0 ); // 返回Acceptable
+
+    s = "105";
+    v.validate( s, 0 ); // 返回Intermediate
+
+    s = "abc";
+    v.validate( s, 0 ); // 返回Invalid
+  </pre>
+ 
+
+<p>从<a href="qvalidator.html#validate">QValidator</a>中重新实现。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>int <a name="bottom-prop"></a>bottom</h3> 
+<p>这个属性保存的是验证器可接受的最小值。
+<p>通过<a href="#setBottom">setBottom</a>()可以设置属性值并且通过<a href="#bottom">bottom</a>()返回属性值。
+<p><p>也可以参考<a href="#setRange">setRange</a>()。
+
+<h3 class=fn>int <a name="top-prop"></a>top</h3> 
+<p>这个属性保存的是验证器可接受的最大值。
+<p>通过<a href="#setTop">setTop</a>()可以设置属性值并且通过<a href="#top">top</a>()返回属性值。
+<p><p>也可以参考<a href="#setRange">setRange</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

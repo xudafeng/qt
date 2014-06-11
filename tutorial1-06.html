@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt教程一 —— 第六章：组装丰富的积木！</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt教程一 —— 第六章：组装丰富的积木！</h1>
+
+ 
+<p> <center><img src="t6.png" alt="Screenshot of tutorial six"></center> 
+<p> 这个例子显示了如何把两个窗口部件封装成一个新的组件和使用许多窗口部件是多么的容易。首先，我们使用一个自定义的窗口部件作为一个子窗口部件。
+<p> <a name="main"></a>
+<pre>/****************************************************************
+**
+** Qt教程一 - 6
+**
+****************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a href="qslider-h.html">qslider.h</a>&gt;
+#include &lt;<a href="qlcdnumber-h.html">qlcdnumber.h</a>&gt;
+#include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+#include &lt;<a href="qvbox-h.html">qvbox.h</a>&gt;
+#include &lt;<a href="qgrid-h.html">qgrid.h</a>&gt;
+
+class LCDRange : public <a href="qvbox.html">QVBox</a>
+{
+public:
+    LCDRange( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+};
+
+<a name="f551"></a>LCDRange::LCDRange( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qvbox.html">QVBox</a>( parent, name )
+{
+    <a href="qlcdnumber.html">QLCDNumber</a> *lcd  = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "lcd"  );
+    <a href="qslider.html">QSlider</a> * slider = new <a href="qslider.html">QSlider</a>( Horizontal, this, "slider" );
+    slider-&gt;<a href="qrangecontrol.html#setRange">setRange</a>( 0, 99 );
+    slider-&gt;<a href="qslider.html#setValue">setValue</a>( 0 );
+    <a href="qobject.html#connect">connect</a>( slider, SIGNAL(<a href="qslider.html#valueChanged">valueChanged</a>(int)), lcd, SLOT(<a href="qlcdnumber.html#display">display</a>(int)) );
+}
+
+class MyWidget : public <a href="qvbox.html">QVBox</a>
+{
+public:
+    MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+};
+
+
+<a name="f552"></a>MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qvbox.html">QVBox</a>( parent, name )
+{
+    <a href="qpushbutton.html">QPushButton</a> *quit = new <a href="qpushbutton.html">QPushButton</a>( "Quit", this, "quit" );
+    quit-&gt;<a href="qwidget.html#setFont">setFont</a>( QFont( "Times", 18, QFont::Bold ) );
+
+    <a href="qobject.html#connect">connect</a>( quit, SIGNAL(<a href="qbutton.html#clicked">clicked</a>()), qApp, SLOT(<a href="qapplication.html#quit">quit</a>()) );
+
+    <a href="qgrid.html">QGrid</a> *grid = new <a href="qgrid.html">QGrid</a>( 4, this );
+
+    for( int r = 0 ; r &lt; 4 ; r++ )
+        for( int c = 0 ; c &lt; 4 ; c++ )
+            (void)new LCDRange( grid );
+}
+
+int main( int argc, char **argv )
+{
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+    MyWidget w;
+    a.<a href="qapplication.html#setMainWidget">setMainWidget</a>( &amp;w );
+    w.<a href="qwidget.html#show">show</a>();
+    return a.<a href="qapplication.html#exec">exec</a>();
+}
+</pre>
+
+
+
+<p> <h2> 一行一行地解说
+</h2>
+<a name="1"></a><p> <pre>    class LCDRange : public <a href="qvbox.html">QVBox</a>
+    {
+    public:
+        LCDRange( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+    };
+</pre>
+<p> LCDRange窗口部件是一个没有任何API的窗口部件。它只有一个构造函数。这种窗口部件不是很有用，所以我们一会儿会加入一些API。
+<p> <pre>    LCDRange::LCDRange( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qvbox.html">QVBox</a>( parent, name )
+    {
+        <a href="qlcdnumber.html">QLCDNumber</a> *lcd  = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "lcd"  );
+        <a href="qslider.html">QSlider</a> * slider = new <a href="qslider.html">QSlider</a>( Horizontal, this, "slider" );
+    <a name="x2257"></a>    slider-&gt;<a href="qrangecontrol.html#setRange">setRange</a>( 0, 99 );
+    <a name="x2258"></a>    slider-&gt;<a href="qslider.html#setValue">setValue</a>( 0 );
+    <a name="x2259"></a><a name="x2256"></a>    <a href="qobject.html#connect">connect</a>( slider, SIGNAL(<a href="qslider.html#valueChanged">valueChanged</a>(int)), lcd, SLOT(<a href="qlcdnumber.html#display">display</a>(int)) );
+    }
+</pre>
+<p> 这里直接利用了第五章里面的<a href="tutorial1-05.html#constructor">MyWidget的构造函数</a>。唯一的不同是按钮被省略了并且这个类被重新命名了。
+<p> <pre>    class MyWidget : public <a href="qvbox.html">QVBox</a>
+    {
+    public:
+        MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+    };
+</pre>
+<p> MyWidget也是除了一个构造函数之外没有包含任何API。
+<p> <pre>    MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qvbox.html">QVBox</a>( parent, name )
+    {
+        <a href="qpushbutton.html">QPushButton</a> *quit = new <a href="qpushbutton.html">QPushButton</a>( "Quit", this, "quit" );
+    <a name="x2260"></a>    quit-&gt;<a href="qwidget.html#setFont">setFont</a>( QFont( "Times", 18, QFont::Bold ) );
+
+    <a name="x2253"></a>    <a href="qobject.html#connect">connect</a>( quit, SIGNAL(<a href="qbutton.html#clicked">clicked</a>()), qApp, SLOT(<a href="qapplication.html#quit">quit</a>()) );
+</pre>
+<p> 这个按钮被放在LCDRange中，这样我们就有了一个“Quit”按钮和许多LCDRange对象。
+<p> <pre>        <a href="qgrid.html">QGrid</a> *grid = new <a href="qgrid.html">QGrid</a>( 4, this );
+</pre>
+<p> 我们创建了一个四列的<a href="qgrid.html">QGrid</a>对象。这个QGrid窗口部件可以自动地把自己地子窗口部件排列到行列中，你可以指定行和列的数量，并且QGrid可以发现它的新子窗口部件并且把它们安放到网格中。
+<p> <pre>        for( int r = 0 ; r &lt; 4 ; r++ )
+            for( int c = 0 ; c &lt; 4 ; c++ )
+                (void)new LCDRange( grid );
+</pre>
+<p> 四行，四列。
+<p> 我们创建了一个4*4个LCDRanges，所有这些都是这个grid对象的子窗口部件。这个QGrid窗口部件会安排它们。
+<p> <pre>    }
+</pre>
+<p> 这就是全部了。
+<p> <h2> 行为
+</h2>
+<a name="2"></a><p> 这个程序显示了在同一时间使用许多窗口部件是多么的容易。其中的滑块和LCD数字的行为在前一章已经提到过了。还有就是，就是实现的不同。
+<p> （请看<a href="tutorial1-01.html#compiling">编译</a>来学习如何创建一个makefile和连编应用程序。）
+<p> <h2> 练习
+</h2>
+<a name="3"></a><p> 在开始的时候使用不同的或者随机的值初始化每个滑块。
+<p> 源代码中的“4”出现了3次。如果你改变<a href="qgrid.html">QGrid</a>构造函数中调用的那个，会发生什么？改变另外两个又会发生什么呢？为什么呢？
+<p> 现在你可以进行<a href="tutorial1-07.html">第七章</a>了。
+<p> [<a href="tutorial1-05.html">上一章</a>]
+[<a href="tutorial1-07.html">下一章</a>]
+[<a href="tutorial.html">教程一主页</a>]
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

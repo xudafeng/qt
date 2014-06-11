@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QBuffer类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QBuffer类参考</h1>
+
+<p>QBuffer类是一个操作QByteArray的输入/输出设备。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qbuffer-h.html">qbuffer.h</a>&gt;</tt>
+<p>继承了<a href="qiodevice.html">QIODevice</a>。
+<p><a href="qbuffer-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QBuffer"><b>QBuffer</b></a> ()</div></li>
+<li><div class=fn><a href="#QBuffer-2"><b>QBuffer</b></a> ( QByteArray&nbsp;buf )</div></li>
+<li><div class=fn><a href="#~QBuffer"><b>~QBuffer</b></a> ()</div></li>
+<li><div class=fn>QByteArray <a href="#buffer"><b>buffer</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#setBuffer"><b>setBuffer</b></a> ( QByteArray&nbsp;buf )</div></li>
+<li><div class=fn>virtual Q_LONG <a href="#writeBlock"><b>writeBlock</b></a> ( const&nbsp;char&nbsp;*&nbsp;p, Q_ULONG&nbsp;len )</div></li>
+<li><div class=fn>Q_LONG <a href="#writeBlock-2"><b>writeBlock</b></a> ( const&nbsp;QByteArray&nbsp;&amp;&nbsp;data )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QBuffer类是一个操作<a href="qbytearray.html">QByteArray</a>的输入/输出设备。
+<p> QBuffer是用来读写内存缓存的。它通常与<a href="qtextstream.html">QTextStream</a>或<a href="qdatastream.html">QDataStream</a>一起使用。QBuffer有一个相关联的QByteArray用来存储缓冲数据。缓冲的大小（<a href="qiodevice.html#size">size</a>()）会根据所写的数据自动调整。
+<p> 构造函数<tt>QBuffer(QByteArray)</tt>以一个现有的字节数组创建一个QBuffer。字节数组也可以由<a href="#setBuffer">setBuffer</a>()来设置。向QBuffer写将会更改初始字节数组，因为QByteArray是<a href="shclass.html">明确共享</a>。
+<p> 在使用之前使用<a href="qiodevice.html#open">open</a>()来打开缓存并且设置模式（只读、只写等等）。<a href="qiodevice.html#close">close</a>()可以关闭缓存。在重新打开或者调用setBuffer()之前缓存必须被关闭。
+<p> 使用QBuffer的一个普通方式是通过<a href="qdatastream.html">QDataStream</a>或<a href="qtextstream.html">QTextStream</a>，它们可以通过一个QBuffer参数来构造。为了方便，QDataStream和<a href="qtextstream.html">QTextStream</a>也可以使用一个<a href="qbytearray.html">QByteArray</a>参数来构造。这些构造函数创建并且打开一个内部的QBuffer。
+<p> 注意QTextStream也可以操作<a href="qstring.html">QString</a>（一个Unicode字符串），而QBuffer不能。
+<p> 你也可以直接通过标准的<a href="qiodevice.html">QIODevice</a>函数<a href="qiodevice.html#readBlock">readBlock</a>()、<a href="#writeBlock">writeBlock</a>()、<a href="qiodevice.html#readLine">readLine</a>()、<a href="qiodevice.html#at">at</a>(),、<a href="qiodevice.html#getch">getch</a>()、<a href="qiodevice.html#putch">putch</a>()和<a href="qiodevice.html#ungetch">ungetch</a>()来使用QBuffer。
+<p> <p>也可以参考<a href="qfile.html">QFile</a>、<a href="qdatastream.html">QDataStream</a>、<a href="qtextstream.html">QTextStream</a>、<a href="qbytearray.html">QByteArray</a>、<a href="shclass.html">共享类</a>、 <a href="collection.html">集合类</a>和<a href="io.html">输入/输出和网络</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QBuffer"></a>QBuffer::QBuffer ()
+</h3>
+构造一个空的缓存。
+
+<h3 class=fn><a name="QBuffer-2"></a>QBuffer::QBuffer ( <a href="qbytearray.html">QByteArray</a>&nbsp;buf )
+</h3>
+操作<em>buf</em>来构造一个缓存。
+如果你使用写模式（<a href="qfile.html#open">IO_WriteOnly</a>或者<a href="qfile.html#open">IO_ReadWrite</a>）打开缓存并且写一些东西到缓存，<em>buf</em>将被修改。
+<p> 实例：
+  <pre>
+    <a href="qcstring.html">QCString</a> str = "abc";
+    QBuffer b( str );
+    b.<a href="qiodevice.html#open">open</a>( IO_WriteOnly );
+    b.<a href="qiodevice.html#at">at</a>( 3 ); // 定位到第四个字符（终结符\0）
+    b.<a href="#writeBlock">writeBlock</a>( "def", 4 ); // 写入“def”，包括终结符\0
+    b.<a href="qiodevice.html#close">close</a>();
+    // 现在，str就是“abcdef”和一个终结符\0
+  </pre>
+<p> <p>也可以参考<a href="#setBuffer">setBuffer</a>()。
+
+<h3 class=fn><a name="~QBuffer"></a>QBuffer::~QBuffer ()
+</h3>
+析构缓存。
+
+<h3 class=fn><a href="qbytearray.html">QByteArray</a> <a name="buffer"></a>QBuffer::buffer () const
+</h3>
+<p> 返回这个缓存的字节数组。
+<p> <p>也可以参考a href="#setBuffer">setBuffer</a>()。
+
+<h3 class=fn>bool <a name="setBuffer"></a>QBuffer::setBuffer ( <a href="qbytearray.html">QByteArray</a>&nbsp;buf )
+</h3>
+把缓存的内容替换为<em>buf</em>。
+<p> 当<a href="qiodevice.html#isOpen">isOpen</a>()为真时，这个操作也许不能被完成。
+<p> 注意如果你使用写模式（<a href="qfile.html#open">IO_WriteOnly</a>或者<a href="qfile.html#open">IO_ReadWrite</a>）打开缓存并且写一些东西到缓存，<em>buf</em>也会被修改因为<a href="qbytearray.html">QByteArray</a>是一个<a href="shclass.html#explicitly-shared">明显共享</a>类。
+<p> <p>也可以参考<a href="#buffer">buffer</a>()、<a href="qiodevice.html#open">open</a>()和<a href="qiodevice.html#close">close</a>()。
+
+<h3 class=fn>Q_LONG <a name="writeBlock"></a>QBuffer::writeBlock ( const&nbsp;char&nbsp;*&nbsp;p, Q_ULONG&nbsp;len )<tt> [虚]</tt>
+</h3>
+<p> 把<em>p</em>中的<em>len</em>字节写到缓存的当前索引位置，如果需要的话，将会覆盖原有的数据并且扩充缓存。返回实际所写的字节数量。
+<p> 如果发生任何错误，返回-1。
+<p> <p>也可以参卡<a href="qiodevice.html#readBlock">readBlock</a>()。
+
+<p>Reimplemented from <a href="qiodevice.html#writeBlock">QIODevice</a>.
+<h3 class=fn>Q_LONG <a name="writeBlock-2"></a>QBuffer::writeBlock ( const&nbsp;<a href="qbytearray.html">QByteArray</a>&nbsp;&amp;&nbsp;data )
+</h3>
+这是一个重载成员函数，提供方便。它的行为和上面的函数基本一致。
+<p> 这个方便的函数使用<em>data</em>与调用<a href="#writeBlock">writeBlock</a>( data.data(), data.<a href="#size">size</a>() )是一样的。
+<p> 
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

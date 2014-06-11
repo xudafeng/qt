@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt模板库</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt模板库</h1>
+
+ 
+<p> 
+<p> Qt模板库（QTL）是一套提供对象容器的模板。如果你的编译器不能用到一个适当的STL实现，QTL可以替代它。它提供了对象的列表、对象的矢量（动态数组）、从一种类型到其它的映射（或字典），并且有关联的<a href="#Iterators">迭代器</a>和<a href="#Algorithms">算法</a>。一个容器是可以包含和管理其它对象的一个对象并且提供迭代器来允许被包含的对象能够被访问。
+<p> QTL类的命名约定与其他Qt类一致（比如，count()、isEmpty()）。它们也提供额外的函数来兼容STL算法，比如size()和empty()。程序员也可以像使用STL的<tt>map</tt>一样来使用它们。
+<p> 与STL相比，QTL仅仅包含了STL容器应用程序接口的最重要的特性，没有平台差异，通常要慢一些并且经常扩展为更少的对象代码。
+<p> 如果你不能复制你所想要存储的对象，你最好使用<a href="qptrcollection.html">QPtrCollection</a>和它的朋友。它们就是被设计用来正确地处理这些类型的指针语义。这将适用于比如所有继承<a href="qobject.html">QObject</a>的类。<a href="qobject.html">QObject</a>没有一个复制构造函数，所以把它们作为值来使用是不可能的。你也许可以选择存储QObject的指针到<a href="qvaluelist.html">QValueList</a>，但是直接使用<a href="qptrlist.html">QPtrList</a>看起来是对这类应用程序领域的更好的选择。QPtrList，像所有其它的基于QPtrCollection的容器，提供了比一个速度优化了的基于值的容器更多健全的检查。
+<p> 如果你有一些实现值语义的对象，并且在你的目标平台没有可用的STL，Qt模板库就可以替代它。值语义至少需要以下这些：
+<p> <ul>
+<li> 一个复制构造函数，
+<li> 一个赋值操作符和
+<li> 一个默认构造函数，比如一个没有任何参数的构造函数。
+</ul>
+<p> 注意一个快速的复制构造函数对于容器的总性能是完全至关重要的，因为许多复制操作将会发生。
+<p> 如果你打算排序你的数据，那么你必须在你的数据类中实现<a href="qcstring.html#operator-lt-2">operator&lt;</a>()。
+<p> 基于值的类的候选对象有<a href="qrect.html">QRect</a>、<a href="qpoint.html">QPoint</a>、<a href="qsize.html">QSize</a>、<a href="qstring.html">QString</a>和所有简单的C++类型，比如int、bool和double。
+<p> Qt模板库是因为速度而被设计。迭代器是非常快的。为了实现这样的性能，所以就比基于<a href="qptrcollection.html">QPtrCollection</a>的类做了更少的错误检查。一个QTL容器，比如，没有跟踪任何关联的迭代器。这样就在比如删除项目的时候没有自动地执行有效性检查，但无论如何，它提供了很快很好的性能。
+<p> <a name="Iterators"></a>
+<h2> 迭代器
+</h2>
+<a name="1"></a><p> Qt模板库处理值对象，而不是指针对象。因为这一点，没有比迭代器更好的遍历容器的方法了。一个迭代器的大小和一个普通指针的大小相同并没有什么不好的。
+<p> 为了遍历一个容器，就像这样使用循环：
+<p> <pre>
+    typedef QValueList&lt;int&gt; List;
+    List l;
+    for( List::Iterator it = l.begin(); it != l.end(); ++it )
+        printf( "Number is %i\n", *it );
+</pre>
+ 
+<p> begin()返回指向第一个元素的迭代器，而end()返回的则是在最后一个元素之<em>后</em>的一个迭代器。end()标明的是一个无效的位置，它永远不能被解除引用。它只是任何一次迭代的终止条件，也许是从begin()开始的。为了最快的速度，我们使用前置的操作符（++it、--it）替代后置的操作符（it++、it--）来增加或减少迭代器，因为前置的比后置的更快一点。
+<p> 同样的概念适用于所有其它容器类：
+<p> <pre>
+    typedef QMap&lt;QString,QString&gt; Map;
+    Map map;
+    for( Map::iterator it = map.begin(); it != map.end(); ++it )
+        printf( "Key=%s Data=%s\n", it.key().ascii(), it.data().ascii() );
+
+    typedef QValueVector&lt;int&gt; Vector;
+    Vector vec;
+    for( Vector::iterator it = vec.begin(); it != vec.end(); ++it )
+        printf( "Data=%d\n", *it );
+</pre>
+ 
+<p> 这里有两种迭代器，上述的例子中显示的是可变的迭代器，还有一种返回当前对象的常量引用的常量迭代器。不论容器本身是一个常量，或者要把一个成员变量放到一个常量函数中，都需要常量迭代器。把一个常量迭代器赋值为一个普通的迭代器是不被允许的，因为它违法了常量语义。
+<p> <a name="Algorithms"></a>
+<h2> 算法
+</h2>
+<a name="2"></a><p> Qt模板库定义了大量的操作它的容器的算法。这些算法被作为模板函数实现并且提供了可以适用于任何提供迭代器的容器（甚至是你自己的容器）的有用的通用代码。
+<p> qHeapSort()和qBubbleSort()提供了著名的排序算法。你可以像这样使用它们：
+<p> <pre>
+    typedef QValueList&lt;int&gt; List;
+    List l;
+    l &lt;&lt; 42 &lt;&lt; 100 &lt;&lt; 1234 &lt;&lt; 12 &lt;&lt; 8;
+    qHeapSort( l );
+
+    List l2;
+    l2 &lt;&lt; 42 &lt;&lt; 100 &lt;&lt; 1234 &lt;&lt; 12 &lt;&lt; 8;
+    List::Iterator b = l2.find( 100 );
+    List::Iterator e = l2.find( 8 );
+    qHeapSort( b, e );
+
+    double arr[] = { 3.2, 5.6, 8.9 };
+    qHeapSort( arr, arr + 3 );
+</pre>
+ 
+<p> 第一个实例是对整个列表进行排序。第二个实例是对两个迭代器之间的所有元素进行排序，也就是100、1234和12。第三个实例显示的是迭代器的行为就像指针一样并且它就可以被作为指针使用。
+<p> 如果使用你自己的数据类型，你必须在你的数据类中实现<a href="qcstring.html#operator-lt-2">operator&lt;</a>()。
+<p> 自然地，这些排序模板在常量迭代器下不能工作。
+<p> <a name="qSwap"></a>
+另一个有用的是qSwap()。它交换两个变量的值：
+<p> <pre>
+    <a href="qstring.html">QString</a> second( "Einstein" );
+    <a href="qstring.html">QString</a> name( "Albert" );
+    qSwap( second, name );
+</pre>
+ 
+<p> <a name="qCount"></a>
+另一个模板函数是qCount()。它统计一个容器中一个值出现的次数。例如：
+<pre>
+    <a href="qvaluelist.html">QValueList</a>&lt;int&gt; l;
+    l.<a href="qvaluelist.html#push_back">push_back</a>( 1 );          
+    l.<a href="qvaluelist.html#push_back">push_back</a>( 1 );          
+    l.<a href="qvaluelist.html#push_back">push_back</a>( 1 );          
+    l.<a href="qvaluelist.html#push_back">push_back</a>( 2 );          
+    int c = 0;
+    qCount( l.<a href="qvaluelist.html#begin">begin</a>(), l.<a href="qvaluelist.html#end">end</a>(), 1, c ); // c == 3
+</pre>
+ 	
+<p> <a name="qFind"></a>
+另一个模板函数是qFind()。它发现一个容器中一个值的第一个出现位置。例如：
+<p> <pre>
+    <a href="qvaluelist.html">QValueList</a>&lt;int&gt; l;
+    l.<a href="qvaluelist.html#push_back">push_back</a>( 1 );          
+    l.<a href="qvaluelist.html#push_back">push_back</a>( 1 );          
+    l.<a href="qvaluelist.html#push_back">push_back</a>( 1 );          
+    l.<a href="qvaluelist.html#push_back">push_back</a>( 2 );          
+    <a href="qvaluelistiterator.html">QValueListIterator</a>&lt;int&gt; it = qFind( l.<a href="qvaluelist.html#begin">begin</a>(), l.<a href="qvaluelist.html#end">end</a>(), 2 );
+</pre>
+ 	
+<p> <a name="qFill"></a>
+另一个模板函数是qFill()。它用一个值的复制来填充一个范围。例如：
+<p> <pre>
+    <a href="qvaluevector.html">QValueVector</a>&lt;int&gt; v(3);
+    qFill( v.<a href="qvaluevector.html#begin">begin</a>(), v.<a href="qvaluevector.html#end">end</a>(), 99 ); // v包含99, 99, 99
+</pre>
+ 
+<p> <a name="qEqual"></a>
+另一个模板函数是qEqual()。它比较两个范围的元素是否相等。注意两个范围的元素数量是不被考虑的，只有第一个范围的元素与第二个范围的对应元素都相等的时候（因此，两个范围都必须有效），它们就相等。例如：
+<p> <pre>
+    <a href="qvaluevector.html">QValueVector</a>&lt;int&gt; v1(3);
+    v1[0] = 1;
+    v1[2] = 2;
+    v1[3] = 3;
+
+    <a href="qvaluevector.html">QValueVector</a>&lt;int&gt; v2(5);
+    v1[0] = 1;
+    v1[2] = 2;
+    v1[3] = 3;
+    v1[4] = 4;
+    v1[5] = 5;
+
+    bool b = qEqual( v1.<a href="qvaluevector.html#begin">begin</a>(), v2.<a href="qvaluevector.html#end">end</a>(), v2.<a href="qvaluevector.html#begin">begin</a>() );
+    // b == TRUE
+</pre>
+ 
+<p> <a name="qCopy"></a>
+另一个模板函数是qCopy()。它复制一个范围的元素到OutputIterator，在这个例子中它是一个QTexOStreamIterator：
+<p> <pre>
+    <a href="qvaluelist.html">QValueList</a>&lt;int&gt; l;
+    l.<a href="qvaluelist.html#push_back">push_back</a>( 100 );
+    l.<a href="qvaluelist.html#push_back">push_back</a>( 200 );
+    l.<a href="qvaluelist.html#push_back">push_back</a>( 300 );
+    <a href="qtextostream.html">QTextOStream</a> str( stdout );
+    qCopy( l.<a href="qvaluelist.html#begin">begin</a>(), l.<a href="qvaluelist.html#end">end</a>(), QTextOStreamIterator(str) );
+</pre>
+ 
+<p> 
+<p> <a name="qCopyBackward"></a>
+另一个模板函数是qCopyBackward()。它复制一个容器或者它的一部分到一个OutputIterator，但是以向后的方式，例如：
+<p> <pre>
+    <a href="qvaluevector.html">QValueVector</a>&lt;int&gt; vec(3);
+    vec.<a href="qvaluevector.html#push_back">push_back</a>( 100 );
+    vec.<a href="qvaluevector.html#push_back">push_back</a>( 200 );
+    vec.<a href="qvaluevector.html#push_back">push_back</a>( 300 );
+    <a href="qvaluevector.html">QValueVector</a>&lt;int&gt; another;
+    qCopyBackward( vec.<a href="qvaluevector.html#begin">begin</a>(), vec.<a href="qvaluevector.html#end">end</a>(), another.<a href="qvaluevector.html#begin">begin</a>() );
+    // “another”现在包含100、200、300
+    // 无论如何元素都被一次性复制
+    // 是按倒序排列的（300、200、100）
+</pre>
+ 
+<p> 另外，你可以把任何一个Qt模板库的迭代器作为OutputIterator使用。只需要注意迭代器的右面现在存在的元素和你所想要插入的一样多。下面这个例子就说明了这些：
+<p> <pre>
+    <a href="qstringlist.html">QStringList</a> l1, l2;
+    l1 &lt;&lt; "Weis" &lt;&lt; "Ettrich" &lt;&lt; "Arnt" &lt;&lt; "Sue";
+    l2 &lt;&lt; "Torben" &lt;&lt; "Matthias";
+    qCopy( l2.begin(), l2.end(), l1.<a href="qvaluelist.html#begin">begin</a>() );
+
+    <a href="qvaluevector.html">QValueVector</a>&lt;QString&gt; v( l1.<a href="qvaluelist.html#size">size</a>(), "Dave" );
+    qCopy( l2.begin(), l2.end(), v.<a href="qvaluevector.html#begin">begin</a>() );
+</pre>
+ 
+<p> 这段代码结束后，列表l1包含“Torben”、“Matthias”、“Arnt”和“Sue”，前面的内容被覆盖了。矢量v包含“Torben”、“Matthias”、“Dave”和“Dave”，也是前面的内容被覆盖了。
+<p> 如果你写了新的算法，请考虑把它们写成模板函数，这样就可以使它们能够用在尽可能多的容器上了。在上一个例子中，你可以很容易地使用qCopy()打印出一个标准C++数组：
+<p> <pre>
+    int arr[] = { 100, 200, 300 };
+    <a href="qtextostream.html">QTextOStream</a> str( stdout );
+    qCopy( arr, arr + 3, QTextOStreamIterator( str ) ); 
+</pre>
+ 
+<p> <h2> 流
+</h2>
+<a name="3"></a><p> 所有提到的容器都可以通过不同的流操作符被串行化。这里是一个例子。
+<p> <pre>
+    <a href="qdatastream.html">QDataStream</a> str(...);
+    <a href="qvaluelist.html">QValueList</a>&lt;QRect&gt; l;
+    // ……在这里填充这个列表
+    str &lt;&lt; l;
+</pre>
+ 
+<p> 容易可以这样被再一次地读入：
+<p> <pre>
+    <a href="qvaluelist.html">QValueList</a>&lt;QRect&gt; l;
+    str &gt;&gt; l;
+</pre>
+ 
+<p> 这些也同样适用于<a href="qstringlist.html">QStringList</a>、<a href="qvaluestack.html">QValueStack</a>和<a href="qmap.html">QMap</a>
+
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

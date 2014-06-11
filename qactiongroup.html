@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QActionGroup类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QActionGroup类参考</h1>
+
+<p>QActionGroup类把操作组合在一起。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qaction-h.html">qaction.h</a>&gt;</tt>
+<p>继承了<a href="qaction.html">QAction</a>。
+<p><a href="qactiongroup-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QActionGroup"><b>QActionGroup</b></a> ( QObject&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;exclusive = TRUE )</div></li>
+<li><div class=fn><a href="#~QActionGroup"><b>~QActionGroup</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setExclusive"><b>setExclusive</b></a> ( bool )</div></li>
+<li><div class=fn>bool <a href="#isExclusive"><b>isExclusive</b></a> () const</div></li>
+<li><div class=fn>void <a href="#add"><b>add</b></a> ( QAction&nbsp;*&nbsp;action )</div></li>
+<li><div class=fn>void <a href="#addSeparator"><b>addSeparator</b></a> ()</div></li>
+<li><div class=fn>virtual bool <a href="#addTo"><b>addTo</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+<li><div class=fn>void <a href="#setUsesDropDown"><b>setUsesDropDown</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>bool <a href="#usesDropDown"><b>usesDropDown</b></a> () const</div></li>
+<li><div class=fn>void insert ( QAction&nbsp;*&nbsp;a ) &nbsp;<em>(obsolete)</em></div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#selected"><b>selected</b></a> ( QAction * )</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>bool <a href="#exclusive-prop"><b>exclusive</b></a>&nbsp;- 操作组是否是排它切换的</div></li>
+<li><div class=fn>bool <a href="#usesDropDown-prop"><b>usesDropDown</b></a>&nbsp;- 组的操作是否被显示到操作组所被添加到的窗口部件的子窗口部件中</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#addedTo"><b>addedTo</b></a> ( QWidget&nbsp;*&nbsp;actionWidget, QWidget&nbsp;*&nbsp;container, QAction&nbsp;*&nbsp;a )</div></li>
+<li><div class=fn>virtual void <a href="#addedTo-2"><b>addedTo</b></a> ( int&nbsp;index, QPopupMenu&nbsp;*&nbsp;menu, QAction&nbsp;*&nbsp;a )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+<p> QActionGroup类把操作组合在一起。
+<p> 在一些情况下，把操作组合在一起是很有用的。例如，你有一个左对齐操作、右对齐操作和中间对齐操作，任何一个时间内只能有一个操作是被激活的，并且达到这一点的简单方法就是把这些操作组合在一个操作组中并且调用<a href="#setExclusive">setExclusive</a>(TRUE)。
+<p> 操作组也可以像单一的单元那样被添加到菜单或者工具条中，操作组中的所有操作都被分别显示为菜单选项和工具条按钮。
+<p> 这里是来自examples/textedit的实例：
+<pre>        QActionGroup *grp = new QActionGroup( this );
+    <a name="x2082"></a>    grp-&gt;<a href="#setExclusive">setExclusive</a>( TRUE );
+    <a name="x2081"></a>    <a href="qobject.html#connect">connect</a>( grp, SIGNAL( <a href="#selected">selected</a>( <a href="qaction.html">QAction</a>* ) ), this, SLOT( textAlign( <a href="qaction.html">QAction</a>* ) ) );
+</pre>
+<p> 我们创建一个新的操作组并且调用setExclusive()来确保任何一个时间内组中只有一个操作可以被激活。然后我们把组的<a href="#selected">selected</a>()信号连接到我们的textAlign()槽。
+<p> <pre>        actionAlignLeft = new <a href="qaction.html">QAction</a>( <a href="qobject.html#tr">tr</a>( "Left" ), QPixmap( "textleft.xpm" ), tr( "&amp;Left" ), CTRL + Key_L, grp, "textLeft" );
+    <a name="x2079"></a>    actionAlignLeft-&gt;<a href="qaction.html#addTo">addTo</a>( tb );
+        actionAlignLeft-&gt;<a href="qaction.html#addTo">addTo</a>( menu );
+    <a name="x2080"></a>    actionAlignLeft-&gt;<a href="qaction.html#setToggleAction">setToggleAction</a>( TRUE );
+</pre>
+<p> 我们创建一个左对齐操作，把它添加到工具条和菜单中并且使它成为切换操作。我们也用同样的方式创建中间对齐操作和右对齐操作。
+<p> 在操作组中的操作像通常一样发射它们的<a href="qaction.html#activated">activated</a>()信号（对于切换操作是<a href="qaction.html#toggled">toggled</a>()）。
+<p> <a href="#setExclusive">setExclusive</a>()函数用来确保任何一个时间内只用一个操作被激活，它应该被用在<a href="qaction.html#toggleAction-prop">toggleAction</a>被设置为真的操作中。
+<p> 操作组中的操作分别出现在菜单选项合工具条按钮中。对于排它操作组使用<a href="#setUsesDropDown">setUsesDropDown</a>()可以把这些操作显示到操作组所被添加到的窗口部件的子窗口部件中。例如，这些操作可以出现在工具条中的组合框中或者菜单的子菜单中。
+<p> 操作可以使用<a href="#add">add</a>()被添加到操作组汇总，但通常它们把操作组作为父对象来创建就可以了。操作可以使用<a href="#addSeparator">addSeparator</a>()来分割。操作组可以使用<a href="#addTo">addTo</a>()被添加到窗口部件中。
+<p>也可以参考<a href="application.html">主窗口和相关类</a>和<a href="basic.html">基本窗口部件</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QActionGroup"></a>QActionGroup::QActionGroup ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;exclusive = TRUE )
+</h3> 
+构造一个父对象为<em>parent</em>并且名称为<em>name</em>的操作组。
+<p> 如果<em>exclusive</em>为真，组中只有一个切换操作可以被激活。
+
+<h3 class=fn><a name="~QActionGroup"></a>QActionGroup::~QActionGroup ()
+</h3> 
+销毁这个对象并且释放已经分配的资源。
+
+<h3 class=fn>void <a name="add"></a>QActionGroup::add ( <a href="qaction.html">QAction</a>&nbsp;*&nbsp;action )
+</h3> 
+把操作<em>action</em>添加到组中。
+<p> 通常把这个组作为父对象创建的操作被添加到组中，所以这个函数通常不被用到。
+<p> <p>也可以参考<a href="#addTo">addTo</a>()。
+
+<h3 class=fn>void <a name="addSeparator"></a>QActionGroup::addSeparator ()
+</h3> 
+把分隔符添加到组中。
+
+<h3 class=fn>bool <a name="addTo"></a>QActionGroup::addTo ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )<tt> [virtual]</tt>
+</h3>
+把这个操作组添加到窗口部件<em>w</em>中。
+<p> 如果<a href="#usesDropDown">usesDropDown</a>()为真并且exclusive为真（请参考<a href="#setExclusive">setExclusive</a>()），如果<em>w</em>是一个工具条的话，这些操作就会出现在一个组合框中或者<em>w</em>是一个菜单的话，它们就会作为一个子菜单出现。否则（默认）组中的操作将会分别被加入到窗口部件中。例如，如果窗口部件是菜单，这些操作将分别被显示为菜单选项，如果窗口部件是工具条的话，它们被分别显示为工具条按钮。
+<p> 在操作组中的操作，特别是usesDropDown()为真的，建议设置它们的<a href="qaction.html#menuText">menuText</a>()或<a href="qaction.html#text">text</a>()属性。
+<p> 应该在操作组被添加到窗口部件<em>之前</em>，所有的操作被添加到操作组中。如果在操作组被添加到窗口部件<em>之后</em>，被添加到操作组中的操作将<em>不会</em>被显示。
+<p> <p>也可以参考<a href="#exclusive-prop">exclusive</a>、<a href="#usesDropDown-prop">usesDropDown</a>和<a href="qaction.html#removeFrom">removeFrom</a>()。
+<p>实例：<a href="actiongroup-example.html#x1053">action/actiongroup/editor.cpp</a>和<a href="themes-example.html#x278">themes/themes.cpp</a>。
+<p>从<a href="qaction.html#addTo">QAction</a>中重新实现的。
+
+<h3 class=fn>void <a name="addedTo"></a>QActionGroup::addedTo ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;actionWidget, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;container, <a href="qaction.html">QAction</a>&nbsp;*&nbsp;a )<tt> [虚 保护]</tt>
+</h3> 
+当它在<em>container</em>中为这个子操作<em>a</em>创建一个窗口部件时（<em>actionWidget</em>），这个函数被<a href="#addTo">addTo</a>()调用。
+
+<h3 class=fn>void <a name="addedTo-2"></a>QActionGroup::addedTo ( int&nbsp;index, <a href="qpopupmenu.html">QPopupMenu</a>&nbsp;*&nbsp;menu, <a href="qaction.html">QAction</a>&nbsp;*&nbsp;a )<tt> [虚 保护]</tt>
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 当它在弹出菜单<em>menu</em>中为这个子操作创建一个索引为<em>index</em>的菜单项时，这个函数被<a href="#addTo">addTo</a>()调用。
+
+<h3 class=fn>void <a name="insert"></a>QActionGroup::insert ( <a href="qaction.html">QAction</a>&nbsp;*&nbsp;a )
+</h3> 
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 使用<a href="#add">add</a>()来替代，或者使用操作组作为父对象来创建操作更好。
+
+<h3 class=fn>bool <a name="isExclusive"></a>QActionGroup::isExclusive () const
+</h3>
+<p>如果操作组是排它切换的，返回真，否则返回假。详细情况请参考<a href="qactiongroup.html#exclusive-prop">“exclusive”</a>属性。
+
+<h3 class=fn>void <a name="selected"></a>QActionGroup::selected ( <a href="qaction.html">QAction</a>&nbsp;* )<tt> [信号]</tt>
+</h3>
+<p> 当切换操作改变状态时，这个信号从排它组中被发射。
+<p> 参数是状态变为“开”的操作。
+<p> 
+<pre>        QActionGroup * colors = new QActionGroup( this, "colors", TRUE );
+</pre><pre>    <a name="x2084"></a><a name="x2083"></a>    QObject::<a href="qobject.html#connect">connect</a>( colors, SIGNAL( <a href="#selected">selected</a>( <a href="qaction.html">QAction</a> * ) ),
+                          this, SLOT( setFontColor( <a href="qaction.html">QAction</a> * ) ) );
+</pre>
+<p> 在这个实例中，我们把<a href="#selected">selected</a>()信号连接到我们自己的setFontColor()槽，传递<a href="qaction.html">QAction</a>所以我们可以直到哪个操作被用户选择。
+<p> （请参考<a href="actiongroup.html">QActionGroup排演</a>。）
+<p> <p>也可以参考<a href="#exclusive-prop">exclusive</a>和<a href="qaction.html#on-prop">on</a>。
+<p>实例：<a href="qactiongroup.html#x2083">action/actiongroup/editor.cpp</a>、<a href="canvas-chart-example.html#x2590">chart/chartform.cpp</a>和<a href="qactiongroup.html#x2081">textedit/textedit.cpp</a>。
+
+<h3 class=fn>void <a name="setExclusive"></a>QActionGroup::setExclusive ( bool )
+</h3>
+<p>设置操作组是否排它切换。详细情况请参考<a href="qactiongroup.html#exclusive-prop">“exclusive”</a>属性。
+
+<h3 class=fn>void <a name="setUsesDropDown"></a>QActionGroup::setUsesDropDown ( bool&nbsp;enable )
+</h3>
+<p>设置组中的操作是否被显示为操作组所被添加到的窗口部件的子窗口部件为<em>enable</em>。详细情况请参考<a href="qactiongroup.html#usesDropDown-prop">“usesDropDown”</a>属性。
+
+<h3 class=fn>bool <a name="usesDropDown"></a>QActionGroup::usesDropDown () const
+</h3>
+<p>如果组的操作被显示为操作组所被添加到的窗口部件的子窗口部件，返回真，否则返回假。详细情况请参考<a href="qactiongroup.html#usesDropDown-prop">“usesDropDown”</a>属性。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>bool <a name="exclusive-prop"></a>exclusive</h3> 
+<p>这个属性保存的是操作组是否是排它切换。
+<p>如果exclusive为真，则任何一个时间内操作组中只有一个切换操作可以被激活。如果用户选择组中的其它切换操作，那么被用户选择的被激活，其它的变为非活动的。默认情况下这个属性为假。
+<p> <p>也可以参考<a href="qaction.html#toggleAction-prop">QAction::toggleAction</a>。
+<p>通过<a href="#setExclusive">setExclusive</a>()设置属性值并且通过<a href="#isExclusive">isExclusive</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="usesDropDown-prop"></a>usesDropDown</h3>  
+<p>这个属性保存的是组的操作是否被显示到操作组所被添加到的窗口部件的子窗口部件中。
+<p>被添加到工具条中的排它操作组会在组合框中显示它们的操作，操作的<a href="qaction.html#text-prop">QAction::text</a>和<a href="qaction.html#iconSet-prop">QAction::iconSet</a>属性被显示。非排它组会被分别显示为工具按钮，显示它们的<a href="qaction.html#iconSet-prop">QAction::iconSet</a>，并且——依赖于<a href="qmainwindow.html#usesTextLabel">QMainWindow::usesTextLabel</a>()——来显示<a href="qaction.html#text">text</a>()属性。
+<p> 在弹出菜单中，成员操作会被显示在子菜单中。
+<p> 改变usersDropDown只影响<em>subsequent</em>调用<a href="#addTo">addTo</a>()。
+<p> 这个属性的默认值为假。
+<p>通过<a href="#setUsesDropDown">setUsesDropDown</a>()设置属性值并且通过<a href="#usesDropDown">usesDropDown</a>()来获得属性值。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

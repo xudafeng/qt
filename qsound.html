@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Translator" content="Hackerjun">
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QSound类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QSound类参考</h1>
+
+<p>QSound提供对平台音频设备的访问。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qsound-h.html">qsound.h</a>&gt;</tt>
+<p>继承了<a href="qobject.html">QObject</a>。
+<p><a href="qsound-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QSound"><b>QSound</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;filename, QObject&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#~QSound"><b>~QSound</b></a> ()</div></li>
+<li><div class=fn>int <a href="#loops"><b>loops</b></a> () const</div></li>
+<li><div class=fn>int <a href="#loopsRemaining"><b>loopsRemaining</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setLoops"><b>setLoops</b></a> ( int&nbsp;l )</div></li>
+<li><div class=fn>QString <a href="#fileName"><b>fileName</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isFinished"><b>isFinished</b></a> () const</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>void <a href="#play-2"><b>play</b></a> ()</div></li>
+<li><div class=fn>void <a href="#stop"><b>stop</b></a> ()</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>bool <a href="#isAvailable"><b>isAvailable</b></a> ()</div></li>
+<li><div class=fn>void <a href="#play"><b>play</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;filename )</div></li>
+<li><div class=fn>bool <a href="#available"><b>available</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QSound提供对平台音频设备的访问。
+<p> Qt提供了在大多数GUI应用程序中通常都需要的操作：异步播放声音文件。这用一个单呼叫就能简单的完成：
+<pre>
+        QSound::<a href="#play">play</a>("mysounds/bells.wav");
+    </pre>
+ 
+<p> 第二个API是被用来根据一个声音文件创建一个QSound对象并且随后就播放它：
+<pre>
+        QSound bells("mysounds/bells.wav");
+
+        bells.<a href="#play">play</a>();
+    </pre>
+ 
+<p> 用以上第二种方式播放声音虽然也许会消耗更多的内存，但依靠底层平台的音频设备，比起第一种方式播放声音起来更直接。 
+<p> 在微软Windows下使用的底层多媒系统，仅支持WAVE格式的声音文件。 
+<p> 在X11下有效的使用了<a href="ftp://ftp.x.org/contrib/audio/nas/">网络音频系统</a>，另外所有的操作工作都在默默的进行着。NAS支持WAVE和AU文件。
+<p> 有趣的是，在苹果机上，我们使用QT（<a href="http://quicktime.apple.com">QuickTime</a>）来播放声音，这意思就是说所有的QuickTime格式被Qt/Mac所支持。
+<p> 在Qt/Embedded中,使用了内建混声服务器，可以直接访问<tt>/dev/dsp</tt>。其仅仅可以支持WAVE格式。
+<p> 用<a href="#isAvailable">QSound::isAvailable</a>()可以测试支持的声音。
+<p>也可以参考<a href="multimedia.html">多媒体类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QSound"></a>QSound::QSound ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;filename, <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个QSound能够快速的通过一个名为<em>filename</em>的文件来播放声音。 
+<p> 这也许会比静态函数<tt>play</tt>使用更多的内存。
+<p> 父类<em>parent</em>和名称<em>name</em>的参数（默认为0）被传递给了<a href="qobject.html">QObject</a>的构造函数。
+
+<h3 class=fn><a name="~QSound"></a>QSound::~QSound ()
+</h3>
+销毁声音对象。 
+
+<h3 class=fn>bool <a name="available"></a>QSound::available ()<tt> [静态]</tt>
+</h3>
+<p> 如果可以有效的支持就返回真，否则返回假。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="fileName"></a>QSound::fileName () const
+</h3>
+返回与声音有关的文件名。
+
+<h3 class=fn>bool <a name="isAvailable"></a>QSound::isAvailable ()<tt> [静态]</tt>
+</h3>
+如果在该平台上存在声音设备便返回真，否则返回假。应用程序要么当声音是十分重要时选择报告用户要么就默默的操作而不麻烦用户了 
+<p> 如果没有有效的声音，所有的QSound操作工作安静且快速。 
+
+<h3 class=fn>bool <a name="isFinished"></a>QSound::isFinished () const
+</h3>
+当声音播放完成时返回真，否则返回假。 
+
+<h3 class=fn>int <a name="loops"></a>QSound::loops () const
+</h3>
+返回声音将播放的次数。
+
+<h3 class=fn>int <a name="loopsRemaining"></a>QSound::loopsRemaining () const
+</h3>
+返回声音将循环的次数。该值在每次声音循环后会减少。
+<p> 该函数在窗口下不支持并且总是返回循环的总数。
+
+<h3 class=fn>void <a name="play"></a>QSound::play ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;filename )<tt> [静态]</tt>
+</h3>
+播放一个叫做<em>filename</em>的文件中的声音。
+<p>实例：<a href="sound-example.html#x2660">sound/sound.cpp</a>。
+
+<h3 class=fn>void <a name="play-2"></a>QSound::play ()<tt> [槽]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 开启声音播放。该数数立即返回。依靠平台的音频设备，其它的声音也许被停止，也许被新的声音混合。
+<p> 在任何时候声音可以再次播放，可能混合或者替代先播放的声音。 
+
+<h3 class=fn>void <a name="setLoops"></a>QSound::setLoops ( int&nbsp;l )
+</h3>
+当它播放时设置声音重复一次。超过-1的值也许会引起声音的死循环。 
+<p> 在Windows中, 不同于1的循环次数的声音将总是死循环。 
+<p> <p>也可以参考<a href="#loops">loops</a>()。
+
+<h3 class=fn>void <a name="stop"></a>QSound::stop ()<tt> [槽]</tt>
+</h3>
+停止声音播放。
+<p> <p>也可以参考<a href="#play">play</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:hackerjun</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

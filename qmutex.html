@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QMutex类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QMutex类参考</h1>
+
+<p>QMutex类提供的是线程之间的访问顺序化。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qmutex-h.html">qmutex.h</a>&gt;</tt>
+<p><a href="qmutex-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QMutex"><b>QMutex</b></a> ( bool&nbsp;recursive = FALSE )</div></li>
+<li><div class=fn>virtual <a href="#~QMutex"><b>~QMutex</b></a> ()</div></li>
+<li><div class=fn>void <a href="#lock"><b>lock</b></a> ()</div></li>
+<li><div class=fn>void <a href="#unlock"><b>unlock</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#locked"><b>locked</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#tryLock"><b>tryLock</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QMutex类提供的是线程之间的访问顺序化。
+<p> 
+
+<p> QMutex的目的是保护一个对象、数据结构或者代码段，所以同一时间只有一个线程可以访问它。（在Java术语中，它和同步关键字“synchronized”很相似）。例如，这里有一个方法打印给用户两条消息：
+<p> <pre>
+  void someMethod()
+  {
+     <a href="qapplication.html#qDebug">qDebug</a>("Hello");
+     <a href="qapplication.html#qDebug">qDebug</a>("World");
+  }
+  </pre>
+ 
+<p> 如果同时在两个线程中调用这个方法，结果的顺序将是：
+<p> <pre>
+  Hello
+  Hello
+  World
+  World
+  </pre>
+ 
+<p> 如果你使用了一个互斥量：
+<p> <pre>
+  QMutex mutex;
+
+  void someMethod()
+  {
+     mutex.<a href="#lock">lock</a>();
+     <a href="qapplication.html#qDebug">qDebug</a>("Hello");
+     <a href="qapplication.html#qDebug">qDebug</a>("World");
+     mutex.<a href="#unlock">unlock</a>();
+  }
+  </pre>
+ 
+<p> 用Java的术语，这段代码应该是：
+<p> <pre>
+  void someMethod()
+  {
+     synchronized {
+       <a href="qapplication.html#qDebug">qDebug</a>("Hello");
+       <a href="qapplication.html#qDebug">qDebug</a>("World");
+     }
+  }
+  </pre>
+ 
+<p> 然后同一时间只有一个线程可以运行someMethod并且消息的顺序也一直是正确的。当然，这只是一个很简单的例子，但是它适用于任何需要按特定频率发生的情况。
+<p> 但你在一个线程中调用<a href="#lock">lock</a>()，其它线程将会在同一地点试图调用lock()来阻塞，知道这个线程调用<a href="#unlock">unlock</a>()之后其它线程才会获得这个锁。lock()的一种非阻塞选择是<a href="#tryLock">tryLock</a>()。
+<p>也可以参考<a href="environment.html">环境类</a>和<a href="thread.html">线程类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QMutex"></a>QMutex::QMutex ( bool&nbsp;recursive = FALSE )
+</h3>
+构造一个新的互斥量。这个互斥量是在没有锁定的状态下创建的。如果<em>recursive</em>为真，就构造一个递归互斥量，如果<em>recursive</em>为假（默认值），就构造一个普通互斥量。对于一个递归互斥量，一个线程可以锁定一个互斥量多次并且只有在相同数量的<a href="#unlock">unlock</a>()调用之后，它才会被解锁。
+
+<h3 class=fn><a name="~QMutex"></a>QMutex::~QMutex ()<tt> [虚]</tt>
+</h3>
+销毁这个互斥量。
+
+<h3 class=fn>void <a name="lock"></a>QMutex::lock ()
+</h3>
+试图锁定互斥量。如果另一个线程已经锁定这个互斥量，那么这次调用将<em>阻塞</em>直到那个线程把它解锁。
+<p> <p>也可以参考<a href="#unlock">unlock</a>()和<a href="#locked">locked</a>()。
+
+<h3 class=fn>bool <a name="locked"></a>QMutex::locked ()
+</h3>
+如果互斥量被另一个线程锁定了，返回真，否则返回假。
+<p> <b>警告：</b>由于不同平台上递归互斥量的实现不同，所以从以前锁定这个互斥量的同一个线程上调用这个函数可能会返回未定义的结果。
+<p> <p>也可以参考<a href="#lock">lock</a>()和<a href="#unlock">unlock</a>()。
+
+<h3 class=fn>bool <a name="tryLock"></a>QMutex::tryLock ()
+</h3>
+试图锁定互斥量。如果锁被得到，这个函数返回真。如果另一个进程已经锁定了这个互斥量，这个函数返回假，而不是一直等到这个锁可用为止，比如，它不是阻塞的。
+<p> 在另一个线程可以成功锁定它之前，这个锁必须被调用<a href="#unlock">unlock</a>()来解锁。
+<p> <p>也可以参考<a href="#lock">lock</a>()、<a href="#unlock">unlock</a>()和<a href="#locked">locked</a>()。
+
+<h3 class=fn>void <a name="unlock"></a>QMutex::unlock ()
+</h3>
+解锁这个互斥量。试图对不同的线程中锁定的互斥量进行解锁将会返回一个错误。对一个没有锁定的互斥量进行解锁的结果是将导致未定义的行为（不同的操作系统的线程实现是有很大不同的）。
+<p> <p>也可以参考<a href="#lock">lock</a>()和<a href="#locked">locked</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

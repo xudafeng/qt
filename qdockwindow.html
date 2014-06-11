@@ -1,0 +1,392 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QDockWindow类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QDockWindow类参考</h1>
+
+<p>QDockWindow类提供了可以被锚接入QDockArea或者作为顶级窗口在桌面上浮动的窗口部件。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qdockwindow-h.html">qdockwindow.h</a>&gt;</tt>
+<p>继承了<a href="qframe.html">QFrame</a>。
+<p>被<a href="qtoolbar.html">QToolBar</a>继承。
+<p><a href="qdockwindow-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>enum <a href="#Place-enum"><b>Place</b></a> { InDock, OutsideDock }</div></li>
+<li><div class=fn>enum <a href="#CloseMode-enum"><b>CloseMode</b></a> { Never = 0, Docked = 1, Undocked = 2, Always = Docked | Undocked }</div></li>
+<li><div class=fn><a href="#QDockWindow"><b>QDockWindow</b></a> ( Place&nbsp;p = InDock, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = 0 )</div></li>
+<li><div class=fn>virtual void <a href="#setWidget"><b>setWidget</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+<li><div class=fn>QWidget * <a href="#widget"><b>widget</b></a> () const</div></li>
+<li><div class=fn>Place <a href="#place"><b>place</b></a> () const</div></li>
+<li><div class=fn>QDockArea * <a href="#area"><b>area</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setCloseMode"><b>setCloseMode</b></a> ( int&nbsp;m )</div></li>
+<li><div class=fn>bool <a href="#isCloseEnabled"><b>isCloseEnabled</b></a> () const</div></li>
+<li><div class=fn>int <a href="#closeMode"><b>closeMode</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setResizeEnabled"><b>setResizeEnabled</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>virtual void <a href="#setMovingEnabled"><b>setMovingEnabled</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>bool <a href="#isResizeEnabled"><b>isResizeEnabled</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isMovingEnabled"><b>isMovingEnabled</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setHorizontallyStretchable"><b>setHorizontallyStretchable</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>virtual void <a href="#setVerticallyStretchable"><b>setVerticallyStretchable</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>bool <a href="#isHorizontallyStretchable"><b>isHorizontallyStretchable</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isVerticallyStretchable"><b>isVerticallyStretchable</b></a> () const</div></li>
+<li><div class=fn>void setHorizontalStretchable ( bool&nbsp;b ) &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>void setVerticalStretchable ( bool&nbsp;b ) &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>bool isHorizontalStretchable () const &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>bool isVerticalStretchable () const &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>bool <a href="#isStretchable"><b>isStretchable</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setOffset"><b>setOffset</b></a> ( int&nbsp;o )</div></li>
+<li><div class=fn>int <a href="#offset"><b>offset</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setFixedExtentWidth"><b>setFixedExtentWidth</b></a> ( int&nbsp;w )</div></li>
+<li><div class=fn>virtual void <a href="#setFixedExtentHeight"><b>setFixedExtentHeight</b></a> ( int&nbsp;h )</div></li>
+<li><div class=fn>QSize <a href="#fixedExtent"><b>fixedExtent</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setNewLine"><b>setNewLine</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>bool <a href="#newLine"><b>newLine</b></a> () const</div></li>
+<li><div class=fn>Qt::Orientation <a href="#orientation"><b>orientation</b></a> () const</div></li>
+<li><div class=fn>QBoxLayout * <a href="#boxLayout"><b>boxLayout</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#setOpaqueMoving"><b>setOpaqueMoving</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>bool <a href="#opaqueMoving"><b>opaqueMoving</b></a> () const</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#undock"><b>undock</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#dock"><b>dock</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#setOrientation"><b>setOrientation</b></a> ( Orientation&nbsp;o )</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#orientationChanged"><b>orientationChanged</b></a> ( Orientation&nbsp;o )</div></li>
+<li><div class=fn>void <a href="#placeChanged"><b>placeChanged</b></a> ( QDockWindow::Place&nbsp;p )</div></li>
+<li><div class=fn>void <a href="#visibilityChanged"><b>visibilityChanged</b></a> ( bool&nbsp;visible )</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>int <a href="#closeMode-prop"><b>closeMode</b></a>&nbsp;- 锚接窗口的关闭模式</div></li>
+<li><div class=fn>bool <a href="#horizontallyStretchable-prop"><b>horizontallyStretchable</b></a>&nbsp;- 锚接窗口水平方向上可否延伸</div></li>
+<li><div class=fn>bool <a href="#movingEnabled-prop"><b>movingEnabled</b></a>&nbsp;- 用户可不可以在锚接区域内移动锚接窗口、把锚接窗口移动到其他锚接区域、或者浮动锚接窗口</div></li>
+<li><div class=fn>bool <a href="#newLine-prop"><b>newLine</b></a>&nbsp;- 锚接窗口是否更愿意在锚接区域中新开一行</div></li>
+<li><div class=fn>int <a href="#offset-prop"><b>offset</b></a>&nbsp;- 锚接窗口对于锚接区域的左边界（对于垂直锚接区域是上边界）首选的位移</div></li>
+<li><div class=fn>bool <a href="#opaqueMoving-prop"><b>opaqueMoving</b></a>&nbsp;- 在锚接窗口正在被移动的时候，锚接窗口是否将被正常显示</div></li>
+<li><div class=fn>Place <a href="#place-prop"><b>place</b></a>&nbsp;- 锚接窗口是否在锚接区域中&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>bool <a href="#resizeEnabled-prop"><b>resizeEnabled</b></a>&nbsp;- 锚接窗口是否是可以重新定义大小的</div></li>
+<li><div class=fn>bool <a href="#stretchable-prop"><b>stretchable</b></a>&nbsp;- 锚接窗口在当前的orientation()上是否是可延伸的&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>bool <a href="#verticallyStretchable-prop"><b>verticallyStretchable</b></a>&nbsp;- 锚接窗口垂直方向上可否延伸</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+ 
+<p>QDockWindow类提供了可以被锚接入<a href="qdockarea.html">QDockArea</a>或者作为顶级窗口在桌面上浮动的窗口部件。
+<p> 
+<p> 这个类处理锚接窗口的移动、重定义大小、锚接和取消锚接。<a href="qtoolbar.html">QToolBar</a>是QDockWindow的一个子类，所以提供给锚接窗口的功能对于工具条的相同应用编程接口也是可用的。
+<p> <center><img src="qmainwindow-qdockareas.png" alt="QDockWindows in a QDockArea"></center> <blockquote><p align="center"><em> 在<a href="qdockarea.html">QDockArea</a>中的两个QDockWindow（<a href="qtoolbar.html">QToolBar</a>）
+</em></p>
+</blockquote><p> <center><img src="qdockwindow.png" alt="A QDockWindow"></center> <blockquote><p align="center"><em> 一个浮动的QDockWindow
+</em></p>
+</blockquote><p> 如果用户把锚接窗口拖动到锚接区域中，锚接窗口将被锚接。如果用户锚接窗口拖动到任何锚接窗口外面，锚接窗口将被取消锚接（也就是被浮动）并且变为一个顶级窗口。双击浮动的锚接窗口的标题栏将会把锚接窗口锚接到它最近一次被锚接的地方。双击被锚接的锚接窗口句柄将取消锚接窗口的锚接（也就是浮动起来）。单击被锚接的锚接窗口句柄将最小化这个锚接窗口（只有它的句柄被显示，在菜单条下面）。单击最小化句柄将会把锚接窗口恢复到最近一次被锚接的地方。如果用户点击关闭按钮（默认情况下会出现在浮动的锚接窗口上），锚接窗口将会消失。你可以通过<a href="#setCloseMode">setCloseMode</a>()控制锚接窗口是否有一个关闭按钮。
+<p> <a href="qmainwindow.html">QMainWindow</a>提供四个可以用来锚接窗口的锚接区域（上、下、左、右）。对于一些应用程序使用这些QMainWindow提供的锚接区域将是足够的。（如果你想创建你自己的锚接区域，请参考<a href="qdockarea.html">QDockArea</a>文档。）在QMainWindow中右键单击弹出菜单（锚接窗口菜单）是可以用来列出锚接窗口的列表的并且可以用来显示或者隐藏它们。
+<p> 当你构造一个锚接窗口时，如果你想它被锚接的话，你<em>必须</em>把<a href="qdockarea.html">QDockArea</a>或者QMainWindow传递给它作为父对象。如果你想它被浮动，就传递0给它作为父对象。
+<p> <pre>
+    <a href="qtoolbar.html">QToolBar</a> *fileTools = new <a href="qtoolbar.html">QToolBar</a>( this, "File Actions" );
+    moveDockWindow( fileTools, Left );
+    </pre>
+ 
+<p> 在上述的实例中，你在一个QMainWindow的子类的构造函数中创建一个新的<a href="qtoolbar.html">QToolBar</a>（所以<em>this</em>指针指向<a href="qmainwindow.html">QMainWindow</a>）。默认情况下，这个工具条将被添加到<a href="qt.html#Dock-enum">Top</a>锚接区域，但是我们已经把它移动到<a href="qt.html#Dock-enum">Left</a>锚接区域了。
+<p> 锚接窗口通常用于包含一个单一的窗口部件。在这些情况下，这个窗口部件可以通过调用<a href="#setWidget">setWidget</a>()来被设置。如果你正在构造一个包含多个窗口部件的锚接窗口，例如一个工具条把窗口部件排列在锚接窗口的盒子布局中。为了做到这点，请使用<a href="#boxLayout">boxLayout</a>()函数来获得锚接窗口的盒子布局，然后使用盒子布局的<a href="qboxlayout.html#addWidget">QBoxLayout::addWidget</a>()函数来把窗口部件添加到这个布局中。锚接窗口将会按需要动态地设置布局的方向为水平或者垂直，尽管你可以通过<a href="#setOrientation">setOrientation</a>()来自己控制它。
+<p> 尽管锚接窗口的通常用途是为了工具条，它们可以被用于任何窗口部件。（对于实例，请参考<i>Qt设计器</i>和<i>Qt语言学家</i>应用程序。）当使用更大的窗口部件，它可以通过调用<a href="#setResizeEnabled">setResizeEnabled</a>()来告诉锚接窗口可以被重新定义大小。可重新定义大小的锚接窗口是给定像分割句柄来允许用户在它们的锚接区域中重新定义它们的大小。当可重新定义大小的锚接窗口被取消锚接，它们变为顶级窗口并且可以像其它顶级窗口被重新定义大小，例如通过拖动角或者边缘来实现。
+<p> 锚接窗口可以使用<a href="#dock">dock</a>()和<a href="#undock">undock</a>()来被锚接和取消锚接。锚接窗口的方向可以使用setOrientation()来设置。你也可以使用<a href="qdockarea.html#moveDockWindow">QDockArea::moveDockWindow</a>()。如果你正在使用一个<a href="qmainwindow.html">QMainWindow</a>，<a href="qmainwindow.html#moveDockWindow">QMainWindow::moveDockWindow</a>()和<a href="qmainwindow.html#removeDockWindow">QMainWindow::removeDockWindow</a>()是可用的。
+<p> 锚接窗口有一些首选设置，例如，你可以使用<a href="#setOffset">setOffset</a>()设置从锚接区域的左边界（对于垂直锚接区域是上边界）开始的首选位移。如果你喜欢锚接窗口当它被锚接时开始一个新<a href="qdockarea.html#lines">行</a>，请使用<a href="#setNewLine">setNewLine</a>()。<a href="#setFixedExtentWidth">setFixedExtentWidth</a>()和<a href="#setFixedExtentHeight">setFixedExtentHeight</a>()函数可以用来定义锚接窗口的首选大小，并且<a href="#setHorizontallyStretchable">setHorizontallyStretchable</a>()和<a href="#setVerticallyStretchable">setVerticallyStretchable</a>()函数设置锚接窗口是否可以被延伸。默认情况下锚接窗口可以被移动，但是这个可以通过<a href="#setMovingEnabled">setMovingEnabled</a>()来改变。当锚接窗口被移动时，它被显示唯一个矩形边界，但是使用<a href="#setOpaqueMoving">setOpaqueMoving</a>()它可以被正常地显示。
+<p> 当锚接窗口的可视性发生改变，也就是它被显示或者隐藏，<a href="#visibilityChanged">visibilityChanged</a>() 信号被发射。当锚接窗口被锚接或者取消锚接时，<a href="#placeChanged">placeChanged</a>()信号被发射。
+<p> <p>也可以参考<a href="application.html">主窗口和相关类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="CloseMode-enum"></a>QDockWindow::CloseMode</h3>
+<p> 这个枚举变量指定了锚接窗口什么时候有（如果）一个关闭按钮。
+<ul>
+<li><tt>QDockWindow::Never</tt> - 锚接窗口从没有一个关闭按钮并且不能被用户关闭
+<li><tt>QDockWindow::Docked</tt> - 锚接窗口只有在被锚接的时候有一个关闭按钮。
+<li><tt>QDockWindow::Undocked</tt> - 锚接窗口只有在浮动的时候有一个关闭按钮。
+<li><tt>QDockWindow::Always</tt> - 锚接窗口总是有一个关闭按钮。
+</ul><p> 注意如果用户在锚接窗口被锚接时点击它们的锚接窗口句柄，锚接窗口总是被最小化。
+
+<h3 class=fn><a name="Place-enum"></a>QDockWindow::Place</h3>
+<p> 这个枚举变量指定了QDockWindow的可能位置：
+<ul>
+<li><tt>QDockWindow::InDock</tt> - 在一个<a href="qdockarea.html">QDockArea</a>中
+<li><tt>QDockWindow::OutsideDock</tt> - 在桌面上作为顶级窗口浮动。
+</ul>
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QDockWindow"></a>QDockWindow::QDockWindow ( <a href="qdockwindow.html#Place-enum">Place</a>&nbsp;p = InDock, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = 0 )
+</h3>
+构造一个父对象为<em>parent</em>、名称为<em>name</em>并且窗口部件标记为<em>f</em>的QDockWindow。
+<p> 如果<em>p</em>为<a href="#Place-enum">InDock</a>，这个锚接窗口被锚接如一个锚接区域并且<em>parent</em><em>必须</em>为<a href="qdockarea.html">QDockArea</a>或<a href="qmainwindow.html">QMainWindow</a>。如果<em>parent</em>为QMainWindow，锚接窗口将被锚接到这个主窗口的<a href="qt.html#Dock-enum">Top</a>锚接区域。
+<p> 如果<em>p</em>为<a href="#Place-enum">OutsideDock</a>，<em>parent</em><em>必须</em>为0并且这个锚接窗口被创建为浮动窗口。
+<p> 我们建议创建QMainWindow为父对象，锚接位置为<a href="#Place-enum">InDock</a>的锚接窗口，然后调用<a href="qmainwindow.html#moveDockWindow">QMainWindow::moveDockWindow</a>()来把这个锚接窗口移动到你想要的位置。
+
+<h3 class=fn><a href="qdockarea.html">QDockArea</a>&nbsp;* <a name="area"></a>QDockWindow::area () const
+</h3> 
+<p> 返回锚接窗口被锚接的锚接区域，或者如果它正在浮动，返回0。
+
+<h3 class=fn><a href="qboxlayout.html">QBoxLayout</a>&nbsp;* <a name="boxLayout"></a>QDockWindow::boxLayout ()
+</h3> 
+返回用于把窗口部件添加到锚接窗口的布局。布局的方向自动与锚接窗口的方向匹配。你可以使用盒子布局的<a href="qboxlayout.html#addWidget">QBoxLayout::addWidget</a>()函数来添加窗口部件到这个布局中。
+<p> 如果锚接窗口只需要包含一个窗口部件，请使用<a href="#setWidget">setWidget</a>()来替代它。
+<p> <p>也可以参考<a href="#setWidget">setWidget</a>()和<a href="#setOrientation">setOrientation</a>()。
+
+<h3 class=fn>int <a name="closeMode"></a>QDockWindow::closeMode () const
+</h3>
+<p>返回锚接窗口的关闭模式。详细情况请参考<a href="qdockwindow.html#closeMode-prop">“closeMode”</a>属性。
+
+<h3 class=fn>void <a name="dock"></a>QDockWindow::dock ()<tt> [虚 槽]</tt>
+</h3> 
+把锚接窗口锚接到它最近一次被锚接的锚接区域中。
+<p> 如果锚接窗口没有最近一次被锚接的区域（例如它被创建为浮动的并且从没有被锚接过），或者如果最近一次被锚接的区域已经不存在了（例如那个锚接区域已经被删除了），就什么也不会发生。
+<p> <p>也可以参考<a href="#undock">undock</a>()。
+
+<h3 class=fn><a href="qsize.html">QSize</a> <a name="fixedExtent"></a>QDockWindow::fixedExtent () const
+</h3> 
+返回锚接窗口的首选大小（固定的宽度）。
+<p> <p>也可以参考<a href="#setFixedExtentWidth">setFixedExtentWidth</a>()和<a href="#setFixedExtentHeight">setFixedExtentHeight</a>()。
+
+<h3 class=fn>bool <a name="isCloseEnabled"></a>QDockWindow::isCloseEnabled () const
+</h3> 
+如果锚接窗口有一个关闭按钮，返回真，否则返回假。这个结果依赖于锚接窗口的<a href="#Place-enum">Place</a>和它的<a href="#CloseMode-enum">CloseMode</a>。
+<p> <p>也可以参考<a href="#closeMode-prop">closeMode</a>。
+
+<h3 class=fn>bool <a name="isHorizontalStretchable"></a>QDockWindow::isHorizontalStretchable () const
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+
+<h3 class=fn>bool <a name="isHorizontallyStretchable"></a>QDockWindow::isHorizontallyStretchable () const
+</h3>
+<p>如果锚接窗口是水平方向上可延伸的，返回真，否则返回假。详细情况请参考<a href="qdockwindow.html#horizontallyStretchable-prop">“horizontallyStretchable”</a>属性。
+
+<h3 class=fn>bool <a name="isMovingEnabled"></a>QDockWindow::isMovingEnabled () const
+</h3>
+<p>如果用户可以在锚接区域内移动锚接窗口、把锚接窗口移动到其他锚接区域、或者浮动锚接窗口，返回真，否则返回假。详细情况请参考<a href="qdockwindow.html#movingEnabled-prop">“movingEnabled”</a>属性。
+
+<h3 class=fn>bool <a name="isResizeEnabled"></a>QDockWindow::isResizeEnabled () const
+</h3>
+<p>如果锚接窗口是可以重新定义大小的，返回真，否则返回假。详细情况请参考<a href="qdockwindow.html#resizeEnabled-prop">“resizeEnabled”</a>属性。
+
+<h3 class=fn>bool <a name="isStretchable"></a>QDockWindow::isStretchable () const
+</h3>
+<p>如果锚接窗口在当前的orientation()上是可延伸的，返回真，否则返回假。详细情况请参考<a href="qdockwindow.html#stretchable-prop">“stretchable”</a>属性。
+
+<h3 class=fn>bool <a name="isVerticalStretchable"></a>QDockWindow::isVerticalStretchable () const
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+
+<h3 class=fn>bool <a name="isVerticallyStretchable"></a>QDockWindow::isVerticallyStretchable () const
+</h3>
+<p>如果锚接窗口是垂直方向上可延伸的，返回真，否则返回假。详细情况请参考<a href="qdockwindow.html#verticallyStretchable-prop">“verticallyStretchable”</a>属性。
+
+<h3 class=fn>bool <a name="newLine"></a>QDockWindow::newLine () const
+</h3>
+<p>如果锚接窗口更愿意在锚接区域中新开一行，返回真否则返回假。详细情况请参考<a href="qdockwindow.html#newLine-prop">“newLine”</a>属性。
+
+<h3 class=fn>int <a name="offset"></a>QDockWindow::offset () const
+</h3>
+<p>返回锚接窗口对于锚接区域的左边界（对于垂直锚接区域是上边界）首选的位移。详细情况请参考<a href="qdockwindow.html#offset-prop">“offset”</a>属性。
+
+<h3 class=fn>bool <a name="opaqueMoving"></a>QDockWindow::opaqueMoving () const
+</h3>
+<p>如果在锚接窗口正在被移动的时候，锚接窗口将被正常显示，返回真，否则返回假。详细情况请参考<a href="qdockwindow.html#opaqueMoving-prop">“opaqueMoving”</a>属性。
+
+<h3 class=fn><a href="qt.html#Orientation-enum">Qt::Orientation</a> <a name="orientation"></a>QDockWindow::orientation () const
+</h3> 
+返回锚接窗口的方向。
+<p> <p>也可以参考<a href="#orientationChanged">orientationChanged</a>()。
+
+<h3 class=fn>void <a name="orientationChanged"></a>QDockWindow::orientationChanged ( <a href="qt.html#Orientation-enum">Orientation</a>&nbsp;o )<tt> [信号]</tt>
+</h3> 
+<p> 当锚接窗口的方向发生改变时，这个信号被发射。新方向为<em>o</em>。
+
+<h3 class=fn><a href="qdockwindow.html#Place-enum">Place</a> <a name="place"></a>QDockWindow::place () const
+</h3>
+<p>如果锚接窗口在锚接区域中，返回真，否则返回假。详细情况请参考<a href="qdockwindow.html#place-prop">“place”</a>属性。
+
+<h3 class=fn>void <a name="placeChanged"></a>QDockWindow::placeChanged ( <a href="qdockwindow.html#Place-enum">QDockWindow::Place</a>&nbsp;p )<tt> [信号]</tt>
+</h3> 
+<p> 当锚接窗口被锚接时（<em>p</em>为<a href="#Place-enum">InDock</a>）或者被取消锚接时（<em>p</em>为<a href="#Place-enum">OutsideDock</a>），这个信号被发射。
+<p> <p>也可以参考<a href="qdockarea.html#moveDockWindow">QDockArea::moveDockWindow</a>()、<a href="qdockarea.html#removeDockWindow">QDockArea::removeDockWindow</a>()、<a href="qmainwindow.html#moveDockWindow">QMainWindow::moveDockWindow</a>()和<a href="qmainwindow.html#removeDockWindow">QMainWindow::removeDockWindow</a>()。
+
+<h3 class=fn>void <a name="setCloseMode"></a>QDockWindow::setCloseMode ( int&nbsp;m )<tt> [信号]</tt>
+</h3>
+<p>设置锚接窗口的关闭模式为<em>m</em>。详细情况请参考<a href="qdockwindow.html#closeMode-prop">“closeMode”</a>属性。
+
+<h3 class=fn>void <a name="setFixedExtentHeight"></a>QDockWindow::setFixedExtentHeight ( int&nbsp;h )<tt> [虚]</tt>
+</h3>
+设置锚接窗口的固定宽度（大小）时的首选高度为<em>h</em>。
+<p> <p>也可以参考<a href="#setFixedExtentWidth">setFixedExtentWidth</a>()。
+
+<h3 class=fn>void <a name="setFixedExtentWidth"></a>QDockWindow::setFixedExtentWidth ( int&nbsp;w )<tt> [虚]</tt>
+</h3> 
+设置锚接窗口的固定宽度（大小）时的首选宽度为<em>w</em>。
+<p> <p>也可以参考<a href="#setFixedExtentHeight">setFixedExtentHeight</a>()。
+
+<h3 class=fn>void <a name="setHorizontalStretchable"></a>QDockWindow::setHorizontalStretchable ( bool&nbsp;b )
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+
+<h3 class=fn>void <a name="setHorizontallyStretchable"></a>QDockWindow::setHorizontallyStretchable ( bool&nbsp;b )<tt> [虚]</tt>
+</h3>
+<p>设置锚接窗口在水平方向上是否可延伸为<em>b</em>。详细情况请参考<a href="qdockwindow.html#horizontallyStretchable-prop">“horizontallyStretchable”</a>属性。
+
+<h3 class=fn>void <a name="setMovingEnabled"></a>QDockWindow::setMovingEnabled ( bool&nbsp;b )<tt> [虚]</tt>
+</h3>
+<p>设置用户可不可以在锚接区域内移动锚接窗口、把锚接窗口移动到其他锚接区域、或者浮动锚接窗口为<em>b</em>。详细情况请参考<a href="qdockwindow.html#movingEnabled-prop">“movingEnabled”</a>属性。
+
+<h3 class=fn>void <a name="setNewLine"></a>QDockWindow::setNewLine ( bool&nbsp;b )<tt> [虚]</tt>
+</h3>
+<p>设置锚接窗口是否更愿意在锚接区域中新开一行为<em>b</em>。详细情况请参考<a href="qdockwindow.html#newLine-prop">“newLine”</a>属性。
+
+<h3 class=fn>void <a name="setOffset"></a>QDockWindow::setOffset ( int&nbsp;o )<tt> [虚]</tt>
+</h3>
+<p>设置锚接窗口对于锚接区域的左边界（对于垂直锚接区域是上边界）首选的位移为<em>o</em>。详细情况请参考<a href="qdockwindow.html#offset-prop">“offset”</a>属性。
+
+<h3 class=fn>void <a name="setOpaqueMoving"></a>QDockWindow::setOpaqueMoving ( bool&nbsp;b )<tt> [虚]</tt>
+</h3>
+<p>设置在锚接窗口正在被移动的时候，锚接窗口是否将被正常显示为<em>b</em>。详细情况请参考<a href="qdockwindow.html#opaqueMoving-prop">“opaqueMoving”</a>属性。
+
+<h3 class=fn>void <a name="setOrientation"></a>QDockWindow::setOrientation ( <a href="qt.html#Orientation-enum">Orientation</a>&nbsp;o )<tt> [虚 槽]</tt>
+</h3> 
+设置锚接窗口的方向为<em>o</em>。这个方向被发送给<a href="#boxLayout">boxLayout</a>()布局。
+
+<h3 class=fn>void <a name="setResizeEnabled"></a>QDockWindow::setResizeEnabled ( bool&nbsp;b )<tt> [虚]</tt>
+</h3>
+<p>设置锚接窗口在当前的orientation()上是否是可延伸的为<em>b</em>。详细情况请参考<a href="qdockwindow.html#resizeEnabled-prop">“resizeEnabled”</a>属性。
+
+<h3 class=fn>void <a name="setVerticalStretchable"></a>QDockWindow::setVerticalStretchable ( bool&nbsp;b )
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+
+<h3 class=fn>void <a name="setVerticallyStretchable"></a>QDockWindow::setVerticallyStretchable ( bool&nbsp;b )<tt> [虚]</tt>
+</h3>
+<p>See the <a href="qdockwindow.html#verticallyStretchable-prop">"verticallyStretchable"</a> property for details.
+设置锚接窗口垂直方向上可否延伸为<em>b</em>。详细情况请参考<a href="qdockwindow.html#verticallyStretchable-prop">“verticallyStretchable”</a>属性。
+
+<h3 class=fn>void <a name="setWidget"></a>QDockWindow::setWidget ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )<tt> [虚]</tt>
+</h3> 
+设置锚接窗口的主窗口为<em>w</em>。
+<p> <p>也可以参考<a href="#boxLayout">boxLayout</a>()。
+
+<h3 class=fn>void <a name="undock"></a>QDockWindow::undock ()<tt> [虚 槽]</tt>
+</h3>
+<p> Undocks the QDockWindow from its current dock area if it is docked;
+otherwise does nothing.
+<p> <p>也可以参考<a href="#dock">dock</a>()、<a href="qdockarea.html#moveDockWindow">QDockArea::moveDockWindow</a>()、<a href="qdockarea.html#removeDockWindow">QDockArea::removeDockWindow</a>()、<a href="qmainwindow.html#moveDockWindow">QMainWindow::moveDockWindow</a>()和<a href="qmainwindow.html#removeDockWindow">QMainWindow::removeDockWindow</a>()。
+
+<h3 class=fn>void <a name="visibilityChanged"></a>QDockWindow::visibilityChanged ( bool&nbsp;visible )<tt> [信号]</tt>
+</h3> 
+<p> 如果锚接窗口的可视性发生变化，这个信号被发射。如果<em>visible</em>为真，QDockWindow现在是可视的，否则它已经被隐藏。
+<p> 如果锚接窗口有一个用户可点击的关闭按钮，它可以被隐藏。在<a href="qmainwindow.html">QMainWindow</a>中，通过点击在QMainWindow的锚接窗口列表的锚接窗口菜单中它的名称，锚接窗口可以有它们自己的可视性变化（隐藏或者显示）。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="widget"></a>QDockWindow::widget () const
+</h3>  
+返回锚接窗口的主窗口。
+<p> <p>也可以参考<a href="#setWidget">setWidget</a>()。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>int <a name="closeMode-prop"></a>closeMode</h3> 
+<p>这个属性保存的是锚接窗口的关闭模式。
+<p>定义了锚接窗口什么时候有（如果）一个关闭按钮。可以选择<a href="#CloseMode-enum">Never</a>、<a href="#CloseMode-enum">Docked</a>（也就是只当被锚接的时候）、<a href="#CloseMode-enum">Undocked</a>（仅当被取消锚接的时候，也就是浮动时）或者<a href="#CloseMode-enum">Always</a>。
+<p> 默认是<a href="#CloseMode-enum">Never</a>。
+<p>通过<a href="#setCloseMode">setCloseMode</a>()设置属性值并且通过<a href="#closeMode">closeMode</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="horizontallyStretchable-prop"></a>horizontallyStretchable</h3> 
+<p>这个属性保存的是锚接窗口水平方向上可否延伸。
+<p>如果你调用<a href="#setHorizontallyStretchable">setHorizontallyStretchable</a>(TRUE)或者<a href="#setResizeEnabled">setResizeEnabled</a>(TRUE)，锚接窗口是水平可延伸的。
+<p> <p>也可以参考<a href="#resizeEnabled-prop">resizeEnabled</a>。
+<p>通过<a href="#setHorizontallyStretchable">setHorizontallyStretchable</a>()设置属性值并且通过<a href="#isHorizontallyStretchable">isHorizontallyStretchable</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="movingEnabled-prop"></a>movingEnabled</h3> 
+<p>这个属性保存的是用户可不可以在锚接区域内移动锚接窗口、把锚接窗口移动到其他锚接区域、或者浮动锚接窗口。
+<p>这个属性默认为真。
+<p>通过<a href="#setMovingEnabled">setMovingEnabled</a>()设置属性值并且通过<a href="#isMovingEnabled">isMovingEnabled</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="newLine-prop"></a>newLine</h3> 
+<p>这个属性保存的是锚接窗口是否更愿意在锚接区域中新开一行。
+<p>默认为假，也就是锚接窗口不需要在锚接区域中新开一行。
+<p>通过<a href="#setNewLine">setNewLine</a>()设置属性值并且通过<a href="#newLine">newLine</a>()来获得属性值。
+
+<h3 class=fn>int <a name="offset-prop"></a>offset</h3> 
+<p>这个属性保存的是锚接窗口对于锚接区域的左边界（对于垂直锚接区域是上边界）首选的位移。
+<p>默认为0。
+<p>通过<a href="#setOffset">setOffset</a>()设置属性值并且通过<a href="#offset">offset</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="opaqueMoving-prop"></a>opaqueMoving</h3> 
+<p>这个属性保存的是在锚接窗口正在被移动的时候，锚接窗口是否将被正常显示。
+<p>如果这个属性为假（默认），锚接窗口在被移动的时候将被表现为一个边界矩形。
+<p> 工具条和锚接窗口的不透明移动已经被知道有一些问题。我们建议不要在这时使用这一点。我们将在稍后的发布中修改这个行为问题。
+<p>通过<a href="#setOpaqueMoving">setOpaqueMoving</a>()设置属性值并且通过<a href="#opaqueMoving">opaqueMoving</a>()来获得属性值。
+
+<h3 class=fn><a href="qdockwindow.html#Place-enum">Place</a> <a name="place-prop"></a>place</h3> 
+<p>这个属性保存的是锚接窗口是否在锚接区域中。
+<p><a href="#place">place</a>()函数返回锚接窗口的当前位置。结果是<a href="#Place-enum">InDock</a>或<a href="#Place-enum">OutsideDock</a>。
+<p> <p>也可以参考<a href="qdockarea.html#moveDockWindow">QDockArea::moveDockWindow</a>()、<a href="qdockarea.html#removeDockWindow">QDockArea::removeDockWindow</a>()、<a href="qmainwindow.html#moveDockWindow">QMainWindow::moveDockWindow</a>()和<a href="qmainwindow.html#removeDockWindow">QMainWindow::removeDockWindow</a>()。
+<p>通过<a href="#place">place</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="resizeEnabled-prop"></a>resizeEnabled</h3> 
+<p>这个属性保存的是锚接窗口是否是可以重新定义大小的。
+<p>可重新定义大小的锚接窗口是可以通过在锚接区域中使用像分割句柄并且当浮动时像每一个其它顶级窗口那样被重新定义大小。
+<p> 如果你调用<a href="#setResizeEnabled">setResizeEnabled</a>(TRUE)，锚接窗口水平方向和垂直方向都是可延伸的。
+<p> 默认为假。
+<p> <p>也可以参考<a href="#verticallyStretchable-prop">verticallyStretchable</a>和<a href="#horizontallyStretchable-prop">horizontallyStretchable</a>。
+<p>通过<a href="#setResizeEnabled">setResizeEnabled</a>()设置属性值并且通过<a href="#isResizeEnabled">isResizeEnabled</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="stretchable-prop"></a>stretchable</h3> 
+<p>这个属性保存的是锚接窗口在当前的<a href="#orientation">orientation</a>()上是否是可延伸的。
+<p>这个属性可以通过使用<a href="#setHorizontallyStretchable">setHorizontallyStretchable</a>()和<a href="#setVerticallyStretchable">setVerticallyStretchable</a>()或者<a href="#setResizeEnabled">setResizeEnabled</a>()来被设置。
+<p>也可以参考<a href="#resizeEnabled-prop">resizeEnabled</a>。
+<p>通过<a href="#isStretchable">isStretchable</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="verticallyStretchable-prop"></a>verticallyStretchable</h3> 
+<p>这个属性保存的是锚接窗口垂直方向上可否延伸。
+<p>如果你调用<a href="#setVerticallyStretchable">setVerticallyStretchable</a>(TRUE)或<a href="#setResizeEnabled">setResizeEnabled</a>(TRUE)，锚接窗口在垂直方向上是可延伸的。
+<p>也可以参考<a href="#resizeEnabled-prop">resizeEnabled</a>。
+<p>通过<a href="#setVerticallyStretchable">setVerticallyStretchable</a>()设置属性值并且通过<a href="#isVerticallyStretchable">isVerticallyStretchable</a>()来获得属性值。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,1209 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>SQL模块</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>SQL模块</h1>
+
+ 
+<p> 这个模块是<a href="editions.html">Qt企业版</a>的一部分。
+<p> <!-- toc -->
+<ul>
+<li><a href="#1"> 介绍
+</a>
+<li><a href="#2"> SQL模块架构
+</a>
+<li><a href="#3"> SQL驱动程序插件
+</a>
+<li><a href="#4"> 连接数据库
+</a>
+<li><a href="#5"> 连接单一数据库
+</a>
+<ul>
+<li><a href="#5-1"> 连接多个数据库
+</a>
+</ul>
+<li><a href="#6"> 使用QSqlQuery执行SQL命令
+</a>
+<ul>
+<li><a href="#6-1"> 事务处理
+</a>
+<li><a href="#6-2"> 基本浏览
+</a>
+<li><a href="#6-3"> 基本数据处理
+</a>
+<li><a href="#6-4"> 定位数据集
+</a>
+</ul>
+<li><a href="#7"> 使用QSqlCursor
+</a>
+<ul>
+<li><a href="#7-1"> 检索记录
+</a>
+<ul>
+<li><a href="#7-1-1"> 排序和过滤记录
+</a>
+<li><a href="#7-1-2"> 提取数据
+</a>
+</ul>
+<li><a href="#7-2"> 处理记录
+</a>
+<ul>
+<li><a href="#7-2-1"> 插入记录
+</a>
+<li><a href="#7-2-2"> 更新记录
+</a>
+<li><a href="#7-2-3"> 删除记录
+</a>
+</ul>
+</ul>
+<li><a href="#8"> 基于数据的窗口部件
+</a>
+<ul>
+<li><a href="#8-1"> 基于数据的表
+</a>
+<li><a href="#8-2"> 创建基于数据的窗体
+</a>
+<ul>
+<li><a href="#8-2-1"> 显示记录
+</a>
+<li><a href="#8-2-2"> 在数据窗体中显示记录
+</a>
+<li><a href="#8-2-3"> 编辑记录
+</a>
+</ul>
+<li><a href="#8-3"> 自定义编辑器窗口部件
+</a>
+<ul>
+<li><a href="#8-3-1"> 为表格自定义编辑器窗口部件
+</a>
+</ul>
+</ul>
+<li><a href="#9"> 继承QSqlCursor
+</a>
+<li><a href="#10"> 实例表
+</a>
+</ul>
+<!-- endtoc -->
+
+<p> <a name="Introduction"></a>
+<h2> 介绍
+</h2>
+<a name="1"></a><p> Qt的SQL类帮助你给你的Qt应用程序提供无缝的数据库集成。
+<p> <blockquote>
+这个概述假设你已经至少有一些SQL的基础知识。你需要能够理解简单的<tt>SELECT</tt>、<tt>INSERT</tt>、<tt>UPDATE</tt>和<tt>DELETE</tt>命令。尽管<a href="qsqlcursor.html">QSqlCursor</a>类提供了数据库浏览和编辑的界面不<em>需要</em>SQL的知识，但是对于SQL的基本理解还是被高度推荐的。一本SQL数据库的标准文本是C. J. Date所作的<em>《数据库系统的介绍》（第七版）</em>，ISBN 0201385902。
+</blockquote>
+<p> 本文所描述的实例是从完全人工编写代码的角度出发的，你还可以参考<em>Qt设计器</em>的用户手册中“创建数据库应用程序”这一节，它提供了更高层次的实现方法来演示窗口部件、执行挖掘和处理外键查找等相关的操作。
+<p> 这份文档被分为六个部分：
+<p> <a href="#Architecture">SQL模块架构</a>。描述了这些类是如何结合在一起的。
+<p> <a href="#Connecting_to_Databases">连接数据库</a>。这部分解释了如何使用<a href="qsqldatabase.html">QSqlDatabase</a>类建立数据库连接。
+<p> <a href="#Executing_SQL_commands">执行SQL命令</a>。描述如何执行标准的数据操作命令，比如<tt>SELECT</tt>、<tt>INSERT</tt>、<tt>UPDATE</tt>和<tt>DELETE</tt>。（当然任何有效的SQL指令均可被送往数据库）。焦点在于用<a href="qsqlquery.html">QSqlQuery</a>进行交互处理。
+<p> <a href="#Using_QSqlCursor">使用游标</a>。描述如何使用<a href="qsqlcursor.html">QSqlCursor</a>类来实现更为强大的应用编程接口函数而不象在<a href="qsqlquery.html">QSqlQuery</a>中执行SQL语句。
+<p> <a href="#Data-Aware_Widgets">基于数据的窗口部件</a>。描述如何把数据库与用户接口链接起来。在这一节中我们介绍<a href="qdatatable.html">QDataTable</a>、<a href="qsqlform.html">QSqlForm</a>、<a href="qsqlpropertymap.html">QSqlPropertyMap</a>和<a href="qsqleditorfactory.html">QSqlEditorFactory</a>类，演示如何使用自定义的基于数据的窗口部件。<em>Qt设计器</em>提供了一个方便的可视化途径来实现同样的事情。请参考<em>Qt设计器</em>的手册，更多的详细情况请见<a href="qdatabrowser.html">QDataBrowser</a>和<a href="qdataview.html">QDataView</a>。
+<p> <a href="#Subclassing_QSqlCursor">继承QSqlCursor</a>。本节给出了继承QSqlCursor的实例。继承类可为字段提供默认值与计算字段等功能（比如以一个自动数值为主键的索引列），以及显示计算字段等等的内容。比如显示一个名称而不是一个外键的标识符。
+<p> 这个文档中所使用的表的定义的所有实例都在<a href="#Example_Tables">实例表</a>部分。
+<p> <a name="Architecture"></a>
+<h2> SQL模块架构
+</h2>
+<a name="2"></a><p> SQL类分成以下三层：
+<p> <em>用户接口层。</em>这些类提供了基于数据的窗口部件，这些窗口部件不仅连接数据库还可为用户所浏览。（以<a href="qsqlcursor.html">QSqlCursor</a>作为数据源)。终端用户通过这些组件来浏览与编辑数据。<em>Qt设计器</em>集成了这些类并可用来创建基于数据的窗体。这些窗口部件也可在程序中与你的C++代码直接交互。支持这一层的类包括<a href="qsqleditorfactory.html">QSqlEditorFactory</a>、<a href="qsqlform.html">QSqlForm</a>、<a href="qsqlpropertymap.html">QSqlPropertyMap</a>、<a href="qdatatable.html">QDataTable</a>、<a href="qdatabrowser.html">QDataBrowser</a>和<a href="qdataview.html">QDataView</a>。
+<p> <em>SQL应用编程接口层。</em>这些类存取数据库。<a href="qsqldatabase.html">QSqlDatabase</a>类用来连接数据库。数据交互的实现要么通过<a href="qsqlquery.html">QSqlQuery</a>类以SQL语句来实现，要么用<a href="qsqlcursor.html">QSqlCursor</a>类，它封装了SQL命令集。除了<a href="qsqldatabase.html">QSqlDatabase</a>、<a href="qsqlcursor.html">QSqlCursor</a>和<a href="qsqlquery.html">QSqlQuery</a>这些类外，<a href="qsqlerror.html">QSqlError</a>、<a href="qsqlfield.html">QSqlField</a>、<a href="qsqlindex.html">QSqlIndex</a>和<a href="qsqlrecord.html">QSqlRecord</a>也支持该层。
+<p> <em>驱动程序层。</em>本层由三个类组成：<a href="qsqlresult.html">QSqlResult</a>、<a href="qsqldriver.html">QSqlDriver</a>和QSqlDriverFactoryInterface。这个层在数据库和SQL类之间提供了底层的桥梁。这个层的<a href="sql-driver.html">文档是另外的</a>，因为它只和驱动程序编写者有关，并且在标准数据库应用程序编程中很少用到。对于实现Qt的SQL驱动程序插件的详细情况请参考<a href="sql-driver.html">这里</a>。
+<p> <a name="Plugins"></a>
+<h2> SQL驱动程序插件
+</h2>
+<a name="3"></a><p> Qt的SQL模块可以在运行期动态地装载新的驱动程序，这是通过<a href="plugins-howto.html">插件</a>实现的。
+<p> <a href="sql-driver.html">SQL驱动程序文档</a>描述了如何为一个特定的数据库建立相应的插件。
+<p> 一旦该插件被建立，Qt可以自动地装载它，之后就可为<a href="qsqldatabase.html">QSqlDatabase</a>所用（详细信息请参考<a href="qsqldatabase.html#drivers">QSqlDatabase::drivers</a>()）。 
+<p> <a name="Connecting_to_Databases"></a>
+<h2> 连接数据库
+</h2>
+<a name="4"></a><p> 如果要使用<a href="qsqlquery.html">QSqlQuery</a>或<a href="qsqlcursor.html">QSqlCursor</a>类，则少要连接并打开一个数据库连接。
+<p> 如果应用程序只需要一个数据库连接，<a href="qsqldatabase.html">QSqlDatabase</a>类可以创建一个为所有SQL操作所利用的默认连接，如果需要多个数据库连接，每个连接也可以容易地建立。
+<p> <a href="qsqldatabase.html">QSqlDatabase</a>需要<a href="qsqldatabase-h.html">qsqldatabase.h</a>这个头文件。
+<p> <a name="Connecting_to_a_Single_Database"></a>
+<h2> 连接单一数据库
+</h2>
+<a name="5"></a><p> 创建一个数据库连接需要三个操作：激活驱动程序、设置连接信息、打开连接。
+<p> 
+<pre>    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include &lt;<a href="qsqldatabase-h.html">qsqldatabase.h</a>&gt;
+    #include "../login.h"
+
+    int main( int argc, char *argv[] )
+    {
+        <a href="qapplication.html">QApplication</a> app( argc, argv );
+
+    <a name="x2141"></a>    <a href="qsqldatabase.html">QSqlDatabase</a> *defaultDB = QSqlDatabase::<a href="qsqldatabase.html#addDatabase">addDatabase</a>( DB_SALES_DRIVER );
+        if ( defaultDB ) {
+    <a name="x2143"></a>        defaultDB-&gt;<a href="qsqldatabase.html#setDatabaseName">setDatabaseName</a>( DB_SALES_DBNAME );
+    <a name="x2146"></a>        defaultDB-&gt;<a href="qsqldatabase.html#setUserName">setUserName</a>( DB_SALES_USER );
+    <a name="x2145"></a>        defaultDB-&gt;<a href="qsqldatabase.html#setPassword">setPassword</a>( DB_SALES_PASSWD );
+    <a name="x2144"></a>        defaultDB-&gt;<a href="qsqldatabase.html#setHostName">setHostName</a>( DB_SALES_HOST );
+
+    <a name="x2142"></a>        if ( defaultDB-&gt;<a href="qsqldatabase.html#open">open</a>() ) {
+                // 数据库被成功打开，我们现在可以运行SQL命令。
+            }
+        }
+
+        return 0;
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-connect1-main-cpp.html">sql/overview/connect1/main.cpp</a>
+</em></p>
+</blockquote><p> 在以上代码中我们先通过<a href="qsqldatabase.html#addDatabase">QSqlDatabase::addDatabase</a>()激活了一个数据库驱动程序，传入了驱动程序名。现在可利用的驱动程序为：<a href="sql-driver.html#QODBC3">QODBC3</a>（开放数据库连接）、<a href="sql-driver.html#QOCI8">QOCI8</a>（Oracle 8和9）、<a href="sql-driver.html#QTDS7">QTDS7</a>（Sybase Adaptive Server和Microsoft SQL Server）、<a href="sql-driver.html#QPSQL7">QPSQL7</a>（PostgreSQL 6和7）和<a href="sql-driver.html#QMYSQL3">QMYSQL3</a>（MySQL）。请注意部分驱动程序并未包括在Qt的自由版中，详细情款请查看README文件。
+<p> 连接创建后就成为应用程序的默认数据库连接并可为Qt的SQL类所使用。
+<p> 其次我们调用了setDatabaseName()、setUserName()、setPassword()和setHostName()来初使化连接信息。对于QOCI8（Oracle 8和9），TNS服务名称必须由setDatbaseName()传递。当连接ODBC数据源时，数据源名称（DSN）必须在setDatabaseName()调用中使用。
+<p> 最后我们调用了open()来打开数据库以存取数据，如果该步失败将返回假，用户可通过<a href="qsqldatabase.html#lastError">QSqlDatabase::lastError</a>()来查明错误信息。 
+<p> <a name="Connecting_to_Multiple_Databases"></a>
+<h3> 连接多个数据库
+</h3>
+<a name="5-1"></a><p> 连接至多个数据库需要在使用<a href="qsqldatabase.html#addDatabase">QSqlDatabase::addDatabase</a>()传入两个参数，其中第二个参数用来指明这个连接的唯一标识符。 
+<p> <a name="create_connections"></a>
+
+
+<pre>    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include &lt;<a href="qsqldatabase-h.html">qsqldatabase.h</a>&gt;
+    #include "../login.h"
+
+    bool createConnections();
+
+    int main( int argc, char *argv[] )
+    {
+        <a href="qapplication.html">QApplication</a> app( argc, argv );
+
+        if ( createConnections() ) {
+            // 数据库被成功打开，得到它们的指针：
+    <a name="x2148"></a>        <a href="qsqldatabase.html">QSqlDatabase</a> *oracledb = QSqlDatabase::<a href="qsqldatabase.html#database">database</a>( "ORACLE" );
+            // 现在我们可以在oracle连接或默认连接上执行SQL命令
+        }
+
+        return 0;
+    }
+
+    bool createConnections()
+    {
+        // 创建默认数据库连接
+    <a name="x2147"></a>    <a href="qsqldatabase.html">QSqlDatabase</a> *defaultDB = QSqlDatabase::<a href="qsqldatabase.html#addDatabase">addDatabase</a>( DB_SALES_DRIVER );
+        if ( ! defaultDB ) {
+            <a href="qapplication.html#qWarning">qWarning</a>( "Failed to connect to driver" );
+            return FALSE;
+        }
+    <a name="x2151"></a>    defaultDB-&gt;<a href="qsqldatabase.html#setDatabaseName">setDatabaseName</a>( DB_SALES_DBNAME );
+    <a name="x2154"></a>    defaultDB-&gt;<a href="qsqldatabase.html#setUserName">setUserName</a>( DB_SALES_USER );
+    <a name="x2153"></a>    defaultDB-&gt;<a href="qsqldatabase.html#setPassword">setPassword</a>( DB_SALES_PASSWD );
+    <a name="x2152"></a>    defaultDB-&gt;<a href="qsqldatabase.html#setHostName">setHostName</a>( DB_SALES_HOST );
+    <a name="x2150"></a>    if ( ! defaultDB-&gt;<a href="qsqldatabase.html#open">open</a>() ) {
+            <a href="qapplication.html#qWarning">qWarning</a>( "Failed to open sales database: " +
+    <a name="x2149"></a>                  defaultDB-&gt;<a href="qsqldatabase.html#lastError">lastError</a>().driverText() );
+            <a href="qapplication.html#qWarning">qWarning</a>( defaultDB-&gt;<a href="qsqldatabase.html#lastError">lastError</a>().databaseText() );
+            return FALSE;
+        }
+
+        // 创建一个名为oracle的连接
+        <a href="qsqldatabase.html">QSqlDatabase</a> *oracle = QSqlDatabase::<a href="qsqldatabase.html#addDatabase">addDatabase</a>( DB_ORDERS_DRIVER, "ORACLE" );
+        if ( ! oracle ) {
+            <a href="qapplication.html#qWarning">qWarning</a>( "Failed to connect to oracle driver" );
+            return FALSE;
+        }
+        oracle-&gt;<a href="qsqldatabase.html#setDatabaseName">setDatabaseName</a>( DB_ORDERS_DBNAME );
+        oracle-&gt;<a href="qsqldatabase.html#setUserName">setUserName</a>( DB_ORDERS_USER );
+        oracle-&gt;<a href="qsqldatabase.html#setPassword">setPassword</a>( DB_ORDERS_PASSWD );
+        oracle-&gt;<a href="qsqldatabase.html#setHostName">setHostName</a>( DB_ORDERS_HOST );
+        if ( ! oracle-&gt;<a href="qsqldatabase.html#open">open</a>() ) {
+            <a href="qapplication.html#qWarning">qWarning</a>( "Failed to open orders database: " +
+                      oracle-&gt;<a href="qsqldatabase.html#lastError">lastError</a>().driverText() );
+            <a href="qapplication.html#qWarning">qWarning</a>( oracle-&gt;<a href="qsqldatabase.html#lastError">lastError</a>().databaseText() );
+            return FALSE;
+        }
+
+        return TRUE;
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-create_connections-main-cpp.html">sql/overview/create_connections/main.cpp</a>
+</em></p>
+</blockquote><p> 在这个实例中我们打开了两个连接并加入了错误处理。静态函数<a href="qsqldatabase.html#database">QSqlDatabase::database</a>()可以在任何地方调用以获得一个数据库连接的指针。如果我们在调用此函数时未使用参数则返回默认连接，如果有参数则返回指定的连接，如上例中的“ORACLE”。
+<p> 如果你使用<em>Qt设计器</em>来创建一个<tt>main.cpp</tt>，它将<em>不会</em>包含我们的实例createConnections()函数。这也就是说在<em>Qt设计器</em>中预览正确的应用程序将不会运行，除非你实现了你自己的数据库连接函数。
+<p> 请注意以上的代码上ODBC连接没有被命名，因此被作为默认连接。<a href="qsqldatabase.html">QSqlDatabase</a>维护着通过addDatabase()这个静态函数返回的的连接指针。如果有移去一个连接，先调用<a href="qsqldatabase.html#close">QSqlDatabase::close</a>()来关闭连接，然后通过静态函数<a href="qsqldatabase.html#removeDatabase">QSqlDatabase::removeDatabase</a>()来移除连接。
+<p> <a name="Executing_SQL_commands"></a>
+<h2> 使用<a href="qsqlquery.html">QSqlQuery</a>执行SQL命令
+</h2>
+<a name="6"></a><p> <a href="qsqlquery.html">QSqlQuery</a>类提供了一个接口来执行SQL命令。它也提供相应的函数来定位<tt>SELECT</tt>查询的数据集和检索的不同的记录和字段值。
+<p> <a href="qsqlcursor.html">QSqlCursor</a>类在下一节中讲述。它为我们提供了更高层的接口来实现SQL命令。<a href="qsqlcursor.html">QSqlCursor</a>特别适用于在屏幕上显示的可视窗口部件。不熟悉SQL的程序员可略过这一节，直接去阅读<a href="#Using_QSqlCursor">“使用 QSqlCursor”</a>来了解<a href="qsqlcursor.html">QSqlCursor</a>类。
+<p> <a name="Transactions"></a>
+<h3> 事务处理
+</h3>
+<a name="6-1"></a><p> 如果下面的数据库引擎支持事务处理，则函数<a href="qsqldriver.html#hasFeature">QSqlDriver::hasFeature</a>（QSqlDriver::Transactions）将返回 真。你可以通过调用<a href="qsqldatabase.html#transaction">QSqlDatabase::transaction</a>()来初始化一个事务处理。之后执行你想在该事务处理的工作。完了再执行<a href="qsqldatabase.html#commit">QSqlDatabase::commit</a>()来提交事务处理或<a href="qsqldatabase.html#rollback">QSqlDatabase::rollback</a>()取消事务处理。 
+<p> <a name="Basic_Browsing"></a>
+<h3> 基本浏览
+</h3>
+<a name="6-2"></a><p> 
+
+<pre>    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include &lt;<a href="qsqldatabase-h.html">qsqldatabase.h</a>&gt;
+    #include &lt;<a href="qsqlquery-h.html">qsqlquery.h</a>&gt;
+    #include "../login.h"
+
+    bool createConnections();
+
+    int main( int argc, char *argv[] )
+    {
+        <a href="qapplication.html">QApplication</a> app( argc, argv );
+
+        if ( createConnections() ) {
+    <a name="x2155"></a>        <a href="qsqldatabase.html">QSqlDatabase</a> *oracledb = QSqlDatabase::<a href="qsqldatabase.html#database">database</a>( "ORACLE" );
+            // 从oracle数据库向ODBC（默认）数据库复制数据
+            <a href="qsqlquery.html">QSqlQuery</a> target;
+            <a href="qsqlquery.html">QSqlQuery</a> query( "SELECT id, name FROM people;", oracledb );
+    <a name="x2157"></a>        if ( query.<a href="qsqlquery.html#isActive">isActive</a>() ) {
+    <a name="x2158"></a>            while ( query.<a href="qsqlquery.html#next">next</a>() ) {
+    <a name="x2156"></a>                target.<a href="qsqlquery.html#exec">exec</a>( "INSERT INTO people ( id, name ) VALUES ( " +
+    <a name="x2159"></a>                              query.<a href="qsqlquery.html#value">value</a>(0).toString() +
+                                  ", '" + query.<a href="qsqlquery.html#value">value</a>(1).toString() +  "' );" );
+                }
+            }
+        }
+
+        return 0;
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-basicbrowsing-main-cpp.html">sql/overview/basicbrowsing/main.cpp</a>
+</em></p>
+</blockquote><p> 在以上实例中我们加入了一个头文件：<a href="qsqlquery-h.html">qsqlquery.h</a>. 我们使用缺省数据库创建了一个查询：<tt>target</tt>，其初始值是空的。我们使用“ORACLE”数据库创建了第二个查询以存取数据。数据连接的设置在createConnections()中完成。
+<p> 在创建了一个<tt>SELECT</tt>语句后，函数isActive()被用来检测该命令是否被成功执行。之后的next()被用来遍历整个数据集。value()函数返回字段中的值，其数据类型为QVariants。插入操作通过先前就已创建的<tt>target</tt> <a href="qsqlquery.html">QSqlQuery</a>来完成。
+<p> 注意这个实例和这份文档中所有的实例使用的表的定义都在<a href="#Example_Tables">实例表</a>中。
+<p> 
+
+<pre>            int count = 0;
+    <a name="x2161"></a>        if ( query.<a href="qsqlquery.html#isActive">isActive</a>() ) {
+    <a name="x2162"></a>            while ( query.<a href="qsqlquery.html#next">next</a>() ) {
+    <a name="x2160"></a>                target.<a href="qsqlquery.html#exec">exec</a>( "INSERT INTO people ( id, name ) VALUES ( " +
+    <a name="x2164"></a>                              query.<a href="qsqlquery.html#value">value</a>(0).toString() +
+                                  ", '" + query.<a href="qsqlquery.html#value">value</a>(1).toString() +  "' );" );
+                    if ( target.<a href="qsqlquery.html#isActive">isActive</a>() )
+    <a name="x2163"></a>                    count += target.<a href="qsqlquery.html#numRowsAffected">numRowsAffected</a>();
+                }
+            }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-basicbrowsing2-main-cpp.html">sql/overview/basicbrowsing2/main.cpp</a>
+</em></p>
+</blockquote><p> 以上的代码来统计有多少记录被成功地插入数据库。如果操作，比如插入，失败则isActive()将返回假，如果记录行的数量不能被决定，比如查询失败，numRowsAffected()将返回-1。
+<p> <a name="Basic_Data_Manipulation"></a>
+<h3> 基本数据处理
+</h3>
+<a name="6-3"></a><p> 
+
+<pre>    int main( int argc, char *argv[] )
+    {
+        <a href="qapplication.html">QApplication</a> app( argc, argv );
+
+        int rows = 0;
+
+        if ( createConnections() ) {
+            <a href="qsqlquery.html">QSqlQuery</a> query( "INSERT INTO staff ( id, forename, surname, salary ) "
+                         "VALUES ( 1155, 'Ginger', 'Davis', 50000 );" );
+    <a name="x2167"></a><a name="x2166"></a>        if ( query.<a href="qsqlquery.html#isActive">isActive</a>() ) rows += query.<a href="qsqlquery.html#numRowsAffected">numRowsAffected</a>() ;
+
+    <a name="x2165"></a>        query.<a href="qsqlquery.html#exec">exec</a>( "UPDATE staff SET salary=60000 WHERE id=1155;" );
+            if ( query.<a href="qsqlquery.html#isActive">isActive</a>() ) rows += query.<a href="qsqlquery.html#numRowsAffected">numRowsAffected</a>() ;
+
+            query.<a href="qsqlquery.html#exec">exec</a>( "DELETE FROM staff WHERE id=1155;" );
+            if ( query.<a href="qsqlquery.html#isActive">isActive</a>() ) rows += query.<a href="qsqlquery.html#numRowsAffected">numRowsAffected</a>() ;
+        }
+
+        return ( rows == 3 ) ? 0 : 1;
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-basicdatamanip-main-cpp.html">sql/overview/basicdatamanip/main.cpp</a>
+</em></p>
+</blockquote><p> 这个实例演示了直接的SQL DML（数据操作语言）命令。既然我们没有在<a href="qsqlquery.html">QSqlQuery</a>的构造函数中指明数据库则默认数据库将被使用。<a href="qsqlquery.html">QSqlQuery</a>也可以用来执行SQL DDL（数据定义语言）命令，诸如<tt>CREATE</tt> TABLE与<tt>CREATE</tt> INDEX。
+<p> <a name="Navigating_Result_Sets"></a>
+<h3> 定位数据集
+</h3>
+<a name="6-4"></a><p> 一旦<tt>SELECT</tt>查询语句被成功执行，我们就可以存取与之对应的结果集。我们先前已使用了一个浏览函数：next()。它可以顺序扫描整个记录集。<a href="qsqlquery.html">QSqlQuery</a>同时也提供了first()、last()、next()和prev()。执行其中的任意一个函数后我们都可以通过isValid()来检验是否成功执行。
+<p> 我们也可以通过seek()来定位至任意一条记录。第一条记录号为零。最后一条记录号为记录的总数减一。请注意并不时所有的数据都为<tt>SELECT</tt>查询提供记录总数这样的信息，此时size()将返回-1。 
+<p> 
+
+<pre>        if ( createConnections() ) {
+            <a href="qsqlquery.html">QSqlQuery</a> query( "SELECT id, name FROM people ORDER BY name;" );
+    <a name="x2170"></a>        if ( ! query.<a href="qsqlquery.html#isActive">isActive</a>() ) return 1; // 查询失败
+            int i;
+    <a name="x2173"></a>        i = query.<a href="qsqlquery.html#size">size</a>();               // 在这个实例中我们有9个记录，i==9。
+    <a name="x2169"></a>        query.<a href="qsqlquery.html#first">first</a>();                  // 移动到第一条记录。
+    <a name="x2168"></a>        i = query.<a href="qsqlquery.html#at">at</a>();                 // i==0
+    <a name="x2171"></a>        query.<a href="qsqlquery.html#last">last</a>();                   // 移动到最后一条记录。
+            i = query.<a href="qsqlquery.html#at">at</a>();                 // i==8
+    <a name="x2172"></a>        query.<a href="qsqlquery.html#seek">seek</a>( query.<a href="qsqlquery.html#size">size</a>() / 2 ); // 移动到中间那条记录。
+            i = query.<a href="qsqlquery.html#at">at</a>();                 // i==4
+        }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-navigating-main-cpp.html">sql/overview/navigating/main.cpp</a>
+</em></p>
+</blockquote><p> 以上实例显示了一些定位函的用法。
+<p> 注意不是所有的驱动程序都支持size()，我们可以通过以下的示例来获知驱动程序是否支持这一特征： 
+<p> <pre>
+    <a href="qsqldatabase.html">QSqlDatabase</a>* defaultDB = QSqlDatabase::<a href="qsqldatabase.html#database">database</a>();
+    if ( defaultDB-&gt;<a href="qsqldatabase.html#driver">driver</a>()-&gt;hasFeature( QSqlDriver::QuerySize ) ) {
+        // QSqlQuery::size()支持
+    }
+    else {
+        // QSqlQuery::size()不能被依赖
+    }
+</pre>
+ 
+<p> 当我们定位了一定记录录后我们往往希望取出这条记录的内容。
+<p> 
+
+<pre>        if ( createConnections() ) {
+            <a href="qsqlquery.html">QSqlQuery</a> query( "SELECT id, surname FROM staff;" );
+    <a name="x2174"></a>        if ( query.<a href="qsqlquery.html#isActive">isActive</a>() ) {
+    <a name="x2175"></a>            while ( query.<a href="qsqlquery.html#next">next</a>() ) {
+                    <a href="qapplication.html#qDebug">qDebug</a>( query.<a href="qsqlquery.html#value">value</a>(0).toString() + ": " +
+    <a name="x2176"></a>                        query.<a href="qsqlquery.html#value">value</a>(1).toString() );
+                }
+            }
+        }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-retrieve1-main-cpp.html">sql/overview/retrieve1/main.cpp</a>
+</em></p>
+</blockquote><p> 注意如果你只是希望扫描整个记录集你只需不断地进行next()操作。
+<p> 提示：函数lastQuery()返回最后一次的的Sql语句，有时你可能想检查一下最后那次操作是否是你所想象中的操作。
+<p> <a name="Using_QSqlCursor"></a>
+<h2> 使用<a href="qsqlcursor.html">QSqlCursor</a>
+</h2>
+<a name="7"></a><p> <a href="qsqlcursor.html">QSqlCursor</a>类提供了一个更高层次的接口来浏览与编辑记录，它不需要你写SQL语句。
+<p> QSqlCursor几乎可以做<a href="qsqlquery.html">QSqlQuery</a>所能做的所有事情。有两点例外：由于其代表的是数据库中的一张表或视图。默认情况下 当你浏览记录时<a href="qsqlcursor.html">QSqlCursor</a>对象总是取出记录中的所有字段。如果你只关心其中的一部分字段你需要进行一些配置，或者使用<a href="qsqlrecord.html#setGenerated">QSqlRecord::setGenerated</a>()来屏蔽掉一些字段。当然你也可以使用<a href="qsqlquery.html">QSqlQuery</a>来完成这个功能。 如果表或者视图有其唯一索引你可以通过<a href="qsqlcursor.html">QSqlCursor</a>来编辑记录。否则就只能通过<a href="qsqlquery.html">QSqlQuery</a>来编辑了。（请注意不是所有的数据库支持可编辑的视图。）
+<p> <a href="qsqlcursor.html">QSqlCursor</a>一次只操作一条记录。无论是执行insert、update还是 delete，QSqlCursor都只是影响一条记录。当浏览记录集时无论何时都只有一条记录处于应用状态。也就是说QSqlCursor只维护了一条记录的“可编辑缓冲区”。“定位缓冲区”单独放置，因此当你浏览记录时该缓冲并不会受其影响。
+<p> 当我们使用<a href="qsqlcursor.html">QSqlCursor</a>对象前我们必须先创建与打开一个数据库连接。数据库连接在上面的<a href="#Connecting_to_Databases">连接数据库</a>一节中已经被讲述。在实例中我们假设已经通过createConnections()创建了连接如同在<a href="#create_connections">QSqlDatabase实例</a>描述的那样。
+<p> 在随后的<a href="#Data-Aware_Widgets">基于数据的窗口部件</a>一节中我们将展示如何连接窗口部件至数据库，当我们了解了游标和基于数据的窗口部件后我们就可以讨论<a href="#Subclassing_QSqlCursor">继承QSqlCursor</a>。
+<p> <a href="qsqlcursor.html">QSqlCursor</a>类需要<a href="qsqlcursor-h.html">qsqlcursor.h</a>这个头文件。
+<p> <a name="Retrieving_Records"></a>
+<h3> 检索记录
+</h3>
+<a name="7-1"></a><p> 
+
+<pre>    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include &lt;<a href="qsqldatabase-h.html">qsqldatabase.h</a>&gt;
+    #include &lt;<a href="qsqlcursor-h.html">qsqlcursor.h</a>&gt;
+    #include "../login.h"
+
+    bool createConnections();
+
+    int main( int argc, char *argv[] )
+    {
+        <a href="qapplication.html">QApplication</a> app( argc, argv );
+
+        if ( createConnections() ) {
+            <a href="qsqlcursor.html">QSqlCursor</a> cur( "staff" ); // 指定表/视图名称
+    <a name="x2177"></a>        cur.<a href="qsqlcursor.html#select">select</a>(); // 我们将检索每一条记录
+            while ( cur.<a href="qsqlquery.html#next">next</a>() ) {
+    <a name="x2178"></a>            <a href="qapplication.html#qDebug">qDebug</a>( cur.<a href="qsqlquery.html#value">value</a>( "id" ).toString() + ": " +
+                        cur.<a href="qsqlquery.html#value">value</a>( "surname" ).toString() + " " +
+                        cur.<a href="qsqlquery.html#value">value</a>( "salary" ).toString() );
+            }
+        }
+
+        return 0;
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-retrieve2-main-cpp.html">sql/overview/retrieve2/main.cpp</a>
+</em></p>
+</blockquote><p> 我们指定表或视图的名字来创建<a href="qsqlcursor.html">QSqlCursor</a>对象，如果我们使用的不是缺省的数据库我们需要在<a href="qsqlcursor.html">QSqlCursor</a>的构造函数中指明。
+<p> cur.select()将自动执行以下的Sql语句：
+<p> <pre>
+    SELECT staff.id, staff.forename, staff.surname, staff.salary, staff.statusid FROM staff
+</pre>
+ 
+<p> 然后我们通过cur.next()来遍历整个记录集。获取字段值的方法与<a href="qsqlquery.html">QSqlQuery</a>类似，不过它指明的是字段名而不是value()和 setValue()的数字索引。 
+<p> <a name="Sorting_Data"></a>
+<h4> 排序和过滤记录
+</h4>
+<a name="7-1-1"></a><p> 如果我们需要取记录子集，我们可以在select()函数中指定过滤条件，随后取到的结果集就都是满足条件的记录（过滤条件在SQL语言中由WHERE负责)）。
+<p> <pre>
+    cur.select( "id &gt; 100" );
+</pre>
+ 
+<p> 这个select()调用将执行SQL命令： 
+<pre>
+    SELECT staff.id, staff.forename, staff.surname, staff.salary, staff.statusid 
+    FROM staff WHERE staff.id &gt; 100
+</pre>
+ 
+<p> 这将检索出<tt>id</tt>大于100的职员。
+<p> 与过滤类似我们也可以对指定记录集进行排序。这个功能需要通过<a href="qsqlindex.html">QSqlIndex</a>对象来实现，它可以包括排序的字段的名称并且可以传递这个对象给select()调用。
+<p> <pre>
+    <a href="qsqlcursor.html">QSqlCursor</a> cur( "staff" );
+    <a href="qsqlindex.html">QSqlIndex</a> nameIndex = cur.<a href="qsqlcursor.html#index">index</a>( "surname" ); 
+    cur.<a href="qsqlcursor.html#select">select</a>( nameIndex );
+</pre>
+ 
+<p> 以上语句使用“surname”字段创建了一个<a href="qsqlindex.html">QSqlIndex</a>对象，当我们把该对象与select()函数集合起来以后，得到的记录集就是按staff.surname进行排序的，在索引对象中的每个字段通过ORDER BY组织起来，被执行的SQL语句如下所示： 
+<pre>
+    SELECT staff.id, staff.forename, staff.surname, staff.salary, staff.statusid 
+    FROM staff ORDER BY staff.surname ASC
+</pre>
+ 
+<p> 把过滤与排序结合起来的方法也是简单易懂的。
+<p> <pre>
+    cur.select( "surname LIKE 'A%'", nameIndex );
+</pre>
+ 
+<p> 过滤字符串引起WHERE操作，<a href="qsqlindex.html">QSqlIndex</a>对象引起ORDER BY的操作，最后的命令如下：
+<p> <pre>
+    SELECT staff.id, staff.forename, staff.surname, staff.salary, staff.statusid
+    FROM staff WHERE staff.surname LIKE 'A%' ORDER BY staff.surname ASC
+</pre>
+ 
+<p> 如果需要对不止一个字段进行排序，则索引对象创建时可包含多个字段。顺序还是倒序也可以通过<a href="qsqlindex.html#setDescending">QSqlIndex::setDescending</a>()来指定，默认是升序排序。 
+<p> 
+
+<pre>            <a href="qsqlcursor.html">QSqlCursor</a> cur( "staff" );
+            <a href="qstringlist.html">QStringList</a> fields = QStringList() &lt;&lt; "surname" &lt;&lt; "forename";
+    <a name="x2180"></a>        <a href="qsqlindex.html">QSqlIndex</a> order = cur.<a href="qsqlcursor.html#index">index</a>( fields );
+    <a name="x2181"></a>        cur.<a href="qsqlcursor.html#select">select</a>( order );
+            while ( cur.<a href="qsqlquery.html#next">next</a>() ) {
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-order1-main-cpp.html">sql/overview/order1/main.cpp</a>
+</em></p>
+</blockquote><p> 以上代码中我们通过一个字符串队列来存放不止一个字段，排序中它们都将被用到。然后我们基于这些字段创建了<a href="qsqlindex.html">QSqlIndex</a>对象，最后的select()操作将执行以下语句： 
+<pre>
+    SELECT staff.id, staff.forename, staff.surname, staff.salary, staff.statusid
+    FROM staff ORDER BY staff.surname ASC, staff.forename ASC
+</pre>
+ 
+<p> 你可以在多重排序中加入过滤条件。 
+<p> 
+
+<pre>            <a href="qsqlcursor.html">QSqlCursor</a> cur( "staff" );
+            <a href="qstringlist.html">QStringList</a> fields = QStringList() &lt;&lt; "id" &lt;&lt; "forename";
+    <a name="x2183"></a>        <a href="qsqlindex.html">QSqlIndex</a> order = cur.<a href="qsqlcursor.html#index">index</a>( fields );
+            <a href="qsqlindex.html">QSqlIndex</a> filter = cur.<a href="qsqlcursor.html#index">index</a>( "surname" );
+    <a name="x2186"></a>        cur.<a href="qsqlrecord.html#setValue">setValue</a>( "surname", "Bloggs" );
+    <a name="x2184"></a>        cur.<a href="qsqlcursor.html#select">select</a>( filter, order );
+            while ( cur.<a href="qsqlquery.html#next">next</a>() ) {
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-order2-main-cpp.html">sql/overview/order2/main.cpp</a>
+</em></p>
+</blockquote><p> 这将执行以下的SQL语句：
+<pre>
+    SELECT staff.id, staff.forename, staff.surname, staff.salary, staff.statusid 
+    FROM staff WHERE staff.surname='Bloggs' ORDER BY staff.id ASC, staff.forename ASC
+</pre>
+ 
+<p> <a href="qsqlindex.html">QSqlIndex</a>对象“order”包含了两个字段：“id”和“forename”，它们被用来对记录集排序。<a href="qsqlindex.html">QSqlIndex</a>对象“filter”包含了一个字段：“surname”。当索引对象被作为过滤条件传给select()函数的时候，该对象中的字段名将被用来进行条件限制的列名，即<em>fieldname=value</em>。其中的value即是对应字段的限定值。我们可以用setValue()来确定每一个过滤字段的限定值。 
+<p> <a name="Extracting_Data"></a>
+<h4> 提取数据
+</h4>
+<a name="7-1-2"></a><p> 
+
+<pre>            <a href="qsqlcursor.html">QSqlCursor</a> cur( "creditors" );
+            <a href="qstringlist.html">QStringList</a> orderFields = QStringList() &lt;&lt; "surname" &lt;&lt; "forename";
+    <a name="x2187"></a>        <a href="qsqlindex.html">QSqlIndex</a> order = cur.<a href="qsqlcursor.html#index">index</a>( orderFields );
+
+            <a href="qstringlist.html">QStringList</a> filterFields = QStringList() &lt;&lt; "surname" &lt;&lt; "city";
+            <a href="qsqlindex.html">QSqlIndex</a> filter = cur.<a href="qsqlcursor.html#index">index</a>( filterFields );
+    <a name="x2191"></a>        cur.<a href="qsqlrecord.html#setValue">setValue</a>( "surname", "Chirac" );
+            cur.<a href="qsqlrecord.html#setValue">setValue</a>( "city", "Paris" );
+
+    <a name="x2188"></a>        cur.<a href="qsqlcursor.html#select">select</a>( filter, order );
+
+            while ( cur.<a href="qsqlquery.html#next">next</a>() ) {
+    <a name="x2189"></a>            int id = cur.<a href="qsqlquery.html#value">value</a>( "id" ).toInt();
+                <a href="qstring.html">QString</a> name = cur.<a href="qsqlquery.html#value">value</a>( "forename" ).toString() + " " +
+                               cur.<a href="qsqlquery.html#value">value</a>( "surname" ).toString();
+    <a name="x2192"></a>            <a href="qapplication.html#qDebug">qDebug</a>( QString::<a href="qstring.html#number">number</a>( id ) + ": " + name );
+            }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-extract-main-cpp.html">sql/overview/extract/main.cpp</a>
+</em></p>
+</blockquote><p> 在以上的实例中，我们为creditors表创建了一个游标,我们创建了两个<a href="qsqlindex.html">QSqlIndex</a>对象，第一个“order”创建于“orderFields”字串列，第二个“filter”创建于“filterFields”字串列，我们为过滤字段“surname”与“city”分别设定了条件值。现在我们调用select()，产生的SQL语句如下：
+<pre>
+    SELECT creditors.city, creditors.surname, creditors.forename, creditors.id 
+    FROM creditors 
+    WHERE creditors.surname = 'Chirac' AND creditors.city = 'Paris' 
+    ORDER BY creditors.surname ASC, creditors.forename ASC
+</pre>
+ 
+过滤字段用于WHERE语句，排序字段用于ORDER BY语句。
+<p> 现在我们遍历整个符合条件的记录集（如果有的话），我们得到字段id、forename与surname的值并把它们传入我们需要处理的函数中去，在这个实例是一个简单的<a href="qapplication.html#qDebug">qDebug</a>()调用。
+<p> <a name="Manipulating_Records"></a>
+<h3> 处理记录
+</h3>
+<a name="7-2"></a><p> 当一张表或视图有唯一索引的情况下，使用<a href="qsqlcursor.html">QSqlCursor</a>可对表或视图的记录进行插入、更新与删除操作。否则只能用<a href="qsqlquery.html">QSqlQuery</a>来进行操作。（注意不是所有数据库都支持可编辑的视图。）
+<p> 每一个游标有一个内部的编辑缓冲区用于编辑操作（insert、update和delete）。 编辑过程对于每种操作都是类似是：获取指向相关缓冲区的指针，调用setValue()来更新缓冲，调用insert()或update()或del()来执行所需要的操作。举例来说，当通过游标来插入记录时，你通过primeInsert()来获得一个指向编辑缓冲区的指针，调用setValue()来刷新缓冲区中每个字段的值，然后调用QSQlCursor::insert()把缓冲区的数据插入数据库。类似的，当刷新（或删除）一条记录的时候，缓冲区中的数据将刷新（或删除）至数据库。你调用任何一个<a href="#Navigating_Result_Sets">游标定位</a>的函数都不会影响缓冲区中的内容。请注意如果你调用setValue()传入的是一个单引号括起来的字符串，单引号将被忽略，因为单引号在SQL中有着特殊的意义。
+<p> primeInsert()、primeUpdate()和primeDelete()这样的方法都返回一个指向内部可编辑缓冲区的指针，每一种方法在返回前都会在可编辑缓冲区上执行一些不同的隐藏操作，默认情况下，<a href="qsqlcursor.html#primeInsert">QSqlCursor::primeInsert</a>()清空缓冲区上所有字段的值。（请参考<a href="qsqlrecord.html#clearValues">QSqlRecord::clearValues</a>()）。<a href="qsqlcursor.html#primeUpdate">QSqlCursor::primeUpdate</a>()和<a href="qsqlcursor.html#primeDelete">QSqlCursor::primeDelete</a>()在缓冲区中初始化当前游标处的各个字段值，这三个函数都是虚函数，因些你可以重新定义它们的行为。（比如重载primeInsert()以便对自动数值型的字段作出处理)。用户界面的数据感知组件会发出信号，比如primeInsert()，这样就可以进行连接，这些操作都会传递一个指针至合适的缓冲，因些子数据操作可能并不需要。相应信息请见<a href="#Subclassing_QSqlCursor">继承QSqlCursor</a>。参考<em>Qt设计器</em>的用户手册可了解与primeInsert()有关的信号。 
+<p> 当你调用了insert()、update()或del()之后，游标将无法定位至一条有效的记录并且实际上是不可用的。如果你还想继续浏览记录的话你必须调用select()以便从数据库读取更改后的记录。
+<p> <a name="Inserting_Records"></a>
+<h4> 插入记录
+</h4>
+<a name="7-2-1"></a><p> 
+
+<pre>            <a href="qsqlcursor.html">QSqlCursor</a> cur( "prices" );
+            <a href="qstringlist.html">QStringList</a> names = QStringList() &lt;&lt;
+                "Screwdriver" &lt;&lt; "Hammer" &lt;&lt; "Wrench" &lt;&lt; "Saw";
+            int id = 20;
+            for ( QStringList::Iterator name = names.<a href="qvaluelist.html#begin">begin</a>();
+    <a name="x2197"></a>              name != names.<a href="qvaluelist.html#end">end</a>(); ++name ) {
+    <a name="x2194"></a>            <a href="qsqlrecord.html">QSqlRecord</a> *buffer = cur.<a href="qsqlcursor.html#primeInsert">primeInsert</a>();
+    <a name="x2195"></a>            buffer-&gt;<a href="qsqlrecord.html#setValue">setValue</a>( "id", id );
+                buffer-&gt;<a href="qsqlrecord.html#setValue">setValue</a>( "name", *name );
+                buffer-&gt;<a href="qsqlrecord.html#setValue">setValue</a>( "price", 100.0 + (double)id );
+    <a name="x2193"></a>            count += cur.<a href="qsqlcursor.html#insert">insert</a>();
+                id++;
+            }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-insert-main-cpp.html">sql/overview/insert/main.cpp</a>
+</em></p>
+</blockquote><p> 在以上的实例中我们为“prices”表创建了一个游标，然后我们创建了一个产品名列表并进入了一个循环。在循环中我们调用了游标的primeInsert()方法。该方法返回了一个指向<a href="qsqlrecord.html">QSqlRecord</a>缓冲区的指针，该缓冲区的所有字段均置为空值。（请注意<a href="qsqlcursor.html#primeInsert">QSqlCursor::primeInsert</a>()是虚函数，可以在继承类中定制，请参考<a href="qsqlcursor.html">QSqlCursor</a>）。然后我们调用setValue()来设置每一个字段，最后调用insert()来实际插入记录。insert()返回值告诉我们有多少记录被实际插入。
+<p> 我们通过primeInsert()调用来获得指向<a href="qsqlrecord.html">QSqlRecord</a>对象的指针。<a href="qsqlrecord.html">QSqlRecord</a>对象存储一条记录的数据以及相关的中间数据。在实际的应用程序中大多数与<a href="qsqlrecord.html">QSqlRecord</a>有关的操作只是简单进行value()与setValue()的调用。就象上面以及下面的实例一样。 
+<p> <a name="Updating_Records"></a>
+<h4> 更新记录
+</h4>
+<a name="7-2-2"></a><p> 
+
+<pre>            <a href="qsqlcursor.html">QSqlCursor</a> cur( "prices" );
+    <a name="x2199"></a>        cur.<a href="qsqlcursor.html#select">select</a>( "id=202" );
+            if ( cur.<a href="qsqlquery.html#next">next</a>() ) {
+    <a name="x2198"></a>            <a href="qsqlrecord.html">QSqlRecord</a> *buffer = cur.<a href="qsqlcursor.html#primeUpdate">primeUpdate</a>();
+    <a name="x2203"></a>            double price = buffer-&gt;<a href="qsqlrecord.html#value">value</a>( "price" ).toDouble();
+                double newprice = price * 1.05;
+    <a name="x2202"></a>            buffer-&gt;<a href="qsqlrecord.html#setValue">setValue</a>( "price", newprice );
+    <a name="x2200"></a>            cur.<a href="qsqlcursor.html#update">update</a>();
+            }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-update-main-cpp.html">sql/overview/update/main.cpp</a>
+</em></p>
+</blockquote><p> 以上代码我们先在价格表上创建了一个游标。调用select()把需更新的记录选出来，通过next()进行定位。再调用primeUpdate()来获得一个指向<a href="qsqlrecord.html">QSqlRecord</a>的指针，该缓冲区中的内容将被当前记录的数据所填充。我们获得当前字段的价格值再计算出一个新的价格。最后调用update()来更新记录，update()返回实际被更新的记录数。
+<p> 如果有许多同样的更新需要执行，比如说更新一批价格，通过<a href="qsqlquery.html">QSqlQuery</a>来执行一条SQL语句的效率可能更高一些。
+<p> <pre>
+    <a href="qsqlquery.html">QSqlQuery</a> query( "UPDATE prices SET price = price * 1.05"  );
+</pre>
+ 
+<p> <a name="Deleting_Records"></a>
+<h4> 删除记录
+</h4>
+<a name="7-2-3"></a><p> 
+
+<pre>            <a href="qsqlcursor.html">QSqlCursor</a> cur( "prices" );
+    <a name="x2206"></a>        cur.<a href="qsqlcursor.html#select">select</a>( "id=999" );
+            if ( cur.<a href="qsqlquery.html#next">next</a>() ) {
+    <a name="x2205"></a>            cur.<a href="qsqlcursor.html#primeDelete">primeDelete</a>();
+    <a name="x2204"></a>            cur.<a href="qsqlcursor.html#del">del</a>();
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-del-main-cpp.html">sql/overview/del/main.cpp</a>
+</em></p>
+</blockquote><p>需要删除记录时，选择相应的记录然后定位，调用primeDelete()使缓冲区保存当前记录的值，然后调用<a href="qsqlcursor.html#del">QSqlCursor::del</a>()来进行删除操作。
+<p> 与更新操作一样，如果有多条类似的记录需要删除，使用一条SQL语句的效率可能更高一些。
+<p> <pre>
+    <a href="qsqlquery.html">QSqlQuery</a> query( "DELETE FROM prices WHERE id &gt;= 2450 AND id &lt;= 2500" );
+</pre>
+ 
+<p> <a name="Data-Aware_Widgets"></a>
+<h2> 基于数据的窗口部件
+</h2>
+<a name="8"></a><p> 基于数据的窗口部件通过简便而强有力的方法把数据与用户界面结合起来。使用<em>Qt设计器</em>来创建与维护基于数据的窗口部件是一件方便的事情。本节为那些致力于完全用编程语言实现下述实例的开发人员们做出一个导引。请注意在<em>Qt设计器</em>的手册中“创建数据库应用程序”这一节所讲述的应用以及附带的实例。
+<p> <a name="Data-Aware_Tables"></a>
+<h3> 基于数据的表
+</h3>
+<a name="8-1"></a><p> 
+
+<pre>    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include &lt;<a href="qsqldatabase-h.html">qsqldatabase.h</a>&gt;
+    #include &lt;<a href="qsqlcursor-h.html">qsqlcursor.h</a>&gt;
+    #include &lt;<a href="qdatatable-h.html">qdatatable.h</a>&gt;
+    #include "../login.h"
+
+    bool createConnections();
+
+    int main( int argc, char *argv[] )
+    {
+        <a href="qapplication.html">QApplication</a> app( argc, argv );
+
+        if ( createConnections() ) {
+            <a href="qsqlcursor.html">QSqlCursor</a> staffCursor( "staff" );
+            <a href="qdatatable.html">QDataTable</a> *staffTable = new <a href="qdatatable.html">QDataTable</a>( &amp;staffCursor, TRUE );
+            app.<a href="qapplication.html#setMainWidget">setMainWidget</a>( staffTable );
+    <a name="x2210"></a>        staffTable-&gt;<a href="qdatatable.html#refresh">refresh</a>();
+            staffTable-&gt;<a href="qwidget.html#show">show</a>();
+
+            return app.<a href="qapplication.html#exec">exec</a>();
+        }
+
+        return 0;
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-table1-main-cpp.html">sql/overview/table1/main.cpp</a>
+</em></p>
+</blockquote><p> 基于数据的表需要<a href="qdatatable-h.html">qdatatable.h</a>和<a href="qsqlcursor-h.html">qsqlcursor.h</a>这两个头文件。我们创建应用程序对象，然后调用createConnections()并创建游标。之后使用游标的指针创建<a href="qdatatable.html">QDataTable</a>对象，设置autoPopulate标志为TRUE。再把<a href="qdatatable.html">QDataTable</a>设为主窗口部件，调用 refresh()来获取数据，调用show()使其为用户可见。
+<p> autoPopulate标志告诉<a href="qdatatable.html">QDataTable</a>是否根据当前游标创建列。该标志并不影响数据的的读入。数据的读入是由refresh()完成的。 
+<p> 
+
+<pre>            <a href="qsqlcursor.html">QSqlCursor</a> staffCursor( "staff" );
+            <a href="qdatatable.html">QDataTable</a> *staffTable = new <a href="qdatatable.html">QDataTable</a>( &amp;staffCursor );
+
+            app.<a href="qapplication.html#setMainWidget">setMainWidget</a>( staffTable );
+
+    <a name="x2213"></a>        staffTable-&gt;<a href="qdatatable.html#addColumn">addColumn</a>( "forename", "Forename" );
+            staffTable-&gt;<a href="qdatatable.html#addColumn">addColumn</a>( "surname",  "Surname" );
+            staffTable-&gt;<a href="qdatatable.html#addColumn">addColumn</a>( "salary",   "Annual Salary" );
+
+            <a href="qstringlist.html">QStringList</a> order = QStringList() &lt;&lt; "surname" &lt;&lt; "forename";
+    <a name="x2215"></a>        staffTable-&gt;<a href="qdatatable.html#setSort">setSort</a>( order );
+
+    <a name="x2214"></a>        staffTable-&gt;<a href="qdatatable.html#refresh">refresh</a>();
+            staffTable-&gt;<a href="qwidget.html#show">show</a>();
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-table2-main-cpp.html">sql/overview/table2/main.cpp</a>
+</em></p>
+</blockquote><p> 在以上代码中我们创建了一个空的<a href="qdatatable.html">QDataTable</a>，然后人工指定将显示的列，每一列我们都可以指定显示的标题。
+<p> 我们可以在表中对记录进行排序，或者也可以让设置游标让其完成排序工作。
+<p> 当所有设置工作完成后就可以调用refresh()以便从数据库中获得数据，然后调用show()使其可见。
+<p> QDataTables只接收可见的记录集（依赖于驱动程序），这样做使得即使是一张大表也可以被迅速地显示同时消耗较少的内存。
+<p> <a name="Creating_Forms"></a>
+<h3> 创建基于数据的窗体
+</h3>
+<a name="8-2"></a><p> 创建一个基于数据的窗体要比使用基于数据的窗口部件要麻烦很多，这是因为我们必须单独处理每一个数据列，以下所示的代码绝大部分都可以由<em>Qt设计器</em>所产生，相关资料可参考<em>Qt设计器</em>的用户手册。
+<p> <a name="Displaying_a_Record"></a>
+<h4> 显示记录
+</h4>
+<a name="8-2-1"></a><p> 
+
+<pre>    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include &lt;<a href="qdialog-h.html">qdialog.h</a>&gt;
+    #include &lt;<a href="qlabel-h.html">qlabel.h</a>&gt;
+    #include &lt;<a href="qlayout-h.html">qlayout.h</a>&gt;
+    #include &lt;<a href="qlineedit-h.html">qlineedit.h</a>&gt;
+    #include &lt;<a href="qsqldatabase-h.html">qsqldatabase.h</a>&gt;
+    #include &lt;<a href="qsqlcursor-h.html">qsqlcursor.h</a>&gt;
+    #include &lt;<a href="qsqlform-h.html">qsqlform.h</a>&gt;
+    #include "../login.h"
+
+    bool createConnections();
+
+    class FormDialog : public <a href="qdialog.html">QDialog</a>
+    {
+        public:
+            FormDialog();
+    };
+
+    FormDialog::FormDialog()
+    {
+        <a href="qlabel.html">QLabel</a> *forenameLabel   = new <a href="qlabel.html">QLabel</a>( "Forename:", this );
+        <a href="qlabel.html">QLabel</a> *forenameDisplay = new <a href="qlabel.html">QLabel</a>( this );
+        <a href="qlabel.html">QLabel</a> *surnameLabel    = new <a href="qlabel.html">QLabel</a>( "Surname:", this );
+        <a href="qlabel.html">QLabel</a> *surnameDisplay  = new <a href="qlabel.html">QLabel</a>( this );
+        <a href="qlabel.html">QLabel</a> *salaryLabel     = new <a href="qlabel.html">QLabel</a>( "Salary:", this );
+        <a href="qlineedit.html">QLineEdit</a> *salaryEdit   = new <a href="qlineedit.html">QLineEdit</a>( this );
+
+        <a href="qgridlayout.html">QGridLayout</a> *grid = new <a href="qgridlayout.html">QGridLayout</a>( this );
+    <a name="x2220"></a>    grid-&gt;<a href="qgridlayout.html#addWidget">addWidget</a>( forenameLabel,     0, 0 );
+        grid-&gt;<a href="qgridlayout.html#addWidget">addWidget</a>( forenameDisplay,   0, 1 );
+        grid-&gt;<a href="qgridlayout.html#addWidget">addWidget</a>( surnameLabel,      1, 0 );
+        grid-&gt;<a href="qgridlayout.html#addWidget">addWidget</a>( surnameDisplay,    1, 1 );
+        grid-&gt;<a href="qgridlayout.html#addWidget">addWidget</a>( salaryLabel,       2, 0 );
+        grid-&gt;<a href="qgridlayout.html#addWidget">addWidget</a>( salaryEdit,        2, 1 );
+    <a name="x2221"></a>    grid-&gt;<a href="qlayout.html#activate">activate</a>();
+
+        <a href="qsqlcursor.html">QSqlCursor</a> staffCursor( "staff" );
+        staffCursor.<a href="qsqlcursor.html#select">select</a>();
+        staffCursor.<a href="qsqlquery.html#next">next</a>();
+
+        <a href="qsqlform.html">QSqlForm</a> sqlForm( this );
+    <a name="x2226"></a><a name="x2222"></a>    sqlForm.<a href="qsqlform.html#setRecord">setRecord</a>( staffCursor.<a href="qsqlcursor.html#primeUpdate">primeUpdate</a>() );
+    <a name="x2224"></a>    sqlForm.<a href="qsqlform.html#insert">insert</a>( forenameDisplay, "forename" );
+        sqlForm.<a href="qsqlform.html#insert">insert</a>( surnameDisplay, "surname" );
+        sqlForm.<a href="qsqlform.html#insert">insert</a>( salaryEdit, "salary" );
+    <a name="x2225"></a>    sqlForm.<a href="qsqlform.html#readFields">readFields</a>();
+    }
+
+    int main( int argc, char *argv[] )
+    {
+        <a href="qapplication.html">QApplication</a> app( argc, argv );
+
+        if ( ! createConnections() ) return 1;
+
+        FormDialog *formDialog = new FormDialog();
+    <a name="x2219"></a>    formDialog-&gt;<a href="qdialog.html#show">show</a>();
+        app.<a href="qapplication.html#setMainWidget">setMainWidget</a>( formDialog );
+
+        return app.<a href="qapplication.html#exec">exec</a>();
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-form1-main-cpp.html">sql/overview/form1/main.cpp</a>
+</em></p>
+</blockquote><p> 我们需要引用各组件所需要的头文件，我们还加入<a href="qsqldatabase-h.html">qsqldatabase.h</a>和<a href="qsqlcursor-h.html">qsqlcursor.h</a>，同时还有<a href="qsqlform-h.html">qsqlform.h</a>。
+<p> 本窗体是以对话框形式出现的，窗体类FormDialog继承于<a href="qdialog.html">QDialog</a>。我们使用了一个<a href="qlineedit.html">QLineEdit</a>来显示薪水同时也允许用户对其进行修改。所有的组件显示在一个网格中。
+<p> 我们为staff表创建了一个游标。让它从数据库取出所有的记录并定位至第一条记录。
+<p> 现在我们创建了一个<a href="qsqlform.html">QSqlForm</a>对象并把<a href="qsqlform.html">QSqlForm</a>的记录缓冲区与游标的更新缓冲区对应起来。对于每个我们希望其数据感知的组件都把与相应的字段名结合进<a href="qsqlform.html">QSqlForm</a>，最后我们调用readFields()把游标缓冲区中的数据刷新至关联窗口部件。
+<p> <a name="Displaying_a_Record_in_a_DataForm"></a>
+<h4> 在数据窗体中显示记录
+</h4>
+<a name="8-2-2"></a><p> <a href="qdataview.html">QDataView</a>是一个可以拥有只读<a href="qsqlform.html">QSqlForm</a>。与<a href="qsqlform.html">QSqlForm</a>类似它也提供了一个槽refresh( <a href="qsqlrecord.html">QSqlRecord</a> * )，因此它可以比较容易地与<a href="qdatatable.html">QDataTable</a>连接在一起用来显示数据：
+<p> <pre>
+    connect( myDataTable, SIGNAL( currentChanged( <a href="qsqlrecord.html">QSqlRecord</a>* ) ), 
+             myDataView, SLOT( refresh( <a href="qsqlrecord.html">QSqlRecord</a>* ) ) );
+</pre>
+ 
+<p> <a name="Editing_a_Record"></a>
+<h4> 编辑记录
+</h4>
+<a name="8-2-3"></a><p> 这个实例与上述的比较相似，所以我们讨论不同部分。
+<p> 
+
+<pre>    class FormDialog : public <a href="qdialog.html">QDialog</a>
+    {
+        <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>
+        public:
+            FormDialog();
+            ~FormDialog();
+        public slots:
+            void save();
+        private:
+            <a href="qsqlcursor.html">QSqlCursor</a> staffCursor;
+            <a href="qsqlform.html">QSqlForm</a> *sqlForm;
+            <a href="qsqlindex.html">QSqlIndex</a> idIndex;
+    };
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-form2-main-h.html">sql/overview/form2/main.h</a>
+</em></p>
+</blockquote><p> 这个save槽将被用于一个按纽以便让用户进行数据刷新的确认。 我们也保存<a href="qsqlcursor.html">QSqlCursor</a>和<a href="qsqlform.html">QSqlForm</a>的指针，因为它们将需要在构造函数之外被访问。
+<p> 
+
+<pre>        staffCursor.setTrimmed( "forename", TRUE );
+        staffCursor.setTrimmed( "surname",  TRUE );
+</pre>
+<p> 我们在文本字段上调用setTrimmed()以便获取到数据的时候自动消除右面的空格。
+<p> 我们可以根据需要设置一些属性，比如对齐方式与有效性检查。相对应的函数为QLineEdit::setAlignment与QLineEdit::setValidator。 
+<p> <pre>        <a href="qlineedit.html">QLineEdit</a>   *forenameEdit  = new <a href="qlineedit.html">QLineEdit</a>( this );
+</pre>
+<p> <pre>        <a href="qpushbutton.html">QPushButton</a> *saveButton    = new <a href="qpushbutton.html">QPushButton</a>( "&amp;Save", this );
+        <a href="qobject.html#connect">connect</a>( saveButton, SIGNAL(<a href="qbutton.html#clicked">clicked</a>()), this, SLOT(save()) );
+</pre>
+<p> FormDialog的构造函数类似于先前的实例。我们更改forename与surname窗口部件的类型至QLineEdits以便使其内容可编辑。然后又加入<a href="qpushbutton.html">QPushButton</a>以便用户点击确认保存他们的更新。 
+<p> <pre>    <a name="x2229"></a>    grid-&gt;<a href="qgridlayout.html#addWidget">addWidget</a>( saveButton,    3, 0 );
+</pre>
+<p> 我们在网格中添加了一行来容纳这个save按钮。
+<p> <pre>        idIndex = staffCursor.index( "id" );
+        staffCursor.select( idIndex );
+        staffCursor.first();
+</pre>
+<p> 我们创建了一个<a href="qsqlindex.html">QSqlIndex</a>对象然后使用索引执行一个select()操作。然后定位至第一条记录。
+<p> <pre>        sqlForm = new <a href="qsqlform.html">QSqlForm</a>( this );
+    <a name="x2232"></a>    sqlForm-&gt;<a href="qsqlform.html#setRecord">setRecord</a>( staffCursor.primeUpdate() );
+</pre>
+<p> 我们创建了一个新的<a href="qsqlform.html">QSqlForm</a>对象并把它的缓冲区与游标的更新缓冲区关联起来。
+<p> <pre>    <a name="x2230"></a>    sqlForm-&gt;<a href="qsqlform.html#insert">insert</a>( forenameEdit, "forename" );
+        sqlForm-&gt;<a href="qsqlform.html#insert">insert</a>( surnameEdit, "surname" );
+        sqlForm-&gt;<a href="qsqlform.html#insert">insert</a>( salaryEdit, "salary" );
+    <a name="x2231"></a>    sqlForm-&gt;<a href="qsqlform.html#readFields">readFields</a>();
+</pre>
+<p> 现在我们把缓冲区的各个字段与<a href="qlineedit.html">QLineEdit</a>控件关联起来。（在先前的实例中我们把它与游标的各个字段相关联）。函数readFields()使得各控件获得数据。 
+<p> <pre>    FormDialog::~FormDialog()
+    {
+
+    }
+</pre>
+<p> 在析构函数中我们无需关注各控件或QSqlForm的处理，由于它们都是窗体的孩子，因此将被Qt在适当的时候清除。
+<p> <pre>    void FormDialog::save()
+    {
+    <a name="x2233"></a>    sqlForm-&gt;<a href="qsqlform.html#writeFields">writeFields</a>();
+        staffCursor.update();
+        staffCursor.select( idIndex );
+        staffCursor.first();
+    }
+</pre>
+<p> 最后我们加入了保存这一个功能，当用户点击保存按纽时该函数将被执行。最后我们调用writeFields()使得数据回写入<a href="qsqlrecord.html">QSqlRecord</a>缓冲区。然后我们利用游标的update()函数来更新数据。此后游标不再可用，因此使用<a href="qsqlindex.html">QSqlIndex</a>再次调用select()来获得数据并定位至第一条记录。
+<p> <a href="qdatabrowser.html">QDataBrowser</a>和<a href="qdataview.html">QDataView</a>这两个窗口部件提供了以上这些功能的许多函数。<a href="qdatabrowser.html">QDataBrowser</a>提供了一个数据标识来指明是否允许编辑与记录浏览。<a href="qdataview.html">QDataView</a>提供了一个数据的只读形式。相关资料可查看类文档或<em>Qt设计器</em>的手册。
+<p> 链接到<a href="sql.html">sql/overview/form2/main.cpp</a>
+<p> <a name="Custom_Editor_Widgets"></a>
+<h3> 自定义编辑器窗口部件
+</h3>
+<a name="8-3"></a><p> <a href="qsqlform.html">QSqlForm</a>使用了<a href="qsqlpropertymap.html">QSqlPropertyMap</a>来控制数据在组件与数据库字段间的传输。自定义窗口部件同样可以使用属性映射，其中包含了如何转递数据的信息。
+<p> 本实例基于前述的form2实例。因此这里只讲述不同部分，完整源码在<a href="sql-overview-custom1-main-h.html">sql/overview/custom1/main.h</a>和<a href="sql-overview-custom1-main-cpp.html">sql/overview/custom1/main.cpp</a>
+<p> 
+
+<pre>    class CustomEdit : public <a href="qlineedit.html">QLineEdit</a>
+    {
+        Q_OBJECT
+        Q_PROPERTY( QString upperLine READ upperLine WRITE setUpperLine )
+        public:
+            CustomEdit( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+            <a href="qstring.html">QString</a> upperLine() const;
+            void setUpperLine( const <a href="qstring.html">QString</a> &amp;line );
+        public slots:
+            void changed( const <a href="qstring.html">QString</a> &amp;line );
+        private:
+            <a href="qstring.html">QString</a> upperLineText;
+    };
+</pre>
+<p> 我们从<a href="qlineedit.html">QLineEdit</a>这儿继承了一个类，加入了属性：upperLineText，以便其中存放字符串的大写。加入一个changed槽。
+<p> <pre>            <a href="qsqlpropertymap.html">QSqlPropertyMap</a> *propMap;
+</pre>
+<p> 由于我们将使用属性映射因此我们把属性映射的指针与FormDialog的私有数据关联起来。
+<p> 
+
+<pre>    CustomEdit::CustomEdit( <a href="qwidget.html">QWidget</a> *parent, const char *name ) :
+        <a href="qlineedit.html">QLineEdit</a>( parent, name )
+    {
+        <a href="qobject.html#connect">connect</a>( this, SIGNAL(<a href="qlineedit.html#textChanged">textChanged</a>(const <a href="qstring.html">QString</a> &amp;)),
+                 this, SLOT(changed(const <a href="qstring.html">QString</a> &amp;)) );
+    }
+</pre>
+<p> 在CustomEdit的构造函数中，我们执行了QLineEdit的构造函数，然后在textChanged信号与changed槽之间建立了连接。
+<p> <pre>    void CustomEdit::changed( const <a href="qstring.html">QString</a> &amp;line )
+    {
+        setUpperLine( line );
+    }
+</pre>
+<p> changed()槽调用setUpperLine()这个函数。 
+<p> <pre>    void CustomEdit::setUpperLine( const <a href="qstring.html">QString</a> &amp;line )
+    {
+    <a name="x2239"></a>    upperLineText = line.<a href="qstring.html#upper">upper</a>();
+        setText( upperLineText );
+    }
+</pre>
+<p> setUpperLine()函数将对文本进行处理以获得一份大写后的拷贝并把它设置成窗口部件的数据。
+<p> 我们的CustomEdit类确保输入的数据始终是大写并提供了一个属性以便在属性映射中使用，使得CustomEdit的实例可与数据库字段相连。 
+<p> <pre>        CustomEdit  *forenameEdit   = new CustomEdit( this );
+</pre>
+<p> <pre>        CustomEdit  *surnameEdit    = new CustomEdit( this );
+</pre>
+<p> 我们使用先前用过的FormDialog，只是这一次我们把原先使用的<a href="qlineedit.html">QLineEdit</a>窗口部件替换成自己的CustomEdit窗口部件。
+<p> 在网格中的分布以及游标的设置与先前相同。
+<p> <pre>        propMap = new <a href="qsqlpropertymap.html">QSqlPropertyMap</a>;
+    <a name="x2238"></a><a name="x2234"></a>    propMap-&gt;<a href="qsqlpropertymap.html#insert">insert</a>( forenameEdit-&gt;<a href="qobject.html#className">className</a>(), "upperLine" );
+</pre>
+<p> 我们在堆中建立一个新的属性映射，注册CustomEdit类并把upperLine属性关联进属性映射。 
+<p> <pre>        sqlForm = new <a href="qsqlform.html">QSqlForm</a>( this );
+    <a name="x2237"></a><a name="x2235"></a>    sqlForm-&gt;<a href="qsqlform.html#setRecord">setRecord</a>( staffCursor-&gt;<a href="qsqlcursor.html#primeUpdate">primeUpdate</a>() );
+    <a name="x2236"></a>    sqlForm-&gt;<a href="qsqlform.html#installPropertyMap">installPropertyMap</a>( propMap );
+</pre>
+<p> 最后的变化是把属性映射装入<a href="qsqlform.html">QSqlForm</a>，这样可把属性映射的内存加载入QSqlForm，由于QSqlForm属于FormDialog，因此Qt将在适当的时候删除它们。
+<p> 这个实例与前述实例其本相同，例外的是forename与surname字段由于使用了自定义的CustomEdit窗口部件因此它们都将被大写。
+<p> <a name="Custom_Editor_Widgets_for_Tables"></a>
+<h4> 为表格自定义编辑器窗口部件
+</h4>
+<a name="8-3-1"></a><p> 我们必须重新实现<a href="qsqleditorfactory.html">QSqlEditorFactory</a>以便使用自定义编辑器窗口部件。在下面的实例中我们将以<a href="qcombobox.html">QComboBox</a>为基类创建自定义窗口部件件并定重载QSqlEditorFactory以便在<a href="qdatatable.html">QDataTable</a>使用自定义窗口部件。 
+<p> 
+
+<pre>    class StatusPicker : public <a href="qcombobox.html">QComboBox</a>
+    {
+        Q_OBJECT
+        Q_PROPERTY( int statusid READ statusId WRITE setStatusId )
+        public:
+            StatusPicker( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+            int statusId() const;
+            void setStatusId( int id );
+        private:
+            <a href="qmap.html">QMap</a>&lt; int, int &gt; index2id;
+    };
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-table3-main-h.html">sql/overview/table3/main.h</a>
+</em></p>
+</blockquote><p> 我们创建了一个属性：statusid，定义了它的读取与写入的方法，由于statusid并不与combobox的索引对应因此我们创建了一个<a href="qmap.html">QMap</a>以映射combobox的索引与statusid的关系。 
+<p> <pre>    class CustomSqlEditorFactory : public <a href="qsqleditorfactory.html">QSqlEditorFactory</a>
+    {
+        Q_OBJECT
+        public:
+            <a href="qwidget.html">QWidget</a> *createEditor( <a href="qwidget.html">QWidget</a> *parent, const <a href="qsqlfield.html">QSqlField</a> *field );
+    };
+</pre>
+<p> 我们同样需要继承<a href="qsqleditorfactory.html">QSqlEditorFactory</a>，声明一个createEditor()函数，该函数是我们唯一需要重新实现的。
+<p> 
+
+<pre>    StatusPicker::StatusPicker( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qcombobox.html">QComboBox</a>( parent, name )
+    {
+        <a href="qsqlcursor.html">QSqlCursor</a> cur( "status" );
+    <a name="x2241"></a><a name="x2240"></a>    cur.<a href="qsqlcursor.html#select">select</a>( cur.<a href="qsqlcursor.html#index">index</a>( "name" ) );
+
+        int i = 0;
+        while ( cur.<a href="qsqlquery.html#next">next</a>() ) {
+    <a name="x2242"></a>        <a href="qcombobox.html#insertItem">insertItem</a>( cur.<a href="qsqlquery.html#value">value</a>( "name" ).toString(), i );
+            index2id[i] = cur.<a href="qsqlquery.html#value">value</a>( "id" ).toInt();
+            i++;
+        }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-table3-main-cpp.html">sql/overview/table3/main.cpp</a>
+</em></p>
+</blockquote><p> 在StatusPicker的构造函数中我们创建了一个游标，遍历整个记录集把每一个name插入combobox，同时通过<a href="qmap.html">QMap</a>型的变量index2id把combobox的索引与id列的值关联起来。
+<p> <pre>    int StatusPicker::statusId() const
+    {
+        return index2id[ currentItem() ];
+    }
+</pre>
+<p> statusid的读取函数只是简单地利用combobox的索引从index2id中取值。 
+<p> <pre>    void StatusPicker::setStatusId( int statusid )
+    {
+        QMap&lt;int,int&gt;::Iterator it;
+        for ( it = index2id.begin(); it != index2id.end(); ++it ) {
+            if ( it.data() == statusid ) {
+                setCurrentItem( it.key() );
+                break;
+            }
+        }
+    }
+</pre>
+<p> statusId()函数实现statusid的定入方法。我们创建了一个迭代器遍历整个QMap，取出其中的数据如果有与statusid相等的就把combobox的索引设成statusid对应的索引，然后离开循环。
+<p> 当用户在<a href="qdatatable.html">QDataTable</a>中编辑status字段时，就有一个combobox出现以便用户选值。为了不编辑的时候在表中显示status的名称我们需要继承QDataTable并重新实现paintField()函数。 
+<p> 
+
+<pre>    class CustomTable : public <a href="qdatatable.html">QDataTable</a>
+    {
+        Q_OBJECT
+    public:
+        CustomTable(
+                <a href="qsqlcursor.html">QSqlCursor</a> *cursor, bool autoPopulate = FALSE,
+                <a href="qwidget.html">QWidget</a> * parent = 0, const char * name = 0 ) :
+            <a href="qdatatable.html">QDataTable</a>( cursor, autoPopulate, parent, name ) {}
+        void paintField(
+                <a href="qpainter.html">QPainter</a> * p, const <a href="qsqlfield.html">QSqlField</a>* field, const <a href="qrect.html">QRect</a> &amp; cr, bool );
+
+    };
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-table4-main-h.html">sql/overview/table4/main.h</a>
+</em></p>
+</blockquote><p> 我们只需简单地调用<a href="qdatatable.html">QDataTable</a>的原始构造函数而不需做任何改动。同时还声明了paintField函数。
+<p> 
+
+<pre>    <a name="x2244"></a>void CustomTable::<a href="qdatatable.html#paintField">paintField</a>( <a href="qpainter.html">QPainter</a> * p, const <a href="qsqlfield.html">QSqlField</a>* field,
+                                  const <a href="qrect.html">QRect</a> &amp; cr, bool b)
+    {
+        if ( !field )
+            return;
+    <a name="x2248"></a>    if ( field-&gt;<a href="qsqlfield.html#name">name</a>() == "statusid" ) {
+            <a href="qsqlquery.html">QSqlQuery</a> query( "SELECT name FROM status WHERE id=" +
+    <a name="x2249"></a>                     field-&gt;<a href="qsqlfield.html#value">value</a>().toString() );
+            <a href="qstring.html">QString</a> text;
+            if ( query.<a href="qsqlquery.html#next">next</a>() ) {
+                text = query.<a href="qsqlquery.html#value">value</a>( 0 ).toString();
+            }
+            p-&gt;<a href="qpainter.html#drawText">drawText</a>( 2,2, cr.<a href="qrect.html#width">width</a>()-4, cr.<a href="qrect.html#height">height</a>()-4, fieldAlignment( field ), text );
+        }
+        else {
+            QDataTable::<a href="qdatatable.html#paintField">paintField</a>( p, field, cr, b) ;
+        }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-table4-main-cpp.html">sql/overview/table4/main.cpp</a>
+</em></p>
+</blockquote><p> paintField函数的代码基于<a href="qdatatable.html">QDataTable</a>中的源码。我们需要做三个改动，首先加入一个if语句：<tt>field-&gt;name() == "statusid"</tt>，此情况下使用<a href="qsqlquery.html">QSqlQuery</a>获得数据。 其次为其他字段调用基类函数。最后的变化是在主函数staffTable由QDataTable改为自定义的CustomTable。 
+<p> <a name="Subclassing_QSqlCursor"></a>
+<h2> 继承<a href="qsqlcursor.html">QSqlCursor</a>
+</h2>
+<a name="9"></a><p> 
+
+<pre>    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include &lt;<a href="qsqldatabase-h.html">qsqldatabase.h</a>&gt;
+    #include &lt;<a href="qsqlcursor-h.html">qsqlcursor.h</a>&gt;
+    #include &lt;<a href="qdatatable-h.html">qdatatable.h</a>&gt;
+    #include "../login.h"
+
+    bool createConnections();
+
+    int main( int argc, char *argv[] )
+    {
+        <a href="qapplication.html">QApplication</a> app( argc, argv );
+
+        if ( createConnections() ) {
+            <a href="qsqlcursor.html">QSqlCursor</a> invoiceItemCursor( "invoiceitem" );
+
+            <a href="qdatatable.html">QDataTable</a> *invoiceItemTable = new <a href="qdatatable.html">QDataTable</a>( &amp;invoiceItemCursor );
+
+            app.<a href="qapplication.html#setMainWidget">setMainWidget</a>( invoiceItemTable );
+
+    <a name="x2254"></a>        invoiceItemTable-&gt;<a href="qdatatable.html#addColumn">addColumn</a>( "pricesid", "PriceID" );
+            invoiceItemTable-&gt;<a href="qdatatable.html#addColumn">addColumn</a>( "quantity", "Quantity" );
+            invoiceItemTable-&gt;<a href="qdatatable.html#addColumn">addColumn</a>( "paiddate", "Paid" );
+
+    <a name="x2255"></a>        invoiceItemTable-&gt;<a href="qdatatable.html#refresh">refresh</a>();
+            invoiceItemTable-&gt;<a href="qwidget.html#show">show</a>();
+
+            return app.<a href="qapplication.html#exec">exec</a>();
+        }
+
+        return 1;
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-subclass1-main-cpp.html">sql/overview/subclass1/main.cpp</a>
+</em></p>
+</blockquote><p> 这个实例与前述的table1实例很相似。我们创建了一个游标，在<a href="qdatatable.html">QDataTable</a>中加入字段与对应的标题。调用refresh()获取数据，再执行show()来显示组件。
+<p> 不幸的是这个实例并不完整，在设置时我们需要输入每一个字段，这是一个单调的工作。如果在显示价格代码的时候显示产品名牌可能会更合适一些。既然我们知道产品的价格与数量我们还可以显示产品的花费。最后如果能填入默认值（或者是一些主键）将更加实用 。 
+<p> 
+
+<pre>    class InvoiceItemCursor : public <a href="qsqlcursor.html">QSqlCursor</a>
+    {
+        public:
+            InvoiceItemCursor();
+    };
+    
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-subclass2-main-h.html">sql/overview/subclass2/main.h</a>
+</em></p>
+</blockquote><p> 我们创建了一个单独的头文件并继承了<a href="qsqlcursor.html">QSqlCursor</a>。
+<p> 
+
+<pre>    InvoiceItemCursor::InvoiceItemCursor() :
+        <a href="qsqlcursor.html">QSqlCursor</a>( "invoiceitem" )
+    {
+        // 空操作
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-subclass2-main-cpp.html">sql/overview/subclass2/main.cpp</a>
+</em></p>
+</blockquote><p> 在继承类的构造函数中我们仅仅调用了QSqlCursor的构造函数。
+<p> <pre>            InvoiceItemCursor invoiceItemCursor;
+</pre>
+<p> 当我们需要在invoiceitem表上使用的游标时我们可以创建InvoiceItemCursor而还是常用的QSqlCursor。
+<p> 我们仍需要显示产品的名称而不是价格代码。 
+<p> 
+
+<pre>        protected:
+            <a href="qvariant.html">QVariant</a> calculateField( const <a href="qstring.html">QString</a> &amp; name );
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-subclass3-main-h.html">sql/overview/subclass3/main.h</a>
+</em></p>
+</blockquote><p> 在头文件中的改动很小：我们简单地加入calculateField()以便重新实现。
+<p> 
+
+<pre>    InvoiceItemCursor::InvoiceItemCursor() :
+        <a href="qsqlcursor.html">QSqlCursor</a>( "invoiceitem" )
+    {
+        <a href="qsqlfieldinfo.html">QSqlFieldInfo</a> productName( "productname", QVariant::String );
+        <a href="qsqlcursor.html#append">append</a>( productName );
+    <a name="x2259"></a>    <a href="qsqlcursor.html#setCalculated">setCalculated</a>( productName.<a href="qsqlfieldinfo.html#name">name</a>(), TRUE );
+    }
+
+    <a name="x2258"></a>QVariant InvoiceItemCursor::<a href="qsqlcursor.html#calculateField">calculateField</a>( const <a href="qstring.html">QString</a> &amp; name )
+    {
+        if ( name == "productname" ) {
+            <a href="qsqlquery.html">QSqlQuery</a> query( "SELECT name FROM prices WHERE id=" +
+                         <a href="qsqlrecord.html#field">field</a>( "pricesid" )-&gt;value().toString() + ";" );
+    <a name="x2260"></a>        if ( query.<a href="qsqlquery.html#next">next</a>() )
+    <a name="x2261"></a>            return query.<a href="qsqlquery.html#value">value</a>( 0 );
+        }
+
+        return QVariant( <a href="qstring.html#QString-null">QString::null</a> );
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-subclass3-main-cpp.html">sql/overview/subclass3/main.cpp</a>
+</em></p>
+</blockquote><p> 我们已更改了InvoiceItemCursor的构造函数，我们创建了一个<a href="qsqlfield.html">QSqlField</a>的对象productname，然后把它加入 InvoiceItemCursor的字段集。我们在productname上调用setCalculated()使其成为一个计算字段。在setCalculated()中第一个参数是字段名，第二个参数是一个布尔参数，当其为TRUE时意味着calculateField()必须被调用以获得字段的值。 
+<p> <pre>    <a name="x2257"></a>        invoiceItemTable-&gt;<a href="qdatatable.html#addColumn">addColumn</a>( "productname", "Product" );
+</pre>
+<p> 我们调用addColumn()来加入一个字段并指定显示名称。
+<p> 我们必须定义自己的calculateField()函数。在我们的实例数据库中，invoiceitem表内价格代码（pricesid）是价格表的一个外键，我们使用pricesid在价格表中执行Sql语句以获得产品名称。
+<p> 现在我们可以扩展实例，包括进一个计算字段并执行真正的计算工作。
+<p> 头文件<a href="sql-overview-subclass4-main-h.html">sql/overview/subclass4/main.h</a>与前述实例一样。但构造函数与calculateField()函数需要一些简单扩展。我们来逐行地看一下。
+<p> 
+
+<pre>    InvoiceItemCursor::InvoiceItemCursor() :
+        <a href="qsqlcursor.html">QSqlCursor</a>( "invoiceitem" )
+    {
+        <a href="qsqlfieldinfo.html">QSqlFieldInfo</a> productName( "productname", QVariant::String );
+        <a href="qsqlcursor.html#append">append</a>( productName );
+    <a name="x2263"></a>    <a href="qsqlcursor.html#setCalculated">setCalculated</a>( productName.<a href="qsqlfieldinfo.html#name">name</a>(), TRUE );
+
+        <a href="qsqlfieldinfo.html">QSqlFieldInfo</a> productPrice( "price", QVariant::Double );
+        <a href="qsqlcursor.html#append">append</a>( productPrice );
+        <a href="qsqlcursor.html#setCalculated">setCalculated</a>( productPrice.<a href="qsqlfieldinfo.html#name">name</a>(), TRUE );
+
+        <a href="qsqlfieldinfo.html">QSqlFieldInfo</a> productCost( "cost", QVariant::Double );
+        <a href="qsqlcursor.html#append">append</a>( productCost );
+        <a href="qsqlcursor.html#setCalculated">setCalculated</a>( productCost.<a href="qsqlfieldinfo.html#name">name</a>(), TRUE );
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-subclass4-main-cpp.html">sql/overview/subclass4/main.cpp</a>
+</em></p>
+</blockquote><p> 我们创建了两个额外的字段：价格price与花费cost。把它们加入游标中字段集，此两个都通过调用setCalculated()被注册成为计算字段。
+<p> <pre>    <a name="x2262"></a>QVariant InvoiceItemCursor::<a href="qsqlcursor.html#calculateField">calculateField</a>( const <a href="qstring.html">QString</a> &amp; name )
+    {
+
+        if ( name == "productname" ) {
+            <a href="qsqlquery.html">QSqlQuery</a> query( "SELECT name FROM prices WHERE id=" +
+                         <a href="qsqlrecord.html#field">field</a>( "pricesid" )-&gt;value().toString() + ";" );
+    <a name="x2264"></a>        if ( query.<a href="qsqlquery.html#next">next</a>() )
+    <a name="x2265"></a>            return query.<a href="qsqlquery.html#value">value</a>( 0 );
+        }
+        else if ( name == "price" ) {
+            <a href="qsqlquery.html">QSqlQuery</a> query( "SELECT price FROM prices WHERE id=" +
+                         <a href="qsqlrecord.html#field">field</a>( "pricesid" )-&gt;value().toString() + ";" );
+            if ( query.<a href="qsqlquery.html#next">next</a>() )
+                return query.<a href="qsqlquery.html#value">value</a>( 0 );
+        }
+        else if ( name == "cost" ) {
+            <a href="qsqlquery.html">QSqlQuery</a> query( "SELECT price FROM prices WHERE id=" +
+                         <a href="qsqlrecord.html#field">field</a>( "pricesid" )-&gt;value().toString() + ";" );
+            if ( query.<a href="qsqlquery.html#next">next</a>() )
+                return QVariant( query.<a href="qsqlquery.html#value">value</a>( 0 ).toDouble() *
+                                 <a href="qsqlquery.html#value">value</a>( "quantity").toDouble() );
+        }
+
+        return QVariant( QString::null );
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-subclass4-main-cpp.html">sql/overview/subclass4/main.cpp</a>
+</em></p>
+</blockquote><p> calculateField()函数的内容进行了一些增加，因为我们必须计算三个字段。productname与price字段是通过价格代码pricesid被选出来的。cost字段是计算出来的：价格与数量的乘积。请注意cost字段是以<a href="qvariant.html">QVariant</a>类型返回的，这是calculateField()函数所要求的。
+<p> 我们使用了三个独立的查询而不是一个，这使得应用程序更为真实就好象它们是从三个不同的表或视图中取得的一样。
+<p> 最后一个特征是当用户插入一条新记录时我们为它加入默认值。
+<p> 
+
+<pre>            <a href="qsqlrecord.html">QSqlRecord</a> *primeInsert();
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-subclass5-main-h.html">sql/overview/subclass5/main.h</a>
+</em></p>
+</blockquote><p> 我们申明了自已的primeInsert()函数以便重新实现。
+<p> 构造函数与calculateField()函数没有变化。 
+<p> 
+
+<pre>    <a name="x2266"></a>QSqlRecord *InvoiceItemCursor::<a href="qsqlcursor.html#primeInsert">primeInsert</a>()
+    {
+        <a href="qsqlrecord.html">QSqlRecord</a> *buffer = <a href="qsqlcursor.html#editBuffer">editBuffer</a>();
+        <a href="qsqlquery.html">QSqlQuery</a> query( "SELECT NEXTVAL( 'invoiceitem_seq' );" );
+    <a name="x2267"></a>    if ( query.<a href="qsqlquery.html#next">next</a>() )
+    <a name="x2269"></a><a name="x2268"></a>        buffer-&gt;<a href="qsqlrecord.html#setValue">setValue</a>( "id", query.<a href="qsqlquery.html#value">value</a>( 0 ) );
+        buffer-&gt;<a href="qsqlrecord.html#setValue">setValue</a>( "paiddate", QDate::currentDate() );
+        buffer-&gt;<a href="qsqlrecord.html#setValue">setValue</a>( "quantity", 1 );
+
+        return buffer;
+    }
+</pre><blockquote><p align="center"><em> 来自<a href="sql-overview-subclass5-main-cpp.html">sql/overview/subclass5/main.cpp</a>
+</em></p>
+</blockquote><p> 我们取得了一个指向可编辑缓冲区的指针以便游标用来插入与更新。字段id是一个用invoiceitem_seq产生的唯一整形，字段paiddate则默认为今天的日期。数量默认为1。最后我们返回一个指向该缓冲区的指针。余下的代码与前述实例没有区别。 
+<p> <a name="Example_Tables"></a>
+<h2> 实例表
+</h2>
+<a name="10"></a><p> 所使用的实例表可以用以下标准SQL语句产生，你可能需要改变数据库名称以便与你所使用的匹配。
+<p> <pre>
+create table people (id integer primary key, name char(40))
+
+create table staff (id integer primary key, forename char(40),
+                    surname char(40), salary float, statusid integer)
+
+create table status (id integer primary key, name char(30))
+
+create table creditors (id integer primary key, forename char(40),
+                        surname char(40), city char(30))
+
+create table prices (id integer primary key, name char(40), price float)
+
+create table invoiceitem (id integer primary key, 
+                          pricesid integer, quantity integer,
+                          paiddate date)
+</pre>
+  
+<p> 在以上的calculateField()实例中使用了一个顺序（sequence），请注意并不是所有的数据库都支持它。 
+<p> <pre>
+create sequence invoiceitem_seq
+</pre>
+ 
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

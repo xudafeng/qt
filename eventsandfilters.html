@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Translator" content="Blueneno">
+
+<title>事件和事件过滤器</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>事件和事件过滤器</h1>
+
+ 
+<p> 在Qt里，一个事件是继承自<a href="qevent.html">QEvent</a>的对象。事件通过调用<A href="qobject.html#event">QObject::event</A>()，被发送到继承自 <a href="qobject.html">QObject</a> 的对象。事件发送就是一个事件已经产生，由 <a href="qevent.html">QEvent</a>正好去表达，且<a href="qobject.html">QObject</a> 需要去回应。多数事件针对 <a href="qwidget.html">QWidget</a>和他的子类的，此外还有些不和图形相关的重要事件，比如，套接字激活，——某种被用于<a href="qsocketnotifier.html">QSocketNotifier</a>运作的事件。
+<p> 某些事件来自窗口系统，如<a href="qmouseevent.html">QMouseEvent</a>，某些来自其他源头，如<a href="qtimerevent.html">QTimerEvent</a>，而某些来自应用程序。Qt一视同仁，因此像通常一样，你可以准确地发送事件，这和Qt自己的事件循环所作的方式一样。
+<p> 多数事件类型具有特定的类，最常见的<a href="qresizeevent.html">QResizeEvent</a>、<a href="qpaintevent.html">QPaintEvent</a>、<a href="qmouseevent.html">QMouseEvent</a>、<a href="qkeyevent.html">QKeyEvent</a>和<a href="qcloseevent.html">QCloseEvent</a>。有很多别的，差不多40种左右，但大都是相当零碎。
+<p> 每个类派生自<a href="qevent.html">QEvent</a>且添加事件特定的函数；例如，<a href="qresizeevent.html">QResizeEvent</a>。在<a href="qresizeevent.html">QResizeEvent</a>中，就被加入了<a href="qresizeevent.html#size">QResizeEvent::size</a>()和<a href="qresizeevent.html#oldSize">QResizeEvent::oldSize</a>()。
+<p> 某些类支持多种事件类型。<a href="qmouseevent.html">QMouseEvent</a>支持鼠标移动、按压、粘滞按压、拖拽、点击、右按压，等等。
+<p> 因为程序需要在多变且复杂的方式下作用，Qt的事件派发机制就是灵活的。<a href="qapplication.html#notify">QApplication::notify</a>() 的文档扼要地叙述其整个来龙去脉，我们揭示在这里的内容满足99％的应用。
+<p> 对于事件去被派发的正常的办法是调用一个虚拟函数。如，<a href="qpaintevent.html">QPaintEvent</a>通过调用<a href="qwidget.html#paintEvent">QWidget::paintEvent</a>()被使用。这个虚拟函数负责引起适当的响应，一般是重画窗口部件。
+<p> 有时，并不存在一个特定事件函数，或者特定事件功能不足。最普通的例如按下tab键。正常情况下，被<a href="qwidget.html">QWidget</a>看成是去移动 <a href="focus.html#keyboard-focus">键盘焦点</a>，但少数窗口部件 需要自行解释。
+<p> 这些对象能重新实现<a href="qobject.html#event">QObject::event</a>()，按常规事件处理，以及要么在通常的处理之前，或之后处理，或完全重写。一个与众不同的的窗口部件，它解释了tab，也含有一个该应用特定的可能包含的自定制事件：
+<p> <pre>
+  bool MyClass:event( <a href="qevent.html">QEvent</a> * e ) {
+      if ( e-&gt;<a href="qevent.html#type">type</a>() == QEvent::KeyPress ) {
+          <a href="qkeyevent.html">QKeyEvent</a> * ke = (QKeyEvent*) e;
+          if ( ke-&gt;<a href="qkeyevent.html#key">key</a>() == Key_Tab ) {
+              // 这里是特定的tab处理
+              k-&gt;accept();
+              return TRUE;
+          }
+      } else if ( e-&gt;<a href="qevent.html#type">type</a>() &gt;= QEvent::User ) {
+          <a href="qcustomevent.html">QCustomEvent</a> * c = (QCustomEvent*) e;
+          // 这里是自定义事件处理
+          return TRUE;
+      }
+      QWidget::<a href="qwidget.html#event">event</a>( e );
+  }
+</pre>
+ 
+<p> 更一般的，一个对象需要去考虑其它的事件。Qt用<a href="qobject.html#installEventFilter">QObject::installEventFilter</a>()支持这个目的（相应的有移除）。如，对话框通常要为某些窗口部件去过滤按键，比如，去修改Return键的处理。
+<p> 一个事件过滤器在目标对象处理之前得以去处理事件。过滤器的<a href="qobject.html#eventFilter">QObject::eventFilter</a>()实现被调用，它可以接受或丢弃过滤，也可容许或拒绝进一步去处理事件。如果所有的事件过滤器允许进一步的处理事件，事件自己就被送达目标对象。如果它们之一停止处理，目标和任何后面的事件过滤器根本就对该事件一无所知了。
+<p> 整个应用程序中过滤所有的事件也是可能的，通过在<a href="qapplication.html">QApplication</a>上安装一个事件过滤器。这里有<a href="qtooltip.html">QToolTip</a>为了处理全部鼠标和键盘行为的实作。这个功能相当强大，但其在整个应用中也拖慢了每单个事件的派送，因此最好避免这种应用方式。
+<p> 全局事件过滤器在对象特定的过滤器前被调用。
+<p> 许多应用程序都要创建和发送他们自己的事件。
+<p> 创建一种内置类型的事件是非常简单的：创建一个相应的类型的对象，然后调用<a href="qapplication.html#sendEvent">QApplication::sendEvent</a>()或者<a href="qapplication.html#postEvent">QApplication::postEvent</a>()。
+<p> sendEvent() 立即处理事件——当sendEvent()	返回，（事件过滤器和）对象已经处理过事件了。对于很多事件类，调用isAccepted()函数，他告知你该事件能否被目前调用的处理者所接受或者拒绝。
+<p> postEvent()投送事件于一个队列，以使能延迟派发。在下次Qt的主事件循环运行，他派发全部事件，带有些优化。举例，若有数个resize事件，它们就被压缩到一个。对于paint事件同样如此：<a href="qwidget.html#update">QWidget::update</a>()调用 postEvent()，最小化闪屏和避免多次重画，以增加速度。
+<p> postEvent()在对象初始化期间常常被使用，因为在对象完成初始化后，投送的消息会被很快派发。
+<p> 去创建一个自定义类型的事件，你需要定义一个事件号，其必须大于<a href="qevent.html#Type-enum">QEvent::User</a>，可能你也需要从<a href="qcustomevent.html">QCustomEvent</a>去派生，为了传递有关你的自定义事件的特性。看<a href="qcustomevent.html">QCustomEvent</a>的文档了解细节。
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Blueneno</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>
+

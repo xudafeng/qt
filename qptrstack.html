@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QPtrStack类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QPtrStack类参考</h1>
+
+<p>QPtrQueue类是一个提供栈的模板类。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qptrstack-h.html">qptrstack.h</a>&gt;</tt>
+<p><a href="qptrstack-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QPtrStack"><b>QPtrStack</b></a> ()</div></li>
+<li><div class=fn><a href="#QPtrStack-2"><b>QPtrStack</b></a> ( const&nbsp;QPtrStack&lt;type&gt;&nbsp;&amp;&nbsp;s )</div></li>
+<li><div class=fn><a href="#~QPtrStack"><b>~QPtrStack</b></a> ()</div></li>
+<li><div class=fn>QPtrStack&lt;type&gt; &amp; <a href="#operator-eq"><b>operator=</b></a> ( const&nbsp;QPtrStack&lt;type&gt;&nbsp;&amp;&nbsp;s )</div></li>
+<li><div class=fn>bool <a href="#autoDelete"><b>autoDelete</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setAutoDelete"><b>setAutoDelete</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>uint <a href="#count"><b>count</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isEmpty"><b>isEmpty</b></a> () const</div></li>
+<li><div class=fn>void <a href="#push"><b>push</b></a> ( const&nbsp;type&nbsp;*&nbsp;d )</div></li>
+<li><div class=fn>type * <a href="#pop"><b>pop</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#remove"><b>remove</b></a> ()</div></li>
+<li><div class=fn>void <a href="#clear"><b>clear</b></a> ()</div></li>
+<li><div class=fn>type * <a href="#top"><b>top</b></a> () const</div></li>
+<li><div class=fn><a href="#operator-type-*"><b>operator type *</b></a> () const</div></li>
+<li><div class=fn>type * <a href="#current"><b>current</b></a> () const</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual QDataStream &amp; <a href="#read"><b>read</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, QPtrCollection::Item&nbsp;&amp;&nbsp;item )</div></li>
+<li><div class=fn>virtual QDataStream &amp; <a href="#write"><b>write</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, QPtrCollection::Item&nbsp;item ) const</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QPtrQueue类是一个提供栈的模板类。
+<p> 
+<p> <a href="qvaluestack.html">QValueStack</a>是可以替代这个类的的一个可兼容STL的的选择。
+<p> <p> 定义一个模板实例QPtrStack&lt;X&gt;就创建了一个操作X（X*）指针的队列。
+<p> 栈就是后进先出的结构。可以通过<a href="#push">push</a>()把项添加到栈的顶端并且可以通过<a href="#pop">pop</a>()可以重新获得顶端的项。使用<a href="#top">top</a>()可以得到栈的顶端元素的应用而不改变它。
+<p> 你可以用<a href="#setAutoDelete">setAutoDelete</a>()来控制栈删除策略。
+<p> <p> 为了兼容<a href="qptrcollection.html">QPtrCollection</a>类，<a href="#current">current</a>()和<a href="#remove">remove</a>()都被提供，两个都基于top()操作。
+<p> <p>也可以参考<a href="qptrlist.html">QPtrList</a>、<a href="qptrqueue.html">QPtrQueue</a>和<a href="tools.html">非GUI类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QPtrStack"></a>QPtrStack::QPtrStack ()
+</h3> 
+创建一个空栈。
+
+<h3 class=fn><a name="QPtrStack-2"></a>QPtrStack::QPtrStack ( const&nbsp;<a href="qptrstack.html">QPtrStack</a>&lt;type&gt;&nbsp;&amp;&nbsp;s )
+</h3> 
+通过<a href="shclass.html#shallow-copy">浅复制</a>另一个栈<em>s</em>来构造一个栈。
+
+<h3 class=fn><a name="~QPtrStack"></a>QPtrStack::~QPtrStack ()
+</h3> 
+销毁这个栈。如果<a href="#autoDelete">autoDelete</a>()为真，栈中的项被删除。
+
+<h3 class=fn>bool <a name="autoDelete"></a>QPtrStack::autoDelete () const
+</h3> 
+<p> 和<a href="qptrcollection.html#autoDelete">QPtrCollection::autoDelete</a>()相同。
+<p> <p>也可以参考<a href="#setAutoDelete">setAutoDelete</a>()。
+
+<h3 class=fn>void <a name="clear"></a>QPtrStack::clear ()
+</h3> 
+从栈中移除所有项，并且如果<a href="#autoDelete">autoDelete</a>()为真，就删除它们。
+<p> <p>也可以参考<a href="#remove">remove</a>()。
+
+<h3 class=fn>uint <a name="count"></a>QPtrStack::count () const
+</h3> 
+返回栈中项的数量。
+<p> <p>也可以参考<a href="#isEmpty">isEmpty</a>()。
+
+<h3 class=fn>type * <a name="current"></a>QPtrStack::current () const
+</h3> 
+返回栈中顶端元素的引用（最近被放入的）。栈不被改变。
+
+<h3 class=fn>bool <a name="isEmpty"></a>QPtrStack::isEmpty () const
+</h3> 
+如果栈没有任何元素可以被<a href="#pop">弹出</a>，返回真，否则返回假。
+
+<h3 class=fn><a name="operator-type-*"></a>QPtrStack::operator type * () const
+</h3> 
+返回栈中顶端元素的引用（最近被放入的）。栈不被改变。
+
+<h3 class=fn><a href="qptrstack.html">QPtrStack</a>&lt;type&gt;&nbsp;&amp; <a name="operator-eq"></a>QPtrStack::operator= ( const&nbsp;<a href="qptrstack.html">QPtrStack</a>&lt;type&gt;&nbsp;&amp;&nbsp;s )
+</h3> 
+通过给另一个栈<em>s</em>做<a href="shclass.html#shallow-copy">浅复制</a>来设置这个栈的内容。如果<a href="#autoDelete">autoDelete</a>()设置为真，这个栈当前的元素将被删除。
+
+<h3 class=fn>type * <a name="pop"></a>QPtrStack::pop ()
+</h3> 
+从栈中删除顶端项并且返回它。
+
+<h3 class=fn>void <a name="push"></a>QPtrStack::push ( const&nbsp;type&nbsp;*&nbsp;d )
+</h3> 
+把元素<em>d</em>添加到栈的顶端。后进先出。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="read"></a>QPtrStack::read ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, <a href="qptrcollection.html#Item">QPtrCollection::Item</a>&nbsp;&amp;&nbsp;item )<tt> [virtual protected]</tt>
+</h3>
+<p> 从流<em>s</em>中读取一个栈项<em>item</em>并且返回流的引用。
+<p> 默认实现是设置<em>item</em>为0。
+<p> <p>也可以参考<a href="#write">write</a>()。
+
+<h3 class=fn>bool <a name="remove"></a>QPtrStack::remove ()
+</h3> 
+从栈中移除顶端项并且如果<a href="#autoDelete">autoDelete</a>()为真就删除它。如果有元素可以弹出，返回真，否则返回假。
+<p> <p>也可以参考<a href="#clear">clear</a>()。
+
+<h3 class=fn>void <a name="setAutoDelete"></a>QPtrStack::setAutoDelete ( bool&nbsp;enable )
+</h3> 
+<p> 定义这个栈是否自动删除它的内容。和<a href="qptrcollection.html#setAutoDelete">QPtrCollection::setAutoDelete</a>()一样。
+<p> 如果<em>enable</em>为真，栈会自动删除它的内容，如果<em>enable</em>为假，栈不会删除它的内容。
+<p> <p>也可以参考<a href="#autoDelete">autoDelete</a>()。
+
+<h3 class=fn>type * <a name="top"></a>QPtrStack::top () const
+</h3> 
+返回栈中顶端元素的引用（最近被放入的）。栈不被改变。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="write"></a>QPtrStack::write ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, <a href="qptrcollection.html#Item">QPtrCollection::Item</a>&nbsp;item ) const<tt> [virtual protected]</tt>
+</h3>
+<p> 写一个栈项<em>item</em>到流<em>s</em>中并且返回流的引用。
+<p> 默认实现是不做任何事。
+<p> <p>也可以参考<a href="#read">read</a>().
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

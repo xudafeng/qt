@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QObjectList类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QObjectList类参考</h1>
+
+<p>QObjectList类就是一个QObject的QPtrList。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qobjectlist-h.html">qobjectlist.h</a>&gt;</tt>
+<p>继承了<a href="qptrlist.html">QPtrList</a>&lt;QObject&gt;。
+<p><a href="qobjectlist-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QObjectList"><b>QObjectList</b></a> ()</div></li>
+<li><div class=fn><a href="#QObjectList-2"><b>QObjectList</b></a> ( const&nbsp;QObjectList&nbsp;&amp;&nbsp;list )</div></li>
+<li><div class=fn><a href="#~QObjectList"><b>~QObjectList</b></a> ()</div></li>
+<li><div class=fn>QObjectList &amp; <a href="#operator-eq"><b>operator=</b></a> ( const&nbsp;QObjectList&nbsp;&amp;&nbsp;list )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QObjectList类就是一个QObject的<a href="qptrlist.html">QPtrList</a>。
+<p> 
+
+<p> QObjectList就是<a href="qptrlist.html">QPtrList&lt;QObject&gt;</a>。这个列表可以使用继承函数，比如<a href="qptrlist.html#getFirst">getFirst</a>()、<a href="qptrlist.html#next">next</a>()等等来遍历，或者使用<a href="qobjectlistit.html">QObjectListIt</a>迭代器来遍历。
+<p> 使用的实例可以参考<a href="qobject.html#queryList">QObject::queryList</a>()。
+<p> <p>也可以参考<a href="qobject.html">QObject</a>、<a href="collection.html">集合类</a>和<a href="tools.html">非GUI类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QObjectList"></a>QObjectList::QObjectList ()
+</h3>
+<p> 构造一个空的<a href="qobject.html">QObject</a>列表。
+
+<h3 class=fn><a name="QObjectList-2"></a>QObjectList::QObjectList ( const&nbsp;<a href="qobjectlist.html">QObjectList</a>&nbsp;&amp;&nbsp;list )
+</h3>
+<p> 构造一个<em>list</em>的复制。
+<p> <em>list</em>的每一个项都被<a href="qptrlist.html#append">添加</a>到这个列表中。只有指针被复制（浅复制）。
+
+<h3 class=fn><a name="~QObjectList"></a>QObjectList::~QObjectList ()
+</h3>
+<p> 移除列表中的所有对象指针并且销毁列表。
+<p> 所有访问这个列表的迭代器都将被重置。
+<p> <p>也可以参考<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()。
+
+<h3 class=fn><a href="qobjectlist.html">QObjectList</a>&nbsp;&amp; <a name="operator-eq"></a>QObjectList::operator= ( const&nbsp;<a href="qobjectlist.html">QObjectList</a>&nbsp;&amp;&nbsp;list )
+</h3>
+<p> 把<em>list</em>赋值给这个列表并且返回这个列表的引用。
+<p> 这个列表首先被清空并且然后<em>list</em>的每一个项都被<a href="qptrlist.html#append">添加</a>到这个列表中。只有指针被复制（浅复制），除非<a href="qptrcollection.html#newItem">newItem</a>()已经被重新实现。
+
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>
