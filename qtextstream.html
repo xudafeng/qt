@@ -1,0 +1,533 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QTextStream类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QTextStream类参考</h1>
+
+<p>QTextStream类提供了使用QIODevice读写文本的基本功能。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qtextstream-h.html">qtextstream.h</a>&gt;</tt>
+<p>由<a href="qtextistream.html">QTextIStream</a>和<a href="qtextostream.html">QTextOStream</a>继承。
+<p><a href="qtextstream-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>enum <a href="#Encoding-enum"><b>Encoding</b></a> { Locale, Latin1, Unicode, UnicodeNetworkOrder, UnicodeReverse, RawUnicode, UnicodeUTF8 }</div></li>
+<li><div class=fn>void <a href="#setEncoding"><b>setEncoding</b></a> ( Encoding&nbsp;e )</div></li>
+<li><div class=fn>void <a href="#setCodec"><b>setCodec</b></a> ( QTextCodec&nbsp;*&nbsp;codec )</div></li>
+<li><div class=fn><a href="#QTextStream"><b>QTextStream</b></a> ()</div></li>
+<li><div class=fn><a href="#QTextStream-2"><b>QTextStream</b></a> ( QIODevice&nbsp;*&nbsp;iod )</div></li>
+<li><div class=fn><a href="#QTextStream-3"><b>QTextStream</b></a> ( QString&nbsp;*&nbsp;str, int&nbsp;filemode )</div></li>
+<li><div class=fn>QTextStream ( QString&nbsp;&amp;&nbsp;str, int&nbsp;filemode ) &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn><a href="#QTextStream-5"><b>QTextStream</b></a> ( QByteArray&nbsp;a, int&nbsp;mode )</div></li>
+<li><div class=fn><a href="#QTextStream-6"><b>QTextStream</b></a> ( FILE&nbsp;*&nbsp;fh, int&nbsp;mode )</div></li>
+<li><div class=fn>virtual <a href="#~QTextStream"><b>~QTextStream</b></a> ()</div></li>
+<li><div class=fn>QIODevice * <a href="#device"><b>device</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setDevice"><b>setDevice</b></a> ( QIODevice&nbsp;*&nbsp;iod )</div></li>
+<li><div class=fn>void <a href="#unsetDevice"><b>unsetDevice</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#atEnd"><b>atEnd</b></a> () const</div></li>
+<li><div class=fn>bool eof () const &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt"><b>operator&gt;&gt;</b></a> ( QChar&nbsp;&amp;&nbsp;c )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt-2"><b>operator&gt;&gt;</b></a> ( char&nbsp;&amp;&nbsp;c )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt-3"><b>operator&gt;&gt;</b></a> ( signed&nbsp;short&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt-4"><b>operator&gt;&gt;</b></a> ( unsigned&nbsp;short&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt-5"><b>operator&gt;&gt;</b></a> ( signed&nbsp;int&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt-6"><b>operator&gt;&gt;</b></a> ( unsigned&nbsp;int&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt-7"><b>operator&gt;&gt;</b></a> ( signed&nbsp;long&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt-8"><b>operator&gt;&gt;</b></a> ( unsigned&nbsp;long&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt-9"><b>operator&gt;&gt;</b></a> ( float&nbsp;&amp;&nbsp;f )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt-a"><b>operator&gt;&gt;</b></a> ( double&nbsp;&amp;&nbsp;f )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt-b"><b>operator&gt;&gt;</b></a> ( char&nbsp;*&nbsp;s )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt-c"><b>operator&gt;&gt;</b></a> ( QString&nbsp;&amp;&nbsp;str )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt-d"><b>operator&gt;&gt;</b></a> ( QCString&nbsp;&amp;&nbsp;str )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt"><b>operator&lt;&lt;</b></a> ( QChar&nbsp;c )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-2"><b>operator&lt;&lt;</b></a> ( char&nbsp;c )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-3"><b>operator&lt;&lt;</b></a> ( signed&nbsp;short&nbsp;i )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-4"><b>operator&lt;&lt;</b></a> ( unsigned&nbsp;short&nbsp;i )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-5"><b>operator&lt;&lt;</b></a> ( signed&nbsp;int&nbsp;i )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-6"><b>operator&lt;&lt;</b></a> ( unsigned&nbsp;int&nbsp;i )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-7"><b>operator&lt;&lt;</b></a> ( signed&nbsp;long&nbsp;i )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-8"><b>operator&lt;&lt;</b></a> ( unsigned&nbsp;long&nbsp;i )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-9"><b>operator&lt;&lt;</b></a> ( float&nbsp;f )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-a"><b>operator&lt;&lt;</b></a> ( double&nbsp;f )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-b"><b>operator&lt;&lt;</b></a> ( const&nbsp;char&nbsp;*&nbsp;s )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-c"><b>operator&lt;&lt;</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;s )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-d"><b>operator&lt;&lt;</b></a> ( const&nbsp;QCString&nbsp;&amp;&nbsp;s )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt-e"><b>operator&lt;&lt;</b></a> ( void&nbsp;*&nbsp;ptr )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#readRawBytes"><b>readRawBytes</b></a> ( char&nbsp;*&nbsp;s, uint&nbsp;len )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#writeRawBytes"><b>writeRawBytes</b></a> ( const&nbsp;char&nbsp;*&nbsp;s, uint&nbsp;len )</div></li>
+<li><div class=fn>QString <a href="#readLine"><b>readLine</b></a> ()</div></li>
+<li><div class=fn>QString <a href="#read"><b>read</b></a> ()</div></li>
+<li><div class=fn>void <a href="#skipWhiteSpace"><b>skipWhiteSpace</b></a> ()</div></li>
+<li><div class=fn>int <a href="#flags"><b>flags</b></a> () const</div></li>
+<li><div class=fn>int <a href="#flags-2"><b>flags</b></a> ( int&nbsp;f )</div></li>
+<li><div class=fn>int <a href="#setf"><b>setf</b></a> ( int&nbsp;bits )</div></li>
+<li><div class=fn>int <a href="#setf-2"><b>setf</b></a> ( int&nbsp;bits, int&nbsp;mask )</div></li>
+<li><div class=fn>int <a href="#unsetf"><b>unsetf</b></a> ( int&nbsp;bits )</div></li>
+<li><div class=fn>void <a href="#reset"><b>reset</b></a> ()</div></li>
+<li><div class=fn>int <a href="#width"><b>width</b></a> () const</div></li>
+<li><div class=fn>int <a href="#width-2"><b>width</b></a> ( int&nbsp;w )</div></li>
+<li><div class=fn>int <a href="#fill"><b>fill</b></a> () const</div></li>
+<li><div class=fn>int <a href="#fill-2"><b>fill</b></a> ( int&nbsp;f )</div></li>
+<li><div class=fn>int <a href="#precision"><b>precision</b></a> () const</div></li>
+<li><div class=fn>int <a href="#precision-2"><b>precision</b></a> ( int&nbsp;p )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+<p> QTextStream类提供了使用<a href="qiodevice.html">QIODevice</a>读写文本的基本功能。
+<p> 
+
+
+<p> 文本流类的功能界面和标准的C++的iostream类非常相似。iostream和QTextStream的不同点是我们的流操作在一个很容易被继承的QIODevice上，而iostream只能操作一个不能被继承的FILE *指针。
+<p> Qt提供了几个和iostream相似的全局函数：
+<ul>
+<li> bin设置QTextStream来读/写二进制数字
+<li> oct设置QTextStream来读/写八进制数字
+<li> dec设置QTextStream来读/写十进制数字
+<li> hex设置QTextStream来读/写十六进制数字
+<li> endl强制换行
+<li> flush强制QIODevice刷新任何被缓存的数据
+<li> ws作为任何可用的控制符（在输入的时候）
+<li> reset重新设置QTextStream为它的缺省模式（请见<a href="#reset">reset</a>()）
+<li> qSetW(int)设置<a href="#width">字段宽度</a>作为指定参数
+<li> qSetFill(int)设置<a href="#fill">填充字符</a>作为指定参数
+<li> qSetPrecision(int)设置<a href="#precision">精确度</a>作为指定参数
+</ul>
+<p> <b>警告：</b>默认情况下，QTextStream在读取流的时候，会自动地检测流中的数字是十进制、八进制、十六进制或者二进制格式。具体情况是，一个以“0”为开头的数字是八进制的，比如顺序为“0100”将会被解释为64。
+<p> QTextStream类读写文本，它不适合处理二进制数据（而<a href="qdatastream.html">QDataStream</a>是适合的）。
+<p> 默认情况下，输出的是使用本地8位编码后的Unicode文本（比如，<a href="qstring.html">QString</a>）。这些可以使用<a href="#setEncoding">setEncoding</a>()方法进行改变。对于输入，QTextStream会自动检测标准Unicode“字节顺序标记的”文本文件，否则会使用本地8位编码。
+<p> <a href="qiodevice.html">QIODevice</a>在构造函数中被设置，或者之后在<a href="#setDevice">setDevice</a>()中使用。如果输入到达了<a href="#atEnd">atEnd</a>()，返回真。数据可以使用<a href="#operator-gt-gt">operator&gt;&gt;</a>()重载操作符读到适当类型的变量中，或者使用<a href="#read">read</a>()把它作为整个部分读到一个单一的字符串中，或者使用<a href="#readLine">readLine</a>()把一次读一行。使用<a href="#skipWhiteSpace">skipWhiteSpace</a>()可以忽略控制符。你可以使用<a href="#flags">flags</a>()或<a href="#setf">setf</a>()来设置流的标记。这个流也支持<a href="#width">width</a>()、<a href="#precision">precision</a>()和 <a href="#fill">fill</a>()，使用<a href="#reset">reset</a>()可以重新恢复默认设置。
+<p> <p>也可以参考<a href="qdatastream.html">QDataStream</a>、<a href="io.html">输入/输出和网络</a>和<a href="text.html">文本相关类</a>.
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="Encoding-enum"></a>QTextStream::Encoding</h3> 
+<ul>
+<li><tt>QTextStream::Locale</tt>
+<li><tt>QTextStream::Latin1</tt>
+<li><tt>QTextStream::Unicode</tt>
+<li><tt>QTextStream::UnicodeNetworkOrder</tt>
+<li><tt>QTextStream::UnicodeReverse</tt>
+<li><tt>QTextStream::RawUnicode</tt>
+<li><tt>QTextStream::UnicodeUTF8</tt>
+</ul><p> 
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QTextStream"></a>QTextStream::QTextStream ()
+</h3>
+构造一个没有IO设备的文本流。
+
+<h3 class=fn><a name="QTextStream-2"></a>QTextStream::QTextStream ( <a href="qiodevice.html">QIODevice</a>&nbsp;*&nbsp;iod )
+</h3>
+构造一个使用<em>iod</em>IO设备的文本流。
+
+<h3 class=fn><a name="QTextStream-3"></a>QTextStream::QTextStream ( <a href="qstring.html">QString</a>&nbsp;*&nbsp;str, int&nbsp;filemode )
+</h3>
+构造一个通过内部设备操作Unicode<a href="qstring.html">QString</a>的<em>str</em>的文本流。<em>filemode</em>参数会被传递给设备的open()函数，请参考<a href="qiodevice.html#mode">QIODevice::mode</a>()。
+<p> 如果你使用<a href="#setEncoding">setEncoding</a>()或<a href="#setCodec">setCodec</a>()来设置一个编码或者编码器，当文本流在QString上操作时，这个设置将被忽略。
+<p> 实例：
+<pre>
+    <a href="qstring.html">QString</a> str;
+    QTextStream ts( &amp;str, <a href="qfile.html#open">IO_WriteOnly</a> );
+    ts &lt;&lt; "pi = " &lt;&lt; 3.14; // str == "pi = 3.14"
+  </pre>
+ 
+<p> 写数据到文本流将会修改字符串的内容。如果所写的内容超过字符串的范围，字符串会被扩大。注意字符串不会被截短。
+<pre>
+    <a href="qstring.html">QString</a> str = "pi = 3.14";
+    QTextStream ts( &amp;str, IO_WriteOnly );
+    ts &lt;&lt;  "2+2 = " &lt;&lt; 2+2; // str == "2+2 = 414"
+  </pre>
+ 
+<p> 注意因为QString是Unicode的，你不应该在这样的流上使用<a href="#readRawBytes">readRawBytes</a>()或<a href="#writeRawBytes">writeRawBytes</a>()。
+
+<h3 class=fn><a name="QTextStream-4"></a>QTextStream::QTextStream ( <a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;str, int&nbsp;filemode )
+</h3> 
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 这个构造函数和使用一个<a href="qstring.html">QString</a>*参数的构造函数一样。
+
+<h3 class=fn><a name="QTextStream-5"></a>QTextStream::QTextStream ( <a href="qbytearray.html">QByteArray</a>&nbsp;a, int&nbsp;mode )
+</h3>
+构造一个通过内部<a href="qbuffer.html">QBuffer</a>设备操作字节数组<em>a</em>的文本流。<em>filemode</em>参数会被传递给设备的open()函数，请参考<a href="qiodevice.html#mode">QIODevice::mode</a>()。
+<p> 实例：
+<pre>
+    <a href="qbytearray.html">QByteArray</a> array;
+    QTextStream ts( array, <a href="qfile.html#open">IO_WriteOnly</a> );
+    ts &lt;&lt; "pi = " &lt;&lt; 3.14 &lt;&lt; '\0'; // array == "pi = 3.14"
+  </pre>
+ 
+<p> 写数据到文本流将会修改数组的内容。如果所写的内容超过数组的范围，数组会被扩大。
+<p> 同样的实例，使用QBuffer：
+<pre>
+    <a href="qbytearray.html">QByteArray</a> array;
+    <a href="qbuffer.html">QBuffer</a> buf( array );
+    buf.<a href="qiodevice.html#open">open</a>( IO_WriteOnly );
+    QTextStream ts( &amp;buf );
+    ts &lt;&lt; "pi = " &lt;&lt; 3.14 &lt;&lt; '\0'; // array == "pi = 3.14"
+    buf.<a href="qiodevice.html#close">close</a>();
+  </pre>
+ 
+
+<h3 class=fn><a name="QTextStream-6"></a>QTextStream::QTextStream ( FILE&nbsp;*&nbsp;fh, int&nbsp;mode )
+</h3>  
+构造一个通过内部的<a href="qfile.html">QFile</a>设备操作已经存在的文件句柄<em>fh</em>的文本流。<em>filemode</em>参数会被传递给设备的open()函数，请参考<a href="qiodevice.html#mode">QIODevice::mode</a>()。
+<p> 注意如果你创建了一个QTextStream<tt>cout</tt>或者也被其他类型的另一个变量使用的另一个名称，一些连接器也许会搞混这两个变量，这经常会导致程序崩溃。
+
+<h3 class=fn><a name="~QTextStream"></a>QTextStream::~QTextStream ()<tt> [虚]</tt>
+</h3>
+销毁这个文本流。
+<p> 这个析构函数对当前IO设备没有任何影响。
+
+<h3 class=fn>bool <a name="atEnd"></a>QTextStream::atEnd () const
+</h3>
+如果IO设备已经达到终点（流或文件的终点），或者如果没有IO设备被设置，返回真，否则返回假。
+<p> <p>也可以参考<a href="qiodevice.html#atEnd">QIODevice::atEnd</a>()。
+<p>实例：<a href="addressbook-example.html#x550">addressbook/centralwidget.cpp</a>和<a href="grapher-nsplugin-example.html#x2782">grapher/grapher.cpp</a>。
+
+<h3 class=fn><a href="qiodevice.html">QIODevice</a>&nbsp;* <a name="device"></a>QTextStream::device () const
+</h3>
+返回当前设置的IO设备。
+<p>也可以参考<a href="#setDevice">setDevice</a>()和<a href="#unsetDevice">unsetDevice</a>()。
+
+<h3 class=fn>bool <a name="eof"></a>QTextStream::eof () const
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 这个函数已经被重新命名为<a href="#atEnd">atEnd</a>()。
+<p> <p>也可以参考<a href="qiodevice.html#atEnd">QIODevice::atEnd</a>()。
+<p>实例：<a href="tutorial2-07.html#x2497">chart/chartform_files.cpp</a>。
+
+<h3 class=fn>int <a name="fill"></a>QTextStream::fill () const
+</h3>
+返回填充字符。默认值是“ ”（空格）。
+
+<h3 class=fn>int <a name="fill-2"></a>QTextStream::fill ( int&nbsp;f )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 设置填充字符为<em>f</em>。返回以前的填充字符。
+
+<h3 class=fn>int <a name="flags"></a>QTextStream::flags () const
+</h3>
+返回当前的流标记。默认值为0。
+<p> 标记的意义是：
+<ul>
+<li> <em>skipws</em> - 当前不被使用了，控制符总是被忽略
+<li> <em>left</em> - 数字字段左对齐
+<li> <em>right</em> - 当前不被使用了（默认情况下，数字字段是右对齐的）
+<li> <em>internal</em> - 在+/-和值的中间填充空格
+<li> <em>bin</em> - 输入<em>和</em>输出只使用二进制
+<li> <em>oct</em> - 输入<em>和</em>输出只使用八进制
+<li> <em>dec</em> - 输入<em>和</em>输出只使用十进制
+<li> <em>hex</em> - 输入<em>和</em>输出只使用十六进制
+<li> <em>showbase</em> - 如果使用<em>bin</em>、<em>oct</em>或<em>hex</em>格式，数字输出使用0b、0和0x注释
+<li> <em>showpoint</em> - 当前不被使用了
+<li> <em>uppercase</em> - 使用0B和0X，而不用0b和0x
+<li> <em>showpos</em> - 对正数显示+
+<li> <em>scientific</em> - 对浮点数使用科学记数法
+<li> <em>fixed</em> - 对浮点数使用固定的位数
+</ul>
+<p> 注意，如果没有设置<em>bin</em>、<em>oct</em>、<em>dec</em>或<em>hex</em>，那么一个以0开始的值被认为是八进制的，以0x开始的被认为是十六进制的，以0b开始的被认为是二进制的，其它的都被认为是十进制的。
+<p> <p>也可以参考<a href="#setf">setf</a>()和<a href="#unsetf">unsetf</a>()。
+
+<h3 class=fn>int <a name="flags-2"></a>QTextStream::flags ( int&nbsp;f )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 设置流标记为<em>f</em>。返回以前的流标记。
+<p> <p>也可以参考<a href="#setf">setf</a>()和<a href="#unsetf">unsetf</a>()。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt"></a>QTextStream::operator&lt;&lt; ( <a href="qchar.html">QChar</a>&nbsp;c )
+</h3>
+写<tt>字符</tt><em>c</em>到流中并且返回流的引用。
+<p> <tt>字符</tt><em>c</em>不依赖于QTextStream的编码设置，被假设为Latin1编码。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-2"></a>QTextStream::operator&lt;&lt; ( char&nbsp;c )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写<tt>字符</tt><em>c</em>到流中并且返回流的引用。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-3"></a>QTextStream::operator&lt;&lt; ( signed&nbsp;short&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写<tt>短整型</tt><em>i</em>到流中并且返回流的引用。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-4"></a>QTextStream::operator&lt;&lt; ( unsigned&nbsp;short&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写<tt>无符号的短</tt>整型<em>i</em>到流中并且返回流的引用。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-5"></a>QTextStream::operator&lt;&lt; ( signed&nbsp;int&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写<tt>有符号的整型</tt><em>i</em>到流中并且返回流的引用。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-6"></a>QTextStream::operator&lt;&lt; ( unsigned&nbsp;int&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写<tt>无符号的整型</tt><em>i</em>到流中并且返回流的引用。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-7"></a>QTextStream::operator&lt;&lt; ( signed&nbsp;long&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写<tt>有符号的长整型</tt><em>i</em>到流中并且返回流的引用。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-8"></a>QTextStream::operator&lt;&lt; ( unsigned&nbsp;long&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写<tt>无符号的长整型</tt><em>i</em>到流中并且返回流的引用。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-9"></a>QTextStream::operator&lt;&lt; ( float&nbsp;f )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写<tt>单精实型</tt><em>f</em>到流中并且返回流的引用。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-a"></a>QTextStream::operator&lt;&lt; ( double&nbsp;f )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写<tt>双精实型</tt><em>f</em>到流中并且返回流的引用。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-b"></a>QTextStream::operator&lt;&lt; ( const&nbsp;char&nbsp;*&nbsp;s )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个字符串到流中并且返回流的引用。
+<p> 字符串<em>s</em>不依赖于QTextStream的编码设置，被假设为Latin1编码。
+
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-c"></a>QTextStream::operator&lt;&lt; ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;s )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个<em>s</em>到流中并且返回流的引用。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-d"></a>QTextStream::operator&lt;&lt; ( const&nbsp;<a href="qcstring.html">QCString</a>&nbsp;&amp;&nbsp;s )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个<em>s</em>到流中并且返回流的引用。
+<p> 字符串<em>s</em>不依赖于QTextStream的编码设置，被假设为Latin1编码。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt-e"></a>QTextStream::operator&lt;&lt; ( void&nbsp;*&nbsp;ptr )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个指针到流中并且返回流的引用。
+<p> <em>ptr</em>是被作为十六进制的无符号的长整型输出的。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt"></a>QTextStream::operator&gt;&gt; ( <a href="qchar.html">QChar</a>&nbsp;&amp;&nbsp;c )
+</h3>
+从流中读取一个<tt>字符</tt><em>c</em>并且返回流的引用。
+注意控制符<em>不</em>被忽略。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt-2"></a>QTextStream::operator&gt;&gt; ( char&nbsp;&amp;&nbsp;c )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个<tt>字符</tt><em>c</em>并且返回流的引用。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt-3"></a>QTextStream::operator&gt;&gt; ( signed&nbsp;short&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个<tt>短整型</tt><em>i</em>并且返回流的引用。对于所希望的输入格式的说明，请参考<a href="#flags">flags</a>()。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt-4"></a>QTextStream::operator&gt;&gt; ( unsigned&nbsp;short&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个<tt>无符号的短整型</tt><em>i</em>并且返回流的引用。对于所希望的输入格式的说明，请参考<a href="#flags">flags</a>()。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt-5"></a>QTextStream::operator&gt;&gt; ( signed&nbsp;int&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个<tt>有符号的整型</tt><em>i</em>并且返回流的引用。对于所希望的输入格式的说明，请参考<a href="#flags">flags</a>()。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt-6"></a>QTextStream::operator&gt;&gt; ( unsigned&nbsp;int&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个<tt>无符号的整型</tt><em>i</em>并且返回流的引用。对于所希望的输入格式的说明，请参考<a href="#flags">flags</a>()。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt-7"></a>QTextStream::operator&gt;&gt; ( signed&nbsp;long&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个<tt>有符号的长整型</tt><em>i</em>并且返回流的引用。对于所希望的输入格式的说明，请参考<a href="#flags">flags</a>()。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt-8"></a>QTextStream::operator&gt;&gt; ( unsigned&nbsp;long&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个<tt>无符号的长整型</tt><em>i</em>并且返回流的引用。对于所希望的输入格式的说明，请参考<a href="#flags">flags</a>()。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt-9"></a>QTextStream::operator&gt;&gt; ( float&nbsp;&amp;&nbsp;f )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个<tt>单精实型</tt><em>f</em>并且返回流的引用。对于所希望的输入格式的说明，请参考<a href="#flags">flags</a>()。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt-a"></a>QTextStream::operator&gt;&gt; ( double&nbsp;&amp;&nbsp;f )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个<tt>双精实型</tt><em>f</em>并且返回流的引用。对于所希望的输入格式的说明，请参考<a href="#flags">flags</a>()。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt-b"></a>QTextStream::operator&gt;&gt; ( char&nbsp;*&nbsp;s )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个“词”<em>s</em>并且返回流的引用。对于所希望的输入格式的说明。
+<p> 一个词是由isspace()返回假的字符组成。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt-c"></a>QTextStream::operator&gt;&gt; ( <a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;str )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个“词”<em>str</em>并且返回流的引用。对于所希望的输入格式的说明。
+<p> 一个词是由isspace()返回假的字符组成。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt-d"></a>QTextStream::operator&gt;&gt; ( <a href="qcstring.html">QCString</a>&nbsp;&amp;&nbsp;str )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个“词”<em>str</em>并且返回流的引用。对于所希望的输入格式的说明。
+<p> 一个词是由isspace()返回假的字符组成。
+
+<h3 class=fn>int <a name="precision"></a>QTextStream::precision () const
+</h3>
+返回精确度。默认值为6。
+
+<h3 class=fn>int <a name="precision-2"></a>QTextStream::precision ( int&nbsp;p )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 设置精确度为<em>p</em>。返回以前设置的精确度。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="read"></a>QTextStream::read ()
+</h3>
+读取整个流并且返回包含文本的字符串。
+<p> <p>也可以参考<a href="qiodevice.html#readLine">QIODevice::readLine</a>().
+<p>实例：<a href="qaction-application-example.html#x1095">action/application.cpp</a>、<a href="simple-application-example.html#x1540">application/application.cpp</a>、<a href="mdi-example.html#x2043">mdi/application.cpp</a>、<a href="qdir-example.html#x1840">qdir/qdir.cpp</a>和<a href="qwerty-example.html#x399">qwerty/qwerty.cpp</a>。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="readLine"></a>QTextStream::readLine ()
+</h3>
+读取流中的一行并且返回包含文本的字符串。
+<p> 返回的字符串不包含任何换行符和回车符。注意这是和<a href="qiodevice.html#readLine">QIODevice::readLine</a>()不一样的，后者不会省略一行最后的换行符。
+<p> 在EOF处，你会得到一个零<a href="qstring.html">QString</a>。在读取一个空行时你得到的QString是空的，但不是零。
+<p> <p>也可以参考<a href="qiodevice.html#readLine">QIODevice::readLine</a>()。
+<p>实例：<a href="addressbook-example.html#x551">addressbook/centralwidget.cpp</a>和<a href="tutorial2-03.html#x2456">chart/element.cpp</a>。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="readRawBytes"></a>QTextStream::readRawBytes ( char&nbsp;*&nbsp;s, uint&nbsp;len )
+</h3>
+从流中读取<em>len</em>字节放到<em>s</em>中并且返回流的引用。
+<p> 缓存<em>s</em>必须被预先分配。
+<p> 注意这个函数中不使用任何编码方式。
+<p> <b>警告：</b>除非流的编码方式被设置为Unicode或者Latin1，这个函数的行为会是不确定的。
+<p> <p>也可以参考<a href="qiodevice.html#readBlock">QIODevice::readBlock</a>()。
+
+<h3 class=fn>void <a name="reset"></a>QTextStream::reset ()
+</h3>
+重新设置文本流为默认设置。
+<p> <ul>
+<li> 所有标记被设置为0。
+<li> 所有字段宽度被设置为0。
+<li> 所有填充字符被设置为“ ”（空格）。
+<li> 精确度被设置为6。
+</ul>
+<p> <p>也可以参考<a href="#setf">setf</a>()、<a href="#width">width</a>()、<a href="#fill">fill</a>()和<a href="#precision">precision</a>()。
+
+<h3 class=fn>void <a name="setCodec"></a>QTextStream::setCodec ( <a href="qtextcodec.html">QTextCodec</a>&nbsp;*&nbsp;codec )
+</h3>  
+设置流的编码器为<em>codec</em>。如果不设置，会自动设置为Unicode。
+<p> 注意这个函数的调用应该发生在这个流进行读/写数据之前。
+<p> <p>也可以参考<a href="#setEncoding">setEncoding</a>()。
+<p>实例：<a href="qwerty-example.html#x400">qwerty/qwerty.cpp</a>。
+
+<h3 class=fn>void <a name="setDevice"></a>QTextStream::setDevice ( <a href="qiodevice.html">QIODevice</a>&nbsp;*&nbsp;iod )
+</h3>
+设置IO设备为<em>iod</em>。
+<p>也可以参考<a href="#device">device</a>()和<a href="#unsetDevice">unsetDevice</a>()。
+
+<h3 class=fn>void <a name="setEncoding"></a>QTextStream::setEncoding ( <a href="qtextstream.html#Encoding-enum">Encoding</a>&nbsp;e )
+</h3>
+设置这个流的编码为<em>e</em>，<em>e</em>为下列之一：
+<ul>
+<li> Locale - 使用本地文件格式（如果本地没有设置，就是Latin1），但是会在输入时自动检测是否Unicode（utf16）。
+<li> Unicode - 使用Unicode（utf16）作为输入和输出。输出将会根据当前平台中最有效率的顺序写出来（比如，<a href="qstring.html">QString</a>内部使用的顺序）。
+<li> UnicodeUTF8 - 使用Unicode（utf8）作为输入和输出。如果使用它作为输入，它将会自动检测是否utf16，如果是的话，将会使用它代替utf8。
+<li> Latin1 - ISO-8859-1。将不会自动检测utf16。
+<li> UnicodeNetworkOrder - 使用网络顺序的Unicode（utf16）作为输入和输出。当读取不使用字节顺序标记的Unicode的时候是有用的。
+<li> UnicodeReverse - 使用与网络顺序相反的顺序的Unicode（utf16）作为输入和输出。当读取不使用字节顺序标记或者当写供bug很多的Windows应用程序读取的数据的Unicode的时候是有用的。
+<li> RawUnicode - 就像Unicode，但是不写字节顺序标记，也不自动检测字节顺序标记。只有当写供一个单独进程使用的非永久保存的数据的时候是有用的。
+</ul>
+<p> <a href="#Encoding-enum">Locale</a>和所有的Unicode编码，除了<a href="#Encoding-enum">RawUnicode</a>，都将看输入流的头两个字节来决定字节顺序。这个初始的字节顺序标记将会在读数据之前省略掉。<p> 注意这个函数的调用应该发生在这个流进行读/写数据之前。
+<p> <p>也可以参考<a href="#setCodec">setCodec</a>()。
+<p>实例：<a href="httpd-example.html#x647">network/httpd/httpd.cpp</a>和<a href="qwerty-example.html#x401">qwerty/qwerty.cpp</a>。
+
+<h3 class=fn>int <a name="setf"></a>QTextStream::setf ( int&nbsp;bits )
+</h3>
+设置流的标记位为<em>bits</em>。返回以前设置的流标记。
+<p> 和<tt>flags( flags() | bits )</tt>是一样的。
+<p> <p>也可以参考<a href="#unsetf">unsetf</a>()。
+
+<h3 class=fn>int <a name="setf-2"></a>QTextStream::setf ( int&nbsp;bits, int&nbsp;mask )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+设置流的标记位为<em>bits</em>和一个位掩码<em>mask</em>。返回以前设置的流标记。
+<p> 和<tt>flags( (flags() &amp; ~mask) | (bits &amp; mask) )</tt>是一样的。
+<p> <p>也可以参考<a href="#unsetf">unsetf</a>()。
+
+<h3 class=fn>void <a name="skipWhiteSpace"></a>QTextStream::skipWhiteSpace ()
+</h3>
+放置读指针在第一个非控制字符上。
+
+<h3 class=fn>void <a name="unsetDevice"></a>QTextStream::unsetDevice ()
+</h3>
+清除IO设备。这个和调用<a href="#setDevice">setDevice</a>( 0 )一样。
+<p>也可以参考<a href="#device">device</a>()和<a href="#setDevice">setDevice</a>()。
+
+<h3 class=fn>int <a name="unsetf"></a>QTextStream::unsetf ( int&nbsp;bits )
+</h3>
+清空流标记位<em>bits</em>。返回以前设置的流标记。
+<p> 和<tt>flags( flags() &amp; ~mask )</tt>是一样的。
+<p> <p>也可以参考<a href="#setf">setf</a>()。
+
+<h3 class=fn>int <a name="width"></a>QTextStream::width () const
+</h3>
+返回字段宽度。默认值为0。
+
+<h3 class=fn>int <a name="width-2"></a>QTextStream::width ( int&nbsp;w )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 设置字段宽度为<em>w</em>。返回以前设置的字段宽度。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="writeRawBytes"></a>QTextStream::writeRawBytes ( const&nbsp;char&nbsp;*&nbsp;s, uint&nbsp;len )
+</h3>
+从<em>s</em>写<em>len</em>字节到流中并且返回流的引用。
+<p> 注意这个函数没有使用任何编码。
+<p> <p>也可以参考<a href="qiodevice.html#writeBlock">QIODevice::writeBlock</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

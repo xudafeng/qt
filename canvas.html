@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>画布模块</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>画布模块</h1>
+
+ 
+<p> 这个模块是<a href="editions.html">Qt企业版</a>的一部分。
+<p> 画布模块提供了一个名为<a href="qcanvas.html">QCanvas</a>的高度优化的二维绘图区。 画布可以有任意数量的<a href="qcanvasitem.html">QCanvasItems</a>。画布项则可以有任意的形状、尺寸和内容，在画布中能自由的移动，并且能被检查出是否有冲突。画布项能被设置成在画布中自动地移动以及使画布项支持<a href="qcanvassprite.html">QCanvasSprite</a>。（如果你需要三维绘图请看Qt的<a href="opengl.html">OpenGL模块</a>。）
+<p> 画布模块使用文档/视图模型。<a href="qcanvasview.html">QCanvasView</a> 类是被用来显示画布的特定视图。多视图能同时在同一画布中显示。每一个视图在画布中使用一个任意的变换矩阵，以便能使其容易的实现诸如缩放的特性。
+<p> <center><a href="qcanvas.html">
+<img src="qcanvas.png" alt="Screenshot of a canvas"></a></center>
+<p> Qt提供了一系列预定义的<a href="qcanvas.html">QCanvas</a>项，如下所示: 
+<p> <ul>
+<li> <a href="qcanvasitem.html">QCanvasItem</a>--一个所有画布项的抽象基类。
+<li> <a href="qcanvasellipse.html">QCanvasEllipse</a>--椭圆或者“饼的部分”。
+<li> <a href="qcanvasline.html">QCanvasLine</a>--线条部分。
+<li> <a href="qcanvaspolygon.html">QCanvasPolygon</a>--多边形。
+<li> <a href="qcanvaspolygonalitem.html">QCanvasPolygonalItem</a>--一个含有非矩形形状的基类。大多数画布项都派生于此类。
+<li> <a href="qcanvasrectangle.html">QCanvasRectangle</a>--矩形。此类矩形不能被倾斜或旋转。绘制可旋转的矩形使用QCanvasPolygon。
+<li> <a href="qcanvasspline.html">QCanvasSpline</a>--多重贝塞尔曲线。
+<li> <a href="qcanvassprite.html">QCanvasSprite</a>--活动的图片。
+<li> <a href="qcanvastext.html">QCanvasText</a>--文本字符串。
+</ul>
+<p> <a href="qcanvaspixmap.html">QCanvasPixmap</a>和<a href="qcanvaspixmaparray.html">QCanvasPixmapArray</a>这两个类是由<a href="qcanvassprite.html">QCanvasSprite</a>类来显示在画布上的活动和移动的图片。
+<p> 更多的专门的项能够通过继承画布项类来实现。从一个<a href="qcanvasitem.html">QCanvasItem</a>的派生类（通常为 <a href="qcanvaspolygonalitem.html">QCanvasPolygonalItem</a>）来实现比直接从QCanvasItem继承更容易。
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><center><a href="zh_CN.html">译者：dirtfei</a></center>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

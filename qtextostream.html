@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QTextOStream类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QTextOStream类参考</h1>
+
+<p>QTextOStream类是为输出流提供方便的类。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qtextstream-h.html">qtextstream.h</a>&gt;</tt>
+<p>继承了<a href="qtextstream.html">QTextStream</a>。
+<p><a href="qtextostream-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QTextOStream"><b>QTextOStream</b></a> ( QString&nbsp;*&nbsp;s )</div></li>
+<li><div class=fn><a href="#QTextOStream-2"><b>QTextOStream</b></a> ( QByteArray&nbsp;ba )</div></li>
+<li><div class=fn><a href="#QTextOStream-3"><b>QTextOStream</b></a> ( FILE&nbsp;*&nbsp;f )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+
+
+QTextOStream类是为输出流提供方便的类。
+<p> 对于简单的任务，代码应该更简单，所以这个类是速记的，所以没有传递<em>mode</em>参数给普通的<a href="qtextstream.html">QTextStream</a>的构造函数。
+<p> 这是一个很简单的例子，就是写这样的东西：
+<pre>
+    <a href="qstring.html">QString</a> result;
+    <a href="#QTextOStream">QTextOStream</a>(&amp;result) &lt;&lt; "pi = " &lt;&lt; 3.14;
+</pre>
+ 
+<p>See also <a href="io.html">输入/输出和网络</a>和<a href="text.html">文本相关类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QTextOStream"></a>QTextOStream::QTextOStream ( <a href="qstring.html">QString</a>&nbsp;*&nbsp;s )
+</h3>
+<p> 构造一个向字符串<em>s</em>写的流。
+
+<h3 class=fn><a name="QTextOStream-2"></a>QTextOStream::QTextOStream ( <a href="qbytearray.html">QByteArray</a>&nbsp;ba )
+</h3>
+<p> 构造一个向数组<em>ba</em>写的流。
+
+<h3 class=fn><a name="QTextOStream-3"></a>QTextOStream::QTextOStream ( FILE&nbsp;*&nbsp;f )
+</h3>
+<p> 构造一个向文件<em>f</em>写的流。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

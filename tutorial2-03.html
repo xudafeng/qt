@@ -1,0 +1,222 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>数据元素</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>数据元素</h1>
+
+
+<p> 
+<p> 我们将使用一个叫<tt>Element</tt>的类来存储和访问数据元素。
+<p> （由<tt>element.h</tt>展开。）
+<p> 
+
+<pre>    private:
+</pre><pre>        double m_value;
+        <a href="qcolor.html">QColor</a> m_valueColor;
+        int m_valuePattern;
+        <a href="qstring.html">QString</a> m_label;
+        <a href="qcolor.html">QColor</a> m_labelColor;
+        double m_propoints[2 * MAX_PROPOINTS];
+</pre>
+<p> 每一个元素都有一个值。每一个值都会被使用一种特定的颜色和填充样式来图形化地显示。值也许会有一个和它们关联的标签，标签会被使用标签的颜色来画，并且对于每一种类型的图表都有一个存储在<tt>m_propoints</tt>数组中的一个（相对）位置。
+<p> 
+
+<pre>    #include &lt;<a href="qcolor-h.html">qcolor.h</a>&gt;
+    #include &lt;<a href="qnamespace-h.html">qnamespace.h</a>&gt;
+    #include &lt;<a href="qstring-h.html">qstring.h</a>&gt;
+    #include &lt;<a href="qvaluevector-h.html">qvaluevector.h</a>&gt;
+</pre>
+<p> 尽管<tt>Element</tt>是一个纯粹的内部数据类，它<tt>包含了</tt>四个Qt类。Qt经常被认为是一个纯粹的图形用户界面工具包，但它也提供了一些用来支持应用程序编程的绝大多数方面的非图形用户界面类。我们使用<a href="qcolor-h.html">qcolor.h</a>可以使我们在<tt>Element</tt>类中控制绘图颜色和文本颜色。<a href="qnamespace-h.html">qnamespace.h</a>的用处稍微有些模糊。绝大多数Qt类都继承于含有各种各样的枚举的<a href="qt.html">Qt</a>这个超级类。<tt>Element</tt>类不继承于<a href="qt.html">Qt</a>，所以我们需要包含<a href="qnamespace-h.html">qnamespace.h</a>来访问这些Qt枚举名称。另一个替代的方案就是使<tt>Element</tt>成为<a href="qt.html">Qt</a>的一个子类。我们包含<a href="qstring-h.html">qstring.h</a>用来使用Qt的Unicode字符串。为了方便，我们<tt>类型定义</tt>一个<tt>Element</tt>的矢量容器，这就是我们为什么把<a href="qvaluevector-h.html">qvaluevector.h</a>头文件放到这里的原因。
+<p> <pre>    typedef QValueVector&lt;Element&gt; ElementVector;
+</pre>
+<p> Qt提供了大量的容器，一些是基于值的，比如<a href="qvaluevector.html">QValueVector</a>，其它一些基于指针。（请看<a href="collection.html">集合类</a>。）这里我们只是类型定义了一个容器类型，我们将在<tt>ElementVector</tt>中保存每一个元素数据组。
+<p> <pre>    const double EPSILON = 0.0000001; // 必须 &gt; INVALID。
+</pre>
+<p> 元素也许只能是正的值。因为我们使用双精度实数来存储值，我们不能很容易地拿它们和零作比较。所以我们指定一个值，<tt>EPSILON</tt>，它和零非常接近，并且任何比<tt>EPSILON</tt>大的值可以被认为是正的和有效的。
+<p> <pre>    class Element
+    {
+    public:
+        enum { INVALID = -1 };
+        enum { NO_PROPORTION = -1 };
+        enum { MAX_PROPOINTS = 3 }; // 每个图表类型一个比例值
+</pre>
+<p> 我们给<tt>Element</tt>定义了三个公有的枚举变量。<tt>INVALID</tt>被isValid()函数使用。它是有用的，因为我们将用使用一个固定大小的<tt>Element</tt>矢量，并且可以通过给定<tt>INVALID</tt>值来标明未使用的<tt>Element</tt>。<tt>NO_PROPORTION</tt>枚举变量用来表明用户还没有定位元素的标签，任何正的比例值都被用来作为与画布大小成比例的文本元素的位置。
+<p> 如果我们存储每一个标签的实际x和y的位置，当用户每次重新定义主窗口大小（同样也对画布）的时候，文本会保留它的初始（现在是错的）位置。所以我们不存储绝对(x,y)位置，我们存储<em>比例</em>位置，比如x/width和y/height。然后当我们画文本的时候，我们分别用当前的宽度和高度来乘这些位置，这样不管大小如何变化，文本都会被正确定位。比如，如果标签的x位置为300，画布有400像素宽，x的比例值为300/400 = 0.75。
+<p> <tt>MAX_PROPOINTS</tt>枚举变量是有些疑问的。我们对于每一个图表类型的文本标签都要存储x和y的比例。并且我们已经选择把这些比例存储到一个固定大小的数组中。因为我们必须指定所需要的比例对的最大数字。如果我们改变图表类型的数字，这个值就必须被改变，这也就是说<tt>Element</tt>类和由<tt>ChartForm</tt>所提供的图表类型的数字是紧密联系的。在一个更大的应用程序中，我们也许使用一个矢量来存储这些点并且根据所能提供的图表类型的数量来动态改变它的大小。
+<p> <pre>        Element( double value = INVALID, QColor valueColor = Qt::gray,
+                 int valuePattern = Qt::SolidPattern,
+                 const <a href="qstring.html">QString</a>&amp; label = <a href="qstring.html#QString-null">QString::null</a>,
+                 <a href="qcolor.html">QColor</a> labelColor = Qt::black ) {
+            init( value, valueColor, valuePattern, label, labelColor );
+            for ( int i = 0; i &lt; MAX_PROPOINTS * 2; ++i )
+                m_propoints[i] = NO_PROPORTION;
+        }
+</pre>
+<p> 构造函数为<tt>Element</tt>类的所有成员变量提供了默认值。新的元素总是有没有位置的标签文本。我们是用init()函数是因为我们也提供了一个set()函数，除了比例位置它做的和构造函数一样。
+<p> <pre>        bool isValid() const { return m_value &gt; EPSILON; }
+</pre>
+<p> 因为我们正在把<tt>Element</tt>存储到一个固定大小的矢量中，所以我们需要检测一个特定元素是否有效（比如应该被用来计算和显示）。通过isValid()函数很容易到达这一目的。
+<p> （由<tt>element.cpp</tt>展开。）
+
+<p> 
+
+<pre>    double Element::proX( int index ) const
+    {
+        <a href="qapplication.html#Q_ASSERT">Q_ASSERT</a>(index &gt;= 0 &amp;&amp; index &lt; MAX_PROPOINTS);
+        return m_propoints[2 * index];
+    }
+</pre>
+<p> 这里对<tt>Element</tt>的所有成员都提供了读取函数和设置函数。proX()和proY()读取函数和setProX()和setProY()设置函数用来读取和设置一个用来确定比例位置所适用的图表的类型索引。这也就是说用户可以为用于竖直条图表、水平条图表和饼形图表的相同数据组设定不同的标签位置。注意我们也使用<tt>Q_ASSERT</tt>宏来提供对图表类型索引的预先情况测试，（请看<a href="debug.html">调试</a>）。
+<p> <h2> 读写数据元素
+</h2>
+<a name="1"></a><p> （由<tt>element.h</tt>展开。）
+<p> 
+
+<pre>    Q_EXPORT QTextStream &amp;operator&lt;&lt;( <a href="qtextstream.html">QTextStream</a>&amp;, const Element&amp; );
+    Q_EXPORT QTextStream &amp;operator&gt;&gt;( <a href="qtextstream.html">QTextStream</a>&amp;, Element&amp; );
+</pre>
+<p> 为了使我们的<tt>Element</tt>类更加独立，我们提供了&lt;&lt;和&gt;&gt;的操作符重载，这样<tt>Element</tt>就可以被文本流读写。我们也可以很容易地使用二进制流，但是使用文本可以让用户使用文本编辑器来维护他们的数据，可以更容易的使用脚本语言来产生和过滤。
+<p> （由<tt>element.cpp</tt>展开。）
+<p> 
+
+<pre>    #include "element.h"
+
+    #include &lt;<a href="qstringlist-h.html">qstringlist.h</a>&gt;
+    #include &lt;<a href="qtextstream-h.html">qtextstream.h</a>&gt;
+</pre>
+<p> 我们对于操作符的实现需要包含<a href="qtextstream-h.html">qtextstream.h</a>和<a href="qstringlist-h.html">qstringlist.h</a>。
+<p> <pre>    const char FIELD_SEP = ':';
+    const char PROPOINT_SEP = ';';
+    const char XY_SEP = ',';
+</pre>
+<p> 我们用来存储数据的格式是用冒号来分隔字段，用换行来分隔记录。比例点用分号间隔，它们的x和y使用逗号分隔。字段的顺序是值、值的颜色、值的样式、标签颜色、标签点、标签文本。比如：
+<pre>
+20:#ff0000:14:#000000:0.767033,0.412946;0,0.75;0,0:Red :with colons:!
+70:#00ffff:2:#ffff00:0.450549,0.198661;0.198516,0.125954;0,0.198473:Cyan
+35:#0000ff:8:#555500:0.10989,0.299107;0.397032,0.562977;0,0.396947:Blue
+55:#ffff00:1:#000080:0.0989011,0.625;0.595547,0.312977;0,0.59542:Yellow
+80:#ff00ff:1:#000000:0.518681,0.694196;0.794063,0;0,0.793893:Magenta or Violet
+</pre>
+ 
+<p> 我们阅读<tt>Element</tt>数据的方式中对于文本标签中的空白符和字段间隔符都没有问题。
+<p> <pre>    QTextStream &amp;operator&lt;&lt;( <a href="qtextstream.html">QTextStream</a> &amp;s, const Element &amp;element )
+    {
+        s &lt;&lt; element.value() &lt;&lt; FIELD_SEP
+          &lt;&lt; element.valueColor().name() &lt;&lt; FIELD_SEP
+          &lt;&lt; element.valuePattern() &lt;&lt; FIELD_SEP
+          &lt;&lt; element.labelColor().name() &lt;&lt; FIELD_SEP;
+
+        for ( int i = 0; i &lt; Element::MAX_PROPOINTS; ++i ) {
+            s &lt;&lt; element.proX( i ) &lt;&lt; XY_SEP &lt;&lt; element.proY( i );
+            s &lt;&lt; ( i == Element::MAX_PROPOINTS - 1 ? FIELD_SEP : PROPOINT_SEP );
+        }
+
+        s &lt;&lt; element.label() &lt;&lt; '\n';
+
+        return s;
+    }
+</pre>
+<p> 写元素就是一直向前。每一个成员后面都被写一个字段间隔符。点被写成由逗号间隔的（<tt>XY_SEP</tt>）x和y的组合，每一对由<tt>PROPOINT_SEP</tt>分隔符分隔。最后一个字段是标签和接着的换行符。
+<p> <pre>    QTextStream &amp;operator&gt;&gt;( <a href="qtextstream.html">QTextStream</a> &amp;s, Element &amp;element )
+    {
+    <a name="x2401"></a>    <a href="qstring.html">QString</a> data = s.<a href="qtextstream.html#readLine">readLine</a>();
+        element.setValue( Element::INVALID );
+
+        int errors = 0;
+        bool ok;
+
+    <a name="x2400"></a>    <a href="qstringlist.html">QStringList</a> fields = QStringList::<a href="qstringlist.html#split">split</a>( FIELD_SEP, data );
+    <a name="x2403"></a>    if ( fields.<a href="qvaluelist.html#count">count</a>() &gt;= 4 ) {
+            double value = fields[0].toDouble( &amp;ok );
+            if ( !ok )
+                errors++;
+            <a href="qcolor.html">QColor</a> valueColor = QColor( fields[1] );
+    <a name="x2398"></a>        if ( !valueColor.<a href="qcolor.html#isValid">isValid</a>() )
+                errors++;
+            int valuePattern = fields[2].toInt( &amp;ok );
+            if ( !ok )
+                errors++;
+            <a href="qcolor.html">QColor</a> labelColor = QColor( fields[3] );
+            if ( !labelColor.<a href="qcolor.html#isValid">isValid</a>() )
+                errors++;
+            <a href="qstringlist.html">QStringList</a> propoints = QStringList::<a href="qstringlist.html#split">split</a>( PROPOINT_SEP, fields[4] );
+    <a name="x2399"></a>        <a href="qstring.html">QString</a> label = data.<a href="qstring.html#section">section</a>( FIELD_SEP, 5 );
+
+            if ( !errors ) {
+                element.set( value, valueColor, valuePattern, label, labelColor );
+                int i = 0;
+    <a name="x2402"></a>            for ( QStringList::iterator point = propoints.<a href="qvaluelist.html#begin">begin</a>();
+    <a name="x2404"></a>                i &lt; Element::MAX_PROPOINTS &amp;&amp; point != propoints.<a href="qvaluelist.html#end">end</a>();
+                    ++i, ++point ) {
+                    errors = 0;
+                    <a href="qstringlist.html">QStringList</a> xy = QStringList::<a href="qstringlist.html#split">split</a>( XY_SEP, *point );
+                    double x = xy[0].toDouble( &amp;ok );
+                    if ( !ok || x &lt;= 0.0 || x &gt;= 1.0 )
+                        errors++;
+                    double y = xy[1].toDouble( &amp;ok );
+                    if ( !ok || y &lt;= 0.0 || y &gt;= 1.0 )
+                        errors++;
+                    if ( errors )
+                        x = y = Element::NO_PROPORTION;
+                    element.setProX( i, x );
+                    element.setProY( i, y );
+                }
+            }
+        }
+
+        return s;
+    }
+</pre>
+<p> 为了读取一个元素我们读取一条记录（比如一行）。我们使用<a href="qstringlist.html#split">QStringList::split</a>()来把数据分成字段。因为标签中有可能包含<tt>FIELD_SEP</tt>字符，所以我们使用<a href="qstring.html#section">QString::section</a>()来获得从最后一个字段到这一行结尾的所有文本。如果获得了足够的字段和值，颜色和样式数据是有效的，我们使用<tt>Element::set()</tt>来把这些数据写到元素中，否则我们就会设置这个元素为<tt>INVALID</tt>。然后我们对点也是这样。如果x和y比例是有效的并且在范围内，我们将会为元素设置它们。如果一个或两个比例是无效的，它们将认为值为零，这样是不合适的，所以我们将会改变无效的（和超出范围的）比例点的值为<tt>NO_PROPORTION</tt>。
+<p> 我们的<tt>Element</tt>类现在足够用来存储、维护和读写元素数据了。我们也创建了一个元素矢量类型定义来存储一个元素的集合。
+<p> 我们现在已经准备好通过我们的用户来生成、编辑和可视化他们的数据组来生成<tt>main.cpp</tt>和用户界面。
+<p> <center><table cellpadding="4" cellspacing="2" border="0">
+<tr bgcolor="#f0f0f0">
+<td valign="top">如果要获得更多的有关Qt的数据流工具请看<a href="datastreamformat.html">QDataStream操作符格式</a>，和任何一个被提及的和你所要存储的东西相似的Qt类的源代码。
+</table></center>
+<p> <p align=right>
+<a href="tutorial2-02.html">&laquo; “大图片”</a> |
+<a href="tutorial2.html">目录</a> |
+<a href="tutorial2-04.html">主体很容易 &raquo;</a>
+</p>
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>
+

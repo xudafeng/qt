@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QGroupBox类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QGroupBox类参考</h1>
+
+<p>QGroupBox窗口部件提供了一个有标题的组合框。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qgroupbox-h.html">qgroupbox.h</a>&gt;</tt>
+<p>继承了<a href="qframe.html">QFrame</a>。
+<p>被<a href="qbuttongroup.html">QButtonGroup</a>、<a href="qhgroupbox.html">QHGroupBox</a>和<a href="qvgroupbox.html">QVGroupBox</a>继承。
+<p><a href="qgroupbox-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QGroupBox"><b>QGroupBox</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QGroupBox-2"><b>QGroupBox</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;title, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QGroupBox-3"><b>QGroupBox</b></a> ( int&nbsp;strips, Orientation&nbsp;orientation, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QGroupBox-4"><b>QGroupBox</b></a> ( int&nbsp;strips, Orientation&nbsp;orientation, const&nbsp;QString&nbsp;&amp;&nbsp;title, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>virtual void <a href="#setColumnLayout"><b>setColumnLayout</b></a> ( int&nbsp;strips, Orientation&nbsp;direction )</div></li>
+<li><div class=fn>QString <a href="#title"><b>title</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setTitle"><b>setTitle</b></a> ( const QString &amp; )</div></li>
+<li><div class=fn>int <a href="#alignment"><b>alignment</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setAlignment"><b>setAlignment</b></a> ( int )</div></li>
+<li><div class=fn>int <a href="#columns"><b>columns</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setColumns"><b>setColumns</b></a> ( int )</div></li>
+<li><div class=fn>Orientation <a href="#orientation"><b>orientation</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setOrientation"><b>setOrientation</b></a> ( Orientation )</div></li>
+<li><div class=fn>int <a href="#insideMargin"><b>insideMargin</b></a> () const</div></li>
+<li><div class=fn>int <a href="#insideSpacing"><b>insideSpacing</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setInsideMargin"><b>setInsideMargin</b></a> ( int&nbsp;m )</div></li>
+<li><div class=fn>void <a href="#setInsideSpacing"><b>setInsideSpacing</b></a> ( int&nbsp;s )</div></li>
+<li><div class=fn>void <a href="#addSpace"><b>addSpace</b></a> ( int&nbsp;size )</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>Alignment <a href="#alignment-prop"><b>alignment</b></a>&nbsp;- 组合框标题的对齐方式</div></li>
+<li><div class=fn>int <a href="#columns-prop"><b>columns</b></a>&nbsp;- 组合框中的列数或者行数（依赖<a href="#orientation-prop">orientation</a>）</div></li>
+<li><div class=fn>Orientation <a href="#orientation-prop"><b>orientation</b></a>&nbsp;- 组合框的当前方向</div></li>
+<li><div class=fn>QString <a href="#title-prop"><b>title</b></a>&nbsp;- 组合框的标题文本</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QGroupBox窗口部件提供了一个有标题的组合框。
+<p> 
+<p> 组合框提供一个框架、一个标题和一个键盘快捷键，并且显示在它里面地其它不同窗口部件。标题在上面，键盘快捷键移动<a href="focus.html#keyboard-focus">键盘焦点</a>到组合框的一个子窗口部件，并且子窗口部件将会排列在这个框架中地一个数组中。
+<p> 使用它的最简单方式是创建一个为你所想要的列数（或者行数）和方向的组合框，并且然后创建其它窗口部件时，把这个组合框作为父对象。
+<p> 然而，也可以在构造函数之后改变方向（<a href="#orientation">orientation</a>()）和列数（或者行数，<a href="#columns">columns</a>()），或者忽略所有自动布局支持并且自己来管理所有的这一切。你也可以通过<a href="#addSpace">addSpace</a>()把“空白”添加到组合框中。
+<p> QGroupBox也让你设置标题（<a href="#title">title</a>()，通常在构造函数中设置）和标题对齐方式（<a href="#alignment">alignment</a>()）。
+<p> 你可以通过<a href="#setInsideMargin">setInsideMargin</a>()和<a href="#setInsideSpacing">setInsideSpacing</a>()改变组合框所用的空白。
+<p> <img src=qgrpbox-w.png>
+<p> <p>也可以参考<a href="qbuttongroup.html">QButtonGroup</a>、<a href="appearance.html">窗口部件外观和风格</a>、<a href="geomanagement.html">布局管理</a>和<a href="organizers.html">组织者</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QGroupBox"></a>QGroupBox::QGroupBox ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个没有标题的组合框。
+<p> <em>parent</em>和<em>name</em>参数被传递给<a href="qwidget.html">QWidget</a>构造函数。
+<p> 这个构造函数不做自动布局。
+
+<h3 class=fn><a name="QGroupBox-2"></a>QGroupBox::QGroupBox ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;title, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个标题为<em>title</em>的组合框。
+<p> <em>parent</em>和<em>name</em>参数被传递给<a href="qwidget.html">QWidget</a>构造函数。
+<p> 这个构造函数不做自动布局。
+
+<h3 class=fn><a name="QGroupBox-3"></a>QGroupBox::QGroupBox ( int&nbsp;strips, <a href="qt.html#Orientation-enum">Orientation</a>&nbsp;orientation, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个没有标题的组合框。子窗口部件会被排列在<em>strips</em>列或者行中（依赖<em>orientation</em>）。
+<p> <em>parent</em>和<em>name</em>参数被传递给<a href="qwidget.html">QWidget</a>构造函数。
+
+<h3 class=fn><a name="QGroupBox-4"></a>QGroupBox::QGroupBox ( int&nbsp;strips, <a href="qt.html#Orientation-enum">Orientation</a>&nbsp;orientation, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;title, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个标题为<em>title</em>的组合框。子窗口部件会被排列在<em>strips</em>列或者行中（依赖<em>orientation</em>）。
+<p> <em>parent</em>和<em>name</em>参数被传递给<a href="qwidget.html">QWidget</a>构造函数。
+
+<h3 class=fn>void <a name="addSpace"></a>QGroupBox::addSpace ( int&nbsp;size )
+</h3>
+在下一个的自由位置添加一个空白单元格。如果<em>size</em>大于0，空白单元格就有固定的高度或宽度。如果组合框是水平方向，这个空白单元格就有固定的高度，如果组合框是垂直方向，这个空白单元格就有固定的宽度。
+<p> 使用这个方法来分隔组合框中的窗口部件或者来略过下一个自由单元格。由于性能的原因，请在调用<a href="#setColumnLayout">setColumnLayout</a>()或者改变<a href="#columns-prop">QGroupBox::columns</a>或<a href="#orientation-prop">QGroupBox::orientation</a>属性之后，调用这个方法。首先调用这些方法（如果需要的话）通常是一个不错的主意，并且在这之后插入窗口部件和间隔。
+
+<h3 class=fn>int <a name="alignment"></a>QGroupBox::alignment () const
+</h3>
+<p>返回组合框标题的对齐方式。详细情况请参考<a href="qgroupbox.html#alignment-prop">“alignment”</a>属性。
+
+<h3 class=fn>int <a name="columns"></a>QGroupBox::columns () const
+</h3>
+<p>返回组合框中的列数或者行数（依赖<a href="#orientation-prop">orientation</a>）。详细情况请参考<a href="qgroupbox.html#columns-prop">“columns”</a>属性。
+
+<h3 class=fn>int <a name="insideMargin"></a>QGroupBox::insideMargin () const
+</h3>
+返回组合框中的项和框架之间的空白的宽度。
+<p> 仅仅适用于组合框有一个定义的方向。
+<p> 默认大约为11。
+<p> <p>也可以参考<a href="#setInsideMargin">setInsideMargin</a>()和<a href="#orientation-prop">orientation</a>。
+
+<h3 class=fn>int <a name="insideSpacing"></a>QGroupBox::insideSpacing () const
+</h3>
+返回组合框中各项之间的空白的宽度。
+<p> 仅仅适用于组合框有一个定义的方向。
+<p> 默认大约为5。
+<p> <p>也可以参考<a href="#setInsideSpacing">setInsideSpacing</a>()和<a href="#orientation-prop">orientation</a>。
+
+<h3 class=fn><a href="qt.html#Orientation-enum">Orientation</a> <a name="orientation"></a>QGroupBox::orientation () const
+</h3>
+<p>返回组合框的当前方向。详细情况请参考<a href="qgroupbox.html#orientation-prop">“orientation”</a>属性。
+
+<h3 class=fn>void <a name="setAlignment"></a>QGroupBox::setAlignment ( int )<tt> [虚]</tt>
+</h3>
+<p>设置组合框标题的对齐方式。详细情况请参考<a href="qgroupbox.html#alignment-prop">“alignment”</a>属性。
+
+<h3 class=fn>void <a name="setColumnLayout"></a>QGroupBox::setColumnLayout ( int&nbsp;strips, <a href="qt.html#Orientation-enum">Orientation</a>&nbsp;direction )<tt> [虚]</tt>
+</h3>
+改变组合框的布局。这个函数只有和没有使用任何布局信息的默认构造函数联合使用才有用。这个函数会把所有已经存在的子对象放入新的布局中。在已经插入子对象之后再调用这个函数不是很好的Qt编程风格。
+<p> <p>也可以参考<a href="#orientation-prop">orientation</a>和<a href="#columns-prop">columns</a>。
+<p>实例：<a href="tutorial2-09.html#x2546">chart/optionsform.cpp</a>。
+
+<h3 class=fn>void <a name="setColumns"></a>QGroupBox::setColumns ( int )
+</h3>
+<p>设置组合框中的列数或者行数（依赖<a href="#orientation-prop">orientation</a>）。详细情况请参考<a href="qgroupbox.html#columns-prop">“columns”</a>属性。
+
+<h3 class=fn>void <a name="setInsideMargin"></a>QGroupBox::setInsideMargin ( int&nbsp;m )
+</h3>
+设置组合框中的项和框架之间的空白的宽度为<em>m</em>象素。
+<p> <p>也可以参考<a href="#insideSpacing">insideSpacing</a>()。
+
+<h3 class=fn>void <a name="setInsideSpacing"></a>QGroupBox::setInsideSpacing ( int&nbsp;s )
+</h3>
+设置组合框中各项之间的空白的宽度为<em>m</em>象素。
+
+<h3 class=fn>void <a name="setOrientation"></a>QGroupBox::setOrientation ( <a href="qt.html#Orientation-enum">Orientation</a> )
+</h3>
+<p>设置组合框的当前方向。详细情况请参考<a href="qgroupbox.html#orientation-prop">“orientation”</a>属性。
+
+<h3 class=fn>void <a name="setTitle"></a>QGroupBox::setTitle ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3>
+<p>设置组合框的标题文本。详细情况请参考<a href="qgroupbox.html#title-prop">“title”</a>属性。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="title"></a>QGroupBox::title () const
+</h3>
+<p>返回组合框的标题文本。详细情况请参考<a href="qgroupbox.html#title-prop">“title”</a>属性。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>Alignment <a name="alignment-prop"></a>alignment</h3>
+<p>这个属性保存的是组合框标题的对齐方式。
+<p>标题总是被放在框架上面的那行中，可是，水平对齐方式可以由这个对齐参数指定。
+<p> 对齐方式是下述标记之一：
+<ul>
+<li> <a href="qt.html#AlignmentFlags-enum">AlignAuto</a>根据语言对齐标题，通常为左。
+<li> <a href="qt.html#AlignmentFlags-enum">AlignLeft</a>左对齐标题。
+<li> <a href="qt.html#AlignmentFlags-enum">AlignRight</a>右对齐标题。
+<li> <a href="qt.html#AlignmentFlags-enum">AlignHCenter</a>中间对齐标题。
+</ul>
+<p> 默认的对齐方式是<a href="qt.html#AlignmentFlags-enum">AlignAuto</a>。
+<p> <p>也可以参考<a href="qt.html#AlignmentFlags-enum">Qt::AlignmentFlags</a>。
+<p>通过<a href="#setAlignment">setAlignment</a>()设置属性值并且通过<a href="#alignment">alignment</a>()来获得属性值。
+
+<h3 class=fn>int <a name="columns-prop"></a>columns</h3>
+<p>这个属性保存的是组合框中的列数或者行数（依赖<a href="#orientation-prop">orientation</a>）。
+<p>通常设置这个属性不是一个好主意，因为这会使它变慢（它是一个完全的布局）。最好在构造函数中直接设置列数或者行数。
+<p>通过<a href="#setColumns">setColumns</a>()设置属性值并且通过<a href="#columns">columns</a>()来获得属性值。
+
+<h3 class=fn><a href="qt.html#Orientation-enum">Orientation</a> <a name="orientation-prop"></a>orientation</h3>
+<p>这个属性保存的是组合框的当前方向。
+<p>水平组合框把它的子对象按列排列，而垂直组合框会按行排列它们。因此只有一列的水平组合框会把它的子对象垂直地排列在这列中。
+<p>通常设置这个属性不是一个好主意，因为这会使它变慢（它是一个完全的布局）。最好在构造函数中直接设置方向。
+<p>通过<a href="#setOrientation">setOrientation</a>()设置属性值并且通过<a href="#orientation">orientation</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="title-prop"></a>title</h3>
+<p>这个属性保存的是组合框的标题文本。
+<p>如果这个标题包含一个&amp;，后面还有一个字母，这个组合框标题文本将会又一个焦点改变键盘快捷键。
+<p> <pre>
+      g-&gt;setTitle( "&amp;User information" );
+  </pre>
+这将会产生“User information”并且U下面有下划线。Alt+U会移动<a href="focus.html#keyboard-focus">键盘焦点</a>到这个组合框。
+<p> 没有默认标题文本。
+<p>通过<a href="#setTitle">setTitle</a>()设置属性值并且通过<a href="#title">title</a>()来获得属性值。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

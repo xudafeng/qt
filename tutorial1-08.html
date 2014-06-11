@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt教程一 —— 第八章：准备战斗</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt教程一 —— 第八章：准备战斗</h1>
+
+ 
+<p> <center><img src="t8.png" alt="Screenshot of tutorial eight"></center> 
+<p> 在这个例子中，我们介绍可以画自己的第一个自定义窗口部件。我们也加入了一个有用的键盘接口（只用了两行代码）。
+<p> <ul>
+<li> <a href="t8-lcdrange-h.html">t8/lcdrange.h</a>包含LCDRange类定义。
+<li> <a href="t8-lcdrange-cpp.html">t8/lcdrange.cpp</a>包含LCDRange类实现。
+<li> <a href="t8-cannon-h.html">t8/cannon.h</a>包含CannonField类定义。
+<li> <a href="t8-cannon-cpp.html">t8/cannon.cpp</a>包含CannonField类实现。
+<li> <a href="t8-main-cpp.html">t8/main.cpp</a>包含MyWidget和main。
+</ul>
+<p> <h2> 一行一行地解说
+</h2>
+<a name="1"></a><p> <h3> <a href="t8-lcdrange-h.html">t8/lcdrange.h</a>
+</h3>
+<a name="1-1"></a><p> 这个文件和第七章中的lcdrange.h很相似。我们添加了一个槽：setRange()。
+<p> 
+
+<p> <pre>        void setRange( int minVal, int maxVal );
+</pre>
+<p> 现在我们添加了设置LCDRange范围的可能性。直到现在，它就可以被设置为0～99。
+<p> <h3> <a href="t8-lcdrange-cpp.html">t8/lcdrange.cpp</a>
+</h3>
+<a name="1-2"></a><p> 
+
+<p> 在构造函数中有一个变化（稍后我们会讨论的）。
+<p> <pre>    void LCDRange::setRange( int minVal, int maxVal )
+    {
+        if ( minVal &lt; 0 || maxVal &gt; 99 || minVal &gt; maxVal ) {
+          <a href="qapplication.html#qWarning">qWarning</a>( "LCDRange::setRange(%d,%d)\n"
+                   "\tRange must be 0..99\n"
+                   "\tand minVal must not be greater than maxVal",
+                   minVal, maxVal );
+          return;
+        }
+    <a name="x2266"></a>    slider-&gt;<a href="qrangecontrol.html#setRange">setRange</a>( minVal, maxVal );
+    }
+</pre>
+<p> setRange()设置了LCDRange中滑块的范围。因为我们已经把<a href="qlcdnumber.html">QLCDNumber</a>设置为只显示两位数字了，我们想通过限制<tt>minVal</tt>和<tt>maxVal</tt>为0~99来避免QLCDNumber的溢出。（我们可以允许最小值为-9，但是我们没有那样做。）如果参数是非法的，我们使用Qt的<a href="qapplication.html#qWarning">qWarning</a>()函数来向用户发出警告并立即返回。qWarning()是一个像printf一样的函数，默认情况下它的输出发送到<tt>stderr</tt>。如果你想改变的话，你可以使用<a href="qapplication.html#qInstallMsgHandler">::qInstallMsgHandler</a>()函数安装自己的处理函数。
+<p> <h3> <a href="t8-cannon-h.html">t8/cannon.h</a>
+</h3>
+<a name="1-3"></a><p> CanonField是一个知道如何显示自己的新的自定义窗口部件。
+<p> 
+
+<p> <pre>    class CannonField : public <a href="qwidget.html">QWidget</a>
+    {
+        <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>
+    public:
+        CannonField( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+</pre>
+<p> CanonField继承了<a href="qwidget.html">QWidget</a>，我们使用了LCDRange中同样的方式。
+<p> <pre>        int angle() const { return ang; }
+        <a href="qsizepolicy.html">QSizePolicy</a> sizePolicy() const;
+
+    public slots:
+        void setAngle( int degrees );
+
+    signals:
+        void angleChanged( int );
+</pre>
+<p> 目前，CanonField只包含一个角度值，我们使用了LCDRange中同样的方式。
+<p> <pre>    protected:
+        void paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * );
+</pre>
+<p> 这是我们在QWidget中遇到的许多事件处理器中的第二个。只要一个窗口部件需要刷新它自己（比如，画窗口部件表面），这个虚函数就会被Qt调用。
+<p> <h3> <a href="t8-cannon-cpp.html">t8/cannon.cpp</a>
+</h3>
+<a name="1-4"></a><p> 
+
+<p> <pre>    CannonField::CannonField( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qwidget.html">QWidget</a>( parent, name )
+    {
+</pre>
+<p> 我们又一次使用和前一章中的LCDRange同样的方式。
+<p> <pre>        ang = 45;
+        <a href="qwidget.html#setPalette">setPalette</a>( QPalette( QColor( 250, 250, 200) ) );
+    }
+</pre>
+<p> 构造函数把角度值初始化为45度并且给这个窗口部件设置了一个自定义调色板。
+<p> 这个调色板只是说明背景色，并选择了其它合适的颜色。（对于这个窗口部件，只有背景色和文本颜色是要用到的。）
+<p> <pre>    void CannonField::setAngle( int degrees )
+    {
+        if ( degrees &lt; 5 )
+            degrees = 5;
+        if ( degrees &gt; 70 )
+            degrees = 70;
+        if ( ang == degrees )
+            return;
+        ang = degrees;
+        <a href="qwidget.html#repaint">repaint</a>();
+        emit angleChanged( ang );
+    }
+</pre>
+<p> 这个函数设置角度值。我们选择了一个5～70的合法范围，并根据这个范围来调节给定的degrees的值。当新的角度值超过了范围，我们选择了不使用警告。
+<p> 如果新的角度值和旧的一样，我们立即返回。这只对当角度值<em>真的</em>发生变化时，发射angleChanged()信号有重要意义。
+<p> 然后我们设置新的角度值并重新画我们的窗口部件。<a href="qwidget.html#repaint">QWidget::repaint</a>()函数清空窗口部件（通常用背景色来充满）并向窗口部件发出一个绘画事件。这样的结构就是调用窗口部件的绘画事件函数一次。
+<p> 最后，我们发射angleChanged()信号来告诉外面的世界，角度值发生了变化。<tt>emit</tt>关键字只是Qt中的关键字，而不是标准C++的语法。实际上，它只是一个宏。
+<p> <pre>    <a name="x2268"></a>void CannonField::<a href="qwidget.html#paintEvent">paintEvent</a>( <a href="qpaintevent.html">QPaintEvent</a> * )
+    {
+        <a href="qstring.html">QString</a> s = "Angle = " + QString::number( ang );
+        <a href="qpainter.html">QPainter</a> p( this );
+    <a name="x2267"></a>    p.<a href="qpainter.html#drawText">drawText</a>( 200, 200, s );
+    }
+</pre>
+<p> 这是我们第一次试图写一个绘画事件处理程序。这个事件参数包含一个绘画事件的描述。<a href="qpaintevent.html">QPaintEvent</a>包含一个必须被刷新的窗口部件的区域。现在，我们比较懒惰，并且只是画每一件事。
+<p> 我们的代码在一个固定位置显示窗口部件的角度值。首先我们创建一个含有一些文本和角度值的<a href="qstring.html">QString</a>，然后我们创建一个操作这个窗口部件的<a href="qpainter.html">QPainter</a>并使用它来画这个字符串。我们一会儿会回到QPainter，它可以做很多事。
+<p> <h3> <a href="t8-main-cpp.html">t8/main.cpp</a>
+</h3>
+<a name="1-5"></a><p> 
+
+<p> <pre>    #include "cannon.h"
+</pre>
+<p> 我们包含了我们的新类：
+<p> <pre>    class MyWidget: public <a href="qwidget.html">QWidget</a>
+    {
+    public:
+        MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+    };
+</pre>
+<p> 这一次我们在顶层窗口部件中只使用了一个LCDRange和一个CanonField。
+<p> <pre>        LCDRange *angle = new LCDRange( this, "angle" );
+</pre>
+<p> 在构造函数中，我们创建并设置了我们的LCDRange。
+<p> <pre>        angle-&gt;setRange( 5, 70 );
+</pre>
+<p> 我们设置LCDRange能够接受的范围是5～70度。
+<p> <pre>        CannonField *cannonField
+            = new CannonField( this, "cannonField" );
+</pre>
+<p> 我们创建了我们的CannonField。
+<p> <pre>        <a href="qobject.html#connect">connect</a>( angle, SIGNAL(valueChanged(int)),
+                 cannonField, SLOT(setAngle(int)) );
+        <a href="qobject.html#connect">connect</a>( cannonField, SIGNAL(angleChanged(int)),
+                 angle, SLOT(setValue(int)) );
+</pre>
+<p> 这里我们把LCDRange的valueChanged()信号和CannonField的setAngle()槽连接起来了。只要用户操作LCDRange，就会刷新CannonField的角度值。我们也把它反过来连接了，这样CannonField中角度的变化就可以刷新LCDRange的值。在我们的例子中，我们从来没有直接改变CannonField的角度，但是通过我们的最后一个connect()我们就可以确保没有任何变化可以改变这两个值之间的同步关系。
+<p> 这说明了组件编程和正确封装的能力。
+<p> 注意只有当角度确实发生变化时，才发射angleChanged()是多么的重要。如果LCDRange和CanonField都省略了这个检查，这个程序就会因为第一次数值变化而进入到一个无限循环当中。
+<p> <pre>        <a href="qgridlayout.html">QGridLayout</a> *grid = new <a href="qgridlayout.html">QGridLayout</a>( this, 2, 2, 10 );
+        //2×2，10像素的边界
+</pre>
+<p> 到现在为止，我们没有因为几何管理把<a href="qvbox.html">QVBox</a>和<a href="qgrid.html">QGrid</a>窗口部件集成到一起。现在，无论如何，我们需要对我们的布局加一些控制，所以我们使用了更加强大的<a href="qgridlayout.html">QGridLayout</a>类。QGridLayout不是一个窗口部件，它是一个可以管理<em>任何</em>窗口部件作为子对象的不同的类。
+<p> 就像注释中所说的，我们创建了一个以10像素为边界的2*2的数组。（<a href="qgridlayout.html">QGridLayout</a>的构造函数有一点神秘，所以最好在这里加入一些注释。）
+<p> <pre>    <a name="x2269"></a>    grid-&gt;<a href="qgridlayout.html#addWidget">addWidget</a>( quit, 0, 0 );
+</pre>
+<p> 我们在网格的左上的单元格中加入一个Quit按钮：0,0。
+<p> <pre>        grid-&gt;<a href="qgridlayout.html#addWidget">addWidget</a>( angle, 1, 0, Qt::AlignTop );
+</pre>
+<p> 我们把angle这个LCDRange放到左下的单元格，在单元格内向上对齐。（这只是QGridLayout所允许的一种对齐方式，而QGrid不允许。）
+<p> <pre>        grid-&gt;<a href="qgridlayout.html#addWidget">addWidget</a>( cannonField, 1, 1 );
+</pre>
+<p> 我们把CannonField对象放到右下的单元格。（右上的单元格是空的。）
+<p> <pre>    <a name="x2270"></a>    grid-&gt;<a href="qgridlayout.html#setColStretch">setColStretch</a>( 1, 10 );
+</pre>
+<p> 我们告诉<a href="qgridlayout.html">QGridLayout</a>右边的列（列1）是可拉伸的。因为左边的列不是（它的<a href="layout.html#stretch-factor">拉伸因数</a>是0，这是默认值），QGridLayout就会在MyWidget被重新定义大小的时候试图让左面的窗口部件大小不变，而重新定义CannonField的大小。
+<p> <pre>        angle-&gt;setValue( 60 );
+</pre>
+<p> 我们设置了一个初始角度值。注意这将会引发从LCDRange到CannonField的连接。
+<p> <pre>    <a name="x2271"></a>    angle-&gt;<a href="qwidget.html#setFocus">setFocus</a>();
+</pre>
+<p> 我们刚才做的是设置<tt>angle</tt>获得<a href="focus.html#keyboard-focus">键盘焦点</a>，这样默认情况下键盘输入会到达LCDRange窗口部件。
+<p> LCDRange没有包含任何keyPressEvent()，所以这看起来不太可能有用。无论如何，它的构造函数中有了新的一行：
+<p> 
+
+<pre>        <a href="qwidget.html#setFocusProxy">setFocusProxy</a>( slider );
+</pre>
+<p> LCDRange设置滑块作为它的焦点代理。这就是说当程序或者用户想要给LCDRange一个键盘焦点，滑块就会就会注意到它。<a href="qslider.html">QSlider</a>有一个相当好的键盘接口，所以就会出现我们给LCDRange添加的这一行。
+<p> <h2> 行为
+</h2>
+<a name="2"></a><p> 键盘现在可以做一些事了——方向键、Home、End、PageUp和PageDown都可以作一些事情。
+<p> 当滑块被操作，CannonFiled会显示新的角度值。如果重新定义大小，CannonField会得到尽可能多的空间。
+<p> 在8位的Windows机器上显示新的颜色会颤动的要命。下一章会处理这些的。
+<p> （请看<a href="tutorial1-07.html#compiling">编译</a>来学习如何创建一个makefile和连编应用程序。）
+<p> <h2> 练习
+</h2>
+<a name="3"></a><p> 设置重新定义窗口的大小。如果你把它变窄或者变矮会发生什么？
+<p> 如果你把AlignTop删掉，LCDRange的位置会发生什么变化？为什么？
+<p> 如果你给左面的列一个非零的拉伸因数，当你重新定义窗口大小时会发生什么？
+<p> 不考虑setFocus()调用。你更喜欢什么样的行为？
+<p> 试着在<a href="qbutton.html#setText">QButton::setText</a>()调用中把“Quit”改为“&Quit”。按钮看起来变成什么样子了？如果你在程序运行的时候按下Alt+Q会发生什么？（在少量键盘中时Meta+Q。）
+<p> 把CannonField的文本放到中间。
+<p> 现在你可以进行<a href="tutorial1-09.html">第九章</a>了。
+<p> [<a href="tutorial1-07.html">上一章</a>]
+[<a href="tutorial1-09.html">下一章</a>]
+[<a href="tutorial.html">教程一主页</a>]
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

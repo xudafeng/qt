@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QEvent类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QEvent类参考</h1>
+
+<p>QEvent类是所有事件类的基类。事件类包含事件参数。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qevent-h.html">qevent.h</a>&gt;</tt>
+<p>继承了<a href="qt.html">Qt</a>。
+<p>由<a href="qtimerevent.html">QTimerEvent</a>、<a href="qmouseevent.html">QMouseEvent</a>、<a href="qwheelevent.html">QWheelEvent</a>、<a href="qtabletevent.html">QTabletEvent</a>、<a href="qkeyevent.html">QKeyEvent</a>、<a href="qfocusevent.html">QFocusEvent</a>、<a href="qpaintevent.html">QPaintEvent</a>、<a href="qmoveevent.html">QMoveEvent</a>、<a href="qresizeevent.html">QResizeEvent</a>、<a href="qcloseevent.html">QCloseEvent</a>、<a href="qshowevent.html">QShowEvent</a>、<a href="qhideevent.html">QHideEvent</a>、<a href="qcontextmenuevent.html">QContextMenuEvent</a>、<a href="qimevent.html">QIMEvent</a>、<a href="qdropevent.html">QDropEvent</a>、<a href="qdragleaveevent.html">QDragLeaveEvent</a>、<a href="qchildevent.html">QChildEvent</a>和<a href="qcustomevent.html">QCustomEvent</a>继承。
+<p><a href="qevent-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>enum Type { None = 0, Timer = 1, MouseButtonPress = 2, MouseButtonRelease = 3, MouseButtonDblClick = 4, MouseMove = 5, KeyPress = 6, KeyRelease = 7, FocusIn = 8, FocusOut = 9, Enter = 10, Leave = 11, Paint = 12, Move = 13, Resize = 14, Create = 15, Destroy = 16, Show = 17, Hide = 18, Close = 19, Quit = 20, Reparent = 21, ShowMinimized = 22, ShowNormal = 23, WindowActivate = 24, WindowDeactivate = 25, ShowToParent = 26, HideToParent = 27, ShowMaximized = 28, ShowFullScreen = 29, Accel = 30, Wheel = 31, AccelAvailable = 32, CaptionChange = 33, IconChange = 34, ParentFontChange = 35, ApplicationFontChange = 36, ParentPaletteChange = 37, ApplicationPaletteChange = 38, PaletteChange = 39, Clipboard = 40, Speech = 42, SockAct = 50, AccelOverride = 51, DeferredDelete = 52, DragEnter = 60, DragMove = 61, DragLeave = 62, Drop = 63, DragResponse = 64, ChildInserted = 70, ChildRemoved = 71, LayoutHint = 72, ShowWindowRequest = 73, ActivateControl = 80, DeactivateControl = 81, ContextMenu = 82, IMStart = 83, IMCompose = 84, IMEnd = 85, Accessibility = 86, Tablet = 87, User = 1000, MaxUser = 65535 } &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn><a href="#QEvent"><b>QEvent</b></a> ( Type&nbsp;type )</div></li>
+<li><div class=fn>Type <a href="#type"><b>type</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#spontaneous"><b>spontaneous</b></a> () const</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QEvent类是所有事件类的基类。事件类包含事件参数。
+<p> 
+
+<p> Qt的主事件回路（<a href="qapplication.html#exec">QApplication::exec</a>()）从事件队列里取得本地窗口系统事件，并把它们转换为QEvent并且把这些转换过的事件发给QObject。
+<p> 通常情况下，来自于窗口系统的事件（<a href="#spontaneous">spontaneous</a>()返回真），但是它也可以使用<a href="qapplication.html#sendEvent">QApplication::sendEvent</a>()和<a href="qapplication.html#postEvent">QApplication::postEvent</a>()手动发送事件（spontaneous()返回假）。
+<p> QObject通过它们的<a href="qobject.html#event">QObject::event</a>()函数调用来接收事件。这个函数可以在子类中重新实现来处理自定义的事件和添加额外的事件类型，<a href="qwidget.html#event">QWidget::event</a>()就是一个著名的例子。默认情况下，像<a href="qobject.html#timerEvent">QObject::timerEvent</a>()和<a href="qwidget.html#mouseMoveEvent">QWidget::mouseMoveEvent</a>()这样的事件可以被发送给事件处理函数。<a href="qobject.html#installEventFilter">QObject::installEventFilter</a>()允许一个对象中途截取发往另一个对象的事件。
+<p> 基本的QEvent只包含了一个事件类型参数。QEvent的子类包含了额外的描述特定事件的参数。
+<p> <p>也可以参考<a href="qobject.html#event">QObject::event</a>()、<a href="qobject.html#installEventFilter">QObject::installEventFilter</a>()、<a href="qwidget.html#event">QWidget::event</a>()、<a href="qapplication.html#sendEvent">QApplication::sendEvent</a>()、a href="qapplication.html#postEvent">QApplication::postEvent</a>()、<a href="qapplication.html#processEvents">QApplication::processEvents</a>()、<a href="environment.html">Environment Classes</a>和<a href="events.html">事件类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="Type-enum"></a>QEvent::Type</h3>
+
+<p> 这个枚举类型定义了Qt中有效的事件类型。事件类型和每个类型的专门类如下：
+<ul>
+<li><tt>QEvent::None</tt> - 不是一个事件。
+<li><tt>QEvent::Accessibility</tt> - 可存取性信息被请求。
+<li><tt>QEvent::Timer</tt> - 规则的定时器事件，<a href="qtimerevent.html">QTimerEvent</a>。
+<li><tt>QEvent::MouseButtonPress</tt> - 鼠标按下，<a href="qmouseevent.html">QMouseEvent</a>。
+<li><tt>QEvent::MouseButtonRelease</tt> - 鼠标抬起，<a href="qmouseevent.html">QMouseEvent</a>。
+<li><tt>QEvent::MouseButtonDblClick</tt> - 鼠标再次按下，a href="qmouseevent.html">QMouseEvent</a>。
+<li><tt>QEvent::MouseMove</tt> - 鼠标移动，<a href="qmouseevent.html">QMouseEvent</a>。
+<li><tt>QEvent::KeyPress</tt> - 键按下（举例，包括Shift）<a href="qkeyevent.html">QKeyEvent</a>。
+<li><tt>QEvent::KeyRelease</tt> - 键抬起，<a href="qkeyevent.html">QKeyEvent</a>。
+<li><tt>QEvent::IMStart</tt> - 输入法写作开始。
+<li><tt>QEvent::IMCompose</tt> - 发生输入法写作。
+<li><tt>QEvent::IMEnd</tt> - 输入法写作结束。
+<li><tt>QEvent::FocusIn</tt> - 窗口部件获得<a href="focus.html#keyboard-focus">键盘焦点</a>，<a href="qfocusevent.html">QFocusEvent</a>。
+<li><tt>QEvent::FocusOut</tt> - 窗口部件失去键盘焦点，<a href="qfocusevent.html">QFocusEvent</a>。
+<li><tt>QEvent::Enter</tt> - 鼠标进入窗口部件边缘。
+<li><tt>QEvent::Leave</tt> - 鼠标离开窗口部件边缘。
+<li><tt>QEvent::Paint</tt> - 屏幕更新所需要的，<a href="qpaintevent.html">QPaintEvent</a>。
+<li><tt>QEvent::Move</tt> - 窗口部件位置改变了，<a href="qmoveevent.html">QMoveEvent</a>。
+<li><tt>QEvent::Resize</tt> - 窗口部件大小改变了，<a href="qresizeevent.html">QResizeEvent</a>。
+<li><tt>QEvent::Show</tt> - 窗口部件被显示到屏幕上，<a href="qshowevent.html">QShowEvent</a>。
+<li><tt>QEvent::Hide</tt> - 窗口部件被隐藏，<a href="qhideevent.html">QHideEvent</a>。
+<li><tt>QEvent::ShowToParent</tt> - 一个子窗口部件被显示。
+<li><tt>QEvent::HideToParent</tt> - 一个子窗口部件被隐藏。
+<li><tt>QEvent::Close</tt> - 窗口部件被关闭（永久性地） <a href="qcloseevent.html">QCloseEvent</a>。
+<li><tt>QEvent::ShowNormal</tt> - 窗口部件应该按通常模式显示。
+<li><tt>QEvent::ShowMaximized</tt> - 窗口部件应该按最大化模式显示。
+<li><tt>QEvent::ShowMinimized</tt> - 窗口部件应该按最小化模式显示。
+<li><tt>QEvent::ShowFullScreen</tt> - 窗口部件应该按全屏模式显示。
+<li><tt>QEvent::ShowWindowRequest</tt> - 窗口部件窗口应该被显示。<b>这个类型是废弃的。</b>它的提供是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<li><tt>QEvent::DeferredDelete</tt> - 在这个对象被清理干净之后，它将被删除。
+<li><tt>QEvent::Accel</tt> - 孩子中的键按下，用于快捷键处理。<a href="qkeyevent.html">QKeyEvent</a>。
+<li><tt>QEvent::Wheel</tt> - 鼠标滚轮转动，<a href="qwheelevent.html">QWheelEvent</a>。
+<li><tt>QEvent::ContextMenu</tt> - 上下文弹出菜单，<a href="qcontextmenuevent.html">QContextMenuEvent</a>。
+<li><tt>QEvent::AccelAvailable</tt> - 在一些平台上Qt使用的内部事件。
+<li><tt>QEvent::AccelOverride</tt> - Key press in child, for overriding shortcut key handling, <a href="qkeyevent.html">QKeyEvent</a>.
+<li><tt>QEvent::WindowActivate</tt> - 窗口被激活了。
+<li><tt>QEvent::WindowDeactivate</tt> - 窗口被停用了。
+<li><tt>QEvent::CaptionChange</tt> - 窗口部件的标题改变了。
+<li><tt>QEvent::IconChange</tt> - 窗口部件的图标改变了。
+<li><tt>QEvent::ParentFontChange</tt> - 父窗口部件的字体改变了。
+<li><tt>QEvent::ApplicationFontChange</tt> - 默认的应用程序字体改变了。
+<li><tt>QEvent::PaletteChange</tt> - 窗口部件的调色板改变了。
+<li><tt>QEvent::ParentPaletteChange</tt> - 父窗口部件的调色板改变了。
+<li><tt>QEvent::ApplicationPaletteChange</tt> - 默认的应用程序调色板改变了。
+<li><tt>QEvent::Clipboard</tt> - 剪贴板内容发生改变，<a href="qclipboard.html">QClipboard</a>。
+<li><tt>QEvent::SockAct</tt> - 套接字触发，通常在<a href="qsocketnotifier.html">QSocketNotifier</a>中实现。
+<li><tt>QEvent::DragEnter</tt> - 一个拖拽进入了一个窗口部件，<a href="qdragenterevent.html">QDragEnterEvent</a>。
+<li><tt>QEvent::DragMove</tt> - 一个拖拽正在进行中，<a href="qdragmoveevent.html">QDragMoveEvent</a>。
+<li><tt>QEvent::DragLeave</tt> - 一个拖拽离开了窗口部件，<a href="qdragleaveevent.html">QDragLeaveEvent</a>。
+<li><tt>QEvent::Drop</tt> - 一个拖拽完成了，<a href="qdropevent.html">QDropEvent</a>。
+<li><tt>QEvent::DragResponse</tt> - 在一些平台上Qt使用的内部事件。
+<li><tt>QEvent::ChildInserted</tt> - 对象得到了一个孩子，<a href="qchildevent.html">QChildEvent</a>。
+<li><tt>QEvent::ChildRemoved</tt> - 对象失去了一个孩子，<a href="qchildevent.html">QChildEvent</a>。
+<li><tt>QEvent::LayoutHint</tt> - 窗口部件孩子改变了布局属性。
+<li><tt>QEvent::ActivateControl</tt> - 在一些平台上Qt使用的内部事件。
+<li><tt>QEvent::DeactivateControl</tt> - 在一些平台上Qt使用的内部事件。
+<li><tt>QEvent::Quit</tt> - 保留的。
+<li><tt>QEvent::Create</tt> - 保留的。
+<li><tt>QEvent::Destroy</tt> - 保留的。
+<li><tt>QEvent::Reparent</tt> - 保留的。
+<li><tt>QEvent::Speech</tt> - 为语音输入而保留的。
+<li><tt>QEvent::Tablet</tt> - Wacom Tablet事件。
+<li><tt>QEvent::User</tt> - 用户定义事件。
+<li><tt>QEvent::MaxUser</tt> - 最后用户事件id。
+</ul><p> 用户事件应该包含User和MaxUser值。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QEvent"></a>QEvent::QEvent ( <a href="qevent.html#Type-enum">Type</a>&nbsp;type )
+</h3>
+<p> 构造一个类型为<em>type</em>的事件对象。
+
+<h3 class=fn>bool <a name="spontaneous"></a>QEvent::spontaneous () const
+</h3>
+<p> 如果事件由应用程序之外产生的，比如一个系统事件，返回真，否则返回假。
+
+<h3 class=fn><a href="qevent.html#Type-enum">Type</a> <a name="type"></a>QEvent::type () const
+</h3>
+<p> 返回事件类型。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

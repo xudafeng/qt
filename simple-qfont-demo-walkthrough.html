@@ -1,0 +1,530 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Walkthrough: A simple QFont demonstration</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>Walkthrough: A simple QFont demonstration</h1>
+
+ 
+<p> 
+<p> The following walkthrough
+will show you how to make use of the font setting and manipulation techniques  
+provided by <a href="qfont.html">QFont</a>.
+<p> In addition it will show some aspects of widget layout -- if you prefer leaving
+this job to Qt Designer simply skip the <a href="#layout()">relevant paragraphs.</a> 
+Moreover, if you
+have asked yourself how to add strings to a <a href="qstringlist.html">QStringList</a> and how to
+step through its members, you will know after reading this walkthrough,
+or skipping to the relevant explanations in <a href="#showFontInfo()_QStringList">Viewer::showFontInfo()</a> and <a href="#setFontSubstitutions()">Viewer::setFontSubstitutions().</a>
+<p> To get the most out of the walkthrough you should at least be familiar with
+<a href="signalsandslots.html">signals and slots.</a>
+<p> The <a href="simple-font-demo-example.html">example program</a> 
+consists of a widget containing two <a href="qtextview.html">QTextView</a>s side by side.
+The one on the left shows greetings in English, Russian, and Hebrew.
+The one on the right shows some information about the fonts used to
+draw these greetings. Three push buttons in the bottom of the main window
+change the font used to display the greetings.
+<p> Note that the fonts and font characteristics in the example have been chosen
+for demonstration purposes only -- in a real world application they
+would rather count for bad design. 
+<p> <h3><a name="viewer.h">The API of the custom widget</a></h3>
+<p> The widget used in this example is a custom widget named
+<em>Viewer</em>.
+<p> 
+
+<pre>    #include &lt;<a href="qwidget-h.html">qwidget.h</a>&gt;
+    #include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+</pre>
+<p> As we derive it from <a href="qwidget.html">QWidget</a> we include the relevant header file.
+Additionally we use a <a href="qfont.html">QFont</a> object as a function argument, and
+therefore include the QFont class.
+<p> <pre>    class QTextView;
+    class QPushButton;
+</pre>
+<p> Furthermore we declare the use of the QTextView and the
+<a href="qpushbutton.html">QPushButton</a> classes for class variables (we don't need to
+include them at this stage yet because we only use pointers to these classes).
+<p> <pre>    class Viewer : public <a href="qwidget.html">QWidget</a>
+    {
+    <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>
+</pre>
+<p> The <em>Viewer</em> widget will have slots, so don't forget to add the
+<em>Q_OBJECT</em> macro.
+<p> <pre>    public:
+        Viewer();
+</pre>
+<p> As we won't use more than one instance of this class 
+there is no need for any complex constructors, a simple one without
+any arguments should be sufficient.
+<p> <pre>    private slots:
+        void setDefault();
+</pre>
+<p> As previously mentioned we're going to have three push buttons. When the user
+clicks on them, something should happen. Thus we define 
+<a href="#setDefault()">one slot that
+sets the font in the greeting window back to the default,</a> ...
+<p> <pre>        void setSansSerif();
+</pre>
+<p> ... <a href="#setSansSerif()">one that switches to a sans serif font,</a>
+and ...
+<p> <pre>        void setItalics();
+</pre>
+<p> ... <a href="#setItalics()">one that shows the greetings in italics.</a>
+<p> <pre>    private:
+        void setFontSubstitutions();
+</pre>
+<p> Will will write the greetings using different alphabets. For users who don't
+have Unicode fonts installed we want to tell the application to try
+to exchange missing characters in one font with appropriate characters
+from other fonts. <a href="qfont.html">QFont</a> does such font substitutions on its own but
+with <a href="#setFontSubstitutions()">this helper function</a>
+we can define our preferred substitution pattern.
+<p> <pre>        void layout();
+</pre>
+<p> The task of putting the buttons and text views together we will put into 
+a separate <a href="#layout()">layout()</a> function. 
+This will make the code easier to understand and read.
+<p> <pre>        void showFontInfo( <a href="qfont.html">QFont</a> &amp; );
+</pre>
+<p> <a href="#showFontInfo()">The last private function</a> reveals 
+font information in the text view on the right.
+<p> <pre>        <a href="qtextview.html">QTextView</a> * greetings;
+        <a href="qtextview.html">QTextView</a> * fontInfo;
+
+        <a href="qpushbutton.html">QPushButton</a> * defaultButton;
+        <a href="qpushbutton.html">QPushButton</a> * sansSerifButton;
+        <a href="qpushbutton.html">QPushButton</a> * italicsButton;
+    };
+</pre>
+<p> Last but not least we define the elements of our GUI as private
+class variables.
+<p> <h3><a name="viewer.cpp">The implementation of the Viewer widget</a></h3>
+<p> Now we will implement the <em>Viewer</em> class.
+<p> 
+
+<pre>    #include "viewer.h"
+    #include &lt;<a href="qstring-h.html">qstring.h</a>&gt;
+    #include &lt;<a href="qstringlist-h.html">qstringlist.h</a>&gt;
+    #include &lt;<a href="qtextview-h.html">qtextview.h</a>&gt;
+    #include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+    #include &lt;<a href="qlayout-h.html">qlayout.h</a>&gt;
+</pre>
+<p> First we include the relevant header files -- obviously the 
+<a href="#viewer.h">header of the Viewer class</a> itself,
+of the <a href="qpushbutton.html">QPushButton</a> and QTextView widgets, and of the <a href="qstring.html">QString</a>
+and <a href="qstringlist.html">QStringList</a> classes. <em>qlayout.h</em> provides
+classes for horizontal and vertical layout and will be used
+in the <a href="#layout()">layout()</a> function.
+<p> <a name="Viewer()"></a>
+<p> <pre>    Viewer::Viewer()
+           :<a href="qwidget.html">QWidget</a>()
+    {
+</pre>
+<p> As already mentioned the finger print of the <em>Viewer</em> constructor
+is as simple as possible, without any arguments, derived from
+the <a href="qwidget.html">QWidget</a> default constructor.
+<p> <pre>        setFontSubstitutions();
+</pre>
+<p> First we define the font substitutions -- for clarity reasons we
+do this in a <a href="#setFontSubstitutions()">separate function.</a>
+<p> <pre>    <a name="x2122"></a>    <a href="qstring.html">QString</a> greeting_heb = QString::<a href="qstring.html#fromUtf8">fromUtf8</a>( "\327\251\327\234\327\225\327\235" );
+        <a href="qstring.html">QString</a> greeting_ru = QString::<a href="qstring.html#fromUtf8">fromUtf8</a>( "\320\227\320\264\321\200\320\260\320\262\321\201\321\202\320\262\321\203\320\271\321\202\320\265" );
+</pre>
+<p> The Hebrew and the Russian greeting we have readily available as UTF8 encoded
+strings.
+To use them in a <a href="qstring.html">QString</a> we "import" them with <a href="qstring.html#fromUtf8">QString::fromUtf8</a>(). 
+<p> <pre>        <a href="qstring.html">QString</a> greeting_en( "Hello" );
+</pre>
+<p> Dor the English greeting we use a simple QString. 
+<p> <pre>        greetings = new <a href="qtextview.html">QTextView</a>( this, "textview" );
+</pre>
+<p> Now we create the first widget as a child of <em>this</em> widget, 
+the QTextView with the identity name <em>textview</em> that shows the greetings. 
+<p> <pre>        greetings-&gt;<a href="qtextedit.html#setText">setText</a>( greeting_en + "\n" +
+                           greeting_ru + "\n" +
+                           greeting_heb );
+</pre>
+<p> Now we set the text shown by <em>greetings</em> to the three greetings.
+<p> <pre>        fontInfo = new <a href="qtextview.html">QTextView</a>( this, "fontinfo" );
+</pre>
+<p> The second text view we call <em>fontinfo</em> and create
+it as a child of <em>this</em> <em>Viewer</em> widget.
+<p> <pre>        setDefault();
+</pre>
+<p> Using the <a href="#setDefault()">setDefault()</a> function we
+apply the initial font to the greetings <em>greetings</em> and 
+fill the <em>fontInfo</em> textview with information about  
+the font used.
+<p> <pre>        defaultButton = new <a href="qpushbutton.html">QPushButton</a>( "Default", this,
+                                                       "pushbutton1" );
+</pre>
+<p> Now we create the first of the three push buttons -- the one
+that changes the font to the initial one -- with the label <em>Default</em>.
+<p> <pre>    <a name="x2132"></a>    defaultButton-&gt;<a href="qwidget.html#setFont">setFont</a>( QFont( "times" ) );
+</pre>
+<p> The label should be printed in a member font of the Times family.
+In the unlikely case that the user does not have installed a
+matching font, <a href="qfont.html">QFont</a> is responsible in finding a replacement.
+Note that case-sensitivity is no issue when specifying the font family.
+<p> As we don't explicitly request a font size or weight, QFont tries to
+find a default 12 pt font with normal boldness. 
+<p> <pre>    <a name="x2109"></a>    <a href="qobject.html#connect">connect</a>( defaultButton, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ),
+                 this, SLOT( setDefault() ) );
+</pre>
+<p> In order to make something happening when the user clicks the
+<em>defaultButton</em>, we connect the <a href="qbutton.html#clicked">QPushButton::clicked</a>() signals
+issued from it to the <em>Viewer</em>'s <a href="#setDefault()">setDefault()</a>
+slot.
+<p> <pre>        sansSerifButton = new <a href="qpushbutton.html">QPushButton</a>( "Sans Serif", this,
+                                                         "pushbutton2" );
+        sansSerifButton-&gt;<a href="qwidget.html#setFont">setFont</a>( QFont( "Helvetica", 12 ) );
+</pre>
+<p> The newly created second button is labelled <em>Sans Serif</em>
+in a 12 pt Helvetica font. Again if this is not possible because
+the requested font is not available on the system, <a href="qfont.html">QFont</a> deals
+with it and finds a replacement.
+<p> <pre>        <a href="qobject.html#connect">connect</a>( sansSerifButton, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ),
+                 this, SLOT( setSansSerif() ) );
+</pre>
+<p> We connect the clicked() signal of the <em>sansSerifButton</em> 
+to the <a href="#setSansSerif()">setSansSerif()</a> slot.
+<p> <pre>        italicsButton = new <a href="qpushbutton.html">QPushButton</a>( "Italics", this,
+                                                       "pushbutton3" );
+        italicsButton-&gt;<a href="qwidget.html#setFont">setFont</a>( QFont( "lucida", 12, QFont::Bold, TRUE ) );
+</pre>
+<p> <em>italicsButton</em>, the last push button, is labelled <em>Italics</em>.
+This time we specify even more characteristics of the
+label font. We wish it to be a 12 pt bold member of the Lucida family.
+Also it should be in italics, indicated by the fourth QFont argument
+being TRUE.
+<p> <pre>        <a href="qobject.html#connect">connect</a>( italicsButton, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ),
+                 this, SLOT( setItalics() ) );
+</pre>
+<p> Again, the <em>italicsButton</em>'s clicked() signal is connected to
+a slot of <em>this</em> <em>Viewer</em> object <a href="#setItalics()">setItalics().</a>
+<p> <pre>        <a href="qwidget.html#layout">layout</a>();
+    }
+</pre>
+<p> Finally we arrange all five child widgets of <em>this</em> main window
+nicely using <a href="#layout()">layout().</a>
+<p> <a name="setDefault()"></a>
+<p> <pre>    void Viewer::setDefault()
+    {
+        <a href="qfont.html">QFont</a> font( "Bavaria" );
+</pre>
+<p> For demonstration purposes on how the <a href="qfont.html">QFont</a> substitution works
+we use a non-existant font family, Bavaria, as the default font for
+the greetings.
+<p> <pre>    <a name="x2115"></a>    font.<a href="qfont.html#setPointSize">setPointSize</a>( 24 );
+</pre>
+<p> This font should have a size of 24 points, ...
+<p> <pre>    <a name="x2118"></a>    font.<a href="qfont.html#setWeight">setWeight</a>( QFont::Bold );
+</pre>
+<p> ... it should be bold, ...
+<p> <pre>    <a name="x2117"></a>    font.<a href="qfont.html#setUnderline">setUnderline</a>( TRUE );
+</pre>
+<p> ... and the text written should be underlined.
+<p> <pre>        greetings-&gt;<a href="qwidget.html#setFont">setFont</a>( font );
+</pre>
+<p> Now we ask the <em>greetings</em> widget to use the font <em>font</em>.
+<p> As a member of the Bavaria font family is unlikely to
+be installed on your machine, run the program and observe
+how QFont finds a substitute. Later on we will define
+custom substitutions for Bavaria in the <a href="#setFontSubstitutions()">setFontSubstitutions()</a> function.
+<p> <pre>        showFontInfo( font );
+    }
+</pre>
+<p> Finally we use the function <a href="#showFontInfo()">showFontInfo()</a> to display appropriate information
+about the current font and how it maybe differs from the one requested.
+<p> <a name="setSansSerif()"></a>
+<p> <pre>    void Viewer::setSansSerif()
+    {
+        <a href="qfont.html">QFont</a> font( "Newyork", 18 );
+</pre>
+<p> The slot to change the greeting font to sans serif
+is quite similar to <a href="#setDefault()">setDefault().</a>
+Here we save a line of code and define the (non-existant) font family (NewYork)
+and size (18 points) at once.
+<p> <pre>    <a name="x2116"></a>    font.<a href="qfont.html#setStyleHint">setStyleHint</a>( QFont::SansSerif );
+</pre>
+<p> We use a style hint to ask <a href="qfont.html">QFont</a> for a sans serif font
+(<em>SansSerif</em> is a member of the QFont::StyleHint enumeration). 
+<p> As a member of the NewYork family is quite unlikely to be installed
+on your computer, QFont will try to follow the style hint and the font size
+and use this information to find a replacement font.
+<p> <pre>        greetings-&gt;<a href="qwidget.html#setFont">setFont</a>( font );
+</pre>
+<p> Finally we apply the requested font to the content of the
+<em>greetings</em> textview ...
+<p> <pre>        showFontInfo( font );
+    }
+</pre>
+<p> ... and display the appropriate font information in the <em>fontInfo</em> textview. 
+<p> <a name="setItalics()"></a>
+<p> <pre>    void Viewer::setItalics()
+    {
+        <a href="qfont.html">QFont</a> font( "Tokyo" );
+        font.<a href="qfont.html#setPointSize">setPointSize</a>( 32 );
+        font.<a href="qfont.html#setWeight">setWeight</a>( QFont::Bold );
+    <a name="x2114"></a>    font.<a href="qfont.html#setItalic">setItalic</a>( TRUE );
+</pre>
+<p> The <a href="#setItalics()">setItalics()</a> slot changes the greetings'
+font to a 32 pt bold and italic member of the (again non-existant)
+Tokyo family. Note that <a href="#setFontSubstitutions()">setFontSubstitutions()</a> defines a substitution family for Tokyo. 
+<p> <pre>        greetings-&gt;<a href="qwidget.html#setFont">setFont</a>( font );
+</pre>
+<p> We set the font of the <em>greetings</em> textview to <em>font</em>, and ...
+<p> <pre>        showFontInfo( font );
+    }
+</pre>
+<p> ... display the appropriate font information in the <em>fontInfo</em> textview.
+<p> <a name="showFontInfo()"></a>
+<p> <pre>    void Viewer::showFontInfo( <a href="qfont.html">QFont</a> &amp; font )
+    {
+</pre>
+<p> Now, how do we show the font information?
+<p> <pre>        <a href="qfontinfo.html">QFontInfo</a> info( font );
+</pre>
+<p> First we obtain information about the font that is actually used 
+when the font <em>font</em> is required, and store it in <em>info</em>.
+<p> <pre>        <a href="qstring.html">QString</a> messageText;
+        messageText = "Font requested: \"" +
+                      font.<a href="qfont.html#family">family</a>() + "\" " +
+</pre>
+<p> Then we start compiling the message that we want to show in the <em>fontInfo</em>
+textview.
+First, we print out the <em>requested</em> font family name. As we want to
+frame the family name with quotation marks, we have to escape the <em>"</em>
+character so that it is not confused with the C++ quotation marks
+used to terminate strings.
+<p> <pre>    <a name="x2123"></a><a name="x2113"></a>                  QString::<a href="qstring.html#number">number</a>( font.<a href="qfont.html#pointSize">pointSize</a>() ) + "pt&lt;BR&gt;" +
+</pre>
+<p> We obtain the <em>requested</em> font size in points and convert it to
+a <a href="qstring.html">QString</a> using <a href="qstring.html#number">QString::number</a>(). Using <em>&lt;BR&gt</em>; we add a rich-text
+linebreak to the <em>messageText</em> string.
+<p> <pre>                      "Font used: \"" +
+</pre>
+<p> After we have displayed information about the <em>required</em> font
+we want to contrast it with the one <em>actually</em> used.
+This is stored in the <a href="qfontinfo.html">QFontInfo</a> <em>info</em> variable. 
+<p> <pre>    <a name="x2120"></a>                  info.<a href="qfontinfo.html#family">family</a>() + "\" " +
+</pre>
+<p> First we display the font family, ...
+<p> <pre>    <a name="x2121"></a>                  QString::<a href="qstring.html#number">number</a>( info.<a href="qfontinfo.html#pointSize">pointSize</a>() ) + "pt&lt;P&gt;";
+</pre>
+<p> ... and then we append the actual font size, converted to a QString,  
+to the message string. The unit abbreviation and a rich-text
+paragraph (<em>&lt;P&gt;</em>) follow.
+<p> If custom substitutions are available for the requested <em>font</em>,
+we're going to show them as well:
+<p> <a name="showFontInfo()_QStringList"></a>
+<pre>    <a name="x2119"></a><a name="x2110"></a>    <a href="qstringlist.html">QStringList</a> substitutions = QFont::<a href="qfont.html#substitutes">substitutes</a>( font.<a href="qfont.html#family">family</a>() );
+</pre>
+<p> First we store the entire list of substitutes in a string list.
+<p> <pre>    <a name="x2128"></a>    if ( ! substitutions.<a href="qvaluelist.html#isEmpty">isEmpty</a>() ){
+</pre>
+<p> If it contains at least one substitute ...
+<p> <pre>            messageText += "The following substitutions exist for " + \
+                           font.<a href="qfont.html#family">family</a>() + ":&lt;UL&gt;";
+</pre>
+<p> ... we say so in the <em>messageText</em>, ...
+<p> <pre>    <a name="x2126"></a>        QStringList::Iterator i = substitutions.<a href="qvaluelist.html#begin">begin</a>();
+</pre>
+<p> ... and prepare ourselves to step through the list. For this
+purpose we set the list iterator <em>i</em> to the first list member
+of the <em>substitutions</em> string list.
+<p> <pre>    <a name="x2127"></a>        while ( i != substitutions.<a href="qvaluelist.html#end">end</a>() ){
+</pre>
+<p> As long as we haven't reached the last list member ...
+<p> <pre>                messageText += "&lt;LI&gt;\"" + (* i) + "\"";
+</pre>
+<p> we add a bullet list entry (<em>&lt;LI&gt;</em>)
+of the current list member (i.e. the font family name
+of the substitute), ...
+<p> <pre>                i++;
+            }
+</pre>
+<p> ... and move the iterator one step further.
+<a name="setFontSubstitutions()"></a>
+<p> <pre>             messageText += "&lt;/UL&gt;";
+</pre>
+<p> Finally we add the end-of-bullet-list rich-text tag to the <em>messageText</em>
+string.
+<p> <pre>        } else {
+            messageText += "No substitutions exist for " + \
+                           font.<a href="qfont.html#family">family</a>() + ".";
+        }
+</pre>
+<p> If the substitution list was empty, we make a note about
+it in the <em>messageText</em> string.
+<p> <pre>        fontInfo-&gt;<a href="qtextedit.html#setText">setText</a>( messageText );
+    }
+</pre>
+<p> Now that we have the <em>messageText</em> string ready we enter it into
+the <em>fontInfo</em> textview.
+<p> <pre>    void Viewer::setFontSubstitutions()
+    {
+</pre>
+<p> With this function we finally reveal the secret of how to
+define custom substitutions for a font family.
+<p> <pre>        <a href="qstringlist.html">QStringList</a> substitutes;
+</pre>
+<p> All we need is a string list.
+<p> <pre>    <a name="x2125"></a>    substitutes.<a href="qvaluelist.html#append">append</a>( "Times" );
+        substitutes +=  "Mincho",
+        substitutes &lt;&lt; "Arabic Newspaper" &lt;&lt; "crox";
+</pre>
+<p> In a real world application you will probably stick to one of the above
+methods to add strings to a string list. Here all possible ones are outlined
+to give you an overview. 
+<p> After these append operations <em>substitutes</em> consists of four members:
+<em>Times</em>, <em>Mincho</em>, <em>Arabic Newspaper</em>, and <em>Crox</em> in this
+order. These are the font families that in the first place are searched 
+for characters the base font does not provide.
+<p> <pre>    <a name="x2112"></a>    QFont::<a href="qfont.html#insertSubstitutions">insertSubstitutions</a>( "Bavaria", substitutes );
+</pre>
+<p> In <em>Viewer</em> objects, these four families provide a fallback
+for the Bavaria font family requested by the <a href="#setDefault()">setDefault()</a> slot.
+<p> <pre>    <a name="x2111"></a>    QFont::<a href="qfont.html#insertSubstitution">insertSubstitution</a>( "Tokyo", "Lucida" );
+    }
+</pre>
+<p> For the Tokyo family used in <a href="#setItalics()">setItalics()</a>
+we provide only one substitute family, Lucida. Because it is
+only one and not many as for Bavaria, we use 
+<a href="qfont.html#insertSubstitution">QFont::insertSubstitution</a>() instead of <a href="qfont.html#insertSubstitutions">QFont::insertSubstitutions</a>().
+<p> If you usually create your GUIs using Qt Designer this walkthrough
+has already come to an end. If this is one of your first encounters
+with Qt you might however continue with the explanation
+of the very simple <a href="#simple-qfont-demo.cpp">main() function.</a>
+<p> <a name="layout()"></a>
+<p> <pre>    <a name="x2130"></a>void Viewer::<a href="qwidget.html#layout">layout</a>()
+    {
+</pre>
+<p> This last member function of the <em>Viewer</em> class does not cover
+any more <a href="qfont.html">QFont</a> details. All it does is creating a nice automatic
+layout for the three push buttons and the two text views.
+<p> The best solution for this task is to have the two <a href="qtextview.html">QTextView</a>s
+lined up horizontally. The same applies to the <a href="qpushbutton.html">QPushButton</a>s.
+Finally both of these layouts are placed together into a vertical
+layout container. Qt takes care of the proportions so that everything
+looks nice.
+<p> <pre>        <a href="qhboxlayout.html">QHBoxLayout</a> * textViewContainer = new <a href="qhboxlayout.html">QHBoxLayout</a>();
+</pre>
+<p> Let's create the first layout that aligns its members horizontally, ...
+<p> <pre>    <a name="x2108"></a>    textViewContainer-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( greetings );
+</pre>
+<p> ... and add the QTextView with the greetings, ...
+<p> <pre>        textViewContainer-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( fontInfo );
+</pre>
+<p> ... as well as the text view with the font information. <em>fontInfo</em> appears
+to the right of <em>greetings</em> because it was added later.
+<p> <pre>        <a href="qhboxlayout.html">QHBoxLayout</a> * buttonContainer = new <a href="qhboxlayout.html">QHBoxLayout</a>();
+</pre>
+<p> Now we create the second layout for the push buttons.
+<p> <pre>        buttonContainer-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( defaultButton );
+</pre>
+<p> <em>defaultButton</em> is placed on the left hand side of the layout, ...
+<p> <pre>        buttonContainer-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( sansSerifButton );
+</pre>
+<p> ... <em>sansSerifButton</em> in the middle, ...
+<p> <pre>        buttonContainer-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( italicsButton );
+</pre>
+<p> ... and <em>italicsButton</em> on the right hand side.
+<p> Unfortunately we face a tiny problem: remember that (a highly unusual
+thing to do in a real world application) the labels of the three
+buttons are drawn in different fonts. Whilst the automatic layout
+accounts for the fact all three buttons have the same width, the uncommon
+occurrence of different character heights leads to different button heights.
+<p> To make the application window look nice we have to help it a little.
+<p> <pre>    <a name="x2129"></a>    int maxButtonHeight = defaultButton-&gt;<a href="qwidget.html#height">height</a>();
+        if ( sansSerifButton-&gt;<a href="qwidget.html#height">height</a>() &gt; maxButtonHeight )
+            maxButtonHeight = sansSerifButton-&gt;<a href="qwidget.html#height">height</a>();
+        if ( italicsButton-&gt;<a href="qwidget.html#height">height</a>() &gt; maxButtonHeight )
+            maxButtonHeight = italicsButton-&gt;<a href="qwidget.html#height">height</a>();
+</pre>
+<p> By comparing the three button heights we find the largest one
+and store it in <em>maxButtonHeight</em>.
+<p> <pre>    <a name="x2131"></a>    defaultButton-&gt;<a href="qwidget.html#setFixedHeight">setFixedHeight</a>( maxButtonHeight );
+        sansSerifButton-&gt;<a href="qwidget.html#setFixedHeight">setFixedHeight</a>( maxButtonHeight );
+        italicsButton-&gt;<a href="qwidget.html#setFixedHeight">setFixedHeight</a>( maxButtonHeight );
+</pre>
+<p> Now we set the height of each button to this maximum value and make sure
+that the automatic layout does not change it.  
+<p> This was the hardest part of the entire layout process. There is one task
+left:
+<p> <pre>        <a href="qvboxlayout.html">QVBoxLayout</a> * container = new <a href="qvboxlayout.html">QVBoxLayout</a>( this );
+</pre>
+<p> We create a layout that arranges its members vertically.
+<p> <pre>    <a name="x2107"></a>    container-&gt;<a href="qboxlayout.html#addLayout">addLayout</a>( textViewContainer );
+</pre>
+<p> This <em>container</em> layout contains the text views on top, ...
+<p> <pre>        container-&gt;<a href="qboxlayout.html#addLayout">addLayout</a>( buttonContainer );
+</pre>
+<p> ... and the button row below.
+<p> <pre>        <a href="qwidget.html#resize">resize</a>( 700, 250 );
+    }
+</pre>
+<p> Finally we set the size of the entire main window to a width of 700 pixels
+and a height of 250 pixels.
+<p> <h3><a name="simple-qfont-demo.cpp">The main program</a></h3>
+<p> There is not much to say about the main program.
+<p> 
+
+<pre>    #include "viewer.h"
+    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+
+    int main( int argc, char **argv )
+    {
+        <a href="qapplication.html">QApplication</a> app( argc, argv );
+        Viewer * textViewer = new Viewer();
+</pre>
+<p> We create an instance of the <a href="#viewer.cpp">Viewer</a>
+class, ...
+<p> 
+
+<pre>    <a name="x2134"></a>    app.<a href="qapplication.html#setMainWidget">setMainWidget</a>( textViewer );
+</pre>
+<p> ... make it the main widget of the application object <em>app</em>, ...
+<p> <pre>    <a name="x2135"></a>    textViewer-&gt;<a href="qwidget.html#show">show</a>();
+</pre>
+<p> ... display it to the user ...
+<p> <pre>    <a name="x2133"></a>    return app.<a href="qapplication.html#exec">exec</a>();
+    }
+</pre>
+<p> ... and enter the application loop. Well done, that was all for today ...
+<p> <p>See also <a href="step-by-step-examples.html">Step-by-step Examples</a>.
+
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

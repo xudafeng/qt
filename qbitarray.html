@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QBitArray类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QBitArray类参考</h1>
+
+<p>QBitArray类提供了一个位数组。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qbitarray-h.html">qbitarray.h</a>&gt;</tt>
+<p>继承了<a href="qbytearray.html">QByteArray</a>。
+<p><a href="qbitarray-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QBitArray"><b>QBitArray</b></a> ()</div></li>
+<li><div class=fn><a href="#QBitArray-2"><b>QBitArray</b></a> ( uint&nbsp;size )</div></li>
+<li><div class=fn><a href="#QBitArray-3"><b>QBitArray</b></a> ( const&nbsp;QBitArray&nbsp;&amp;&nbsp;a )</div></li>
+<li><div class=fn>QBitArray &amp; <a href="#operator-eq"><b>operator=</b></a> ( const&nbsp;QBitArray&nbsp;&amp;&nbsp;a )</div></li>
+<li><div class=fn>uint <a href="#size"><b>size</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#resize"><b>resize</b></a> ( uint&nbsp;size )</div></li>
+<li><div class=fn>bool <a href="#fill"><b>fill</b></a> ( bool&nbsp;v, int&nbsp;size = -1 )</div></li>
+<li><div class=fn>virtual void <a href="#detach"><b>detach</b></a> ()</div></li>
+<li><div class=fn>QBitArray <a href="#copy"><b>copy</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#testBit"><b>testBit</b></a> ( uint&nbsp;index ) const</div></li>
+<li><div class=fn>void <a href="#setBit-2"><b>setBit</b></a> ( uint&nbsp;index )</div></li>
+<li><div class=fn>void <a href="#setBit"><b>setBit</b></a> ( uint&nbsp;index, bool&nbsp;value )</div></li>
+<li><div class=fn>void <a href="#clearBit"><b>clearBit</b></a> ( uint&nbsp;index )</div></li>
+<li><div class=fn>bool <a href="#toggleBit"><b>toggleBit</b></a> ( uint&nbsp;index )</div></li>
+<li><div class=fn>bool <a href="#at"><b>at</b></a> ( uint&nbsp;index ) const</div></li>
+<li><div class=fn>QBitVal <a href="#operator[]"><b>operator[]</b></a> ( int&nbsp;index )</div></li>
+<li><div class=fn>bool <a href="#operator[]-2"><b>operator[]</b></a> ( int&nbsp;index ) const</div></li>
+<li><div class=fn>QBitArray &amp; <a href="#operator-and-eq"><b>operator&amp;=</b></a> ( const&nbsp;QBitArray&nbsp;&amp;&nbsp;a )</div></li>
+<li><div class=fn>QBitArray &amp; <a href="#operator|-eq"><b>operator|=</b></a> ( const&nbsp;QBitArray&nbsp;&amp;&nbsp;a )</div></li>
+<li><div class=fn>QBitArray &amp; <a href="#operator^-eq"><b>operator^=</b></a> ( const&nbsp;QBitArray&nbsp;&amp;&nbsp;a )</div></li>
+<li><div class=fn>QBitArray <a href="#operator~"><b>operator~</b></a> () const</div></li>
+</ul>
+<h2>Related Functions</h2>
+<ul>
+<li><div class=fn>QBitArray <a href="#operator-and"><b>operator&amp;</b></a> ( const&nbsp;QBitArray&nbsp;&amp;&nbsp;a1, const&nbsp;QBitArray&nbsp;&amp;&nbsp;a2 )</div></li>
+<li><div class=fn>QBitArray <a href="#operator|"><b>operator|</b></a> ( const&nbsp;QBitArray&nbsp;&amp;&nbsp;a1, const&nbsp;QBitArray&nbsp;&amp;&nbsp;a2 )</div></li>
+<li><div class=fn>QBitArray <a href="#operator^"><b>operator^</b></a> ( const&nbsp;QBitArray&nbsp;&amp;&nbsp;a1, const&nbsp;QBitArray&nbsp;&amp;&nbsp;a2 )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt"><b>operator&lt;&lt;</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, const&nbsp;QBitArray&nbsp;&amp;&nbsp;a )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt"><b>operator&gt;&gt;</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, QBitArray&nbsp;&amp;&nbsp;a )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QBitArray类提供了一个位数组。
+<p> 
+
+<p> 因为QBitArray是一个<a href="qmemarray.html">QMemArray</a>，它通过一个引用计数使用了明显<a href="shclass.html">共享</a>。
+<p> QBitArray是一个特殊的字节数组，它可以访问单独的位并且可以在整个位数组上执行为操作（AND、OR、XOR和NOT）。
+<p> 位可以通过函数<a href="#setBit">setBit</a>()和<a href="#clearBit">clearBit</a>()来操作，但是它也可以使用索引[]操作符来测试和设置单独的位。[]操作符比setBit()和clearBit()慢一些，因为在实现单独位分配中需要一些技巧。
+<p> 实例：
+<pre>
+    QBitArray a(3);
+    a.<a href="#setBit">setBit</a>( 0 );
+    a.<a href="#clearBit">clearBit</a>( 1 );
+    a.<a href="#setBit">setBit</a>( 2 );                      // a = [1 0 1]
+
+    QBitArray b(3);
+    b[0] = 1;
+    b[1] = 1;
+    b[2] = 0;                           // b = [1 1 0]
+
+    QBitArray c;
+    c = ~a &amp; b;                         // c = [0 1 0]
+  </pre>
+ 
+<p> 当QBitArray被构造时，位没有被初始化。使用<a href="#fill">fill</a>()可以设置所有的位为0或1。数组可以用<a href="#resize">resize</a>()来重新定义大小并且用<a href="#copy">copy</a>()来复制。位可以用setBit()来设置并且用clearBit()来清空。位可以用<a href="#toggleBit">toggleBit</a>()来切换。一个位的值可以用<a href="#testBit">testBit</a>()和<a href="#at">at</a>()来获得。
+<p> QBitArray支持&amp;（AND）、|（OR）、^（XOR）和~（NOT）操作符。
+<p>也可以参考<a href="collection.html">集合类</a>、<a href="shared.html">隐含和明显共享类</a>和<a href="tools.html">非GUI类</a>。
+
+<hr><h2>成员函数文档</h2>
+
+<h3 class=fn><a name="QBitArray"></a>QBitArray::QBitArray ()
+</h3>
+构造一个空的位数组。
+
+<h3 class=fn><a name="QBitArray-2"></a>QBitArray::QBitArray ( uint&nbsp;size )
+</h3>
+构造一个<em>size</em>位的位数组。位没有被初始化。
+<p> <p>也可以参考<a href="#fill">fill</a>()。
+
+<h3 class=fn><a name="QBitArray-3"></a>QBitArray::QBitArray ( const&nbsp;<a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a )
+</h3>
+构造一个<em>a</em>的<a href="shclass.html#shallow-copy">浅复制</a>。
+
+<h3 class=fn>bool <a name="at"></a>QBitArray::at ( uint&nbsp;index ) const
+</h3>
+返回<em>index</em>位置的位的值（0或1）。
+<p>也可以参考<a href="#operator[]">operator[]</a>()。
+
+<h3 class=fn>void <a name="clearBit"></a>QBitArray::clearBit ( uint&nbsp;index )
+</h3>
+清空<em>index</em>位置的位（设置它为0）。
+<p>也可以参考<a href="#setBit">setBit</a>()和<a href="#toggleBit">toggleBit</a>()。
+
+<h3 class=fn><a href="qbitarray.html">QBitArray</a> <a name="copy"></a>QBitArray::copy () const
+</h3>
+返回一个位数组的<a href="shclass.html#deep-copy">深复制</a>。
+<p>也可以参考<a href="#detach">detach</a>()。
+
+<h3 class=fn>void <a name="detach"></a>QBitArray::detach ()<tt> [虚]</tt>
+</h3>
+从共享位数组数据中分离并且并且确认这个位数组是数据的唯一引用。
+<p> 如果是多重位数组共享公有数据，这个位数组引用计数减一并且得到一个数据的复制。如果只是一个单独的引用将没有任何操作。
+<p> <p>也可以参考<a href="#copy">copy</a>()。
+<p>从<a href="qmemarray.html#detach">QMemArray</a>中重新实现的。
+
+<h3 class=fn>bool <a name="fill"></a>QBitArray::fill ( bool&nbsp;v, int&nbsp;size = -1 )
+</h3>
+用<em>v</em>填充位数组（如果<em>v</em>为真，填1，或者如果<em>v</em>为假，填0）。
+<p> 如果<em>size</em>为非负数，<a href="#fill">fill</a>()会重新定义位数组的大小为<em>size</em>。
+<p> 如果<em>size</em>为非负数并且位数组没有能被重新定义大小，返回假，否则返回真。
+<p> <p>也可以参考<a href="#resize">resize</a>()。
+
+<h3 class=fn><a href="qbitarray.html">QBitArray</a>&nbsp;&amp; <a name="operator-and-eq"></a>QBitArray::operator&amp;= ( const&nbsp;<a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a )
+</h3>
+对这个位数组和<em>a</em>的所有位进行AND操作。返回这个位数组的引用。
+<p> 如果两个数组大小不同，对于缺少的位，AND操作将使用0，就像下面的例子所描述的：
+<pre>
+    QBitArray a( 3 ), b( 2 );
+    a[0] = 1;  a[1] = 0;  a[2] = 1;     // a = [1 0 1]
+    b[0] = 1;  b[1] = 0;                // b = [1 0]
+    a &amp;= b;                             // a = [1 0 0]
+  </pre>
+ 
+<p> <p>也可以参考<a href="#operator|-eq">operator|=</a>()、<a href="#operator^-eq">operator^=</a>()和<a href="#operator~">operator~</a>()。
+
+<h3 class=fn><a href="qbitarray.html">QBitArray</a>&nbsp;&amp; <a name="operator-eq"></a>QBitArray::operator= ( const&nbsp;<a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a )
+</h3>
+分配一个<em>a</em>的<a href="shclass.html#shallow-copy">浅复制</a>给这个位数组并且返回这个位数组的引用。
+
+<h3 class=fn><a href="qbitval.html">QBitVal</a> <a name="operator[]"></a>QBitArray::operator[] ( int&nbsp;index )
+</h3>
+为位数组实现了[]操作符。
+<p> 返回到<a href="qbitval.html">QBitVal</a>是一个上下文对象。它使得得到和设置<em>index</em>位置的单个位成为可能。
+<p> 实例：
+<pre>
+    QBitArray a( 3 );
+    a[0] = 0;
+    a[1] = 1;
+    a[2] = a[0] ^ a[1];
+  </pre>
+ 
+<p> 函数<a href="#testBit">testBit</a>()、<a href="#setBit">setBit</a>()和<a href="#clearBit">clearBit</a>()更快一些。
+<p> <p>也可以参考<a href="#at">at</a>()。
+
+<h3 class=fn>bool <a name="operator[]-2"></a>QBitArray::operator[] ( int&nbsp;index ) const
+</h3>
+这是一个重载成员函数，提供了方便。它的行为和上面的函数基本一致。
+<p> 为常量位数组实现了[]操作符。
+
+<h3 class=fn><a href="qbitarray.html">QBitArray</a>&nbsp;&amp; <a name="operator^-eq"></a>QBitArray::operator^= ( const&nbsp;<a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a )
+</h3>
+对这个位数组和<em>a</em>的所有位做XOR操作。返回这个数组的引用。
+<p> 结果的长度为两个数组中比较长的长度，比较短的数组缺少的位用0。
+<p> 实例：
+<pre>
+    QBitArray a( 3 ), b( 2 );
+    a[0] = 1;  a[1] = 0;  a[2] = 1;     // a = [1 0 1]
+    b[0] = 1;  b[1] = 0;                // b = [1 0]
+    a ^= b;                             // a = [0 0 1]
+  </pre>
+ 
+<p> <p>也可以参考<a href="#operator-and-eq">operator&amp;=</a>()、<a href="#operator|-eq">operator|=</a>()和<a href="#operator~">operator~</a>()。
+
+<h3 class=fn><a href="qbitarray.html">QBitArray</a>&nbsp;&amp; <a name="operator|-eq"></a>QBitArray::operator|= ( const&nbsp;<a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a )
+</h3>
+对这个位数组和<em>a</em>的所有位做OR操作。返回这个数组的引用。
+<p> 结果的长度为两个数组中比较长的长度，比较短的数组缺少的位用0。
+<p> 实例：
+<pre>
+    QBitArray a( 3 ), b( 2 );
+    a[0] = 1;  a[1] = 0;  a[2] = 1;     // a = [1 0 1]
+    b[0] = 1;  b[1] = 0;                // b = [1 0]
+    a |= b;                             // a = [1 0 1]
+  </pre>
+ 
+<p> <p>也可以参考<a href="#operator-and-eq">operator&amp;=</a>()、<a href="#operator^-eq">operator^=</a>()和<a href="#operator~">operator~</a>()。
+
+<h3 class=fn><a href="qbitarray.html">QBitArray</a> <a name="operator~"></a>QBitArray::operator~ () const
+</h3>
+返回这个位数组所有位取反后的位数组。
+<p> 实例：
+<pre>
+    QBitArray a( 3 ), b;
+    a[0] = 1;  a[1] = 0; a[2] = 1;      // a = [1 0 1]
+    b = ~a;                             // b = [0 1 0]
+  </pre>
+ 
+
+<h3 class=fn>bool <a name="resize"></a>QBitArray::resize ( uint&nbsp;size )
+</h3>  重新定义位数组的大小为<em>size</em>位并且如果位数组可以重新定义大小，返回真，否则返回假。
+<p> 如果数组被扩大了，新的位被设置为0。
+<p> <p>也可以参考<a href="#size">size</a>()。
+
+<h3 class=fn>void <a name="setBit"></a>QBitArray::setBit ( uint&nbsp;index, bool&nbsp;value )
+</h3>
+设置<em>index</em>位置的位为<em>value</em>。
+<p> 等同于：
+<pre>
+    if ( value )
+        <a href="#setBit">setBit</a>( index );
+    else
+        <a href="#clearBit">clearBit</a>( index );
+  </pre>
+ 
+<p> <p>也可以参考<a href="#clearBit">clearBit</a>()和<a href="#toggleBit">toggleBit</a>()。
+
+<h3 class=fn>void <a name="setBit-2"></a>QBitArray::setBit ( uint&nbsp;index )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为和上面的函数基本一致。
+<p> 设置<em>index</em>位置的位（设置它为1）。
+<p>也可以参考<a href="#clearBit">clearBit</a>()和<a href="#toggleBit">toggleBit</a>()。
+
+<h3 class=fn>uint <a name="size"></a>QBitArray::size () const
+</h3>
+返回位数组的大小（位的个数）。
+<p>也可以参考<a href="#resize">resize</a>()。
+
+<h3 class=fn>bool <a name="testBit"></a>QBitArray::testBit ( uint&nbsp;index ) const
+</h3>
+如果<em>index</em>位置的位已经被设置，比如是1，就返回真。
+<p>也可以参考<a href="#setBit">setBit</a>()和<a href="#clearBit">clearBit</a>()。
+
+<h3 class=fn>bool <a name="toggleBit"></a>QBitArray::toggleBit ( uint&nbsp;index )
+</h3>
+切换<em>index</em>位置的位。
+<p> 如果以前的值为0，新值就是1。如果以前的指为1，新值就为0。
+<p> <p>也可以参考<a href="#setBit">setBit</a>()和<a href="#clearBit">clearBit</a>()。
+
+<hr><h2>相关函数</h2>
+
+<h3 class=fn><a href="qbitarray.html">QBitArray</a> <a name="operator-and"></a>operator&amp; ( const&nbsp;<a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a1, const&nbsp;<a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a2 )
+</h3>
+返回位数组<em>a1</em>和<em>a2</em>的AND操作的结果。
+<p>也可以参考<a href="#operator-and-eq">QBitArray::operator&=</a>()。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt"></a>operator&lt;&lt; ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, const&nbsp;<a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a )
+</h3>
+把位数组<em>a</em>写到流<em>s</em>中。
+<p> <p>也可以参考<a href="datastreamformat.html">QDataStream操作符的格式</a>。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt"></a>operator&gt;&gt; ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, <a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a )
+</h3>
+从流<em>s</em>中读取一个位数组到<em>a</em>中。
+<p> <p>也可以参考<a href="datastreamformat.html">QDataStream操作符的格式</a>。
+
+<h3 class=fn><a href="qbitarray.html">QBitArray</a> <a name="operator^"></a>operator^ ( const&nbsp;<a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a1, const&nbsp;<a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a2 )
+</h3>
+返回位数组<em>a1</em>和<em>a2</em>的XOR操作的结果。
+<p>也可以参考<a href="#operator^">QBitArray::operator^</a>()。
+
+<h3 class=fn><a href="qbitarray.html">QBitArray</a> <a name="operator|"></a>operator| ( const&nbsp;<a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a1, const&nbsp;<a href="qbitarray.html">QBitArray</a>&nbsp;&amp;&nbsp;a2 )
+</h3>
+返回位数组<em>a1</em>和<em>a2</em>的OR操作的结果。
+<p>也可以参考<a href="#operator|-eq">QBitArray::operator|=</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

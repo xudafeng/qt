@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>键盘焦点概述</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>键盘焦点概述</h1>
+
+ 
+<p> <!-- index keyboard focus --><a name="keyboard-focus"></a>
+<p> Qt的窗口部件使用图形用户界面中已经非常通用的方式来处理键盘焦点。
+<p> 基本观点是用户的击键会定向到屏幕上的窗口中，和计划中的窗口的窗口部件中。当用户按下一个键，他们希望它能够到达正确的位置，并且软件必须尽量满足这种希望。系统必须决定哪一个应用程序、应用程序中的哪一个窗口和窗口中的哪一个窗口部件被击键，
+<p> <h2> 焦点移动
+</h2>
+<a name="1"></a><p> 为了把焦点移到特殊的窗口部件的已经解决的方式有：
+<ol type=1>
+<p> <li> 用户按下Tab键（或者Shift键+Tab键）（或者有时是Enter键）。
+<p> <li> 用户点击一个窗口部件。
+<p> <li> 用户按下一个键盘快捷键。
+<p> <li> 用户使用鼠标滚轮。
+<p> <li> 用户移动焦点到一个窗口，并且应用程序可以决定窗口中的哪个窗口部件应该得到焦点。
+<p> </ol>
+<p> 每一个移动机制都是不同的，并且不同类型的窗口部件只接收它们中的一些。我们将逐个介绍它们中的每一个。
+<p> <h3> Tab或者Shift+Tab.
+</h3>
+<a name="1-1"></a><p> 按Tab键是到目前为止使用键盘来移动焦点的最普通的方法。有时在输入数据的应用程序中Enter键和Tab键的作用是一样的。我们暂时忽略这一点。
+<p> 按Tab键，是今天所有窗口系统中的普通使用方法，把键盘焦点移到一个每个窗口中的循环列表中的下一个窗口部件。Tab键按照循环列表的顺序的一个方向移动，Shift键+Tab键是另一个方向。使用按Tab键从一个窗口部件到下一个窗口部件移动焦点的顺序叫做Tab键控制次序。
+<p> 在Qt中，这个列表存放在<a href="qfocusdata.html">QFocusData</a>列表中。在每一个窗口中都有一个<a href="qfocusdata.html">QFocusData</a>对象，并且当<a href="qwidget.html#setFocusPolicy">QWidget::setFocusPolicy</a>()使用适当的<a href="qwidget.html#FocusPolicy-enum">QWidget::FocusPolicy</a>被调用的时候，窗口部件自动把它们自己添加到列表的最后。你可以使用<a href="qwidget.html#setTabOrder">QWidget::setTabOrder</a>()来自定义Tab键控制次序。（如果你没有自定义，那么Tab键会按照窗口部件构造的顺序移动焦点。）<a href="designer-manual.html">Qt设计器</a>提供了一个可视化的改变Tab键控制次序的方法。
+<p> 因为按Tab键是如此的普通，绝大多数含有焦点的窗口部件都应该支持Tab焦点。主要的例外情况是一些很少使用的窗口部件，和一些使用一些键盘快捷键或者错误处理来移动焦点的窗口部件。
+<p> 举个例子，在一个数据输入对话框中，也许一个字段只有在百分之一的情况下是必须的。在这样的一个对话框中，Tab键可能忽略这个区域，并且对话框可以使用下面的机制之一：
+<p> <ol type=1>
+<p> <li> 如果程序能够决定哪个字段是需要的，它可以当用户完成输入并且按下OK时，或者当用户在完成其它字段后按下Enter键时，移动焦点到那里。另一种方法是，把这个字段包含到Tab键控制次序中，但使这个字段失效。然后当用户在其它字段中输入后的适当条件下，再使它生效。
+<p> <li> 这个字段的标签可以包含一个可以使焦点移动到这个字段的键盘快捷键。
+<p> </ol>
+<p> 还有一种对Tab键支持的例外情况是那些必须支持Tab键的文本输入窗口部件，几乎所有的文本编辑器都属于这一类。Qt把Control键+Tab键作为Tab键来对待，把Control键+Shift键+Tab键作为Shift键+Tab键来对待，并且这样的窗口部件都重新实现了<a href="qwidget.html#event">QWidget::event</a>()并且在调用<a href="qwidget.html#event">QWidget::event</a>()获得对于所有其它键的处理之前处理Tab键。无论如何，因为一些系统中把Control键+Tab键用于其它用途，并且一些用户无论如何也不知道Control键+Tab键这种方法，所以这不是一个完全的解决方案。
+<p> <h3> 用户点击一个窗口部件。
+</h3>
+<a name="1-2"></a><p> 在使用鼠标或者其它指示器的计算机中，这可能是一种比按Tab键更普通的方法。
+<p> 点击来移动焦点比Tab键稍微强大一些。当它把焦点移<em>到</em>一个窗口部件时，对于编辑器窗口部件，它也会移动文本光标（窗口部件的内部焦点）到鼠标被点击的点。
+<p> 因为它是如此的普通，绝大多数窗口部件都支持它是一个不错的主意。人们已经很习惯使用它了。无论如何，还有一个重要的原因要避免它：你可能不想从它所在地窗口部件中移去焦点。
+<p> 举个例子，在一个字处理程序中，当用户点击“B”（粗体）工具按钮，键盘焦点会发生什么呢？应该保留它原来的位置，几乎所有的编辑器窗口部件都是这样的，或者把焦点移到“B”按钮？
+<p> 我们建议支持文本输入的窗口部件支持点击到焦点，并且为了避免它对于绝大多数窗口部件中的鼠标点击有一个不同的效果。（对于按钮，我们也推荐加入键盘快捷键－<a href="qbutton.html">QButton</a>和它的子类都使这个变得很容易。）
+<p> 在Qt中，只有<a href="qwidget.html#setFocusPolicy">QWidget::setFocusPolicy</a>()函数影响点击到焦点。
+<p> <h3> 用户按下一个键盘快捷键。
+</h3>
+<a name="1-3"></a><p> 使用键盘快捷键来移动焦点不是很常用。这种情况可能会隐含地发生在打开的模式对话框中，但是也会明显地使用键盘焦点，比如在<a href="qlabel.html#setBuddy">QLabel::setBuddy</a>()、<a href="qgroupbox.html">QGroupBox</a>和<a href="qtabbar.html">QTabBar</a>。
+<p> 我们建议用户如果想在窗口部件中实现跳最好支持快捷键焦点。举个例子，一个Tab对话框为它的每一个页提供键盘快捷键，所以用户可以按下比如Alt+P来跳到打印（<u>P</u>）页面。但不要做得太过分－只需要少量的快捷键，并且为命令提供键盘快捷键也是很重要的。举个例子，Alt+P也可以用来粘贴、播放、打印和打印这里，请参考<a href="accelerators.html">标准快捷键列表</a>。
+<p> <h3> 用户使用鼠标滚轮。
+</h3>
+<a name="1-4"></a><p> 在Microsoft Windows上，鼠标滚轮的用法是一直由有键盘焦点的窗口部件处理。在Mac OS X和X11上，它是由可以获得其它鼠标事件的窗口部件处理。
+<p> Qt处理这种与平台相关的方法是当滚轮被用到的时候，让窗口部件移动键盘焦点。每个窗口部件上使用正确的焦点策略，应用程序就可以在Windows、Mac OS X和X11上按照习惯正确地工作了。
+<p> <h3> 用户移动焦点到这个窗口。
+</h3>
+<a name="1-5"></a><p> 在这种情况下，应用程序不得不决定窗口中的哪一个窗口部件应该接收焦点。
+<p> 这样也许会简单些：如果以前焦点在这个窗口中，那么上次获得焦点的最后一个窗口部件将会重新得到它。Qt自动地就是这样做的。
+<p> 如果以前焦点就从来没有来到过这个窗口，并且你知道焦点应该从哪里开始，就在你调用<a href="qwidget.html#show">QWidget::show</a>()显示它之前，在这个接收焦点的窗口部件上调用<a href="qwidget.html#setFocus">QWidget::setFocus</a>()。如果你不知道，Qt也许会选择一些合适的窗口部件。
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

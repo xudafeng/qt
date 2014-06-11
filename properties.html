@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>属性</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>属性</h1>
+
+ 
+<p> Qt提供了一套和一些编译器提供商也提供的属性系统类似的完善的属性系统。然而，作为一个不依赖编译器和平台的库，Qt不能依赖像<tt>__property</tt>或者<tt>[property]</tt>那样的非标准编译器特征。我们的解决方案可以在我们支持的每一个平台上和<em>任何</em>标准的C++编译器一起工作。它基于元对象系统，元对象系统也通过<a href="signalsandslots.html">信号和槽</a>提供对象通讯。
+<p> 在类声明中的<tt>Q_PROPERTY</tt>宏声明了一个属性。属性只能在继承于<a href="qobject.html">QObject</a>的子类中声明。第二个宏，<tt>Q_OVERRIDE</tt>，可以用来覆盖一些子类中由继承得到的属性。
+<p> 对于外面的世界，属性看起来和一个数据成员非常类似。然而，属性和普通的数据成员还是有一下一些不同点：
+<p> <ul>
+<li> 一个读函数。这是一直存在的。
+<p> <li> 一个写函数。这个是可选的：像<a href="qwidget.html#isDesktop">QWidget::isDesktop</a>()这样的只读的属性就没有写函数。
+<p> <li> “存储”特征需要说明持续性。绝大多数属性是被存储的，但是有一小部分的虚拟属性却不用。举个例子，<a href="qwidget.html#minimumWidth">QWidget::minimumWidth</a>()是不用存储的，因为它只是<a href="qwidget.html#minimumSize">QWidget::minimumSize</a>()的一种查看，没有自己的数据。
+<p> <li> 一个复位函数用来把属性设置回它根据上下文的特定缺省值。这个用法还是比较罕见的，但是举个例子，<a href="qwidget.html#font">QWidget::font</a>()需要这个函数，因为没有调用<a href="qwidget.html#setFont">QWidget::setFont</a>()意味着“复位到根据上下文特定的字体”。
+<p> <li> “可设计”特征说明它是否可以被一个图形用户界面生成器（例如<a href="designer-manual.html">Qt设计器</a>）设置属性。对于大多数属性都有这个特征，但不是所有，例如<a href="qbutton.html#isDown">QButton::isDown</a>()。用户可以按按钮，并且应用程序设计人员可以让程序来按它自己的按钮，但是一个图形用户界面设计工具不能按按钮。
+<p> </ul>
+<p> 读、写和复位函数就像任何成员函数一样，继承或不继承，虚或不虚。只有一个例外就是，在多重继承的情况下，成员函数必须从第一个被继承类继承。
+<p> 属性可以在不知道被使用的类的任何情况的时候通过<a href="qobject.html">QObject</a>中的一般函数进行读写。下面两个函数调用是等效的：
+<p> <pre>
+    // QButton *b和QObject *o指向同一个按钮
+    b-&gt;setDown( TRUE );
+    o-&gt;setProperty( "down", TRUE );
+</pre>
+ 
+<p> 等效的是指，除了第一个函数要快一些，在编译的时候提供了更好的诊断信息。在实际应用中，第一个函数更好些。然而，因为我们可以通过<a href="qmetaobject.html">QMetaObject</a>获得任何一个QObject的所有有用属性的一个列表，<a href="qobject.html#setProperty">QObject::setProperty</a>()可以让你控制类中那些在编译时不可用的属性。
+<p> 像<a href="qobject.html#setProperty">QObject::setProperty</a>()一样，还有一个相应的<a href="qobject.html#property">QObject::property</a>()函数。<a href="qmetaobject.html#propertyNames">QMetaObject::propertyNames</a>()返回所有可用属性的名称。<a href="qmetaobject.html#property">QMetaObject::property</a>()返回一个指定属性的属性数据：一个<a href="qmetaproperty.html">QMetaProperty</a>对象。
+<p> 这里有一个简单的例子说明了可以应用的绝大多数重要属性函数：
+<p> <pre>
+    class MyClass : public <a href="qobject.html">QObject</a>
+    {
+        <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>
+    public:
+        MyClass( <a href="qobject.html">QObject</a> * parent=0, const char * name=0 );
+        ~MyClass();
+
+        enum Priority { High, Low, VeryHigh, VeryLow };
+        void setPriority( Priority );
+        Priority priority() const;
+    };
+</pre>
+ 
+<p> 这个类有一个名为“priority”的还不被<a href="metaobjects.html#meta-object">元对象</a>系统所知的属性。为了让这个属性被元对象系统知道，你必须用<tt>Q_PROPERTY</tt>宏来声明它。声明语法如下：
+<p> <pre>
+Q_PROPERTY( type name READ getFunction [WRITE setFunction]
+            [RESET resetFunction] [DESIGNABLE bool] 
+            [SCRIPTABLE bool] [STORED bool] )
+</pre>
+ 
+<p> 为了声明是有效的，读函数必须是常量函数并且返回值的类型是它本身或者是指向它的指针，或者是它的一个引用。可选的写函数必须返回void并且必须带有一个正确的参数，类型必须是它本身或者是指向它的指针，或者是它的一个常量引用。元对象编译器强迫这样的。
+<p> 属性的类型可以是任何一个<a href="qvariant.html">QVariant</a>支持的类型或者是一个自己在类中已经定义的枚举类型。因为<tt>MyClass</tt>中的属性使用了枚举类型<tt>Priority</tt>，这个类型必须也向属性系统注册。这样的话，像如下方式通过名称来设置值是可行的：
+<p> <pre>
+    obj-&gt;setProperty( "priority", "VeryHigh" );
+</pre>
+ 
+<p> 枚举类型必须使用<tt>Q_ENUMS</tt>宏来进行注册。这里是一个包含属性相关声明的最终的类声明：
+<p> <pre>
+    class MyClass : public <a href="qobject.html">QObject</a>
+    {
+        Q_OBJECT
+        Q_PROPERTY( Priority priority READ priority WRITE setPriority )
+        Q_ENUMS( Priority )
+    public:
+        MyClass( <a href="qobject.html">QObject</a> * parent=0, const char * name=0 );
+        ~MyClass();
+
+        enum Priority { High, Low, VeryHigh, VeryLow };
+        void setPriority( Priority );
+        Priority priority() const;
+    };
+</pre>
+ 
+<p> 另外一个类似的宏是<tt>Q_SETS</tt>。像<tt>Q_ENUMS</tt>一样，它注册了一个枚举类型，但是它额外的加了一个“set”的标记，也就是说，这个枚举数据可以被一起读或写。一个输入输出类也许有枚举数据“读”和“写”和接收“读|写”：这时最好用<tt>Q_SETS</tt>来声明一个枚举类型，而不是<tt>Q_ENUMS</tt>。
+<p> <tt>Q_PROPERTY</tt>段剩余的关键字是<tt>RESET</tt>、<tt>DESIGNABLE</tt>、<tt>SCRIPTABLE</tt>和STORED。
+<p> <tt>RESET</tt>指定一个函数可以设置属性到缺省状态（这个缺省状态可能和初始状态不同）。这个函数必须返回void并且不带有参数。
+<p> <tt>DESIGNABLE</tt>声明这个属性是否适合被一个图形用户界名设计工具修改。缺省的<tt>TRUE</tt>是说这个属性可写，否则就是<tt>FALSE</tt>说明不能。你可以定义一个布尔成员函数来替代<tt>TRUE</tt>或<tt>FALSE</tt>。
+<p> <tt>SCRIPTABLE</tt>声明这个属性是否适合被一个脚本引擎访问。缺省是<tt>TRUE</tt>，可以。你可以定义一个布尔成员函数来替代<tt>TRUE</tt>或<tt>FALSE</tt>。
+<p> <tt>STORED</tt>声明这个属性的值是否必须作为一个存储的对象状态而被记得。STORED只对可写的属性有意义。缺省是<tt>TRUE</tt>。技术上多余的属性（比如，如果<a href="qrect.html">QRect</a>的geometry已经是一个属性了的<a href="qpoint.html">QPoint</a>的pos）定义为<tt>FALSE</tt>。
+<p> 连接到属性系统是一个附加宏，“Q_CLASSINFO”，它可以用来把名称/值这样一套的属性添加到一个类的元对象中，例如：
+<p> <pre>
+    Q_CLASSINFO( "Version", "3.0.0" )
+</pre>
+ 
+<p> 和其它元数据一样，类信息在运行时是可以通过元对象访问的，具体请看<a href="qmetaobject.html#classInfo">QMetaObject::classInfo</a>()。
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

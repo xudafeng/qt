@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt教程一 —— 第十章：像丝一样滑</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt教程一 —— 第十章：像丝一样滑</h1>
+
+ 
+<p> <center><img src="t10.png" alt="Screenshot of tutorial ten"></center> 
+<p> 在这个例子中，我们介绍画一个pixmap来除去闪烁。我们也会加入一个力量控制。
+<p> <ul>
+<li> <a href="t10-lcdrange-h.html">t10/lcdrange.h</a>包含LCDRange类定义。
+<li> <a href="t10-lcdrange-cpp.html">t10/lcdrange.cpp</a>包含LCDRange类实现。
+<li> <a href="t10-cannon-h.html">t10/cannon.h</a>包含CannonField类定义。
+<li> <a href="t10-cannon-cpp.html">t10/cannon.cpp</a>包含CannonField类实现。
+<li> <a href="t10-main-cpp.html">t10/main.cpp</a>包含MyWidget和main。
+</ul>
+<p> <h2> 一行一行地解说
+</h2>
+<a name="1"></a><p> <h3> <a href="t10-cannon-h.html">t10/cannon.h</a>
+</h3>
+<a name="1-1"></a><p> CannonField现在除了角度又多了一个力量值。
+<p> 
+
+<p> <pre>        int   angle() const { return ang; }
+        int   force() const { return f; }
+
+    public slots:
+        void  setAngle( int degrees );
+        void  setForce( int newton );
+
+    signals:
+        void  angleChanged( int );
+        void  forceChanged( int );
+</pre>
+<p> 力量的接口的实现和角度一样。
+<p> <pre>    private:
+        <a href="qrect.html">QRect</a> cannonRect() const;
+</pre>
+<p> 我们把加农炮封装的矩形的定义放到了一个单独的函数中。
+<p> <pre>        int ang;
+        int f;
+    };
+</pre>
+<p> 力量被存储到一个整数<tt>f</tt>中。
+<p> <h3> <a href="t10-cannon-cpp.html">t10/cannon.cpp</a>
+</h3>
+<a name="1-2"></a><p> 
+
+<p> <pre>    #include &lt;<a href="qpixmap-h.html">qpixmap.h</a>&gt;
+</pre>
+<p> 我们包含了<a href="qpixmap.html">QPixmap</a>类定义。
+<p> <pre>    CannonField::CannonField( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qwidget.html">QWidget</a>( parent, name )
+    {
+        ang = 45;
+        f = 0;
+        <a href="qwidget.html#setPalette">setPalette</a>( QPalette( QColor( 250, 250, 200) ) );
+    }
+</pre>
+<p> 力量（<tt>f</tt>）被初始化为0。
+<p> <pre>    void CannonField::setAngle( int degrees )
+    {
+        if ( degrees &lt; 5 )
+            degrees = 5;
+        if ( degrees &gt; 70 )
+            degrees = 70;
+        if ( ang == degrees )
+            return;
+        ang = degrees;
+        <a href="qwidget.html#repaint">repaint</a>( cannonRect(), FALSE );
+        emit angleChanged( ang );
+    }
+</pre>
+<p> 我们在setAngle()函数中做了一个小的改变。它只重画窗口部件中含有加农炮的一小部分。FALSE参数说明在一个绘画事件发送到窗口部件之前指定的矩形将不会被擦去。这将会使绘画过程加速和平滑。
+<p> <pre>    void CannonField::setForce( int newton )
+    {
+        if ( newton &lt; 0 )
+            newton = 0;
+        if ( f == newton )
+            return;
+        f = newton;
+        emit forceChanged( f );
+    }
+</pre>
+<p> setForce()的实现和setAngle()很相似。唯一的不同是因为我们不显示力量值，我们不需要重画窗口部件。
+<p> <pre>    void CannonField::<a href="qwidget.html#paintEvent">paintEvent</a>( <a href="qpaintevent.html">QPaintEvent</a> *e )
+    {
+    <a name="x2289"></a>    if ( !e-&gt;<a href="qpaintevent.html#rect">rect</a>().intersects( cannonRect() ) )
+            return;
+</pre>
+<p> 我们现在用只重画需要刷新得部分来优化绘画事件。首先我们检查是否不得不完全重画任何事，我们返回是否不需要。
+<p> <pre>        <a href="qrect.html">QRect</a> cr = cannonRect();
+    <a name="x2293"></a>    <a href="qpixmap.html">QPixmap</a> pix( cr.<a href="qrect.html#size">size</a>() );
+</pre>
+<p> 然后，我们创建一个临时的pixmap，我们用来不闪烁地画。所有的绘画操作都在这个pixmap中完成，并且之后只用一步操作来把这个pixmap画到屏幕上。
+<p> 这是不闪烁绘画的本质：一次准确地在每一个像素上画。更少，你会得到绘画错误。更多，你会得到闪烁。在这个例子中这个并不重要——当代码被写时，仍然是很慢的机器导致闪烁，但以后不会再闪烁了。我们由于教育目的保留了这些代码。
+<p> <pre>    <a name="x2294"></a><a name="x2290"></a>    pix.<a href="qpixmap.html#fill">fill</a>( this, cr.<a href="qrect.html#topLeft">topLeft</a>() );
+</pre>
+<p> 我们用这个pixmap来充满这个窗口部件的背景。
+<p> <pre>        <a href="qpainter.html">QPainter</a> p( &amp;pix );
+    <a name="x2286"></a>    p.<a href="qpainter.html#setBrush">setBrush</a>( blue );
+    <a name="x2287"></a>    p.<a href="qpainter.html#setPen">setPen</a>( NoPen );
+    <a name="x2291"></a><a name="x2288"></a>    p.<a href="qpainter.html#translate">translate</a>( 0, pix.<a href="qpixmap.html#height">height</a>() - 1 );
+    <a name="x2281"></a>    p.<a href="qpainter.html#drawPie">drawPie</a>( QRect( -35,-35, 70, 70 ), 0, 90*16 );
+    <a name="x2285"></a>    p.<a href="qpainter.html#rotate">rotate</a>( -ang );
+    <a name="x2283"></a>    p.<a href="qpainter.html#drawRect">drawRect</a>( QRect(33, -4, 15, 8) );
+    <a name="x2284"></a>    p.<a href="qpainter.html#end">end</a>();
+</pre>
+<p> 我们就像第九章中一样画，但是现在我们是在pixmap上画。
+<p> 在这一点上，我们有一个绘画工具变量和一个pixmap看起来相当正确，但是我们还没有在屏幕上画呢。
+<p> <pre>    <a name="x2280"></a>    p.<a href="qpainter.html#begin">begin</a>( this );
+    <a name="x2282"></a>    p.<a href="qpainter.html#drawPixmap">drawPixmap</a>( cr.<a href="qrect.html#topLeft">topLeft</a>(), pix );
+</pre>
+<p> 所以我们在CannonField上面打开绘图工具并在这之后画这个pixmap。
+<p> 这就是全部了。在顶部和底部各有一对线，并且这个代码是100%不闪烁的。
+<p> <pre>    QRect CannonField::cannonRect() const
+    {
+        <a href="qrect.html">QRect</a> r( 0, 0, 50, 50 );
+    <a name="x2292"></a>    r.<a href="qrect.html#moveBottomLeft">moveBottomLeft</a>( <a href="qwidget.html#rect">rect</a>().bottomLeft() );
+        return r;
+    }
+</pre>
+<p> 这个函数返回一个在窗口部件坐标中封装加农炮的矩形。首先我们创建一个50*50大小的矩形，然后移动它，使它的左下角和窗口部件自己的左下角相等。
+<p> <a href="qwidget.html#rect">QWidget::rect</a>()函数在窗口部件自己的坐标（左上角是0,0）中返回窗口部件封装的矩形。
+<p> <h3> <a href="t10-main-cpp.html">t10/main.cpp</a>
+</h3>
+<a name="1-3"></a><p> 
+
+<p> <pre>    MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qwidget.html">QWidget</a>( parent, name )
+    {
+</pre>
+<p> 构造函数也是一样，但是已经加入了一些东西。
+<p> <pre>        LCDRange *force  = new LCDRange( this, "force" );
+        force-&gt;setRange( 10, 50 );
+</pre>
+<p> 我们加入了第二个LCDRange，用来设置力量。
+<p> <pre>        <a href="qobject.html#connect">connect</a>( force, SIGNAL(valueChanged(int)),
+                 cannonField, SLOT(setForce(int)) );
+        <a href="qobject.html#connect">connect</a>( cannonField, SIGNAL(forceChanged(int)),
+                 force, SLOT(setValue(int)) );
+</pre>
+<p> 我们把<tt>force</tt>窗口部件和<tt>cannonField</tt>窗口部件连接起来，就和我们对<tt>angle</tt>窗口部件做的一样。
+<p> <pre>        <a href="qvboxlayout.html">QVBoxLayout</a> *leftBox = new <a href="qvboxlayout.html">QVBoxLayout</a>;
+    <a name="x2297"></a>    grid-&gt;<a href="qgridlayout.html#addLayout">addLayout</a>( leftBox, 1, 0 );
+        leftBox-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( angle );
+        leftBox-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( force );
+</pre>
+<p> 在第九章，我们把<tt>angle</tt>放到了布局的左下单元。现在我们想在这个单元中放入两个窗口部件，所一个我们用了一个垂直的盒子，把这个垂直的盒子放到这个网格单元中，并且把<tt>angle</tt>和<tt>force</tt>放到这个垂直的盒子中。
+<p> <pre>        force-&gt;setValue( 25 );
+</pre>
+<p> 我们初始化力量的值为25。
+<p> <h2> 行为
+</h2>
+<a name="2"></a><p> 闪烁已经走了，并且我们还有一个力量控制。
+<p> （请看<a href="tutorial1-07.html#compiling">编译</a>来学习如何创建一个makefile和连编应用程序。）
+<p> <h2> 练习
+</h2>
+<a name="3"></a><p> 让加农炮的炮筒的大小依赖于力量。
+<p> 把加农炮放到右下角。
+<p> 试着加入一个更好的键盘接口。例如，用+和-来增加或者减少力量，用enter来发射。提示：<a href="qaccel.html">QAccel</a>和在LCDRange中新建addStep()和subtractStep()，就像<a href="qslider.html#addStep">QSlider::addStep</a>()。如果你被左面和右面键所苦恼（我就是！），试着都改变！
+<p> 现在你可以进行<a href="tutorial1-11.html">第十一章</a>了。
+<p> [<a href="tutorial1-09.html">上一章</a>]
+[<a href="tutorial1-11.html">下一章</a>]
+[<a href="tutorial.html">教程一主页</a>]
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

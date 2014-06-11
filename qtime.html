@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QTime类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QTime类参考</h1>
+
+<p>QTime类提供了时钟时间功能。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qdatetime-h.html">qdatetime.h</a>&gt;</tt>
+<p><a href="qtime-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QTime"><b>QTime</b></a> ()</div></li>
+<li><div class=fn><a href="#QTime-2"><b>QTime</b></a> ( int&nbsp;h, int&nbsp;m, int&nbsp;s = 0, int&nbsp;ms = 0 )</div></li>
+<li><div class=fn>bool <a href="#isNull"><b>isNull</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isValid"><b>isValid</b></a> () const</div></li>
+<li><div class=fn>int <a href="#hour"><b>hour</b></a> () const</div></li>
+<li><div class=fn>int <a href="#minute"><b>minute</b></a> () const</div></li>
+<li><div class=fn>int <a href="#second"><b>second</b></a> () const</div></li>
+<li><div class=fn>int <a href="#msec"><b>msec</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#toString-2"><b>toString</b></a> ( Qt::DateFormat&nbsp;f = Qt::TextDate ) const</div></li>
+<li><div class=fn>QString <a href="#toString"><b>toString</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;format ) const</div></li>
+<li><div class=fn>bool <a href="#setHMS"><b>setHMS</b></a> ( int&nbsp;h, int&nbsp;m, int&nbsp;s, int&nbsp;ms = 0 )</div></li>
+<li><div class=fn>QTime <a href="#addSecs"><b>addSecs</b></a> ( int&nbsp;nsecs ) const</div></li>
+<li><div class=fn>int <a href="#secsTo"><b>secsTo</b></a> ( const&nbsp;QTime&nbsp;&amp;&nbsp;t ) const</div></li>
+<li><div class=fn>QTime <a href="#addMSecs"><b>addMSecs</b></a> ( int&nbsp;ms ) const</div></li>
+<li><div class=fn>int <a href="#msecsTo"><b>msecsTo</b></a> ( const&nbsp;QTime&nbsp;&amp;&nbsp;t ) const</div></li>
+<li><div class=fn>bool <a href="#operator-eq-eq"><b>operator==</b></a> ( const&nbsp;QTime&nbsp;&amp;&nbsp;t ) const</div></li>
+<li><div class=fn>bool <a href="#operator!-eq"><b>operator!=</b></a> ( const&nbsp;QTime&nbsp;&amp;&nbsp;t ) const</div></li>
+<li><div class=fn>bool <a href="#operator-lt"><b>operator&lt;</b></a> ( const&nbsp;QTime&nbsp;&amp;&nbsp;t ) const</div></li>
+<li><div class=fn>bool <a href="#operator-lt-eq"><b>operator&lt;=</b></a> ( const&nbsp;QTime&nbsp;&amp;&nbsp;t ) const</div></li>
+<li><div class=fn>bool <a href="#operator-gt"><b>operator&gt;</b></a> ( const&nbsp;QTime&nbsp;&amp;&nbsp;t ) const</div></li>
+<li><div class=fn>bool <a href="#operator-gt-eq"><b>operator&gt;=</b></a> ( const&nbsp;QTime&nbsp;&amp;&nbsp;t ) const</div></li>
+<li><div class=fn>void <a href="#start"><b>start</b></a> ()</div></li>
+<li><div class=fn>int <a href="#restart"><b>restart</b></a> ()</div></li>
+<li><div class=fn>int <a href="#elapsed"><b>elapsed</b></a> () const</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>QTime <a href="#currentTime"><b>currentTime</b></a> ()</div></li>
+<li><div class=fn>QTime <a href="#fromString"><b>fromString</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;s, Qt::DateFormat&nbsp;f = Qt::TextDate )</div></li>
+<li><div class=fn>bool <a href="#isValid-2"><b>isValid</b></a> ( int&nbsp;h, int&nbsp;m, int&nbsp;s, int&nbsp;ms = 0 )</div></li>
+</ul>
+<h2>相关函数</h2>
+<ul>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt"><b>operator&lt;&lt;</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, const&nbsp;QTime&nbsp;&amp;&nbsp;t )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt"><b>operator&gt;&gt;</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, QTime&nbsp;&amp;&nbsp;t )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QTime类提供了时钟时间功能。
+<p> 
+
+<p> QTime对象包含时钟时间，比如从午夜开始的时、分、秒和毫秒数。它可以从系统时钟中读取当前的时间并且度量时间的跨度。它提供比较时间和操作时间的函数，比如加上一定的秒或毫秒。
+<p> QTime操作的是24小时时钟格式，它没有AM/PM概念。它操作的是本地时间，它不知道有关时区或白天时间的概念。
+<p> QTime对象通常可以由明白地给定的时、分、秒和毫秒数字来创建，或者使用静态函数<a href="#currentTime">currentTime</a>()让QTime对象包含系统时钟时间。注意精确性取决于下面操作系统的精确性，不是所有的操作系统都有毫秒级精确度的。
+<p> <a href="#hour">hour</a>()、<a href="#minute">minute</a>()、<a href="#second">second</a>()和<a href="#msec">msec</a>()函数提供了对时、分、秒和毫秒数字的访问。<a href="#toString">toString</a>()提供了文本格式的相同信息。
+<p> QTime提供了一整套的操作符来比较两个QTime对象，在这里小于表示早一些，大于表示晚一些。
+<p> 一个给定时间之后给定的秒或毫秒数的时间可以使用<a href="#addSecs">addSecs</a>()或<a href="#addMSecs">addMSecs</a>()得到。相对地，两个时间的秒（或毫秒）数可以使用<a href="#secsTo">secsTo</a>()或<a href="#msecsTo">msecsTo</a>()得到。
+<p> QTime可以使用<a href="#start">start</a>()、<a href="#restart">restart</a>()和<a href="#elapsed">elapsed</a>()函数度量流逝的时间。
+<p> <p>也可以参考<a href="qdate.html">QDate</a>、<a href="qdatetime.html">QDateTime</a>和<a href="time.html">时间和日期</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QTime"></a>QTime::QTime ()
+</h3>
+<p> 构造一个时、分、秒和毫秒都是0的时间，比如，00:00:00.000（午夜）。这是一个有效的时间。
+<p> <p>也可以参考<a href="#isValid">isValid</a>()。
+
+<h3 class=fn><a name="QTime-2"></a>QTime::QTime ( int&nbsp;h, int&nbsp;m, int&nbsp;s = 0, int&nbsp;ms = 0 )
+</h3>
+构造一个时、分、秒和毫秒分别为<em>h</em>、<em>m</em>、<em>s</em>和<em>ms</em>的时间。
+<p> <em>h</em>必须在0－23之间，<em>m</em>和<em>s</em>必须在0－59之间，<em>ms</em>必须在0－999之间。
+<p> <p>也可以参考<a href="#isValid">isValid</a>()。
+
+<h3 class=fn><a href="qtime.html">QTime</a> <a name="addMSecs"></a>QTime::addMSecs ( int&nbsp;ms ) const
+</h3>
+返回这个时间对象<em>ms</em>毫秒之后的一个时间对象（或者<em>ms</em>毫秒之前的，如果它是一个负数）。
+<p> 注意如果这个时间过了午夜，它将被转换。请参考<a href="#addSecs">addSecs</a>()中的实例。
+<p> <p>也可以参考<a href="#addSecs">addSecs</a>()和<a href="#msecsTo">msecsTo</a>()。
+
+<h3 class=fn><a href="qtime.html">QTime</a> <a name="addSecs"></a>QTime::addSecs ( int&nbsp;nsecs ) const
+</h3>
+返回这个时间对象<em>nsecs</em>秒之后的一个时间对象（或者<em>nsecs</em>秒之前的，如果它是一个负数）。
+<p> 注意如果这个时间过了午夜，它将被转换。
+<p> 实例：
+<pre>
+    QTime n( 14, 0, 0 );                // n == 14:00:00
+    QTime t;
+    t = n.<a href="#addSecs">addSecs</a>( 70 );                // t == 14:01:10
+    t = n.<a href="#addSecs">addSecs</a>( -70 );               // t == 13:58:50
+    t = n.<a href="#addSecs">addSecs</a>( 10*60*60 + 5 );      // t == 00:00:05
+    t = n.<a href="#addSecs">addSecs</a>( -15*60*60 );         // t == 23:00:00
+  </pre>
+ 
+<p> <p>也可以参考<a href="#addMSecs">addMSecs</a>()、<a href="#secsTo">secsTo</a>()和<a href="qdatetime.html#addSecs">QDateTime::addSecs</a>()。
+
+<h3 class=fn><a href="qtime.html">QTime</a> <a name="currentTime"></a>QTime::currentTime ()<tt> [静态]</tt>
+</h3>
+返回当前时间，来自于系统时钟。
+<p> 注意精确性取决于下面操作系统的精确性，不是所有的操作系统都有毫秒级精确度的。
+<p>实例：<a href="aclock-example.html#x1219">aclock/aclock.cpp</a>、<a href="dclock-example.html#x904">dclock/dclock.cpp</a>、<a href="tutorial1-12.html#x2385">t12/cannon.cpp</a>和<a href="tictac-example.html#x136">tictac/tictac.cpp</a>。
+
+<h3 class=fn>int <a name="elapsed"></a>QTime::elapsed () const
+</h3>
+返回从最后一次调用<a href="#start">start</a>()或<a href="#restart">restart</a>()到现在已经过去的毫秒数。
+<p> 注意如果在最后一次调用start()或restart()后24小时，计数器转换为0。
+<p> 注意精确性取决于下面操作系统的精确性，不是所有的操作系统都有毫秒级精确度的。
+<p> <b>警告：</b> 如果最后一次调用start()或restart()之后，系统时钟设置发生了改变，结果将是不确定的。
+<p> <p>也可以参考<a href="#start">start</a>()和<a href="#restart">restart</a>()。
+
+<h3 class=fn><a href="qtime.html">QTime</a> <a name="fromString"></a>QTime::fromString ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;s, <a href="qt.html#DateFormat-enum">Qt::DateFormat</a>&nbsp;f = Qt::TextDate )<tt> [静态]</tt>
+</h3>
+通过给定的字符串<em>s</em>，使用格式<em>f</em>，返回这个QTime，或者如果这是不可能的话返回一个无效的时间。
+<p> 注意Qt::LocalDate在这里不能使用。
+
+<h3 class=fn>int <a name="hour"></a>QTime::hour () const
+</h3>
+返回时间的小时部分（0－23）。
+<p>实例：<a href="tictac-example.html#x137">tictac/tictac.cpp</a>。
+
+<h3 class=fn>bool <a name="isNull"></a>QTime::isNull () const
+</h3>
+如果时间和00:00:00.000相等，返回真，否则返回假。零时间是有效的。
+<p> <p>也可以参考<a href="#isValid">isValid</a>()。
+
+<h3 class=fn>bool <a name="isValid"></a>QTime::isValid () const
+</h3>
+如果时间是有效的，返回真，否则返回假。时间23:30:55.746是有效的，而24:12:30是无效的。
+<p> <p>也可以参考<a href="#isNull">isNull</a>()。
+
+<h3 class=fn>bool <a name="isValid-2"></a>QTime::isValid ( int&nbsp;h, int&nbsp;m, int&nbsp;s, int&nbsp;ms = 0 )<tt> [静态]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 如果时间是有效的，返回真，否则返回假。
+<p> 如果<em>h</em>在0－23之间、<em>m</em>和<em>s</em>在0－59之间、<em>ms</em>在0－999之间，时间是有效的。
+<p> 实例：
+<pre>
+    QTime::<a href="#isValid">isValid</a>(21, 10, 30); // 返回真
+    QTime::<a href="#isValid">isValid</a>(22, 5,  62); // 返回假
+  </pre>
+ 
+
+<h3 class=fn>int <a name="minute"></a>QTime::minute () const
+</h3>
+返回时间的分钟部分（0－59）。
+<p>实例：<a href="aclock-example.html#x1220">aclock/aclock.cpp</a>和<a href="tictac-example.html#x138">tictac/tictac.cpp</a>。
+
+<h3 class=fn>int <a name="msec"></a>QTime::msec () const
+</h3>
+返回时间的毫秒部分（0－999）。
+
+<h3 class=fn>int <a name="msecsTo"></a>QTime::msecsTo ( const&nbsp;<a href="qtime.html">QTime</a>&nbsp;&amp;&nbsp;t ) const
+</h3>
+返回这个时间到<em>t</em>的毫秒数（如果<em>t</em>早于这个时间，返回的为负数）。
+<p> 因为QTime只能度量一天之内的时间，而且一天内只有86400000毫秒，所以结果就应该在-86400000毫秒和86400000毫秒之间。
+<p> <p>也可以参考<a href="#secsTo">secsTo</a>()。
+
+<h3 class=fn>bool <a name="operator!-eq"></a>QTime::operator!= ( const&nbsp;<a href="qtime.html">QTime</a>&nbsp;&amp;&nbsp;t ) const
+</h3>
+<p> 如果这个时间不等于<em>t</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-lt"></a>QTime::operator&lt; ( const&nbsp;<a href="qtime.html">QTime</a>&nbsp;&amp;&nbsp;t ) const
+</h3>
+<p> 如果这个时间早于<em>t</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-lt-eq"></a>QTime::operator&lt;= ( const&nbsp;<a href="qtime.html">QTime</a>&nbsp;&amp;&nbsp;t ) const
+</h3>
+<p> 如果这个时间不晚于<em>t</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-eq-eq"></a>QTime::operator== ( const&nbsp;<a href="qtime.html">QTime</a>&nbsp;&amp;&nbsp;t ) const
+</h3>
+<p> 如果这个时间等于<em>t</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-gt"></a>QTime::operator&gt; ( const&nbsp;<a href="qtime.html">QTime</a>&nbsp;&amp;&nbsp;t ) const
+</h3>
+<p> 如果这个时间晚于<em>t</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-gt-eq"></a>QTime::operator&gt;= ( const&nbsp;<a href="qtime.html">QTime</a>&nbsp;&amp;&nbsp;t ) const
+</h3>
+<p> 如果这个时间不早于<em>t</em>，返回真，否则返回假。
+
+<h3 class=fn>int <a name="restart"></a>QTime::restart ()
+</h3>
+设置这个时间为当前时间并且返回从最后一次调用<a href="#start">start</a>()或<a href="#restart">restart</a>()到现在过去的毫秒数。
+<p> 这个函数保证是原子的并且这样对于重复度量是非常方便的。调用start()开始第一次度量，然后调用restart()来做以后的每一次度量。
+<p> 注意如果在最后一次调用start()或restart()后24小时，计数器转换为0。
+<p> <b>警告：</b> 如果最后一次调用start()或restart()之后，系统时钟设置发生了改变，结果将是不确定的。
+<p> <p>也可以参考<a href="#start">start</a>()、<a href="#elapsed">elapsed</a>()和<a href="#currentTime">currentTime</a>()。
+
+<h3 class=fn>int <a name="second"></a>QTime::second () const
+</h3>
+返回时间的秒部分（0－59）。
+<p>实例：<a href="tictac-example.html#x139">tictac/tictac.cpp</a>。
+
+<h3 class=fn>int <a name="secsTo"></a>QTime::secsTo ( const&nbsp;<a href="qtime.html">QTime</a>&nbsp;&amp;&nbsp;t ) const
+</h3>
+返回这个时间到<em>t</em>的秒数（如果<em>t</em>早于这个时间，返回的为负数）。
+<p> 因为QTime只能度量一天之内的时间，而且一天内只有86400秒，所以结果就应该在-86400秒和86400秒之间。
+<p> <p>也可以参考<a href="#addSecs">addSecs</a>() and <a href="qdatetime.html#secsTo">QDateTime::secsTo</a>().
+<p>实例：<a href="tutorial1-12.html#x2386">t12/cannon.cpp</a>。
+
+<h3 class=fn>bool <a name="setHMS"></a>QTime::setHMS ( int&nbsp;h, int&nbsp;m, int&nbsp;s, int&nbsp;ms = 0 )
+</h3>
+设置时间的时、分、秒和毫秒分别为<em>h</em>、<em>m</em>、<em>s</em>和<em>ms</em>。
+<p> <em>h</em>必须在0－23之间，<em>m</em>和<em>s</em>必须在0－59之间，<em>ms</em>必须在0－999之间。如果设置的时间有效，返回真，否则返回假。
+<p> <p>也可以参考<a href="#isValid">isValid</a>()。
+
+<h3 class=fn>void <a name="start"></a>QTime::start ()
+</h3>
+设置这个时间为当前时间。这是实际上使用来计时的：
+<p> <pre>
+    QTime t;
+    t.<a href="#start">start</a>();                     // 开始计时
+    ... // 一些任务
+    <a href="qapplication.html#qDebug">qDebug</a>( "%d\n", t.<a href="#elapsed">elapsed</a>() ); // 打印过去的毫秒数
+  </pre>
+ 
+<p> <p>也可以参考<a href="#restart">restart</a>()、<a href="#elapsed">elapsed</a>()和<a href="#currentTime">currentTime</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="toString"></a>QTime::toString ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;format ) const
+</h3>  
+返回一个字符串的时间。<em>format</em>参数决定了结果字符串的格式。
+<p> 这些是可能用到的表达式：
+<p> <ul>
+<li> <em>h</em> - 没有前置0的数字的小时（0－23或者如果显示AM/PM时，1－12）
+<li> <em>hh</em> - 前置0的数字的小时（00－23或者如果显示AM/PM时，01－12）
+<li> <em>m</em> - 没有前置0的数字的分钟（0－59）
+<li> <em>mm</em> - 前置0的数字的分钟（00－59）
+<li> <em>s</em> - 没有前置0的数字的秒（0－59）
+<li> <em>ss</em> - 前置0的数字的秒（00－59）
+<li> <em>z</em> - 没有前置0的数字的毫秒（0－999）
+<li> <em>zzz</em> - 前置0的数字的毫秒（000－999）
+<li> <em>AP</em> - 切换为AM/PM显示。<em>AP</em>将被“AM”或“PM”替换。
+<li> <em>ap</em> - 切换为am/pm显示。<em>ap</em>将被“am”或“pm”替换。
+</ul>
+<p> 所有其他输入字符都将被忽略。
+<p> 格式字符串实例（假设这个QTime为14:13:09.042）
+<p> <ul>
+<li> “hh:mm:ss.zzz”的结果将是“14:13:09.042”
+<li> “h:m:s ap”的结果将是“2:13:9 pm”
+</ul>
+<p> <p>也可以参考<a href="qdate.html#toString">QDate::toString</a>()和<a href="#toString">QTime::toString</a>()。
+
+<p> 
+<h3 class=fn><a href="qstring.html">QString</a> <a name="toString-2"></a>QTime::toString ( <a href="qt.html#DateFormat-enum">Qt::DateFormat</a>&nbsp;f = Qt::TextDate ) const
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回一个字符串的时间。<em>f</em>参数决定了结果字符串的格式。
+<p> 如果<em>f</em>是Qt::TextDate，字符串格式是HH:MM:SS，比日午夜前一秒是“23:59:59”。
+<p> 如果<em>f</em>是Qt::ISODate，字符串格式遵循ISO 8601表示时间的说明，也就是HH:MM:SS。
+<p> 如果<em>f</em>是Qt::LocalDate，字符串格式依赖于系统的本地设置。
+
+<hr><h2>相关函数</h2>
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt"></a>operator&lt;&lt; ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, const&nbsp;<a href="qtime.html">QTime</a>&nbsp;&amp;&nbsp;t )
+</h3>
+写时间<em>t</em>到流<em>s</em>中。
+<p> <p>也可以参考<a href="datastreamformat.html">QDataStream操作符的格式</a>。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt"></a>operator&gt;&gt; ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, <a href="qtime.html">QTime</a>&nbsp;&amp;&nbsp;t )
+</h3>
+从流<em>s</em>中读取一个时间到<em>t</em>中。
+<p> <p>也可以参考<a href="datastreamformat.html">QDataStream操作符的格式</a>。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

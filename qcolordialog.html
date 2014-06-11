@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QColorDialog类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QColorDialog类参考</h1>
+
+<p>QColorDialog类提供了指定颜色的对话框窗口部件。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qcolordialog-h.html">qcolordialog.h</a>&gt;</tt>
+<p>继承了<a href="qdialog.html">QDialog</a>。
+<p><a href="qcolordialog-members.html">所有成员函数的列表。</a>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>QColor <a href="#getColor"><b>getColor</b></a> ( const&nbsp;QColor&nbsp;&amp;&nbsp;initial = white, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>QRgb <a href="#getRgba"><b>getRgba</b></a> ( QRgb&nbsp;initial, bool&nbsp;*&nbsp;ok = 0, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>int <a href="#customCount"><b>customCount</b></a> ()</div></li>
+<li><div class=fn>QRgb <a href="#customColor"><b>customColor</b></a> ( int&nbsp;i )</div></li>
+<li><div class=fn>void <a href="#setCustomColor"><b>setCustomColor</b></a> ( int&nbsp;i, QRgb&nbsp;c )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QColorDialog类提供了指定颜色的对话框窗口部件。
+<p> 眼色对话框函数允许用户来选择颜色——例如，你也许在一个绘制程序中使用它来允许用户设置画刷颜色。
+<p> 静态函数提供模式颜色对话框。
+<p> <a href="#getColor">getColor</a>()静态函数显示对话框并且允许用户指定一个颜色。<a href="#getRgba">getRgba</a>()函数可以做同样的事情但是也允许用户指定一个有alpha通道（透明）值的颜色。
+<p> 用户可以用<a href="#customCount">customCount</a>()来存储不同的自定义颜色。自定义颜色被所有颜色对话框共享，并且在这个程序执行期间被记住。使用<a href="#setCustomColor">setCustomColor</a>()来设置自定义颜色，并且使用<a href="#customColor">customColor</a>()来得到它们。
+<p> <img src=qcolordlg-w.png>
+<p>也可以参考<a href="dialogs.html">对话框类</a>和<a href="graphics.html">图形类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn>QRgb <a name="customColor"></a>QColorDialog::customColor ( int&nbsp;i )<tt> [静态]</tt>
+</h3>
+返回一个数字为<em>i</em>的QRgb自定义颜色。
+
+<h3 class=fn>int <a name="customCount"></a>QColorDialog::customCount ()<tt> [静态]</tt>
+</h3>
+返回QColorDialog所支持的自定义颜色的数量。所有的颜色对话框共享相同的自定义颜色。
+
+<h3 class=fn><a href="qcolor.html">QColor</a> <a name="getColor"></a>QColorDialog::getColor ( const&nbsp;<a href="qcolor.html">QColor</a>&nbsp;&amp;&nbsp;initial = white, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )<tt> [静态]</tt>
+</h3>
+弹出模式颜色对话框，让用户选择一个颜色并且返回那个颜色。这个颜色用<em>initial</em>来初始化。对话框是<em>parent</em>的孩子并且名为<em>name</em>。如果用户撤消这个对话框，返回一个无效的颜色（请参考<a href="qcolor.html#isValid">QColor::isValid</a>()）。对话框分配的所有颜色在函数返回之前都将被释放。
+<p>实例：<a href="tutorial2-08.html#x2506">chart/setdataform.cpp</a>和<a href="scribble-example.html#x930">scribble/scribble.cpp</a>。
+
+<h3 class=fn>QRgb <a name="getRgba"></a>QColorDialog::getRgba ( QRgb&nbsp;initial, bool&nbsp;*&nbsp;ok = 0, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )<tt> [静态]</tt>
+</h3>
+弹出模式颜色对话框，让用户选择一个颜色和一个alpha通道（透明）值。这个颜色和alpha用<em>initial</em>来初始化。对话框是<em>parent</em>的孩子并且名为<em>name</em>。
+<p> 如果<em>ok</em>为非空，如果用户点击OK，<em>*</em><em>ok</em>被设置为真，并且如果用户点击Cancel，就被设置为假。
+<p> 如果用户点击Cancel，<em>initial</em>值被返回。
+
+<h3 class=fn>void <a name="setCustomColor"></a>QColorDialog::setCustomColor ( int&nbsp;i, QRgb&nbsp;c )<tt> [静态]</tt>
+</h3>
+设置数字为<em>i</em>的自定义颜色为QRgb值<em>c</em>。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

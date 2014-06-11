@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt教程一 —— 第七章：一个事物领导另一个</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt教程一 —— 第七章：一个事物领导另一个</h1>
+
+ 
+<p> <center><img src="t7.png" alt="Screenshot of tutorial seven"></center> 
+<p> 这个例子显示了如何使用信号和槽来创建自定义窗口部件，和如何使用更加复杂的方式把它们连接起来。首先，源文件被我们分成几部分并放在放在<tt>t7</tt>目录下。
+<p> <ul>
+<li> <a href="t7-lcdrange-h.html">t7/lcdrange.h</a>包含LCDRange类定义。
+<li> <a href="t7-lcdrange-cpp.html">t7/lcdrange.cpp</a>包含LCDRange类实现。
+<li> <a href="t7-main-cpp.html">t7/main.cpp</a>包含MyWidget和main。
+</ul>
+<p> <h2> 一行一行地解说
+</h2>
+<a name="1"></a><p> <h3> <a href="t7-lcdrange-h.html">t7/lcdrange.h</a>
+</h3>
+<a name="1-1"></a><p> 这个文件主要利用了第六章的<a href="tutorial1-06.html#main">main.cpp</a>，在这里只是说明一下改变了哪些。
+<p> 
+
+<p> <pre>    #ifndef LCDRANGE_H
+    #define LCDRANGE_H
+</pre>
+<p> 这里是一个经典的C语句，为了避免出现一个头文件被包含不止一次的情况。如果你没有使用过它，这是开发中的一个很好的习惯。#ifndef需要把这个头文件的<em>全部</em>都包含进去。
+<p> <pre>    #include &lt;<a href="qvbox-h.html">qvbox.h</a>&gt;
+</pre>
+<p> <a href="qvbox-h.html">qvbox.h</a>被包含了。LCDRange继承了<a href="qvbox.html">QVBox</a>，所以父类的头文件必须被包含。我们在前几章里面偷了一点懒，我们通过包含其它一些头文件，比如<a href="qpushbutton-h.html">qpushbutton.h</a>，这样就可以间接地包含<a href="qwidget-h.html">qwidget.h</a>。
+<p> <pre>    class QSlider;
+</pre>
+<p> 这里是另外一个小伎俩，但是没有前一个用的多。因为我们在类的<em>界面</em>中不需要<a href="qslider.html">QSlider</a>，仅仅是在实现中，我们在头文件中使用一个前置的类声明，并且在.cpp文件中包含一个QSlider的头文件。
+<p> 这会使编译一个大的项目变得更快，因为当一个头文件改变的时候，很少的文件需要重新编译。它通常可以给大型编译加速两倍或两倍以上。
+<p> <pre>    class LCDRange : public <a href="qvbox.html">QVBox</a>
+    {
+        <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>
+    public:
+        LCDRange( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+</pre>
+<p> <a href="metaobjects.html">meta object file</a>.
+注意Q_OBJECT。这个宏必须被包含到<em>所有</em>使用信号和/或槽的类。如果你很好奇，它定义了在<a href="metaobjects.html">元对象文件</a>中实现的一些函数。
+<p> <pre>        int value() const;
+    public slots:
+        void setValue( int );
+
+    signals:
+        void valueChanged( int );
+</pre>
+<p> 这三个成员函数构成了这个窗口部件和程序中其它组件的接口。直到现在，LCDRange根本没有一个真正的接口。
+<p> value()是一个可以访问LCDRange的值的公共函数。setValue()是我们第一个自定义槽，并且valueChanged()是我们第一个自定义信号。
+<p> 槽必须按通常的方式实现（记住槽也是一个C++成员函数）。信号可以在<a href="signalsandslots.html">元对象</a>文件中自动实现。信号也遵守C++函数的保护法则（比如，一个类只能发射它自己定义的或者继承来的信号）。
+<p> 当LCDRange的值发生变化时，valueChanged()信号就会被使用——你从这个名字中就可以猜到。这将不会是你将会看到的命名为<i>something</i>Changed()的最后一个信号。
+<p> <h3> <a href="t7-lcdrange-cpp.html">t7/lcdrange.cpp</a>
+</h3>
+<a name="1-2"></a><p> 
+
+<p> 这个文件主要利用了<a href="tutorial1-06.html#main">t6/main.cpp</a>，在这里只是说明一下改变了哪些。
+<p> <pre>    <a name="x2265"></a>    <a href="qobject.html#connect">connect</a>( slider, SIGNAL(<a href="qslider.html#valueChanged">valueChanged</a>(int)),
+    <a name="x2262"></a>             lcd, SLOT(<a href="qlcdnumber.html#display">display</a>(int)) );
+        <a href="qobject.html#connect">connect</a>( slider, SIGNAL(<a href="qslider.html#valueChanged">valueChanged</a>(int)),
+                 SIGNAL(valueChanged(int)) );
+</pre>
+<p> 这个代码来自LCDRange的构造函数。
+<p> 第一个connect和你在上一章中看到的一样。第二个是新的，它把滑块的valueChanged()信号和这个对象的valueChanged<em>信号</em>连接起来了。带有三个参数的connect()函数连接到<tt>this</tt>对象的信号或槽。
+<p> 是的，这是正确的。信号可以被连接到其它的信号。当第一个信号被发射时，第二个信号也被发射。
+<p> 让我们来看看当用户操作这个滑块的时候都发生了些什么。滑块看到自己的值发生了改变，并发射了valueChanged()信号。这个信号被连接到<a href="qlcdnumber.html">QLCDNumber</a>的display()槽和LCDRange的valueChanged()信号。
+<p> 所以，当这个信号被发射的时候，LCDRange发射它自己的valueChanged()信号。另外，<a href="qlcdnumber.html#display">QLCDNumber::display</a>()被调用并显示新的数字。
+<p> 注意你并没有保证执行的任何顺序——LCDRange::valueChanged()也许在QLCDNumber::display()之前或者之后发射，这是完全任意的。
+<p> <pre>    int LCDRange::value() const
+    {
+    <a name="x2264"></a>    return slider-&gt;<a href="qslider.html#value">value</a>();
+    }
+</pre>
+<p> value()的实现是直接了当的，它简单地返回滑块的值。
+<p> <pre>    void LCDRange::setValue( int value )
+    {
+    <a name="x2263"></a>    slider-&gt;<a href="qslider.html#setValue">setValue</a>( value );
+    }
+</pre>
+<p> setValue()的实现是相当直接了当的。注意因为滑块和LCD数字是连接的，设置滑块的值就会自动的改变LCD数字的值。另外，如果滑块的值超过了合法范围，它会自动调节。
+<p> <h3> <a href="t7-main-cpp.html">t7/main.cpp</a>
+</h3>
+<a name="1-3"></a><p> 
+
+<p> <pre>        LCDRange *previous = 0;
+        for( int r = 0 ; r &lt; 4 ; r++ ) {
+            for( int c = 0 ; c &lt; 4 ; c++ ) {
+                LCDRange* lr = new LCDRange( grid );
+                if ( previous )
+                    <a href="qobject.html#connect">connect</a>( lr, SIGNAL(valueChanged(int)),
+                             previous, SLOT(setValue(int)) );
+                previous = lr;
+            }
+        }
+</pre>
+<p> main.cpp中所有的部分都是上一章复制的，除了MyWidget的构造函数。当我们创建16个RCDRange对象时，我们现在使用<a href="signalsandslots.html">信号/槽</a>机制连接它们。每一个的valueChanged()信号都和前一个的setValue()槽连接起来了。因为当LCDRange的值发生改变的时候，发射一个valueChanged()信号（惊奇！），我们在这里创建了一个信号和槽的“链”。
+<p> <a name="compiling"></a>
+<h2> 编译
+</h2>
+<a name="2"></a><p> 为一个多文件的应用程序创建一个makefile和为一个单文件的应用程序创建一个makefile是没有什么不同的。如果你已经把这个例子中的所有文件都保存到它们自己的目录中，你所要做的就是这些：
+<pre>
+qmake -project
+qmake
+</pre>
+ 
+<p> 第一个命令调用<a href="qmake-manual.html">qmake</a>来生成一个<tt>.pro</tt>（项目）文件。第二个命令根据这个项目文件来生成一个（系统相关的）makefile。你现在可以输入<tt>make</tt>（或者<tt>nmake</tt>，如果你使用Visual
+Studio）。
+<p> <h2> 行为
+</h2>
+<a name="3"></a><p> 在开始的时候，这个程序看起来和上一章里的一样。试着操作滑块到右下角……
+<p> <h2> 练习
+</h2>
+<a name="4"></a><p> seven LCDs back to 50.
+使用右下角的滑块并设置所有的LCD到50。然后设置通过点击这个滑块的左侧把它设置为40。现在，你可以通过把最后一个调到左边来把前七个LCD设置回50。
+<p> 点击右下角滑块的滑块的左边。发生了什么？为什么只是正确的行为？
+<p> 现在你可以进行<a href="tutorial1-08.html">第八章</a>了。
+<p> [<a href="tutorial1-06.html">上一章</a>]
+[<a href="tutorial1-08.html">下一章</a>]
+[<a href="tutorial.html">教程一主页</a>]
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

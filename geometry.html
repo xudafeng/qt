@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>窗口几何结构</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>窗口几何结构</h1>
+
+ 
+<h2> 概述
+</h2>
+<a name="1"></a><p> <a href="qwidget.html">QWidget</a>提供了几个处理窗口几何结构的函数。这些函数中的几个操作纯客户区域（例如不包含窗口框架的窗口），其它一些包括窗口框架。它们之间的区别在某种意义上被完成覆盖明显地最普通的方法。
+<p> <dl>
+<dt><strong>包括窗口的框架：</strong>
+<dd>x(), y(), frameGeometry(), pos() and move()
+<dt><strong>不包括窗口的框架：</strong>
+<dd> geometry(), width(), height(), rect() and size()
+</dl>
+<p> 请注意这这种区别仅仅对于被装饰的顶层窗口部件有效。对于所有的子窗口部件，框架的几何结构和这个窗口部件的客户几何结构相同。
+<p> 这个图显示了我们所使用的绝大多数函数：
+<center><img src="geometry.png" alt="Geometry diagram"></center> 
+<p> <h2> Unix/X11特性
+</h2>
+<a name="2"></a><p> 在Unix/X11中，一个窗口没有框架直到窗口管理器来装饰它。这种情况发生在异步情况下调用show()之后和窗口接收到第一个绘画事件的一些点中，否则它根本就不会发生。请记住X11是自由策略的（其它人把它称为灵活的）。因此你不能作出关于你的窗口得到装饰框架这样的任何安全假设。基本规则：总是会有用户使用窗口管理器来打破你的假设，并且他还会向你抱怨。
+<p> 此外，一个工具包不能简单地把窗口放置到屏幕上。Qt所能做的一切是把一些确定的提示发送给窗口管理器。窗口管理器，一个单独的进程，也许会遵守、忽略或者误解它们。由于部分不清楚的客户间通信约定（ICCCM），在存在的窗口管理器中窗口放置的处理非常困难。
+<p> 当窗口被装饰的时候，X11没有提供标准的或者容易的方式来获得框架的几何结构。Qt使用了可以工作在今天存在的大量的窗口管理器中的非常富有启发性和巧妙的代码来解决这一问题。如果你发现某种情况下frameGeometry()返回了虚假的结果的时候，请不要惊讶。
+<p> X11同样也不提供最大化一个窗口的方法。因此Qt中的showMaximized()函数不得不模拟这一功能。它的结果完全取决于frameGeometry()的结果和窗口管理器作出正确的窗口放置的能力，但这两个都不能被保证。
+<p> <h2> 恢复窗口几何结构
+</h2>
+<a name="3"></a><p> 现代的应用程序的一个普通任务就是在稍后的对话中恢复一个窗口的几何结构。在Windows中，这基本上通过存储geometry()的结果和在下一个对话中还没有框架之前调用setGeometry()。在X11中，这样将不会工作，因为一个没有显示的窗口还没有框架呢。窗口管理器将会在稍后装饰这个窗口。当这些发生的时候，窗口朝着依赖于装饰框架的大小的屏幕的右下角偏移。X从理论上提供了一种可以避免这种偏移的方法。尽管，我们的测试已经显示，绝大多数窗口管理器都不能实现这一特性。
+<p> 一个工作区在show()之后调用setGeometry()。这样做有两个缺点，是窗口部件会在一毫秒中出现在一个错误的位置（结果是闪烁）和通常在一秒之后窗口管理器会正确地得到它。一个安全的方式是存储pos()和size()并且在show()之前调用resize()和move()来恢复几何结构，就像下面这个例子一样装饰：
+<p> <pre>
+    MyWidget* widget = new MyWidget
+    ...
+    <a href="qpoint.html">QPoint</a> p = widget-&gt;pos();   // 存储位置
+    <a href="qsize.html">QSize</a> s = widget-&gt;size();   // 存储大小
+    ...
+    widget = new MyWidget;
+    widget-&gt;resize( s );        // 恢复大小
+    widget-&gt;move( p );          // 恢复位置
+    widget-&gt;show();             // 显示窗口部件
+</pre>
+ 
+<p> 这种方法可以在MS-Windows和绝大多数现存的X11窗口管理器上工作。
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

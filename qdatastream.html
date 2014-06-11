@@ -1,0 +1,427 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QDataStream类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QDataStream类参考</h1>
+
+<p>QDataStream类提供了二进制数据到QIODevice的串行化。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qdatastream-h.html">qdatastream.h</a>&gt;</tt>
+<p><a href="qdatastream-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QDataStream"><b>QDataStream</b></a> ()</div></li>
+<li><div class=fn><a href="#QDataStream-2"><b>QDataStream</b></a> ( QIODevice&nbsp;*&nbsp;d )</div></li>
+<li><div class=fn><a href="#QDataStream-3"><b>QDataStream</b></a> ( QByteArray&nbsp;a, int&nbsp;mode )</div></li>
+<li><div class=fn>virtual <a href="#~QDataStream"><b>~QDataStream</b></a> ()</div></li>
+<li><div class=fn>QIODevice * <a href="#device"><b>device</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setDevice"><b>setDevice</b></a> ( QIODevice&nbsp;*&nbsp;d )</div></li>
+<li><div class=fn>void <a href="#unsetDevice"><b>unsetDevice</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#atEnd"><b>atEnd</b></a> () const</div></li>
+<li><div class=fn>bool eof () const &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>enum <a href="#ByteOrder-enum"><b>ByteOrder</b></a> { BigEndian, LittleEndian }</div></li>
+<li><div class=fn>int <a href="#byteOrder"><b>byteOrder</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setByteOrder"><b>setByteOrder</b></a> ( int&nbsp;bo )</div></li>
+<li><div class=fn>bool <a href="#isPrintableData"><b>isPrintableData</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setPrintableData"><b>setPrintableData</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>int <a href="#version"><b>version</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setVersion"><b>setVersion</b></a> ( int&nbsp;v )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt"><b>operator&gt;&gt;</b></a> ( Q_INT8&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt-2"><b>operator&gt;&gt;</b></a> ( Q_UINT8&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt-3"><b>operator&gt;&gt;</b></a> ( Q_INT16&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt-4"><b>operator&gt;&gt;</b></a> ( Q_UINT16&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt-5"><b>operator&gt;&gt;</b></a> ( Q_INT32&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt-6"><b>operator&gt;&gt;</b></a> ( Q_UINT32&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt-7"><b>operator&gt;&gt;</b></a> ( Q_LONG&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt-8"><b>operator&gt;&gt;</b></a> ( Q_ULONG&nbsp;&amp;&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt-9"><b>operator&gt;&gt;</b></a> ( float&nbsp;&amp;&nbsp;f )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt-a"><b>operator&gt;&gt;</b></a> ( double&nbsp;&amp;&nbsp;f )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt-b"><b>operator&gt;&gt;</b></a> ( char&nbsp;*&amp;&nbsp;s )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt"><b>operator&lt;&lt;</b></a> ( Q_INT8&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt-2"><b>operator&lt;&lt;</b></a> ( Q_UINT8&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt-3"><b>operator&lt;&lt;</b></a> ( Q_INT16&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt-4"><b>operator&lt;&lt;</b></a> ( Q_UINT16&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt-5"><b>operator&lt;&lt;</b></a> ( Q_INT32&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt-6"><b>operator&lt;&lt;</b></a> ( Q_UINT32&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt-7"><b>operator&lt;&lt;</b></a> ( Q_LONG&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt-8"><b>operator&lt;&lt;</b></a> ( Q_ULONG&nbsp;i )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt-9"><b>operator&lt;&lt;</b></a> ( float&nbsp;f )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt-a"><b>operator&lt;&lt;</b></a> ( double&nbsp;f )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt-b"><b>operator&lt;&lt;</b></a> ( const&nbsp;char&nbsp;*&nbsp;s )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#readBytes"><b>readBytes</b></a> ( char&nbsp;*&amp;&nbsp;s, uint&nbsp;&amp;&nbsp;l )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#readRawBytes"><b>readRawBytes</b></a> ( char&nbsp;*&nbsp;s, uint&nbsp;len )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#writeBytes"><b>writeBytes</b></a> ( const&nbsp;char&nbsp;*&nbsp;s, uint&nbsp;len )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#writeRawBytes"><b>writeRawBytes</b></a> ( const&nbsp;char&nbsp;*&nbsp;s, uint&nbsp;len )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+<p> QDataStream类提供了二进制数据到<a href="qiodevice.html">QIODevice</a>的串行化。
+<p> 
+<p> 数据流是一个编码信息的二进制流，它与主机的操作系统、CPU或字节顺序100％的没有关系。比如一个在PC的Windows下写的数据流可以在Sun SPARC的Solaris中读出。
+<p> <a href="qtextstream.html">QTextStream</a>.
+你也可以使用一个数据流来读/写<a href="#raw">原始的未编码的二进制数据</a>。如果你想“解析”输入流，请参考<a href="qtextstream.html">QTextStream</a>。
+<p> QDataStream类实现了基本类型的串行化，比如<tt>char</tt>、<tt>short</tt>、<tt>int</tt>、<tt>char*</tt>等等。更加复杂的类型的串行化是通过把数据分解为简单单元来实现的。
+<p> 数据流和QIODevice合作非常紧密。QIODevice描述了一个可以从中读数据和向它写数据的输入/输出介质。<a href="qfile.html">QFile</a>类就是一个IO设备的例子。
+<p> 实例（向一个流中写二进制数据）：
+<pre>
+    <a href="qfile.html">QFile</a> f( "file.dta" );
+    f.<a href="qfile.html#open">open</a>( <a href="qfile.html#open">IO_WriteOnly</a> );
+    QDataStream s( &amp;f );    // 我们将把数据串行化至文件f
+    s &lt;&lt; "the answer is";   // 串行化一个字符串
+    s &lt;&lt; (Q_INT32)42;       // 串行化一个整数
+  </pre>
+ 
+<p> 实例（从一个流中读二进制数据）：
+<pre>
+    <a href="qfile.html">QFile</a> f( "file.dta" );
+    f.<a href="qfile.html#open">open</a>( <a href="qfile.html#open">IO_ReadOnly</a> );
+    QDataStream s( &amp;f );    // 从文件f中读取串行化的数据
+    <a href="qstring.html">QString</a> str;
+    Q_INT32 a;
+    s &gt;&gt; str &gt;&gt; a;          // 提取出“the answer is”和42
+  </pre>
+ 
+<p> 每一个要写到流中的项都被写成一种预定义的二进制格式，这种格式取决于这个项的类型。Qt中支持的类型有<a href="qbrush.html">QBrush</a>、<a href="qcolor.html">QColor</a>、<a href="qdatetime.html">QDateTime</a>、<a href="qfont.html">QFont</a>、<a href="qpixmap.html">QPixmap</a>、<a href="qstring.html">QString</a>、<a href="qvariant.html">QVariant</a>和其它一些。支持数据流的所有的Qt类型的列表请看<a href="datastreamformat.html">QDataStream操作符的格式</a>。
+<p> 举个例子，<tt>char*</tt>字符串被写做一个等于包括NUL字节的字符串长度的32位整数，后面跟着字符串中包括NUL字节的所有字节。当读取<tt>char*</tt>字符串的时候，先读4个字节创建一个32位长度值，然后读取包括NUL的这么多的字节到<tt>char*</tt>字符串中。
+<p> 初始的IODevice通常在构造函数中设置，但是也可以使用<a href="#setDevice">setDevice</a>()来改变。如果你到达了数据的终点（或者如果没有IODevice被设置），<a href="#atEnd">atEnd</a>()将返回真。
+<p> 如果你希望数据和以前版本的Qt一致，请使用<a href="#setVersion">setVersion</a>()。
+<p> 如果你希望数据是人们可读的，比如，用于调试，你可以用<a href="#setPrintableData">setPrintableData</a>()设置数据流为可打印数据模式。然后这个数据写起来慢一些，并且膨胀起来但已经是人们可以读取的格式了。
+<p> 如果你正在生成一种新的二进制数据格式，比如是你的应用程序创建的一种文档的文件格式，你可以使用QDataStream来把数据写成一种可移植的格式。通常，你可以写一个包含幻数字符串和版本信息的简要的头信息，这样可以给你以后的扩展提供一定的空间。比如：
+<p> <pre>
+    <a href="qfile.html">QFile</a> f( "file.xxx" );
+    f.<a href="qfile.html#open">open</a>( IO_WriteOnly );
+    QDataStream s( &amp;f );
+
+    // 写一个含有“幻数”和版本号的头
+    s &lt;&lt; (Q_UINT32)0xa0b0c0d0;
+    s &lt;&lt; (Q_INT32)123;
+
+    // 写数据
+    s &lt;&lt; [lots of interesting data]
+  </pre>
+ 
+<p> 然后这样读：
+<p> <pre>
+    <a href="qfile.html">QFile</a> f( "file.xxx" );
+    f.<a href="qfile.html#open">open</a>( IO_ReadOnly );
+    QDataStream s( &amp;f );
+
+    // 读取并检查头
+    Q_UINT32 magic;
+    s &gt;&gt; magic;
+    if ( magic != 0xa0b0c0d0 )
+        return XXX_BAD_FILE_FORMAT;
+
+    // 读取版本号
+    Q_INT32 version;
+    s &gt;&gt; version;
+    if ( version &lt; 100 )
+        return XXX_BAD_FILE_TOO_OLD;
+    if ( version &gt; 123 )
+        return XXX_BAD_FILE_TOO_NEW;
+    if ( version &lt;= 110 )
+        s.<a href="#setVersion">setVersion</a>(1);
+
+    // 读取数据
+    s &gt;&gt; [很多有趣的数据];
+    if ( version &gt; 120 )
+        s &gt;&gt; [在1.2版中的新数据XXX];
+    s &gt;&gt; [其它有趣的数据];
+  </pre>
+ 
+<p> 当你串行化数据的时候，你可以选择你要使用的字节顺序。默认的设置是高字节在前。把它改变为低字节在前会破坏可移植性（除非读取程序也是用低字节在前）。我们建议你使用默认设置，除非你有特殊需要。
+<p> <b>读写原始二进制数据</b>
+<a name="raw">
+<p> 你也许希望把你自己的原始二进制数据直接写到数据流中，或者从数据流中直接读取它们。数据可以使用<a href="#readRawBytes">readRawBytes</a>()从流中读取到一个预先分配好的char*。同样地也可以使用<a href="#writeRawBytes">writeRawBytes</a>()把数据写到流中。注意，任何数据的编码/解码就只能由你自己来完成了。
+<p> 一对相似的函数<a href="#readBytes">readBytes</a>()和<a href="#writeBytes">writeBytes</a>()。它们与操作<em>原始数据</em>的那两个的区别是：readBytes()先读取可读的数据长度到一个Q_UINT32，然后读取这个数量的字节到已经预先分配空间的char*；writeBytes()写一个包含数据长度的Q_UNIT32，然后再是数据。注意任何数据的编码/解码（除了长度Q_UINT32）都必须由你自己来做。
+<p> <p>也可以参考<a href="qtextstream.html">QTextStream</a>、<a href="qvariant.html">QVariant</a>和<a href="io.html">输入/输出和网络</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="ByteOrder-enum"></a>QDataStream::ByteOrder</h3>
+<p> 读/写数据时使用的字节顺序。
+<ul>
+<li><tt>QDataStream::BigEndian</tt> - 高位在前（默认的）
+<li><tt>QDataStream::LittleEndian</tt> - 低位在前
+</ul>
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QDataStream"></a>QDataStream::QDataStream ()
+</h3>
+构造一个没有IO设备的数据流。
+<p> <p>也可以参考<a href="#setDevice">setDevice</a>()。
+
+<h3 class=fn><a name="QDataStream-2"></a>QDataStream::QDataStream ( <a href="qiodevice.html">QIODevice</a>&nbsp;*&nbsp;d )
+</h3>
+构造一个使用IO设备<em>d</em>的数据流。
+<p> <b>警告：</b>如果你使用<a href="qsocket.html">QSocket</a>或<a href="qsocketdevice.html">QSocketDevice</a>来作为IO设备<em>d</em>进行读数据，为了确保操作能够成功地执行，你必须确认在套接字提供了足够的数据，QDataStream没有任何方法来处理和恢复这种读取缺少地情况。
+<p> <p>也可以参考<a href="#setDevice">setDevice</a>() and <a href="#device">device</a>().
+
+<h3 class=fn><a name="QDataStream-3"></a>QDataStream::QDataStream ( <a href="qbytearray.html">QByteArray</a>&nbsp;a, int&nbsp;mode )
+</h3>
+构造一个通过内置的<a href="qbuffer.html">QBuffer</a>设备来操作一个字节数组<em>a</em>的数据流。<em>mode</em>就是<a href="qiodevice.html#mode">QIODevice::mode</a>()，通常不是<a href="qfile.html#open">IO_ReadOnly</a>就是<a href="qfile.html#open">IO_WriteOnly</a>。
+<p> 实例：
+<pre>
+    static char bindata[] = { 231, 1, 44, ... };
+    <a href="qbytearray.html">QByteArray</a> a;
+    a.<a href="qmemarray.html#setRawData">setRawData</a>( bindata, sizeof(bindata) );   // a指向bindata
+    QDataStream s( a, <a href="qfile.html#open">IO_ReadOnly</a> );            // 打开a的数据
+    s &gt;&gt; [something];                           // 读取原始的bindata
+    a.<a href="qmemarray.html#resetRawData">resetRawData</a>( bindata, sizeof(bindata) ); // 完成
+  </pre>
+ 
+<p> <a href="qmemarray.html#setRawData">QByteArray::setRawData</a>()函数不是提供给没有经验的人的。
+
+<h3 class=fn><a name="~QDataStream"></a>QDataStream::~QDataStream ()<tt> [虚]</tt>
+</h3>
+销毁这个数据流。
+<p> 析构函数对当前的IO设备没有任何效果，除非他是一个通过<em>构造函数</em>传递的一个处理<a href="qbytearray.html">QByteArray</a>的内部IO设备，这种情况下，内部IO设备被销毁。。
+
+<h3 class=fn>bool <a name="atEnd"></a>QDataStream::atEnd () const
+</h3>
+如果IO设备已经到达终点（流或文件的终点），或者如果没有IO设备被设置，返回真，否则返回假，比如，如果IO设备当前位置在终点之前。
+<p> <p>也可以参考<a href="qiodevice.html#atEnd">QIODevice::atEnd</a>()。
+
+<h3 class=fn>int <a name="byteOrder"></a>QDataStream::byteOrder () const
+</h3>
+返回当前字节顺序设置——不是<a href="#ByteOrder-enum">BigEndian</a>就是<a href="#ByteOrder-enum">LittleEndian</a>。
+<p> <p>也可以参考<a href="#setByteOrder">setByteOrder</a>()。
+
+<h3 class=fn><a href="qiodevice.html">QIODevice</a>&nbsp;* <a name="device"></a>QDataStream::device () const
+</h3>
+返回当前设置的IO设备。
+<p>也可以参考<a href="#setDevice">setDevice</a>()和<a href="#unsetDevice">unsetDevice</a>()。
+
+<h3 class=fn>bool <a name="eof"></a>QDataStream::eof () const
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 如果IO设备到达终点（流或文件的终点），或者如果没有IO设备被设置，返回真。
+<p> 如果当前的IO的读写位置在终点之前，返回假。
+<p> <p>也可以参考<a href="qiodevice.html#atEnd">QIODevice::atEnd</a>()。
+
+<h3 class=fn>bool <a name="isPrintableData"></a>QDataStream::isPrintableData () const
+</h3>
+如果可打印数据标记已经被设定，返回真。
+<p>也可以参考<a href="#setPrintableData">setPrintableData</a>()。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt"></a>QDataStream::operator&lt;&lt; ( Q_INT8&nbsp;i )
+</h3>
+写一个有符号的字节<em>i</em>到流中并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt-2"></a>QDataStream::operator&lt;&lt; ( Q_UINT8&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个无符号的字节<em>i</em>到流中并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt-3"></a>QDataStream::operator&lt;&lt; ( Q_INT16&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个有符号的16位整数<em>i</em>到流中并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt-4"></a>QDataStream::operator&lt;&lt; ( Q_UINT16&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个无符号的16位整数<em>i</em>到流中并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt-5"></a>QDataStream::operator&lt;&lt; ( Q_INT32&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个有符号的32位整数<em>i</em>到流中并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt-6"></a>QDataStream::operator&lt;&lt; ( Q_UINT32&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个无符号的32位整数<em>i</em>到流中并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt-7"></a>QDataStream::operator&lt;&lt; ( Q_LONG&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个有符号的，长度为系统字长度的整数<em>i</em>到流中并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt-8"></a>QDataStream::operator&lt;&lt; ( Q_ULONG&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个无符号的，长度为系统字长度的整数<em>i</em>到流中并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt-9"></a>QDataStream::operator&lt;&lt; ( float&nbsp;f )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个使用标准IEEE754格式的32位浮点数<em>f</em>到流中并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt-a"></a>QDataStream::operator&lt;&lt; ( double&nbsp;f )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个使用标准IEEE754格式的64位浮点数<em>f</em>到流中并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt-b"></a>QDataStream::operator&lt;&lt; ( const&nbsp;char&nbsp;*&nbsp;s )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 写一个以“&#92;0”结尾的字符串<em>s</em>到流中并返回流的引用。
+<p> 这个字符串是使用<a href="#writeBytes">writeBytes</a>()串行化的。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt"></a>QDataStream::operator&gt;&gt; ( Q_INT8&nbsp;&amp;&nbsp;i )
+</h3>
+从流中读取一个有符号的字节到<em>i</em>并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt-2"></a>QDataStream::operator&gt;&gt; ( Q_UINT8&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个无符号的字节到<em>i</em>并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt-3"></a>QDataStream::operator&gt;&gt; ( Q_INT16&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个有符号的16位整数到<em>i</em>并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt-4"></a>QDataStream::operator&gt;&gt; ( Q_UINT16&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个无符号的16位整数到<em>i</em>并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt-5"></a>QDataStream::operator&gt;&gt; ( Q_INT32&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个有符号的32位整数到<em>i</em>并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt-6"></a>QDataStream::operator&gt;&gt; ( Q_UINT32&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个无符号的32位整数到<em>i</em>并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt-7"></a>QDataStream::operator&gt;&gt; ( Q_LONG&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个有符号的，长度为系统字长度的整数到<em>i</em>并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt-8"></a>QDataStream::operator&gt;&gt; ( Q_ULONG&nbsp;&amp;&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个无符号的，长度为系统字长度的整数到<em>i</em>并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt-9"></a>QDataStream::operator&gt;&gt; ( float&nbsp;&amp;&nbsp;f )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个使用标准IEEE754格式的32位浮点数到<em>f</em>并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt-a"></a>QDataStream::operator&gt;&gt; ( double&nbsp;&amp;&nbsp;f )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个使用标准IEEE754格式的64位浮点数到<em>f</em>并返回流的引用。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt-b"></a>QDataStream::operator&gt;&gt; ( char&nbsp;*&amp;&nbsp;s )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 从流中读取一个以“&#92;0”结尾的字符串到<em>s</em>并返回流的引用。
+<p> 存放这个字符串的空间是使用<tt>new</tt>来分配的——调用者必须使用<tt>delete[]</tt>来销毁它。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="readBytes"></a>QDataStream::readBytes ( char&nbsp;*&amp;&nbsp;s, uint&nbsp;&amp;&nbsp;l )
+</h3>
+从流中读取缓存<em>s</em>并返回流的引用。
+<p> 这个缓存<em>s</em>是使用<tt>new</tt>来分配的。需要使用<tt>delete[]</tt>来销毁它。如果长度为0或者<em>s</em>没能被分配，<em>s</em>就被设置为0。
+<p> <em>l</em>参数将被设置为缓存的长度。
+<p> 串行化格式首先是一个Q_UINT32长度的说明符，然后是<em>l</em>字节的数据。注意数据<em>不是</em>编码的。
+<p> <p>也可以参考<a href="#readRawBytes">readRawBytes</a>()和<a href="#writeBytes">writeBytes</a>()。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="readRawBytes"></a>QDataStream::readRawBytes ( char&nbsp;*&nbsp;s, uint&nbsp;len )
+</h3>
+从流中读取<em>len</em>字节到<em>s</em>并返回流的引用。
+<p> 这个缓存<em>s</em>必须被预先分配。数据<em>不是</em>编码的。
+<p> <p>也可以参考<a href="#readBytes">readBytes</a>()、<a href="qiodevice.html#readBlock">QIODevice::readBlock</a>()和<a href="#writeRawBytes">writeRawBytes</a>()。
+
+<h3 class=fn>void <a name="setByteOrder"></a>QDataStream::setByteOrder ( int&nbsp;bo )
+</h3>
+设置串行化字节顺序为<em>bo</em>。
+<p> <em>bo</em>参数可以是<a href="#ByteOrder-enum">QDataStream::BigEndian</a>或<a href="#ByteOrder-enum">QDataStream::LittleEndian</a>。
+<p> 默认设置是高字节在前。我们强烈建议你保留这个设置，除非你有特殊需要。
+<p> <p>也可以参考<a href="#byteOrder">byteOrder</a>()。
+
+<h3 class=fn>void <a name="setDevice"></a>QDataStream::setDevice ( <a href="qiodevice.html">QIODevice</a>&nbsp;*&nbsp;d )
+</h3>
+设置IO设备为<em>d</em>。
+<p>也可以参考<a href="#device">device</a>()和<a href="#unsetDevice">unsetDevice</a>()。
+
+<h3 class=fn>void <a name="setPrintableData"></a>QDataStream::setPrintableData ( bool&nbsp;enable )
+</h3>
+设置（如果<em>enable</em>为真）或者清空可打印数据标记。
+<p> 如果这个标记被设置，写函数将生成由可打印字符（7位ASCII码）的输出。
+<p> 我们建议只有在调试的情况下打开可打印数据设置（它比较慢并且生成了更多的输出）。
+
+<h3 class=fn>void <a name="setVersion"></a>QDataStream::setVersion ( int&nbsp;v )
+</h3>
+设置数据串行化格式的版本号。
+<p> 如果你只使用当前版本的Qt，你不需要设置这个版本号。
+<p> 为了提供新的功能，在一些Qt的版本中，一些Qt类的数据流串行化格式变化了。如果你想读较早版本Qt中创建的数据，或者写可供较早版本Qt编译的程序能够读的数据，请使用这个函数来设置QDataStream的串行化格式。
+<p> <ul>
+<li> 为了兼容Qt 3.0，请使用<em>v</em> == 4。
+<li> 为了兼容Qt 2.1.x和Qt 2.2.x，请使用<em>v</em> == 3。
+<li> 为了兼容Qt 2.0.x，请使用<em>v</em> == 2。
+<li> 为了兼容Qt 1.x，请使用<em>v</em> == 1。
+</ul>
+<p> <p>也可以参考<a href="#version">version</a>().
+
+<h3 class=fn>void <a name="unsetDevice"></a>QDataStream::unsetDevice ()
+</h3>
+清除IO设备。这个和调用<a href="#setDevice">setDevice</a>( 0 )一样。
+<p>也可以参考<a href="#device">device</a>()和<a href="#setDevice">setDevice</a>()。
+
+<h3 class=fn>int <a name="version"></a>QDataStream::version () const
+</h3>
+返回数据串行化格式的版本号。
+在Qt 3.0中，这个版本号为4。
+<p>也可以参考<a href="#setVersion">setVersion</a>()。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="writeBytes"></a>QDataStream::writeBytes ( const&nbsp;char&nbsp;*&nbsp;s, uint&nbsp;len )
+</h3>
+写长度说明符<em>len</em>和缓存<em>s</em>到流中并返回流的引用。
+<p> <em>len</em>被串行化为一个Q_UINT32，接着的是<em>s</em>中的<em>len</em>字节。注意数据<em>不是</em>编码的。
+<p> <p>也可以参考<a href="#writeRawBytes">writeRawBytes</a>()和<a href="#readBytes">readBytes</a>()。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="writeRawBytes"></a>QDataStream::writeRawBytes ( const&nbsp;char&nbsp;*&nbsp;s, uint&nbsp;len )
+</h3>
+从<em>s</em>中写<em>len</em>字节到流中并且返回流的引用。数据<em>不是</em>编码的。
+<p> <p>也可以参考<a href="#writeBytes">writeBytes</a>()、<a href="qiodevice.html#writeBlock">QIODevice::writeBlock</a>()和<a href="#readRawBytes">readRawBytes</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

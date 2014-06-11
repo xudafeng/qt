@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QClipboard类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QClipboard类参考</h1>
+
+<p>QClipboard类提供了对窗口系统剪贴板的访问。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qclipboard-h.html">qclipboard.h</a>&gt;</tt>
+<p>继承了<a href="qobject.html">QObject</a>。
+<p><a href="qclipboard-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>void <a href="#clear"><b>clear</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#supportsSelection"><b>supportsSelection</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#ownsSelection"><b>ownsSelection</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#ownsClipboard"><b>ownsClipboard</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setSelectionMode"><b>setSelectionMode</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>bool <a href="#selectionModeEnabled"><b>selectionModeEnabled</b></a> () const</div></li>
+<li><div class=fn>QMimeSource * <a href="#data"><b>data</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setData"><b>setData</b></a> ( QMimeSource&nbsp;*&nbsp;src )</div></li>
+<li><div class=fn>QString <a href="#text-2"><b>text</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#text"><b>text</b></a> ( QCString&nbsp;&amp;&nbsp;subtype ) const</div></li>
+<li><div class=fn>void <a href="#setText"><b>setText</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text )</div></li>
+<li><div class=fn>QImage <a href="#image"><b>image</b></a> () const</div></li>
+<li><div class=fn>QPixmap <a href="#pixmap"><b>pixmap</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setImage"><b>setImage</b></a> ( const&nbsp;QImage&nbsp;&amp;&nbsp;image )</div></li>
+<li><div class=fn>void <a href="#setPixmap"><b>setPixmap</b></a> ( const&nbsp;QPixmap&nbsp;&amp;&nbsp;pixmap )</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#selectionChanged"><b>selectionChanged</b></a> ()</div></li>
+<li><div class=fn>void <a href="#dataChanged"><b>dataChanged</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QClipboard类提供了对窗口系统剪贴板的访问。
+<p> 
+<p> 剪贴板提供了一种在应用程序之间复制和粘贴数据的简单机制。
+<p> QClipboard支持和<a href="qdragobject.html">QDragObject</a>一样的数据类型，并且使用类似的机制。有关剪贴板高级的用法请阅读<a href="dnd.html">拖放文档</a>。
+<p> 在应用程序中只有一个QClipboard，并且你可以使用<a href="qapplication.html#clipboard">QApplication::clipboard</a>()来访问它。
+<p> 实例：
+<pre>
+    QClipboard *cb = QApplication::<a href="qapplication.html#clipboard">clipboard</a>();
+    <a href="qstring.html">QString</a> text;
+
+	// 从剪贴板中复制文本（粘贴）
+    text = cb-&gt;<a href="#text">text</a>();
+    if ( text )
+        <a href="qapplication.html#qDebug">qDebug</a>( "The clipboard contains: %s", text );
+
+	// 把文本复制到剪贴板
+    cb-&gt;<a href="#setText">setText</a>( "This text can be pasted by other programs" );
+    </pre>
+ 
+<p> QClipboard提供了一些有特色的很方便的函数来访问普通数据类型：<a href="#setText">setText</a>()允许在应用程序之间Unicode文本的交换，<a href="#setPixmap">setPixmap</a>()和<a href="#setImage">setImage</a>()允许在应用程序之间交换QPixmap和QImage。<a href="#setData">setData</a>()函数在功能上是最灵活的：它允许你把任何<a href="qmimesource.html">QMimeSource</a>添加到剪贴板。每种方式都有相应的获得函数，例如<a href="#text">text</a>()、<a href="#image">image</a>()和<a href="#pixmap">pixmap</a>()。
+<p> 你可以通过调用<a href="#clear">clear</a>()清空剪贴板。
+<p> X窗口系统和微软的Windows底层的剪贴板是不同的。X窗口系统有一个选择的概念——当文本被选择，它立即被复制到选择缓冲；微软的Windows仅仅在文本被显示地复制或者剪切的时候才被复制到剪贴板。X窗口系统还有一个所有权的概念，如果你在一个窗口中改变了选择，X11仅仅通知变化的拥有者和前任拥有者，在微软的Windows是剪贴板是一个完完全全的全局资源，所以所有应用程序被通知了变化。请参考<em>Qt设计器</em>实例中的multiclip实例，这是一个也描述了选择处理的多平台剪贴板应用程序。
+<p>也可以参考<a href="environment.html">环境类</a>和<a href="io.html">输入/输出和网络</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn>void <a name="clear"></a>QClipboard::clear ()
+</h3>
+清空剪贴板内容。
+
+<h3 class=fn><a href="qmimesource.html">QMimeSource</a>&nbsp;* <a name="data"></a>QClipboard::data () const
+</h3>
+返回代表当前剪贴板数据的<a href="qmimesource.html">QMimeSource</a>的引用。
+
+<h3 class=fn>void <a name="dataChanged"></a>QClipboard::dataChanged ()<tt> [信号]</tt>
+</h3>
+<p> 当剪贴板内容发生变化时，这个信号被发射。
+
+<h3 class=fn><a href="qimage.html">QImage</a> <a name="image"></a>QClipboard::image () const
+</h3>
+返回剪贴板图片，或者如果剪贴板没有包含任何图片或者它包含一个不被支持的格式的图片，返回一个无效的图片。
+<p> <p>也可以参考<a href="#setImage">setImage</a>()、<a href="#pixmap">pixmap</a>()、<a href="#data">data</a>()和<a href="qimage.html#isNull">QImage::isNull</a>()。
+
+<h3 class=fn>bool <a name="ownsClipboard"></a>QClipboard::ownsClipboard () const
+</h3>
+如果剪贴板对象拥有剪贴板数据，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="ownsSelection"></a>QClipboard::ownsSelection () const
+</h3>
+如果剪贴板对象拥有鼠标选择数据，返回真，否则返回假。
+
+<h3 class=fn><a href="qpixmap.html">QPixmap</a> <a name="pixmap"></a>QClipboard::pixmap () const
+</h3>
+返回剪贴板像素映射，或者如果剪贴板不包含像素映射，返回无效的像素映射。注意这样会导致丢失信息。例如，如果图片是24位并且显示是8位，结果会被转换为8位，并且如果这个图象有一个alpha通道，结果会只有一个面具。
+<p> <p>也可以参考<a href="#setPixmap">setPixmap</a>()、<a href="#image">image</a>()、<a href="#data">data</a>()和<a href="qpixmap.html#convertFromImage">QPixmap::convertFromImage</a>()。
+
+<h3 class=fn>void <a name="selectionChanged"></a>QClipboard::selectionChanged ()<tt> [信号]</tt>
+</h3>
+<p> 当选择发生变化时，这个信号被发射。这仅仅适用于支持选择的窗口系统，例如X11。Windows不支持选择。
+
+<h3 class=fn>bool <a name="selectionModeEnabled"></a>QClipboard::selectionModeEnabled () const
+</h3>
+返回选择模式。
+<p> <p>也可以参考<a href="#setSelectionMode">setSelectionMode</a>()和<a href="#supportsSelection">supportsSelection</a>()。
+
+<h3 class=fn>void <a name="setData"></a>QClipboard::setData ( <a href="qmimesource.html">QMimeSource</a>&nbsp;*&nbsp;src )
+</h3>
+设置剪贴板数据位<em>src</em>。数据的所有权被传递给剪贴板。如果你想移除这个数据，请调用<a href="#clear">clear</a>()或者使用新数据再次调用<a href="#setData">setData</a>()。
+<p> <a href="qdragobject.html">QDragObject</a>子类是可以放到剪贴板中的合理对象（但是不要试图在同一个对象上调用<a href="qdragobject.html#drag">QDragObject::drag</a>()）。任何被放置到剪贴板中的QDragObject的父对象都必须为0。不要把<a href="qdragmoveevent.html">QDragMoveEvent</a>或<a href="qdropevent.html">QDropEvent</a>的子类放到剪贴板中，因为它们不属于接收到它们的事件处理器。
+<p> <a href="#setText">setText</a>()和<a href="#setPixmap">setPixmap</a>()函数只是分别地对文本和图象数据的简单封装。
+
+<h3 class=fn>void <a name="setImage"></a>QClipboard::setImage ( const&nbsp;<a href="qimage.html">QImage</a>&nbsp;&amp;&nbsp;image )
+</h3>
+把<em>image</em>复制到剪贴板。
+<p> 这是一个快速的方式：
+<pre>
+        <a href="#setData">setData</a>(new <a href="qimagedrag.html">QImageDrag</a>(image))
+    </pre>
+ 
+<p> <p>也可以参考<a href="#image">image</a>()、<a href="#setPixmap">setPixmap</a>()和<a href="#setData">setData</a>()。
+
+<h3 class=fn>void <a name="setPixmap"></a>QClipboard::setPixmap ( const&nbsp;<a href="qpixmap.html">QPixmap</a>&nbsp;&amp;&nbsp;pixmap )
+</h3>
+把<em>pixmap</em>复制到剪贴板。注意这个比<a href="#setImage">setImage</a>()慢，因为它需要首先把<a href="qpixmap.html">QPixmap</a>转换为<a href="qimage.html">QImage</a>。
+<p> <p>也可以参考<a href="#pixmap">pixmap</a>()、<a href="#setImage">setImage</a>()和<a href="#setData">setData</a>()。
+
+<h3 class=fn>void <a name="setSelectionMode"></a>QClipboard::setSelectionMode ( bool&nbsp;enable )
+</h3>
+设置剪贴板选择模式。如果<em>enable</em>为真，那么后来对<a href="#setData">QClipboard::setData</a>()的调用以及其它把数据放到简帖板的函数都将会把数据放到鼠标选择中，否则数据将会被放到剪贴板中。
+<p> <p>也可以参考<a href="#supportsSelection">supportsSelection</a>()和<a href="#selectionModeEnabled">selectionModeEnabled</a>()。
+
+<h3 class=fn>void <a name="setText"></a>QClipboard::setText ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text )
+</h3>
+把<em>text</em>作为简单文本复制到剪贴板中。
+<p> <p>也可以参考<a href="#text">text</a>()和<a href="#setData">setData</a>()。
+
+<h3 class=fn>bool <a name="supportsSelection"></a>QClipboard::supportsSelection () const
+</h3>
+如果剪贴板支持鼠标选择，返回真，否则返回假。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text"></a>QClipboard::text ( <a href="qcstring.html">QCString</a>&nbsp;&amp;&nbsp;subtype ) const
+</h3>
+返回子类型为<em>subtype</em>的剪贴板文本，或者如果剪贴板不包含任何文本，返回一个无效字符串。如果<em>subtype</em>为空，任何子类型都是可以接受的，并且<em>subtype</em>被设置为被选择的子类型。
+<p> <em>subtype</em>的值应为“plain”和“html”。
+<p> <p>也可以参考<a href="#setText">setText</a>()、<a href="#data">data</a>()和<a href="qstring.html#operator!">QString::operator!</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text-2"></a>QClipboard::text () const
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回纯文本格式的剪贴板文本，或者如果剪贴板不包含任何文本，返回一个无效字符串。
+<p> <p>也可以参考<a href="#setText">setText</a>()、<a href="#data">data</a>()和<a href="qstring.html#operator!">QString::operator!</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

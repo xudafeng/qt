@@ -1,0 +1,936 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>An FTP client</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>An FTP client</h1>
+
+ 
+<p> 
+<p> This example implements a FTP client. It uses <a href="qurloperator.html">QUrlOperator</a> (which in
+turn uses <a href="qftp.html">QFtp</a>) to perform its FTP commands.
+<p> <hr>
+<p> The API of the FtpMainWindow class (ftpmainwindow.h):
+<p> <pre>/****************************************************************************
+** $Id:  qt/ftpmainwindow.h   3.0.5   edited Oct 12 2001 $
+**
+** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#ifndef FTPMAINWINDOW_H
+#define FTPMAINWINDOW_H
+
+#include &lt;<a href="qmainwindow-h.html">qmainwindow.h</a>&gt;
+#include &lt;<a href="qurloperator-h.html">qurloperator.h</a>&gt;
+
+class FtpView;
+class QSplitter;
+class QVBox;
+class QSpinBox;
+class QComboBox;
+class QLineEdit;
+class QNetworkOperation;
+class QLabel;
+class QProgressBar;
+
+class FtpMainWindow : public <a href="qmainwindow.html">QMainWindow</a>
+{
+    <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>
+
+public:
+    FtpMainWindow();
+
+    <a href="qsplitter.html">QSplitter</a> *mainSplitter() const {
+        return splitter;
+    }
+
+private:
+    void setupLeftSide();
+    void setupRightSide();
+    void setupCenterCommandBar();
+    void setup();
+
+private slots:
+    void slotLocalDirChanged( const <a href="qstring.html">QString</a> &amp;path );
+    void slotLocalDirChanged( const <a href="qurlinfo.html">QUrlInfo</a> &amp;info );
+    void slotRemoteDirChanged( const <a href="qstring.html">QString</a> &amp;path );
+    void slotRemoteDirChanged( const <a href="qurlinfo.html">QUrlInfo</a> &amp;info );
+    void slotConnect();
+    void slotUpload();
+    void slotDownload();
+    void slotLocalStart( <a href="qnetworkoperation.html">QNetworkOperation</a> * );
+    void slotLocalFinished( <a href="qnetworkoperation.html">QNetworkOperation</a> * );
+    void slotRemoteStart( <a href="qnetworkoperation.html">QNetworkOperation</a> * );
+    void slotRemoteFinished( <a href="qnetworkoperation.html">QNetworkOperation</a> * );
+    void slotLocalDataTransferProgress( int, int, QNetworkOperation * );
+    void slotRemoteDataTransferProgress( int, int, QNetworkOperation * );
+    void slotLocalMkDir();
+    void slotLocalRemove();
+    void slotRemoteMkDir();
+    void slotRemoteRemove();
+    void slotConnectionStateChanged( int, const <a href="qstring.html">QString</a> &amp;msg );
+
+private:
+    <a href="qsplitter.html">QSplitter</a> *splitter;
+    <a href="qvbox.html">QVBox</a> *mainWidget;
+    FtpView *leftView, *rightView;
+    <a href="qcombobox.html">QComboBox</a> *localCombo, *remoteHostCombo, *remotePathCombo, *userCombo;
+    <a href="qlineedit.html">QLineEdit</a> *passLined;
+    <a href="qspinbox.html">QSpinBox</a> *portSpin;
+    <a href="qurloperator.html">QUrlOperator</a> localOperator, remoteOperator, oldLocal, oldRemote;
+    <a href="qlabel.html">QLabel</a> *progressLabel1, *progressLabel2;
+    <a href="qprogressbar.html">QProgressBar</a> *progressBar1, *progressBar2;
+
+};
+
+#endif
+</pre>
+
+<p> <hr>
+<p> The Implementation of the FtpMainWindow class (ftpmainwindow.cpp):
+<p> <pre>/****************************************************************************
+** $Id:  qt/ftpmainwindow.cpp   3.0.5   edited Oct 12 2001 $
+**
+** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "ftpmainwindow.h"
+#include "ftpview.h"
+
+#include &lt;<a href="qvbox-h.html">qvbox.h</a>&gt;
+#include &lt;<a href="qhbox-h.html">qhbox.h</a>&gt;
+#include &lt;<a href="qsplitter-h.html">qsplitter.h</a>&gt;
+#include &lt;<a href="qcombobox-h.html">qcombobox.h</a>&gt;
+#include &lt;<a href="qlabel-h.html">qlabel.h</a>&gt;
+#include &lt;<a href="qspinbox-h.html">qspinbox.h</a>&gt;
+#include &lt;<a href="qlineedit-h.html">qlineedit.h</a>&gt;
+#include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a href="qmessagebox-h.html">qmessagebox.h</a>&gt;
+#include &lt;<a href="qprogressbar-h.html">qprogressbar.h</a>&gt;
+#include &lt;<a href="qdir-h.html">qdir.h</a>&gt;
+#include &lt;<a href="qinputdialog-h.html">qinputdialog.h</a>&gt;
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qstatusbar-h.html">qstatusbar.h</a>&gt;
+
+<a name="f262"></a>FtpMainWindow::FtpMainWindow()
+    : <a href="qmainwindow.html">QMainWindow</a>(),
+      localOperator( "/" )
+{
+    setup();
+
+    // connect to the signals of the local QUrlOperator - this will be used to
+    // work on the local file system (listing dirs, etc.) and to copy files
+    // TO the local filesystem (downloading)
+    <a href="qobject.html#connect">connect</a>( &amp;localOperator, SIGNAL( newChildren( const <a href="qvaluelist.html">QValueList</a>&lt;QUrlInfo&gt; &amp;, QNetworkOperation * ) ),
+             leftView, SLOT( slotInsertEntries( const <a href="qvaluelist.html">QValueList</a>&lt;QUrlInfo&gt; &amp; ) ) );
+    <a href="qobject.html#connect">connect</a>( &amp;localOperator, SIGNAL( start( <a href="qnetworkoperation.html">QNetworkOperation</a> * ) ),
+             this, SLOT( slotLocalStart( <a href="qnetworkoperation.html">QNetworkOperation</a> *) ) );
+    <a href="qobject.html#connect">connect</a>( &amp;localOperator, SIGNAL( finished( <a href="qnetworkoperation.html">QNetworkOperation</a> * ) ),
+             this, SLOT( slotLocalFinished( <a href="qnetworkoperation.html">QNetworkOperation</a> *) ) );
+    <a href="qobject.html#connect">connect</a>( leftView, SIGNAL( itemSelected( const <a href="qurlinfo.html">QUrlInfo</a> &amp; ) ),
+             this, SLOT( slotLocalDirChanged( const <a href="qurlinfo.html">QUrlInfo</a> &amp; ) ) );
+    <a href="qobject.html#connect">connect</a>( &amp;localOperator, SIGNAL( dataTransferProgress( int, int, QNetworkOperation * ) ),
+             this, SLOT( slotLocalDataTransferProgress( int, int, QNetworkOperation * ) ) );
+
+    // connect to the signals of the remote QUrlOperator - this will be used to
+    // work on the remote file system (on the FTP Server) and to copy files
+    // TO the ftp server (uploading)
+    <a href="qobject.html#connect">connect</a>( &amp;remoteOperator, SIGNAL( newChildren( const <a href="qvaluelist.html">QValueList</a>&lt;QUrlInfo&gt; &amp;, QNetworkOperation * ) ),
+             rightView, SLOT( slotInsertEntries( const <a href="qvaluelist.html">QValueList</a>&lt;QUrlInfo&gt; &amp; ) ) );
+    <a href="qobject.html#connect">connect</a>( &amp;remoteOperator, SIGNAL( start( <a href="qnetworkoperation.html">QNetworkOperation</a> * ) ),
+             this, SLOT( slotRemoteStart( <a href="qnetworkoperation.html">QNetworkOperation</a> *) ) );
+    <a href="qobject.html#connect">connect</a>( &amp;remoteOperator, SIGNAL( finished( <a href="qnetworkoperation.html">QNetworkOperation</a> * ) ),
+             this, SLOT( slotRemoteFinished( <a href="qnetworkoperation.html">QNetworkOperation</a> *) ) );
+    <a href="qobject.html#connect">connect</a>( rightView, SIGNAL( itemSelected( const <a href="qurlinfo.html">QUrlInfo</a> &amp; ) ),
+             this, SLOT( slotRemoteDirChanged( const <a href="qurlinfo.html">QUrlInfo</a> &amp; ) ) );
+    <a href="qobject.html#connect">connect</a>( &amp;remoteOperator, SIGNAL( dataTransferProgress( int, int, QNetworkOperation * ) ),
+             this, SLOT( slotRemoteDataTransferProgress( int, int, QNetworkOperation * ) ) );
+    <a href="qobject.html#connect">connect</a>( &amp;remoteOperator, SIGNAL( connectionStateChanged( int, const <a href="qstring.html">QString</a> &amp; ) ),
+             this, SLOT( slotConnectionStateChanged( int, const <a href="qstring.html">QString</a> &amp; ) ) );
+
+    // read the local filesystem at the beginning once
+    localOperator.listChildren();
+
+    // create status bar
+    (void)<a href="qmainwindow.html#statusBar">statusBar</a>();
+}
+
+void <a name="f263"></a>FtpMainWindow::setupLeftSide()
+{
+    // Setup the left side of the GUI, this is the listview
+    // of the local filesystem
+
+    <a href="qvbox.html">QVBox</a> *layout = new <a href="qvbox.html">QVBox</a>( splitter );
+<a name="x656"></a>    layout-&gt;<a href="qhbox.html#setSpacing">setSpacing</a>( 5 );
+<a name="x655"></a>    layout-&gt;<a href="qframe.html#setMargin">setMargin</a>( 5 );
+
+    <a href="qhbox.html">QHBox</a> *h = new <a href="qhbox.html">QHBox</a>( layout );
+    h-&gt;<a href="qhbox.html#setSpacing">setSpacing</a>( 5 );
+    <a href="qlabel.html">QLabel</a> *l = new <a href="qlabel.html">QLabel</a>( <a href="qobject.html#tr">tr</a>( "Local Path:" ), h );
+<a name="x686"></a><a name="x659"></a>    l-&gt;<a href="qwidget.html#setFixedWidth">setFixedWidth</a>( l-&gt;<a href="qwidget.html#sizeHint">sizeHint</a>().width() );
+    localCombo = new <a href="qcombobox.html">QComboBox</a>( TRUE, h );
+<a name="x652"></a>    localCombo-&gt;<a href="qcombobox.html#insertItem">insertItem</a>( "/" );
+
+<a name="x650"></a>    <a href="qobject.html#connect">connect</a>( localCombo, SIGNAL( <a href="qcombobox.html#activated">activated</a>( const <a href="qstring.html">QString</a> &amp; ) ),
+             this, SLOT( slotLocalDirChanged( const <a href="qstring.html">QString</a> &amp; ) ) );
+
+    leftView = new FtpView( layout );
+
+    <a href="qhbox.html">QHBox</a> *bottom = new <a href="qhbox.html">QHBox</a>( layout );
+    bottom-&gt;<a href="qhbox.html#setSpacing">setSpacing</a>( 5 );
+    <a href="qpushbutton.html">QPushButton</a> *bMkDir = new <a href="qpushbutton.html">QPushButton</a>( <a href="qobject.html#tr">tr</a>( "New Directory" ), bottom );
+    <a href="qpushbutton.html">QPushButton</a> *bRemove = new <a href="qpushbutton.html">QPushButton</a>( <a href="qobject.html#tr">tr</a>( "Remove" ), bottom );
+<a name="x649"></a>    <a href="qobject.html#connect">connect</a>( bMkDir, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ),
+             this, SLOT( slotLocalMkDir() ) );
+    <a href="qobject.html#connect">connect</a>( bRemove, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ),
+             this, SLOT( slotLocalRemove() ) );
+
+<a name="x678"></a>    splitter-&gt;<a href="qsplitter.html#setResizeMode">setResizeMode</a>( layout, QSplitter::Stretch );
+}
+
+void <a name="f264"></a>FtpMainWindow::setupRightSide()
+{
+    // Setup the right side of the GUI, this is the listview
+    // of the remote filesystem (FTP), needs also lineedits/combos
+    // for username, password, etc.
+
+    <a href="qvbox.html">QVBox</a> *layout = new <a href="qvbox.html">QVBox</a>( splitter );
+    layout-&gt;<a href="qhbox.html#setSpacing">setSpacing</a>( 5 );
+    layout-&gt;<a href="qframe.html#setMargin">setMargin</a>( 5 );
+
+    <a href="qhbox.html">QHBox</a> *h = new <a href="qhbox.html">QHBox</a>( layout );
+    h-&gt;<a href="qhbox.html#setSpacing">setSpacing</a>( 5 );
+    <a href="qlabel.html">QLabel</a> *l = new <a href="qlabel.html">QLabel</a>( <a href="qobject.html#tr">tr</a>( "Remote Host:" ), h );
+    l-&gt;<a href="qwidget.html#setFixedWidth">setFixedWidth</a>( l-&gt;<a href="qwidget.html#sizeHint">sizeHint</a>().width() );
+    remoteHostCombo = new <a href="qcombobox.html">QComboBox</a>( TRUE, h );
+
+    l = new <a href="qlabel.html">QLabel</a>( <a href="qobject.html#tr">tr</a>( "Port:" ), h );
+    l-&gt;<a href="qwidget.html#setFixedWidth">setFixedWidth</a>( l-&gt;<a href="qwidget.html#sizeHint">sizeHint</a>().width() );
+    portSpin = new <a href="qspinbox.html">QSpinBox</a>( 0, 32767, 1, h );
+<a name="x675"></a>    portSpin-&gt;<a href="qspinbox.html#setValue">setValue</a>( 21 );
+<a name="x676"></a>    portSpin-&gt;<a href="qwidget.html#setFixedWidth">setFixedWidth</a>( portSpin-&gt;<a href="qwidget.html#sizeHint">sizeHint</a>().width() );
+<a name="x677"></a>    remoteOperator.setPort( portSpin-&gt;<a href="qspinbox.html#value">value</a>() );
+
+    h = new <a href="qhbox.html">QHBox</a>( layout );
+    h-&gt;<a href="qhbox.html#setSpacing">setSpacing</a>( 5 );
+    l = new <a href="qlabel.html">QLabel</a>( <a href="qobject.html#tr">tr</a>( "Remote Path:" ), h );
+    l-&gt;<a href="qwidget.html#setFixedWidth">setFixedWidth</a>( l-&gt;<a href="qwidget.html#sizeHint">sizeHint</a>().width() );
+    remotePathCombo = new <a href="qcombobox.html">QComboBox</a>( TRUE, h );
+
+    h = new <a href="qhbox.html">QHBox</a>( layout );
+    h-&gt;<a href="qhbox.html#setSpacing">setSpacing</a>( 5 );
+    l = new <a href="qlabel.html">QLabel</a>( <a href="qobject.html#tr">tr</a>( "Username:" ), h );
+    l-&gt;<a href="qwidget.html#setFixedWidth">setFixedWidth</a>( l-&gt;<a href="qwidget.html#sizeHint">sizeHint</a>().width() );
+    userCombo = new <a href="qcombobox.html">QComboBox</a>( TRUE, h );
+
+    l = new <a href="qlabel.html">QLabel</a>( <a href="qobject.html#tr">tr</a>( "Password:" ), h );
+    l-&gt;<a href="qwidget.html#setFixedWidth">setFixedWidth</a>( l-&gt;<a href="qwidget.html#sizeHint">sizeHint</a>().width() );
+    passLined = new <a href="qlineedit.html">QLineEdit</a>( h );
+<a name="x660"></a>    passLined-&gt;<a href="qlineedit.html#setEchoMode">setEchoMode</a>( QLineEdit::Password );
+
+    rightView = new FtpView( layout );
+
+    <a href="qhbox.html">QHBox</a> *bottom = new <a href="qhbox.html">QHBox</a>( layout );
+    bottom-&gt;<a href="qhbox.html#setSpacing">setSpacing</a>( 5 );
+    <a href="qpushbutton.html">QPushButton</a> *bMkDir = new <a href="qpushbutton.html">QPushButton</a>( <a href="qobject.html#tr">tr</a>( "New Directory" ), bottom );
+    <a href="qpushbutton.html">QPushButton</a> *bRemove = new <a href="qpushbutton.html">QPushButton</a>( <a href="qobject.html#tr">tr</a>( "Remove" ), bottom );
+    <a href="qobject.html#connect">connect</a>( bMkDir, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ),
+             this, SLOT( slotRemoteMkDir() ) );
+    <a href="qobject.html#connect">connect</a>( bRemove, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ),
+             this, SLOT( slotRemoteRemove() ) );
+
+    splitter-&gt;<a href="qsplitter.html#setResizeMode">setResizeMode</a>( layout, QSplitter::Stretch );
+
+    <a href="qobject.html#connect">connect</a>( remotePathCombo, SIGNAL( <a href="qcombobox.html#activated">activated</a>( const <a href="qstring.html">QString</a> &amp; ) ),
+             this, SLOT( slotRemoteDirChanged( const <a href="qstring.html">QString</a> &amp; ) ) );
+}
+
+void <a name="f265"></a>FtpMainWindow::setupCenterCommandBar()
+{
+    // Setup the command bar in the middle between the two views
+
+    <a href="qvbox.html">QVBox</a> *w = new <a href="qvbox.html">QVBox</a>( splitter );
+    splitter-&gt;<a href="qsplitter.html#setResizeMode">setResizeMode</a>( w, QSplitter::FollowSizeHint );
+    w-&gt;<a href="qhbox.html#setSpacing">setSpacing</a>( 5 );
+    w-&gt;<a href="qframe.html#setMargin">setMargin</a>( 5 );
+
+    <a href="qpushbutton.html">QPushButton</a> *bConnect = new <a href="qpushbutton.html">QPushButton</a>( <a href="qobject.html#tr">tr</a>( "&amp;Connect" ), w );
+    (void)new <a href="qwidget.html">QWidget</a>( w );
+    <a href="qpushbutton.html">QPushButton</a> *bUpload = new <a href="qpushbutton.html">QPushButton</a>( <a href="qobject.html#tr">tr</a>( "== &amp;Upload ==&gt;" ), w );
+    <a href="qpushbutton.html">QPushButton</a> *bDownload = new <a href="qpushbutton.html">QPushButton</a>( <a href="qobject.html#tr">tr</a>( "&lt;== &amp;Download ==" ), w );
+    (void)new <a href="qwidget.html">QWidget</a>( w );
+
+    <a href="qobject.html#connect">connect</a>( bConnect, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ),
+             this, SLOT( slotConnect() ) );
+    <a href="qobject.html#connect">connect</a>( bUpload, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ),
+             this, SLOT( slotUpload() ) );
+    <a href="qobject.html#connect">connect</a>( bDownload, SIGNAL( <a href="qbutton.html#clicked">clicked</a>() ),
+             this, SLOT( slotDownload() ) );
+}
+
+void <a name="f266"></a>FtpMainWindow::setup()
+{
+    // Setup the GUI
+
+    mainWidget = new <a href="qvbox.html">QVBox</a>( this );
+    splitter = new <a href="qsplitter.html">QSplitter</a>( mainWidget );
+    setupLeftSide();
+    setupCenterCommandBar();
+    setupRightSide();
+
+    progressLabel1 = new <a href="qlabel.html">QLabel</a>( <a href="qobject.html#tr">tr</a>( "No Operation in Progress" ), mainWidget );
+    progressBar1 = new <a href="qprogressbar.html">QProgressBar</a>( mainWidget );
+    progressLabel2 = new <a href="qlabel.html">QLabel</a>( <a href="qobject.html#tr">tr</a>( "No Operation in Progress" ), mainWidget );
+    progressBar2 = new <a href="qprogressbar.html">QProgressBar</a>( mainWidget );
+
+<a name="x684"></a>    progressLabel1-&gt;<a href="qwidget.html#hide">hide</a>();
+    progressBar1-&gt;<a href="qwidget.html#hide">hide</a>();
+    progressLabel2-&gt;<a href="qwidget.html#hide">hide</a>();
+    progressBar2-&gt;<a href="qwidget.html#hide">hide</a>();
+
+    <a href="qmainwindow.html#setCentralWidget">setCentralWidget</a>( mainWidget );
+}
+
+void <a name="f267"></a>FtpMainWindow::slotLocalDirChanged( const <a href="qstring.html">QString</a> &amp;path )
+{
+    // The user changed the path on the left side
+
+    oldLocal = localOperator;
+    localOperator.setPath( path );
+    localOperator.listChildren();
+}
+
+void FtpMainWindow::slotLocalDirChanged( const <a href="qurlinfo.html">QUrlInfo</a> &amp;info )
+{
+    // The user changed the path on the left side
+
+    oldLocal = localOperator;
+<a name="x680"></a>    localOperator.addPath( info.<a href="qurlinfo.html#name">name</a>() );
+    localOperator.listChildren();
+    localCombo-&gt;<a href="qcombobox.html#insertItem">insertItem</a>( localOperator.path(), 0 );
+<a name="x653"></a>    localCombo-&gt;<a href="qcombobox.html#setCurrentItem">setCurrentItem</a>( 0 );
+}
+
+void <a name="f268"></a>FtpMainWindow::slotRemoteDirChanged( const <a href="qstring.html">QString</a> &amp;path )
+{
+    // The user changed the path on the right side
+
+    if ( !remoteOperator.isValid() )
+        return;
+    oldRemote = remoteOperator;
+    remoteOperator.setPath( path );
+    remoteOperator.listChildren();
+}
+
+void FtpMainWindow::slotRemoteDirChanged( const <a href="qurlinfo.html">QUrlInfo</a> &amp;info )
+{
+    // The user changed the path on the right side
+
+    oldRemote = remoteOperator;
+    remoteOperator.addPath( info.<a href="qurlinfo.html#name">name</a>() );
+    remoteOperator.listChildren();
+    remotePathCombo-&gt;<a href="qcombobox.html#insertItem">insertItem</a>( remoteOperator.path(), 0 );
+    remotePathCombo-&gt;<a href="qcombobox.html#setCurrentItem">setCurrentItem</a>( 0 );
+}
+
+void <a name="f269"></a>FtpMainWindow::slotConnect()
+{
+    // The user pressed the connect button, so let's connect to the
+    // FTP server
+    // First we need to set stuff (host, path, etc.) which the user
+    // entered on the right side to the remote QUrlOperator
+
+    // protocol + hostname
+<a name="x651"></a>    <a href="qstring.html">QString</a> s = "ftp://" + remoteHostCombo-&gt;<a href="qcombobox.html#currentText">currentText</a>();
+    oldRemote = remoteOperator;
+    remoteOperator = s;
+
+    // path on the server
+    if ( !remotePathCombo-&gt;<a href="qcombobox.html#currentText">currentText</a>().isEmpty() )
+        remoteOperator.setPath( remotePathCombo-&gt;<a href="qcombobox.html#currentText">currentText</a>() );
+    else
+        remoteOperator.setPath( "/" );
+
+    // if nothing or "ftp" or "anonymous" has been entered into the username combo,
+    // let's connect anonymous, else private with password
+    if ( !userCombo-&gt;<a href="qcombobox.html#currentText">currentText</a>().isEmpty() &amp;&amp;
+         userCombo-&gt;<a href="qcombobox.html#currentText">currentText</a>().lower() != "anonymous" &amp;&amp;
+         userCombo-&gt;<a href="qcombobox.html#currentText">currentText</a>().lower() != "ftp" ) {
+        remoteOperator.setUser( userCombo-&gt;<a href="qcombobox.html#currentText">currentText</a>() );
+<a name="x662"></a>        remoteOperator.setPassword( passLined-&gt;<a href="qlineedit.html#text">text</a>() );
+    }
+
+    // set the port
+    remoteOperator.setPort( portSpin-&gt;<a href="qspinbox.html#value">value</a>() );
+
+    // finally read the directory on the ftp server
+    remoteOperator.listChildren();
+}
+
+void <a name="f270"></a>FtpMainWindow::slotUpload()
+{
+    // the user pressed the upload button
+
+    // if files have been selected on the left side (local filesystem)
+    <a href="qvaluelist.html">QValueList</a>&lt;QUrlInfo&gt; files = leftView-&gt;selectedItems();
+<a name="x683"></a>    if ( files.<a href="qvaluelist.html#isEmpty">isEmpty</a>() )
+        return;
+
+    // create a list of the URLs which should be copied
+    <a href="qstringlist.html">QStringList</a> lst;
+    QValueList&lt;QUrlInfo&gt;::Iterator it = files.<a href="qvaluelist.html#begin">begin</a>();
+    for ( ; it != files.<a href="qvaluelist.html#end">end</a>(); ++it )
+        lst &lt;&lt; QUrl( localOperator, ( *it ).name() );
+
+    // copy the list of selected files to the directory in which the
+    // remoteOperator currently is (upload)
+    remoteOperator.copy( lst, remoteOperator, FALSE );
+}
+
+void <a name="f271"></a>FtpMainWindow::slotDownload()
+{
+    // if the user pressed the download button
+
+    // if files have been selected on the right side (remote filesystem)
+    <a href="qvaluelist.html">QValueList</a>&lt;QUrlInfo&gt; files = rightView-&gt;selectedItems();
+    if ( files.<a href="qvaluelist.html#isEmpty">isEmpty</a>() )
+        return;
+
+    // create a list of the URLs which should be downloaded
+    <a href="qstringlist.html">QStringList</a> lst;
+    QValueList&lt;QUrlInfo&gt;::Iterator it = files.<a href="qvaluelist.html#begin">begin</a>();
+    for ( ; it != files.<a href="qvaluelist.html#end">end</a>(); ++it )
+        lst &lt;&lt; QUrl( remoteOperator, ( *it ).name() );
+
+    // copy the list of selected files to the directory in which the
+    // localOperator currently is (download)
+    localOperator.copy( lst, localOperator, FALSE );
+}
+
+void <a name="f272"></a>FtpMainWindow::slotLocalStart( <a href="qnetworkoperation.html">QNetworkOperation</a> *op )
+{
+    // this slot is always called if the local QUrlOperator starts
+    // listing a directory or dowloading a file
+
+    if ( !op )
+        return;
+
+<a name="x667"></a>    if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpListChildren ) {
+        // start listing a dir? clear the left view!
+<a name="x663"></a>        leftView-&gt;<a href="qlistview.html#clear">clear</a>();
+    } else if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpGet ) {
+        // start downloading a file? reset the progress bar!
+<a name="x672"></a>        progressBar1-&gt;<a href="qprogressbar.html#setTotalSteps">setTotalSteps</a>( 0 );
+<a name="x670"></a>        progressBar1-&gt;<a href="qprogressbar.html#reset">reset</a>();
+    }
+}
+
+void <a name="f273"></a>FtpMainWindow::slotLocalFinished( <a href="qnetworkoperation.html">QNetworkOperation</a> *op )
+{
+    // this slot is always called if the local QUrlOperator finished
+    // an operation
+
+    if ( !op )
+        return;
+
+<a name="x669"></a>    if ( op &amp;&amp; op-&gt;<a href="qnetworkoperation.html#state">state</a>() == QNetworkProtocol::StFailed ) {
+        // an error happend, let the user know that
+<a name="x668"></a><a name="x664"></a>        QMessageBox::<a href="qmessagebox.html#critical">critical</a>( this, tr( "ERROR" ), op-&gt;<a href="qnetworkoperation.html#protocolDetail">protocolDetail</a>() );
+
+        // do something depending in the error code
+<a name="x666"></a>        int ecode = op-&gt;<a href="qnetworkoperation.html#errorCode">errorCode</a>();
+        if ( ecode == QNetworkProtocol::ErrListChildren || ecode == QNetworkProtocol::ErrParse ||
+             ecode == QNetworkProtocol::ErrUnknownProtocol || ecode == QNetworkProtocol::ErrLoginIncorrect ||
+             ecode == QNetworkProtocol::ErrValid || ecode == QNetworkProtocol::ErrHostNotFound ||
+             ecode == QNetworkProtocol::ErrFileNotExisting ) {
+            localOperator = oldLocal;
+<a name="x654"></a>            localCombo-&gt;<a href="qcombobox.html#setEditText">setEditText</a>( localOperator.path() );
+            localOperator.listChildren();
+        }
+    } else if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpPut ) {
+        // finished saving the downloaded file? reread the dir and hide the progress bar
+        localOperator.listChildren();
+        progressLabel1-&gt;<a href="qwidget.html#hide">hide</a>();
+        progressBar1-&gt;<a href="qwidget.html#hide">hide</a>();
+    } else if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpGet ) {
+        // finished reading a file from the ftp server? reset the progress bar
+        progressBar1-&gt;<a href="qprogressbar.html#setTotalSteps">setTotalSteps</a>( 0 );
+        progressBar1-&gt;<a href="qprogressbar.html#reset">reset</a>();
+    }
+
+}
+
+void <a name="f274"></a>FtpMainWindow::slotRemoteStart( <a href="qnetworkoperation.html">QNetworkOperation</a> *op )
+{
+    // this slot is always called if the remote QUrlOperator starts
+    // listing a directory or uploading a file
+
+    if ( !op )
+        return;
+
+    if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpListChildren ) {
+        // start listing a dir? clear the right view!
+        rightView-&gt;<a href="qlistview.html#clear">clear</a>();
+    } else if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpGet ) {
+        // start downloading a file? reset the progress bar!
+        progressBar2-&gt;<a href="qprogressbar.html#setTotalSteps">setTotalSteps</a>( 0 );
+        progressBar2-&gt;<a href="qprogressbar.html#reset">reset</a>();
+    }
+}
+
+void <a name="f275"></a>FtpMainWindow::slotRemoteFinished( <a href="qnetworkoperation.html">QNetworkOperation</a> *op )
+{
+    // this slot is always called if the remote QUrlOperator finished
+    // an operation
+
+    if ( !op )
+        return;
+
+    if ( op &amp;&amp; op-&gt;<a href="qnetworkoperation.html#state">state</a>() == QNetworkProtocol::StFailed ) {
+        // an error happend, let the user know that
+        QMessageBox::<a href="qmessagebox.html#critical">critical</a>( this, tr( "ERROR" ), op-&gt;<a href="qnetworkoperation.html#protocolDetail">protocolDetail</a>() );
+
+        // do something depending in the error code
+        int ecode = op-&gt;<a href="qnetworkoperation.html#errorCode">errorCode</a>();
+        if ( ecode == QNetworkProtocol::ErrListChildren || ecode == QNetworkProtocol::ErrParse ||
+             ecode == QNetworkProtocol::ErrUnknownProtocol || ecode == QNetworkProtocol::ErrLoginIncorrect ||
+             ecode == QNetworkProtocol::ErrValid || ecode == QNetworkProtocol::ErrHostNotFound ||
+             ecode == QNetworkProtocol::ErrFileNotExisting ) {
+            remoteOperator = oldRemote;
+            remoteHostCombo-&gt;<a href="qcombobox.html#setEditText">setEditText</a>( remoteOperator.host() );
+            remotePathCombo-&gt;<a href="qcombobox.html#setEditText">setEditText</a>( remoteOperator.path() );
+<a name="x661"></a>            passLined-&gt;<a href="qlineedit.html#setText">setText</a>( remoteOperator.password() );
+            userCombo-&gt;<a href="qcombobox.html#setEditText">setEditText</a>( remoteOperator.user() );
+            portSpin-&gt;<a href="qspinbox.html#setValue">setValue</a>( remoteOperator.port() );
+            remoteOperator.listChildren();
+        }
+    } else if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpListChildren ) {
+        // finished reading a dir? set the correct path to the pth combo of the right view
+        remotePathCombo-&gt;<a href="qcombobox.html#setEditText">setEditText</a>( remoteOperator.path() );
+    } else if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpPut ) {
+        // finished saving the uploaded file? reread the dir and hide the progress bar
+        remoteOperator.listChildren();
+        progressLabel2-&gt;<a href="qwidget.html#hide">hide</a>();
+        progressBar2-&gt;<a href="qwidget.html#hide">hide</a>();
+    } else if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpGet ) {
+        // finished reading a file from the local filesystem? reset the progress bar
+        progressBar2-&gt;<a href="qprogressbar.html#setTotalSteps">setTotalSteps</a>( 0 );
+        progressBar2-&gt;<a href="qprogressbar.html#reset">reset</a>();
+    }
+}
+
+void <a name="f276"></a>FtpMainWindow::slotLocalDataTransferProgress( int bytesDone, int bytesTotal,
+                                                   <a href="qnetworkoperation.html">QNetworkOperation</a> *op )
+{
+    // Show the progress here of the local QUrlOperator reads or writes data
+
+    if ( !op )
+        return;
+
+<a name="x685"></a>    if ( !progressBar1-&gt;<a href="qwidget.html#isVisible">isVisible</a>() ) {
+        if ( bytesDone &lt; bytesTotal) {
+            progressLabel1-&gt;<a href="qwidget.html#show">show</a>();
+<a name="x673"></a>            progressBar1-&gt;<a href="qwidget.html#show">show</a>();
+            progressBar1-&gt;<a href="qprogressbar.html#setTotalSteps">setTotalSteps</a>( bytesTotal );
+<a name="x671"></a>            progressBar1-&gt;<a href="qprogressbar.html#setProgress">setProgress</a>( 0 );
+            progressBar1-&gt;<a href="qprogressbar.html#reset">reset</a>();
+        } else
+            return;
+    }
+
+<a name="x674"></a>    if ( progressBar1-&gt;<a href="qprogressbar.html#totalSteps">totalSteps</a>() == bytesTotal )
+        progressBar1-&gt;<a href="qprogressbar.html#setTotalSteps">setTotalSteps</a>( bytesTotal );
+
+    if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpGet )
+<a name="x665"></a><a name="x658"></a>        progressLabel1-&gt;<a href="qlabel.html#setText">setText</a>( <a href="qobject.html#tr">tr</a>( "Read: %1" ).arg( op-&gt;<a href="qnetworkoperation.html#arg">arg</a>( 0 ) ) );
+    else if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpPut )
+        progressLabel1-&gt;<a href="qlabel.html#setText">setText</a>( <a href="qobject.html#tr">tr</a>( "Write: %1" ).arg( op-&gt;<a href="qnetworkoperation.html#arg">arg</a>( 0 ) ) );
+    else
+        return;
+
+    progressBar1-&gt;<a href="qprogressbar.html#setProgress">setProgress</a>( bytesDone );
+}
+
+void <a name="f277"></a>FtpMainWindow::slotRemoteDataTransferProgress( int bytesDone, int bytesTotal,
+                                                    <a href="qnetworkoperation.html">QNetworkOperation</a> *op )
+{
+    // Show the progress here of the remote QUrlOperator reads or writes data
+
+    if ( !op )
+        return;
+
+    if ( !progressBar2-&gt;<a href="qwidget.html#isVisible">isVisible</a>() ) {
+        if ( bytesDone &lt; bytesTotal) {
+            progressLabel2-&gt;<a href="qwidget.html#show">show</a>();
+            progressBar2-&gt;<a href="qwidget.html#show">show</a>();
+            progressBar2-&gt;<a href="qprogressbar.html#setTotalSteps">setTotalSteps</a>( bytesTotal );
+            progressBar2-&gt;<a href="qprogressbar.html#setProgress">setProgress</a>( 0 );
+            progressBar2-&gt;<a href="qprogressbar.html#reset">reset</a>();
+        } else
+            return;
+    }
+
+    if ( progressBar2-&gt;<a href="qprogressbar.html#totalSteps">totalSteps</a>() != bytesTotal )
+        progressBar2-&gt;<a href="qprogressbar.html#setTotalSteps">setTotalSteps</a>( bytesTotal );
+
+    if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpGet )
+        progressLabel2-&gt;<a href="qlabel.html#setText">setText</a>( <a href="qobject.html#tr">tr</a>( "Read: %1" ).arg( op-&gt;<a href="qnetworkoperation.html#arg">arg</a>( 0 ) ) );
+    else if ( op-&gt;<a href="qnetworkoperation.html#operation">operation</a>() == QNetworkProtocol::OpPut )
+        progressLabel2-&gt;<a href="qlabel.html#setText">setText</a>( <a href="qobject.html#tr">tr</a>( "Write: %1" ).arg( op-&gt;<a href="qnetworkoperation.html#arg">arg</a>( 0 ) ) );
+    else
+        return;
+
+    progressBar2-&gt;<a href="qprogressbar.html#setProgress">setProgress</a>( bytesDone );
+}
+
+void <a name="f278"></a>FtpMainWindow::slotLocalMkDir()
+{
+    // create a dir on the local filesystem
+
+    bool ok = FALSE;
+<a name="x657"></a>    <a href="qstring.html">QString</a> name = QInputDialog::<a href="qinputdialog.html#getText">getText</a>( <a href="qobject.html#tr">tr</a>( "Directory Name:" ), <a href="qstring.html#QString-null">QString::null</a>, QLineEdit::Normal, QString::null, &amp;ok, this );
+
+    if ( !name.<a href="qstring.html#isEmpty">isEmpty</a>() &amp;&amp; ok )
+        localOperator.mkdir( name );
+}
+
+void <a name="f279"></a>FtpMainWindow::slotLocalRemove()
+{
+}
+
+void <a name="f280"></a>FtpMainWindow::slotRemoteMkDir()
+{
+    // create a dir on the remote filesystem (FTP server)
+
+    bool ok = FALSE;
+    <a href="qstring.html">QString</a> name = QInputDialog::<a href="qinputdialog.html#getText">getText</a>( <a href="qobject.html#tr">tr</a>( "Directory Name:" ), QString::null, QLineEdit::Normal, QString::null, &amp;ok, this );
+
+    if ( !name.<a href="qstring.html#isEmpty">isEmpty</a>() &amp;&amp; ok )
+        remoteOperator.mkdir( name );
+}
+
+void <a name="f281"></a>FtpMainWindow::slotRemoteRemove()
+{
+}
+
+void <a name="f282"></a>FtpMainWindow::slotConnectionStateChanged( int, const <a href="qstring.html">QString</a> &amp;msg )
+{
+    <a href="qmainwindow.html#statusBar">statusBar</a>()-&gt;message( msg );
+}
+</pre>
+
+<p> <hr>
+<p> The API of the FtpViewItem and FtpView classes (ftpview.h):
+<p> <pre>/****************************************************************************
+** $Id:  qt/ftpview.h   3.0.5   edited Oct 12 2001 $
+**
+** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#ifndef FTPVIEW_H
+#define FTPVIEW_H
+
+#include &lt;<a href="qlistview-h.html">qlistview.h</a>&gt;
+#include &lt;<a href="qvaluelist-h.html">qvaluelist.h</a>&gt;
+#include &lt;<a href="qurlinfo-h.html">qurlinfo.h</a>&gt;
+
+class FtpViewItem : public <a href="qlistviewitem.html">QListViewItem</a>
+{
+public:
+    FtpViewItem( <a href="qlistview.html">QListView</a> *parent, const <a href="qurlinfo.html">QUrlInfo</a> &amp;i );
+
+    int compare( <a href="qlistviewitem.html">QListViewItem</a> * i, int col, bool ascending ) const;
+    <a href="qstring.html">QString</a> text( int c ) const;
+    const <a href="qpixmap.html">QPixmap</a>* pixmap( int c ) const;
+
+    <a href="qurlinfo.html">QUrlInfo</a> entryInfo() {
+        return info;
+    }
+
+private:
+    <a href="qurlinfo.html">QUrlInfo</a> info;
+
+};
+
+class FtpView : public <a href="qlistview.html">QListView</a>
+{
+    Q_OBJECT
+
+public:
+    FtpView( <a href="qwidget.html">QWidget</a> *parent );
+    <a href="qvaluelist.html">QValueList</a>&lt;QUrlInfo&gt; selectedItems() const;
+
+public slots:
+    void slotInsertEntries( const <a href="qvaluelist.html">QValueList</a>&lt;QUrlInfo&gt; &amp;info );
+
+signals:
+    void itemSelected( const <a href="qurlinfo.html">QUrlInfo</a> &amp;info );
+
+private slots:
+    void slotSelected( <a href="qlistviewitem.html">QListViewItem</a> *item );
+
+};
+
+#endif
+</pre>
+
+<p> <hr>
+<p> Their Implementation (ftpview.cpp):
+<p> <pre>/****************************************************************************
+** $Id:  qt/ftpview.cpp   3.0.5   edited Oct 12 2001 $
+**
+** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "ftpview.h"
+
+#include &lt;<a href="qpixmap-h.html">qpixmap.h</a>&gt;
+#include &lt;<a href="qvaluelist-h.html">qvaluelist.h</a>&gt;
+
+/* XPM */
+static const char* closed_xpm[]={
+    "15 15 6 1",
+    ". c None",
+    "b c #ffff00",
+    "d c #000000",
+    "* c #999999",
+    "a c #cccccc",
+    "c c #ffffff",
+    "...............",
+    "..*****........",
+    ".*ababa*.......",
+    "*abababa******.",
+    "*cccccccccccc*d",
+    "*cbababababab*d",
+    "*cabababababa*d",
+    "*cbababababab*d",
+    "*cabababababa*d",
+    "*cbababababab*d",
+    "*cabababababa*d",
+    "*cbababababab*d",
+    "**************d",
+    ".dddddddddddddd",
+    "..............."};
+
+/* XPM */
+static const char* file_xpm[]={
+    "13 15 5 1",
+    ". c #7f7f7f",
+    "# c None",
+    "c c #000000",
+    "b c #bfbfbf",
+    "a c #ffffff",
+    "..........###",
+    ".aaaaaaaab.##",
+    ".aaaaaaaaba.#",
+    ".aaaaaaaacccc",
+    ".aaaaaaaaaabc",
+    ".aaaaaaaaaabc",
+    ".aaaaaaaaaabc",
+    ".aaaaaaaaaabc",
+    ".aaaaaaaaaabc",
+    ".aaaaaaaaaabc",
+    ".aaaaaaaaaabc",
+    ".aaaaaaaaaabc",
+    ".aaaaaaaaaabc",
+    ".bbbbbbbbbbbc",
+    "ccccccccccccc"};
+
+QPixmap *folderIcon = 0;
+QPixmap *fileIcon = 0;
+
+<a name="f287"></a>FtpViewItem::FtpViewItem( <a href="qlistview.html">QListView</a> *parent, const <a href="qurlinfo.html">QUrlInfo</a> &amp;i )
+<a name="x693"></a>    : <a href="qlistviewitem.html">QListViewItem</a>( parent, i.<a href="qurlinfo.html#name">name</a>() ), info( i )
+{
+}
+
+<a name="x688"></a>int FtpViewItem::<a href="qlistviewitem.html#compare">compare</a>( <a href="qlistviewitem.html">QListViewItem</a> * i, int col, bool ascending ) const
+{
+    FtpViewItem *other = (FtpViewItem*)i;
+    switch ( col ) {
+    case 1:
+<a name="x696"></a>        if ( info.<a href="qvaluelist.html#size">size</a>() == other-&gt;info.<a href="qvaluelist.html#size">size</a>() )
+            return 0;
+        else
+            return info.<a href="qvaluelist.html#size">size</a>() &lt; other-&gt;info.<a href="qvaluelist.html#size">size</a>() ? -1 : 1;
+    case 2:
+        if ( info.lastModified() == other-&gt;info.lastModified() )
+            return 0;
+        else
+            return info.lastModified() &lt; other-&gt;info.lastModified() ? -1 : 1;
+    default:
+        // use default method for colum 0 and others added in the future
+        return QListViewItem::compare( i, col, ascending );
+    };
+}
+
+<a name="x691"></a>QString FtpViewItem::<a href="qlistviewitem.html#text">text</a>( int c ) const
+{
+    switch ( c ) {
+    case 0:
+        return info.name();
+    case 1:
+        return QString::number( info.<a href="qvaluelist.html#size">size</a>() );
+    case 2:
+        return info.lastModified().toString();
+    }
+
+    return "????";
+}
+
+<a name="x689"></a>const QPixmap *FtpViewItem::<a href="qlistviewitem.html#pixmap">pixmap</a>( int c ) const
+{
+    if ( !folderIcon )
+        folderIcon = new <a href="qpixmap.html">QPixmap</a>( closed_xpm );
+    if ( !fileIcon )
+        fileIcon = new <a href="qpixmap.html">QPixmap</a>( file_xpm );
+    if ( info.isDir() &amp;&amp; c == 0 )
+        return folderIcon;
+    else if ( info.isFile() &amp;&amp; c == 0 )
+        return fileIcon;
+    return 0;
+}
+
+
+<a name="f283"></a>FtpView::FtpView( <a href="qwidget.html">QWidget</a> *parent )
+    : <a href="qlistview.html">QListView</a>( parent )
+{
+    <a href="qlistview.html#addColumn">addColumn</a>( <a href="qobject.html#tr">tr</a>( "Name" ) );
+    <a href="qlistview.html#addColumn">addColumn</a>( <a href="qobject.html#tr">tr</a>( "Size" ) );
+    <a href="qlistview.html#addColumn">addColumn</a>( <a href="qobject.html#tr">tr</a>( "Last Modified" ) );
+    <a href="qlistview.html#setColumnAlignment">setColumnAlignment</a>( 1, Qt::AlignRight );
+    <a href="qlistview.html#setShowSortIndicator">setShowSortIndicator</a>( TRUE );
+    <a href="qlistview.html#setAllColumnsShowFocus">setAllColumnsShowFocus</a>( TRUE );
+    <a href="qlistview.html#setSelectionMode">setSelectionMode</a>( Extended );
+
+    <a href="qobject.html#connect">connect</a>( this, SIGNAL( <a href="qlistview.html#doubleClicked">doubleClicked</a>( <a href="qlistviewitem.html">QListViewItem</a> * ) ),
+             this, SLOT( slotSelected( <a href="qlistviewitem.html">QListViewItem</a> * ) ) );
+    <a href="qobject.html#connect">connect</a>( this, SIGNAL( <a href="qlistview.html#returnPressed">returnPressed</a>( <a href="qlistviewitem.html">QListViewItem</a> * ) ),
+             this, SLOT( slotSelected( <a href="qlistviewitem.html">QListViewItem</a> * ) ) );
+}
+
+void <a name="f284"></a>FtpView::slotInsertEntries( const <a href="qvaluelist.html">QValueList</a>&lt;QUrlInfo&gt; &amp;info )
+{
+    QValueList&lt;QUrlInfo&gt;::ConstIterator it;
+<a name="x695"></a><a name="x694"></a>    for( it = info.<a href="qvaluelist.html#begin">begin</a>(); it != info.<a href="qvaluelist.html#end">end</a>(); ++it ) {
+        if ( (*it).name() != ".." &amp;&amp; (*it).name() != "." &amp;&amp; (*it).name()[ 0 ] == '.' )
+            continue;
+        FtpViewItem *item = new FtpViewItem( this, (*it) );
+        if ( (*it).isDir() )
+<a name="x690"></a>            item-&gt;<a href="qlistviewitem.html#setSelectable">setSelectable</a>( FALSE );
+    }
+}
+
+void <a name="f285"></a>FtpView::slotSelected( <a href="qlistviewitem.html">QListViewItem</a> *item )
+{
+    if ( !item )
+        return;
+
+    FtpViewItem *i = (FtpViewItem*)item;
+    if ( i-&gt;entryInfo().isDir() )
+        emit itemSelected( i-&gt;entryInfo() );
+}
+
+QValueList&lt;QUrlInfo&gt; <a name="f286"></a>FtpView::selectedItems() const
+{
+    <a href="qvaluelist.html">QValueList</a>&lt;QUrlInfo&gt; lst;
+    <a href="qlistviewitemiterator.html">QListViewItemIterator</a> it( (QListView*)this );
+<a name="x692"></a>    for ( ; it.<a href="qlistviewitemiterator.html#current">current</a>(); ++it ) {
+        if ( it.<a href="qlistviewitemiterator.html#current">current</a>()-&gt;isSelected() ) {
+            lst &lt;&lt; ( (FtpViewItem*)it.<a href="qlistviewitemiterator.html#current">current</a>() )-&gt;entryInfo();
+        }
+    }
+
+    return lst;
+}
+</pre>
+
+<p> <hr>
+<p> Main (main.cpp):
+<p> <pre>/****************************************************************************
+** $Id:  qt/main.cpp   3.0.5   edited Nov 6 2001 $
+**
+** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qnetwork-h.html">qnetwork.h</a>&gt;
+#include &lt;<a href="qsplitter-h.html">qsplitter.h</a>&gt;
+
+#include "ftpmainwindow.h"
+
+int main( int argc, char **argv )
+{
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+    // call this to register the built-in network protocols, e.g. FTP
+    // and HTTP.
+    <a href="qurloperator.html#qInitNetworkProtocols">qInitNetworkProtocols</a>();
+
+    FtpMainWindow m;
+    a.<a href="qapplication.html#setMainWidget">setMainWidget</a>( &amp;m );
+    <a href="qvaluelist.html">QValueList</a>&lt;int&gt; sizes;
+    sizes &lt;&lt; 300 &lt;&lt; 70 &lt;&lt; 300;
+    m.mainSplitter()-&gt;setSizes( sizes );
+    m.<a href="qwidget.html#resize">resize</a>( 800, 600 );
+<a name="x699"></a>    m.<a href="qwidget.html#show">show</a>();
+    return a.<a href="qapplication.html#exec">exec</a>();
+}
+</pre>
+
+<p>See also <a href="network-examples.html">Network Examples</a>.
+
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

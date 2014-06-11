@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>坐标系统</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>坐标系统</h1>
+
+
+
+<p> 在Qt中的一个<a href="qpaintdevice.html">绘画设备</a>是一个可画的二维平面。<a href="qwidget.html">QWidget</a>、<a href="qpixmap.html">QPixmap</a>、<a href="qpicture.html">QPicture</a>和<a href="qprinter.html">QPrinter</a>都是绘画设备。<a href="qpainter.html">QPainter</a>是一个可以在上面画的对象。
+<p> 一个绘画设备的默认坐标系统的原点在左上角。X轴由左向右增加，Y轴由上向下增加。对于基于像素的设备单位是像素，对于打印机是点。
+<p> <h2> 一个例子
+</h2>
+<a name="1"></a><p> 下面这个图显示了一个绘画设备的左上角的高度放大的部分。
+<p> <center><img src="coordsys.png"></center> 
+<p> 这个矩形和线段是由下面的代码画出来的（在这个图中添加了网格）：
+<p> <pre>
+    void MyWidget::paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * )
+    {
+        <a href="qpainter.html">QPainter</a> p( this );
+        p.<a href="qpainter.html#setPen">setPen</a>( darkGray );
+        p.<a href="qpainter.html#drawRect">drawRect</a>( 1,2, 5,4 );
+        p.<a href="qpainter.html#setPen">setPen</a>( lightGray );
+        p.<a href="qpainter.html#drawLine">drawLine</a>( 9,2, 7,7 );
+    }
+</pre>
+ 
+<p> applies to all the relevant functions in <a href="qpainter.html">QPainter</a>.
+请注意drawRect()所画的所有像素是在指定的大小之内（5*4像素）。这一点和其它工具包不同；Qt中你指定的大小包括你所要画的像素。这一点适用于所有<a href="qpainter.html">QPainter</a>中相关的函数。
+<p> 相似的，drawLine()调用画了这个线段的两个端点，而不仅仅是一个。
+<p> 这里是一些和坐标系统关系很近的类：
+<p> <ul>
+<p> <li> <a href="qpoint.html">QPoint</a>是坐标系统中的单个二维点。Qt中处理点的绝大多数函数都可以接受<a href="qpoint.html">QPoint</a>参数或者两个整数参数，比如<a href="qpainter.html#drawPoint">QPainter::drawPoint</a>()。
+<p> <li> <a href="qsize.html">QSize</a>是单个二维矢量。在内部，QPoint和<a href="qsize.html">QSize</a>是一样的，但是一个点和一个大小不同，所以这两个类都存在。同样，绝大多数函数都可以接受一个QSize或者两个整数，比如<a href="qwidget.html#resize">QWidget::resize</a>()。
+<p> <li> <a href="qrect.html">QRect</a>是一个二维的矩形。绝大多数函数都可以接受一个<a href="qrect.html">QRect</a>或者四个整数，比如<a href="qwidget.html#setGeometry">QWidget::setGeometry</a>()。
+<p> <li> <a href="qregion.html">QRegion</a>是点的一个任意组合，包括所有通常的组合操作，例如<a href="qregion.html#intersect">QRegion::intersect</a>()，并且一些常用的函数返回一个矩形的列表，这个矩形的列表的集合等于一个区域。<a href="qregion.html">QRegion</a>被例如<a href="qpainter.html#setClipRegion">QPainter::setClipRegion</a>()、<a href="qwidget.html#repaint">QWidget::repaint</a>()和<a href="qpaintevent.html#region">QPaintEvent::region</a>()使用。
+<p> <li> <a href="qpainter.html">QPainter</a>是一个绘图的类。它可以用同样的代码在任何一个设备上绘画。设备中是存在差异的，<a href="qprinter.html#newPage">QPrinter::newPage</a>()是一个很好的例子，但<a href="qpainter.html">QPainter</a>可以对所有的设备按同一种方式工作。
+<p> <li> <a href="qpaintdevice.html">QPaintDevice</a>是一个QPainter可以在上面绘画的设备。这里有两种都基于像素的内部的设备，和两种外部设备，<a href="qprinter.html">QPrinter</a>和<a href="qpicture.html">QPicture</a>（它把QPainter的命令都记录在一个文件或者其它的<a href="qiodevice.html">QIODevice</a>，然后再运行它们）。其它的设备都可以被定义。
+<p> </ul>
+<p> <h2> 变换
+</h2>
+<a name="2"></a><p> 尽管Qt默认的坐标系统像我们上面描述的那样工作，<a href="qpainter.html">QPainter</a>也支持任意的变换。
+<p> 这个变换引擎是一个三步的管道，和下面的<a href="http://www.amazon.com/exec/obidos/ASIN/0201848406/trolltech/t">Foley &amp; Van Dam</a> and the
+<a href="http://www.amazon.com/exec/obidos/ASIN/0201604582/trolltech/t">OpenGL Programming Guide</a>两本书中的模型非常接近。参考那些深度的内容，这里我们给出了一个简单的概述和一个例子。
+<p> 第一步使用通用变换矩阵。使用这个矩阵来定位你的模型中的对象。Qt提供了像<a href="qpainter.html#rotate">QPainter::rotate</a>()、<a href="qpainter.html#scale">QPainter::scale</a>()、<a href="qpainter.html#translate">QPainter::translate</a>()等等方法来操作这个矩阵。
+<p> <a href="qpainter.html#save">QPainter::save</a>()和<a href="qpainter.html#restore">QPainter::restore</a>()存储和恢复这个矩阵。你也可以使用<a href="qwmatrix.html">QWMatrix</a>对象、<a href="qpainter.html#worldMatrix">QPainter::worldMatrix</a>()和<a href="qpainter.html#setWorldMatrix">QPainter::setWorldMatrix</a>()来存储和使用指定的矩阵。
+<p> 第二步使用窗口。这个窗口在模式坐标上说明视图的边界。矩阵定位<em>对象</em>并且<a href="qpainter.html#setWindow">QPainter::setWindow</a>()定位这个<em>窗口</em>，决定哪个坐标系统是可见的。（如果你有三维的经验，这个窗口通常是被三维投影出来的。）
+<p> 第三步使用视口。视口也描述视图的边界，但是是在设备坐标上。视口和窗口描述的是同一个矩形，但是在不同的坐标系统中。
+<p> 在屏幕上，默认的是你所画的通常合适的整个<a href="qwidget.html">QWidget</a>或者<a href="qpixmap.html">QPixmap</a>。对于打印这个功能是非常重要的，因为只有很少的打印机可以在真个物理页面上打印。
+<p> 所以每一个要画的对象被使用<a href="qpainter.html#worldMatrix">QPainter::worldMatrix</a>()变换到模式坐标中，然后被<a href="qpainter.html#window">QPainter::window</a>()剪辑，最后被使用<a href="qpainter.html#viewport">QPainter::viewport</a>()定位到所画的设备上。
+<p> 没有上述一个或两个步骤也是可能做到的。举例来说，比如你的目标是画一些按比例缩放的东西，然后使用<a href="qpainter.html#scale">QPainter::scale</a>()来达到理想的效果。如果你使用一个大小固定的坐标系统，<a href="qpainter.html#setWindow">QPainter::setWindow</a>()是最好的。等等。
+<p> 这里是一个使用所有这三个机制的一个简单的例子：这个函数在<a href="aclock-example.html">aclock/aclock.cpp</a>例子中画了一个钟表面板。我们建议你在读任何代码之前先编译和运行这个例子。尤其是，试着把这个窗口改变成不同的形状。
+<p> 
+
+<pre>    void AnalogClock::drawClock( <a href="qpainter.html">QPainter</a> *paint )
+    {
+    <a name="x2379"></a>    paint-&gt;<a href="qpainter.html#save">save</a>();
+</pre>
+<p> 首先，我们保存绘画工具的状态，这样的调用函数就保证了不会将要使用的变换干扰。
+<p> <pre>    <a name="x2381"></a>    paint-&gt;<a href="qpainter.html#setWindow">setWindow</a>( -500,-500, 1000,1000 );
+</pre>
+<p> 我们设置一个1000*1000、原点（0，0)在中间的窗口的模式坐标系统。
+<p> <pre>    <a name="x2382"></a>    <a href="qrect.html">QRect</a> v = paint-&gt;<a href="qpainter.html#viewport">viewport</a>();
+    <a name="x2386"></a><a name="x2383"></a>    int d = QMIN( v.<a href="qrect.html#width">width</a>(), v.<a href="qrect.html#height">height</a>() );
+</pre>
+<p> 这个设备也许不是正方形的，但我们希望钟表是正方形的，所以我们找到它当前的视口并计算它最短的边。
+<p> <pre>    <a name="x2384"></a><a name="x2380"></a>    paint-&gt;<a href="qpainter.html#setViewport">setViewport</a>( v.<a href="qrect.html#left">left</a>() + (v.<a href="qrect.html#width">width</a>()-d)/2,
+    <a name="x2385"></a>                        v.<a href="qrect.html#top">top</a>() + (v.<a href="qrect.html#height">height</a>()-d)/2, d, d );
+</pre>
+<p> 然后我们设置一个新的正方形视口，把它放在原来的中间。
+<p> 现在我们做完了我们的视图。从这点上来看，当我们在（0，0）点周围画一个1000*1000的区域，我们所画的东西将会在适合输出设备的最大可能的正方形区域中显示出来。
+<p> 是我们开始绘图的时候了。
+<p> <pre>    <a name="x2387"></a>    // time = QTime::<a href="qtime.html#currentTime">currentTime</a>();
+        <a href="qpointarray.html">QPointArray</a> pts;
+</pre>
+<p> 因为我们在画一个钟表，所以我们需要知道时间。<em>pts</em>刚好是一个用来存储一些点的有用的变量。
+<p> 接下来我们画三个块，一个是时针，一个是分针，最后一个是钟表面板自己。首先我们来画时针：
+<p> <pre>        paint-&gt;<a href="qpainter.html#save">save</a>();
+    <a name="x2378"></a>    paint-&gt;<a href="qpainter.html#rotate">rotate</a>( 30*(time.hour()%12-3) + time.minute()/2 );
+</pre>
+<p> 我们保存绘画工具，然后根据时针转动的方向旋转它。
+<p> <pre>        pts.setPoints( 4, -20,0,  0,-20, 300,0, 0,20 );
+    <a name="x2375"></a>    paint-&gt;<a href="qpainter.html#drawConvexPolygon">drawConvexPolygon</a>( pts );
+</pre>
+<p> 我们把<em>pts</em>设置为一个四点的多边形，好像时针就在三点钟，然后画上它。因为这个旋转，时针被画到正确的位置。
+<p> <pre>    <a name="x2377"></a>    paint-&gt;<a href="qpainter.html#restore">restore</a>();
+</pre>
+<p> 我们恢复被存储哦绘图工具，取消旋转。我们也可以通过调用rotate( -30 )，但是那样也许会导致旋转错误，所以使用save()和restore()是更好的方法。接下来，按大致相同哦方式画分针：
+<p> <pre>        paint-&gt;<a href="qpainter.html#save">save</a>();
+        paint-&gt;<a href="qpainter.html#rotate">rotate</a>( (time.minute()-15)*6 );
+        pts.setPoints( 4, -10,0, 0,-10, 400,0, 0,10 );
+        paint-&gt;<a href="qpainter.html#drawConvexPolygon">drawConvexPolygon</a>( pts );
+        paint-&gt;<a href="qpainter.html#restore">restore</a>();
+</pre>
+<p> 唯一的不同是如何计算要旋转的角度和多边形的形状。
+<p> 要画的最后一部分就是钟表面板自己。
+<p> <pre>        for ( int i=0; i&lt;12; i++ ) {
+    <a name="x2376"></a>        paint-&gt;<a href="qpainter.html#drawLine">drawLine</a>( 440,0, 460,0 );
+            paint-&gt;<a href="qpainter.html#rotate">rotate</a>( 30 );
+        }
+</pre>
+<p> 十二个短的时针刻度之间的间隔是三十度。最后，绘图工具被旋转不是一个非常有用的方法，但是我们已经画完了，所以这也没什么。
+<p> <pre>        paint-&gt;<a href="qpainter.html#restore">restore</a>();
+    }
+</pre>
+<p> 最后一行的函数是恢复绘图工具，这样绘图工具的调用者就不用担心我们所做的所有变换会影响它。
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

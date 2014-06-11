@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QToolButton类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QToolButton类参考</h1>
+
+<p> QToolButton类提供了用于命令或者选项的可以快速访问的按钮，通常可以用在QToolBar里面。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qtoolbutton-h.html">qtoolbutton.h</a>&gt;</tt>
+<p>继承了<a href="qbutton.html">QButton</a>。
+<p><a href="qtoolbutton-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QToolButton"><b>QToolButton</b></a> ( QWidget&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QToolButton-2"><b>QToolButton</b></a> ( const&nbsp;QIconSet&nbsp;&amp;&nbsp;iconSet, const&nbsp;QString&nbsp;&amp;&nbsp;textLabel, const&nbsp;QString&nbsp;&amp;&nbsp;grouptext, QObject&nbsp;*&nbsp;receiver, const&nbsp;char&nbsp;*&nbsp;slot, QToolBar&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QToolButton-3"><b>QToolButton</b></a> ( ArrowType&nbsp;type, QWidget&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#~QToolButton"><b>~QToolButton</b></a> ()</div></li>
+<li><div class=fn>void setOnIconSet ( const QIconSet &amp; ) &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>void setOffIconSet ( const QIconSet &amp; ) &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>void setIconSet ( const&nbsp;QIconSet&nbsp;&amp;&nbsp;set, bool&nbsp;on ) &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>QIconSet onIconSet () const &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>QIconSet offIconSet () const &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>QIconSet iconSet ( bool&nbsp;on ) const &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>virtual void <a href="#setIconSet"><b>setIconSet</b></a> ( const QIconSet &amp; )</div></li>
+<li><div class=fn>QIconSet <a href="#iconSet"><b>iconSet</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#usesBigPixmap"><b>usesBigPixmap</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#usesTextLabel"><b>usesTextLabel</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#textLabel"><b>textLabel</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setPopup"><b>setPopup</b></a> ( QPopupMenu&nbsp;*&nbsp;popup )</div></li>
+<li><div class=fn>QPopupMenu * <a href="#popup"><b>popup</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setPopupDelay"><b>setPopupDelay</b></a> ( int&nbsp;delay )</div></li>
+<li><div class=fn>int <a href="#popupDelay"><b>popupDelay</b></a> () const</div></li>
+<li><div class=fn>void <a href="#openPopup"><b>openPopup</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setAutoRaise"><b>setAutoRaise</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>bool <a href="#autoRaise"><b>autoRaise</b></a> () const</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#setUsesBigPixmap"><b>setUsesBigPixmap</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>virtual void <a href="#setUsesTextLabel"><b>setUsesTextLabel</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>virtual void <a href="#setTextLabel-2"><b>setTextLabel</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;newLabel, bool&nbsp;tipToo )</div></li>
+<li><div class=fn>virtual void <a href="#setToggleButton"><b>setToggleButton</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>virtual void <a href="#setOn"><b>setOn</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>void <a href="#toggle"><b>toggle</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setTextLabel"><b>setTextLabel</b></a> ( const QString &amp; )</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>bool <a href="#autoRaise-prop"><b>autoRaise</b></a>&nbsp;- 自动浮起是否生效</div></li>
+<li><div class=fn>QIconSet <a href="#iconSet-prop"><b>iconSet</b></a>&nbsp;- 提供显示在按钮上的图标的图标集</div></li>
+<li><div class=fn>QIconSet offIconSet&nbsp;- 当按钮在“关”状态时使用的图标集&nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>bool <a href="#on-prop"><b>on</b></a>&nbsp;- 工具按钮是否为开</div></li>
+<li><div class=fn>QIconSet onIconSet&nbsp;- 当按钮在“开”状态时使用的图标集&nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>int <a href="#popupDelay-prop"><b>popupDelay</b></a>&nbsp;- 在按下按钮和出现关联的弹出按钮之间的以毫秒为单位的时间</div></li>
+<li><div class=fn>QString <a href="#textLabel-prop"><b>textLabel</b></a>&nbsp;- 按钮的标签</div></li>
+<li><div class=fn>bool <a href="#toggleButton-prop"><b>toggleButton</b></a>&nbsp;- 工具按钮是否是切换按钮</div></li>
+<li><div class=fn>bool <a href="#usesBigPixmap-prop"><b>usesBigPixmap</b></a>&nbsp;- 工具按钮是否使用大的像素映射</div></li>
+<li><div class=fn>bool <a href="#usesTextLabel-prop"><b>usesTextLabel</b></a>&nbsp;- 工具按钮是否在按钮像素映射下方显示标签</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>bool <a href="#uses3D"><b>uses3D</b></a> () const</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+<p> QToolButton类提供了用于命令或者选项的可以快速访问的按钮，通常可以用在<a href="qtoolbar.html">QToolBar</a>里面。
+<p> 
+<p> 工具按钮是提供对特定命令或者选项快速访问的特殊按钮。和普通的命令按钮不同，工具按钮通常不显示文本标签，而是图标。它的经典用法事选择工具，例如在一个绘图程序中的“笔”工具。这个被QToolButton作为切换按钮重新实现。（请参考<a href="#setToggleButton">setToggleButton</a>()）。
+<p> QToolButton支持自动浮起。在自动浮起模式中，按钮只有在鼠标指向它的时候才绘制三维的框架。当按钮被用在QToolBar里面的时候，这个特征会自动被启用。可以使用<a href="#setAutoRaise">setAutoRaise</a>()来改变它。
+<p> 工具按钮的图标是被设置为<a href="qiconset.html">QIconSet</a>。这使得它可以为失效和激活状态指定不同的像素映射。当按钮的功能不可用的时候，失效的像素映射被使用。当因为用户用鼠标指向按钮而自动浮起时，激活的像素映射被显示。
+<p> 按钮的外观和尺寸可以通过<a href="#setUsesBigPixmap">setUsesBigPixmap</a>()和<a href="#setUsesTextLabel">setUsesTextLabel</a>()来调节。当被用在<a href="qtoolbar.html">QToolBar</a>里面时，按钮会自动地调节来适合<a href="qmainwindow.html">QMainWindow</a>的设置（请参考<a href="qmainwindow.html#setUsesTextLabel">QMainWindow::setUsesTextLabel</a>()和<a href="qmainwindow.html#setUsesBigPixmaps">QMainWindow::setUsesBigPixmaps</a>()）。
+<p> 工具按钮可以提供一个弹出菜单的额外选择。这个特征有时对于网页浏览器中的“后退”按钮是有用的。在按下按钮一段时间之后，一个菜单会弹出来显示所有可以后退浏览的可能页面。你可以使用<a href="#setPopup">setPopup</a>()来为QToolButton设置一个弹出菜单。默认延时是600毫秒，你可以使用<a href="#setPopupDelay">setPopupDelay</a>()来调节它。
+<p> <center><img src="qdockwindow.png" alt="Toolbar with Toolbuttons"></center> <blockquote><p align="center"><em> 一个有QToolbutton的浮动的QToolbar
+</em></p>
+</blockquote><p> <p>也可以参考<a href="qpushbutton.html">QPushButton</a>、<a href="qtoolbar.html">QToolBar</a>、<a href="qmainwindow.html">QMainWindow</a>、<a href="guibooks.html#fowler">图形用户界面设计手册：推动按钮</a>和<a href="basic.html">基本窗口部件</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QToolButton"></a>QToolButton::QToolButton ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个父对象为<em>parent</em>并且名称为<em>name</em>的空工具按钮。
+
+<h3 class=fn><a name="QToolButton-2"></a>QToolButton::QToolButton ( const&nbsp;<a href="qiconset.html">QIconSet</a>&nbsp;&amp;&nbsp;iconSet, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;textLabel, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;grouptext, <a href="qobject.html">QObject</a>&nbsp;*&nbsp;receiver, const&nbsp;char&nbsp;*&nbsp;slot, <a href="qtoolbar.html">QToolBar</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>  
+构造一个父对象为<em>parent</em>（必须为<a href="qtoolbar.html">QToolBar</a>）并且名称为<em>name</em>的工具按钮。
+<p> 工具按钮将显示<em>iconSet</em>，它的文本标签和工具提示设置为<em>textLabel</em>并且它的状态条信息设置为<em>grouptext</em>。它将被连接到<em>receiver</em>对象的<em>slot</em>槽。
+
+<h3 class=fn><a name="QToolButton-3"></a>QToolButton::QToolButton ( <a href="qt.html#ArrowType-enum">ArrowType</a>&nbsp;type, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+把工具按钮构造为箭头按钮。ArrowType <em>type</em>定义了箭头的方向。可用的值为LeftArrow、RightArrow、UpArrow和DownArrow。
+<p> 箭头按钮的自动重复默认是打开的。
+<p> <em>parent</em>和<em>name</em>参数被发送给<a href="qwidget.html">QWidget</a>构造函数。
+
+<h3 class=fn><a name="~QToolButton"></a>QToolButton::~QToolButton ()
+</h3> 
+销毁这个对象并且释放任何被分配的资源。
+
+<h3 class=fn>bool <a name="autoRaise"></a>QToolButton::autoRaise () const
+</h3>
+<p>如果自动浮起有效，返回真，否则返回假。详细情况请参考<a href="qtoolbutton.html#autoRaise-prop">“autoRaise”</a>属性。
+
+<h3 class=fn><a href="qiconset.html">QIconSet</a> <a name="iconSet"></a>QToolButton::iconSet () const
+</h3>
+<p>返回提供显示在按钮上的图标的图标集。详细情况请参考<a href="qtoolbutton.html#iconSet-prop">“iconSet”</a>属性。
+
+<h3 class=fn><a href="qiconset.html">QIconSet</a> <a name="iconSet-2"></a>QToolButton::iconSet ( bool&nbsp;on ) const
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 从Qt 3.0开始，<a href="qiconset.html">QIconSet</a>可以包含开和关两套图标了。
+<p> 为了方便移植，这个函数将忽略<em>on</em>参数并且返回<a href="#iconSet-prop">iconSet</a>属性。如果你依赖于<em>on</em>参数，你也许要把你的代码升级到QIconSet开/关机制了。
+
+<h3 class=fn><a href="qiconset.html">QIconSet</a> <a name="offIconSet"></a>QToolButton::offIconSet () const
+</h3>
+<p>返回当按钮在“关”状态下被使用的图标集。详细情况请参考<a href="qtoolbutton.html#offIconSet-prop">“offIconSet”</a>属性。
+
+<h3 class=fn><a href="qiconset.html">QIconSet</a> <a name="onIconSet"></a>QToolButton::onIconSet () const
+</h3>
+<p>返回当按钮在“开”状态下被使用的图标集。详细情况请参考<a href="qtoolbutton.html#onIconSet-prop">“onIconSet”</a>属性。
+
+<h3 class=fn>void <a name="openPopup"></a>QToolButton::openPopup ()
+</h3>
+打开（弹出）关联的弹出菜单。如果没有这样的菜单，这个函数就什么也不做。直到这个弹出菜单已经被用户关闭，这个函数才会返回。
+
+<h3 class=fn><a href="qpopupmenu.html">QPopupMenu</a>&nbsp;* <a name="popup"></a>QToolButton::popup () const
+</h3>
+返回关联的弹出菜单，或者如果没有定义弹出菜单，返回0。
+<p> <p>也可以参考<a href="#setPopup">setPopup</a>()。
+
+<h3 class=fn>int <a name="popupDelay"></a>QToolButton::popupDelay () const
+</h3>
+<p>返回在按下按钮和出现关联的弹出按钮之间的以毫秒为单位的时间。详细情况请参考<a href="qtoolbutton.html#popupDelay-prop">“popupDelay”</a>属性。
+
+<h3 class=fn>void <a name="setAutoRaise"></a>QToolButton::setAutoRaise ( bool&nbsp;enable )
+</h3>
+<p>设置自动浮起是否有效为<em>enable</em>。详细情况请参考<a href="qtoolbutton.html#autoRaise-prop">“autoRaise”</a>属性。
+
+<h3 class=fn>void <a name="setIconSet"></a>QToolButton::setIconSet ( const&nbsp;<a href="qiconset.html">QIconSet</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3>
+<p>设置提供显示在按钮上的图标的图标集。详细情况请参考<a href="qtoolbutton.html#iconSet-prop">“iconSet”</a>属性。
+
+<h3 class=fn>void <a name="setIconSet-2"></a>QToolButton::setIconSet ( const&nbsp;<a href="qiconset.html">QIconSet</a>&nbsp;&amp;&nbsp;set, bool&nbsp;on )
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 从Qt 3.0开始，<a href="qiconset.html">QIconSet</a>可以包含开和关两套图标了。
+<p> 为了方便移植，这个函数将忽略<em>on</em>参数并且返回<a href="#iconSet-prop">iconSet</a>属性。如果你依赖于<em>on</em>参数，你也许要把你的代码升级到QIconSet开/关机制了。
+<p> <p>也可以参考<a href="#iconSet-prop">iconSet</a>和<a href="qiconset.html#State-enum">QIconSet::State</a>。
+
+<h3 class=fn>void <a name="setOffIconSet"></a>QToolButton::setOffIconSet ( const&nbsp;<a href="qiconset.html">QIconSet</a>&nbsp;&amp; )
+</h3>
+<p>设置当按钮在“关”状态下被使用的图标集。详细情况请参考<a href="qtoolbutton.html#offIconSet-prop">“offIconSet”</a>属性。
+
+<h3 class=fn>void <a name="setOn"></a>QToolButton::setOn ( bool&nbsp;enable )<tt> [虚 槽]</tt>
+</h3>
+<p>设置按钮是否为开为<em>enable</em>。详细情况请参考<a href="qtoolbutton.html#on-prop">“on”</a>属性。
+
+<h3 class=fn>void <a name="setOnIconSet"></a>QToolButton::setOnIconSet ( const&nbsp;<a href="qiconset.html">QIconSet</a>&nbsp;&amp; )
+</h3>
+<p>设置当按钮在“开”状态下被使用的图标集。详细情况请参考<a href="qtoolbutton.html#onIconSet-prop">“onIconSet”</a>属性。
+
+<h3 class=fn>void <a name="setPopup"></a>QToolButton::setPopup ( <a href="qpopupmenu.html">QPopupMenu</a>&nbsp;*&nbsp;popup )
+</h3>
+把弹出菜单<em>popup</em>和这个工具按钮关联起来。
+<p> 每次在工具按钮被按下一定时间之后，弹出菜单将被显示。一个经典的实例是一些网页浏览器的工具条上的“后退”按钮。如果用户点击它，浏览器简单地后退浏览到上一页。如果用户按下这个按钮一段时间，工具按钮会显示一个包含当前历史列表的菜单。
+<p> 弹出菜单的所有权不会被传递给工具按钮。
+<p> <p>也可以参考<a href="#popup">popup</a>()。
+
+<h3 class=fn>void <a name="setPopupDelay"></a>QToolButton::setPopupDelay ( int&nbsp;delay )
+</h3>
+<p>设置在按下按钮和出现关联的弹出按钮之间的以毫秒为单位的时间。详细情况请参考<a href="qtoolbutton.html#popupDelay-prop">“popupDelay”</a>属性。
+
+<h3 class=fn>void <a name="setTextLabel"></a>QToolButton::setTextLabel ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [槽]</tt>
+</h3>
+<p>设置按钮的标签。详细情况请参考<a href="qtoolbutton.html#textLabel-prop">“textLabel”</a>属性。
+
+<h3 class=fn>void <a name="setTextLabel-2"></a>QToolButton::setTextLabel ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;newLabel, bool&nbsp;tipToo )<tt> [虚 槽]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 设置按钮的标签为<em>newLabel</em>并且如果<em>tipToo</em>为真，自动地把工具提示也设置为<em>newLabel</em>。
+
+<h3 class=fn>void <a name="setToggleButton"></a>QToolButton::setToggleButton ( bool&nbsp;enable )<tt> [虚 槽]</tt>
+</h3>
+<p>设置工具按钮是否是切换按钮为<em>enable</em>。详细情况请参考<a href="qtoolbutton.html#toggleButton-prop">“toggleButton”</a>属性。
+
+<h3 class=fn>void <a name="setUsesBigPixmap"></a>QToolButton::setUsesBigPixmap ( bool&nbsp;enable )<tt> [虚 槽]</tt>
+</h3>
+<p>设置工具按钮是否使用大的像素映射为<em>enable</em>。详细情况请参考<a href="qtoolbutton.html#usesBigPixmap-prop">“usesBigPixmap”</a>属性。
+
+<h3 class=fn>void <a name="setUsesTextLabel"></a>QToolButton::setUsesTextLabel ( bool&nbsp;enable )<tt> [虚 槽]</tt>
+</h3>
+<p>设置工具按钮是否在按钮像素映射下方显示标签为<em>enable</em>。详细情况请参考<a href="qtoolbutton.html#usesTextLabel-prop">“usesTextLabel”</a>属性。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="textLabel"></a>QToolButton::textLabel () const
+</h3>
+<p>返回按钮的标签。详细情况请参考<a href="qtoolbutton.html#textLabel-prop">“textLabel”</a>属性。
+
+<h3 class=fn>void <a name="toggle"></a>QToolButton::toggle ()<tt> [槽]</tt>
+</h3>  
+切换工具按钮的状态。
+<p> 这个函数对于<a href="qbutton.html#isToggleButton">非切换按钮</a>无效。
+<p> <p>也可以参考<a href="#toggleButton-prop">toggleButton</a>和<a href="qbutton.html#toggled">toggled</a>()。
+
+<h3 class=fn>bool <a name="uses3D"></a>QToolButton::uses3D () const<tt> [保护]</tt>
+</h3>
+如果这个按钮应该被使用浮起的边缘绘制，返回真，否则返回假。
+<p>也可以参考<a href="qbutton.html#drawButton">drawButton</a>()。
+
+<h3 class=fn>bool <a name="usesBigPixmap"></a>QToolButton::usesBigPixmap () const
+</h3>
+<p>如果工具按钮使用大地像素映射，返回真，否则返回假。详细情况请参考<a href="qtoolbutton.html#usesBigPixmap-prop">“usesBigPixmap”</a>属性。
+
+<h3 class=fn>bool <a name="usesTextLabel"></a>QToolButton::usesTextLabel () const
+</h3>
+<p>如果工具按钮在按钮像素映射下方显示标签，返回真，否则返回假。详细情况请参考<a href="qtoolbutton.html#usesTextLabel-prop">“usesTextLabel”</a>属性。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>bool <a name="autoRaise-prop"></a>autoRaise</h3>
+<p>这个属性保存的是自动浮起是否生效。
+<p>默认是失效的（也就是假）。
+<p>通过<a href="#setAutoRaise">setAutoRaise</a>()设置属性值并且通过<a href="#autoRaise">autoRaise</a>()来获得属性值。
+
+<h3 class=fn><a href="qiconset.html">QIconSet</a> <a name="iconSet-prop"></a>iconSet</h3> 
+<p>这个属性保存的是提供显示在按钮上的图标的图标集。
+<p>设置这个属性把<a href="qbutton.html#pixmap-prop">QToolButton::pixmap</a>设置为零像素映射。没有默认图标集。
+<p> <p>也可以参考<a href="qbutton.html#pixmap-prop">pixmap</a>、<a href="#toggleButton-prop">toggleButton</a>和<a href="#on-prop">on</a>。
+<p>通过<a href="#setIconSet">setIconSet</a>()设置属性值并且通过<a href="#iconSet">iconSet</a>()来获得属性值。
+
+<h3 class=fn><a href="qiconset.html">QIconSet</a> <a name="offIconSet-prop"></a>offIconSet</h3>
+<p>这个属性保存的是当按钮在“关”状态时使用的图标集。
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 从Qt 3.0开始，<a href="qiconset.html">QIconSet</a>可以包含开和关两套图标了。现在<a href="#iconSet-prop">QToolButton::iconSet</a>属性替换了<a href="#onIconSet-prop">QToolButton::onIconSet</a>和<a href="#offIconSet-prop">QToolButton::offIconSet</a>。
+<p> 为了方便移植，这个函数将忽略<em>on</em>参数并且返回<a href="#iconSet-prop">iconSet</a>属性。如果你依赖于<em>on</em>参数，你也许要把你的代码升级到QIconSet开/关机制了。
+<p> <p>也可以参考<a href="#iconSet-prop">iconSet</a>和<a href="qiconset.html#State-enum">QIconSet::State</a>。
+<p>通过<a href="#setOffIconSet">setOffIconSet</a>()设置属性值并且通过<a href="#offIconSet">offIconSet</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="on-prop"></a>on</h3>
+<p>这个属性保存的是工具按钮是否为开。
+<p>这个属性对于<a href="qbutton.html#isToggleButton">非切换按钮</a>无效。默认为假（也就是关）。
+<p> <p>也可以参考<a href="#toggleButton-prop">toggleButton</a>和<a href="#toggle">toggle</a>()。
+<p>通过<a href="#setOn">setOn</a>()设置属性值。
+
+<h3 class=fn><a href="qiconset.html">QIconSet</a> <a name="onIconSet-prop"></a>onIconSet</h3>
+<p>这个属性保存的是当按钮在“开”状态时使用的图标集。
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 从Qt 3.0开始，<a href="qiconset.html">QIconSet</a>可以包含开和关两套图标了。现在<a href="#iconSet-prop">QToolButton::iconSet</a>属性替换了<a href="#onIconSet-prop">QToolButton::onIconSet</a>和<a href="#offIconSet-prop">QToolButton::offIconSet</a>。
+<p> 为了方便移植，这个函数将忽略<em>on</em>参数并且返回<a href="#iconSet-prop">iconSet</a>属性。如果你依赖于<em>on</em>参数，你也许要把你的代码升级到QIconSet开/关机制了。
+<p> <p>也可以参考<a href="#iconSet-prop">iconSet</a>和<a href="qiconset.html#State-enum">QIconSet::State</a>。
+<p>通过<a href="#setOnIconSet">setOnIconSet</a>()设置属性值并且通过<a href="#onIconSet">onIconSet</a>()来获得属性值。
+
+<h3 class=fn>int <a name="popupDelay-prop"></a>popupDelay</h3>
+<p>这个属性保存的是在按下按钮和出现关联的弹出按钮之间的以毫秒为单位的时间。
+<p>通常是在半秒左右。0值可以为工具按钮设置一个特殊区域来打开弹出菜单。
+<p> <p>也可以参考<a href="#setPopup">setPopup</a>()。
+<p>通过<a href="#setPopupDelay">setPopupDelay</a>()设置属性值并且通过<a href="#popupDelay">popupDelay</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="textLabel-prop"></a>textLabel</h3>
+<p>这个属性保存的是按钮的标签。
+<p>设置这个属性会自动地设置这个文本为工具提示。
+<p>通过<a href="#setTextLabel">setTextLabel</a>()设置属性值并且通过<a href="#textLabel">textLabel</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="toggleButton-prop"></a>toggleButton</h3>
+<p>这个属性保存的是工具按钮是否是切换按钮。
+<p>切换按钮像<a href="qcheckbox.html">检查框</a>一样也有开/关状态。默认情况下，工具按钮不是切换按钮。
+<p> <p>也可以参考<a href="#on-prop">on</a>和<a href="#toggle">toggle</a>()。
+<p>通过<a href="#setToggleButton">setToggleButton</a>()设置属性值。
+
+<h3 class=fn>bool <a name="usesBigPixmap-prop"></a>usesBigPixmap</h3>
+<p>这个属性保存的是工具按钮是否使用大的像素映射。
+<p>QToolButton自动地链接这个属性到它所在的<a href="qmainwindow.html">QMainWindow</a>中的相应信号。我们强烈建议你使用<a href="qmainwindow.html#setUsesBigPixmaps">QMainWindow::setUsesBigPixmaps</a>()来替代它。
+<p> 这个属性默认为真。
+<p> <b>警告：</b> 如果你设置一些按钮（在QMainWindow中）使用大的像素映射并且其它的使用小的像素映射，QMainWindow可能不能得到正确的几何形状。
+<p>通过<a href="#setUsesBigPixmap">setUsesBigPixmap</a>()设置属性值并且通过<a href="#usesBigPixmap">usesBigPixmap</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="usesTextLabel-prop"></a>usesTextLabel</h3>
+<p>这个属性保存的是工具按钮是否在按钮像素映射下方显示标签。
+<p>默认为假。
+<p> QToolButton自动地链接这个槽到它所在的<a href="qmainwindow.html">QMainWindow</a>中的相应信号。
+<p>通过<a href="#setUsesTextLabel">setUsesTextLabel</a>()设置属性值并且通过<a href="#usesTextLabel">usesTextLabel</a>()来获得属性值。
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

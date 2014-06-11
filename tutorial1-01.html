@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt教程一 —— 第一章：Hello, World!</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt教程一 —— 第一章：Hello, World!</h1>
+
+ 
+<p> <center><img src="t1.png" alt="Screenshot of tutorial one"></center> 
+<p> 第一个程序是一个简单的Hello World例子。它只包含你建立和运行Qt应用程序所需要的最少的代码。上面的图片是这个程序的快照。
+<p> <pre>/****************************************************************
+**
+** Qt教程一 - 2
+**
+****************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+
+
+int main( int argc, char **argv )
+{
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+    <a href="qpushbutton.html">QPushButton</a> hello( "Hello world!", 0 );
+    hello.<a href="qwidget.html#resize">resize</a>( 100, 30 );
+
+    a.<a href="qapplication.html#setMainWidget">setMainWidget</a>( &amp;hello );
+    hello.<a href="qwidget.html#show">show</a>();
+    return a.<a href="qapplication.html#exec">exec</a>();
+}
+</pre>
+
+
+
+<p> <h2> 一行一行地解说
+</h2>
+<a name="1"></a><p> <pre>    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+</pre>
+<p> 这一行包含了<a href="qapplication.html">QApplication</a>类的定义。在每一个使用Qt的应用程序中都必须使用一个QApplication对象。QApplication管理了各种各样的应用程序的广泛资源，比如默认的字体和光标。
+<p> <pre>    #include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+</pre>
+<p> 这一行包含了<a href="qpushbutton.html">QPushButton</a>类的定义。<a href="hierarchy.html">参考文档</a>的文件的最上部分提到了使用哪个类就必须包含哪个头文件的说明。
+<p> QPushButton是一个经典的图形用户界面按钮，用户可以按下去，也可以放开。它管理自己的观感，就像其它每一个<a href="qwidget.html">QWidget</a>。一个窗口部件就是一个可以处理用户输入和绘制图形的用户界面对象。程序员可以改变它的全部<a href="qapplication.html#setStyle">观感</a>和它的许多主要的属性（比如颜色），还有这个窗口部件的内容。一个QPushButton可以显示一段文本或者一个<a href="qpixmap.html">QPixmap</a>。
+<p> <pre>    int main( int argc, char **argv )
+    {
+</pre>
+<p> main()函数是程序的入口。几乎在使用Qt的所有情况下，main()只需要在把控制转交给Qt库之前执行一些初始化，然后Qt库通过事件来向程序告知用户的行为。
+<p> <tt>argc</tt>是命令行变量的数量，<tt>argv</tt>是命令行变量的数组。这是一个C/C++特征。它不是Qt专有的，无论如何Qt需要处理这些变量（请看下面）。
+<p> <pre>        <a href="qapplication.html">QApplication</a> a( argc, argv );
+</pre>
+<p> <tt>a</tt>是这个程序的<a href="qapplication.html">QApplication</a>。它在这里被创建并且处理这些命令行变量（比如在X窗口下的-display）。请注意，所有被Qt识别的命令行参数都会从<tt>argv</tt>中被移除（并且<tt>argc</tt>也因此而减少）。关于细节请看<a href="qapplication.html#argv">QApplication::argv</a>()文档。
+<p> <strong>注意：</strong>在任何Qt的窗口系统部件被使用之前创建QApplication对象是必须的。
+<p> <pre>        <a href="qpushbutton.html">QPushButton</a> hello( "Hello world!", 0 );
+</pre>
+<p> 这里，在QApplication<em>之后</em>，接着的是第一个窗口系统代码：一个按钮被创建了。
+<p> 这个按钮被设置成显示“Hello world!”并且它自己构成了一个窗口（因为在构造函数指定0为它的父窗口，在这个父窗口中按钮被定位）。
+<p> <pre>    <a name="x2217"></a>    hello.<a href="qwidget.html#resize">resize</a>( 100, 30 );
+</pre>
+<p> 这个按酒被设置成100像素宽，30像素高（加上窗口系统边框）。在这种情况下，我们不用考虑按钮的位置，并且我们接受默认值。
+<p> <pre>    <a name="x2216"></a>    a.<a href="qapplication.html#setMainWidget">setMainWidget</a>( &amp;hello );
+</pre>
+<p> 这个按钮被选为这个应用程序的主窗口部件。如果用户关闭了主窗口部件，应用程序就退出了。
+<p> 你不用必须设置一个主窗口部件，但绝大多数程序都有一个。
+<p> <pre>    <a name="x2218"></a>    hello.<a href="qwidget.html#show">show</a>();
+</pre>
+<p> 当你创建一个窗口部件的时候，它是不可见的。你必须调用show()来使它变为可见的。
+<p> <pre>    <a name="x2215"></a>    return a.<a href="qapplication.html#exec">exec</a>();
+</pre>
+<p> 这里就是main()把控制转交给Qt，并且当应用程序退出的时候exec()就会返回。
+<p> 在exec()中，Qt接受并处理用户和系统的事件并且把它们传递给适当的窗口部件。
+<p> <pre>    }
+</pre>
+<p> 你现在可以试着编译和运行这个程序了。
+<p> <a name="compiling"></a>
+<h2> 编译
+</h2>
+<a name="2"></a><p> 编译一个C++应用程序，你需要创建一个makefile。创建一个Qt的makefile的最容易的方法是使用Qt提供的连编工具<a href="qmake-manual.html">qmake</a>。如果你已经把<tt>main.cpp</tt>保存到它自己的目录了，你所要做的就是这些：
+<pre>
+qmake -project
+qmake
+</pre>
+ 
+<p> 第一个命令调用<a href="qmake-manual.html">qmake</a>来生成一个<tt>.pro</tt>（项目）文件。第二个命令根据这个项目文件来生成一个（系统相关的）makefile。你现在可以输入<tt>make</tt>（或者<tt>nmake</tt>，如果你使用Visual
+Studio），然后运行你的第一个Qt应用程序！
+<p> <h2> 行为
+</h2>
+<a name="3"></a><p> 当你运行它的时候，你就会看到一个被单一按钮充满的小窗口，在它上面你可以读到著名的词：Hellow World!
+<p> <h2> 练习
+</h2>
+<a name="4"></a><p> 试着改变窗口的大小。按下按钮。如果你在X窗口下运行，使用-geometry选项（比如，<tt>-geometry 100x200+10+20</tt>）来运行这个程序。
+<p> 现在你可以进行<a href="tutorial1-02.html">第二章</a>了。
+<p> [<a href="tutorial1-02.html">下一章</a>]
+[<a href="tutorial.html">教程一主页</a>]
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

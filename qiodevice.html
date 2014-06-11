@@ -1,0 +1,405 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QIODevice类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QIODevice类参考</h1>
+
+<p>QIODevice类是输入/输出设备的基类。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qiodevice-h.html">qiodevice.h</a>&gt;</tt>
+<p>被<a href="qbuffer.html">QBuffer</a>、<a href="qfile.html">QFile</a>、<a href="qsocket.html">QSocket</a>和<a href="qsocketdevice.html">QSocketDevice</a>继承。
+<p><a href="qiodevice-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>typedef off_t&nbsp;<a href="#Offset"><b>Offset</b></a></div></li>
+<li><div class=fn><a href="#QIODevice"><b>QIODevice</b></a> ()</div></li>
+<li><div class=fn>virtual <a href="#~QIODevice"><b>~QIODevice</b></a> ()</div></li>
+<li><div class=fn>int <a href="#flags"><b>flags</b></a> () const</div></li>
+<li><div class=fn>int <a href="#mode"><b>mode</b></a> () const</div></li>
+<li><div class=fn>int <a href="#state"><b>state</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isDirectAccess"><b>isDirectAccess</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isSequentialAccess"><b>isSequentialAccess</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isCombinedAccess"><b>isCombinedAccess</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isBuffered"><b>isBuffered</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isRaw"><b>isRaw</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isSynchronous"><b>isSynchronous</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isAsynchronous"><b>isAsynchronous</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isTranslated"><b>isTranslated</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isReadable"><b>isReadable</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isWritable"><b>isWritable</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isReadWrite"><b>isReadWrite</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isInactive"><b>isInactive</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isOpen"><b>isOpen</b></a> () const</div></li>
+<li><div class=fn>int <a href="#status"><b>status</b></a> () const</div></li>
+<li><div class=fn>void <a href="#resetStatus"><b>resetStatus</b></a> ()</div></li>
+<li><div class=fn>virtual bool <a href="#open"><b>open</b></a> ( int&nbsp;mode ) = 0</div></li>
+<li><div class=fn>virtual void <a href="#close"><b>close</b></a> () = 0</div></li>
+<li><div class=fn>virtual void <a href="#flush"><b>flush</b></a> () = 0</div></li>
+<li><div class=fn>virtual Offset <a href="#size"><b>size</b></a> () const = 0</div></li>
+<li><div class=fn>virtual Offset <a href="#at"><b>at</b></a> () const</div></li>
+<li><div class=fn>virtual bool <a href="#at-2"><b>at</b></a> ( Offset&nbsp;pos )</div></li>
+<li><div class=fn>virtual bool <a href="#atEnd"><b>atEnd</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#reset"><b>reset</b></a> ()</div></li>
+<li><div class=fn>virtual Q_LONG <a href="#readBlock"><b>readBlock</b></a> ( char&nbsp;*&nbsp;data, Q_ULONG&nbsp;maxlen ) = 0</div></li>
+<li><div class=fn>virtual Q_LONG <a href="#writeBlock"><b>writeBlock</b></a> ( const&nbsp;char&nbsp;*&nbsp;data, Q_ULONG&nbsp;len ) = 0</div></li>
+<li><div class=fn>virtual Q_LONG <a href="#readLine"><b>readLine</b></a> ( char&nbsp;*&nbsp;data, Q_ULONG&nbsp;maxlen )</div></li>
+<li><div class=fn>Q_LONG <a href="#writeBlock-2"><b>writeBlock</b></a> ( const&nbsp;QByteArray&nbsp;&amp;&nbsp;data )</div></li>
+<li><div class=fn>virtual QByteArray <a href="#readAll"><b>readAll</b></a> ()</div></li>
+<li><div class=fn>virtual int <a href="#getch"><b>getch</b></a> () = 0</div></li>
+<li><div class=fn>virtual int <a href="#putch"><b>putch</b></a> ( int&nbsp;ch ) = 0</div></li>
+<li><div class=fn>virtual int <a href="#ungetch"><b>ungetch</b></a> ( int&nbsp;ch ) = 0</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+<p> QIODevice类是输入/输出设备的基类。
+<p> 
+<p> 一个输入/输出设备代表了一个可从中读取字节和/和向它写字节的一种媒介。QIODevice类是一个所有这样的设备的抽象超类，像<a href="qfile.html">QFile</a>、<a href="qbuffer.html">QBuffer</a>和<a href="qsocket.html">QSocket</a>这些类继承了QIODevice类并且适当地实现了像write()这样地虚函数。
+<p> 尽管应用程序有时直接使用QIODevice，但通常最好是通过提供了对任何一个QIODevice子类的流操作的<a href="qtextstream.html">QTextStream</a>和<a href="qdatastream.html">QDataStream</a>。QTextStream提供了基于文本的流的功能（比如对于人们是可读的ASCII文件），而QDataStream则可以以完全不依赖平台的方式处理二进制数据。
+<p> QIODevice中的公有成员可以粗略地分为两类：操作函数和状态访问函数。最主要的操作函数有：
+<p> <ul>
+<p> <li>  <a href="#open">open</a>() 打开一个用来读和/或写的设备，依赖于open()所使用的参数。
+<p> <li>  <a href="#close">close</a>() 关闭设备并且整理好。
+<p> <li>  <a href="#readBlock">readBlock</a>() 从一个设备中读取一块数据。
+<p> <li>  <a href="#writeBlock">writeBlock</a>() 向一个设备中写入一块数据。
+<p> <li>  <a href="#readLine">readLine</a>() reads a line (of text, usually) from the device.
+<p> <li>  <a href="#flush">flush</a>() 确保所有的缓存数据都已经写入到真正的设备中。
+<p> </ul>
+<p> 这里是其它的一些不太常用的操作函数：
+<p> <ul>
+<p> <li>  <a href="#getch">getch</a>() 读一个单字符。
+<p> <li>  <a href="#ungetch">ungetch</a>() 如果可能的话，忘记上一次对getch()的调用。
+<p> <li>  <a href="#putch">putch</a>() 写一个单字符。
+<p> <li>  <a href="#size">size</a>() 如果有这个设备的话，返回它的大小。
+<p> <li>  <a href="#at">at</a>() 如果这个设备存在一个当前读/写指针，就返回这个指针的位置，否则就移动这个指针。
+<p> <li>  <a href="#atEnd">atEnd</a>() 如果对于这个设备是有意义的问题的话，就会表示出是否还可以继续读。
+<p> <li>  <a href="#reset">reset</a>() 如果对于这个设备是可能的话，就移动读/写指针到这个设备的开始位置。
+<p> </ul>
+<p> 状态访问就是所有的“读取”函数。QIODevice子类调用setState()来更新状态，并且简单的访问函数告诉用户这个设备的状态。这里就是设置和与它们相配合的访问函数：
+<p> <ul>
+<p> <li>  访问类型。 一些设备是被随机存取的（它可以在任何地方直接读/写），而其它的设备是顺序存取的。QIODevice提供了访问函数（<a href="#isDirectAccess">isDirectAccess</a>()、<a href="#isSequentialAccess">isSequentialAccess</a>()和<a href="#isCombinedAccess">isCombinedAccess</a>()）来告诉用户一个给定的输入/输出设备所支持的。
+<p> <li>  缓存。 一些设备是以直接的模式被访问，而其它设备则使用缓存模式。缓存可以提供更高的效率，尤其是一些小的读/写操作。<a href="#isBuffered">isBuffered</a>()告诉用户给定的设备是否被缓存。（这通常可以通过应用程序调用<a href="#open">open</a>()来设置。）
+<p> <li> 同步性。 同步设备立即工作（比如文件）。当你从一个文件中读时，文件立刻传递它的数据。其它类型的设备，比如一个连接到HTTP服务器的套接字，也许在你命令它读取的几秒后才传递数据。<a href="#isSynchronous">isSynchronous</a>()和<a href="#isAsynchronous">isAsynchronous</a>()会告诉用户如何操作这个设备的。
+<p> <li> 回车/换行翻译。 简单地说，应用程序通常喜欢看到只有一种单一的回车/换行风格，并且QIODevice子类可以提供这个。如果这个对象把回车/换行翻译成仅仅是换行，<a href="#isTranslated">isTranslated</a>()返回真。（这通常可以通过应用程序调用<a href="#open">open</a>()来设置。）
+<p> <li> 权限。 一些文件不能被写。比如，<a href="#isReadable">isReadable</a>()、<a href="#isWritable">isWritable</a>()和<a href="#isReadWrite">isReadWrite</a>()告诉应用程序一个给定设备是否可读和可写。（这通常可以通过应用程序调用<a href="#open">open</a>()来设置。）
+<p> <li> 最后，如果设备是打开的话，比如在调用open()之后，<a href="#isOpen">isOpen</a>()返回真。
+<p> </ul>
+<p> QIODevice提供了大量的纯虚函数，你在继承它的时候需要实现这些函数。这里是一个子类的框架，其中包含了你所需要的全部成员和一些你也许需要的成员：
+<p> <pre>
+    class MyDevice : public QIODevice
+    {
+    public:
+        MyDevice();
+        ~MyDevice();
+
+        bool open( int mode );
+        void close();
+        void flush();
+
+        uint size() const;
+        int  at() const;        // 非纯虚
+        bool at( int );         // 非纯虚
+        bool atEnd() const;     // 非纯虚
+
+        int readBlock( char *data, uint maxlen );
+        int writeBlock( const char *data, uint len );
+        int readLine( char *data, uint maxlen );
+
+        int getch();
+        int putch( int );
+        int ungetch( int );
+    };
+  </pre>
+ 
+<p> 这里有三个非纯虚函数，它们对于顺序设备是可以不用实现的。
+<p> 也可以参考<a href="qdatastream.html">QDataStream</a>、<a href="qtextstream.html">QTextStream</a>和<a href="io.html">输入/输出和网络</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="Offset"></a>QIODevice::Offset</h3> 
+设备中的位移。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QIODevice"></a>QIODevice::QIODevice ()
+</h3>
+构造一个输入/输出设备。
+
+<h3 class=fn><a name="~QIODevice"></a>QIODevice::~QIODevice ()<tt> [虚]</tt>
+</h3>
+析构一个输入/输出设备。
+
+<h3 class=fn><a href="qiodevice.html#Offset">Offset</a> <a name="at"></a>QIODevice::at () const<tt> [虚]</tt>
+</h3>
+虚函数返回当前输入/输出设备位置。
+<p> 这是输入/输出设备读/写数据的头的位置。
+<p> <p>也可以参考<a href="#size">size</a>()。
+<p>在<a href="qfile.html#at-2">QFile</a>和<a href="qsocket.html#at">QSocket</a>中被重新实现。
+
+<h3 class=fn>bool <a name="at-2"></a>QIODevice::at ( <a href="qiodevice.html#Offset">Offset</a>&nbsp;pos )<tt> [虚]</tt>
+</h3>
+这是一个重载成员函数，提供了更多方便。它的行为和上面的函数基本一致。
+<p> 虚函数设置输入/输出位置到<em>pos</em>。如果位置设置成功，返回真，比如<em>pos</em>是在范围之内，否则返回假。
+<p> <p>也可以参考<a href="#size">size</a>()。
+<p>在<a href="qfile.html#at">QFile</a>和<a href="qsocket.html#at-2">QSocket</a>中被重新实现。
+
+<h3 class=fn>bool <a name="atEnd"></a>QIODevice::atEnd () const<tt> [虚]</tt>
+</h3>
+如果输入/输出设备位置在输入的末尾位置时，虚函数返回真，否则返回假。
+<p>在<a href="qfile.html#atEnd">QFile</a>和<a href="qsocket.html#atEnd">QSocket</a>中被重新实现。
+
+<h3 class=fn>void <a name="close"></a>QIODevice::close ()<tt> [纯虚]</tt>
+</h3>
+关闭输入/输出设备。
+<p> 这个虚函数在所有的子类中必须被重新实现。
+<p> <p>也可以参考<a href="#open">open</a>()。
+
+<p>实例：<a href="grapher-nsplugin-example.html#x2679">grapher/grapher.cpp</a>。
+<p>在<a href="qfile.html#close">QFile</a>和<a href="qsocket.html#close">QSocket</a>中被重新实现。
+
+<h3 class=fn>int <a name="flags"></a>QIODevice::flags () const
+</h3>
+返回当前输入/输出设备标记设置。
+<p> 标记由模式标记和状态标记组成。
+<p> <p>也可以参考<a href="#mode">mode</a>()和<a href="#state">state</a>()。
+
+<h3 class=fn>void <a name="flush"></a>QIODevice::flush ()<tt> [纯虚]</tt>
+</h3>
+<p> 刷新一个打开的输入/输出设备。
+<p> 这个虚函数在所有的子类中必须被重新实现。
+<p>在<a href="qfile.html#flush">QFile</a>和<a href="qsocket.html#flush">QSocket</a>中被重新实现。
+
+<h3 class=fn>int <a name="getch"></a>QIODevice::getch ()<tt> [纯虚]</tt>
+</h3>
+<p> 从输入/输出设备中读取一个单一的字节/字符。
+<p> 返回所读取的字节/字符，或者是如果到了输入/输出设备的终点，返回-1。
+<p> 这个虚函数在所有的子类中必须被重新实现。
+<p> <p>也可以参考<a href="#putch">putch</a>()和<a href="#ungetch">ungetch</a>()。
+<p>在<a href="qfile.html#getch">QFile</a>和<a href="qsocket.html#getch">QSocket</a>中被重新实现。
+
+<h3 class=fn>bool <a name="isAsynchronous"></a>QIODevice::isAsynchronous () const
+</h3>
+如果这个输入/输出设备是一个异步设备，返回真，否则返回假，比如，如果这个设备是一个同步设备。
+<p> 这个模式当前不在使用中。
+<p> <p>也可以参考<a href="#isSynchronous">isSynchronous</a>()。
+
+<h3 class=fn>bool <a name="isBuffered"></a>QIODevice::isBuffered () const
+</h3>
+如果这个输入/输出设备是一个被缓存的设备，返回真，否则返回假，比如，如果这个设备是一个直接的设备。
+<p>也可以参考<a href="#isRaw">isRaw</a>()。
+
+<h3 class=fn>bool <a name="isCombinedAccess"></a>QIODevice::isCombinedAccess () const
+</h3>
+如果这个输入/输出设备是一个组合存取（既可以随机存取也可以顺序存取）的设备，返回真，否则返回假。
+<p> 这个访问方法当前不在使用中。
+
+<h3 class=fn>bool <a name="isDirectAccess"></a>QIODevice::isDirectAccess () const
+</h3>
+如果这个输入/输出设备是一个随机存取的设备，返回真，否则返回假，比如，如果这个设备是一个顺序存取的设备。
+<p>也可以参考<a href="#isSequentialAccess">isSequentialAccess</a>()。
+
+<h3 class=fn>bool <a name="isInactive"></a>QIODevice::isInactive () const
+</h3>
+如果这个输入/输出设备状态是0，返回真，比如，这个设备没有打开，否则返回假。
+<p>也可以参考<a href="#isOpen">isOpen</a>()。
+
+<h3 class=fn>bool <a name="isOpen"></a>QIODevice::isOpen () const
+</h3>
+如果这个输入/输出设备已经被打开，返回真，否则返回假。
+<p>也可以参考<a href="#isInactive">isInactive</a>()。
+<p>实例：<a href="networkprotocol-example.html#x599">network/networkprotocol/nntp.cpp</a>。
+
+<h3 class=fn>bool <a name="isRaw"></a>QIODevice::isRaw () const
+</h3>
+如果这个输入/输出设备是一个直接设备，返回真，否则返回假，比如，如果这个设备是一个被缓存的设备。
+<p>也可以参考<a href="#isBuffered">isBuffered</a>()。
+
+<h3 class=fn>bool <a name="isReadWrite"></a>QIODevice::isReadWrite () const
+</h3>
+如果这个输入/输出设备被使用<a href="qfile.html#open">IO_ReadWrite</a>模式打开，返回真，否则返回假。
+<p>也可以参考<a href="#isReadable">isReadable</a>()和<a href="#isWritable">isWritable</a>()。
+
+<h3 class=fn>bool <a name="isReadable"></a>QIODevice::isReadable () const
+</h3>
+如果这个输入/输出设备被使用<a href="qfile.html#open">IO_ReadOnly</a>或<a href="qfile.html#open">IO_ReadWrite</a> 模式打开，返回真，否则返回假。
+<p>也可以参考<a href="#isWritable">isWritable</a>()和<a href="#isReadWrite">isReadWrite</a>()。
+
+<h3 class=fn>bool <a name="isSequentialAccess"></a>QIODevice::isSequentialAccess () const
+</h3>
+如果这个输入/输出设备是一个顺序存取的设备，返回真，否则返回假，比如，如果这个设备是一个随机存取的设备。
+<p> 包括<a href="#size">size</a>()和<a href="#at">at</a>(int)的操作在顺序存取的设备上都是无效的。
+<p>也可以参考<a href="#isDirectAccess">isDirectAccess</a>()。
+
+<h3 class=fn>bool <a name="isSynchronous"></a>QIODevice::isSynchronous () const
+</h3>
+如果这个输入/输出设备是一个同步设备，返回真，否则返回假，比如，如果这个设备是一个异步设备。
+<p>也可以参考<a href="#isAsynchronous">isAsynchronous</a>()。
+
+<h3 class=fn>bool <a name="isTranslated"></a>QIODevice::isTranslated () const
+</h3>
+如果这个输入/输出设备翻译回车/换行，返回真，否则返回假。
+<p> 如果<a href="qfile.html">QFile</a>是以<a href="qfile.html#open">IO_Translate</a>模式标记打开的，它就是被翻译的。
+
+<h3 class=fn>bool <a name="isWritable"></a>QIODevice::isWritable () const
+</h3>
+如果这个输入/输出设备被使用<a href="qfile.html#open">IO_WriteOnly</a>或<a href="qfile.html#open">IO_ReadWrite</a>模式打开，返回真，否则返回假。
+<p>也可以参考<a href="#isReadable">isReadable</a>()和<a href="#isReadWrite">isReadWrite</a>()。
+
+<h3 class=fn>int <a name="mode"></a>QIODevice::mode () const
+</h3>
+返回指定的当前操作模式的位或运算的结果。
+<p> 这里是提供给<a href="#open">open</a>()函数的标记。
+<p> 这些标记是<a href="qfile.html#open">IO_ReadOnly</a>、<a href="qfile.html#open">IO_WriteOnly</a>、<a href="qfile.html#open">IO_ReadWrite</a>、<a href="qfile.html#open">IO_Append</a>、<a href="qfile.html#open">IO_Truncate</a>和<a href="qfile.html#open">IO_Translate</a>。
+
+<h3 class=fn>bool <a name="open"></a>QIODevice::open ( int&nbsp;mode )<tt> [纯虚]</tt>
+</h3>
+使用指定的<em>mode</em>打开输入/输出设备。如果这个设备被成功打开，返回真，否则返回假。
+<p> 模式参数<em>mode</em>必须是下列标记的或的组合。
+<ul>
+<li> <a href="qfile.html#open">IO_Raw</a> 指定直接的（非缓存的）文件访问。
+<li> <a href="qfile.html#open">IO_ReadOnly</a> 以只读模式打开文件。
+<li> <a href="qfile.html#open">IO_WriteOnly</a> 以只写模式打开文件。
+<li> <a href="qfile.html#open">IO_ReadWrite</a> 以读/写模式打开文件。
+<li> <a href="qfile.html#open">IO_Append</a> 设置文件索引到文件的末尾。
+<li> <a href="qfile.html#open">IO_Truncate</a> 截短文件。
+<li> <a href="qfile.html#open">IO_Translate</a> 在MS-DOS、Windows和Macintosh下对文本文件翻译回车和换行。在Unix系统上这个标记无效。使用时请注意，它会把文件中的每一个换行符转换为一组回车换行。如果你写二进制数据的时候，可能会破坏你要写的文件。请不要和<a href="qfile.html#open">IO_Raw</a>组合使用。
+</ul>
+<p> 这个虚函数在所有的子类中必须被重新实现。
+<p> <p>也可以参考<a href="#close">close</a>()。
+<p>实例：<a href="grapher-nsplugin-example.html#x2680">grapher/grapher.cpp</a>。
+<p>在<a href="qfile.html#open">QFile</a>和<a href="qsocket.html#open">QSocket</a>中被重新实现。
+
+<h3 class=fn>int <a name="putch"></a>QIODevice::putch ( int&nbsp;ch )<tt> [纯虚]</tt>
+</h3>
+<p> 向输入/输出设备写入字符<em>ch</em>。
+<p> 返回<em>ch</em>，或者如果发生错误，返回-1。
+<p> 这个虚函数在所有的子类中必须被重新实现。
+<p> <p>也可以参考<a href="#getch">getch</a>()和<a href="#ungetch">ungetch</a>()。
+<p>实例：<a href="grapher-nsplugin-example.html#x2681">grapher/grapher.cpp</a>。
+<p>在<a href="qfile.html#putch">QFile</a>和<a href="qsocket.html#putch">QSocket</a>中被重新实现。
+
+<h3 class=fn><a href="qbytearray.html">QByteArray</a> <a name="readAll"></a>QIODevice::readAll ()<tt> [虚]</tt>
+</h3>
+这个方便的函数返回这个设备中的所有剩余数据。
+
+<h3 class=fn>Q_LONG <a name="readBlock"></a>QIODevice::readBlock ( char&nbsp;*&nbsp;data, Q_ULONG&nbsp;maxlen )<tt> [纯虚]</tt>
+</h3>
+从这个输入/输出设备中读取最多<em>maxlen</em>字节到<em>data</em>并且返回实际读取的字节数量。
+<p> 如果发生致命错误，这个函数应该返回-1。
+<p> 这个虚函数在所有的子类中必须被重新实现。
+<p> <p>也可以参考<a href="#writeBlock">writeBlock</a>()。
+<p>在<a href="qfile.html#readBlock">QFile</a>、<a href="qsocket.html#readBlock">QSocket</a>和<a href="qsocketdevice.html#readBlock">QSocketDevice</a>中被重新实现。
+
+<h3 class=fn>Q_LONG <a name="readLine"></a>QIODevice::readLine ( char&nbsp;*&nbsp;data, Q_ULONG&nbsp;maxlen )<tt> [虚]</tt>
+</h3>
+读取文本的一行，（或者如果还没有遇到新的一行的情况下，读取<em>maxlen</em>字节）加上一个结束符&#92;0到<em>data</em>。如果这一行后面还有新的一行，就不再做上述的操作了。
+<p> 返回包括终结符&#92;0的所读字节数，或者如果发生错误返回-1。
+<p> 这个虚函数在绝大多数子类中被重新实现的话能够提供更高的效率。
+<p> <p>也可以参考<a href="#readBlock">readBlock</a>()和<a href="qtextstream.html#readLine">QTextStream::readLine</a>()。
+<p>在<a href="qfile.html#readLine">QFile</a>中被重新实现。
+
+<h3 class=fn>bool <a name="reset"></a>QIODevice::reset ()
+</h3>
+设置这个设备索引位置为0。
+<p>也可以参考<a href="#at">at</a>()。
+
+<h3 class=fn>void <a name="resetStatus"></a>QIODevice::resetStatus ()
+</h3>
+<p> 设置这个输入/输出设备状态为<a href="qiodevice.html#status">IO_Ok</a>。
+<p> <p>也可以参考<a href="#status">status</a>()。
+
+<h3 class=fn><a href="qiodevice.html#Offset">Offset</a> <a name="size"></a>QIODevice::size () const<tt> [纯虚]</tt>
+</h3>
+虚函数返回输入/输出设备的大小。
+<p>也可以参考<a href="#at">at</a>()。
+<p>在<a href="qfile.html#size">QFile</a>和<a href="qsocket.html#size">QSocket</a>中被重新实现。
+
+<h3 class=fn>int <a name="state"></a>QIODevice::state () const
+</h3>
+返回指定当前状态的位或运算结果。
+<p> 这个标记是：<tt>IO_Open</tt>。
+<p> 子类也可以定义另外的标记。
+
+<h3 class=fn>int <a name="status"></a>QIODevice::status () const
+</h3>
+返回这个输入/输出设备的状态。
+<p> 这个输入/输出设备状态返回一个错误码。如果<a href="#open">open</a>()返回失败或者<a href="#readBlock">readBlock</a>()或<a href="#writeBlock">writeBlock</a>()返回-1，这个函数就可以被调用来发现操作为什么不成功的原因。
+<p> <!-- index IO_Ok --><!-- index IO_ReadError --><!-- index IO_WriteError --><!-- index IO_FatalError --><!-- index IO_OpenError --><!-- index IO_ConnectError --><!-- index IO_AbortError --><!-- index IO_TimeOutError --><!-- index IO_UnspecifiedError -->
+<p> 状态码是：
+<ul>
+<li> <a href="qiodevice.html#status">IO_Ok</a> - 操作成功。
+<li> <a href="qiodevice.html#status">IO_ReadError</a> - 不能从设备中读取。
+<li> <a href="qiodevice.html#status">IO_WriteError</a> - 不能向设备写入。
+<li> <a href="qiodevice.html#status">IO_FatalError</a> - 发生了致命的不可恢复的错误。
+<li> <a href="qiodevice.html#status">IO_OpenError</a> - 不能打开设备。
+<li> <a href="qiodevice.html#status">IO_ConnectError</a> - 不能连接设备。
+<li> <a href="qiodevice.html#status">IO_AbortError</a> - 操作出乎意料地失败了。
+<li> <a href="qiodevice.html#status">IO_TimeOutError</a> - 操作超时。
+<li> <a href="qiodevice.html#status">IO_UnspecifiedError</a> - 关闭时发生了未指定的错误。
+</ul>
+<p> <p>也可以参考<a href="#resetStatus">resetStatus</a>()。
+
+<h3 class=fn>int <a name="ungetch"></a>QIODevice::ungetch ( int&nbsp;ch )<tt> [纯虚]</tt>
+</h3>
+<p> 把字符<em>ch</em>放回到这个输入/输车设备中并且如果索引位置不是零的话，减一。
+<p> 这个函数正常地被调用就是“撤销”<a href="#getch">getch</a>()操作。
+<p> 返回<em>ch</em>，或者如果发生错误，返回-1。
+<p> 这个虚函数在所有的子类中必须被重新实现。
+<p> <p>也可以参考<a href="#getch">getch</a>()和<a href="#putch">putch</a>()。
+<p>在<a href="qfile.html#ungetch">QFile</a>和<a href="qsocket.html#ungetch">QSocket</a>中被重新实现。
+
+<h3 class=fn>Q_LONG <a name="writeBlock"></a>QIODevice::writeBlock ( const&nbsp;char&nbsp;*&nbsp;data, Q_ULONG&nbsp;len )<tt> [纯虚]</tt>
+</h3>
+从<em>data</em>中写<em>len</em>字节到这个输入/输出设备并且返回实际写的字节数。
+<p> 如果发生致命错误，这个函数应该返回-1。
+<p> 这个虚函数在所有的子类中必须被重新实现。
+<p> <p>也可以参考<a href="#readBlock">readBlock</a>()。
+<p>在<a href="qbuffer.html#writeBlock">QBuffer</a>、<a href="qsocket.html#writeBlock">QSocket</a>和<a href="qsocketdevice.html#writeBlock">QSocketDevice</a>中被重新实现。
+
+<h3 class=fn>Q_LONG <a name="writeBlock-2"></a>QIODevice::writeBlock ( const&nbsp;<a href="qbytearray.html">QByteArray</a>&nbsp;&amp;&nbsp;data )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为和上面的函数基本一致。
+<p> 这个方便的函数与调用<a href="#writeBlock">writeBlock</a>( data.data(), data.<a href="#size">size</a>() )是一样的。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

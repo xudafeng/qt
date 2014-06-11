@@ -1,0 +1,360 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QAction类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QAction类参考</h1>
+
+<p>QAction类提供了一个可以同时出现在菜单和工具条上的抽象用户界面操作。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qaction-h.html">qaction.h</a>&gt;</tt>
+<p>Inherits <a href="qobject.html">QObject</a>。
+<p>Inherited by <a href="qactiongroup.html">QActionGroup</a>。
+<p><a href="qaction-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QAction"><b>QAction</b></a> ( QObject&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;toggle = FALSE )</div></li>
+<li><div class=fn><a href="#QAction-2"><b>QAction</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text, const&nbsp;QIconSet&nbsp;&amp;&nbsp;icon, const&nbsp;QString&nbsp;&amp;&nbsp;menuText, QKeySequence&nbsp;accel, QObject&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;toggle = FALSE )</div></li>
+<li><div class=fn><a href="#QAction-3"><b>QAction</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text, const&nbsp;QString&nbsp;&amp;&nbsp;menuText, QKeySequence&nbsp;accel, QObject&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;toggle = FALSE )</div></li>
+<li><div class=fn><a href="#~QAction"><b>~QAction</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#setIconSet"><b>setIconSet</b></a> ( const QIconSet &amp; )</div></li>
+<li><div class=fn>QIconSet <a href="#iconSet"><b>iconSet</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setText"><b>setText</b></a> ( const QString &amp; )</div></li>
+<li><div class=fn>QString <a href="#text"><b>text</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setMenuText"><b>setMenuText</b></a> ( const QString &amp; )</div></li>
+<li><div class=fn>QString <a href="#menuText"><b>menuText</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setToolTip"><b>setToolTip</b></a> ( const QString &amp; )</div></li>
+<li><div class=fn>QString <a href="#toolTip"><b>toolTip</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setStatusTip"><b>setStatusTip</b></a> ( const QString &amp; )</div></li>
+<li><div class=fn>QString <a href="#statusTip"><b>statusTip</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setWhatsThis"><b>setWhatsThis</b></a> ( const QString &amp; )</div></li>
+<li><div class=fn>QString <a href="#whatsThis"><b>whatsThis</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setAccel"><b>setAccel</b></a> ( const&nbsp;QKeySequence&nbsp;&amp;&nbsp;key )</div></li>
+<li><div class=fn>QKeySequence <a href="#accel"><b>accel</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setToggleAction"><b>setToggleAction</b></a> ( bool )</div></li>
+<li><div class=fn>bool <a href="#isToggleAction"><b>isToggleAction</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isOn"><b>isOn</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isEnabled"><b>isEnabled</b></a> () const</div></li>
+<li><div class=fn>virtual bool <a href="#addTo"><b>addTo</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+<li><div class=fn>virtual bool <a href="#removeFrom"><b>removeFrom</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>void <a href="#toggle"><b>toggle</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#setOn"><b>setOn</b></a> ( bool )</div></li>
+<li><div class=fn>virtual void <a href="#setEnabled"><b>setEnabled</b></a> ( bool )</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#activated"><b>activated</b></a> ()</div></li>
+<li><div class=fn>void <a href="#toggled"><b>toggled</b></a> ( bool )</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>QKeySequence <a href="#accel-prop"><b>accel</b></a>&nbsp;- 操作快捷键</div></li>
+<li><div class=fn>bool <a href="#enabled-prop"><b>enabled</b></a>&nbsp;- 操作是否生效</div></li>
+<li><div class=fn>QIconSet <a href="#iconSet-prop"><b>iconSet</b></a>&nbsp;- 操作的图标</div></li>
+<li><div class=fn>QString <a href="#menuText-prop"><b>menuText</b></a>&nbsp;- 操作的菜单文本</div></li>
+<li><div class=fn>bool <a href="#on-prop"><b>on</b></a>&nbsp;- 切换操作是否打开</div></li>
+<li><div class=fn>QString <a href="#statusTip-prop"><b>statusTip</b></a>&nbsp;- 操作的状态提示</div></li>
+<li><div class=fn>QString <a href="#text-prop"><b>text</b></a>&nbsp;- 操作的描述文本</div></li>
+<li><div class=fn>bool <a href="#toggleAction-prop"><b>toggleAction</b></a>&nbsp;- 操作是否是切换操作</div></li>
+<li><div class=fn>QString <a href="#toolTip-prop"><b>toolTip</b></a>&nbsp;- 操作的工具提示</div></li>
+<li><div class=fn>QString <a href="#whatsThis-prop"><b>whatsThis</b></a>&nbsp;- 操作的“这是什么？”帮助文本</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#addedTo"><b>addedTo</b></a> ( QWidget&nbsp;*&nbsp;actionWidget, QWidget&nbsp;*&nbsp;container )</div></li>
+<li><div class=fn>virtual void <a href="#addedTo-2"><b>addedTo</b></a> ( int&nbsp;index, QPopupMenu&nbsp;*&nbsp;menu )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QAction类提供了一个可以同时出现在菜单和工具条上的抽象用户界面操作。
+<p> 在图形用户界面应用程序中很多命令可以通过菜单选项、工具条按钮和键盘快捷键调用。因为同一个操作将会被执行，而与它的调用方法无关，并且因为菜单和工具条必须保持同步，所以提供一个<em>操作</em>这样的命令很有用。一个操作可以被添加到菜单和工具条中并且将会自动使它们同步。例如，如果用户按下“加粗”工具条按钮，“加粗”菜单项将会自动被选中。
+<p> QAction可以包含图标、菜单文本、快捷键、状态条文本、这是什么文本和工具提示。它们可以分别通过<a href="#setIconSet">setIconSet</a>()、<a href="#setText">setText</a>()、<a href="#setMenuText">setMenuText</a>()、<a href="#setToolTip">setToolTip</a>()、<a href="#setStatusTip">setStatusTip</a>()、<a href="#setWhatsThis">setWhatsThis</a>()和<a href="#setAccel">setAccel</a>()来设置。
+<p> 操作可以是一个切换操作，例如，一个“加粗”工具条按钮，或者一个命令操作，例如“打开文件”来调用打开文件对话框。当切换操作的状态改变了，它发射<a href="#toggled">toggled</a>()信号。当命令操作和切换按钮被调用时，它们都发射<a href="#activated">activated</a>()信号。使用<a href="#setToggleAction">setToggleAction</a>()来设置操作的切换状态。如果要看操作是否是切换操作，请使用<a href="#isToggleAction">isToggleAction</a>()。切换操作可以是“开”，<a href="#isOn">isOn</a>()返回真，或者“关”，isOn()返回假。
+<p> 操作可以使用<a href="#addTo">addTo</a>()被添加到窗口部件（菜单或者工具条）中，并且使用<a href="#removeFrom">removeFrom</a>()来移除。
+<p> 一旦QAction已经被创建，它应该被添加到相应的菜单或者工具条重并且然后连接到执行这个操作的槽。例如：
+<p> 
+
+<pre>        fileSaveAction = new QAction( "Save File", QPixmap( filesave ),
+                                      "&amp;Save", CTRL+Key_S, this, "save" );
+        <a href="qobject.html#connect">connect</a>( fileSaveAction, SIGNAL( <a href="#activated">activated</a>() ) , this, SLOT( save() ) );
+</pre>
+<p> 我们创建一个菜单文本为“保存(&S)”并且<em>Ctrl+S</em>为键盘快捷键的“文件保存”操作。我们连接fileSaveAction的<a href="#activated">activated</a>()信号到我自己的save()槽。注意在这时还没有菜单或者工具条操作，接下来我们将添加它们：
+<p> <pre>        <a href="qtoolbar.html">QToolBar</a> * fileTools = new <a href="qtoolbar.html">QToolBar</a>( this, "file operations" );
+</pre><pre>        fileSaveAction-&gt;<a href="#addTo">addTo</a>( fileTools );
+</pre><pre>        <a href="qpopupmenu.html">QPopupMenu</a> * file = new <a href="qpopupmenu.html">QPopupMenu</a>( this );
+        <a href="qmainwindow.html#menuBar">menuBar</a>()-&gt;insertItem( "&amp;File", file );
+</pre><pre>        fileSaveAction-&gt;<a href="#addTo">addTo</a>( file );
+</pre>
+<p> 我们创建了一个工具条并把我们的fileSaveAction添加进去。类似的，我们创建一个菜单，添加一个顶级菜单项并且把我们的fileSaveAction添加进去。
+<p> （对于一个更详细的实例请参考<a href="simple-application-action.html">有QAction特征的简单应用程序排演</a>。）
+<p> 我们建议把操作为它所在的窗口的子对象来创建。在绝大多数情况下操作是应用程序主窗口的子对象。
+<p> 为了防止循环，不要在一个稍后要添加操作的窗口部件的子对象中创建操作。
+<p>也可以参考<a href="application.html">主窗口和相关类</a>和<a href="basic.html">基本窗口部件</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QAction"></a>QAction::QAction ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;toggle = FALSE )
+</h3>
+构造一个父对象为<em>parent</em>并且名称为<em>name</em>的操作。
+<p> 如果<em>toggle</em>为真，操作将是切换操作，否则它就是命令操作。
+<p> 如果<em>parent</em>是<a href="qactiongroup.html">QActionGroup</a>，新的操作会把自己插入到<em>parent</em>中。
+<p> 为了使快捷键和状态提示能够工作，<em>parent</em>必须是一个窗口部件或者一个父对象为窗口部件的操作组。
+
+<h3 class=fn><a name="QAction-2"></a>QAction::QAction ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, const&nbsp;<a href="qiconset.html">QIconSet</a>&nbsp;&amp;&nbsp;icon, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;menuText, <a href="qkeysequence.html">QKeySequence</a>&nbsp;accel, <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;toggle = FALSE )
+</h3>
+构造一个有如下属性的操作：描述为<em>text</em>、图标为<em>icon</em>、菜单文本为<em>menuText</em>并且键盘快捷键为<em>accel</em>。它是<em>parent</em>的子对象并且名称为<em>name</em>。如果<em>toggle</em>为真，操作将是切换操作，否则它就是命令操作。
+<p> 如果<em>parent</em>是<a href="qactiongroup.html">QActionGroup</a>，新的操作会把自己插入到<em>parent</em>中。
+<p> 为了使快捷键和状态提示能够工作，<em>parent</em>必须是一个窗口部件或者一个父对象为窗口部件的操作组。
+<p> <em>text</em>和<em>accel</em>将会用于工具提示和状态提示，除非你使用<a href="#setToolTip">setToolTip</a>()和<a href="#setStatusTip">setStatusTip</a>()为它们提供特定文本。
+
+<h3 class=fn><a name="QAction-3"></a>QAction::QAction ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;menuText, <a href="qkeysequence.html">QKeySequence</a>&nbsp;accel, <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;toggle = FALSE )
+</h3> 
+这个构造函数的结果是没有图标的操作：描述为<em>text</em>、菜单文本为<em>menuText</em>并且键盘快捷键为<em>accel</em>。它是<em>parent</em>的子对象并且名称为<em>name</em>。如果<em>toggle</em>为真，操作将是切换操作，否则它就是命令操作。
+<p> 如果<em>parent</em>是<a href="qactiongroup.html">QActionGroup</a>，新的操作会把自己插入到<em>parent</em>中。
+<p> 为了使快捷键和状态提示能够工作，<em>parent</em>必须是一个窗口部件或者一个父对象为窗口部件的操作组。
+<p> <em>text</em>和<em>accel</em>将会用于工具提示和状态提示，除非你使用<a href="#setToolTip">setToolTip</a>()和<a href="#setStatusTip">setStatusTip</a>()为它们提供特定文本。
+
+<h3 class=fn><a name="~QAction"></a>QAction::~QAction ()
+</h3> 
+销毁这个对象并且释放已经分配的资源。
+
+<h3 class=fn><a href="qkeysequence.html">QKeySequence</a> <a name="accel"></a>QAction::accel () const
+</h3>
+<p>返回操作的快捷键。详细情况请参考<a href="qaction.html#accel-prop">“accel”</a>属性。
+
+<h3 class=fn>void <a name="activated"></a>QAction::activated ()<tt> [信号]</tt>
+</h3> 
+<p> 当操作被用户激活时，也就是说当用户点击菜单选项或者工具条按钮或者按下操作的快捷键组合时，这个信号被发射。
+<p> 对于命令操作连接这个信号。对于切换按钮连接<a href="#toggled">toggled</a>()信号。
+<p>例如：<a href="qaction-application-example.html#x1059">action/application.cpp</a>、<a href="canvas-chart-example.html#x2586">chart/chartform.cpp</a>和<a href="themes-example.html#x276">themes/themes.cpp</a>。
+
+<h3 class=fn>bool <a name="addTo"></a>QAction::addTo ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )<tt> [虚]</tt>
+</h3> 
+把这个这个操作添加到窗口部件<em>w</em>。
+<p> 现在操作可以被添加到<a href="qtoolbar.html">QToolBar</a>和<a href="qpopupmenu.html">QPopupMenu</a>窗口部件中。
+<p> 被添加到菜单条中的操作会自动被显示为一个按钮，被添加到弹出菜单中的操作会自动显示为一个菜单项。
+<p> 如果操作被添加成功，<a href="#addTo">addTo</a>()返回真，否则返回假。（如果<em>w</em>不是QToolBar或者QPopupMenu，操作将不会被添加并且将返回假。）
+<p> <p>也可以参考<a href="#removeFrom">removeFrom</a>()。
+<p>例如：<a href="qaction-application-example.html#x1060">action/application.cpp</a>、<a href="toggleaction-example.html#x2805">action/toggleaction/toggleaction.cpp</a>、<a href="canvas-chart-example.html#x2587">chart/chartform.cpp</a>和<a href="qactiongroup.html#x2079">textedit/textedit.cpp</a>。
+<p>在<a href="qactiongroup.html#addTo">QActionGroup</a>中被重新实现。
+
+<h3 class=fn>void <a name="addedTo"></a>QAction::addedTo ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;actionWidget, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;container )<tt> [虚 保护]</tt>
+</h3> 
+当它在<em>container</em>中为这个操作创建一个窗口部件时（<em>actionWidget</em>），这个函数被<a href="#addTo">addTo</a>()调用。
+
+<h3 class=fn>void <a name="addedTo-2"></a>QAction::addedTo ( int&nbsp;index, <a href="qpopupmenu.html">QPopupMenu</a>&nbsp;*&nbsp;menu )<tt> [虚 保护]</tt>
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 当它在弹出菜单<em>menu</em>中为这个操作创建一个索引为<em>index</em>的菜单项时，这个函数被<a href="#addTo">addTo</a>()调用。
+
+<h3 class=fn><a href="qiconset.html">QIconSet</a> <a name="iconSet"></a>QAction::iconSet () const
+</h3>
+<p>返回操作的图标。详细情况请参考<a href="qaction.html#iconSet-prop">“iconSet”</a>属性。
+
+<h3 class=fn>bool <a name="isEnabled"></a>QAction::isEnabled () const
+</h3>
+<p>如果操作生效，返回真，否则返回假。详细情况请参考<a href="qaction.html#enabled-prop">“enabled”</a>属性。
+
+<h3 class=fn>bool <a name="isOn"></a>QAction::isOn () const
+</h3>
+<p>如果切换操作是开的，返回真，否则返回假。详细情况请参考<a href="qaction.html#on-prop">“on”</a>属性。
+
+<h3 class=fn>bool <a name="isToggleAction"></a>QAction::isToggleAction () const
+</h3>
+<p>如果操作是切换操作，返回真，否则返回假。详细情况请参考<a href="qaction.html#toggleAction-prop">“toggleAction”</a>属性。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="menuText"></a>QAction::menuText () const
+</h3>
+<p>返回操作的菜单文本。详细情况请参考<a href="qaction.html#menuText-prop">“menuText”</a>属性。
+
+<h3 class=fn>bool <a name="removeFrom"></a>QAction::removeFrom ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )<tt> [虚]</tt>
+</h3>
+从窗口部件<em>w</em>中移除操作。
+<p> 如果操作被成功移除，返回真，否则返回假。
+<p> <p>也可以参考<a href="#addTo">addTo</a>()。
+
+<h3 class=fn>void <a name="setAccel"></a>QAction::setAccel ( const&nbsp;<a href="qkeysequence.html">QKeySequence</a>&nbsp;&amp;&nbsp;key )<tt> [虚]</tt>
+</h3>
+<p>设置操作的快捷键为<em>key</em>。详细情况请参考<a href="qaction.html#accel-prop">“accel”</a>属性。
+
+<h3 class=fn>void <a name="setEnabled"></a>QAction::setEnabled ( bool )<tt> [虚 槽]</tt>
+</h3>
+<p>设置操作是否生效。详细情况请参考<a href="qaction.html#enabled-prop">“enabled”</a>属性。
+
+<h3 class=fn>void <a name="setIconSet"></a>QAction::setIconSet ( const&nbsp;<a href="qiconset.html">QIconSet</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3>
+<p>设置操作的图标。详细情况请参考<a href="qaction.html#iconSet-prop">“iconSet”</a>属性。
+
+<h3 class=fn>void <a name="setMenuText"></a>QAction::setMenuText ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3>
+<p>设置操作的菜单文本。详细情况请参考<a href="qaction.html#menuText-prop">“menuText”</a>属性。
+
+<h3 class=fn>void <a name="setOn"></a>QAction::setOn ( bool )<tt> [虚 槽]</tt>
+</h3>
+<p>设置切换按钮为开。详细情况请参考<a href="qaction.html#on-prop">“on”</a>属性。
+
+<h3 class=fn>void <a name="setStatusTip"></a>QAction::setStatusTip ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3>
+<p>设置操作的状态提示。详细情况请参考<a href="qaction.html#statusTip-prop">“statusTip”</a>属性。
+
+<h3 class=fn>void <a name="setText"></a>QAction::setText ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3>
+<p>设置操作的描述文本。详细情况请参考<a href="qaction.html#text-prop">“text”</a>属性。
+
+<h3 class=fn>void <a name="setToggleAction"></a>QAction::setToggleAction ( bool )<tt> [虚]</tt>
+</h3>
+<p>设置操作是否是切换按钮。详细情况请参考<a href="qaction.html#toggleAction-prop">“toggleAction”</a>属性。
+
+<h3 class=fn>void <a name="setToolTip"></a>QAction::setToolTip ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3>
+<p>设置操作的工具提示。详细情况请参考<a href="qaction.html#toolTip-prop">“toolTip”</a>属性。
+
+<h3 class=fn>void <a name="setWhatsThis"></a>QAction::setWhatsThis ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3>
+<p>设置操作的“这是什么？”帮助文本。详细情况请参考<a href="qaction.html#whatsThis-prop">“whatsThis”</a>属性。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="statusTip"></a>QAction::statusTip () const
+</h3>
+<p>返回操作的状态提示。详细情况请参考<a href="qaction.html#statusTip-prop">“statusTip”</a>属性。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text"></a>QAction::text () const
+</h3>
+<p>返回操作的描述文本。详细情况请参考<a href="qaction.html#text-prop">“text”</a>属性。
+
+<h3 class=fn>void <a name="toggle"></a>QAction::toggle ()<tt> [槽]</tt>
+</h3>
+切换切换按钮的状态。
+<p> <p>也可以参考<a href="#on-prop">on</a>、<a href="#toggled">toggled</a>()和<a href="#toggleAction-prop">toggleAction</a>。
+
+<h3 class=fn>void <a name="toggled"></a>QAction::toggled ( bool )<tt> [信号]</tt>
+</h3> 
+<p> 当切换按钮改变状态时，这个信号被发射，命令操作和QActionGroups不发射<a href="#toggled">toggled</a>()。
+<p> 参数表示新的状态，也就是如果切换按钮被打开，为真，或者如果它被关闭，为假。
+<p> 依赖切换按钮是否被打开或者关闭来触发用户命令要把它连接到一个可以得到bool变量来识别状态的槽，例如：
+<p> 
+
+<pre>        <a href="qmainwindow.html">QMainWindow</a> * window = new <a href="qmainwindow.html">QMainWindow</a>;
+</pre><pre>        QAction * labelonoffaction = new QAction( window, "labelonoff", TRUE );
+</pre><pre>    <a name="x2076"></a>    QObject::<a href="qobject.html#connect">connect</a>( labelonoffaction, SIGNAL( <a href="#toggled">toggled</a>( bool ) ),
+    <a name="x2077"></a>                      window, SLOT( <a href="qmainwindow.html#setUsesTextLabel">setUsesTextLabel</a>( bool ) ) );
+</pre>
+<p> <p>也可以参考<a href="#activated">activated</a>()、<a href="#toggleAction-prop">toggleAction</a>和<a href="#on-prop">on</a>。
+<p>实例：<a href="qaction.html#x2076">action/toggleaction/toggleaction.cpp</a>。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="toolTip"></a>QAction::toolTip () const
+</h3>
+<p>返回操作的工具提示。详细情况请参考<a href="qaction.html#toolTip-prop">“toolTip”</a>属性。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="whatsThis"></a>QAction::whatsThis () const
+</h3>
+<p>返回操作的“这是什么？”帮助文本。详细情况请参考<a href="qaction.html#whatsThis-prop">“whatsThis”</a>属性。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn><a href="qkeysequence.html">QKeySequence</a> <a name="accel-prop"></a>accel</h3> 
+<p>这个属性保存的是操作的快捷键。
+<p>键代码可以在<a href="qt.html#Key-enum">Qt::Key</a>和<a href="qt.html#Modifier-enum">Qt::Modifier</a>中找到。这里没有默认快捷键。
+<p>通过<a href="#setAccel">setAccel</a>()设置属性值并且通过<a href="#accel">accel</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="enabled-prop"></a>enabled</h3> 
+<p>这个属性保存的是操作是否生效。
+<p>失效的操作不能被用户选择。它们不从菜单/工具条上消失，但是会以某种方式表面它们不可用，例如，它们也许被变灰。
+<p> 失效操作上的“这是什么？”帮助还是由被设置的<a href="#whatsThis-prop">QAction::whatsThis</a>属性提供。
+<p>通过<a href="#setEnabled">setEnabled</a>()设置属性值并且通过<a href="#isEnabled">isEnabled</a>()来获得到属性值。
+
+<h3 class=fn><a href="qiconset.html">QIconSet</a> <a name="iconSet-prop"></a>iconSet</h3> 
+<p>这个属性保存的是操作的图标。
+<p>这个图标会用在工具条按钮和菜单中菜单文本的左面。这里没有默认图标。
+<p> （请参考action/toggleaction/toggleaction.cpp实例。）
+<p>通过<a href="#setIconSet">setIconSet</a>()设置属性值并且通过<a href="#iconSet">iconSet</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="menuText-prop"></a>menuText</h3> 
+<p>这个属性保存的是操作的菜单文本。
+<p>如果操作备添加为菜单中的一个菜单选项将会由图标（如果有的话）、菜单文本和快捷键（如果有的话）组成。如果没有菜单文本在构造函数或者使用<a href="#setMenuText">setMenuText</a>()中明确设置，操作的描述文本将用来作为菜单文本。这里没有默认菜单文本。
+<p> <p>也可以参考<a href="#text-prop">text</a>。
+<p>通过<a href="#setMenuText">setMenuText</a>()设置属性值并且通过<a href="#menuText">menuText</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="on-prop"></a>on</h3>
+<p>这个属性保存的是切换按钮是否为开。
+<p>对于命令操作和<a href="qactiongroup.html">QActionGroup</a>这个属性总是开的（真），<a href="#setOn">setOn</a>()对于它们没有效果。对于为真的操作，这个属性的默认值是关（假）。
+<p> <p>也可以参考<a href="#toggleAction-prop">toggleAction</a>。
+<p>通过<a href="#setOn">setOn</a>()设置属性值并且通过<a href="#isOn">isOn</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="statusTip-prop"></a>statusTip</h3> 
+<p>这个属性保存的是操作的状态提示。
+<p>这个状态提示将会被显示在操作的顶级父窗口部件提供的所有状态条上。
+<p> 如果没有状态提示被定义，操作使用工具条提示文本。
+<p> 这里没有默认的状态提示。
+<p> <p>也可以参考<a href="#statusTip-prop">statusTip</a>和<a href="#toolTip-prop">toolTip</a>。
+<p>通过<a href="#setStatusTip">setStatusTip</a>()设置属性值并且通过<a href="#statusTip">statusTip</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text-prop"></a>text</h3> 
+<p>这个属性保存的是操作的描述文本。
+<p>如果<a href="qmainwindow.html#usesTextLabel-prop">QMainWindow::usesTextLabel</a>为真，文本将会作为相应工具按钮上的文本。如果没有菜单文本和工具条提示被定义，它也可以作为相应的默认文本。这里没有默认的文本。
+<p> <p>也可以参考<a href="#menuText-prop">menuText</a>、<a href="#toolTip-prop">toolTip</a>和<a href="#statusTip-prop">statusTip</a>。
+<p>通过<a href="#setText">setText</a>()设置属性值并且通过<a href="#text">text</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="toggleAction-prop"></a>toggleAction</h3>
+<p>这个属性保存的是操作是否是切换操作。
+<p>切换操作的状态为开/关中的一种。例如，“加粗”工具条按钮是开或者是开。不是切换操作的操作是命令操作，命令操作被简单执行。这个属性默认为假。
+<p> 在一些情况下，切换操作的状态依赖于其它切换操作状态。例如，“左对齐”、“中间对齐”和“右对齐”切换操作是互斥的。为了达到互斥切换，把相关切换操作添加到<a href="qactiongroup.html">QActionGroup</a>中，并且把<a href="qactiongroup.html#exclusive-prop">QActionGroup::exclusive</a>属性设置为真。
+<p>通过<a href="#setToggleAction">setToggleAction</a>()设置属性值并且通过<a href="#isToggleAction">isToggleAction</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="toolTip-prop"></a>toolTip</h3>
+<p>这个属性保存得失操作的工具提示。
+<p>这个文本用于工具提示。如果没有状态提示被设置，工具提示会被用作状态提示。
+<p> 如果没有指定工具提示，那么操作的文本被使用并且如果没有指定操作的文本没有被指定，那么描述文本将被用作工具提示。
+<p> 这里没有默认工具提示文本。
+<p> <p>也可以参考<a href="#statusTip-prop">statusTip</a>和<a href="#accel-prop">accel</a>。
+<p>通过<a href="#setToolTip">setToolTip</a>()设置属性值并且通过<a href="#toolTip">toolTip</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="whatsThis-prop"></a>whatsThis</h3>
+<p>这个属性保存的是操作的“这是什么？”帮助文本。
+<p>“这是什么？”文本被用来提供操作的简要描述。这个文本中可以使用多信息文本（比如HTML标记——对于支持的标记得列表请参考<a href="qstylesheet.html">QStyleSheet</a>）。这里没有默认的“这是什么？”文本。
+<p> <p>也可以参考<a href="qwhatsthis.html">QWhatsThis</a>。
+<p>通过<a href="#setWhatsThis">setWhatsThis</a>()设置属性值并且通过<a href="#whatsThis">whatsThis</a>()来获得属性值。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

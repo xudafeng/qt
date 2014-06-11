@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Editors in an Xt form</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>Editors in an Xt form</h1>
+
+ 
+
+<p> 
+<p> This example shows two simple text editors, with most of the program
+written in Xt. One editor is a Qt QMultiLineEdit, the other is an
+Athena Widgets text widget. They are bound together in an Xt form
+widget.
+<p> <hr>
+<p> Implementation:
+<p> <pre>#include "qxt.h"
+#include &lt;<a href="qmultilineedit-h.html">qmultilineedit.h</a>&gt;
+#include &lt;<a href="qpainter-h.html">qpainter.h</a>&gt;
+#include &lt;<a href="qmessagebox-h.html">qmessagebox.h</a>&gt;
+#include &lt;X11/Shell.h&gt;
+#include &lt;X11/StringDefs.h&gt;
+#include &lt;X11/Xaw/Form.h&gt;
+#include &lt;X11/Xaw/AsciiText.h&gt;
+
+static const char* QTEDMSG =
+    "This is a Qt widget.\nIt is a QMultiLineEdit.";
+
+static const char* XTEDMSG =
+    "This is an Xt widget.\nIt is an asciiTextWidgetClass.";
+
+
+class EncapsulatedQtWidget : public <a href="qxtwidget.html">QXtWidget</a> {
+public:
+    <a href="qmultilineedit.html">QMultiLineEdit</a>* mle;
+    EncapsulatedQtWidget(Widget parent) :
+        <a href="qxtwidget.html">QXtWidget</a>("editor", parent, TRUE)
+    {
+        mle = new <a href="qmultilineedit.html">QMultiLineEdit</a>(this);
+<a name="x2554"></a>        mle-&gt;<a href="qtextedit.html#setText">setText</a>(QTEDMSG);
+    }
+
+    void resizeEvent(QResizeEvent* e )
+    {
+<a name="x2556"></a>        QXtWidget::<a href="qwidget.html#resizeEvent">resizeEvent</a>( e );
+        mle-&gt;<a href="qwidget.html#resize">resize</a>(width(),height());
+    }
+};
+
+int main(int argc, char** argv)
+{
+    XtAppContext app;
+
+    Widget toplevel = XtAppInitialize(
+        &amp;app, "Editors",
+        0, 0, &amp;argc, argv, 0, 0, 0);
+    <a href="qxtapplication.html">QXtApplication</a> qapp(XtDisplay(toplevel));
+
+    Widget form = XtVaCreateManagedWidget("form", formWidgetClass, toplevel, 0);
+
+    EncapsulatedQtWidget qtchild(form);
+
+    Arg args[20];
+    Cardinal nargs=0;
+    XtSetArg(args[nargs], XtNwidth, 200);                    nargs++;
+    XtSetArg(args[nargs], XtNheight, 200);                   nargs++;
+<a name="x2558"></a>    XtSetValues(qtchild.<a href="qxtwidget.html#xtWidget">xtWidget</a>(), args, nargs);
+    nargs=0;
+    XtSetArg(args[nargs], XtNeditType, XawtextEdit);         nargs++;
+    XtSetArg(args[nargs], XtNstring, XTEDMSG);               nargs++;
+    XtSetArg(args[nargs], XtNwidth, 200);                    nargs++;
+    XtSetArg(args[nargs], XtNheight, 200);                   nargs++;
+    XtSetArg(args[nargs], XtNfromHoriz, qtchild.<a href="qxtwidget.html#xtWidget">xtWidget</a>()); nargs++;
+    Widget xtchild = XtCreateManagedWidget("editor", asciiTextWidgetClass,
+        form, args, nargs);
+
+    XtRealizeWidget(toplevel);
+
+<a name="x2557"></a>//     XSetInputFocus( qt_xdisplay(), qtchild.mle-&gt;<a href="qwidget.html#winId">winId</a>(), RevertToParent, CurrentTime );
+
+
+    //XtAppMainLoop(app);
+
+    // or the equivalent:
+
+    XEvent xe;
+    while (1)
+    {
+        XtAppNextEvent(app, &amp;xe);
+        XtDispatchEvent(&amp;xe);
+    }
+}
+</pre>
+
+<p> <p>See also <a href="xt-motif-examples.html">Qt Xt/Motif Support Extension</a>.
+
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

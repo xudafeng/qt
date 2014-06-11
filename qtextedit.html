@@ -1,0 +1,1122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QTextEdit类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QTextEdit类参考<br></h1>
+
+<p>QTextEdit窗口部件提供了强大的单页面的多信息文本编辑器。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qtextedit-h.html">qtextedit.h</a>&gt;</tt>
+<p>继承了<a href="qscrollview.html">QScrollView</a>。
+<p>被<a href="qmultilineedit.html">QMultiLineEdit</a>、<a href="qtextbrowser.html">QTextBrowser</a>和<a href="qtextview.html">QTextView</a>继承。
+<p><a href="qtextedit-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>enum <a href="#WordWrap-enum"><b>WordWrap</b></a> { NoWrap, WidgetWidth, FixedPixelWidth, FixedColumnWidth }</div></li>
+<li><div class=fn>enum <a href="#WrapPolicy-enum"><b>WrapPolicy</b></a> { AtWordBoundary, Anywhere, AtWhiteSpace = AtWordBoundary }</div></li>
+<li><div class=fn>enum <a href="#KeyboardAction-enum"><b>KeyboardAction</b></a> { ActionBackspace, ActionDelete, ActionReturn, ActionKill }</div></li>
+<li><div class=fn>enum <a href="#CursorAction-enum"><b>CursorAction</b></a> { MoveBackward, MoveForward, MoveWordBackward, MoveWordForward, MoveUp, MoveDown, MoveLineStart, MoveLineEnd, MoveHome, MoveEnd, MovePgUp, MovePgDown }</div></li>
+<li><div class=fn>enum <a href="#VerticalAlignment-enum"><b>VerticalAlignment</b></a> { AlignNormal, AlignSuperScript, AlignSubScript }</div></li>
+<li><div class=fn><a href="#QTextEdit"><b>QTextEdit</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text, const&nbsp;QString&nbsp;&amp;&nbsp;context = QString::null, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#QTextEdit-2"><b>QTextEdit</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>QString <a href="#text"><b>text</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#text-2"><b>text</b></a> ( int&nbsp;para ) const</div></li>
+<li><div class=fn>TextFormat <a href="#textFormat"><b>textFormat</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#context"><b>context</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#documentTitle"><b>documentTitle</b></a> () const</div></li>
+<li><div class=fn>void <a href="#getSelection"><b>getSelection</b></a> ( int&nbsp;*&nbsp;paraFrom, int&nbsp;*&nbsp;indexFrom, int&nbsp;*&nbsp;paraTo, int&nbsp;*&nbsp;indexTo, int&nbsp;selNum = 0 ) const</div></li>
+<li><div class=fn>virtual bool <a href="#find"><b>find</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;expr, bool&nbsp;cs, bool&nbsp;wo, bool&nbsp;forward = TRUE, int&nbsp;*&nbsp;para = 0, int&nbsp;*&nbsp;index = 0 )</div></li>
+<li><div class=fn>int <a href="#paragraphs"><b>paragraphs</b></a> () const</div></li>
+<li><div class=fn>int <a href="#lines"><b>lines</b></a> () const</div></li>
+<li><div class=fn>int <a href="#linesOfParagraph"><b>linesOfParagraph</b></a> ( int&nbsp;para ) const</div></li>
+<li><div class=fn>int <a href="#lineOfChar"><b>lineOfChar</b></a> ( int&nbsp;para, int&nbsp;index )</div></li>
+<li><div class=fn>int <a href="#length"><b>length</b></a> () const</div></li>
+<li><div class=fn>QRect <a href="#paragraphRect"><b>paragraphRect</b></a> ( int&nbsp;para ) const</div></li>
+<li><div class=fn>int <a href="#paragraphAt"><b>paragraphAt</b></a> ( const&nbsp;QPoint&nbsp;&amp;&nbsp;pos ) const</div></li>
+<li><div class=fn>int <a href="#charAt"><b>charAt</b></a> ( const&nbsp;QPoint&nbsp;&amp;&nbsp;pos, int&nbsp;*&nbsp;para ) const</div></li>
+<li><div class=fn>int <a href="#paragraphLength"><b>paragraphLength</b></a> ( int&nbsp;para ) const</div></li>
+<li><div class=fn>QStyleSheet * <a href="#styleSheet"><b>styleSheet</b></a> () const</div></li>
+<li><div class=fn>QMimeSourceFactory * <a href="#mimeSourceFactory"><b>mimeSourceFactory</b></a> () const</div></li>
+<li><div class=fn>QBrush <a href="#paper"><b>paper</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#linkUnderline"><b>linkUnderline</b></a> () const</div></li>
+<li><div class=fn>virtual int <a href="#heightForWidth"><b>heightForWidth</b></a> ( int&nbsp;w ) const</div></li>
+<li><div class=fn>bool <a href="#hasSelectedText"><b>hasSelectedText</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#selectedText"><b>selectedText</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isUndoAvailable"><b>isUndoAvailable</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isRedoAvailable"><b>isRedoAvailable</b></a> () const</div></li>
+<li><div class=fn>WordWrap <a href="#wordWrap"><b>wordWrap</b></a> () const</div></li>
+<li><div class=fn>int <a href="#wrapColumnOrWidth"><b>wrapColumnOrWidth</b></a> () const</div></li>
+<li><div class=fn>WrapPolicy <a href="#wrapPolicy"><b>wrapPolicy</b></a> () const</div></li>
+<li><div class=fn>int <a href="#tabStopWidth"><b>tabStopWidth</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#anchorAt"><b>anchorAt</b></a> ( const&nbsp;QPoint&nbsp;&amp;&nbsp;pos )</div></li>
+<li><div class=fn>bool <a href="#isReadOnly"><b>isReadOnly</b></a> () const</div></li>
+<li><div class=fn>void <a href="#getCursorPosition"><b>getCursorPosition</b></a> ( int&nbsp;*&nbsp;para, int&nbsp;*&nbsp;index ) const</div></li>
+<li><div class=fn>bool <a href="#isModified"><b>isModified</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#italic"><b>italic</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#bold"><b>bold</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#underline"><b>underline</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#family"><b>family</b></a> () const</div></li>
+<li><div class=fn>int <a href="#pointSize"><b>pointSize</b></a> () const</div></li>
+<li><div class=fn>QColor <a href="#color"><b>color</b></a> () const</div></li>
+<li><div class=fn>QFont <a href="#font"><b>font</b></a> () const</div></li>
+<li><div class=fn>int <a href="#alignment"><b>alignment</b></a> () const</div></li>
+<li><div class=fn>int <a href="#undoDepth"><b>undoDepth</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isOverwriteMode"><b>isOverwriteMode</b></a> () const</div></li>
+<li><div class=fn>QColor <a href="#paragraphBackgroundColor"><b>paragraphBackgroundColor</b></a> ( int&nbsp;para ) const</div></li>
+<li><div class=fn>bool <a href="#isUndoRedoEnabled"><b>isUndoRedoEnabled</b></a> () const</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#setMimeSourceFactory"><b>setMimeSourceFactory</b></a> ( QMimeSourceFactory&nbsp;*&nbsp;factory )</div></li>
+<li><div class=fn>virtual void <a href="#setStyleSheet"><b>setStyleSheet</b></a> ( QStyleSheet&nbsp;*&nbsp;styleSheet )</div></li>
+<li><div class=fn>virtual void <a href="#scrollToAnchor"><b>scrollToAnchor</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;name )</div></li>
+<li><div class=fn>virtual void <a href="#setPaper"><b>setPaper</b></a> ( const&nbsp;QBrush&nbsp;&amp;&nbsp;pap )</div></li>
+<li><div class=fn>virtual void <a href="#setLinkUnderline"><b>setLinkUnderline</b></a> ( bool )</div></li>
+<li><div class=fn>virtual void <a href="#setWordWrap"><b>setWordWrap</b></a> ( WordWrap&nbsp;mode )</div></li>
+<li><div class=fn>virtual void <a href="#setWrapColumnOrWidth"><b>setWrapColumnOrWidth</b></a> ( int )</div></li>
+<li><div class=fn>virtual void <a href="#setWrapPolicy"><b>setWrapPolicy</b></a> ( WrapPolicy&nbsp;policy )</div></li>
+<li><div class=fn>virtual void <a href="#copy"><b>copy</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#append"><b>append</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text )</div></li>
+<li><div class=fn>void <a href="#setText"><b>setText</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;txt )</div></li>
+<li><div class=fn>virtual void <a href="#setText-2"><b>setText</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text, const&nbsp;QString&nbsp;&amp;&nbsp;context )</div></li>
+<li><div class=fn>virtual void <a href="#setTextFormat"><b>setTextFormat</b></a> ( TextFormat&nbsp;f )</div></li>
+<li><div class=fn>virtual void <a href="#selectAll"><b>selectAll</b></a> ( bool&nbsp;select = TRUE )</div></li>
+<li><div class=fn>virtual void <a href="#setTabStopWidth"><b>setTabStopWidth</b></a> ( int&nbsp;ts )</div></li>
+<li><div class=fn>virtual void <a href="#zoomIn"><b>zoomIn</b></a> ( int&nbsp;range )</div></li>
+<li><div class=fn>virtual void <a href="#zoomIn-2"><b>zoomIn</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#zoomOut"><b>zoomOut</b></a> ( int&nbsp;range )</div></li>
+<li><div class=fn>virtual void <a href="#zoomOut-2"><b>zoomOut</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#zoomTo"><b>zoomTo</b></a> ( int&nbsp;size )</div></li>
+<li><div class=fn>virtual void <a href="#setReadOnly"><b>setReadOnly</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>virtual void <a href="#undo"><b>undo</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#redo"><b>redo</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#cut"><b>cut</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#paste"><b>paste</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#pasteSubType"><b>pasteSubType</b></a> ( const&nbsp;QCString&nbsp;&amp;&nbsp;subtype )</div></li>
+<li><div class=fn>virtual void <a href="#clear"><b>clear</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#del"><b>del</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#indent"><b>indent</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#setItalic"><b>setItalic</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>virtual void <a href="#setBold"><b>setBold</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>virtual void <a href="#setUnderline"><b>setUnderline</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>virtual void <a href="#setFamily"><b>setFamily</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;fontFamily )</div></li>
+<li><div class=fn>virtual void <a href="#setPointSize"><b>setPointSize</b></a> ( int&nbsp;s )</div></li>
+<li><div class=fn>virtual void <a href="#setColor"><b>setColor</b></a> ( const&nbsp;QColor&nbsp;&amp;&nbsp;c )</div></li>
+<li><div class=fn>virtual void <a href="#setVerticalAlignment"><b>setVerticalAlignment</b></a> ( VerticalAlignment&nbsp;a )</div></li>
+<li><div class=fn>virtual void <a href="#setAlignment"><b>setAlignment</b></a> ( int&nbsp;a )</div></li>
+<li><div class=fn>virtual void <a href="#setCursorPosition"><b>setCursorPosition</b></a> ( int&nbsp;para, int&nbsp;index )</div></li>
+<li><div class=fn>virtual void <a href="#setSelection"><b>setSelection</b></a> ( int&nbsp;paraFrom, int&nbsp;indexFrom, int&nbsp;paraTo, int&nbsp;indexTo, int&nbsp;selNum = 0 )</div></li>
+<li><div class=fn>virtual void <a href="#setSelectionAttributes"><b>setSelectionAttributes</b></a> ( int&nbsp;selNum, const&nbsp;QColor&nbsp;&amp;&nbsp;back, bool&nbsp;invertText )</div></li>
+<li><div class=fn>virtual void <a href="#setModified"><b>setModified</b></a> ( bool&nbsp;m )</div></li>
+<li><div class=fn>virtual void <a href="#setUndoDepth"><b>setUndoDepth</b></a> ( int&nbsp;d )</div></li>
+<li><div class=fn>virtual void <a href="#ensureCursorVisible"><b>ensureCursorVisible</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#placeCursor"><b>placeCursor</b></a> ( const&nbsp;QPoint&nbsp;&amp;&nbsp;pos, QTextCursor&nbsp;*&nbsp;c = 0 )</div></li>
+<li><div class=fn>virtual void <a href="#moveCursor"><b>moveCursor</b></a> ( CursorAction&nbsp;action, bool&nbsp;select )</div></li>
+<li><div class=fn>virtual void <a href="#doKeyboardAction"><b>doKeyboardAction</b></a> ( KeyboardAction&nbsp;action )</div></li>
+<li><div class=fn>virtual void <a href="#removeSelectedText"><b>removeSelectedText</b></a> ( int&nbsp;selNum = 0 )</div></li>
+<li><div class=fn>virtual void <a href="#removeSelection"><b>removeSelection</b></a> ( int&nbsp;selNum = 0 )</div></li>
+<li><div class=fn>virtual void <a href="#setCurrentFont"><b>setCurrentFont</b></a> ( const&nbsp;QFont&nbsp;&amp;&nbsp;f )</div></li>
+<li><div class=fn>virtual void <a href="#setOverwriteMode"><b>setOverwriteMode</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>virtual void <a href="#scrollToBottom"><b>scrollToBottom</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#insert"><b>insert</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text, bool&nbsp;indent = FALSE, bool&nbsp;checkNewLine = TRUE, bool&nbsp;removeSelected = TRUE )</div></li>
+<li><div class=fn>virtual void <a href="#insertAt"><b>insertAt</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text, int&nbsp;para, int&nbsp;index )</div></li>
+<li><div class=fn>virtual void <a href="#removeParagraph"><b>removeParagraph</b></a> ( int&nbsp;para )</div></li>
+<li><div class=fn>virtual void <a href="#insertParagraph"><b>insertParagraph</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text, int&nbsp;para )</div></li>
+<li><div class=fn>virtual void <a href="#setParagraphBackgroundColor"><b>setParagraphBackgroundColor</b></a> ( int&nbsp;para, const&nbsp;QColor&nbsp;&amp;&nbsp;bg )</div></li>
+<li><div class=fn>virtual void <a href="#clearParagraphBackground"><b>clearParagraphBackground</b></a> ( int&nbsp;para )</div></li>
+<li><div class=fn>virtual void <a href="#setUndoRedoEnabled"><b>setUndoRedoEnabled</b></a> ( bool&nbsp;b )</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#textChanged"><b>textChanged</b></a> ()</div></li>
+<li><div class=fn>void <a href="#selectionChanged"><b>selectionChanged</b></a> ()</div></li>
+<li><div class=fn>void <a href="#copyAvailable"><b>copyAvailable</b></a> ( bool&nbsp;yes )</div></li>
+<li><div class=fn>void <a href="#undoAvailable"><b>undoAvailable</b></a> ( bool&nbsp;yes )</div></li>
+<li><div class=fn>void <a href="#redoAvailable"><b>redoAvailable</b></a> ( bool&nbsp;yes )</div></li>
+<li><div class=fn>void <a href="#currentFontChanged"><b>currentFontChanged</b></a> ( const&nbsp;QFont&nbsp;&amp;&nbsp;f )</div></li>
+<li><div class=fn>void <a href="#currentColorChanged"><b>currentColorChanged</b></a> ( const&nbsp;QColor&nbsp;&amp;&nbsp;c )</div></li>
+<li><div class=fn>void <a href="#currentAlignmentChanged"><b>currentAlignmentChanged</b></a> ( int&nbsp;a )</div></li>
+<li><div class=fn>void <a href="#currentVerticalAlignmentChanged"><b>currentVerticalAlignmentChanged</b></a> ( VerticalAlignment&nbsp;a )</div></li>
+<li><div class=fn>void <a href="#cursorPositionChanged"><b>cursorPositionChanged</b></a> ( QTextCursor&nbsp;*&nbsp;c )</div></li>
+<li><div class=fn>void <a href="#cursorPositionChanged-2"><b>cursorPositionChanged</b></a> ( int&nbsp;para, int&nbsp;pos )</div></li>
+<li><div class=fn>void <a href="#returnPressed"><b>returnPressed</b></a> ()</div></li>
+<li><div class=fn>void <a href="#modificationChanged"><b>modificationChanged</b></a> ( bool&nbsp;m )</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>QString <a href="#documentTitle-prop"><b>documentTitle</b></a>&nbsp;- 从文本中分析出的文档标题&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>bool <a href="#hasSelectedText-prop"><b>hasSelectedText</b></a>&nbsp;- 是否有文本被选择到选择区0中&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>int <a href="#length-prop"><b>length</b></a>&nbsp;- 文本的字符数&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>bool <a href="#linkUnderline-prop"><b>linkUnderline</b></a>&nbsp;- 超文本链接是否使用下划线</div></li>
+<li><div class=fn>bool <a href="#modified-prop"><b>modified</b></a>&nbsp;- 文档是否已经被用户修改</div></li>
+<li><div class=fn>bool <a href="#overwriteMode-prop"><b>overwriteMode</b></a>&nbsp;- 文本编辑的覆盖模式</div></li>
+<li><div class=fn>QBrush <a href="#paper-prop"><b>paper</b></a>&nbsp;- 背景（纸）的画刷</div></li>
+<li><div class=fn>bool <a href="#readOnly-prop"><b>readOnly</b></a>&nbsp;- 文本编辑是否只读</div></li>
+<li><div class=fn>QString <a href="#selectedText-prop"><b>selectedText</b></a>&nbsp;- 被选择的文本（在选择区0中）或者如果当前没有被选择的文本（在选择区0中）就是空字符串&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>int <a href="#tabStopWidth-prop"><b>tabStopWidth</b></a>&nbsp;- tab stop的象素宽度s</div></li>
+<li><div class=fn>QString <a href="#text-prop"><b>text</b></a>&nbsp;- 文本编辑的文本</div></li>
+<li><div class=fn>TextFormat <a href="#textFormat-prop"><b>textFormat</b></a>&nbsp;- 文本格式：多信息文本、一般文本或者自动文本</div></li>
+<li><div class=fn>int <a href="#undoDepth-prop"><b>undoDepth</b></a>&nbsp;- 撤销历史的深度</div></li>
+<li><div class=fn>bool <a href="#undoRedoEnabled-prop"><b>undoRedoEnabled</b></a>&nbsp;- 撤销/恢复是否生效</div></li>
+<li><div class=fn>WordWrap <a href="#wordWrap-prop"><b>wordWrap</b></a>&nbsp;- 自动换行模式</div></li>
+<li><div class=fn>int <a href="#wrapColumnOrWidth-prop"><b>wrapColumnOrWidth</b></a>&nbsp;- 被自动换行的文本的位置（根据自动换行模式来决定是像素还是列）</div></li>
+<li><div class=fn>WrapPolicy <a href="#wrapPolicy-prop"><b>wrapPolicy</b></a>&nbsp;- 自动换行策略，在空白符号还是在任何地方</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>void <a href="#repaintChanged"><b>repaintChanged</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#keyPressEvent"><b>keyPressEvent</b></a> ( QKeyEvent&nbsp;*&nbsp;e )</div></li>
+<li><div class=fn>virtual bool <a href="#focusNextPrevChild"><b>focusNextPrevChild</b></a> ( bool&nbsp;n )</div></li>
+<li><div class=fn>QTextCursor * <a href="#textCursor"><b>textCursor</b></a> () const</div></li>
+<li><div class=fn>virtual QPopupMenu * <a href="#createPopupMenu"><b>createPopupMenu</b></a> ( const&nbsp;QPoint&nbsp;&amp;&nbsp;pos )</div></li>
+<li><div class=fn>virtual QPopupMenu * createPopupMenu () &nbsp;<em>(obsolete)</em></div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QTextEdit窗口部件提供了强大的单页面的多信息文本编辑器。
+<p> 
+
+
+<p> <!-- toc -->
+<ul>
+<li><a href="#1"> 介绍和概念
+</a>
+<li><a href="#1-1"> 使用QTextEdit作为一个显示窗口部件
+</a>
+<ul>
+<li><a href="#1-1-1"> 只读的键绑定
+</a>
+</ul>
+<li><a href="#1-2"> 使用QTextEdit作为一个编辑器
+</a>
+<ul>
+<li><a href="#1-2-1"> 编辑键绑定
+</a>
+</ul>
+</ul>
+<!-- endtoc -->
+
+<p> <h3> 介绍和概念
+</h3>
+<a name="1"></a><p> QTextEdit是一个高级的所见即所得的支持使用HTML风格标记的多信息文本格式的查看器/编辑器。它对于处理大文档和快速相应用户的输入进行了优化。
+<p> QTextEdit操作的三个模式：
+<center><table cellpadding="4" cellspacing="2" border="0">
+<tr bgcolor="#a2c511"> <th valign="top">模式 <th valign="top">命令 <th valign="top">注释
+<tr bgcolor="#f0f0f0"> <td valign="top">一般文本编辑器 <td valign="top">setTextFormat(PlainText)
+<td valign="top">使用<a href="#setText">setText</a>()设置文本，<a href="#text">text</a>()可以返回一般文本。文本属性（比如颜色）可以被设置，但是一般文本总是被返回。<sup>1.</sup>
+<tr bgcolor="#d0d0d0"> <td valign="top">多信息文本编辑器 <td valign="top">setTextFormat(RichText)
+<td valign="top">使用<a href="#setText">setText</a>()设置文本，<a href="#text">text</a>()可以返回多信息文本。多信息文本编辑是相当受限制的。例如你不能设置边白或者插入图片（尽管你可以读取并且正确地显示具有边白和包含图片的文件）。这个模式对于编辑少量的多信息文本是非常有用的。<sup>2.</sup>
+<tr bgcolor="#f0f0f0"> <td valign="top">文本查看器<sup>3.</sup> <td valign="top">setReadOnly(TRUE)
+<td valign="top">使用setText()或<a href="#append">append</a>()（这个没有撤销历史，所以更快并且使用更少的内存）来设置文本，text()根据<a href="#textFormat">textFormat</a>()返回一般文本或者多信息文本。这个模式可以正确显示HTML中一个比较大的子集。
+</table></center>
+<p> <sup>1.</sup><small>我们<em>不</em>建议使用QTextEdit来创建语法高亮的编辑器，因为现在的应用编程接口对于这个目的是不够的。我们希望能在以后的发行中发行一个支持语法高亮的更加完整的应用编程接口。</small>
+<p> <sup>2.</sup><small>在稍后的Qt发行中计划推出一个更完整的支持设置边白、图片等等的应用编程接口。</small>
+<p> <sup>3.</sup><small>Qt 3.1将提供一个日志浏览器模式，它是专门为快速地并且有效使用内存地显示大量的只读文本而优化的。</small>
+<p> 我们建议你总是调用<a href="#setTextFormat">setTextFormat</a>()来设置你想使用的模式。如果你是用<a href="qt.html#TextFormat-enum">AutoText</a>，那么<a href="#setText">setText</a>()和<a href="#append">append</a>()将会试图决定给定的文本是一般文本还是多信息文本。如果你使用<a href="qt.html#TextFormat-enum">RichText</a>，那么setText()和append()总是假设给定的文本是多信息文本。<a href="#insert">insert</a>()简单的插入给定的文本。
+<p> QTextEdit在段落和字符上工作。段落就是被自动换行来适应窗口部件的宽度的被格式化的字符串。默认情况下当读取一般文本时，两个换行符确定一个段落。一个文档由零或更多个段落组成，索引从0开始。字符是基于每一个段落来被索引的，也是从0开始。段落中的单字根据段落的<a href="#alignment">alignment</a>()进行对齐。段落被硬换行分隔。段落中的字符都有自己的属性，例如字体和颜色。
+<p> 文本编辑文档使用如下概念：
+<ul>
+<li> <em>当前格式</em> -- 这是当前光标位置的格式，如果存在被选择文本，<em>也是</em>它的格式。
+<li> <em>当前段落</em> -- 包含光标的段落。
+</ul>
+<p> QTextEdit可以显示图片（使用<a href="qmimesourcefactory.html">QMimeSourceFactory</a>）、列表和表格。如果文本太大以至于不能在文本编辑的视口中查看时，滚动条将会出现。文本编辑可以载入一般文本和HTML文件（HTML3.2和4的子集）。表现风格和有效标记集由<a href="#styleSheet">styleSheet</a>()来定义。自定义标记可以被创建并且被放置到样式单中。可以使用<a href="#setStyleSheet">setStyleSheet</a>()改变样式单，具体情况请参考<a href="qstylesheet.html">QStyleSheet</a>。通过图片标记识别的图片如果它们可以被使用文本编辑的<a href="qmimesourcefactory.html">QMimeSourceFactory</a>解释的话就可以被显示，请参考<a href="#setMimeSourceFactory">setMimeSourceFactory</a>()。
+<p> 如果你想要一个有更多导航的文本浏览器，请使用<a href="qtextbrowser.html">QTextBrowser</a>。如果你只是想显示一小条多信息文本，请使用<a href="qlabel.html">QLabel</a>或者<a href="qsimplerichtext.html">QSimpleRichText</a>。
+<p> 如果你创建一个新的QTextEdit并且想允许用户编辑多信息文本，请调用<a href="#setTextFormat">setTextFormat</a>(Qt::RichText)来确保文本被看做多信息文本。（多信息文本使用HTML标记来设置文本格式属性。关于被支持的HTML标记的信息请参考QStyleSheet。）如果你不明确地调用setTextFormat()，文本编辑将会猜测文本自己是多信息文本还是一般文本。这也就是说如果文本看起来像HTML或XML，它可能被解释为多信息文本，所以你应该调用setTextFormat(Qt::PlainText)来保护这些文本。
+<p> 注意我们并不是要为Qt添加一个具有所有特征的网页浏览器窗口部件（因为这将很容易使Qt的大小加倍并且只有很少的应用程序可以从这里受益）。Qt中的多信息文本支持是被设计为应用程序提供一个快速、可移植并且有效率地方式来添加合理的<a href="helpsystem.html#online-help">在线帮助</a>工具，并且提供一个多信息文本编辑器的基础。
+<h3> 使用QTextEdit作为一个显示窗口部件
+</h3>
+<a name="1-1"></a><p> QTextEdit可以显示一个包括表格和图片的大的HTML子集。
+<p> 文本通过使用<a href="#setText">setText</a>()来设置或者替换，它删除任何已经存在的文本并且用传递给setText()调用的文本替换它。如果你使用继承HTML（强制使用<a href="#setTextFormat">setTextFormat</a>(RichText)）调用setText()，并且然后调用<a href="#text">text</a>()，返回的文本可能有不同的标签，但是它们呈现的都是一样的。文本可以使用<a href="#insert">insert</a>()、<a href="#paste">paste</a>()、<a href="#pasteSubType">pasteSubType</a>()和<a href="#append">append</a>()来插入。被添加的文本没有进入撤销历史中，这使得append()更快并且消耗更少的内存。文本也可以被<a href="#cut">cut</a>()。整个文本可以使用<a href="#clear">clear</a>()来被删除并且被选择的文本可以使用<a href="#removeSelectedText">removeSelectedText</a>()来被删除。被选择（被标记）的文本也可以使用<a href="#del">del</a>()来被删除（如果没有文本被选择，这将删除光标右面的字符）。
+<p> 可以使用<a href="#setText">setText</a>()和text()来达到载入和保存文本的目的，例如：
+<pre>
+    <a href="qfile.html">QFile</a> file( fileName ); // 从文件中读取文本
+    if ( file.<a href="qfile.html#open">open</a>( <a href="qfile.html#open">IO_ReadOnly</a> ) ) {
+        <a href="qtextstream.html">QTextStream</a> ts( &amp;file );
+        textEdit-&gt;setText( ts.<a href="qtextstream.html#read">read</a>() );
+    }
+    </pre>
+ 
+<pre>
+    <a href="qfile.html">QFile</a> file( fileName ); // 把文本写入到文件中
+    if ( file.<a href="qfile.html#open">open</a>( <a href="qfile.html#open">IO_WriteOnly</a> ) ) {
+        <a href="qtextstream.html">QTextStream</a> ts( &amp;file );
+        ts &lt;&lt; textEdit-&gt;text();
+        textEdit-&gt;setModified( FALSE );
+    }
+    </pre>
+ 
+<p> 默认这个文本编辑会在空白符号处自动换行来适应文本编辑窗口部件。<a href="#setWordWrap">setWordWrap</a>()函数用来指定你想要的自动换行方式，或者如果你不像要任何自动换行，请使用<a href="#WordWrap-enum">NoWrap</a>。调用setWordWrap()来设置固定的像素宽度<a href="#WordWrap-enum">FixedPixelWidth</a>，或者由<a href="#setWrapColumnOrWidth">setWrapColumnOrWidth</a>()确定的像素或者列数的字符列数（例如80列）<a href="#WordWrap-enum">FixedColumnWidth</a>。如果你是用自动换行来适应窗口部件的宽度<a href="#WordWrap-enum">WidgetWidth</a>，你可以使用<a href="#setWrapPolicy">setWrapPolicy</a>()来指定是在空白符号或者任何地方自动换行。
+<p> 背景色的设置与其它窗口部件不同，使用<a href="#setPaper">setPaper</a>()。你可以指定画刷风格是一个普通颜色或者一个复杂的像素映射。
+<p> 超文本链接可以自动加上下划线，这个可以通过<a href="#setLinkUnderline">setLinkUnderline</a>()来改变。tab stop宽度可以使用<a href="#setTabStopWidth">setTabStopWidth</a>()来设置。
+<p> <a href="#zoomIn">zoomIn</a>()和<a href="#zoomOut">zoomOut</a>()函数能够用来通过增加（对于zoomOut()是减少）使用的点的大小来重新定义文本的大小。
+<p> <a href="#lines">lines</a>()函数返回文本中的行数并且<a href="#paragraphs">paragraphs</a>()返回段落数。特定段落中的函数可以通过<a href="#linesOfParagraph">linesOfParagraph</a>()返回。整个文本的字符长度可以通过<a href="#length">length</a>()返回。
+<p> 你可以滚动到文本中的一个锚，也就是通过<a href="#scrollToAnchor">scrollToAnchor</a>()到达<tt>&lt;a name="anchor"&gt;</tt>。<a href="#find">find</a>()函数可以被用来找到和选择文本中的给定字符串。
+<p> 只读的QTextEdit提供了和（废弃的）QTextEdit相同的功能。（QTextView仍被提供用来保证旧代码的兼容性。）
+<p> <h4> 只读的键绑定
+</h4>
+<a name="1-1-1"></a><p> 当QTextEdit被使用的时候，只读的键绑定仅限于浏览，并且文本只能被鼠标选定：
+<center><table cellpadding="4" cellspacing="2" border="0">
+<tr bgcolor="#a2c511"> <th valign="top">按键 <th valign="top">操作
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>UpArrow</em> <td valign="top">向上移动一行
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>DownArrow</em> <td valign="top">向下移动一行
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>LeftArrow</em> <td valign="top">向左移动一个字符
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>RightArrow</em> <td valign="top">向右移动一个字符
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>PageUp</em> <td valign="top">向上移动一页（视口）
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>PageDown</em> <td valign="top">向下移动一页（视口）
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>Home</em> <td valign="top">移动到文本开始处
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>End</em> <td valign="top">移动到文本结束处
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>Shift+Wheel</em> <td valign="top">水平的滚动文本（Wheel就是鼠标滚轮）
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+Wheel</em> <td valign="top">缩放文本
+</table></center>
+<p> 文本编辑也可以提供一些元信息。例如，<a href="#documentTitle">documentTitle</a>()函数将返回来自HTML的<tt>&lt;title&gt;</tt>标签中的文本。
+<p> 文本编辑中显示的文本有一个<em>context</em>。context就是文本编辑的<a href="qmimesourcefactory.html">QMimeSourceFactory</a>用来解析文件和图片的定位的路径。当查询数据时，它被传递给<a href="#mimeSourceFactory">mimeSourceFactory</a>()。（请参考See QTextEdit()和<a href="#context">context</a>()。）
+<p> <h3> 使用QTextEdit作为一个编辑器
+</h3>
+<a name="1-2"></a><p> 使用QTextEdit作为显示窗口部件的所有信息这里也适用。
+<p> 当前格式属性可以通过<a href="#setItalic">setItalic</a>()、<a href="#setBold">setBold</a>()、<a href="#setUnderline">setUnderline</a>()、<a href="#setFamily">setFamily</a>()（字体族）、<a href="#setPointSize">setPointSize</a>()、<a href="#setColor">setColor</a>()和<a href="#setCurrentFont">setCurrentFont</a>()来设置。当前段落的对齐方式使用<a href="#setAlignment">setAlignment</a>()来设置。
+<p> 使用<a href="#setSelection">setSelection</a>()来选择文本。<a href="#setSelectionAttributes">setSelectionAttributes</a>()函数用来指出被选择文本应该如何被显示。使用<a href="#hasSelectedText">hasSelectedText</a>()来搜索是否有任何文本被选择。当前被选择文本的位置可以由<a href="#getSelection">getSelection</a>()提供并且被选择文本本身被<a href="#selectedText">selectedText</a>()返回。选择可以使用<a href="#copy">copy</a>()来复制到剪贴板，或者使用<a href="#cut">cut</a>()剪切到剪贴板中。它可以被<a href="#removeSelectedText">removeSelectedText</a>()删除。使用<a href="#selectAll">selectAll</a>()可以选择（或者取消选择）整个文本。QTextEdit支持多重选择。绝大多数选择函数是在默认选择（选择区0）中操作。如果用户按下非选择键，例如没有按下Shift的情况下的一个光标键，所有选择都被清空。
+<p> 使用<a href="#setCursorPosition">setCursorPosition</a>()和<a href="#getCursorPosition">getCursorPosition</a>()可以分别设置和获得光标的位置。当光标被移动，信号<a href="#currentFontChanged">currentFontChanged</a>()、<a href="#currentColorChanged">currentColorChanged</a>()和<a href="#currentAlignmentChanged">currentAlignmentChanged</a>()被发射来影响新光标位置的字体、颜色和对齐方式。
+<p> 如果文本改变了，<a href="#textChanged">textChanged</a>()信号被发射，并且如果用户通过按下回车键或者换行键插入一个新行，<a href="#returnPressed">returnPressed</a>()被发射。如果文本已经被修改，<a href="#isModified">isModified</a>()函数将会返回真。
+<p> QTextEdit提供基于命令的撤销和恢复。使用<a href="#setUndoDepth">setUndoDepth</a>()可以设置命令历史的深度，默认为100步。调用<a href="#undo">undo</a>()或<a href="#redo">redo</a>()可以撤销或者恢复上一次操作。信号<a href="#undoAvailable">undoAvailable</a>()和<a href="#redoAvailable">redoAvailable</a>()表明撤销和恢复操作是否可以被执行。
+<p> <a href="#indent">indent</a>()函数用来再次缩进一个段落。它对于代码编辑器是很有用的，例如，<em>Qt设计器</em>的代码编辑器中，<em>Ctrl+I</em>调用indent()函数。
+<p> <h4> 编辑键绑定
+</h4>
+<a name="1-2-1"></a><p> 编辑中被实现的键绑定的列表：
+<center><table cellpadding="4" cellspacing="2" border="0">
+<tr bgcolor="#a2c511"> <th valign="top">按键 <th valign="top">操作
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>Backspace</em> <td valign="top">删除光标左侧的字符
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Delete</em> <td valign="top">删除光标右侧的字符
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>Ctrl+A</em> <td valign="top">移动光标到行首
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+B</em> <td valign="top">向左移动光标一个字符
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>Ctrl+C</em> <td valign="top">复制标定的文本到剪贴板（也就是Windows下的<em>Ctrl+Insert</em>）
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+D</em> <td valign="top">删除光标右侧的字符
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>Ctrl+E</em> <td valign="top">移动光标到行尾
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+F</em> <td valign="top">向右移动光标一个字符
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>Ctrl+H</em> <td valign="top">删除光标左侧的字符
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+K</em> <td valign="top">删除到行尾
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>Ctrl+N</em> <td valign="top">移动光标到下一行
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+P</em> <td valign="top">移动光标到上一行
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>Ctrl+V</em> <td valign="top">把剪贴板文本粘贴到行编辑中（也就是Windows下的<em>Shift+Insert</em>）
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+X</em> <td valign="top">剪切标定的文本，复制到剪贴板（也就是Windows下的<em>Shift+Delete</em>）
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>Ctrl+Z</em> <td valign="top">撤销最后一次操作
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+Y</em> <td valign="top">恢复最后一次操作
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>LeftArrow</em> <td valign="top">向左移动光标一个字符
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+LeftArrow</em> <td valign="top">向左移动光标一个单字
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>RightArrow</em> <td valign="top">向右移动光标一个字符
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+RightArrow</em> <td valign="top">向右移动光标一个单字
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>UpArrow</em> <td valign="top">移动光标到上一行
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+UpArrow</em> <td valign="top">移动光标到上一个单字
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>DownArrow</em> <td valign="top">移动光标到下一行
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+Down Arrow</em> <td valign="top">移动光标到下一个单字
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>PageUp</em> <td valign="top">移动光标到上一页
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>PageDown</em> <td valign="top">移动光标到下一页
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>Home</em> <td valign="top">移动光标到行首
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+Home</em> <td valign="top">移动光标到文首
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>End</em> <td valign="top">移动光标到行尾
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+End</em> <td valign="top">移动光标到文尾
+<tr bgcolor="#d0d0d0"> <td valign="top"><em>Shift+Wheel</em> <td valign="top">水平的滚动文本（Wheel就是鼠标滚轮）
+<tr bgcolor="#f0f0f0"> <td valign="top"><em>Ctrl+Wheel</em> <td valign="top">缩放文本
+</table></center>
+<p> 要选择（标定）文本，按下一个移动键的同时按住Shift键，例如<i>Shift+右箭头</i>将会选择右面的字符，并且<i>Shift+Ctrl+右箭头</i>将会选择右面的单字，等等。
+<p> 默认情况下，文本编辑窗口部件在插入模式下工作，所以用户输入的文本都被插入到文本编辑中并且光标右面的文本都会移动到不碍事的地方。使用<a href="#setOverwriteMode">setOverwriteMode</a>()，这个模式可以被改为覆盖，这时新文本将覆盖光标右面存在的任何文本。
+<p> <p>也可以参考<a href="basic.html">基本窗口部件</a>和<a href="text.html">文本相关类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="CursorAction-enum"></a>QTextEdit::CursorAction</h3> 
+<p> 这个枚举变量被<a href="#moveCursor">moveCursor</a>()使用，它用来指定光标应该被移动的方向：
+<ul>
+<li><tt>QTextEdit::MoveBackward</tt> - 向后移动光标一个字符
+<li><tt>QTextEdit::MoveWordBackward</tt> - 向后移动光标一个单字
+<li><tt>QTextEdit::MoveForward</tt> - 向前移动光标一个字符
+<li><tt>QTextEdit::MoveWordForward</tt> - 向前移动光标一个单字
+<li><tt>QTextEdit::MoveUp</tt> - 向上移动光标一行
+<li><tt>QTextEdit::MoveDown</tt> - 向下移动光标一行
+<li><tt>QTextEdit::MoveLineStart</tt> - 移动光标到行首
+<li><tt>QTextEdit::MoveLineEnd</tt> - 移动光标到行尾
+<li><tt>QTextEdit::MoveHome</tt> - 移动光标到文首
+<li><tt>QTextEdit::MoveEnd</tt> - 移动光标到文尾
+<li><tt>QTextEdit::MovePgUp</tt> - 向上移动光标一页
+<li><tt>QTextEdit::MovePgDown</tt> - 向下移动光标一页
+</ul>
+
+<h3 class=fn><a name="KeyboardAction-enum"></a>QTextEdit::KeyboardAction</h3> 
+<p> 这个枚举变量被<a href="#doKeyboardAction">doKeyboardAction</a>()使用，它用来指定哪个操作被执行：
+<ul>
+<li><tt>QTextEdit::ActionBackspace</tt> - 删除光标左面的字符。
+<li><tt>QTextEdit::ActionDelete</tt> - 删除光标右面的字符。
+<li><tt>QTextEdit::ActionReturn</tt> - 在光标位置分割段落。
+<li><tt>QTextEdit::ActionKill</tt> - 如果光标不在段尾，从光标位置删除字符，直到段尾。如果光标在段尾，删除段尾的硬回车符——这将会导致这个段落和随后的段落被连接在一起。
+</ul>
+
+<h3 class=fn><a name="VerticalAlignment-enum"></a>QTextEdit::VerticalAlignment</h3> 
+<p> 这个枚举变量被用来设置文本的垂直对齐方式。
+<ul>
+<li><tt>QTextEdit::AlignNormal</tt> - 普通对齐
+<li><tt>QTextEdit::AlignSuperScript</tt> - 上标
+<li><tt>QTextEdit::AlignSubScript</tt> - 下标
+</ul>
+
+<h3 class=fn><a name="WordWrap-enum"></a>QTextEdit::WordWrap</h3> 
+<p> 这个枚举变量定义了QTextEdit的自动换行模式。下面这些值是有效的：
+<ul>
+<li><tt>QTextEdit::NoWrap</tt> - 不自动换行。
+<li><tt>QTextEdit::WidgetWidth</tt> - 在窗口部件的当前宽度自动换行（这是默认的）。默认在空白符号处自动换行，这可以使用<a href="#setWrapPolicy">setWrapPolicy</a>()来改变。
+<li><tt>QTextEdit::FixedPixelWidth</tt> - 从窗口部件的左侧开始的固定数量的象素数自动换行。象素的数量可以通过<a href="#wrapColumnOrWidth">wrapColumnOrWidth</a>()来设置。
+<li><tt>QTextEdit::FixedColumnWidth</tt> - 从窗口部件左侧开始的固定数量的列数自动换行。列数可以通过wrapColumnOrWidth()设置。如果你需要使用等宽文本在设备上显示很好的格式文本，这是很有用的，例如标准的VT100终端，你可以把wrapColumnOrWidth()设置为80。
+</ul><p> <p>也可以参考<a href="#wordWrap-prop">wordWrap</a>和<a href="#wordWrap-prop">wordWrap</a>。
+
+<h3 class=fn><a name="WrapPolicy-enum"></a>QTextEdit::WrapPolicy</h3> 
+<p> 这个枚举变量定义了自动换行模式在哪里自动换行。
+<p> 下面这些值是有效的：
+<ul>
+<li><tt>QTextEdit::AtWhiteSpace</tt> - 在空白符号处（空格或者换行）自动换行。
+<li><tt>QTextEdit::Anywhere</tt> - 在任何情况下自动换行，包括单字中。
+<li><tt>QTextEdit::AtWordBoundary</tt> - 不要使用这个不赞成的值（它是AtWhiteSpace的同义字，请使用后者替换它）。
+</ul><p> <p>也可以参考<a href="#wrapPolicy-prop">wrapPolicy</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QTextEdit"></a>QTextEdit::QTextEdit ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;context = QString::null, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+使用父对象<em>parent</em>和名称<em>name</em>构造一个QTextEdit。文本编辑将使用上下文<em>context</em>来显示文本<em>text</em>。
+<p> <em>context</em>是文本编辑的<a href="qmimesourcefactory.html">QMimeSourceFactory</a>用来解析文件和图片的定位的路径。当查询数据时，它被传递给<a href="#mimeSourceFactory">mimeSourceFactory</a>()。
+<p> 例如，如果文本包含一个文本标签<tt>&lt;img src="image.png"&gt;</tt>，并且上下文为“path/to/look/in”，那么QMimeSourceFactory将会试图从“path/to/look/in/image.png”载入图片。如果标签为<tt>&lt;img src="/image.png"&gt;</tt>，context将不会被使用（因为QMimeSourceFactory识别出了我们使用的是绝对路径）并且将会试图载入“/image.png”。context也可以正确的适用于<em>hrefs</em>，例如<tt>&lt;a href="target.html"&gt;Target&lt;/a&gt;</tt>，将会被识别为“path/to/look/in/target.html”。
+
+<h3 class=fn><a name="QTextEdit-2"></a>QTextEdit::QTextEdit ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>  
+使用父对象<em>parent</em>和名称<em>name</em>构造一个空的QTextEdit。
+
+<h3 class=fn>int <a name="alignment"></a>QTextEdit::alignment () const
+</h3>
+返回当前段落的对齐方式。
+<p> <p>也可以参考<a href="#setAlignment">setAlignment</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="anchorAt"></a>QTextEdit::anchorAt ( const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;pos )
+</h3> 
+如果在<em>pos</em>位置有一个锚（在内容坐标中），它的名称被返回，否则返回空字符串。
+
+<h3 class=fn>void <a name="append"></a>QTextEdit::append ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text )<tt> [虚 槽]</tt>
+</h3> 
+把文本<em>text</em>添加到文本编辑的结尾。注意这个函数会清空撤销/恢复历史。
+<p>实例：<a href="clientserver-example.html#x790">network/clientserver/client/client.cpp</a>、<a href="clientserver-example.html#x772">network/clientserver/server/server.cpp</a>、<a href="httpd-example.html#x646">network/httpd/httpd.cpp</a>和<a href="process-example.html#x71">process/process.cpp</a>。
+
+<h3 class=fn>bool <a name="bold"></a>QTextEdit::bold () const
+</h3>
+如果当前格式是粗体的，返回真，否则返回假。
+<p> <p>也可以参考<a href="#setBold">setBold</a>()。
+
+<h3 class=fn>int <a name="charAt"></a>QTextEdit::charAt ( const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;pos, int&nbsp;*&nbsp;para ) const
+</h3>
+返回在<em>pos</em>位置（在内容坐标中）的字符的索引（相对于它的段落）。如果<em>para</em>不为零，<em>*</em><em>para</em>被设置为当前段落。如果在<em>pos</em>没有字符，-1被返回。
+
+<h3 class=fn>void <a name="clear"></a>QTextEdit::clear ()<tt> [虚 槽]</tt>
+</h3>
+删除文本编辑中的所有文本。
+<p> <p>也可以参考<a href="#cut">cut</a>(), <a href="#removeSelectedText">removeSelectedText</a>()和<a href="#text-prop">text</a>。
+
+<h3 class=fn>void <a name="clearParagraphBackground"></a>QTextEdit::clearParagraphBackground ( int&nbsp;para )<tt> [虚 槽]</tt>
+</h3> 
+清除<em>para</em>段落的背景色，所以背景色将再次被使用。
+
+<h3 class=fn><a href="qcolor.html">QColor</a> <a name="color"></a>QTextEdit::color () const
+</h3>
+返回当前格式的颜色。
+<p> <p>也可以参考<a href="#setColor">setColor</a>()和<a href="#paper-prop">paper</a>。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="context"></a>QTextEdit::context () const
+</h3>  
+返回编辑的context。context是文本编辑的<a href="qmimesourcefactory.html">QMimeSourceFactory</a>用来解析文件和图片的定位的路径。
+<p> <p>也可以参考<a href="#text-prop">text</a>。
+<p>实例：<a href="helpviewer-example.html#x1030">helpviewer/helpwindow.cpp</a>和<a href="qdir-example.html#x1836">qdir/qdir.cpp</a>。
+
+<h3 class=fn>void <a name="copy"></a>QTextEdit::copy ()<tt> [虚 槽]</tt>
+</h3> 
+复制任何选择文本（从选择区0中）到剪贴板。
+<p> <p>也可以参考<a href="#hasSelectedText-prop">hasSelectedText</a>和<a href="#copyAvailable">copyAvailable</a>()。
+
+<h3 class=fn>void <a name="copyAvailable"></a>QTextEdit::copyAvailable ( bool&nbsp;yes )<tt> [信号]</tt>
+</h3>  
+<p> 当文本编辑中的文本被选择或者取消选择时，这个信号被发射。
+<p> 当文本被选择时，这个信号被发射，这时<em>yes</em>被设置为真。如果没有文本被选择或者如果被选择文本被取消选择，这个信号被发射，这时<em>yes</em>被设置为假。
+<p> 如果<em>yes</em>为真，那么<a href="#copy">copy</a>()可以被用来复制所选文本到剪贴板。如果<em>yes</em>为假，那么copy()什么也不做。
+<p> <p>也可以参考<a href="#selectionChanged">selectionChanged</a>()。
+
+<h3 class=fn><a href="qpopupmenu.html">QPopupMenu</a>&nbsp;* <a name="createPopupMenu"></a>QTextEdit::createPopupMenu ( const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;pos )<tt> [虚 保护]</tt>
+</h3>
+<p> 这个函数被用来在文档<em>pos</em>位置创建一个右键弹出菜单。如果你想创建一个自定义弹出菜单，重新实现这个函数并且返回被创建的弹出菜单。弹出菜单的所有权被传递给调用者。
+
+<h3 class=fn><a href="qpopupmenu.html">QPopupMenu</a>&nbsp;* <a name="createPopupMenu-2"></a>QTextEdit::createPopupMenu ()<tt> [虚 保护]</tt>
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 这个函数被用来创建一个右键弹出菜单。如果你想创建一个自定义弹出菜单，重新实现这个函数并且返回被创建的弹出菜单。弹出菜单的所有权被传递给调用者。
+<p> 这个函数只有在<a href="#createPopupMenu">createPopupMenu</a>( const <a href="qpoint.html">QPoint</a> & )返回0时才能被调用。
+
+<h3 class=fn>void <a name="currentAlignmentChanged"></a>QTextEdit::currentAlignmentChanged ( int&nbsp;a )<tt> [信号]</tt>
+</h3> 
+<p> 如果当前段落的对齐方式已经改变时，这个信号被发射。
+<p> 新的对齐方式是<em>a</em>。
+<p> <p>也可以参考<a href="#setAlignment">setAlignment</a>()。
+
+<h3 class=fn>void <a name="currentColorChanged"></a>QTextEdit::currentColorChanged ( const&nbsp;<a href="qcolor.html">QColor</a>&nbsp;&amp;&nbsp;c )<tt> [信号]</tt>
+</h3> 
+<p> 如果当前格式的颜色已经改变时，这个信号被发射。
+<p> 新的颜色是<em>c</em>。
+<p> <p>也可以参考<a href="#setColor">setColor</a>()。
+
+<h3 class=fn>void <a name="currentFontChanged"></a>QTextEdit::currentFontChanged ( const&nbsp;<a href="qfont.html">QFont</a>&nbsp;&amp;&nbsp;f )<tt> [信号]</tt>
+</h3> 
+<p> 如果当前格式的字体已经改变时，这个信号被发射。
+<p> 新的字体是<em>f</em>。
+<p> <p>也可以参考<a href="#setCurrentFont">setCurrentFont</a>()。
+
+<h3 class=fn>void <a name="currentVerticalAlignmentChanged"></a>QTextEdit::currentVerticalAlignmentChanged ( <a href="qtextedit.html#VerticalAlignment-enum">VerticalAlignment</a>&nbsp;a )<tt> [信号]</tt>
+</h3> 
+<p> 如果当前格式的垂直对齐方式已经改变时，这个信号被发射。
+<p> 新的垂直对齐方式是<em>a</em>。
+<p> <p>也可以参考<a href="#setVerticalAlignment">setVerticalAlignment</a>()。
+
+<h3 class=fn>void <a name="cursorPositionChanged"></a>QTextEdit::cursorPositionChanged ( QTextCursor&nbsp;*&nbsp;c )<tt> [信号]</tt>
+</h3> 
+<p> 如果光标位置发生改变，这个信号被发射。<em>c</em>指向文本光标对象。
+<p> <p>也可以参考<a href="#setCursorPosition">setCursorPosition</a>()。
+
+<h3 class=fn>void <a name="cursorPositionChanged-2"></a>QTextEdit::cursorPositionChanged ( int&nbsp;para, int&nbsp;pos )<tt> [信号]</tt>
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 如果光标位置发生改变，这个信号被发射。<em>para</em>包含段落索引并且<em>pos</em>包含段落中的字符位置。
+<p> <p>也可以参考<a href="#setCursorPosition">setCursorPosition</a>()。
+
+<h3 class=fn>void <a name="cut"></a>QTextEdit::cut ()<tt> [虚 槽]</tt>
+</h3>
+复制被选择文本（从选择区0中）到剪贴板并且从文本编辑中删除它。
+<p> 如果没有被选择文本（在选择区0中），就什么也不发生。
+<p> <p>也可以参考<a href="#copy">QTextEdit::copy</a>(), <a href="#paste">paste</a>()和<a href="#pasteSubType">pasteSubType</a>()。
+
+<h3 class=fn>void <a name="del"></a>QTextEdit::del ()<tt> [虚 槽]</tt>
+</h3>
+如果有被选择文本（在选择区0中），它就被删除。如果没有被选择文本（在选择区0中），文本光标右面的字符被删除。
+<p> <p>也可以参考<a href="#removeSelectedText">removeSelectedText</a>()和<a href="#cut">cut</a>()。
+
+<h3 class=fn>void <a name="doKeyboardAction"></a>QTextEdit::doKeyboardAction ( <a href="qtextedit.html#KeyboardAction-enum">KeyboardAction</a>&nbsp;action )<tt> [虚 槽]</tt>
+</h3>
+执行键盘操作<em>action</em>。这通常被键盘事件处理器调用。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="documentTitle"></a>QTextEdit::documentTitle () const
+</h3>
+<p>返回从文本中解析的文档标题。详细情况请参考<a href="qtextedit.html#documentTitle-prop">“documentTitle”</a>属性。
+
+<h3 class=fn>void <a name="ensureCursorVisible"></a>QTextEdit::ensureCursorVisible ()<tt> [虚 槽]</tt>
+</h3>
+如果需要，确保滚动文本编辑时光标是可视的。
+<p> <p>也可以参考<a href="#setCursorPosition">setCursorPosition</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="family"></a>QTextEdit::family () const
+</h3>
+返回当前格式的字体族。
+<p> <p>也可以参考<a href="#setFamily">setFamily</a>(), <a href="#setCurrentFont">setCurrentFont</a>()和<a href="#setPointSize">setPointSize</a>()。
+
+<h3 class=fn>bool <a name="find"></a>QTextEdit::find ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;expr, bool&nbsp;cs, bool&nbsp;wo, bool&nbsp;forward = TRUE, int&nbsp;*&nbsp;para = 0, int&nbsp;*&nbsp;index = 0 )<tt> [虚]</tt>
+</h3>
+找到字符串<em>expr</em>下一个出现位置。如果<em>expr</em>被找到，返回真，否则返回假。
+<p> 如果<em>para</em>和<em>index</em>都为零，搜索将从当前光标位置开始。如果<em>para</em>和<em>index</em>全不为零，搜索将从<em>*</em><em>para</em>段的<em>*</em><em>index</em>字符位置开始。
+<p> 如果<em>cs</em>为真，搜索是区分大小写的，否则它是不区分大小写的。如果<em>wo</em>为真，搜索将查找匹配整个单字的，否则它搜索任何匹配的文本。如果<em>forward</em>为真（默认），搜索将从开始位置到文尾进行工作，否则它从开始位置到文首进行工作。
+<p> 如果<em>expr</em>被找到，函数返回真。如果<em>index</em>和<em>para</em>不为零，被找到的匹配项的第一个字符的段落号被放到<em>*</em><em>para</em>，并且这个字符在段落中的索引位置被放到<em>*</em><em>index</em>。
+<p> 如果<em>expr</em>没有被找到，函数返回假。如果<em>index</em>和<em>para</em>不为零，并且<em>expr</em>没有被找到，<em>*</em><em>index</em>和<em>*</em><em>para</em>都是不确定的。
+
+<h3 class=fn>bool <a name="focusNextPrevChild"></a>QTextEdit::focusNextPrevChild ( bool&nbsp;n )<tt> [虚 保护]</tt>
+</h3> 
+重新实现用来允许链接间移动焦点。如果<em>n</em>为真，tab把焦点移动到下一个子对象，如果<em>n</em>为假，tab把焦点移动到上一个子对象。如果焦点被移动，返回真，否则返回假。
+
+<h3 class=fn><a href="qfont.html">QFont</a> <a name="font"></a>QTextEdit::font () const
+</h3>
+返回当前格式的字体。
+<p> <p>也可以参考<a href="#setCurrentFont">setCurrentFont</a>(), <a href="#setFamily">setFamily</a>()和<a href="#setPointSize">setPointSize</a>()。
+<p>实例：<a href="qaction-application-example.html#x1089">action/application.cpp</a>、<a href="simple-application-example.html#x1534">application/application.cpp</a>、<a href="mdi-example.html#x2040">mdi/application.cpp</a>和<a href="qwerty-example.html#x394">qwerty/qwerty.cpp</a>。
+
+<h3 class=fn>void <a name="getCursorPosition"></a>QTextEdit::getCursorPosition ( int&nbsp;*&nbsp;para, int&nbsp;*&nbsp;index ) const
+</h3>
+这个函数设置<em>*</em><em>para</em>和<em>*</em><em>index</em>参数到当前光标位置。<em>para</em>和<em>index</em>必须为非空整形指针。
+<p> <p>也可以参考<a href="#setCursorPosition">setCursorPosition</a>()。
+
+<h3 class=fn>void <a name="getSelection"></a>QTextEdit::getSelection ( int&nbsp;*&nbsp;paraFrom, int&nbsp;*&nbsp;indexFrom, int&nbsp;*&nbsp;paraTo, int&nbsp;*&nbsp;indexTo, int&nbsp;selNum = 0 ) const
+</h3>
+如果有选择，<em>*</em><em>paraFrom</em>被设置为选择开始的段落号并且<em>*</em><em>paraTo</em>被设置为选择结束的段落号。（它们可以是相同的。）<em>*</em><em>indexFrom</em>被设置为<em>*</em><em>paraFrom</em>中选择的开始索引并且<em>*</em><em>indexTo</em>被设置为<em>*</em><em>paraTo</em>中选择的结束缩影。
+<p> 如果没有选择，<em>*</em><em>paraFrom</em>、<em>*</em><em>indexFrom</em>、<em>*</em><em>paraTo</em>和 <em>*</em><em>indexTo</em>都被设置为-1。
+<p> <em>paraFrom</em>、<em>indexFrom</em>、<em>paraTo</em>和<em>indexTo</em>都必须为非空整形指针。
+<p> <em>selNum</em>是选择的数量（多重选择是被支持的）。它默认为0（默认选择）。
+<p> <p>也可以参考<a href="#setSelection">setSelection</a>()和<a href="#selectedText-prop">selectedText</a>。
+
+<h3 class=fn>bool <a name="hasSelectedText"></a>QTextEdit::hasSelectedText () const
+</h3>
+<p>如果在选择区0中一些文本被选择，返回真，否则返回假。详细情况请参考<a href="qtextedit.html#hasSelectedText-prop">“hasSelectedText”</a>属性。
+
+<h3 class=fn>int <a name="heightForWidth"></a>QTextEdit::heightForWidth ( int&nbsp;w ) const<tt> [虚]</tt>
+</h3>
+返回如果文本编辑有<em>w</em>象素宽，文本编辑需要有多少象素高才能显示所有文本。
+<p>从<a href="qwidget.html#heightForWidth">QWidget</a>中被重新实现。
+
+<h3 class=fn>void <a name="indent"></a>QTextEdit::indent ()<tt> [虚 槽]</tt>
+</h3>
+重新缩进当前段落。
+
+<h3 class=fn>void <a name="insert"></a>QTextEdit::insert ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, bool&nbsp;indent = FALSE, bool&nbsp;checkNewLine = TRUE, bool&nbsp;removeSelected = TRUE )<tt> [虚 槽]</tt>
+</h3>  
+在当前光标位置插入<em>text</em>。如果<em>indent</em>为真，这个段落被重新缩进。如果<em>checkNewLine</em>为真，在<em>text</em>中的新行符导致真正的硬换行（也就是新的段落）。如果<em>checkNewLine</em>为假，<em>text</em>重的新行符的行为是不确定的。如果<em>checkNewLine</em>为假，如果<em>text</em>包含新行符，编辑器的行为是不确定的。如果<em>removeSelected</em>为真，任何被选择文本（在选择区0中）在文本被插入之前被移除。
+<p> <p>也可以参考<a href="#paste">paste</a>()和<a href="#pasteSubType">pasteSubType</a>()。
+
+<h3 class=fn>void <a name="insertAt"></a>QTextEdit::insertAt ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, int&nbsp;para, int&nbsp;index )<tt> [虚 槽]</tt>
+</h3> 
+在<em>para</em>段落和<em>index</em>位置插入<em>text</em>。
+
+<h3 class=fn>void <a name="insertParagraph"></a>QTextEdit::insertParagraph ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, int&nbsp;para )<tt> [虚 槽]</tt>
+</h3> 
+在位置<em>para</em>插入<em>text</em>作为段落。如果<em>para</em>为-1，这些文本被追加。
+
+<h3 class=fn>bool <a name="isModified"></a>QTextEdit::isModified () const
+</h3>
+<p>如果文档已经被用户修改，返回真，否则返回假。详细情况请参考<a href="qtextedit.html#modified-prop">“modified”</a>属性。
+
+<h3 class=fn>bool <a name="isOverwriteMode"></a>QTextEdit::isOverwriteMode () const
+</h3>
+<p>返回文本编辑的覆盖模式。详细情况请参考<a href="qtextedit.html#overwriteMode-prop">“overwriteMode”</a>属性。
+
+<h3 class=fn>bool <a name="isReadOnly"></a>QTextEdit::isReadOnly () const
+</h3>
+<p>如果文本编辑是只读的，返回真，否则返回假。详细情况请参考<a href="qtextedit.html#readOnly-prop">“readOnly”</a>属性。
+
+<h3 class=fn>bool <a name="isRedoAvailable"></a>QTextEdit::isRedoAvailable () const
+</h3> 
+返回恢复是否可用。
+
+<h3 class=fn>bool <a name="isUndoAvailable"></a>QTextEdit::isUndoAvailable () const
+</h3> 
+返回撤销是否可用。
+
+<h3 class=fn>bool <a name="isUndoRedoEnabled"></a>QTextEdit::isUndoRedoEnabled () const
+</h3>
+<p>如果撤销/恢复是生效的，返回真，否则返回假。详细情况请参考<a href="qtextedit.html#undoRedoEnabled-prop">“undoRedoEnabled”</a>属性。
+
+<h3 class=fn>bool <a name="italic"></a>QTextEdit::italic () const
+</h3>
+如果当前格式是斜体的，返回真，否则返回假。
+<p> <p>也可以参考<a href="#setItalic">setItalic</a>()。
+
+<h3 class=fn>void <a name="keyPressEvent"></a>QTextEdit::keyPressEvent ( <a href="qkeyevent.html">QKeyEvent</a>&nbsp;*&nbsp;e )<tt> [虚 保护]</tt>
+</h3>
+处理键盘事件<em>e</em>。默认情况，键盘事件是用来提供键盘导航和文本编辑的。
+<p>从<a href="qwidget.html#keyPressEvent">QWidget</a>中被重新实现。
+<p>在<a href="qtextbrowser.html#keyPressEvent">QTextBrowser</a>中被重新实现。
+
+<h3 class=fn>int <a name="length"></a>QTextEdit::length () const
+</h3>
+<p>返回文本中的字符数。详细情况请参考<a href="qtextedit.html#length-prop">“length”</a>属性。
+
+<h3 class=fn>int <a name="lineOfChar"></a>QTextEdit::lineOfChar ( int&nbsp;para, int&nbsp;index )
+</h3>
+返回在<em>para</em>段落的<em>index</em>位置出现的字符在段落中的行数。<em>index</em>位置是相对于段首的位置。如果没有这个段落或者在<em>index</em>位置没有这样一个字符（也就是说索引超出范围），-1被返回。
+
+<h3 class=fn>int <a name="lines"></a>QTextEdit::lines () const
+</h3>
+返回文本编辑中的行数，它可以为0。
+<p> <b>警告：</b> 这个函数也许比较慢。行数会在自动换行期间发生改变，所以这个函数不得不遍历所有的段落并且分别得到它们的行数。
+<p>实例：<a href="qaction-application-example.html#x1091">action/application.cpp</a>和<a href="simple-application-example.html#x1536">application/application.cpp</a>。
+
+<h3 class=fn>int <a name="linesOfParagraph"></a>QTextEdit::linesOfParagraph ( int&nbsp;para ) const
+</h3>
+返回<em>para</em>段落的行数，或者如果在<em>para</em>索引没有这个段落，返回-1。
+
+<h3 class=fn>bool <a name="linkUnderline"></a>QTextEdit::linkUnderline () const
+</h3>
+<p>如果超文本链接将显示下划线，返回真，否则返回假。详细情况请参考<a href="qtextedit.html#linkUnderline-prop">“linkUnderline”</a>属性。
+
+<h3 class=fn><a href="qmimesourcefactory.html">QMimeSourceFactory</a>&nbsp;* <a name="mimeSourceFactory"></a>QTextEdit::mimeSourceFactory () const
+</h3> 
+返回这个文档编辑当前使用的<a href="qmimesourcefactory.html">QMimeSourceFactory</a>。
+<p> <p>也可以参考<a href="#setMimeSourceFactory">setMimeSourceFactory</a>()。
+<p>实例：<a href="helpviewer-example.html#x1032">helpviewer/helpwindow.cpp</a>和<a href="qdir-example.html#x1837">qdir/qdir.cpp</a>。
+
+<h3 class=fn>void <a name="modificationChanged"></a>QTextEdit::modificationChanged ( bool&nbsp;m )<tt> [信号]</tt>
+</h3> 
+<p> 当文档修改发生改变时，这个信号被发射。如果<em>m</em>为真，文档被修改了，否则修改状态已经被重置为未修改。
+<p> <p>也可以参考<a href="#modified-prop">modified</a>。
+
+<h3 class=fn>void <a name="moveCursor"></a>QTextEdit::moveCursor ( <a href="qtextedit.html#CursorAction-enum">CursorAction</a>&nbsp;action, bool&nbsp;select )<tt> [虚 槽]</tt>
+</h3>  
+根据<em>action</em>移动文本光标。这通常被一些键盘事件处理器使用。<em>select</em>指定从当前光标位置到新位置之间的文本是否应该被选定。
+
+<h3 class=fn><a href="qbrush.html">QBrush</a> <a name="paper"></a>QTextEdit::paper () const
+</h3>
+<p>返回背景（纸）的画刷。详细情况请参考<a href="qtextedit.html#paper-prop">“paper”</a>属性。
+
+<h3 class=fn>int <a name="paragraphAt"></a>QTextEdit::paragraphAt ( const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;pos ) const
+</h3>
+返回在<em>pos</em>位置（在内容坐标中）的段落，或者如果在<em>pos</em>索引没有段落，返回-1。
+
+<h3 class=fn><a href="qcolor.html">QColor</a> <a name="paragraphBackgroundColor"></a>QTextEdit::paragraphBackgroundColor ( int&nbsp;para ) const
+</h3> 
+返回<em>para</em>段落的背景色或者如果<em>para</em>超出范围或者这个段落没有背景设置，返回一个无效的颜色。
+
+<h3 class=fn>int <a name="paragraphLength"></a>QTextEdit::paragraphLength ( int&nbsp;para ) const
+</h3>
+返回<em>para</em>段落的长度（字符数），或者如果<em>para</em>超出范围或者这个段落没有背景设置，返回-1。
+
+<h3 class=fn><a href="qrect.html">QRect</a> <a name="paragraphRect"></a>QTextEdit::paragraphRect ( int&nbsp;para ) const
+</h3> 
+返回<em>para</em>段落在内容坐标中的矩形，或者如果<em>para</em>超出范围，返回一个无效矩形。
+
+<h3 class=fn>int <a name="paragraphs"></a>QTextEdit::paragraphs () const
+</h3>
+返回文本中的段落数，它可以为0。
+
+<h3 class=fn>void <a name="paste"></a>QTextEdit::paste ()<tt> [虚 槽]</tt>
+</h3>
+把剪贴板中的文本粘贴到文本编辑的当前光标位置。只有一般文本能够被粘贴。
+<p> 如果剪贴板中没有文本，就什么也没发生。
+<p> <p>也可以参考<a href="#pasteSubType">pasteSubType</a>(), <a href="#cut">cut</a>()和<a href="#copy">QTextEdit::copy</a>()。
+
+<h3 class=fn>void <a name="pasteSubType"></a>QTextEdit::pasteSubType ( const&nbsp;<a href="qcstring.html">QCString</a>&nbsp;&amp;&nbsp;subtype )<tt> [虚 槽]</tt>
+</h3>
+把剪贴板中格式为<em>subtype</em>的文本粘贴到文本编辑的当前光标位置。<em>subtype</em>可以是“plain”或“html”。
+<p> 如果剪贴板中没有<em>subtype</em>格式的文本，就什么也没发生。
+<p> <p>也可以参考<a href="#paste">paste</a>(), <a href="#cut">cut</a>()和<a href="#copy">QTextEdit::copy</a>()。
+
+<h3 class=fn>void <a name="placeCursor"></a>QTextEdit::placeCursor ( const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;pos, QTextCursor&nbsp;*&nbsp;c = 0 )<tt> [虚 槽]</tt>
+</h3>
+在离<em>pos</em>位置（在内容坐标中）最近的字符放置光标<em>c</em>。如果<em>c</em>为0，默认的文本光标被放置。
+<p> <p>也可以参考<a href="#setCursorPosition">setCursorPosition</a>()。
+
+<h3 class=fn>int <a name="pointSize"></a>QTextEdit::pointSize () const
+</h3>
+返回当前格式的字体的点的大小。
+<p> <p>也可以参考<a href="#setFamily">setFamily</a>(), <a href="#setCurrentFont">setCurrentFont</a>()和<a href="#setPointSize">setPointSize</a>()。
+
+<h3 class=fn>void <a name="redo"></a>QTextEdit::redo ()<tt> [虚 槽]</tt>
+</h3>
+恢复上一次操作。
+<p> 如果没有操作可以恢复，例如，在撤销/恢复历史中没有恢复步骤，就什么也没发生。
+<p> <p>也可以参考<a href="#redoAvailable">redoAvailable</a>(), <a href="#undo">undo</a>()和<a href="#undoDepth-prop">undoDepth</a>。
+
+<h3 class=fn>void <a name="redoAvailable"></a>QTextEdit::redoAvailable ( bool&nbsp;yes )<tt> [信号]</tt>
+</h3> 
+<p> 当恢复的可用性发生改变时，这个信号被发射。如果<em>yes</em>为真，那么<a href="#redo">redo</a>()可以一直工作到<a href="#redoAvailable">redoAvailable</a>( FALSE )被发射。
+<p> <p>也可以参考<a href="#redo">redo</a>()和<a href="#undoDepth-prop">undoDepth</a>。
+
+<h3 class=fn>void <a name="removeParagraph"></a>QTextEdit::removeParagraph ( int&nbsp;para )<tt> [虚 槽]</tt>
+</h3> 
+移除<em>para</em>段落。
+
+<h3 class=fn>void <a name="removeSelectedText"></a>QTextEdit::removeSelectedText ( int&nbsp;selNum = 0 )<tt> [虚 槽]</tt>
+</h3>  
+删除<em>selNum</em>（默认为0）选择区中的被选定文本（也就是默认选择的文本）。如果没有被选定文本，就什么也没发生。
+<p> <p>也可以参考<a href="#selectedText-prop">selectedText</a>和<a href="#removeSelection">removeSelection</a>()。
+
+<h3 class=fn>void <a name="removeSelection"></a>QTextEdit::removeSelection ( int&nbsp;selNum = 0 )<tt> [虚 槽]</tt>
+</h3> 
+移除<em>selNum</em>（默认为0）选择区。这不会移除被选定文本。
+<p> <p>也可以参考<a href="#removeSelectedText">removeSelectedText</a>()。
+
+<h3 class=fn>void <a name="repaintChanged"></a>QTextEdit::repaintChanged ()<tt> [保护]</tt>
+</h3> 
+重新绘制任何已经改变的段落。
+<p> 尽管在内部广泛地使用，但是你也不应该需要自己调用这个函数。
+
+<h3 class=fn>void <a name="returnPressed"></a>QTextEdit::returnPressed ()<tt> [信号]</tt>
+</h3> 
+<p> 如果用户按下回车键或者换行键，这个信号被发射。
+
+<h3 class=fn>void <a name="scrollToAnchor"></a>QTextEdit::scrollToAnchor ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;name )<tt> [虚 槽]</tt>
+</h3> 
+滚动文本编辑来使在被叫作<em>name</em>的锚的文本可视，如果它在文档中可以被发现的话。如果这个锚不能被找到，就没有滚动发生。锚是使用HTML锚标签，也就是<tt>&lt;a name="target"&gt;</tt>定义的。
+
+<h3 class=fn>void <a name="scrollToBottom"></a>QTextEdit::scrollToBottom ()<tt> [虚 槽]</tt>
+</h3> 
+滚动到文本的底部并且如果需要就重新执行格式操作。
+
+<h3 class=fn>void <a name="selectAll"></a>QTextEdit::selectAll ( bool&nbsp;select = TRUE )<tt> [虚 槽]</tt>
+</h3>
+如果<em>select</em>为真（默认），所有的文本都被选择作为选择区0。如果<em>select</em>为假，所有的文本都被取消选择，也就是默认选择区（选择区0）被清空。
+<p> <p>也可以参考<a href="#selectedText-prop">selectedText</a>。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="selectedText"></a>QTextEdit::selectedText () const
+</h3>
+<p>返回被选定文本（从选择区0中）或者如果当前没有被选定文本（在选择区0中）返回空字符串。详细情况请参考<a href="qtextedit.html#selectedText-prop">“selectedText”</a>属性。
+
+<h3 class=fn>void <a name="selectionChanged"></a>QTextEdit::selectionChanged ()<tt> [信号]</tt>
+</h3>  
+<p> 只要选择发生改变，这个信号就被发射。
+<p> <p>也可以参考<a href="#setSelection">setSelection</a>()和<a href="#copyAvailable">copyAvailable</a>()。
+
+<h3 class=fn>void <a name="setAlignment"></a>QTextEdit::setAlignment ( int&nbsp;a )<tt> [虚 槽]</tt>
+</h3>
+设置当前段落的对齐方式为<em>a</em>。有效的对齐方式为<a href="qt.html#AlignmentFlags-enum">Qt::AlignLeft</a>、<a href="qt.html#AlignmentFlags-enum">Qt::AlignRight</a>、Qt::AlignJustify和Qt::AlignCenter（这个是水平中间）。
+<p>在<a href="qmultilineedit.html#setAlignment">QMultiLineEdit</a>中被重新实现。
+
+<h3 class=fn>void <a name="setBold"></a>QTextEdit::setBold ( bool&nbsp;b )<tt> [虚 槽]</tt>
+</h3>
+如果<em>b</em>为真，设置当前格式为粗体，否则设置当前格式为非粗体。
+<p> <p>也可以参考<a href="#bold">bold</a>()。
+
+<h3 class=fn>void <a name="setColor"></a>QTextEdit::setColor ( const&nbsp;<a href="qcolor.html">QColor</a>&nbsp;&amp;&nbsp;c )<tt> [虚 槽]</tt>
+</h3>
+设置当前格式的颜色，也就是文本的颜色，为<em>c</em>。
+<p> <p>也可以参考<a href="#color">color</a>()和<a href="#paper-prop">paper</a>。
+<p>实例：<a href="actiongroup-example.html#x1058">action/actiongroup/editor.cpp</a>。
+
+<h3 class=fn>void <a name="setCurrentFont"></a>QTextEdit::setCurrentFont ( const&nbsp;<a href="qfont.html">QFont</a>&nbsp;&amp;&nbsp;f )<tt> [虚 槽]</tt>
+</h3> 
+<p> 设置当前格式的字体为<em>f</em>。
+<p> <p>也可以参考<a href="#font">font</a>(), <a href="#setPointSize">setPointSize</a>()和<a href="#setFamily">setFamily</a>()。
+
+<h3 class=fn>void <a name="setCursorPosition"></a>QTextEdit::setCursorPosition ( int&nbsp;para, int&nbsp;index )<tt> [虚 槽]</tt>
+</h3>
+设置光标到<em>para</em>段落的<em>index</em>位置。
+<p> <p>也可以参考<a href="#getCursorPosition">getCursorPosition</a>()。
+
+<h3 class=fn>void <a name="setFamily"></a>QTextEdit::setFamily ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;fontFamily )<tt> [虚 槽]</tt>
+</h3>
+设置当前格式的字体族为<em>fontFamily</em>。
+<p> <p>也可以参考<a href="#family">family</a>()和<a href="#setCurrentFont">setCurrentFont</a>()。
+
+<h3 class=fn>void <a name="setItalic"></a>QTextEdit::setItalic ( bool&nbsp;b )<tt> [虚 槽]</tt>
+</h3>
+如果<em>b</em>为真，设置当前格式为斜体，否则设置当前格式为非斜体。
+<p> <p>也可以参考<a href="#italic">italic</a>()。
+
+<h3 class=fn>void <a name="setLinkUnderline"></a>QTextEdit::setLinkUnderline ( bool )<tt> [虚 槽]</tt>
+</h3>
+<p>设置超文本链接是否显示下划线。详细情况请参考<a href="qtextedit.html#linkUnderline-prop">“linkUnderline”</a>属性。
+
+<h3 class=fn>void <a name="setMimeSourceFactory"></a>QTextEdit::setMimeSourceFactory ( <a href="qmimesourcefactory.html">QMimeSourceFactory</a>&nbsp;*&nbsp;factory )<tt> [虚 槽]</tt>
+</h3> 
+设置文本编辑的mime源工厂为 <em>factory</em>。详细情况请参考<a href="qmimesourcefactory.html">QMimeSourceFactory</a>。
+<p> <p>也可以参考<a href="#mimeSourceFactory">mimeSourceFactory</a>()。
+
+<h3 class=fn>void <a name="setModified"></a>QTextEdit::setModified ( bool&nbsp;m )<tt> [虚 槽]</tt>
+</h3>
+<p>设置文档是否已经被用户修改为<em>m</em>。详细情况请参考<a href="qtextedit.html#modified-prop">“modified”</a>属性。
+
+<h3 class=fn>void <a name="setOverwriteMode"></a>QTextEdit::setOverwriteMode ( bool&nbsp;b )<tt> [虚 槽]</tt>
+</h3>
+<p>设置文本编辑的覆盖模式为<em>b</em>。详细情况请参考<a href="qtextedit.html#overwriteMode-prop">“overwriteMode”</a>属性。
+
+<h3 class=fn>void <a name="setPaper"></a>QTextEdit::setPaper ( const&nbsp;<a href="qbrush.html">QBrush</a>&nbsp;&amp;&nbsp;pap )<tt> [虚 槽]</tt>
+</h3>
+<p>设置背景（纸）的画刷为<em>pap</em>。详细情况请参考<a href="qtextedit.html#paper-prop">“paper”</a>属性。
+
+<h3 class=fn>void <a name="setParagraphBackgroundColor"></a>QTextEdit::setParagraphBackgroundColor ( int&nbsp;para, const&nbsp;<a href="qcolor.html">QColor</a>&nbsp;&amp;&nbsp;bg )<tt> [虚 槽]</tt>
+</h3> 
+设置<em>para</em>段落的背景色为<em>bg</em>。
+
+<h3 class=fn>void <a name="setPointSize"></a>QTextEdit::setPointSize ( int&nbsp;s )<tt> [虚 槽]</tt>
+</h3>
+设置当前格式的点大小为<em>s</em>。
+<p> 注意如果<em>s</em>为0或者负数，这个函数的行为是不确定的。
+<p> <p>也可以参考<a href="#pointSize">pointSize</a>(), <a href="#setCurrentFont">setCurrentFont</a>()和<a href="#setFamily">setFamily</a>()。
+
+<h3 class=fn>void <a name="setReadOnly"></a>QTextEdit::setReadOnly ( bool&nbsp;b )<tt> [虚 槽]</tt>
+</h3>
+<p>设置文本编辑是否只读为<em>b</em>。详细情况请参考<a href="qtextedit.html#readOnly-prop">“readOnly”</a>属性。
+
+<h3 class=fn>void <a name="setSelection"></a>QTextEdit::setSelection ( int&nbsp;paraFrom, int&nbsp;indexFrom, int&nbsp;paraTo, int&nbsp;indexTo, int&nbsp;selNum = 0 )<tt> [虚 槽]</tt>
+</h3>  
+设置一个选择从<em>paraFrom</em>段落的<em>indexFrom</em>位置开始，直到<em>paraTo</em>段落的<em>indexTo</em>位置结束。有不同id（selNum）的选择区不会被移除，有相同id（selNum）的选择区会被移除。
+<p> 使用<em>selNum</em>选择区的选择设置。如果<em>selNum</em>为0，这个就是默任选择了。
+<p> 如果<em>selNum</em>为0，光标被移动到这个选择的结尾，否则光标位置保持不变。
+<p> <p>也可以参考<a href="#getSelection">getSelection</a>()和<a href="#selectedText-prop">selectedText</a>。
+
+<h3 class=fn>void <a name="setSelectionAttributes"></a>QTextEdit::setSelectionAttributes ( int&nbsp;selNum, const&nbsp;<a href="qcolor.html">QColor</a>&nbsp;&amp;&nbsp;back, bool&nbsp;invertText )<tt> [虚 槽]</tt>
+</h3>
+设置<em>selNum</em>选择区的背景色为<em>back</em>并且指定这个选择区的文本是否应该被使用<em>invertText</em>反白。
+<p> 这个只在<em>selNum</em> > 0的时候工作。默认选择（<em>selNum</em> == 0）从这个窗口部件的<a href="qwidget.html#colorGroup">colorGroup</a>()得到它的属性。
+
+<h3 class=fn>void <a name="setStyleSheet"></a>QTextEdit::setStyleSheet ( <a href="qstylesheet.html">QStyleSheet</a>&nbsp;*&nbsp;styleSheet )<tt> [虚 槽]</tt>
+</h3> 
+设置这个文本编辑使用的样式单为<em>styleSheet</em>。改变仅对通过<a href="#setText">setText</a>()或<a href="#append">append</a>()新增的文本有效。
+<p> <p>也可以参考<a href="#styleSheet">styleSheet</a>()。
+
+<h3 class=fn>void <a name="setTabStopWidth"></a>QTextEdit::setTabStopWidth ( int&nbsp;ts )<tt> [虚 槽]</tt>
+</h3>
+<p>设置tab stop宽度为<em>ts</em>象素。详细情况请参考<a href="qtextedit.html#tabStopWidth-prop">“tabStopWidth”</a>属性。
+
+<h3 class=fn>void <a name="setText"></a>QTextEdit::setText ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;txt )<tt> [槽]</tt>
+</h3>
+<p>设置文本编辑的文本为<em>txt</em>。详细情况请参考<a href="qtextedit.html#text-prop">“text”</a>属性。
+
+<h3 class=fn>void <a name="setText-2"></a>QTextEdit::setText ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;context )<tt> [虚 槽]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 改变文本编辑的文本为<em>txt</em>并且上下文为<em>context</em>。任何以前的文本都被移除。
+<p> <em>text</em>可以被解释为一般文本或者多信息文本，取决于<a href="#textFormat">textFormat</a>()。默认设置为<a href="qt.html#TextFormat-enum">AutoText</a>，也就是说文本编辑从<em>text</em>中自动检测格式。
+<p> 选项<em>context</em>就是文本编辑的<a href="qmimesourcefactory.html">QMimeSourceFactory</a>用来解析文件和图片的定位的路径。（请参考<a href="#QTextEdit">QTextEdit::QTextEdit</a>()。）当查询数据时，它被传递给<a href="#mimeSourceFactory">mimeSourceFactory</a>()。
+<p> 注意这个函数会清空撤销/恢复历史。
+<p> <p>也可以参考<a href="#text-prop">text</a>和<a href="#textFormat-prop">textFormat</a>。
+
+<h3 class=fn>void <a name="setTextFormat"></a>QTextEdit::setTextFormat ( <a href="qt.html#TextFormat-enum">TextFormat</a>&nbsp;f )<tt> [虚 槽]</tt>
+</h3>
+<p>设置文本格式：多信息文本、一般文本或者自动文本为<em>f</em>。详细情况请参考<a href="qtextedit.html#textFormat-prop">“textFormat”</a>属性。
+
+<h3 class=fn>void <a name="setUnderline"></a>QTextEdit::setUnderline ( bool&nbsp;b )<tt> [虚 槽]</tt>
+</h3>
+如果<em>b</em>为真，设置当前格式是有下划线的，否则设置当前格式是没有下划线的。
+<p> <p>也可以参考<a href="#underline">underline</a>()。
+
+<h3 class=fn>void <a name="setUndoDepth"></a>QTextEdit::setUndoDepth ( int&nbsp;d )<tt> [虚 槽]</tt>
+</h3>
+<p>设置撤销历史的深度为<em>d</em>。详细情况请参考<a href="qtextedit.html#undoDepth-prop">“undoDepth”</a>属性。
+
+<h3 class=fn>void <a name="setUndoRedoEnabled"></a>QTextEdit::setUndoRedoEnabled ( bool&nbsp;b )<tt> [虚 槽]</tt>
+</h3>
+<p>设置撤销/恢复是否生效为<em>b</em>。详细情况请参考<a href="qtextedit.html#undoRedoEnabled-prop">“undoRedoEnabled”</a>属性。
+
+<h3 class=fn>void <a name="setVerticalAlignment"></a>QTextEdit::setVerticalAlignment ( <a href="qtextedit.html#VerticalAlignment-enum">VerticalAlignment</a>&nbsp;a )<tt> [虚 槽]</tt>
+</h3>
+设置当前格式的垂直对齐方式，也就是文本的，为<em>a</em>。
+<p> <p>也可以参考<a href="#color">color</a>()和<a href="#paper-prop">paper</a>。
+
+<h3 class=fn>void <a name="setWordWrap"></a>QTextEdit::setWordWrap ( <a href="qtextedit.html#WordWrap-enum">WordWrap</a>&nbsp;mode )<tt> [虚 槽]</tt>
+</h3>
+<p>设置自动换行模式为<em>mode</em>。详细情况请参考<a href="qtextedit.html#wordWrap-prop">“wordWrap”</a>属性。
+
+<h3 class=fn>void <a name="setWrapColumnOrWidth"></a>QTextEdit::setWrapColumnOrWidth ( int )<tt> [虚 槽]</tt>
+</h3>
+<p>设置将被自动换行的文本的位置（根据自动换行模式决定是象素还是列数）。详细情况请参考<a href="qtextedit.html#wrapColumnOrWidth-prop">“wrapColumnOrWidth”</a>属性。
+
+<h3 class=fn>void <a name="setWrapPolicy"></a>QTextEdit::setWrapPolicy ( <a href="qtextedit.html#WrapPolicy-enum">WrapPolicy</a>&nbsp;policy )<tt> [虚 槽]</tt>
+</h3>
+<p>设置自动换行策略，是在空白符号还是在任意处为<em>policy</em>。详细情况请参考<a href="qtextedit.html#wrapPolicy-prop">“wrapPolicy”</a>属性。
+
+<h3 class=fn><a href="qstylesheet.html">QStyleSheet</a>&nbsp;* <a name="styleSheet"></a>QTextEdit::styleSheet () const
+</h3> 
+返回文本编辑中当前使用的<a href="qstylesheet.html">QStyleSheet</a>。
+<p> <p>也可以参考<a href="#setStyleSheet">setStyleSheet</a>()。
+<p>实例：<a href="helpviewer-example.html#x1033">helpviewer/helpwindow.cpp</a>。
+
+<h3 class=fn>int <a name="tabStopWidth"></a>QTextEdit::tabStopWidth () const
+</h3>
+<p>返回tab stop的象素宽度。详细情况请参考<a href="qtextedit.html#tabStopWidth-prop">“tabStopWidth”</a>属性。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text"></a>QTextEdit::text () const
+</h3>
+<p>返回文本编辑的文本。详细情况请参考<a href="qtextedit.html#text-prop">“text”</a>属性。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text-2"></a>QTextEdit::text ( int&nbsp;para ) const
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回<em>para</em>段落的文本。
+<p> 如果<a href="#textFormat">textFormat</a>()为<a href="qt.html#TextFormat-enum">RichText</a>，文本将包含HTML格式标签。
+
+<h3 class=fn>void <a name="textChanged"></a>QTextEdit::textChanged ()<tt> [信号]</tt>
+</h3>  
+<p> 只要文本编辑中的文本发生改变，这个信号就被发射。
+<p> <p>也可以参考<a href="#text-prop">text</a>和<a href="#append">append</a>()。
+<p>实例：<a href="helpviewer-example.html#x1035">helpviewer/helpwindow.cpp</a>、<a href="qwerty-example.html#x398">qwerty/qwerty.cpp</a>和<a href="rot-example.html#x1561">rot13/rot13.cpp</a>。
+
+<h3 class=fn>QTextCursor * <a name="textCursor"></a>QTextEdit::textCursor () const<tt> [保护]</tt>
+</h3>
+<p> 返回文本编辑的文本光标。
+<p> <b>警告：</b> QTextCursor不在公有的应用编程接口中，但在一些特殊环境中你也许需要使用它。
+
+<h3 class=fn><a href="qt.html#TextFormat-enum">TextFormat</a> <a name="textFormat"></a>QTextEdit::textFormat () const
+</h3>
+<p>返回文本格式：多信息文本、一般文本或者自动文本。详细情况请参考<a href="qtextedit.html#textFormat-prop">“textFormat”</a>属性。
+
+<h3 class=fn>bool <a name="underline"></a>QTextEdit::underline () const
+</h3>
+如果当前格式是有下划线的，返回真，否则返回假。
+<p> <p>也可以参考<a href="#setUnderline">setUnderline</a>()。
+
+<h3 class=fn>void <a name="undo"></a>QTextEdit::undo ()<tt> [虚 槽]</tt>
+</h3>
+撤销上一次操作。
+<p> 如果没有操作可以撤销，例如在撤销/恢复历史中没有撤销步骤，那就什么也没发生。
+<p> <p>也可以参考<a href="#undoAvailable">undoAvailable</a>(), <a href="#redo">redo</a>()和<a href="#undoDepth-prop">undoDepth</a>。
+
+<h3 class=fn>void <a name="undoAvailable"></a>QTextEdit::undoAvailable ( bool&nbsp;yes )<tt> [信号]</tt>
+</h3> 
+<p> 当撤销的可能性发生变化时，这个信号被发射。如果<em>yes</em>为真，那么<a href="#undo">undo</a>()将会一直工作到<a href="#undoAvailable">undoAvailable</a>( FALSE )下一次被发射为止。
+<p> <p>也可以参考<a href="#undo">undo</a>()和<a href="#undoDepth-prop">undoDepth</a>。
+
+<h3 class=fn>int <a name="undoDepth"></a>QTextEdit::undoDepth () const
+</h3>
+<p>返回撤销历史的深度。详细情况请参考<a href="qtextedit.html#undoDepth-prop">“undoDepth”</a>属性。
+
+<h3 class=fn><a href="qtextedit.html#WordWrap-enum">WordWrap</a> <a name="wordWrap"></a>QTextEdit::wordWrap () const
+</h3>
+<p>返回自动换行模式。详细情况请参考<a href="qtextedit.html#wordWrap-prop">“wordWrap”</a>属性。
+
+<h3 class=fn>int <a name="wrapColumnOrWidth"></a>QTextEdit::wrapColumnOrWidth () const
+</h3>
+<p>返回将被自动换行的文本的位置（根据自动换行模式决定是象素还是列数）。详细情况请参考<a href="qtextedit.html#wrapColumnOrWidth-prop">“wrapColumnOrWidth”</a>属性。
+
+<h3 class=fn><a href="qtextedit.html#WrapPolicy-enum">WrapPolicy</a> <a name="wrapPolicy"></a>QTextEdit::wrapPolicy () const
+</h3>
+<p>返回自动换行策略是在空白符号还是在任意处。详细情况请参考<a href="qtextedit.html#wrapPolicy-prop">“wrapPolicy”</a>属性。
+
+<h3 class=fn>void <a name="zoomIn"></a>QTextEdit::zoomIn ( int&nbsp;range )<tt> [虚 槽]</tt>
+</h3>
+通过把基本字体大小增大<em>range</em>点并且重新计算所有字体大小来放大文本。这不会改变任何图片的大小。
+<p> <p>也可以参考<a href="#zoomOut">zoomOut</a>()。
+
+<h3 class=fn>void <a name="zoomIn-2"></a>QTextEdit::zoomIn ()<tt> [虚 槽]</tt>
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 通过把基本字体大小增大1点并且重新计算所有字体大小来放大文本。这不会改变任何图片的大小。
+<p> <p>也可以参考<a href="#zoomOut">zoomOut</a>()。
+
+<p> 
+<h3 class=fn>void <a name="zoomOut"></a>QTextEdit::zoomOut ( int&nbsp;range )<tt> [虚 槽]</tt>
+</h3> 
+通过把基本字体大小缩小<em>range</em>点并且重新计算所有字体大小来放大文本。这不会改变任何图片的大小。
+<p> <p>也可以参考<a href="#zoomIn">zoomIn</a>()。
+
+<h3 class=fn>void <a name="zoomOut-2"></a>QTextEdit::zoomOut ()<tt> [虚 槽]</tt>
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 通过把基本字体大小缩小1点并且重新计算所有字体大小来放大文本。这不会改变任何图片的大小。
+<p> <p>也可以参考<a href="#zoomIn">zoomIn</a>()。
+
+<h3 class=fn>void <a name="zoomTo"></a>QTextEdit::zoomTo ( int&nbsp;size )<tt> [虚 槽]</tt>
+</h3> 
+通过把基本字体大小变为<em>size</em>点并且重新计算所有字体大小来显示文本。这不会改变任何图片的大小。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn><a href="qstring.html">QString</a> <a name="documentTitle-prop"></a>documentTitle</h3>
+<p>这个属性保存的是从文本中分析出的文档标题。
+<p>对于<a href="qt.html#TextFormat-enum">PlainText</a>，标题将为空字符串。对于<a href="qt.html#TextFormat-enum">RichText</a>，如果存在，标题将为<tt>&lt;title&gt;</tt>标签之间的文本，否则为空字符串。
+<p>通过<a href="#documentTitle">documentTitle</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="hasSelectedText-prop"></a>hasSelectedText</h3> 
+<p>这个属性保存的是是否有文本被选择到选择区0中。
+<p>通过<a href="#hasSelectedText">hasSelectedText</a>()来获得属性值。
+
+<h3 class=fn>int <a name="length-prop"></a>length</h3>
+<p>这个属性保存的是文本的字符数。
+<p>通过<a href="#length">length</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="linkUnderline-prop"></a>linkUnderline</h3>
+<p>这个属性保存的是超文本链接是否使用下划线。
+<p>如果为真（默认），超文本链接将被显示下划线。如果为假，链接将不被显示下划线。
+<p>通过<a href="#setLinkUnderline">setLinkUnderline</a>()设置属性值并且通过<a href="#linkUnderline">linkUnderline</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="modified-prop"></a>modified</h3> 
+<p>这个属性保存的是文档是否已经被用户修改。
+<p>通过<a href="#setModified">setModified</a>()设置属性值并且通过<a href="#isModified">isModified</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="overwriteMode-prop"></a>overwriteMode</h3>
+<p>这个属性保存的是文本编辑的覆盖模式。
+<p>如果为真（默认），用户输入的文本都被插入到文本编辑中并且光标右面的文本都会移动到不碍事的地方。如果为假，编辑器是覆盖模式，也就是说新文本将覆盖光标右面存在的任何文本。
+<p>通过<a href="#setOverwriteMode">setOverwriteMode</a>()设置属性值并且通过<a href="#isOverwriteMode">isOverwriteMode</a>()来获得属性值。
+
+<h3 class=fn><a href="qbrush.html">QBrush</a> <a name="paper-prop"></a>paper</h3>
+<p>这个属性保存的是背景（纸）的画刷。
+<p>这个画刷是当前用于绘制文本编辑的背景的。初始设置是空画刷。
+<p>通过<a href="#setPaper">setPaper</a>()设置属性值并且通过<a href="#paper">paper</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="readOnly-prop"></a>readOnly</h3>
+<p>这个属性保存的是文本编辑是否只读。
+<p>在只读的文本编辑中，用户只能在文本中浏览和选择文本，修改文本是不可能的。
+<p> 这个属性默认为假。
+<p>通过<a href="#setReadOnly">setReadOnly</a>()设置属性值并且通过<a href="#isReadOnly">isReadOnly</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="selectedText-prop"></a>selectedText</h3>
+<p>这个属性保存的是被选择的文本（在选择区0中）或者如果当前没有被选择的文本（在选择区0中）就是空字符串。
+<p>这个文本不管文本格式总是被作为<a href="qt.html#TextFormat-enum">PlainText</a>返回。在Qt的未来的版本中，根据文本格式，HTML的子集<em>可能</em>被返回。
+<p> <p>也可以参考<a href="#hasSelectedText-prop">hasSelectedText</a>。
+<p>通过<a href="#selectedText">selectedText</a>()来获得属性质。
+
+<h3 class=fn>int <a name="tabStopWidth-prop"></a>tabStopWidth</h3>
+<p>这个属性保存的是tab stop的象素宽度。
+<p>通过<a href="#setTabStopWidth">setTabStopWidth</a>()设置属性值并且通过<a href="#tabStopWidth">tabStopWidth</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text-prop"></a>text</h3>
+<p>这个属性保存的是文本编辑的文本。
+<p>这里没有默认文本。
+<p> 在设置的时候，任何以前的文本都被删除了。
+<p> 根据<a href="#textFormat">textFormat</a>()，文本可以被作为一般文本或者多信息文本来解释。默认设置为<a href="qt.html#TextFormat-enum">AutoText</a>，也就是说文本编辑自动探测文本格式。
+<p> 对于多信息文本，在可编辑的QTextEdit上调用<a href="#text">text</a>()将会导致文本会被文本编辑重新生成。这也许意味着被返回的<a href="qstring.html">QString</a>也许和原来被设置的不同。
+<p> <p>也可以参考<a href="#textFormat-prop">textFormat</a>。
+<p>通过<a href="#setText">setText</a>()设置属性值并且通过<a href="#text">text</a>()来获得属性值。
+
+<h3 class=fn><a href="qt.html#TextFormat-enum">TextFormat</a> <a name="textFormat-prop"></a>textFormat</h3>
+<p>这个属性保存的是文本格式：多信息文本、一般文本或者自动文本。
+<p>文本格式是下列之一：
+<ul>
+<li> PlainText - 所有的文本，除了新行符，包括空格都被逐字地显示。只要文本中出现一个新行符，文本编辑就插入一个硬换行并且开始一个新的段落。
+<li> RichText - 多信息文本表现。可用的样式在默认样式单<a href="qstylesheet.html#defaultSheet">QStyleSheet::defaultSheet</a>()中定义。
+<li> AutoText - 这是默认值。文本编辑会自动探测哪一个表现样式更好，<a href="qt.html#TextFormat-enum">PlainText</a>或<a href="qt.html#TextFormat-enum">RichText</a>这个是通过使用<a href="qstylesheet.html#mightBeRichText">QStyleSheet::mightBeRichText</a>()函数完成的。
+</ul>
+<p>通过<a href="#setTextFormat">setTextFormat</a>()设置属性值并且通过<a href="#textFormat">textFormat</a>()来获得属性值。
+
+<h3 class=fn>int <a name="undoDepth-prop"></a>undoDepth</h3>
+<p>这个属性保存的是撤销历史的深度。
+<p>也就是撤销/恢复历史中的最大步数。默认为100。
+<p> <p>也可以参考<a href="#undo">undo</a>()和<a href="#redo">redo</a>()。
+<p>通过<a href="#setUndoDepth">setUndoDepth</a>()设置属性值并且通过<a href="#undoDepth">undoDepth</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="undoRedoEnabled-prop"></a>undoRedoEnabled</h3> 
+<p>这个属性保存的是撤销/恢复是否生效。
+<p>默认为真。
+<p>通过<a href="#setUndoRedoEnabled">setUndoRedoEnabled</a>()设置属性值并且通过<a href="#isUndoRedoEnabled">isUndoRedoEnabled</a>()来得到属性值。
+
+<h3 class=fn><a href="qtextedit.html#WordWrap-enum">WordWrap</a> <a name="wordWrap-prop"></a>wordWrap</h3>
+<p>这个属性保存的是自动换行模式。
+<p>默认模式是<a href="#WordWrap-enum">WidgetWidth</a>，也就是在文本编辑右边缘的单字将被自动换行。在空白字符处自动换行，保证整个单字不被分割。如果你想在单字内自动换行，请使用<a href="#setWrapPolicy">setWrapPolicy</a>()。如果你设置自动换行模式为<a href="#WordWrap-enum">FixedPixelWidth</a>或者<a href="#WordWrap-enum">FixedColumnWidth</a>，你也应该调用<a href="#setWrapColumnOrWidth">setWrapColumnOrWidth</a>()你希望的宽度。
+<p> <p>也可以参考<a href="#WordWrap-enum">WordWrap</a>、<a href="#wrapColumnOrWidth-prop">wrapColumnOrWidth</a>和<a href="#wrapPolicy-prop">wrapPolicy</a>。
+<p>通过<a href="#setWordWrap">setWordWrap</a>()设置属性值并且通过<a href="#wordWrap">wordWrap</a>()来获得属性值。
+
+<h3 class=fn>int <a name="wrapColumnOrWidth-prop"></a>wrapColumnOrWidth</h3>
+<p>这个属性保存的是被自动换行的文本的位置（根据自动换行模式来决定是像素还是列）。
+<p>如果自动换行模式为<a href="#WordWrap-enum">FixedPixelWidth</a>，那么这个值就是从文本编辑左边界开始需要自动换行的象素数量。如果自动换行模式为<a href="#WordWrap-enum">FixedColumnWidth</a>，那么这个值就是从文本编辑左边界开始需要自动换行的列数。
+<p> <p>也可以参考<a href="#wordWrap-prop">wordWrap</a>。
+<p>通过<a href="#setWrapColumnOrWidth">setWrapColumnOrWidth</a>()设置属性值并且通过<a href="#wrapColumnOrWidth">wrapColumnOrWidth</a>()来获得属性值。
+
+<h3 class=fn><a href="qtextedit.html#WrapPolicy-enum">WrapPolicy</a> <a name="wrapPolicy-prop"></a>wrapPolicy</h3>
+<p>这个属性保存的是自动换行策略，在空白符号还是在任何地方。
+<p>当自动换行模式不是<a href="#WordWrap-enum">NoWrap</a>的时候，定义文本在哪里自动换行。可以选择的是<a href="#WrapPolicy-enum">AtWhiteSpace</a>（默认）和<a href="#WrapPolicy-enum">Anywhere</a>。
+<p> <p>也可以参考<a href="#wordWrap-prop">wordWrap</a>。
+<p>通过<a href="#setWrapPolicy">setWrapPolicy</a>()设置属性值并且通过<a href="#wrapPolicy">wrapPolicy</a>()来获得属性值。
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

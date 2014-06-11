@@ -1,0 +1,731 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QFileDialog类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QFileDialog类参考</h1>
+
+<p>QFileDialog类提供了允许用户选择文件或者目录的对话框。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qfiledialog-h.html">qfiledialog.h</a>&gt;</tt>
+<p>继承了<a href="qdialog.html">QDialog</a>。
+<p><a href="qfiledialog-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QFileDialog"><b>QFileDialog</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;dirName, const&nbsp;QString&nbsp;&amp;&nbsp;filter = QString::null, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;modal = FALSE )</div></li>
+<li><div class=fn><a href="#QFileDialog-2"><b>QFileDialog</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;modal = FALSE )</div></li>
+<li><div class=fn><a href="#~QFileDialog"><b>~QFileDialog</b></a> ()</div></li>
+<li><div class=fn>QString <a href="#selectedFile"><b>selectedFile</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#selectedFilter"><b>selectedFilter</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setSelectedFilter"><b>setSelectedFilter</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;mask )</div></li>
+<li><div class=fn>virtual void <a href="#setSelectedFilter-2"><b>setSelectedFilter</b></a> ( int&nbsp;n )</div></li>
+<li><div class=fn>void <a href="#setSelection"><b>setSelection</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;filename )</div></li>
+<li><div class=fn>void <a href="#selectAll"><b>selectAll</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>QStringList <a href="#selectedFiles"><b>selectedFiles</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#dirPath"><b>dirPath</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setDir"><b>setDir</b></a> ( const&nbsp;QDir&nbsp;&amp;&nbsp;dir )</div></li>
+<li><div class=fn>const QDir * <a href="#dir"><b>dir</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setShowHiddenFiles"><b>setShowHiddenFiles</b></a> ( bool&nbsp;s )</div></li>
+<li><div class=fn>bool <a href="#showHiddenFiles"><b>showHiddenFiles</b></a> () const</div></li>
+<li><div class=fn>void <a href="#rereadDir"><b>rereadDir</b></a> ()</div></li>
+<li><div class=fn>void <a href="#resortDir"><b>resortDir</b></a> ()</div></li>
+<li><div class=fn>enum <a href="#Mode-enum"><b>Mode</b></a> { AnyFile, ExistingFile, Directory, ExistingFiles, DirectoryOnly }</div></li>
+<li><div class=fn>void <a href="#setMode"><b>setMode</b></a> ( Mode )</div></li>
+<li><div class=fn>Mode <a href="#mode"><b>mode</b></a> () const</div></li>
+<li><div class=fn>enum <a href="#ViewMode-enum"><b>ViewMode</b></a> { Detail, List }</div></li>
+<li><div class=fn>enum <a href="#PreviewMode-enum"><b>PreviewMode</b></a> { NoPreview, Contents, Info }</div></li>
+<li><div class=fn>void <a href="#setViewMode"><b>setViewMode</b></a> ( ViewMode&nbsp;m )</div></li>
+<li><div class=fn>ViewMode <a href="#viewMode"><b>viewMode</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setPreviewMode"><b>setPreviewMode</b></a> ( PreviewMode&nbsp;m )</div></li>
+<li><div class=fn>PreviewMode <a href="#previewMode"><b>previewMode</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isInfoPreviewEnabled"><b>isInfoPreviewEnabled</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isContentsPreviewEnabled"><b>isContentsPreviewEnabled</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setInfoPreviewEnabled"><b>setInfoPreviewEnabled</b></a> ( bool )</div></li>
+<li><div class=fn>void <a href="#setContentsPreviewEnabled"><b>setContentsPreviewEnabled</b></a> ( bool )</div></li>
+<li><div class=fn>void <a href="#setInfoPreview"><b>setInfoPreview</b></a> ( QWidget&nbsp;*&nbsp;w, QFilePreview&nbsp;*&nbsp;preview )</div></li>
+<li><div class=fn>void <a href="#setContentsPreview"><b>setContentsPreview</b></a> ( QWidget&nbsp;*&nbsp;w, QFilePreview&nbsp;*&nbsp;preview )</div></li>
+<li><div class=fn>QUrl <a href="#url"><b>url</b></a> () const</div></li>
+<li><div class=fn>void <a href="#addFilter"><b>addFilter</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;filter )</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>void <a href="#setDir-2"><b>setDir</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;pathstr )</div></li>
+<li><div class=fn>void <a href="#setUrl"><b>setUrl</b></a> ( const&nbsp;QUrlOperator&nbsp;&amp;&nbsp;url )</div></li>
+<li><div class=fn>void <a href="#setFilter"><b>setFilter</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;newFilter )</div></li>
+<li><div class=fn>void <a href="#setFilters"><b>setFilters</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;filters )</div></li>
+<li><div class=fn>void <a href="#setFilters-2"><b>setFilters</b></a> ( const&nbsp;char&nbsp;**&nbsp;types )</div></li>
+<li><div class=fn>void <a href="#setFilters-3"><b>setFilters</b></a> ( const QStringList &amp; )</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#fileHighlighted"><b>fileHighlighted</b></a> ( const QString &amp; )</div></li>
+<li><div class=fn>void <a href="#fileSelected"><b>fileSelected</b></a> ( const QString &amp; )</div></li>
+<li><div class=fn>void <a href="#filesSelected"><b>filesSelected</b></a> ( const QStringList &amp; )</div></li>
+<li><div class=fn>void <a href="#dirEntered"><b>dirEntered</b></a> ( const QString &amp; )</div></li>
+<li><div class=fn>void <a href="#filterSelected"><b>filterSelected</b></a> ( const QString &amp; )</div></li>
+</ul>
+<h2>静态公有函数</h2>
+<ul>
+<li><div class=fn>QString <a href="#getOpenFileName"><b>getOpenFileName</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;startWith = QString::null, const&nbsp;QString&nbsp;&amp;&nbsp;filter = QString::null, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, const&nbsp;QString&nbsp;&amp;&nbsp;caption = QString::null, QString&nbsp;*&nbsp;selectedFilter = 0, bool&nbsp;resolveSymlinks = TRUE )</div></li>
+<li><div class=fn>QString <a href="#getSaveFileName"><b>getSaveFileName</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;startWith = QString::null, const&nbsp;QString&nbsp;&amp;&nbsp;filter = QString::null, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, const&nbsp;QString&nbsp;&amp;&nbsp;caption = QString::null, QString&nbsp;*&nbsp;selectedFilter = 0, bool&nbsp;resolveSymlinks = TRUE )</div></li>
+<li><div class=fn>QString <a href="#getExistingDirectory"><b>getExistingDirectory</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;dir = QString::null, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, const&nbsp;QString&nbsp;&amp;&nbsp;caption = QString::null, bool&nbsp;dirOnly = TRUE, bool&nbsp;resolveSymlinks = TRUE )</div></li>
+<li><div class=fn>QStringList <a href="#getOpenFileNames"><b>getOpenFileNames</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;filter = QString::null, const&nbsp;QString&nbsp;&amp;&nbsp;dir = QString::null, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, const&nbsp;QString&nbsp;&amp;&nbsp;caption = QString::null, QString&nbsp;*&nbsp;selectedFilter = 0, bool&nbsp;resolveSymlinks = TRUE )</div></li>
+<li><div class=fn>void <a href="#setIconProvider"><b>setIconProvider</b></a> ( QFileIconProvider&nbsp;*&nbsp;provider )</div></li>
+<li><div class=fn>QFileIconProvider * <a href="#iconProvider"><b>iconProvider</b></a> ()</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>bool <a href="#contentsPreview-prop"><b>contentsPreview</b></a>&nbsp;- 文件对话框是否提供当前选择文件的内容预览</div></li>
+<li><div class=fn>QString <a href="#dirPath-prop"><b>dirPath</b></a>&nbsp;- 文件对话框的工作目录&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>bool <a href="#infoPreview-prop"><b>infoPreview</b></a>&nbsp;- 文件对话框是否提供当前选择文件的信息预览</div></li>
+<li><div class=fn>Mode <a href="#mode-prop"><b>mode</b></a>&nbsp;- 文件对话框的模式</div></li>
+<li><div class=fn>PreviewMode <a href="#previewMode-prop"><b>previewMode</b></a>&nbsp;- 文件的对话框的预览模式</div></li>
+<li><div class=fn>QString <a href="#selectedFile-prop"><b>selectedFile</b></a>&nbsp;- 选择的文件的名称&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>QStringList <a href="#selectedFiles-prop"><b>selectedFiles</b></a>&nbsp;- 选择的文件的列表&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>QString <a href="#selectedFilter-prop"><b>selectedFilter</b></a>&nbsp;- 文件对话框中用户选择文件的过滤器&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>bool <a href="#showHiddenFiles-prop"><b>showHiddenFiles</b></a>&nbsp;- 文件对话框中隐藏文件是否显示</div></li>
+<li><div class=fn>ViewMode <a href="#viewMode-prop"><b>viewMode</b></a>&nbsp;- 文件对话框的视图模式</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>void <a href="#addWidgets"><b>addWidgets</b></a> ( QLabel&nbsp;*&nbsp;l, QWidget&nbsp;*&nbsp;w, QPushButton&nbsp;*&nbsp;b )</div></li>
+<li><div class=fn>void <a href="#addToolButton"><b>addToolButton</b></a> ( QButton&nbsp;*&nbsp;b, bool&nbsp;separator = FALSE )</div></li>
+<li><div class=fn>void <a href="#addLeftWidget"><b>addLeftWidget</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+<li><div class=fn>void <a href="#addRightWidget"><b>addRightWidget</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QFileDialog类提供了允许用户选择文件或者目录的对话框。
+<p> QFileDialog类允许用户在它们的文件系统上遍历来选择一个或多个文件或目录。
+<p> 最简单的方式是使用静态函数来创建一个QFileDialog。在Windows上，这些静态函数将调用本地Windows文件对话框并且在Mac OS X上，这些静态函数将调用本地Mac OS X文件对话框。
+<p> <pre>
+    <a href="qstring.html">QString</a> s = QFileDialog::<a href="#getOpenFileName">getOpenFileName</a>(
+                    "/home",
+                    "Images (*.png *.xpm *.jpg)",
+                    this,
+                    "open file dialog"
+                    "Choose a file" );
+  </pre>
+ 
+<p> 在上面的实例中，一个模式对话框被使用静态函数来创建。开始目录被设置为“/home”。文件过滤器被设置为“Images (*.png *.xpm *.jpg)”。文件对话框的父对象被设置为<em>this</em>并且它被给定一个标识名称——“open file dialog”。文件对话框上面的标题被设置为“Choose a file”。
+<p> 你可以不使用静态函数创建你自己的QFileDialog。通过调用<a href="#setMode">setMode</a>()，你可以设置可以从QFileDialog返回什么。
+<p> <pre>
+    QFileDialog* fd = new QFileDialog( this, "file dialog", TRUE );
+    fd-&gt;<a href="#setMode">setMode</a>( QFileDialog::<a href="#Mode-enum">AnyFile</a> );
+  </pre>
+ 
+<p> 在上面的实例中，文件对话框的模式被设置为<a href="#Mode-enum">AnyFile</a>，也就是说用户可以设置任何文件或者甚至指定一个不存在的文件。这个模式对于创建一个“File Save As”文件对话框。如果用户必须选择存在的文件，请使用<a href="#Mode-enum">ExistingFile</a>，或者如果可以选择目录，请使用<a href="#Mode-enum">Directory</a>。（模式的完整列表请参考<a href="#Mode-enum">QFileDialog::Mode</a>枚举变量。）
+<p> 你可以通过<a href="#mode">mode</a>()重新得到对话框的模式。也可以使用<a href="#setFilter">setFilter</a>()来设置对话框的文件过滤器。
+<p> <pre>
+    fd-&gt;setFilter( "Images (*.png *.xpm *.jpg)" );
+  </pre>
+ 
+<p> 在上面的实例中，过滤器被设置为“Images (*.png *.xpm *.jpg)”，这也就是说只有扩展名为<tt>png</tt>、<tt>xpm</tt>或<tt>jpg</tt>的文件可以被显示在QFileDialog中。你可以使用<a href="#setFilters">setFilters</a>()来设置几个过滤器并且使用<a href="#addFilter">addFilter</a>()来添加额外的过滤器。使用<a href="#setSelectedFilter">setSelectedFilter</a>()来选择你给定的其中一个作为文件对话框默认过滤器。只用用户改变过滤器，<a href="#filterSelected">filterSelected</a>()信号就被发射。
+<p> 文件对话框有两种视图模式，QFileDialog::List可以简单地列出文件和目录名称并且QFileDialog::Detail会在旁边显示额外的信息，例如，文件大小。
+<p> <pre>
+    fd-&gt;setViewMode( QFileDialog::<a href="#ViewMode-enum">Detail</a> );
+  </pre>
+ 
+<p> 在创建你自己的文件对话框时最后需要的最后重要的函数是<a href="#selectedFile">selectedFile</a>()。
+<p> <pre>
+    <a href="qstring.html">QString</a> fileName;
+    if ( fd-&gt;exec() == QDialog::<a href="qdialog.html#DialogCode-enum">Accepted</a> )
+        fileName = fd-&gt;selectedFile();
+  </pre>
+ 
+<p> 在上面的实例中，模式对话框被创建并被显示。如果用户点击OK，然后他们选择的文件被放入<tt>fileName</tt>中。
+<p> 如果你使用<a href="#Mode-enum">ExistingFiles</a>模式，那么你将需要使用<a href="#selectedFiles">selectedFiles</a>()在一个<a href="qstringlist.html">QStringList</a>中返回选择的文件。
+<p> 对话框工作目录可以使用<a href="#setDir">setDir</a>()来设置。隐藏文件的显示控制可以使用<a href="#setShowHiddenFiles">setShowHiddenFiles</a>()。对话框可以被强制使用<a href="#rereadDir">rereadDir</a>()重新读取目录并且使用<a href="#resortDir">resortDir</a>()来重新排列目录。可以使用<a href="#selectAll">selectAll</a>()来选择当前目录下的所有文件。
+<p> <h3> 创建和使用预览窗口部件
+</h3>
+<a name="1"></a><p> QFileDialog中使用两种预览窗口部件：<em>内容</em>预览窗口部件和<em>信息</em>预览窗口部件。它们的创建和使用方法相同，除了函数名不同以外，例如，<a href="#setContentsPreview">setContentsPreview</a>()和<a href="#setInfoPreview">setInfoPreview</a>()。
+<p> 预览窗口部件被放置在QFileDialog中，让用户能够看到文件的内容或者有关文件的信息。
+<p> <pre>
+    class Preview : public <a href="qlabel.html">QLabel</a>, public QFilePreview
+    {
+    public:
+        Preview( <a href="qwidget.html">QWidget</a> *parent=0 ) : <a href="qlabel.html">QLabel</a>( parent ) {}
+
+        void previewUrl( const <a href="qurl.html">QUrl</a> &amp;u )
+        {
+            <a href="qstring.html">QString</a> path = u.<a href="qurl.html#path">path</a>();
+            <a href="qpixmap.html">QPixmap</a> pix( path );
+            if ( pix.<a href="qpixmap.html#isNull">isNull</a>() )
+                setText( "This is not a pixmap" );
+            else
+                setPixmap( pix );
+        }
+    };
+  </pre>
+ 
+<p> 在上面的代码段中，我们创建一个继承与<a href="qlabel.html">QLabel</a>和<a href="qfilepreview.html">QFilePreview</a>的预览窗口部件。文件预览窗口部件<em>必须</em>从QFilePreview继承。
+<p> 在这个类中我们重新实现了<a href="qfilepreview.html#previewUrl">QFilePreview::previewUrl</a>()，这是我们决定当文件被选择时发生什么。在上面的实例中，如果它是有效的像素映射，我们只是显示文件的预览。这里是文件对话框如何使用预览窗口部件的：
+<p> <pre>
+    Preview* p = new Preview;
+
+    QFileDialog* fd = new QFileDialog( this );
+    fd-&gt;<a href="#setContentsPreviewEnabled">setContentsPreviewEnabled</a>( TRUE );
+    fd-&gt;<a href="#setContentsPreview">setContentsPreview</a>( p, p );
+    fd-&gt;<a href="#setPreviewMode">setPreviewMode</a>( QFileDialog::<a href="#PreviewMode-enum">Contents</a> );
+    fd-&gt;<a href="qdialog.html#show">show</a>();
+  </pre>
+ 
+<p> 第一行创建了我们的预览窗口部件的实例。然后我们创建我们的文件对话框并且调用<a href="#setContentsPreviewEnabled">setContentsPreviewEnabled</a>( TRUE )，这告诉文件对话框预览当前选择文件的内容。然后我们调用<a href="#setContentsPreview">setContentsPreview</a>()——注意我们传递同样的预览窗口部件两次。最后，在显示文件对话框之前，我们调用<a href="#setPreviewMode">setPreviewMode</a>()来设置<em>Contents</em>为用户选择文件的预览模式来显示内容预览。
+<p> 如果你创建另一个预览窗口部件来显示有关文件的信息，那么像内容预览窗口部件一样的方式来创建它并且调用<a href="#setInfoPreviewEnabled">setInfoPreviewEnabled</a>()和<a href="#setInfoPreview">setInfoPreview</a>()。然后用户将能够在两种预览模式中切换。
+<p> 有关创建<a href="qfilepreview.html">QFilePreview</a>窗口部件的更多信息，请参考<a href="qfilepreview.html">QFilePreview</a>。
+<p> <img src=qfiledlg-m.png> <img src=qfiledlg-w.png>
+<p> <p>也可以参考<a href="dialogs.html">对话框类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="Mode-enum"></a>QFileDialog::Mode</h3> 
+<p> 这个枚举变量用来表明用户可以在文件对话框中选择什么，也就是如果用户点击OK，这个对话框返回什么。
+<ul>
+<li><tt>QFileDialog::AnyFile</tt> - 文件名称，不论是否存在。
+<li><tt>QFileDialog::ExistingFile</tt> - 一个单一存在文件的名称
+<li><tt>QFileDialog::Directory</tt> - 目录名称。文件和目录都被显示。
+<li><tt>QFileDialog::DirectoryOnly</tt> - 目录名称。只显示目录。
+<li><tt>QFileDialog::ExistingFiles</tt> - 0个或更多个存在文件的名称。
+</ul><p> 请参考<a href="#setMode">setMode</a>()。
+
+<h3 class=fn><a name="PreviewMode-enum"></a>QFileDialog::PreviewMode</h3>
+<p> 这个枚举变量描述的是文件对话框的预览模式。
+<ul>
+<li><tt>QFileDialog::NoPreview</tt> - 没有预览被显示。
+<li><tt>QFileDialog::Contents</tt> - 使用内容预览窗口部件来预览当前文件的内容。
+<li><tt>QFileDialog::Info</tt> - 使用信息预览窗口部件来预览有关当前文件的信息。
+</ul><p> 请参考<a href="#setPreviewMode">setPreviewMode</a>()、<a href="#setContentsPreview">setContentsPreview</a>()和<a href="#setInfoPreview">setInfoPreview</a>()。
+
+<h3 class=fn><a name="ViewMode-enum"></a>QFileDialog::ViewMode</h3>
+<p> 这个枚举变量描述的是文件对话框的视图模式，也就是说关于每个文件都显示什么。
+<ul>
+<li><tt>QFileDialog::List</tt> - 显示文件和目录的名称和图标。
+<li><tt>QFileDialog::Detail</tt> - 显示文件和目录的名称和图标以及更多的信息，比如文件的大小和修改日期。
+</ul><p> 请参考<a href="#setViewMode">setViewMode</a>()。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QFileDialog"></a>QFileDialog::QFileDialog ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;dirName, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;filter = QString::null, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;modal = FALSE )
+</h3>
+构造一个父对象为<em>parent</em>、名称为<em>name</em>的文件对话框。如果<em>modal</em>为真，那么文件对话框是模式的，否则它就是非模式的。
+<p> 如果<em>dirName</em>被指定，那么它将被作为对话框的工作目录，比如，当对话框出现时，它将被作为被显示的目录。如果<em>filter</em>被指定，它将会被用作对话框的文件过滤器。
+
+<h3 class=fn><a name="QFileDialog-2"></a>QFileDialog::QFileDialog ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;modal = FALSE )
+</h3>
+构造一个父对象为<em>parent</em>、名称为<em>name</em>的文件对话框。如果<em>modal</em>为真，那么文件对话框是模式的，否则它就是非模式的。
+
+<h3 class=fn><a name="~QFileDialog"></a>QFileDialog::~QFileDialog ()
+</h3>
+销毁这个文件对话框。
+
+<h3 class=fn>void <a name="addFilter"></a>QFileDialog::addFilter ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;filter )
+</h3>
+添加过滤器<em>filter</em>到过滤器的列表中并且把它作为当前过滤器。
+<p> <pre>
+    QFileDialog* fd = new QFileDialog( this );
+    fd-&gt;<a href="#addFilter">addFilter</a>( "Images (*.png *.jpg *.xpm)" );
+    fd-&gt;<a href="qdialog.html#show">show</a>();
+  </pre>
+ 
+<p> 在上面的实例中，一个文件对话框被创建，并且文件过滤器“Images (*.png *.jpg *.xpm)”被添加并且它被设置为当前过滤器。初始过滤器“All Files (*)”仍然是有效的。
+<p> <p>也可以参考<a href="#setFilter">setFilter</a>()和<a href="#setFilters">setFilters</a>()。
+
+<h3 class=fn>void <a name="addLeftWidget"></a>QFileDialog::addLeftWidget ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )<tt> [保护]</tt>
+</h3>
+添加窗口部件<em>w</em>到文件对话框左侧。
+<p> <p>也可以参考<a href="#addRightWidget">addRightWidget</a>()、<a href="#addWidgets">addWidgets</a>()和<a href="#addToolButton">addToolButton</a>()。
+
+<h3 class=fn>void <a name="addRightWidget"></a>QFileDialog::addRightWidget ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )<tt> [保护]</tt>
+</h3>
+添加窗口部件<em>w</em>到文件对话框右侧。
+<p> <p>也可以参考<a href="#addLeftWidget">addLeftWidget</a>()、<a href="#addWidgets">addWidgets</a>()和<a href="#addToolButton">addToolButton</a>()。
+
+<h3 class=fn>void <a name="addToolButton"></a>QFileDialog::addToolButton ( <a href="qbutton.html">QButton</a>&nbsp;*&nbsp;b, bool&nbsp;separator = FALSE )<tt> [保护]</tt>
+</h3>
+把工具按钮<em>b</em>添加到文件对话框上面的一排工具按钮中。这个按钮被添加到这一行的右面。如果<em>separator</em>为真，在这行按钮中的最后一个和这个新按钮<em>b</em>之间会被插入一小块空间。
+<p> <p>也可以参考<a href="#addWidgets">addWidgets</a>()、<a href="#addLeftWidget">addLeftWidget</a>()和<a href="#addRightWidget">addRightWidget</a>()。
+
+<h3 class=fn>void <a name="addWidgets"></a>QFileDialog::addWidgets ( <a href="qlabel.html">QLabel</a>&nbsp;*&nbsp;l, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w, <a href="qpushbutton.html">QPushButton</a>&nbsp;*&nbsp;b )<tt> [保护]</tt>
+</h3>
+把指定的窗口部件添加到文件对话框的底部。标签<em>l</em>会被放置到“file name”和“file types”标签的下面。窗口部件<em>w</em>会被放置到文件类型组合框的下面。按钮<em>b</em>会被放到Cancel推动按钮的下面。
+<p> <pre>
+    MyFileDialog::MyFileDialog( <a href="qwidget.html">QWidget</a>* parent, const char* name ) :
+        <a href="#QFileDialog">QFileDialog</a>( parent, name )
+    {
+        <a href="qlabel.html">QLabel</a>* label = new <a href="qlabel.html">QLabel</a>( "Added widgets", this );
+        <a href="qlineedit.html">QLineEdit</a>* lineedit = new <a href="qlineedit.html">QLineEdit</a>( this );
+        <a href="qtoolbutton.html">QToolButton</a>* toolbutton = new <a href="qtoolbutton.html">QToolButton</a>( this );
+
+        <a href="#addWidgets">addWidgets</a>( label, lineedit, toolbutton );
+    }
+  </pre>
+ 
+<p> 如果你不想添加任何其中一个窗口部件，就在那个窗口部件的位置上传递0。
+<p> 每一次你调用这个函数，一行新的窗口部件被添加到文件对话框的底部。
+<p> <p>也可以参考<a href="#addToolButton">addToolButton</a>()、<a href="#addLeftWidget">addLeftWidget</a>()和<a href="#addRightWidget">addRightWidget</a>()。
+
+<h3 class=fn>const&nbsp;<a href="qdir.html">QDir</a>&nbsp;* <a name="dir"></a>QFileDialog::dir () const
+</h3>
+返回文件对话框中显示的当前目录。
+<p> <a href="qdir.html">QDir</a>指针的所有权被传递给被调用者，所以你必须在调用者不需要它的时候删除它。
+<p> <p>也可以参考<a href="#setDir">setDir</a>()。
+
+<h3 class=fn>void <a name="dirEntered"></a>QFileDialog::dirEntered ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [信号]</tt>
+</h3>
+<p> 当用户进入一个目录时，这个信号被发射。
+<p> <p>也可以参考<a href="#dir">dir</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="dirPath"></a>QFileDialog::dirPath () const
+</h3>
+<p>返回文件对话框的工作目录。详细情况请参考<a href="qfiledialog.html#dirPath-prop">“dirPath”</a>属性。
+
+<h3 class=fn>void <a name="fileHighlighted"></a>QFileDialog::fileHighlighted ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [信号]</tt>
+</h3>
+<p> 当用户高亮显示一个文件时，这个信号被发射。
+<p> <p>也可以参考<a href="#fileSelected">fileSelected</a>()和<a href="#filesSelected">filesSelected</a>()。
+
+<h3 class=fn>void <a name="fileSelected"></a>QFileDialog::fileSelected ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [信号]</tt>
+</h3>
+<p> 当用户选择一个文件时，这个信号被发射。
+<p> <p>也可以参考<a href="#filesSelected">filesSelected</a>()、<a href="#fileHighlighted">fileHighlighted</a>()和<a href="#selectedFile-prop">selectedFile</a>。
+
+<h3 class=fn>void <a name="filesSelected"></a>QFileDialog::filesSelected ( const&nbsp;<a href="qstringlist.html">QStringList</a>&nbsp;&amp; )<tt> [信号]</tt>
+</h3>
+<p> 当用户在<em>ExistingFiles</em>模式下选择一个或多个文件时，这个信号被发射。
+<p> <p>也可以参考<a href="#fileSelected">fileSelected</a>()、<a href="#fileHighlighted">fileHighlighted</a>()和<a href="#selectedFiles-prop">selectedFiles</a>。
+
+<h3 class=fn>void <a name="filterSelected"></a>QFileDialog::filterSelected ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp; )<tt> [信号]</tt>
+</h3>
+<p> 当用户选择一个过滤器时，这个信号被发射。
+<p> <p>也可以参考<a href="#selectedFilter-prop">selectedFilter</a>。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="getExistingDirectory"></a>QFileDialog::getExistingDirectory ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;dir = QString::null, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption = QString::null, bool&nbsp;dirOnly = TRUE, bool&nbsp;resolveSymlinks = TRUE )<tt> [静态]</tt>
+</h3>
+这是一个返回由用户选择的已经存在的目录的方便的静态函数。
+<p> <pre>
+    <a href="qstring.html">QString</a> s = QFileDialog::<a href="#getExistingDirectory">getExistingDirectory</a>(
+                    "/home",
+                    this,
+                    "get existing directory"
+                    "Choose a directory",
+                    TRUE );
+  </pre>
+ 
+<p> 这个函数创建了一个父对象为<em>parent</em>、名称为<em>name</em>的模式文件对话框。如果父对象不为0，这个对话框将被显示在它的父对象上面的中间。
+<p> 对话框的工作目录被设置为<em>dir</em>，并且标题被设置为<em>caption</em>。它们当中的任何一个都可以是<a href="qstring.html#QString-null">QString::null</a>，在这种情况下，当前目录和默认标题将被分别使用。
+<p> 如果<em>dirOnly</em>为真，那么只有目录被显示在文件对话框中，否则目录和文件都将被显示。
+<p> 在Unix/X11下，文件对话框的通常行为是解析并跟踪符号连接。例如，如果/usr/tmp是/var/tmp的符号连接，那么在进入/usr/tmp之后，文件对话框将改变到/var/tmp。如果<em>resolveSymlinks</em>为假，文件对话框将把符号连接看作通常的目录。
+<p> <p>也可以参考<a href="#getOpenFileName">getOpenFileName</a>()、<a href="#getOpenFileNames">getOpenFileNames</a>()和<a href="#getSaveFileName">getSaveFileName</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="getOpenFileName"></a>QFileDialog::getOpenFileName ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;startWith = QString::null, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;filter = QString::null, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption = QString::null, <a href="qstring.html">QString</a>&nbsp;*&nbsp;selectedFilter = 0, bool&nbsp;resolveSymlinks = TRUE )<tt> [静态]</tt>
+</h3>
+这是一个返回由用户选择的已经存在的文件的方便的静态函数。如果用户按下Cancel，它返回一个零字符串。
+<p> <pre>
+    <a href="qstring.html">QString</a> s = QFileDialog::<a href="#getOpenFileName">getOpenFileName</a>(
+                    "/home",
+                    "Images (*.png *.xpm *.jpg)",
+                    this,
+                    "open file dialog",
+                    "Choose a file to open" );
+  </pre>
+ 
+<p> 这个函数创建了一个父对象为<em>parent</em>、名称为<em>name</em>的模式文件对话框。如果父对象不为0，这个对话框将被显示在它的父对象上面的中间。
+<p> 文件的工作目录将被设置为<em>startWith</em>。如果<em>startWith</em>包括一个文件名，这个文件将被选择。过滤器被设置为<em>filter</em>，这样只有匹配过滤器的文件才会被显示。被选择的过滤器被设置为<em>selectedFilter</em>。参数<em>startWith</em>、<em>selectedFilter</em>和<em>filter</em>可以为<a href="qstring.html#QString-null">QString::null</a>。
+<p> 对话框的标题可以被设置为<em>caption</em>。如果<em>caption</em>没有被指定，那么将会有一个默认标题被使用。
+<p> 在Windows和Mac OS X下，这个静态函数将使用本地文件对话框而不是QFileDialog，除非应用程序的风格被设置为本地风格以外的某种风格。
+<p> 在Unix/X11下，文件对话框的通常行为是解析并跟踪符号连接。例如，如果/usr/tmp是/var/tmp的符号连接，那么在进入/usr/tmp之后，文件对话框将改变到/var/tmp。如果<em>resolveSymlinks</em>为假，文件对话框将把符号连接看作通常的目录。
+<p> <p>也可以参考<a href="#getOpenFileNames">getOpenFileNames</a>(), <a href="#getSaveFileName">getSaveFileName</a>() and <a href="#getExistingDirectory">getExistingDirectory</a>().
+<p>实例：<a href="qaction-application-example.html#x1068">action/application.cpp</a>、<a href="addressbook-example.html#x516">addressbook/mainwindow.cpp</a>、<a href="simple-application-example.html#x1512">application/application.cpp</a>、<a href="tutorial2-05.html#x2469">chart/chartform.cpp</a>、<a href="mdi-example.html#x2007">mdi/application.cpp</a>、<a href="qwerty-example.html#x363">qwerty/qwerty.cpp</a>和<a href="showimg-example.html#x1256">showimg/showimg.cpp</a>。
+
+<h3 class=fn><a href="qstringlist.html">QStringList</a> <a name="getOpenFileNames"></a>QFileDialog::getOpenFileNames ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;filter = QString::null, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;dir = QString::null, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption = QString::null, <a href="qstring.html">QString</a>&nbsp;*&nbsp;selectedFilter = 0, bool&nbsp;resolveSymlinks = TRUE )<tt> [静态]</tt>
+</h3>
+这是一个返回由用户选择的已经存在的一个或多个文件的方便的静态函数。
+<p> <pre>
+    <a href="qstringlist.html">QStringList</a> files = QFileDialog::<a href="#getOpenFileNames">getOpenFileNames</a>(
+                            "Images (*.png *.xpm *.jpg)",
+                            "/home",
+                            this,
+                            "open files dialog"
+                            "Select one or more files to open" );
+  </pre>
+ 
+<p> 这个函数创建了一个父对象为<em>parent</em>、名称为<em>name</em>的模式文件对话框。如果父对象不为0，这个对话框将被显示在它的父对象上面的中间。
+<p> 文件的工作目录将被设置为<em>dir</em>。如果<em>dir</em>包括一个文件名，这个文件将被选择。过滤器被设置为<em>filter</em>，这样只有匹配过滤器的文件才会被显示。被选择的过滤器被设置为<em>selectedFilter</em>。参数<em>dir</em>、<em>selectedFilter</em>和<em>filter</em>可以为<a href="qstring.html#QString-null">QString::null</a>。
+<p> 对话框的标题可以被设置为<em>caption</em>。如果<em>caption</em>没有被指定，那么将会有一个默认标题被使用。
+<p> 在Windows和Mac OS X下，这个静态函数将使用本地文件对话框而不是QFileDialog，除非应用程序的风格被设置为本地风格以外的某种风格。
+<p> 在Unix/X11下，文件对话框的通常行为是解析并跟踪符号连接。例如，如果/usr/tmp是/var/tmp的符号连接，那么在进入/usr/tmp之后，文件对话框将改变到/var/tmp。如果<em>resolveSymlinks</em>为假，文件对话框将把符号连接看作通常的目录。
+<p> 注意如果你想遍历文件的列表，你应该在一个复制上进行遍历，例如：
+<pre>
+    <a href="qstringlist.html">QStringList</a> list = files;
+    QStringList::Iterator it = list.<a href="qvaluelist.html#begin">begin</a>();
+    while( it != list.<a href="qvaluelist.html#end">end</a>() ) {
+        myProcessing( *it );
+        ++it;
+    }
+    </pre>
+ 
+<p> <p>也可以参考<a href="#getOpenFileName">getOpenFileName</a>()、<a href="#getSaveFileName">getSaveFileName</a>()和<a href="#getExistingDirectory">getExistingDirectory</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="getSaveFileName"></a>QFileDialog::getSaveFileName ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;startWith = QString::null, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;filter = QString::null, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;caption = QString::null, <a href="qstring.html">QString</a>&nbsp;*&nbsp;selectedFilter = 0, bool&nbsp;resolveSymlinks = TRUE )<tt> [静态]</tt>
+</h3>
+这是一个返回由用户选择的已经存在的文件的方便的静态函数。这个文件不一定存在。
+<p> 这个函数创建了一个父对象为<em>parent</em>、名称为<em>name</em>的模式文件对话框。如果父对象不为0，这个对话框将被显示在它的父对象上面的中间。
+<p> <pre>
+    <a href="qstring.html">QString</a> s = QFileDialog::<a href="#getSaveFileName">getSaveFileName</a>(
+                    "/home",
+                    "Images (*.png *.xpm *.jpg)",
+                    this,
+                    "save file dialog"
+                    "Choose a filename to save under" );
+  </pre>
+ 
+<p> 文件的工作目录将被设置为<em>startWith</em>。如果<em>startWith</em>包括一个文件名，这个文件将被选择。过滤器被设置为<em>filter</em>，这样只有匹配过滤器的文件才会被显示。被选择的过滤器被设置为<em>selectedFilter</em>。参数<em>startWith</em>、<em>selectedFilter</em>和<em>filter</em>可以为<a href="qstring.html#QString-null">QString::null</a>。
+<p> 对话框的标题可以被设置为<em>caption</em>。如果<em>caption</em>没有被指定，那么将会有一个默认标题被使用。
+<p> 在Windows和Mac OS X下，这个静态函数将使用本地文件对话框而不是QFileDialog，除非应用程序的风格被设置为本地风格以外的某种风格。
+<p> 在Unix/X11下，文件对话框的通常行为是解析并跟踪符号连接。例如，如果/usr/tmp是/var/tmp的符号连接，那么在进入/usr/tmp之后，文件对话框将改变到/var/tmp。如果<em>resolveSymlinks</em>为假，文件对话框将把符号连接看作通常的目录。
+<p> <p>也可以参考<a href="#getOpenFileName">getOpenFileName</a>()、<a href="#getOpenFileNames">getOpenFileNames</a>()和<a href="#getExistingDirectory">getExistingDirectory</a>()。
+<p>实例：<a href="qaction-application-example.html#x1069">action/application.cpp</a>、<a href="addressbook-example.html#x517">addressbook/mainwindow.cpp</a>、<a href="simple-application-example.html#x1513">application/application.cpp</a>、<a href="tutorial2-05.html#x2470">chart/chartform.cpp</a>、<a href="qmag-example.html#x1628">qmag/qmag.cpp</a>、<a href="qwerty-example.html#x364">qwerty/qwerty.cpp</a>和<a href="showimg-example.html#x1257">showimg/showimg.cpp</a>。
+
+<h3 class=fn><a href="qfileiconprovider.html">QFileIconProvider</a>&nbsp;* <a name="iconProvider"></a>QFileDialog::iconProvider ()<tt> [静态]</tt>
+</h3>
+返回在文件对话框上当前设置的图标提供者的指针。默认情况下没有图标提供者，并且这个函数返回0。
+<p> <p>也可以参考<a href="#setIconProvider">setIconProvider</a>()和<a href="qfileiconprovider.html">QFileIconProvider</a>。
+
+<h3 class=fn>bool <a name="isContentsPreviewEnabled"></a>QFileDialog::isContentsPreviewEnabled () const
+</h3>
+<p>如果文件对话框提供当前选择文件的内容预览，返回真，否则返回假。详细情况请参考<a href="qfiledialog.html#contentsPreview-prop">“contentsPreview”</a>属性。
+
+<h3 class=fn>bool <a name="isInfoPreviewEnabled"></a>QFileDialog::isInfoPreviewEnabled () const
+</h3>
+<p>如果文件对话框提供当前选择文件的信息预览，返回真，否则返回假。详细情况请参考<a href="qfiledialog.html#infoPreview-prop">“infoPreview”</a>属性。
+
+<h3 class=fn><a href="qfiledialog.html#Mode-enum">Mode</a> <a name="mode"></a>QFileDialog::mode () const
+</h3>
+<p>Returns the file dialog's mode.
+See the <a href="qfiledialog.html#mode-prop">"mode"</a> property for details.
+
+<h3 class=fn><a href="qfiledialog.html#PreviewMode-enum">PreviewMode</a> <a name="previewMode"></a>QFileDialog::previewMode () const
+</h3>
+<p>返回文件对话框的预览模式。详细情况请参考<a href="qfiledialog.html#previewMode-prop">“previewMode”</a>属性。
+
+<h3 class=fn>void <a name="rereadDir"></a>QFileDialog::rereadDir ()
+</h3>
+重新读取在文件对话框中显示的当前目录。
+<p> 只有在如果目录的内容发生改变并且你想刷新文件对话框来反映这样的变化时，你才需要调用这个函数。
+<p> <p>也可以参考<a href="#resortDir">resortDir</a>()。
+
+<h3 class=fn>void <a name="resortDir"></a>QFileDialog::resortDir ()
+</h3>
+重新排列所显示的目录。
+<p> <p>也可以参考<a href="#rereadDir">rereadDir</a>()。
+
+<h3 class=fn>void <a name="selectAll"></a>QFileDialog::selectAll ( bool&nbsp;b )
+</h3>
+如果<em>b</em>为真，那么当前目录下的所有文件都被选择，否则它们都被取消选择。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="selectedFile"></a>QFileDialog::selectedFile () const
+</h3>
+<p>返回被选择文件的名称。详细情况请参考<a href="qfiledialog.html#selectedFile-prop">“selectedFile”</a>属性。
+
+<h3 class=fn><a href="qstringlist.html">QStringList</a> <a name="selectedFiles"></a>QFileDialog::selectedFiles () const
+</h3>
+<p>返回被选择文件的列表。详细情况请参考<a href="qfiledialog.html#selectedFiles-prop">“selectedFiles”</a>属性。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="selectedFilter"></a>QFileDialog::selectedFilter () const
+</h3>
+<p>返回文件对话框中用户所选择的过滤器。详细情况请参考<a href="qfiledialog.html#selectedFilter-prop">“selectedFilter”</a>属性。
+
+<h3 class=fn>void <a name="setContentsPreview"></a>QFileDialog::setContentsPreview ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w, <a href="qfilepreview.html">QFilePreview</a>&nbsp;*&nbsp;preview )
+</h3>
+设置被用于作为文件对话框显示文件内容的窗口部件为<em>w</em>并且使用<a href="qfilepreview.html">QFilePreview</a> <em>preview</em>来预览内容。
+<p> 通常你需要创建一个继承<a href="qwidget.html">QWidget</a>和QFilePreview的预览窗口部件，所以你需要传递同一个窗口部件两次。
+<p> <pre>
+    class Preview : public <a href="qlabel.html">QLabel</a>, public QFilePreview
+    {
+    public:
+        Preview( <a href="qwidget.html">QWidget</a> *parent=0 ) : <a href="qlabel.html">QLabel</a>( parent ) {}
+
+        void previewUrl( const <a href="qurl.html">QUrl</a> &amp;u )
+        {
+            <a href="qstring.html">QString</a> path = u.<a href="qurl.html#path">path</a>();
+            <a href="qpixmap.html">QPixmap</a> pix( path );
+            if ( pix.<a href="qpixmap.html#isNull">isNull</a>() )
+                setText( "This is not a pixmap" );
+            else
+                setPixmap( pix );
+        }
+    };
+
+  //...
+
+  int main( int argc, char** argv )
+  {
+    Preview* p = new Preview;
+
+    QFileDialog* fd = new QFileDialog( this );
+    fd-&gt;<a href="#setContentsPreviewEnabled">setContentsPreviewEnabled</a>( TRUE );
+    fd-&gt;<a href="#setContentsPreview">setContentsPreview</a>( p, p );
+    fd-&gt;<a href="#setPreviewMode">setPreviewMode</a>( QFileDialog::<a href="#PreviewMode-enum">Contents</a> );
+    fd-&gt;<a href="qdialog.html#show">show</a>();
+  }
+  </pre>
+ 
+<p> <p>也可以参考<a href="#contentsPreview-prop">contentsPreview</a>、<a href="#setInfoPreview">setInfoPreview</a>()和<a href="#previewMode-prop">previewMode</a>。
+<p>实例：<a href="qdir-example.html#x1810">qdir/qdir.cpp</a>。
+
+<h3 class=fn>void <a name="setContentsPreviewEnabled"></a>QFileDialog::setContentsPreviewEnabled ( bool )
+</h3>
+<p>设置文件对话框是否提供当前选择文件的内容预览。详细情况请参考<a href="qfiledialog.html#contentsPreview-prop">“contentsPreview”</a>属性。
+
+<h3 class=fn>void <a name="setDir"></a>QFileDialog::setDir ( const&nbsp;<a href="qdir.html">QDir</a>&nbsp;&amp;&nbsp;dir )
+</h3>
+设置文件对话框的工作目录是<em>dir</em>。
+<p>也可以参考<a href="#dir">dir</a>()。
+
+<h3 class=fn>void <a name="setDir-2"></a>QFileDialog::setDir ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;pathstr )<tt> [槽]</tt>
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 设置文件对话框的工作目录是<em>pathstr</em>。
+<p> <p>也可以参考<a href="#dir">dir</a>()。
+
+<h3 class=fn>void <a name="setFilter"></a>QFileDialog::setFilter ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;newFilter )<tt> [槽]</tt>
+</h3>
+<p> 设置文件对话框中使用的过滤器为<em>newFilter</em>。
+<p> 如果<em>newFilter</em>中包含一对包含一个或多个<em><b>anything*something</b></em>，由空格或者分号分隔的括号，那么只有其中被括号包含的内容会被作为过滤器。这也就是说下面这些调用方法都是相同的：
+<p> <pre>
+     fd-&gt;setFilter( "All C++ files (*.cpp *.cc *.C *.cxx *.c++)" );
+     fd-&gt;setFilter( "*.cpp *.cc *.C *.cxx *.c++" );
+     fd-&gt;setFilter( "All C++ files (*.cpp;*.cc;*.C;*.cxx;*.c++)" );
+     fd-&gt;setFilter( "*.cpp;*.cc;*.C;*.cxx;*.c++" );
+  </pre>
+ 
+<p> <p>也可以参考<a href="#setFilters">setFilters</a>()。
+
+<h3 class=fn>void <a name="setFilters"></a>QFileDialog::setFilters ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;filters )<tt> [槽]</tt>
+</h3>
+设置文件对话框中使用的过滤器为<em>filters</em>。过滤器中的每一组必须使用<tt>;;</tt>（<em>两个</em>分号）来分隔。
+<p> <pre>
+    <a href="qstring.html">QString</a> types("*.png;;*.xpm;;*.jpg");
+    QFileDialog fd = new QFileDialog( this );
+    fd-&gt;<a href="#setFilters">setFilters</a>( types );
+    fd-&gt;<a href="qdialog.html#show">show</a>();
+  </pre>
+ 
+
+<h3 class=fn>void <a name="setFilters-2"></a>QFileDialog::setFilters ( const&nbsp;char&nbsp;**&nbsp;types )<tt> [槽]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 必须是以结束符结尾的字符串列表。
+
+<h3 class=fn>void <a name="setFilters-3"></a>QFileDialog::setFilters ( const&nbsp;<a href="qstringlist.html">QStringList</a>&nbsp;&amp; )<tt> [槽]</tt>
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+
+<h3 class=fn>void <a name="setIconProvider"></a>QFileDialog::setIconProvider ( <a href="qfileiconprovider.html">QFileIconProvider</a>&nbsp;*&nbsp;provider )<tt> [静态]</tt>
+</h3>
+设置文件对话框使用的<a href="qfileiconprovider.html">QFileIconProvider</a>为<em>provider</em>。
+<p> 默认没有QFileIconProvider并且QFileDialog只为每一个目录绘制一个文件夹图标，而对文件则没有图标。
+<p> <p>也可以参考<a href="qfileiconprovider.html">QFileIconProvider</a>和<a href="#iconProvider">iconProvider</a>()。
+<p>实例：<a href="showimg-example.html#x1301">showimg/main.cpp</a>。
+
+<h3 class=fn>void <a name="setInfoPreview"></a>QFileDialog::setInfoPreview ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w, <a href="qfilepreview.html">QFilePreview</a>&nbsp;*&nbsp;preview )
+</h3>
+设置被用于作为文件对话框显示文件信息的窗口部件为<em>w</em>并且使用<a href="qfilepreview.html">QFilePreview</a> <em>preview</em>来预览信息。
+<p> 通常你需要创建一个继承<a href="qwidget.html">QWidget</a>和QFilePreview的预览窗口部件，所以你需要传递同一个窗口部件两次。
+<p> <pre>
+    class Preview : public <a href="qlabel.html">QLabel</a>, public QFilePreview
+    {
+    public:
+        Preview( <a href="qwidget.html">QWidget</a> *parent=0 ) : <a href="qlabel.html">QLabel</a>( parent ) {}
+
+        void previewUrl( const <a href="qurl.html">QUrl</a> &amp;u )
+        {
+            <a href="qstring.html">QString</a> path = u.<a href="qurl.html#path">path</a>();
+            <a href="qpixmap.html">QPixmap</a> pix( path );
+            if ( pix.<a href="qpixmap.html#isNull">isNull</a>() )
+                setText( "This is not a pixmap" );
+            else
+                setText( "This is a pixmap" );
+        }
+    };
+
+  //...
+
+  int main( int argc, char** argv )
+  {
+    Preview* p = new Preview;
+
+    QFileDialog* fd = new QFileDialog( this );
+    fd-&gt;<a href="#setInfoPreviewEnabled">setInfoPreviewEnabled</a>( TRUE );
+    fd-&gt;<a href="#setInfoPreview">setInfoPreview</a>( p, p );
+    fd-&gt;<a href="#setPreviewMode">setPreviewMode</a>( QFileDialog::<a href="#PreviewMode-enum">Info</a> );
+    fd-&gt;<a href="qdialog.html#show">show</a>();
+  }
+
+  </pre>
+ 
+<p> <p>也可以参考<a href="#setContentsPreview">setContentsPreview</a>()、<a href="#infoPreview-prop">infoPreview</a>和<a href="#previewMode-prop">previewMode</a>。
+
+<h3 class=fn>void <a name="setInfoPreviewEnabled"></a>QFileDialog::setInfoPreviewEnabled ( bool )
+</h3>
+<p>设置文件对话框是否提供当前选择文件的信息预览。详细情况请参考<a href="qfiledialog.html#infoPreview-prop">“infoPreview”</a>属性。
+
+<h3 class=fn>void <a name="setMode"></a>QFileDialog::setMode ( <a href="qfiledialog.html#Mode-enum">Mode</a> )
+</h3>
+<p>设置文件对话框的模式。详细情况请参考<a href="qfiledialog.html#mode-prop">“mode”</a>属性。
+
+<h3 class=fn>void <a name="setPreviewMode"></a>QFileDialog::setPreviewMode ( <a href="qfiledialog.html#PreviewMode-enum">PreviewMode</a>&nbsp;m )
+</h3>
+<p>设置文件对话框的预览模式为<em>m</em>。详细情况请参考<a href="qfiledialog.html#previewMode-prop">“previewMode”</a>属性。
+
+<h3 class=fn>void <a name="setSelectedFilter"></a>QFileDialog::setSelectedFilter ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;mask )<tt> [虚]</tt>
+</h3>
+设置文件对话框中当前选择的过滤器为文本<em>mask</em>中包含的第一个。
+
+<h3 class=fn>void <a name="setSelectedFilter-2"></a>QFileDialog::setSelectedFilter ( int&nbsp;n )<tt> [虚]</tt>
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 设置文件对话框中当前选择的过滤器为过滤器列表中的第<em>n</em>个过滤器。
+<p> <p>也可以参考<a href="#filterSelected">filterSelected</a>()、<a href="#selectedFilter-prop">selectedFilter</a>、<a href="#selectedFiles-prop">selectedFiles</a>和<a href="#selectedFile-prop">selectedFile</a>。
+
+<h3 class=fn>void <a name="setSelection"></a>QFileDialog::setSelection ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;filename )
+</h3>
+设置默认选择为<em>filename</em>。如果<em>filename</em>为绝对的，<a href="#setDir">setDir</a>()也会被调用来设置文件对话框的工作目录为<em>filename</em>中的目录。
+<p>实例：<a href="qdir-example.html#x1814">qdir/qdir.cpp</a>。
+
+<h3 class=fn>void <a name="setShowHiddenFiles"></a>QFileDialog::setShowHiddenFiles ( bool&nbsp;s )
+</h3>
+<p>设置文件对话框中隐藏文件是否被显示为<em>s</em>。详细情况请参考<a href="qfiledialog.html#showHiddenFiles-prop">“showHiddenFiles”</a>属性。
+
+<h3 class=fn>void <a name="setUrl"></a>QFileDialog::setUrl ( const&nbsp;<a href="qurloperator.html">QUrlOperator</a>&nbsp;&amp;&nbsp;url )<tt> [槽]</tt>
+</h3>
+设置文件对话框的工作目录为<em>url</em>指定的目录。
+<p> <p>也可以参考<a href="#url">url</a>()。
+
+<h3 class=fn>void <a name="setViewMode"></a>QFileDialog::setViewMode ( <a href="qfiledialog.html#ViewMode-enum">ViewMode</a>&nbsp;m )
+</h3>
+<p>设置文件对话框的视图模式为<em>m</em>。详细情况请参考<a href="qfiledialog.html#viewMode-prop">“viewMode”</a>属性。
+
+<h3 class=fn>bool <a name="showHiddenFiles"></a>QFileDialog::showHiddenFiles () const
+</h3>
+<p>如果文件对话框中隐藏文件被显示，返回真，否则返回假。详细情况请参考<a href="qfiledialog.html#showHiddenFiles-prop">“showHiddenFiles”</a>属性。
+
+<h3 class=fn><a href="qurl.html">QUrl</a> <a name="url"></a>QFileDialog::url () const
+</h3>
+返回文件对话框中当前工作目录的URL。
+<p> <p>也可以参考<a href="#setUrl">setUrl</a>()。
+<p>实例：<a href="qdialog.html#x2099">network/networkprotocol/view.cpp</a>。
+
+<h3 class=fn><a href="qfiledialog.html#ViewMode-enum">ViewMode</a> <a name="viewMode"></a>QFileDialog::viewMode () const
+</h3>
+<p>返回文件对话框的视图模式。详细情况请参考<a href="qfiledialog.html#viewMode-prop">“viewMode”</a>属性。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>bool <a name="contentsPreview-prop"></a>contentsPreview</h3>
+<p>这个属性保存的是文件对话框是否提供当前选择文件的内容预览。
+<p>默认为假。
+<p> <p>也可以参考<a href="#setContentsPreview">setContentsPreview</a>()和<a href="#infoPreview-prop">infoPreview</a>。
+<p>通过<a href="#setContentsPreviewEnabled">setContentsPreviewEnabled</a>()设置属性值并且通过<a href="#isContentsPreviewEnabled">isContentsPreviewEnabled</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="dirPath-prop"></a>dirPath</h3>
+<p>这个属性保存的是文件对话框的工作目录。
+<p>通过<a href="#dirPath">dirPath</a>()来获得属性值。
+<p><p>也可以参考<a href="#dir">dir</a>()和<a href="#setDir">setDir</a>()。
+
+<h3 class=fn>bool <a name="infoPreview-prop"></a>infoPreview</h3>
+<p>这个属性保存的是文件对话框是否提供当前选择文件的信息预览。
+<p>默认为假。
+<p>通过<a href="#setInfoPreviewEnabled">setInfoPreviewEnabled</a>()设置属性值并且通过<a href="#isInfoPreviewEnabled">isInfoPreviewEnabled</a>()来获得属性值。
+
+<h3 class=fn><a href="qfiledialog.html#Mode-enum">Mode</a> <a name="mode-prop"></a>mode</h3>
+<p>这个属性保存的是文件对话框的模式。
+<p>默认模式为<a href="#Mode-enum">ExistingFile</a>。
+<p>通过<a href="#setMode">setMode</a>()设置属性值并且通过<a href="#mode">mode</a>()来获得属性值。
+
+<h3 class=fn><a href="qfiledialog.html#PreviewMode-enum">PreviewMode</a> <a name="previewMode-prop"></a>previewMode</h3>
+<p>这个属性保存的是文件的对话框的预览模式。
+<p>如果你设置这个模式为<em>NoPreview</em>之外的模式，你必须使用<a href="#setInfoPreview">setInfoPreview</a>()或者<a href="#setContentsPreview">setContentsPreview</a>()来设置这个对话框的预览窗口部件为你的预览窗口部件并且使用<a href="#setInfoPreviewEnabled">setInfoPreviewEnabled</a>()或<a href="#setContentsPreviewEnabled">setContentsPreviewEnabled</a>()来让预览窗口部件生效。
+<p> <p>也可以参考<a href="#infoPreview-prop">infoPreview</a>、<a href="#contentsPreview-prop">contentsPreview</a>和<a href="#viewMode-prop">viewMode</a>。
+<p>通过<a href="#setPreviewMode">setPreviewMode</a>()设置属性值并且通过<a href="#previewMode">previewMode</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="selectedFile-prop"></a>selectedFile</h3>
+<p>这个属性保存的是选择的文件的名称。
+<p>如果文件被选择，则selectedFile包含文件的名称和它的绝对路径，否则selectedFile为空。
+<p> <p>也可以参考<a href="qstring.html#isEmpty">QString::isEmpty</a>()、<a href="#selectedFiles-prop">selectedFiles</a>和<a href="#selectedFilter-prop">selectedFilter</a>。
+<p>通过<a href="#selectedFile">selectedFile</a>()来获得属性值。
+
+<h3 class=fn><a href="qstringlist.html">QStringList</a> <a name="selectedFiles-prop"></a>selectedFiles</h3>
+<p>这个属性保存的是选择的文件的列表。
+<p>如果有一个或多个文件被选择，selectedFiles包含这些文件的名称和它们的绝对路径。如果没有文件被选择或者模式不是ExistingFiles，selectedFiles是一个空列表。
+<p> 如果模式为<a href="#Mode-enum">ExistingFile</a>、<a href="#Mode-enum">Directory</a>或<a href="#Mode-enum">DirectoryOnly</a>，使用<a href="#selectedFile">selectedFile</a>()更方便。
+<p> 注意，如果你想遍历这个列表，你应该遍历它的复制，例如：
+<pre>
+    <a href="qstringlist.html">QStringList</a> list = myFileDialog.selectedFiles();
+    QStringList::Iterator it = list.<a href="qvaluelist.html#begin">begin</a>();
+    while( it != list.<a href="qvaluelist.html#end">end</a>() ) {
+        myProcessing( *it );
+        ++it;
+    }
+    </pre>
+ 
+<p> <p>也可以参考<a href="#selectedFile-prop">selectedFile</a>、<a href="#selectedFilter-prop">selectedFilter</a>和<a href="qvaluelist.html#empty">QValueList::empty</a>()。
+<p>通过<a href="#selectedFiles">selectedFiles</a>()来获得属性值。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="selectedFilter-prop"></a>selectedFilter</h3>
+<p>这个属性保存的是文件对话框中用户选择文件的过滤器。
+<p>通过<a href="#selectedFilter">selectedFilter</a>()来获得属性值。
+<p><p>也可以参考<a href="#filterSelected">filterSelected</a>()、<a href="#selectedFiles-prop">selectedFiles</a>和<a href="#selectedFile-prop">selectedFile</a>。
+
+<h3 class=fn>bool <a name="showHiddenFiles-prop"></a>showHiddenFiles</h3>
+<p>这个属性保存的是文件对话框中隐藏文件是否显示。
+<p>默认是假，也就是不显示隐藏文件。
+<p>通过<a href="#setShowHiddenFiles">setShowHiddenFiles</a>()设置属性值并且通过<a href="#showHiddenFiles">showHiddenFiles</a>()来获得属性值。
+
+<h3 class=fn><a href="qfiledialog.html#ViewMode-enum">ViewMode</a> <a name="viewMode-prop"></a>viewMode</h3>
+<p>这个属性保存的是文件对话框的视图模式。
+<p>如果你设置视图模式为<em>Detail</em>（默认），那么你将看到文件的详细情况，除了文件名之外，还有文件的大小和这个文件最近一次被修改的日期。
+<p> 如果你设置视图模式为<em>List</em>，那么你将只会看到文件和文件夹的列表。
+<p> 请参考<a href="#ViewMode-enum">QFileDialog::ViewMode</a>。
+<p>通过<a href="#setViewMode">setViewMode</a>()设置属性值并且通过<a href="#viewMode">viewMode</a>()来获得属性值。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

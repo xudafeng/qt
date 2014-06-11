@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QThread类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QThread类参考</h1>
+
+<p>QThread类提供了与系统无关的线程。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qthread-h.html">qthread.h</a>&gt;</tt>
+<p>继承了<a href="qt.html">Qt</a>。
+<p><a href="qthread-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QThread"><b>QThread</b></a> ()</div></li>
+<li><div class=fn>virtual <a href="#~QThread"><b>~QThread</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#wait"><b>wait</b></a> ( unsigned&nbsp;long&nbsp;time = ULONG_MAX )</div></li>
+<li><div class=fn>void <a href="#start"><b>start</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#finished"><b>finished</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#running"><b>running</b></a> () const</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>Qt::HANDLE <a href="#currentThread"><b>currentThread</b></a> ()</div></li>
+<li><div class=fn>void <a href="#postEvent"><b>postEvent</b></a> ( QObject&nbsp;*&nbsp;receiver, QEvent&nbsp;*&nbsp;event )</div></li>
+<li><div class=fn>void <a href="#exit"><b>exit</b></a> ()</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#run"><b>run</b></a> () = 0</div></li>
+</ul>
+<h2>静态保护成员</h2>
+<ul>
+<li><div class=fn>void <a href="#sleep"><b>sleep</b></a> ( unsigned&nbsp;long&nbsp;secs )</div></li>
+<li><div class=fn>void <a href="#msleep"><b>msleep</b></a> ( unsigned&nbsp;long&nbsp;msecs )</div></li>
+<li><div class=fn>void <a href="#usleep"><b>usleep</b></a> ( unsigned&nbsp;long&nbsp;usecs )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QThread类提供了与系统无关的线程。
+<p> 
+
+<p> QThread代表在程序中一个单独的线程控制，在多任务操作系统中，它和同一进程中的其它线程共享数据，但运行起来就像一个单独的程序一样。它不是在main()中开始，QThread是在<a href="#run">run</a>()中开始运行的。你继承run()并且在其中包含你的代码。例如：
+<p> <pre>
+    class MyThread : public QThread {
+
+    public:
+
+        virtual void run();
+
+    };
+
+    void MyThread::<a href="#run">run</a>()
+    {
+        for( int count = 0; count &lt; 20; count++ ) {
+            <a href="#sleep">sleep</a>( 1 );
+            <a href="qapplication.html#qDebug">qDebug</a>( "Ping!" );
+        }
+    }
+
+    int main()
+    {
+        MyThread a;
+        MyThread b;
+        a.<a href="#start">start</a>();
+        b.<a href="#start">start</a>();
+        a.<a href="#wait">wait</a>();
+        b.<a href="#wait">wait</a>();
+    }
+    </pre>
+ 
+<p> 这将会开始两个线程，每个线程在屏幕上写20次“Ping!”并且退出。在main()的结尾调用<a href="#wait">wait</a>()是必需的，因为main()的结束会终结整个程序，它会杀掉所有其它线程。当每个MyThread运行到MyThread::run()结尾时，它就结束运行，就好像一个应用程序离开main()时所做的一样。
+<p> <p>也可以参考<a href="threads.html">Qt中支持的线程</a>、<a href="environment.html">环境类</a>和<a href="thread.html">线程类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QThread"></a>QThread::QThread ()
+</h3>
+构造一个新的线程。这个线程将直到<a href="#start">start</a>()被调用的时候才开始运行。
+
+<h3 class=fn><a name="~QThread"></a>QThread::~QThread ()<tt> [虚]</tt>
+</h3>
+QThread析构函数。
+<p> 注意删除QThread对象将不会停止它所代表的线程的运行。删除一个运行中的线程（比如<a href="#finished">finished</a>()返回假）将可能导致程序崩溃这样的结果。你可以对线程运行<a href="#wait">wait</a>()来确定程序运行结束。
+
+<h3 class=fn>Qt::HANDLE <a name="currentThread"></a>QThread::currentThread ()<tt> [静态]</tt>
+</h3>
+这返回当前执行的线程的线程句柄。
+<p> <b>警告：</b>这个函数返回的句柄用于内部目的并且<em>不</em>应该在任何应用程序代码中使用它。在Windows中，返回值是当前线程的假句柄，并且它不能用于数字比较。
+
+<h3 class=fn>void <a name="exit"></a>QThread::exit ()<tt> [静态]</tt>
+</h3>
+结束调用线程的执行并且唤醒任何等待它终止的线程。
+
+<h3 class=fn>bool <a name="finished"></a>QThread::finished () const
+</h3>
+如果线程完成，返回真，否则返回假。
+
+<h3 class=fn>void <a name="msleep"></a>QThread::msleep ( unsigned&nbsp;long&nbsp;msecs )<tt> [静态 保护]</tt>
+</h3>
+与系统无关的睡眠。这将导致当前线程睡眠<em>msecs</em>毫秒。
+
+<h3 class=fn>void <a name="postEvent"></a>QThread::postEvent ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;receiver, <a href="qevent.html">QEvent</a>&nbsp;*&nbsp;event )<tt> [静态]</tt>
+</h3>
+提供一个从一个不是事件线程的线程发送一个事件到一个对象的方法。
+<p> 如下是已经完成的：
+<ul>
+<li> <em>event</em>被放进队列；
+<li> 事件线程被唤醒；
+<li> 事件线程发送事件到<em>receiver</em>对象。
+</ul>
+重要的是请注意事件的事件处理器当它被调用时，它是被事件线程调用，而不是被调用<a href="#postEvent">QThread::postEvent</a>()的线程所调用。
+<p> 因为QThread::postEvent()发送事件到<a href="qapplication.html">QApplication</a>的事件队列，你必须在调用QThread::postEvent()之前创建QApplication对象。
+<p> 事件必须在堆上分配，因为发送事件的队列会得到事件的所有权并且一旦这个事件被发送成功，它将被删除。
+<p> <p>也可以参考<a href="qapplication.html#postEvent">QApplication::postEvent</a>()。
+
+<h3 class=fn>void <a name="run"></a>QThread::run ()<tt> [纯虚 保护]</tt>
+</h3>
+<p> 这个方法是纯虚的，并且为了能够做有用的工作必须在继承类中被重新实现。这个方法的返回将会结束线程的执行。
+<p> <p>也可以参考<a href="#wait">wait</a>()。
+
+<h3 class=fn>bool <a name="running"></a>QThread::running () const
+</h3>
+如果线程正在运行，返回真，否则返回假。
+
+<h3 class=fn>void <a name="sleep"></a>QThread::sleep ( unsigned&nbsp;long&nbsp;secs )<tt> [静态 保护]</tt>
+</h3>
+与系统无关的睡眠。这将导致当前线程睡眠<em>secs</em>秒。
+
+<h3 class=fn>void <a name="start"></a>QThread::start ()
+</h3>
+通过调用<a href="#run">run</a>()（必须在QThread子类中重新实现来包含你的代码）开始这个线程的执行。如果你试图开始一个已经运行的线程，这个调用将一直等待，直到这个线程完成，然后再重新开始这个线程。
+
+<h3 class=fn>void <a name="usleep"></a>QThread::usleep ( unsigned&nbsp;long&nbsp;usecs )<tt> [静态 保护]</tt>
+</h3>
+与系统无关的睡眠。这将导致当前线程睡眠<em>usecs</em>微秒。
+
+<h3 class=fn>bool <a name="wait"></a>QThread::wait ( unsigned&nbsp;long&nbsp;time = ULONG_MAX )
+</h3>
+这将提供和POSIX pthread_join相似的功能。一个线程调用了它将会一直阻塞，知道下述条件之一满足时继续：
+<ul>
+<li> 这个QThread对象所关联的线程已经结束执行（比如，当它从<a href="#run">run</a>()中返回）。如果线程完成，这个函数将返回真。如果线程还没有开始呢，这个函数也返回真。
+<li> <em>time</em>毫秒过去了。如果<em>time</em>是ULONG_MAX（默认值），然后等待将永远不会超时（线程必须从<a href="#run">run</a>()中返回）。如果等待时间到了，这个函数将返回假。
+</ul>
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

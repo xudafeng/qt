@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>安装qmake</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<p align="right">[<a href="qmake-manual-1.html">上一章：qmake的介绍</a>] [<a href="qmake-manual.html">qmake首页</a>] [<a href="qmake-manual-3.html">下一章：10分钟学会使用qmake</a>]</p>
+<h2 align="center">安装qmake</h2>
+<h3><a name="1"></a>安装qmake</h3>
+<p>当Qt被连编的时候，默认情况下<em>qmake</em>也会被连编。</p>
+<p>这一部分解释如何手工连编<em>qmake</em>。如果你已经有了<em>qmake</em>，可以跳过这里，请看<a href="qmake-manual-3.html">10分钟学会使用qmake</a>。</p>
+<h4><a name="1-1"></a>手动安装qmake</h4>
+<p>在手工连编Qt之前，下面这些环境变量必须被设置：</p>
+<ul><li><p>QMAKESPEC 
+<br> 这个必须设置为你所使用的系统的平台和编译器的组合。
+<br> 举例来说，加入你使用的是Windows和Microsoft Visual Studio，你应该把环境变量设置为<em>win32-msvc</em>。如果你使用的是Solaris和g++，你应该把环境变量设置为<em>solaris-g++</em>。</p>
+<p>当你在设置QMAKESPEC时，可以从下面的可能的环境变量列表中进行选择：</p>
+<p>aix-64 hpux-cc irix-032 netbsd-g++ solaris-cc unixware7-g++ aix-g++ hpux-g++ linux-cxx openbsd-g++ solaris-g++ win32-borland aix-xlc hpux-n64 linux-g++ openunix-cc sunos-g++ win32-g++ bsdi-g++ hpux-o64 linux-icc qnx-g++ tru64-cxx win32-msvc dgux-g++ hurd-g++ linux-kcc reliant-64 tru64-g++ win32-watc freebsd-g++ irix-64 macx-pbuilder reliant-cds ultrix-g++ win32-visa hpux-acc irix-g++ macx-g++ sco-g++ unixware-g hpux-acc irix-n32 solaris-64 unixware7-cc</p>
+<p>envvar是下面之一时，环境变量应该被设置到qws/envvar：</p>
+<p>linux-arm-g++ linux-generic-g++ linux-mips-g++ linux-x86-g++ linux-freebsd-g++ linux-ipaq-g++ linux-solaris-g++ qnx-rtp-g++</p>
+<li><p>QTDIR 
+<br> 这个必须设置到Qt被（或者将被）安装到的地方。比如，<em>c:\qt</em>和<em>/local/qt</em>。</p>
+</ul><p>一旦环境变量被设置到qmake目录，<em>$QTDIR/qmake</em>，比如<em>C:\qt\qmake</em>，现在根据你的编译器运行<em>make</em>或者<em>nmake</em>。</p>
+<p>当编译完成时，<em>qmake</em>已经可以使用了。</p>
+<!-- eof -->
+<p align="right">[<a href="qmake-manual-1.html">上一章：qmake的介绍</a>] [<a href="qmake-manual.html">qmake首页</a>] [<a href="qmake-manual-3.html">下一章：10分钟学会使用qmake</a>]</p>
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QSize类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QSize类参考</h1>
+
+<p>QSize定义了一个二维对象的大小。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qsize-h.html">qsize.h</a>&gt;</tt>
+<p><a href="qsize-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QSize"><b>QSize</b></a> ()</div></li>
+<li><div class=fn><a href="#QSize-2"><b>QSize</b></a> ( int&nbsp;w, int&nbsp;h )</div></li>
+<li><div class=fn>bool <a href="#isNull"><b>isNull</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isEmpty"><b>isEmpty</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isValid"><b>isValid</b></a> () const</div></li>
+<li><div class=fn>int <a href="#width"><b>width</b></a> () const</div></li>
+<li><div class=fn>int <a href="#height"><b>height</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setWidth"><b>setWidth</b></a> ( int&nbsp;w )</div></li>
+<li><div class=fn>void <a href="#setHeight"><b>setHeight</b></a> ( int&nbsp;h )</div></li>
+<li><div class=fn>void <a href="#transpose"><b>transpose</b></a> ()</div></li>
+<li><div class=fn>QSize <a href="#expandedTo"><b>expandedTo</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;otherSize ) const</div></li>
+<li><div class=fn>QSize <a href="#boundedTo"><b>boundedTo</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;otherSize ) const</div></li>
+<li><div class=fn>QCOORD &amp; <a href="#rwidth"><b>rwidth</b></a> ()</div></li>
+<li><div class=fn>QCOORD &amp; <a href="#rheight"><b>rheight</b></a> ()</div></li>
+<li><div class=fn>QSize &amp; <a href="#operator+-eq"><b>operator+=</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;s )</div></li>
+<li><div class=fn>QSize &amp; <a href="#operator--eq"><b>operator-=</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;s )</div></li>
+<li><div class=fn>QSize &amp; <a href="#operator*-eq"><b>operator*=</b></a> ( int&nbsp;c )</div></li>
+<li><div class=fn>QSize &amp; <a href="#operator*-eq-2"><b>operator*=</b></a> ( double&nbsp;c )</div></li>
+<li><div class=fn>QSize &amp; <a href="#operator/-eq"><b>operator/=</b></a> ( int&nbsp;c )</div></li>
+<li><div class=fn>QSize &amp; <a href="#operator/-eq-2"><b>operator/=</b></a> ( double&nbsp;c )</div></li>
+</ul>
+<h2>相关函数</h2>
+<ul>
+<li><div class=fn>bool <a href="#operator-eq-eq"><b>operator==</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;s1, const&nbsp;QSize&nbsp;&amp;&nbsp;s2 )</div></li>
+<li><div class=fn>bool <a href="#operator!-eq"><b>operator!=</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;s1, const&nbsp;QSize&nbsp;&amp;&nbsp;s2 )</div></li>
+<li><div class=fn>const QSize <a href="#operator+"><b>operator+</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;s1, const&nbsp;QSize&nbsp;&amp;&nbsp;s2 )</div></li>
+<li><div class=fn>const QSize <a href="#operator-"><b>operator-</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;s1, const&nbsp;QSize&nbsp;&amp;&nbsp;s2 )</div></li>
+<li><div class=fn>const QSize <a href="#operator*"><b>operator*</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;s, int&nbsp;c )</div></li>
+<li><div class=fn>const QSize <a href="#operator*-2"><b>operator*</b></a> ( int&nbsp;c, const&nbsp;QSize&nbsp;&amp;&nbsp;s )</div></li>
+<li><div class=fn>const QSize <a href="#operator*-3"><b>operator*</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;s, double&nbsp;c )</div></li>
+<li><div class=fn>const QSize <a href="#operator*-4"><b>operator*</b></a> ( double&nbsp;c, const&nbsp;QSize&nbsp;&amp;&nbsp;s )</div></li>
+<li><div class=fn>const QSize <a href="#operator/"><b>operator/</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;s, int&nbsp;c )</div></li>
+<li><div class=fn>const QSize <a href="#operator/-2"><b>operator/</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;s, double&nbsp;c )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt"><b>operator&lt;&lt;</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, const&nbsp;QSize&nbsp;&amp;&nbsp;sz )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt"><b>operator&gt;&gt;</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, QSize&nbsp;&amp;&nbsp;sz )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QSize定义了一个二维对象的大小。
+<p> 
+
+<p> 一个大小由一个宽和一个高确定。
+<p> 坐标类型是QCOORD（和<tt>int</tt>一样在qwindowdefs.h中定义的）。QCOORD的最小值是QCOORD_MIN（-2147483648），最大值是QCOORD_MAX（2147483647）。
+<p> 大小可以在构造函数中设置并且可以用<a href="#setWidth">setWidth</a>()和<a href="#setHeight">setHeight</a>()来修改，或者使用<a href="#operator+-eq">operator+=</a>()、<a href="#operator--eq">operator-=</a>()、<a href="#operator*-eq">operator*=</a>()和<a href="#operator/-eq">operator/=</a>()等等。你可以使用<a href="#transpose">transpose</a>()来交换宽和高。你可以使用<a href="#expandedTo">expandedTo</a>()来得到宽和高为两个大小的宽和高的最大值的大小，并且可以使用<a href="#boundedTo">boundedTo</a>()来得到宽和高为两个大小的宽和高的最小值的大小。
+<p> <p>也可以参考<a href="qpoint.html">QPoint</a>、<a href="qrect.html">QRect</a>、<a href="graphics.html">图形类</a>和<a href="images.html">图像处理类</a>。
+
+<hr><h2>成员函数文档</h2>
+
+<h3 class=fn><a name="QSize"></a>QSize::QSize ()
+</h3>
+构造一个具有无效的（负的）宽和高的大小。
+
+<h3 class=fn><a name="QSize-2"></a>QSize::QSize ( int&nbsp;w, int&nbsp;h )
+</h3>
+构造一个宽为<em>w</em>，高为<em>h</em>的大小。
+
+<h3 class=fn><a href="qsize.html">QSize</a> <a name="boundedTo"></a>QSize::boundedTo ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;otherSize ) const
+</h3>
+<p> 返回一个宽高分别为这个大小和<em>otherSize</em>两个中宽高最小值的大小。
+
+<h3 class=fn><a href="qsize.html">QSize</a> <a name="expandedTo"></a>QSize::expandedTo ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;otherSize ) const
+</h3>
+<p> 返回一个宽高分别为这个大小和<em>otherSize</em>两个中宽高最大值的大小。
+<p>实例：<a href="customlayout-example.html#x1399">customlayout/card.cpp</a>和<a href="customlayout-example.html#x1356">customlayout/flow.cpp</a>。
+
+<h3 class=fn>int <a name="height"></a>QSize::height () const
+</h3>
+返回高。
+<p>也可以参考<a href="#width">width</a>()。
+<p>实例：<a href="movies-example.html#x471">movies/main.cpp</a>、<a href="qfd-example.html#x1989">qfd/fontdisplayer.cpp</a>和<a href="qfd-example.html#x2000">qfd/qfd.cpp</a>。
+
+<h3 class=fn>bool <a name="isEmpty"></a>QSize::isEmpty () const
+</h3>
+如果宽&lt;=0或者高&lt;=0，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="isNull"></a>QSize::isNull () const
+</h3>
+如果宽为0并且高也为0，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="isValid"></a>QSize::isValid () const
+</h3>
+如果宽&gt;=0并且高&gt;=0，返回真，否则返回假。
+
+<h3 class=fn><a href="qsize.html">QSize</a>&nbsp;&amp; <a name="operator*-eq"></a>QSize::operator*= ( int&nbsp;c )
+</h3>
+把宽和高都乘以<em>c</em>并且返回这个大小的引用。
+
+<h3 class=fn><a href="qsize.html">QSize</a>&nbsp;&amp; <a name="operator*-eq-2"></a>QSize::operator*= ( double&nbsp;c )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为和上面的函数基本一致。
+<p> 把宽和高都乘以<em>c</em>并且返回这个大小的引用。
+<p> 注意这个结果被取整了。
+
+<h3 class=fn><a href="qsize.html">QSize</a>&nbsp;&amp; <a name="operator+-eq"></a>QSize::operator+= ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s )
+</h3>
+<p> 把<em>s</em>加到这个大小上并且返回这个大小的引用。
+<p> 实例：
+<pre>
+    QSize s(  3, 7 );
+    QSize r( -1, 4 );
+    s += r;                     // s变成了(2,11)
+</pre>
+ 
+<h3 class=fn><a href="qsize.html">QSize</a>&nbsp;&amp; <a name="operator--eq"></a>QSize::operator-= ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s )
+</h3>
+<p> 从这个大小上减去<em>s</em>并且返回这个大小的引用。
+<p> 实例：
+<pre>
+    QSize s(  3, 7 );
+    QSize r( -1, 4 );
+    s -= r;                     // s变成了(4,3)
+  </pre>
+ 
+
+<h3 class=fn><a href="qsize.html">QSize</a>&nbsp;&amp; <a name="operator/-eq"></a>QSize::operator/= ( int&nbsp;c )
+</h3>
+把宽和高都除以<em>c</em>并且返回这个大小的引用。
+
+<h3 class=fn><a href="qsize.html">QSize</a>&nbsp;&amp; <a name="operator/-eq-2"></a>QSize::operator/= ( double&nbsp;c )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为和上面的函数基本一致。
+<p> 把宽和高都除以<em>c</em>并且返回这个大小的引用。
+<p> 注意这个结果被取整了。
+
+<h3 class=fn>QCOORD &amp; <a name="rheight"></a>QSize::rheight ()
+</h3>
+返回高的引用。
+<p> 使用这个引用你就可以直接操作高了。
+<p> 实例：
+<pre>
+    QSize s( 100, 10 );
+    s.<a href="#rheight">rheight</a>() += 5;           // s变成了(100,15)
+  </pre>
+ 
+<p> <p>也可以参考<a href="#rwidth">rwidth</a>()。
+
+<h3 class=fn>QCOORD &amp; <a name="rwidth"></a>QSize::rwidth ()
+</h3>
+返回宽的引用。
+<p> 使用这个引用你就可以直接操作宽了。
+<p> 实例：
+<pre>
+    QSize s( 100, 10 );
+    s.<a href="#rwidth">rwidth</a>() += 20;           // s变成了(120,10)
+  </pre>
+ 
+<p> <p>也可以参考<a href="#rheight">rheight</a>()。
+
+<h3 class=fn>void <a name="setHeight"></a>QSize::setHeight ( int&nbsp;h )
+</h3>
+设置高为<em>h</em>。
+<p>也可以参考<a href="#height">height</a>()和<a href="#setWidth">setWidth</a>()。
+
+<h3 class=fn>void <a name="setWidth"></a>QSize::setWidth ( int&nbsp;w )
+</h3>
+设置宽为<em>w</em>。
+<p>也可以参考<a href="#width">width</a>() and <a href="#setHeight">setHeight</a>()。
+
+<h3 class=fn>void <a name="transpose"></a>QSize::transpose ()
+</h3>
+交换宽和高的值。
+
+<h3 class=fn>int <a name="width"></a>QSize::width () const
+</h3>
+返回宽。
+<p>也可以参考<a href="#height">height</a>()。
+<p>实例：<a href="movies-example.html#x472">movies/main.cpp</a>、<a href="qfd-example.html#x1990">qfd/fontdisplayer.cpp</a>和<a href="qfd-example.html#x2001">qfd/qfd.cpp</a>。
+
+<hr><h2>相关函数</h2>
+
+<h3 class=fn>bool <a name="operator!-eq"></a>operator!= ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s1, const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s2 )
+</h3>
+如果<em>s1</em>和<em>s2</em>不同，返回真，否则返回假。
+
+<h3 class=fn>const&nbsp;<a href="qsize.html">QSize</a> <a name="operator*"></a>operator* ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s, int&nbsp;c )
+</h3>
+把<em>s</em>乘以<em>c</em>并且返回结果。
+
+<h3 class=fn>const&nbsp;<a href="qsize.html">QSize</a> <a name="operator*-2"></a>operator* ( int&nbsp;c, const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为和上面的函数基本一致。
+<p> 
+把<em>s</em>乘以<em>c</em>并且返回结果。
+
+<h3 class=fn>const&nbsp;<a href="qsize.html">QSize</a> <a name="operator*-3"></a>operator* ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s, double&nbsp;c )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为和上面的函数基本一致。
+<p> 
+把<em>s</em>乘以<em>c</em>并且返回结果。
+
+<h3 class=fn>const&nbsp;<a href="qsize.html">QSize</a> <a name="operator*-4"></a>operator* ( double&nbsp;c, const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为和上面的函数基本一致。
+<p> 
+把<em>s</em>乘以<em>c</em>并且返回结果。
+
+<h3 class=fn>const&nbsp;<a href="qsize.html">QSize</a> <a name="operator+"></a>operator+ ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s1, const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s2 )
+</h3>
+返回<em>s1</em>和<em>s2</em>的和，每个分量分别相加。
+
+<h3 class=fn>const&nbsp;<a href="qsize.html">QSize</a> <a name="operator-"></a>operator- ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s1, const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s2 )
+</h3>
+从<em>s1</em>中减去<em>s2</em>，每个分量分别相减。
+
+<h3 class=fn>const&nbsp;<a href="qsize.html">QSize</a> <a name="operator/"></a>operator/ ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s, int&nbsp;c )
+</h3>
+把<em>s</em>除以<em>c</em>并且返回结果。
+
+<h3 class=fn>const&nbsp;<a href="qsize.html">QSize</a> <a name="operator/-2"></a>operator/ ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s, double&nbsp;c )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为和上面的函数基本一致。
+<p> 把<em>s</em>除以<em>c</em>并且返回结果。
+<p> 注意这个结果被取整了。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt"></a>operator&lt;&lt; ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;sz )
+</h3>
+把大小<em>sz</em>写到流<em>s</em>中并且返回这个流的引用。
+<p> <p>也可以参考<a href="datastreamformat.html">QDataStream操作符的格式</a>。
+
+<h3 class=fn>bool <a name="operator-eq-eq"></a>operator== ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s1, const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;s2 )
+</h3>
+如果<em>s1</em>和<em>s2</em>相等，返回真，否则返回假。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt"></a>operator&gt;&gt; ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, <a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;sz )
+</h3>
+从流<em>sz</em>中读取大小到<em>s</em>中并且返回这个流的引用。
+<p> <p>也可以参考<a href="datastreamformat.html">QDataStream操作符的格式</a>。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

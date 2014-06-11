@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>发布管理器</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<p align="right">[<a href="linguist-manual-1.html">上一章：介绍</a>] [<a href="linguist-manual.html">Qt语言学家首页</a>] [<a href="linguist-manual-3.html">下一章：翻译人员</a>]</p>
+<h2 align="center">发布管理器</h2>
+<!-- index Release Manager --><p>发布管理器提供了两个工具，<a href="linguist-manual-2.html#2">lupdate</a>和<a href="linguist-manual-2.html#3">lrelease</a>。这些工具依赖于<em>qmake</em>项目文件。尽管你不必使用<em>qmake</em>。</p>
+<h3><a name="1"></a>Qt项目文件</h3>
+<!-- index .pro Files --><!-- index Project Files --><!-- index qmake!Project Files --><p><a href="linguist-manual-2.html#2">lupdate</a>和<a href="linguist-manual-2.html#3">lrelease</a>依赖于应用程序的<tt>.pro</tt>Qt项目文件。在项目文件中必须有除了本地语言的之外的附加语言的<tt>TRANSLATIONS</tt>部分。一个比较有代表性的条目就像这样：</p>
+<!-- index TRANSLATIONS!in Project Files --><pre>    TRANSLATIONS    = tt2_fr.ts \
+                      tt2_nl.ts
+</pre>
+ <p>在翻译文件的名称中包含有一个场所对于运行时决定调用那种语言很有用处。这个将会在<a href="linguist-manual-4.html">第四章：程序员</a>中进行解释。</p>
+<!-- index HEADERS!in Project Files --><!-- index SOURCES!in Project Files --><!-- index FORMS!in Project Files --><!-- index TRANSLATIONS!in Project Files --><p>一个含有四个翻译源文件的完整的<tt>.pro</tt>文件的实例：</p>
+<pre>
+    HEADERS         = main-dlg.h \
+		      options-dlg.h
+    SOURCES         = main-dlg.cpp \
+		      options-dlg.cpp \
+		      main.cpp 
+    FORMS           = search-dlg.ui
+    TRANSLATIONS    = superapp_dk.ts \
+		      superapp_fi.ts \
+		      superapp_no.ts \
+		      superapp_se.ts
+</pre>
+<!-- index QApplication!defaultCodec() --><!-- index defaultCodec()!QApplication --><!-- index DEFAULTCODEC!in Project Files --><p><a href="qapplication.html#setDefaultCodec">QApplication::setDefaultCodec</a>()可以使在被<tt>tr()</tt>调用中出现的文字字符串所要选择使用的一种8位编码方式成为可能。如果没有编码方式被指定，<tt>tr()</tt>使用Latin-1。</p>
+<p>如果你在你的应用程序中使用QApplication::defaultCodec()机制，<em>Qt语言学家</em>需要你在<tt>.pro</tt>文件中也设置<tt>DEFAULTCODEC</tt>条目。例如：</p>
+<pre>
+    DEFAULTCODEC    = ISO-8859-5
+</pre>
+<h3><a name="2"></a>lupdate</h3>
+<!-- index lupdate --><p>用法：<tt>lupdate myproject.pro</tt></p>
+<p>这是一个简单的命令行工具。<a href="linguist-manual-2.html#2">lupdate</a>读取一个Qt<tt>.pro</tt>项目文件并且产生或者更新项目文件中列出的<tt>.ts</tt>翻译源文件。翻译人员可以用<em>Qt语言学家</em>来读取这个翻译文件并且插入翻译。</p>
+<p>有自己的翻译人员的公司会发现像应用程序开发人员那样定期地（也许每个月）运行<a href="linguist-manual-2.html#2">lupdate</a>会很有用处的。这样可以使翻译工作能够很均匀地分布在整个项目周期中并且这将可以允许翻译人员可以同时为大量的项目工作。</p>
+<p>雇佣翻译人员的公司只需要在整个应用程序开发周期中运行几次<a href="linguist-manual-2.html#2">lupdate</a>，第一次运行也许正好在第一个测试阶段之前。这样可以把一个充实的单一工作块提供给翻译人员并且翻译缺陷也可以在最初的测试阶段很容易地被发现。第二次以及后来的<a href="linguist-manual-2.html#2">lupdate</a>运行可以发生在最后的beta测试阶段。</p>
+<!-- index .ts Files --><!-- index Translation Source Files --><!-- index XML --><p><tt>.ts</tt>文件格式是一种很简单的人们可读的XML格式，并且如果必要的话，可以使用版本控制系统。</p>
+<h3><a name="3"></a>lrelease</h3>
+<!-- index lrelease --><p>用法：<tt>lrelease myproject.pro</tt></p>
+<!-- index .qm Files --><!-- index Qt Message Files --><p>这是另一个简单的命令行工具。它读取Qt<tt>.pro</tt>项目文件并且根据项目文件中列出的每一个<tt>.ts</tt>翻译源文件产生一个应用程序所要用到的<tt>.qm</tt>文件。<tt>.qm</tt>文件格式是一个紧凑的二进制格式，它可以提供更快速的翻译查找。</p>
+<p>只要应用程序要被发布，从最初的测试版本一直到最终的发布版本，就要运行这个工具。如果<tt>.qm</tt>文件没有被创建，比如，因为一个alpha发布需要在翻译完成之前出来，应用程序也可以使用程序员放置在源文件中的文本正常运行。一旦<tt>.qm</tt>文件被提供，应用程序就可以检测它们并且自动地使用它们。</p>
+<p>注意：<a href="linguist-manual-2.html#3">lrelease</a>只是合并那些被标记为“done”的翻译。如果缺少一个翻译，或者有不成功的确认，那么最初的文本将会被使用。</p>
+<h3><a name="4"></a>缺少的翻译</h3>
+<p><a href="linguist-manual-2.html#2">lupdate</a>和<a href="linguist-manual-2.html#3">lrelease</a>也可以用在不完全的<tt>.ts</tt>翻译源文件上。缺少的翻译将会在运行的时候由本地的语言短语替换。</p>
+<!-- eof -->
+<p align="right">[<a href="linguist-manual-1.html">上一章：介绍</a>] [<a href="linguist-manual.html">Qt语言学家首页</a>] [<a href="linguist-manual-3.html">下一章：翻译人员</a>]</p>
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

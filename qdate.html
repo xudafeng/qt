@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QDate类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QDate类参考</h1>
+
+<p>QDate类提供了日期功能。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qdatetime-h.html">qdatetime.h</a>&gt;</tt>
+<p><a href="qdate-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QDate"><b>QDate</b></a> ()</div></li>
+<li><div class=fn><a href="#QDate-2"><b>QDate</b></a> ( int&nbsp;y, int&nbsp;m, int&nbsp;d )</div></li>
+<li><div class=fn>bool <a href="#isNull"><b>isNull</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isValid"><b>isValid</b></a> () const</div></li>
+<li><div class=fn>int <a href="#year"><b>year</b></a> () const</div></li>
+<li><div class=fn>int <a href="#month"><b>month</b></a> () const</div></li>
+<li><div class=fn>int <a href="#day"><b>day</b></a> () const</div></li>
+<li><div class=fn>int <a href="#dayOfWeek"><b>dayOfWeek</b></a> () const</div></li>
+<li><div class=fn>int <a href="#dayOfYear"><b>dayOfYear</b></a> () const</div></li>
+<li><div class=fn>int <a href="#daysInMonth"><b>daysInMonth</b></a> () const</div></li>
+<li><div class=fn>int <a href="#daysInYear"><b>daysInYear</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#toString-2"><b>toString</b></a> ( Qt::DateFormat&nbsp;f = Qt::TextDate ) const</div></li>
+<li><div class=fn>QString <a href="#toString"><b>toString</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;format ) const</div></li>
+<li><div class=fn>bool <a href="#setYMD"><b>setYMD</b></a> ( int&nbsp;y, int&nbsp;m, int&nbsp;d )</div></li>
+<li><div class=fn>QDate <a href="#addDays"><b>addDays</b></a> ( int&nbsp;ndays ) const</div></li>
+<li><div class=fn>QDate <a href="#addMonths"><b>addMonths</b></a> ( int&nbsp;nmonths ) const</div></li>
+<li><div class=fn>QDate <a href="#addYears"><b>addYears</b></a> ( int&nbsp;nyears ) const</div></li>
+<li><div class=fn>int <a href="#daysTo"><b>daysTo</b></a> ( const&nbsp;QDate&nbsp;&amp;&nbsp;d ) const</div></li>
+<li><div class=fn>bool <a href="#operator-eq-eq"><b>operator==</b></a> ( const&nbsp;QDate&nbsp;&amp;&nbsp;d ) const</div></li>
+<li><div class=fn>bool <a href="#operator!-eq"><b>operator!=</b></a> ( const&nbsp;QDate&nbsp;&amp;&nbsp;d ) const</div></li>
+<li><div class=fn>bool <a href="#operator-lt"><b>operator&lt;</b></a> ( const&nbsp;QDate&nbsp;&amp;&nbsp;d ) const</div></li>
+<li><div class=fn>bool <a href="#operator-lt-eq"><b>operator&lt;=</b></a> ( const&nbsp;QDate&nbsp;&amp;&nbsp;d ) const</div></li>
+<li><div class=fn>bool <a href="#operator-gt"><b>operator&gt;</b></a> ( const&nbsp;QDate&nbsp;&amp;&nbsp;d ) const</div></li>
+<li><div class=fn>bool <a href="#operator-gt-eq"><b>operator&gt;=</b></a> ( const&nbsp;QDate&nbsp;&amp;&nbsp;d ) const</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>QString monthName ( int&nbsp;month ) &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>QString dayName ( int&nbsp;weekday ) &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>QString <a href="#shortMonthName"><b>shortMonthName</b></a> ( int&nbsp;month )</div></li>
+<li><div class=fn>QString <a href="#shortDayName"><b>shortDayName</b></a> ( int&nbsp;weekday )</div></li>
+<li><div class=fn>QString <a href="#longMonthName"><b>longMonthName</b></a> ( int&nbsp;month )</div></li>
+<li><div class=fn>QString <a href="#longDayName"><b>longDayName</b></a> ( int&nbsp;weekday )</div></li>
+<li><div class=fn>QDate <a href="#currentDate"><b>currentDate</b></a> ()</div></li>
+<li><div class=fn>QDate <a href="#fromString"><b>fromString</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;s, Qt::DateFormat&nbsp;f = Qt::TextDate )</div></li>
+<li><div class=fn>bool <a href="#isValid-2"><b>isValid</b></a> ( int&nbsp;y, int&nbsp;m, int&nbsp;d )</div></li>
+<li><div class=fn>bool <a href="#leapYear"><b>leapYear</b></a> ( int&nbsp;y )</div></li>
+</ul>
+<h2>相关函数</h2>
+<ul>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt"><b>operator&lt;&lt;</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, const&nbsp;QDate&nbsp;&amp;&nbsp;d )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt"><b>operator&gt;&gt;</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, QDate&nbsp;&amp;&nbsp;d )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QDate类提供了日期功能。
+<p> 
+
+<p> QDate对象包含日历日期，比如现代西方（教皇格列高利一世的）日历年、月和日的数字。它可以从系统时钟中读取当前日期。它提供比较日期和操作日期的函数，比如加上一定数量的天、月或年。
+<p> QDate对象通常可以由明白地给定的年、月、日数字来创建，或者使用静态函数<a href="#currentDate">currentDate</a>()让QDate对象包含系统时钟日期。一个明确的日期也可以用<a href="#setYMD">setYMD</a>()来设置。<a href="#fromString">fromString</a>()函数通过一个给定的字符串和在字符串中日期格式的间隔说明就可以返回一个QDate。
+<p> <a href="#year">year</a>()、<a href="#month">month</a>()和<a href="#day">day</a>()函数提供了对年、月、日数字的访问。也提供了<a href="#dayOfWeek">dayOfWeek</a>()和<a href="#dayOfYear">dayOfYear</a>()函数。<a href="#toString">toString</a>()、<a href="#shortDayName">shortDayName</a>()、<a href="#longDayName">longDayName</a>()、<a href="#shortMonthName">shortMonthName</a>()和<a href="#longMonthName">longMonthName</a>()提供了文本格式的相同信息。
+<p> QDate提供了一整套的操作符来比较两个QDate对象，在这里小于表示早一些，大于表示晚一些。
+<p> 你可以使用<a href="#addDays">addDays</a>()给一个日期增加（或减少）一个给定的天数。相似地你可以使用<a href="#addMonths">addMonths</a>()和<a href="#addYears">addYears</a>()。<a href="#daysTo">daysTo</a>()函数返回两个日期之间的天数。
+<p> <a href="#daysInMonth">daysInMonth</a>()和<a href="#daysInYear">daysInYear</a>()函数分别返回这个日期在当月和当年的天数。<a href="#leapYear">leapYear</a>()函数说明这个日期是不是在一个闰年中。
+<p> 注意QDate不应用于早于格列高利历的日期的计算。这个历法是英格兰从1752年9月14日采用的（因此这是最早有效的QDate），并且后来其他绝大多数西方国家知道1923年才采用。
+<p> QDate的结束时间可以一直到8000年，到那个时候我们希望Qt已经被废弃了。
+<p> <p>也可以参考<a href="qtime.html">QTime</a>、<a href="qdatetime.html">QDateTime</a>、<a href="qdateedit.html">QDateEdit</a>、<a href="qdatetimeedit.html">QDateTimeEdit</a>和<a href="time.html">时间和日期</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QDate"></a>QDate::QDate ()
+</h3>
+构造一个零日期。零日期是无效的。
+<p> <p>也可以参考<a href="#isNull">isNull</a>()和<a href="#isValid">isValid</a>()。
+
+<h3 class=fn><a name="QDate-2"></a>QDate::QDate ( int&nbsp;y, int&nbsp;m, int&nbsp;d )
+</h3>
+构造一个年、月、日分别为<em>y</em>、<em>m</em>、<em>d</em>的日期。
+<p> <em>y</em>必须在1752－8000之间，<em>m</em>必须在1－12之间，<em>d</em>必须在1－31之间。例外，如果<em>y</em>在0－99之间，它表示的是1900－1999。
+<p> <p>也可以参考<a href="#isValid">isValid</a>()。
+
+<h3 class=fn><a href="qdate.html">QDate</a> <a name="addDays"></a>QDate::addDays ( int&nbsp;ndays ) const
+</h3>
+返回这个日期对象<em>ndays</em>天之后的一个QDate对象（或者<em>ndays</em>天之前的，如果它是一个负数）。
+<p> <p>也可以参考<a href="#daysTo">daysTo</a>()。
+
+<h3 class=fn><a href="qdate.html">QDate</a> <a name="addMonths"></a>QDate::addMonths ( int&nbsp;nmonths ) const
+</h3>
+返回这个日期对象<em>nmonths</em>月之后的一个QDate对象（或者<em>nmonths</em>月之前的，如果它是一个负数）。
+
+<h3 class=fn><a href="qdate.html">QDate</a> <a name="addYears"></a>QDate::addYears ( int&nbsp;nyears ) const
+</h3>
+返回这个日期对象<em>nyears</em>年之后的一个QDate对象（或者<em>nyears</em>年之前的，如果它是一个负数）。
+ 
+<h3 class=fn><a href="qdate.html">QDate</a> <a name="currentDate"></a>QDate::currentDate ()<tt> [静态]</tt>
+</h3>
+返回当前日期，来自于系统时钟。
+<p> <p>也可以参考<a href="qtime.html#currentTime">QTime::currentTime</a>()和<a href="qdatetime.html#currentDateTime">QDateTime::currentDateTime</a>()。
+<p>实例：<a href="dclock-example.html#x898">dclock/dclock.cpp</a>。
+
+<h3 class=fn>int <a name="day"></a>QDate::day () const
+</h3>
+返回这个日期在月中的天数（1－31）。
+<p> <p>也可以参考<a href="#year">year</a>()、<a href="#month">month</a>()和<a href="#dayOfWeek">dayOfWeek</a>()。
+<p>实例：<a href="dclock-example.html#x899">dclock/dclock.cpp</a>。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="dayName"></a>QDate::dayName ( int&nbsp;weekday )<tt> [静态]</tt>
+</h3>
+<b>这个函数是废弃的。</b>它的提供是为了保证就代码能够工作。我们强烈建议你在新代码中不要使用它。
+<p> 使用<a href="#shortDayName">shortDayName</a>()来替代它。
+
+<h3 class=fn>int <a name="dayOfWeek"></a>QDate::dayOfWeek () const
+</h3>
+返回这个日期中在星期中的天数（星期一为1－星期日为7）。
+<p> <p>也可以参考<a href="#day">day</a>()和<a href="#dayOfYear">dayOfYear</a>()。
+
+<h3 class=fn>int <a name="dayOfYear"></a>QDate::dayOfYear () const
+</h3>
+返回这个日期中在年中的天数（1－365）。
+<p> <p>也可以参考<a href="#day">day</a>()和<a href="#dayOfWeek">dayOfWeek</a>()。
+
+<h3 class=fn>int <a name="daysInMonth"></a>QDate::daysInMonth () const
+</h3>
+返回这个日期中这个月的总天数（28－31）。
+<p> <p>也可以参考<a href="#day">day</a>()和<a href="#daysInYear">daysInYear</a>()。
+
+<h3 class=fn>int <a name="daysInYear"></a>QDate::daysInYear () const
+</h3>
+返回这个日期中这个年的总天数（365－366）。
+<p> <p>也可以参考<a href="#day">day</a>()和<a href="#daysInMonth">daysInMonth</a>()。
+
+<h3 class=fn>int <a name="daysTo"></a>QDate::daysTo ( const&nbsp;<a href="qdate.html">QDate</a>&nbsp;&amp;&nbsp;d ) const
+</h3>
+返回从这个日期到<em>d</em>的天数（如果<em>d</em>早于这个日期，返回的为负数）。
+<p> 实例：
+<pre>
+    QDate d1( 1995, 5, 17 );  // 1995年5月17日
+    QDate d2( 1995, 5, 20 );  // 1995年5月20日
+    d1.<a href="#daysTo">daysTo</a>( d2 );          // 返回3
+    d2.<a href="#daysTo">daysTo</a>( d1 );          // 返回-3
+  </pre>
+ 
+<p> <p>也可以参考<a href="#addDays">addDays</a>()。
+
+<h3 class=fn><a href="qdate.html">QDate</a> <a name="fromString"></a>QDate::fromString ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;s, <a href="qt.html#DateFormat-enum">Qt::DateFormat</a>&nbsp;f = Qt::TextDate )<tt> [静态]</tt>
+</h3>
+通过给定的字符串<em>s</em>，使用格式<em>f</em>，返回这个QDate，或者如果这是不可能的话返回一个无效的日期。
+<p> 注意Qt::LocalDate在这里不能使用。
+<p> 注意Qt::TextDate：它被推荐使用英语中的月的缩写格式（比如Jan）。本地的月名称也可以被使用，但这取决于用户的本地设置。
+
+<h3 class=fn>bool <a name="isNull"></a>QDate::isNull () const
+</h3>
+<p> 如果这个日期是零日期，返回真，否则返回假。一个零日期是无效的。
+<p> <p>也可以参考<a href="#isValid">isValid</a>()。
+
+<h3 class=fn>bool <a name="isValid"></a>QDate::isValid () const
+</h3>
+如果这个日期是有效的，返回真，否则返回假。
+<p> <p>也可以参考<a href="#isNull">isNull</a>()。
+
+<h3 class=fn>bool <a name="isValid-2"></a>QDate::isValid ( int&nbsp;y, int&nbsp;m, int&nbsp;d )<tt> [静态]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 如果一个给定的（年、月、日分别为<em>y</em>、<em>m</em>、<em>d</em>）日期是有效的，返回真。
+<p> 实例：
+<pre>
+    QDate::<a href="#isValid">isValid</a>( 2002, 5, 17 );  // 真，2002年5月17日是有效的
+    QDate::<a href="#isValid">isValid</a>( 2002, 2, 30 );  // 假，2月30日是不存在的
+    QDate::<a href="#isValid">isValid</a>( 2004, 2, 29 );  // 真，2004年是闰年
+    QDate::<a href="#isValid">isValid</a>( 1202, 6, 6 );   // 假，1202是在格列高利历之前的
+  </pre>
+ 
+<p> 注意如果<em>y</em>在0－99范围内表示1900－1999。
+<p> <p>也可以参考<a href="#isNull">isNull</a>()和<a href="#setYMD">setYMD</a>()。
+
+<h3 class=fn>bool <a name="leapYear"></a>QDate::leapYear ( int&nbsp;y )<tt> [静态]</tt>
+</h3>
+如果给定的年<em>y</em>是闰年，返回真。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="longDayName"></a>QDate::longDayName ( int&nbsp;weekday )<tt> [静态]</tt>
+</h3>
+返回这一日<em>weekday</em>在星期中的长名称。
+<p> 1 = “Monday”、2 = “Tuesday”、……7 = “Sunday”
+<p> 日名称将根据系统本地设置而改变。
+<p> <p>也可以参考<a href="#toString">toString</a>()、<a href="#shortDayName">shortDayName</a>()、<a href="#shortMonthName">shortMonthName</a>()和<a href="#longMonthName">longMonthName</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="longMonthName"></a>QDate::longMonthName ( int&nbsp;month )<tt> [静态]</tt>
+</h3>
+返回这一月<em>month</em>的长名称。
+<p> 1 = “January”、2 = “February”、……12 = “December”
+<p> 月名称将根据系统本地设置而改变。
+<p> <p>也可以参考<a href="#toString">toString</a>()、<a href="#shortMonthName">shortMonthName</a>()、<a href="#shortDayName">shortDayName</a>()和<a href="#longDayName">longDayName</a>()。
+
+<h3 class=fn>int <a name="month"></a>QDate::month () const
+</h3>
+返回这个日期的月（一月为1－十二月为12）。
+<p> <p>也可以参考<a href="#year">year</a>()和<a href="#day">day</a>()。
+<p>实例：<a href="dclock-example.html#x900">dclock/dclock.cpp</a>。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="monthName"></a>QDate::monthName ( int&nbsp;month )<tt> [静态]</tt>
+</h3>
+<b>这个函数是废弃的。</b>它的提供是为了保证就代码能够工作。我们强烈建议你在新代码中不要使用它。
+<p> 使用<a href="#shortMonthName">shortMonthName</a>()来替代它。
+
+<h3 class=fn>bool <a name="operator!-eq"></a>QDate::operator!= ( const&nbsp;<a href="qdate.html">QDate</a>&nbsp;&amp;&nbsp;d ) const
+</h3>
+如果这个日期不等于<em>d</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-lt"></a>QDate::operator&lt; ( const&nbsp;<a href="qdate.html">QDate</a>&nbsp;&amp;&nbsp;d ) const
+</h3>
+如果这个日期早于<em>d</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-lt-eq"></a>QDate::operator&lt;= ( const&nbsp;<a href="qdate.html">QDate</a>&nbsp;&amp;&nbsp;d ) const
+</h3>
+如果这个日期不晚于<em>d</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-eq-eq"></a>QDate::operator== ( const&nbsp;<a href="qdate.html">QDate</a>&nbsp;&amp;&nbsp;d ) const
+</h3>
+如果这个日期等于<em>d</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-gt"></a>QDate::operator&gt; ( const&nbsp;<a href="qdate.html">QDate</a>&nbsp;&amp;&nbsp;d ) const
+</h3>
+如果这个日期晚于<em>d</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-gt-eq"></a>QDate::operator&gt;= ( const&nbsp;<a href="qdate.html">QDate</a>&nbsp;&amp;&nbsp;d ) const
+</h3>
+如果这个日期不早于<em>d</em>，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="setYMD"></a>QDate::setYMD ( int&nbsp;y, int&nbsp;m, int&nbsp;d )
+</h3>
+设置日期的年、月、日分别为<em>y</em>、<em>m</em>、<em>d</em>。
+<p> <em>y</em>必须在1752－8000之间，<em>m</em>必须在1－12之间，<em>d</em>必须在1－31之间。例外，如果<em>y</em>在0－99之间，它表示的是1900－1999。
+<p> 如果日期有效，返回真，否则返回假。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="shortDayName"></a>QDate::shortDayName ( int&nbsp;weekday )<tt> [静态]</tt>
+</h3>
+返回这一日<em>weekday</em>在星期中的名称。
+<p> 1 = “Mon”、2 = “Tue”、……7 = “Sun”
+<p> 日名称将根据系统本地设置而改变。
+<p> <p>也可以参考<a href="#toString">toString</a>()、<a href="#shortMonthName">shortMonthName</a>()、<a href="#longMonthName">longMonthName</a>()和<a href="#longDayName">longDayName</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="shortMonthName"></a>QDate::shortMonthName ( int&nbsp;month )<tt> [静态]</tt>
+</h3>
+返回这一月<em>month</em>的名称。
+<p> 1 = “Jan”、2 = “Feb”、……12 = “Dec”
+<p> 月名称将根据系统本地设置而改变。
+<p> <p>也可以参考<a href="#toString">toString</a>()、<a href="#longMonthName">longMonthName</a>()、<a href="#shortDayName">shortDayName</a>()和<a href="#longDayName">longDayName</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="toString"></a>QDate::toString ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;format ) const
+</h3>  
+返回一个字符串的日期。<em>format</em>参数决定了结果字符串的格式。
+<p> 这些是可能用到的表达式：
+<p> <ul>
+<li> <em>d</em> - 没有前置0的数字的天（1－31）
+<li> <em>dd</em> - 前置0的数字的天（01－31）
+<li> <em>ddd</em> - 缩写的日名称（Mon－Sun）。使用<a href="#shortDayName">QDate::shortDayName</a>()。
+<li> <em>dddd</em> - 长的日名称（Monday－Sunday）。使用<a href="#longDayName">QDate::longDayName</a>()。
+<li> <em>M</em> - 没有前置0的数字的月（1－12）
+<li> <em>MM</em> - 前置0的数字的月（01－12）
+<li> <em>MMM</em> - 缩写的月名称（Jan－Dec）。使用<a href="#shortMonthName">QDate::shortMonthName</a>()。
+<li> <em>MMMM</em> - 长的月名称（January－December）。使用<a href="#longMonthName">QDate::longMonthName</a>()。
+<li> <em>yy</em> - 两位数字的年（00－99）
+<li> <em>yyyy</em> - 四位数字的年（0000-9999）
+</ul>
+<p> 所有其他输入字符都将被忽略。
+<p> 格式字符串实例（假设这个QDate为2001年5月21日）
+<p> <ul>
+<li> “dd.MM.yyyy”的结果将是“21.05.2001”。
+<li> “ddd MMMM d yy”的结果将是“Tue May 21 01”。
+</ul>
+<p> <p>也可以参考<a href="#toString">QDate::toString</a>() and <a href="qtime.html#toString">QTime::toString</a>().
+
+<p> 
+<h3 class=fn><a href="qstring.html">QString</a> <a name="toString-2"></a>QDate::toString ( <a href="qt.html#DateFormat-enum">Qt::DateFormat</a>&nbsp;f = Qt::TextDate ) const
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回一个字符串的日期。<em>f</em>参数决定了结果字符串的格式。
+<p> 如果<em>f</em>是Qt::TextDate，字符串格式是“Sat May 20 1995”（使用<a href="#shortDayName">shortDayName</a>()和<a href="#shortMonthName">shortMonthName</a>()函数来生成本地指定的字符串）。
+<p> 如果<em>f</em>是Qt::ISODate，字符串格式遵循ISO 8601表示日期的说明，也就是YYYY-MM-DD，YYYY是年，MM是月（01－12），DD是日（01－31）。
+<p> 如果<em>f</em>是Qt::LocalDate，字符串格式依赖于系统的本地设置。
+<p> <p>也可以参考<a href="#shortDayName">shortDayName</a>() and <a href="#shortMonthName">shortMonthName</a>().
+
+<h3 class=fn>int <a name="year"></a>QDate::year () const
+</h3>
+返回这个日期的年（1752－8000）。
+<p> <p>也可以参考<a href="#month">month</a>()和<a href="#day">day</a>()。
+
+<hr><h2>相关函数</h2>
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt"></a>operator&lt;&lt; ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, const&nbsp;<a href="qdate.html">QDate</a>&nbsp;&amp;&nbsp;d )
+</h3>
+写日期<em>d</em>到流<em>s</em>中。
+<p> <p>也可以参考<a href="datastreamformat.html">QDataStream操作符的格式</a>。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt"></a>operator&gt;&gt; ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, <a href="qdate.html">QDate</a>&nbsp;&amp;&nbsp;d )
+</h3>
+从流<em>s</em>中读取一个日期到<em>d</em>中。
+<p> <p>也可以参考<a href="datastreamformat.html">QDataStream操作符的格式</a>。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

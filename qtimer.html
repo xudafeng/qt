@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QTimer类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QTimer类参考</h1>
+
+<p>QTimer类提供了定时器信号和单触发定时器。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qtimer-h.html">qtimer.h</a>&gt;</tt>
+<p>继承了<a href="qobject.html">QObject</a>。
+<p><a href="qtimer-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QTimer"><b>QTimer</b></a> ( QObject&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#~QTimer"><b>~QTimer</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#isActive"><b>isActive</b></a> () const</div></li>
+<li><div class=fn>int <a href="#start"><b>start</b></a> ( int&nbsp;msec, bool&nbsp;sshot = FALSE )</div></li>
+<li><div class=fn>void <a href="#changeInterval"><b>changeInterval</b></a> ( int&nbsp;msec )</div></li>
+<li><div class=fn>void <a href="#stop"><b>stop</b></a> ()</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#timeout"><b>timeout</b></a> ()</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>void <a href="#singleShot"><b>singleShot</b></a> ( int&nbsp;msec, QObject&nbsp;*&nbsp;receiver, const&nbsp;char&nbsp;*&nbsp;member )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QTimer类提供了定时器信号和单触发定时器。
+<p> 
+
+
+<p> 它在内部使用<a href="qtimerevent.html">定时器事件</a>来提供更通用的定时器。QTimer很容易使用：创建一个QTimer，使用<a href="#start">start</a>()来开始并且把它的<a href="#timeout">timeout</a>()连接到适当的槽。当这段时间过去了，它将会发射timeout()信号。
+<p> 注意当QTimer的父对象被销毁时，它也会被自动销毁。
+<p> 实例：
+<pre>
+        QTimer *timer = new QTimer( myObject );
+        <a href="qobject.html#connect">connect</a>( timer, SIGNAL(<a href="#timeout">timeout</a>()), myObject, SLOT(timerDone()) );
+        timer-&gt;<a href="#start">start</a>( 2000, TRUE ); // 2秒单触发定时器
+    </pre>
+ 
+<p> 你也可以使用静态的<a href="#singleShot">singleShot</a>()函数来创建单触发定时器。
+<p> 作为一个特殊情况，一旦窗口系统事件队列中的所有事件都已经被处理完，一个定时为0的QTimer就会到时间了。
+<p> 这也可以用来当提供迅速的用户界面时来做比较繁重的工作。
+<pre>
+        QTimer *t = new QTimer( myObject );
+        <a href="qobject.html#connect">connect</a>( t, SIGNAL(<a href="#timeout">timeout</a>()), SLOT(processOneThing()) );
+        t-&gt;<a href="#start">start</a>( 0, FALSE );
+    </pre>
+ 
+<p> myObject->processOneThing()将会被重复调用并且应该很快返回（通常在处理一个数据项之后），这样Qt可以把事件传送给窗口部件并且一旦它完成这个工作就停止这个定时器。这是在图形用户界面应用程序中实现繁重的工作的一个典型方法，现在多线程可以在越来越多的平台上使用，并且我们希望无效事件最终被线程替代。
+<p> 注意QTimer的精确度依赖于底下的操作系统和硬件。绝大多数平台支持20毫秒的精确度，一些平台可以提供更高的。如果Qt不能传送定时器触发所要求的数量，它将会默默地抛弃一些。
+<p> 另一个使用QTimer的方法是为你的对象调用<a href="qobject.html#startTimer">QObject::startTimer</a>()和在你的类中（当然必须继承<a href="qobject.html">QObject</a>）重新实现<a href="qobject.html#timerEvent">QObject::timerEvent</a>()事件处理器。缺点是<a href="qobject.html#timerEvent">timerEvent</a>()不支持像单触发定时器或信号那样的高级水平。
+<p> 一些操作系统限制可能用到的定时器的数量，Qt会尽力在限制范围内工作。
+<p>也可以参考<a href="events.html">事件类</a>和<a href="time.html">时间和日期</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QTimer"></a>QTimer::QTimer ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3>
+构造一个被称作<em>name</em>，父对象为<em>parent</em>的定时器。
+<p> 注意这个父对象的析构函数将会销毁这个定时器对象。
+
+<h3 class=fn><a name="~QTimer"></a>QTimer::~QTimer ()
+</h3>
+销毁这个定时器。
+
+<h3 class=fn>void <a name="changeInterval"></a>QTimer::changeInterval ( int&nbsp;msec )
+</h3>
+改变定时间隔为<em>msec</em>毫秒。
+<p> 如果这个定时器信号是运行的，它将会被停止并且重新开始，否则它将会被开始。
+<p> <p>也可以参考<a href="#start">start</a>()和<a href="#isActive">isActive</a>()。
+
+<h3 class=fn>bool <a name="isActive"></a>QTimer::isActive () const
+</h3>
+<p> 如果定时器正在运行，返回真，否则返回假。
+<p>实例：<a href="tutorial1-11.html#x2363">t11/cannon.cpp</a>。
+
+<h3 class=fn>void <a name="singleShot"></a>QTimer::singleShot ( int&nbsp;msec, <a href="qobject.html">QObject</a>&nbsp;*&nbsp;receiver, const&nbsp;char&nbsp;*&nbsp;member )<tt> [静态]</tt>
+</h3>
+这个静态函数在一个给定时间间隔之后调用一个槽。
+<p> 使用这个函数是非常方便的，因为你不需要被<a href="qobject.html#timerEvent">timerEvent</a>或创建一个本地QTimer对象所困扰。
+<p> 实例：
+<pre>
+        #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+        #include &lt;<a href="qtimer-h.html">qtimer.h</a>&gt;
+
+        int main( int argc, char **argv )
+        {
+            <a href="qapplication.html">QApplication</a> a( argc, argv );
+            QTimer::<a href="#singleShot">singleShot</a>( 10*60*1000, &amp;a, SLOT(<a href="qapplication.html#quit">quit</a>()) );
+                ... // 创建并且显示你的窗口部件
+            return a.<a href="qapplication.html#exec">exec</a>();
+        }
+    </pre>
+ 
+<p> 这个示例程序会自动在10分钟之后终止（也就是600000毫秒）。
+<p> <em>receiver</em>是正在接收的对象并且<em>member</em>是一个槽。时间间隔是<em>msec</em>。
+
+<h3 class=fn>int <a name="start"></a>QTimer::start ( int&nbsp;msec, bool&nbsp;sshot = FALSE )
+</h3>
+开始一个<em>msec</em>毫秒定时的定时器。
+<p> 如果<em>sshot</em>为真，这个定时器将只会被激活一次，否则它将会持续到它被停止。
+<p> 任何正在运行的定时器将被停止。
+<p> <p>也可以参考<a href="#singleShot">singleShot</a>()、<a href="#stop">stop</a>()、<a href="#changeInterval">changeInterval</a>()和<a href="#isActive">isActive</a>()。
+<p>实例：<a href="aclock-example.html#x1221">aclock/aclock.cpp</a>、<a href="dirview-example.html#x1741">dirview/dirview.cpp</a>、<a href="forever-example.html#x799">forever/forever.cpp</a>、<a href="hello-example.html#x1605">hello/hello.cpp</a>、<a href="tutorial1-11.html#x2364">t11/cannon.cpp</a>和<a href="tutorial1-13.html#x2394">t13/cannon.cpp</a>。
+
+<h3 class=fn>void <a name="stop"></a>QTimer::stop ()
+</h3>
+停止这个定时器。
+<p> <p>也可以参考<a href="#start">start</a>()。
+<p>实例：<a href="dirview-example.html#x1742">dirview/dirview.cpp</a>、<a href="tutorial1-11.html#x2365">t11/cannon.cpp</a>、<a href="tutorial1-12.html#x2387">t12/cannon.cpp</a>和<a href="tutorial1-13.html#x2395">t13/cannon.cpp</a>。
+
+<h3 class=fn>void <a name="timeout"></a>QTimer::timeout ()<tt> [信号]</tt>
+</h3>
+<p> 当定时器被激活时，这个信号被发射。
+<p>实例：<a href="aclock-example.html#x1222">aclock/aclock.cpp</a>、<a href="dirview-example.html#x1743">dirview/dirview.cpp</a>、<a href="forever-example.html#x800">forever/forever.cpp</a>、<a href="hello-example.html#x1606">hello/hello.cpp</a>和<a href="tutorial1-11.html#x2366">t11/cannon.cpp</a>。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>定时器</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>定时器</h1>
+
+ 
+<p> 在Qt中，<a href="qobject.html">QObject</a>，所有Qt对象的基类，提供了一个基本的定时器。通过<a href="qobject.html#startTimer">QObject::startTimer</a>()，你可以把一个以毫秒为单位的<em>时间间隔</em>作为参数来开始定时器。这个函数返回一个唯一的整数的定时器的标识符。这个定时器现在就会在每一个<em>时间间隔</em>“触发”，直到你明确地使用这个定时器的标识符来调用<a href="qobject.html#killTimer">QObject::killTimer</a>()结束。
+<p> 对于这种工作机制，应用程序不得不在一个事件回路中运行。你通过<a href="qapplication.html#exec">QApplication::exec</a>()来开始一个事件回路。当定时器触发时，应用程序会发送一个<a href="qtimerevent.html">QTimerEvent</a>，并且控制流直到定时器事件被处理时才会离开事件回路。这暗示着当你的应用程序正忙于其它事情的时候，定时器不能触发。换句话说，定时器的精确性依赖于你的应用程序的间隔尺度。
+<p> 事实上，对于间隔值是没有上限的（超过一年也是可能的）。精确性依赖于位于下面的操作系统。Windows 95/98的精确度为55毫秒（每秒18.2次），其它我们已经测试过的操作系统（UNIX X11、Windows NT和OS/2）都可以处理1毫秒的间隔。
+<p> 定时器功能的主要的应用程序接口是<a href="qtimer.html">QTimer</a>。这个类可以提供当定时器触发的时候发射一个信号的有规律的定时器，并且继承了<a href="qobject.html">QObject</a>，所以它很适合绝大多数图形用户界面程序的所有权结构。通常的使用方法如下：
+<pre>
+    <a href="qtimer.html">QTimer</a> * counter = new <a href="qtimer.html">QTimer</a>( this );
+    connect( counter, SIGNAL(<a href="qtimer.html#timeout">timeout</a>()),
+             this, SLOT(updateCaption()) );
+    counter-&gt;<a href="qtimer.html#start">start</a>( 1000 );
+</pre>
+ 
+<p> counter定时器被作为这个窗口部件的子类，这样当这个窗口部件被删除时，定时器也会被删除。接下来，它的timeout信号被连接到将要做工作的槽上，最后它开始了。
+<p> <a href="qtimer.html">QTimer</a>也提供了一个简单的只有一次定时器的应用程序接口。<a href="qbutton.html">QButton</a>，当键盘被用来“按下”按钮的时候，在按钮被按下来显示按钮和接下来（0.1秒之后）被释放时使用它来显示按钮，例如：
+<p> <pre>
+    QTimer::<a href="qtimer.html#singleShot">singleShot</a>( 100, this, SLOT(animateTimeout()) );
+</pre>
+ 
+<p> 在这行代码之后0.1秒时，同一个按钮的animateTimeout()槽被调用。
+<p> 这里是一个通过QTimer对象的信号和槽来进行对象通讯的不太复杂的实例的大纲。它示范了一个单线程应用程序如何使用定时器在不阻塞用户界面的情况下进行精确运算的。
+<p> <pre>
+	// Mandelbrot类使用QTimer在不阻塞CPU的情况下来计算一个扫描行。
+	// 它继承了QObject来使用信号和槽。调用start()来开始运算。当运
+	// 算完成时，done()信号被发射。注意这个例子并不完全，只是一个
+	// 大纲。
+
+    class Mandelbrot : public <a href="qobject.html">QObject</a>
+    {
+        <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a> // 因为需要使用信号/槽
+    public:
+        Mandelbrot( <a href="qobject.html">QObject</a> *parent=0, const char *name );
+        ...
+    public slots:
+        void start();
+    signals:
+        void done();
+    private slots:
+        void calculate();
+        private:
+        <a href="qtimer.html">QTimer</a> timer;
+        ...
+    };
+
+    //
+    // 构造并初始化Mandelbrot对象。
+    //
+
+    Mandelbrot::Mandelbrot( <a href="qobject.html">QObject</a> *parent=0, const char *name )
+    : <a href="qobject.html">QObject</a>( parent, name )
+    {
+        <a href="qobject.html#connect">connect</a>( &amp;timer, SIGNAL(<a href="qtimer.html#timeout">timeout</a>()), SLOT(calculate()) );
+        ...
+    }
+
+    //
+    // 开始运算任务。内部的calculate()槽会每10毫秒被激活一次。
+    //
+
+    void Mandelbrot::start()
+    {
+        if ( !timer.<a href="qtimer.html#isActive">isActive</a>() ) // 还没有准备好运行
+            timer.<a href="qtimer.html#start">start</a>( 10 );   // 每10毫秒超时
+    }
+
+    //
+    // 每次运算一个扫描行。
+    // 当结束时发射done()信号。
+    //
+
+    void Mandelbrot::calculate()
+    {
+        ...                // 执行一个扫描行的运算
+        if ( finished ) {  // 没有更多的扫描行了
+            timer.<a href="qtimer.html#stop">stop</a>();
+            emit done();
+        }
+    }
+  </pre>
+ 
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt教程一 —— 第九章：你可以使用加农炮了</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt教程一 —— 第九章：你可以使用加农炮了</h1>
+
+ 
+<p> <center><img src="t9.png" alt="Screenshot of tutorial nine"></center> 
+<p> 在这个例子中我们开始画一个蓝色可爱的小加农炮.只cannon.cpp和上一章不同。
+<p> <ul>
+<li> <a href="t9-lcdrange-h.html">t9/lcdrange.h</a>包含LCDRange类定义。
+<li> <a href="t9-lcdrange-cpp.html">t9/lcdrange.cpp</a>包含LCDRange类实现。
+<li> <a href="t9-cannon-h.html">t9/cannon.h</a>包含CannonField类定义。
+<li> <a href="t9-cannon-cpp.html">t9/cannon.cpp</a>包含CannonField类实现。
+<li> <a href="t9-main-cpp.html">t9/main.cpp</a>包含MyWidget和main。
+</ul>
+<p> <h2> 一行一行地解说
+</h2>
+<a name="1"></a><p> <h3> <a href="t9-cannon-cpp.html">t9/cannon.cpp</a>
+</h3>
+<a name="1-1"></a><p> 
+
+<p> <pre>    <a name="x2278"></a>void CannonField::<a href="qwidget.html#paintEvent">paintEvent</a>( <a href="qpaintevent.html">QPaintEvent</a> * )
+    {
+        <a href="qpainter.html">QPainter</a> p( this );
+</pre>
+<p> 我们现在开始认真地使用<a href="qpainter.html">QPainter</a>。我们创建一个绘画工具来操作这个窗口部件。
+<p> <pre>    <a name="x2275"></a>    p.<a href="qpainter.html#setBrush">setBrush</a>( blue );
+</pre>
+<p> 当一个QPainter填满一个矩形、圆或者其它无论什么，它会用它的画刷填满这个图形。这里我们把画刷设置为蓝色。（我们也可以使用一个调色板。）
+<p> <pre>    <a name="x2276"></a>    p.<a href="qpainter.html#setPen">setPen</a>( NoPen );
+</pre>
+<p> 并且QPainter使用画笔来画边界。这里我们设置为NoPen，就是说我们在边界上什么都不画，蓝色画刷会在我们画的东西的边界内画满全部。
+<p> <pre>    <a name="x2277"></a>    p.<a href="qpainter.html#translate">translate</a>( 0, rect().bottom() );
+</pre>
+<p> <a href="qpainter.html#translate">QPainter::translate</a>()函数转化QPainter的坐标系统，比如，它通过偏移谅来移动。这里我们设置窗口部件的左下角为(0,0)。x和y的方向没有改变，比如，窗口部件中的所有y坐标现在都是负数（请看<a href="coordsys.html">坐标系统</a>获得有关Qt的坐标系统更多的信息。）
+<p> <pre>    <a name="x2272"></a>    p.<a href="qpainter.html#drawPie">drawPie</a>( QRect(-35, -35, 70, 70), 0, 90*16 );
+</pre>
+<p> drawPie()函数使用一个开始角度和弧长在一个指定的矩形内画一个饼型图。角度的度量用的是一度的十六分之一。零度在三点的位置。画的方向是顺时针的。这里我们在窗口部件的左下角画一个四分之一圆。这个饼图被蓝色充满，并且没有边框。
+<p> <pre>    <a name="x2274"></a>    p.<a href="qpainter.html#rotate">rotate</a>( -ang );
+</pre>
+<p> <a href="qpainter.html#rotate">QPainter::rotate</a>()函数绕<a href="qpainter.html">QPainter</a>坐标系统的初始位置旋转它。旋转的参数是一个按度数给定的<tt>浮点数</tt>（不是一个像上面那样给的十六分之一的度数）并且是顺时针的。这里我们顺时针旋转<tt>ang</tt>度数。
+<p> <pre>    <a name="x2273"></a>    p.<a href="qpainter.html#drawRect">drawRect</a>( QRect(33, -4, 15, 8) );
+</pre>
+<p> <a href="qpainter.html#drawRect">QPainter::drawRect</a>()函数画一个指定的矩形。这里我们画的是加农炮的炮筒。
+<p> 很难想象当坐标系统被转换之后（转化、旋转、缩放或者修剪）的绘画结果。
+<p> 在这种情况下，坐标系统先被转化后被旋转。如果矩形<a href="qrect.html">QRect</a>(33, -4, 15, 8)被画到这个转化后的坐标系统中，它看起来会是这样：
+<p> <center><img src="t9_1.png" alt="The cannon translated but not rotated"></center> 
+<p> 注意矩形被CannonField窗口部件的边界省略了一部分。当我们选装坐标系统，以60度为例，矩形会以(0,0)为圆心被旋转，也就是左下角，因为我们已经转化了坐标系统。结果会是这样：
+<p> <center><img src="t9_2.png" alt="The cannon translated and rotated"></center> 
+<p> 我们做完了，除了我们还没有解释为什么Windows在这个时候没有发抖。
+<p> 
+<pre>    int main( int argc, char **argv )
+    {
+    <a name="x2279"></a>    QApplication::<a href="qapplication.html#setColorSpec">setColorSpec</a>( QApplication::CustomColor );
+        <a href="qapplication.html">QApplication</a> a( argc, argv );
+</pre>
+<p> 我们告诉Qt我们在这个程序中想使用一个不同的颜色分配策略。这里没有单一正确的颜色分配策略。因为这个程序使用了不常用的黄色，但不是很多颜色，<tt>CustomColor</tt>最好。这里有几个其它的分配策略，你可以在<a href="qapplication.html#setColorSpec">QApplication::setColorSpec</a>()文档中读到它们。
+<p> 通常情况下你可以忽略这一点，因为默认的是好的。偶尔一些使用常用颜色的应用程序看起来比较糟糕，因而改变分配策略通常会有所帮助。
+<p> <h2> 行为
+</h2>
+<a name="2"></a><p> 当滑块被操作的时候，所画的加农炮的角度会因此而变化。
+<p> Quit中的字母Q现在有下划线，并且Alt+Q会实现你所要的。如果你不知道这些，你一定是没有做第八章中的练习。
+<p> 你也要注意加农炮的闪烁让人很烦，特别是在一个比较慢的机器上。我们将会在下一章修正这一点。
+<p> （请看<a href="tutorial1-07.html#compiling">编译</a>来学习如何创建一个makefile和连编应用程序。）
+<p> <h2> 练习
+</h2>
+<a name="3"></a><p> 设置一个不同的画笔代替NoPen。设置一个调色板的画刷。
+<p> 试着用“Q&uit”或者“Qu&it”作为按钮的文本来提到“&Quit”。发生了什么？
+<p> 现在你可以进行<a href="tutorial1-10.html">第十章</a>了。
+<p> [<a href="tutorial1-08.html">上一章</a>]
+[<a href="tutorial1-10.html">下一章</a>]
+[<a href="tutorial.html">教程一主页</a>]
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QSemaphore类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QSemaphore类参考</h1>
+
+<p>QSemaphore类提供了强壮的整数信号量。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qsemaphore-h.html">qsemaphore.h</a>&gt;</tt>
+<p><a href="qsemaphore-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QSemaphore"><b>QSemaphore</b></a> ( int&nbsp;maxcount )</div></li>
+<li><div class=fn>virtual <a href="#~QSemaphore"><b>~QSemaphore</b></a> ()</div></li>
+<li><div class=fn>int <a href="#available"><b>available</b></a> () const</div></li>
+<li><div class=fn>int <a href="#total"><b>total</b></a> () const</div></li>
+<li><div class=fn>int <a href="#operator++"><b>operator++</b></a> ( int )</div></li>
+<li><div class=fn>int <a href="#operator--"><b>operator--</b></a> ( int )</div></li>
+<li><div class=fn>int <a href="#operator+-eq"><b>operator+=</b></a> ( int&nbsp;n )</div></li>
+<li><div class=fn>int <a href="#operator--eq"><b>operator-=</b></a> ( int&nbsp;n )</div></li>
+<li><div class=fn>bool <a href="#tryAccess"><b>tryAccess</b></a> ( int&nbsp;n )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QSemaphore类提供了强壮的整数信号量。
+<p> 
+
+<p> QSemaphore也可以被用来使线程的执行顺序化，和<a href="qmutex.html">QMutex</a>的方法相似。信号量和互斥量的不同在于，信号量可以在同一时间被多于一个的线程访问。
+<p> 例如，假设我们有一个应用程序把数据存储到一个大的树型结构中。应用程序创建了10个线程（通常被称作线程池）来执行树中的搜索。当应用程序搜索树中的一小片数据，它在每个基本节点上使用一个线程来执行搜索。一个信号量就可以用来确保两个线程不必在同一时间内试图对树的同一个分支进行搜索。
+<p> 一个信号量的非计算实例是在餐馆就餐。信号量被初始化为最大值等于餐馆内的椅子数。当人们来了，他们想要一个座位。当座位满了，信号量就被访问，每次一个人。当人们离开了，访问就被释放，允许更多的人进入。如果一个10人的聚会想坐下，但是这里只有9个座位，那么这10个人就必须等，但是一个4人的聚会就可以坐下了（剩下的座位就是5了，那么那10个人就得等更长的时间了）。
+<p> 当信号量被创建时，它被给定为一个它所允许的同时访问的最大数值。这个数量可以使用<a href="#operator++">operator++</a>()、<a href="#operator--">operator--</a>()、<a href="#operator+-eq">operator+=</a>()和<a href="#operator--eq">operator-=</a>()来改变。允许访问的数字可以使用<a href="#available">available</a>()重新得到，并且总量可以通过<a href="#total">total</a>()得到。注意如果没有足够多的可使用的访问，增加函数将会阻塞。如果你需要得到不阻塞的访问，请使用<a href="#tryAccess">tryAccess</a>()。
+<p>也可以参考<a href="environment.html">环境类</a>和<a href="thread.html">线程类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QSemaphore"></a>QSemaphore::QSemaphore ( int&nbsp;maxcount )
+</h3>
+创建一个新的信号量。这个信号量可以同时被最多<em>maxcount</em>次访问。
+
+<h3 class=fn><a name="~QSemaphore"></a>QSemaphore::~QSemaphore ()<tt> [虚]</tt>
+</h3>
+销毁这个信号量。
+
+<h3 class=fn>int <a name="available"></a>QSemaphore::available () const
+</h3>
+这个函数返回信号量当前可使用的访问的数量。
+
+<h3 class=fn>int <a name="operator++"></a>QSemaphore::operator++ ( int )
+</h3>
+后置++操作符。
+<p> 试图得到信号量的访问。如果<a href="#available">available</a>() == 0，这个调用将会阻塞，一直到它能够得到访问，比如直到<a href="#available">available</a>() > 0。
+
+<h3 class=fn>int <a name="operator+-eq"></a>QSemaphore::operator+= ( int&nbsp;n )
+</h3>
+试图得到信号量的访问。如果<a href="#available">available</a>() < <em>n</em>，这个调用将会阻塞，一直到它能够得到访问，比如直到<a href="#available">available</a>() >= <em>n</em>。
+
+<h3 class=fn>int <a name="operator--"></a>QSemaphore::operator-- ( int )
+</h3>
+后置--操作符。
+<p> 释放信号量的访问。这将会唤醒所有等待访问这个信号量的线程。
+
+<h3 class=fn>int <a name="operator--eq"></a>QSemaphore::operator-= ( int&nbsp;n )
+</h3>
+释放信号量的<em>n</em>个访问。
+
+<h3 class=fn>int <a name="total"></a>QSemaphore::total () const
+</h3>
+这个函数返回信号量的最大访问数。
+
+<h3 class=fn>bool <a name="tryAccess"></a>QSemaphore::tryAccess ( int&nbsp;n )
+</h3>
+试图得到信号量的访问。如果<a href="#available">available</a>() < <em>n</em>，这个函数会立即返回假。如果If <a href="#available">available</a>() >= <em>n</em>，这个函数会得到<em>n</em>个访问并且返回真。这个函数是<em>不</em>阻塞的。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

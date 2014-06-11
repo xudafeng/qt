@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QDockArea类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QDockArea类参考</h1>
+
+<p>QDockArea类管理和布局QDockWindow。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qdockarea-h.html">qdockarea.h</a>&gt;</tt>
+<p>继承了<a href="qwidget.html">QWidget</a>。
+<p><a href="qdockarea-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>enum <a href="#HandlePosition-enum"><b>HandlePosition</b></a> { Normal, Reverse }</div></li>
+<li><div class=fn><a href="#QDockArea"><b>QDockArea</b></a> ( Orientation&nbsp;o, HandlePosition&nbsp;h = Normal, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn><a href="#~QDockArea"><b>~QDockArea</b></a> ()</div></li>
+<li><div class=fn>void <a href="#moveDockWindow-2"><b>moveDockWindow</b></a> ( QDockWindow&nbsp;*&nbsp;w, const&nbsp;QPoint&nbsp;&amp;&nbsp;p, const&nbsp;QRect&nbsp;&amp;&nbsp;r, bool&nbsp;swap )</div></li>
+<li><div class=fn>void <a href="#removeDockWindow"><b>removeDockWindow</b></a> ( QDockWindow&nbsp;*&nbsp;w, bool&nbsp;makeFloating, bool&nbsp;swap, bool&nbsp;fixNewLines = TRUE )</div></li>
+<li><div class=fn>void <a href="#moveDockWindow"><b>moveDockWindow</b></a> ( QDockWindow&nbsp;*&nbsp;w, int&nbsp;index = -1 )</div></li>
+<li><div class=fn>bool <a href="#hasDockWindow"><b>hasDockWindow</b></a> ( QDockWindow&nbsp;*&nbsp;w, int&nbsp;*&nbsp;index = 0 )</div></li>
+<li><div class=fn>Orientation <a href="#orientation"><b>orientation</b></a> () const</div></li>
+<li><div class=fn>HandlePosition <a href="#handlePosition"><b>handlePosition</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isEmpty"><b>isEmpty</b></a> () const</div></li>
+<li><div class=fn>int <a href="#count"><b>count</b></a> () const</div></li>
+<li><div class=fn>QPtrList&lt;QDockWindow&gt; <a href="#dockWindowList"><b>dockWindowList</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isDockWindowAccepted"><b>isDockWindowAccepted</b></a> ( QDockWindow&nbsp;*&nbsp;dw )</div></li>
+<li><div class=fn>void <a href="#setAcceptDockWindow"><b>setAcceptDockWindow</b></a> ( QDockWindow&nbsp;*&nbsp;dw, bool&nbsp;accept )</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>void <a href="#lineUp"><b>lineUp</b></a> ( bool&nbsp;keepNewLines )</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>int <a href="#count-prop"><b>count</b></a>&nbsp;- 锚接区域中的锚接窗口的数量&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>bool <a href="#empty-prop"><b>empty</b></a>&nbsp;- 锚接区域是否为空&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>HandlePosition <a href="#handlePosition-prop"><b>handlePosition</b></a>&nbsp;- 锚接窗口的分隔句柄被放在锚接区域的哪里&nbsp;<em>（只读）</em></div></li>
+<li><div class=fn>Orientation <a href="#orientation-prop"><b>orientation</b></a>&nbsp;- 锚接区域的方向&nbsp;<em>（只读）</em></div></li>
+</ul>
+<h2>相关函数</h2>
+<ul>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt"><b>operator&lt;&lt;</b></a> ( QTextStream&nbsp;&amp;&nbsp;ts, const&nbsp;QDockArea&nbsp;&amp;&nbsp;dockArea )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt"><b>operator&gt;&gt;</b></a> ( QTextStream&nbsp;&amp;&nbsp;ts, QDockArea&nbsp;&amp;&nbsp;dockArea )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+ 
+<p>QDockArea类管理和布局QDockWindow。
+<p> 
+<p> QDockArea是一个管理QDockWindow的列表，把它们布局在它的区域中的一个容器。在和QDockWindow的合作当中，它负责QDockWindow的锚接和取消锚接并且在锚接区域中移动它们。QDockArea也处理QDockWindow的自动换行来填充尽可能紧密的可用空间。QDockArea可以包含QToolBar，因为<a href="qtoolbar.html">QToolBar</a>是<a href="qdockwindow.html">QDockWindow</a>的一个子类。
+<p> <a href="qmainwindow.html">QMainWindow</a>包含四个你可以使用你的QToolBar和QDockWindow的QDockArea，所以在绝大多数情况下，你不需要直接使用QDockArea类。尽管QMainWindow包含了它自己的锚接区域，但是对于添加新的QDockArea它是不方便的。如果你需要创建你自己的锚接区域，我们建议你创建<a href="qwidget.html">QWidget</a>的一个子类并且把你的QDockArea添加到你的子类中。
+<p> <center><img src="qmainwindow-qdockareas.png" alt="QMainWindow's QDockAreas"></center> 
+<p> <a name="lines"></a>
+<em>行</em>。QDockAre使用行的概念。一行就是可以并排地包含锚接窗口的一个水平区域。一个锚接区域可以拥有比一行更多的空间。当锚接窗口被锚接到一个锚接区域中时，它们通常被添加到这个空间中最上面一行的最右侧（除了是由用户手工放置的）。当用户移动锚接窗口时，它们可以离开空白行或者放入非空行的空隙中。使用<a href="#lineUp">lineUp</a>()函数，锚接窗口可以被按行排序来使浪费的空间最小化。
+<p> QDockArea类维护着所有它的子锚接窗口的位置列表。被添加到锚接区域的锚接窗口是从0开始的。锚接窗口被按从左到右的顺序布局，并且对于多行的锚接窗口，是从上到下。如果一个锚接窗口被浮动起来，它还保持着它的位置，因为如果用户双击它的标题，它会返回它原来的位置。锚接窗口的位置可以被<a href="#hasDockWindow">hasDockWindow</a>()决定。位置可以被<a href="#moveDockWindow">moveDockWindow</a>()改变。
+<p> 使用<a href="qdockwindow.html#dock">QDockWindow::dock</a>()和<a href="qdockwindow.html#undock">QDockWindow::undock</a>()可以分别锚接一个锚接窗口或者取消锚接一个锚接窗口。如果你想控制哪个锚接窗口可以锚接在一个锚接区域中请使用<a href="#setAcceptDockWindow">setAcceptDockWindow</a>()。为了查看一个锚接区域是否有一个特定锚接窗口请使用<a href="#hasDockWindow">hasDockWindow</a>()，为了查看一个锚接区域中包含多少个锚接窗口请使用<a href="#count">count</a>()。
+<p> 流操作符可以把锚接区域中的锚接窗口的位置写到<a href="qtextstream.html">QTextStream</a>中。这些位置也可以在这之后被读出来恢复被保存的位置。
+<p> 把位置存储到QTextStream中。
+<pre>
+    ts &lt;&lt; *myDockArea;
+  </pre>
+ 
+<p> 从QTextStream中恢复位置：
+<pre>
+    ts &gt;&gt; *myDockArea;
+  </pre>
+ 
+<p> <p>也可以参考<a href="application.html">主窗口和相关类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="HandlePosition-enum"></a>QDockArea::HandlePosition</h3>
+<p> 锚接窗口有两种句柄，锚接窗口句柄用于拖动锚接窗口，并且分隔句柄用于使用一个分隔符和其它锚接窗口的关系中来重新定义锚接窗口的大小。
+<p> 这个枚举变量指定了锚接窗口分割句柄被放置到锚接区域的哪里。
+<ul>
+<li><tt>QDockArea::Normal</tt> - 锚接窗口的分割句柄被放置到右面或者下面。
+<li><tt>QDockArea::Reverse</tt> - 锚接窗口的分割句柄被放置到左面或者上面。
+</ul><p> 
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QDockArea"></a>QDockArea::QDockArea ( <a href="qt.html#Orientation-enum">Orientation</a>&nbsp;o, <a href="qdockarea.html#HandlePosition-enum">HandlePosition</a>&nbsp;h = Normal, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )
+</h3> 
+构造一个方向为<em>o</em>、句柄位置为<em>h</em>、父对象为<em>parent</em>并且名称为<em>name</em>的QDockArea。
+
+<h3 class=fn><a name="~QDockArea"></a>QDockArea::~QDockArea ()
+</h3>  
+销毁这个锚接区域和所有锚接到这个锚接区域的锚接窗口。
+<p> 不会影响任何正在浮动的锚接窗口或者在其它锚接区域的锚接窗口，尽管它们最开始出现在这个锚接窗口中。正在浮动的锚接窗口是有效地顶级窗口并且不再是这个锚接区域的子窗口。当一个正在浮动的锚接窗口被锚接（拖动进入一个锚接区域），它的父对象变为这个锚接区域。
+
+<h3 class=fn>int <a name="count"></a>QDockArea::count () const
+</h3>
+<p>返回锚接区域中锚接窗口的数量。详细情况请参考<a href="qdockarea.html#count-prop">“count”</a>属性。
+
+<h3 class=fn><a href="qptrlist.html">QPtrList</a>&lt;QDockWindow&gt; <a name="dockWindowList"></a>QDockArea::dockWindowList () const
+</h3> 
+返回锚接区域中锚接窗口的列表。
+
+<h3 class=fn><a href="qdockarea.html#HandlePosition-enum">HandlePosition</a> <a name="handlePosition"></a>QDockArea::handlePosition () const
+</h3>
+<p>返回锚接窗口的分割处理器被放置到锚接区域的哪里。详细情况请参考<a href="qdockarea.html#handlePosition-prop">“handlePosition”</a>属性。
+
+<h3 class=fn>bool <a name="hasDockWindow"></a>QDockArea::hasDockWindow ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;w, int&nbsp;*&nbsp;index = 0 )
+</h3> 
+如果锚接区域包含锚接窗口<em>w</em>，返回真，否则返回假。如果一个非空指针被作为<em>index</em>传递，它将被设置为如下这样：如果锚接区域包含锚接窗口，<em>index</em>被设置为<em>w</em>的位置，否则<em>index</em>被设置为-1。
+
+<h3 class=fn>bool <a name="isDockWindowAccepted"></a>QDockArea::isDockWindowAccepted ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dw )
+</h3>
+如果锚接窗口<em>dw</em>可以被锚接入这个锚接区域中，返回真，否则返回家爱。
+<p> <p>也可以参考<a href="#setAcceptDockWindow">setAcceptDockWindow</a>()。
+
+<h3 class=fn>bool <a name="isEmpty"></a>QDockArea::isEmpty () const
+</h3>
+<p>如果锚接区域为空，返回真，否则返回假。详细情况请参考<a href="qdockarea.html#empty-prop">“empty”</a>属性。
+
+<h3 class=fn>void <a name="lineUp"></a>QDockArea::lineUp ( bool&nbsp;keepNewLines )<tt> [槽]</tt>
+</h3>
+把在这个锚接区域中的锚接窗口排列起来使浪费的空间最小化。如果<em>keepNewLines</em>为真，只有行中的空间被清空。如果<em>keepNewLines</em>为假，行数可能被改变。
+
+<h3 class=fn>void <a name="moveDockWindow"></a>QDockArea::moveDockWindow ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;w, int&nbsp;index = -1 )
+</h3> 
+把<a href="qdockwindow.html">QDockWindow</a> <em>w</em>移入锚接区域中。如果<em>w</em>没有被锚接到这个区域中，<em>w</em>首先被锚接。如果<em>index</em>为-1或者大于被锚接窗口的数量，<em>w</em>被添加到末尾，否则它被插入到<em>index</em>位置。
+
+<h3 class=fn>void <a name="moveDockWindow-2"></a>QDockArea::moveDockWindow ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;w, const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;p, const&nbsp;<a href="qrect.html">QRect</a>&nbsp;&amp;&nbsp;r, bool&nbsp;swap )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 把锚接窗口<em>w</em>移入新位置为<em>p</em>（在全局屏幕坐标中）的锚接区域中，<em>r</em>是锚接窗口的被建议矩形并且<em>swap</em>指定锚接窗口的方向是否需要被改变。
+<p> 这个函数被<a href="qdockwindow.html">QDockWindow</a>内部使用。你不应该需要自己调用它。
+
+<h3 class=fn><a href="qt.html#Orientation-enum">Orientation</a> <a name="orientation"></a>QDockArea::orientation () const
+</h3>
+<p>返回锚接区域的方向。详细情况请参考<a href="qdockarea.html#orientation-prop">“orientation”</a>属性。
+
+<h3 class=fn>void <a name="removeDockWindow"></a>QDockArea::removeDockWindow ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;w, bool&nbsp;makeFloating, bool&nbsp;swap, bool&nbsp;fixNewLines = TRUE )
+</h3> 
+从锚接区域中移除锚接窗口<em>w</em>。如果<em>makeFloating</em>为真，<em>w</em>就会被浮动，并且如果<em>swap</em>为真，<em>w</em>的方向被切换。如果<em>fixNewLines</em>为真（默认），区域中的新行将被固定。
+<p> 你应该永远不需要自己调用这个函数。使用<a href="qdockwindow.html#dock">QDockWindow::dock</a>()和<a href="qdockwindow.html#undock">QDockWindow::undock</a>()来替代它。
+
+<h3 class=fn>void <a name="setAcceptDockWindow"></a>QDockArea::setAcceptDockWindow ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dw, bool&nbsp;accept )
+</h3>
+如果<em>accept</em>为真，锚接窗口<em>dw</em>可以被锚接入锚接区域。如果<em>accept</em>为假，锚接窗口<em>dw</em>不可以被锚接入锚接区域。
+<p> <p>也可以参考<a href="#isDockWindowAccepted">isDockWindowAccepted</a>()。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>int <a name="count-prop"></a>count</h3> 
+<p>这个属性保存的是锚接区域中的锚接窗口的数量。
+<p>通过<a href="#count">count</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="empty-prop"></a>empty</h3> 
+<p>这个属性保存的是锚接区域是否为空。
+<p>通过<a href="#isEmpty">isEmpty</a>()来获得属性值。
+
+<h3 class=fn><a href="qdockarea.html#HandlePosition-enum">HandlePosition</a> <a name="handlePosition-prop"></a>handlePosition</h3> 
+<p>这个属性保存的是锚接窗口的分隔句柄被放在锚接区域的哪里。
+<p>默认位置是<a href="#HandlePosition-enum">Normal</a>。
+<p>通过<a href="#handlePosition">handlePosition</a>()来获得属性值。
+
+<h3 class=fn><a href="qt.html#Orientation-enum">Orientation</a> <a name="orientation-prop"></a>orientation</h3> 
+<p>这个属性保存的是锚接区域的方向。
+<p>这个没有默认值，方向在构造函数中被指定。
+<p>通过<a href="#orientation">orientation</a>()来获得属性值。
+
+<hr><h2>相关函数</h2>
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt"></a>operator&lt;&lt; ( <a href="qtextstream.html">QTextStream</a>&nbsp;&amp;&nbsp;ts, const&nbsp;<a href="qdockarea.html">QDockArea</a>&nbsp;&amp;&nbsp;dockArea )
+</h3>
+<p> 把锚接区域<em>dockArea</em>中的锚接窗口的布局写入文本流<em>ts</em>。
+<p> <p>也可以参考<a href="#operator-gt-gt">operator&gt;&gt;</a>()。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt"></a>operator&gt;&gt; ( <a href="qtextstream.html">QTextStream</a>&nbsp;&amp;&nbsp;ts, <a href="qdockarea.html">QDockArea</a>&nbsp;&amp;&nbsp;dockArea )
+</h3>
+<p> 从文本流<em>ts</em>中读取锚接区域<em>dockArea</em>的锚接窗口的布局描述并且恢复它。这隔布局描述必须已经由以前的<a href="#operator-lt-lt">operator&lt;&lt;</a>()函数已经写入过了。
+<p> <p>也可以参考<a href="#operator-lt-lt">operator&lt;&lt;</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

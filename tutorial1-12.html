@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt教程一 —— 第十一章：悬在空中的砖</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt教程一 —— 第十一章：悬在空中的砖</h1>
+
+ 
+<p> <center><img src="t12.png" alt="Screenshot of tutorial twelve"></center> 
+<p> 在这个例子中，我们扩展我们的LCDRange类来包含一个文本标签。我们也会给射击提供一个目标。
+<p> <ul>
+<li> <a href="t12-lcdrange-h.html">t12/lcdrange.h</a>包含LCDRange类定义。
+<li> <a href="t12-lcdrange-cpp.html">t12/lcdrange.cpp</a>包含LCDRange类实现。
+<li> <a href="t12-cannon-h.html">t12/cannon.h</a>包含CannonField类定义。
+<li> <a href="t12-cannon-cpp.html">t12/cannon.cpp</a>包含CannonField类实现。
+<li> <a href="t12-main-cpp.html">t12/main.cpp</a>包含MyWidget和main。
+</ul>
+<p> <h2> 一行一行地解说
+</h2>
+<a name="1"></a><p> <h3> <a href="t12-lcdrange-h.html">t12/lcdrange.h</a>
+</h3>
+<a name="1-1"></a><p>LCDRange现在有了一个文本标签。
+<p> 
+
+<p> <pre>    class QLabel;
+</pre>
+<p> 我们名称声明<a href="qlabel.html">QLabel</a>，因为我们将在这个类声明中使用一个QLabel的指针。
+<p> <pre>    class LCDRange : public <a href="qvbox.html">QVBox</a>
+    {
+        <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>
+    public:
+        LCDRange( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+        LCDRange( const char *s, QWidget *parent=0,
+                  const char *name=0 );
+</pre>
+<p> 我们添加了一个新的构造函数，这个构造函数在父对象和名称之外还设置了标签文本。
+<p> <pre>        const char *text()  const;
+</pre>
+<p> 这个函数返回标签文本。
+<p> <pre>        void setText( const char * );
+</pre>
+<p> 这个槽设置标签文本。
+<p> <pre>    private:
+        void init();
+</pre>
+<p> 因为我们现在有了两个构造函数，我们选择把通常的初始化放在一个私有的init()函数。
+<p> <pre>        <a href="qlabel.html">QLabel</a>      *label;
+</pre>
+<p> 我们还有一个新的私有变量：一个QLabel。QLabel是一个Qt标准窗口部件并且可以显示一个有或者没有框架的文本或者pixmap。
+<p> <h3> <a href="t12-lcdrange-cpp.html">t12/lcdrange.cpp</a>
+</h3>
+<a name="1-2"></a><p> 
+
+<p> <pre>    #include &lt;<a href="qlabel-h.html">qlabel.h</a>&gt;
+</pre>
+<p> 这里我们包含了<a href="qlabel.html">QLabel</a>类定义。
+<p> <pre>    LCDRange::LCDRange( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qvbox.html">QVBox</a>( parent, name )
+    {
+        init();
+    }
+</pre>
+<p> 这个构造函数调用了init()函数，它包括了通常的初始化代码。
+<p> <pre>    LCDRange::LCDRange( const char *s, QWidget *parent,
+                        const char *name )
+            : <a href="qvbox.html">QVBox</a>( parent, name )
+    {
+        init();
+        setText( s );
+    }
+</pre>
+<p> 这个构造函数首先调用了init()然后设置标签文本。
+<p> <pre>    void LCDRange::init()
+    {
+        <a href="qlcdnumber.html">QLCDNumber</a> *lcd  = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "lcd"  );
+        slider = new <a href="qslider.html">QSlider</a>( Horizontal, this, "slider" );
+    <a name="x2319"></a>    slider-&gt;<a href="qrangecontrol.html#setRange">setRange</a>( 0, 99 );
+    <a name="x2320"></a>    slider-&gt;<a href="qslider.html#setValue">setValue</a>( 0 );
+
+        label = new <a href="qlabel.html">QLabel</a>( " ", this, "label"  );
+    <a name="x2315"></a>    label-&gt;<a href="qlabel.html#setAlignment">setAlignment</a>( AlignCenter );
+
+    <a name="x2321"></a>    <a href="qobject.html#connect">connect</a>( slider, SIGNAL(<a href="qslider.html#valueChanged">valueChanged</a>(int)),
+    <a name="x2318"></a>             lcd, SLOT(<a href="qlcdnumber.html#display">display</a>(int)) );
+        <a href="qobject.html#connect">connect</a>( slider, SIGNAL(<a href="qslider.html#valueChanged">valueChanged</a>(int)),
+                 SIGNAL(valueChanged(int)) );
+
+        <a href="qwidget.html#setFocusProxy">setFocusProxy</a>( slider );
+    }
+</pre>
+<p> <tt>lcd</tt>和<tt>slider</tt>的设置和上一章一样。接下来我们创建一个<a href="qlabel.html">QLabel</a>并且让它的内容中间对齐（垂直方向和水平方向都是）。connect()语句也来自于上一章。
+<p> <pre>    const char *LCDRange::text() const
+    {
+    <a name="x2317"></a>    return label-&gt;<a href="qlabel.html#text">text</a>();
+    }
+</pre>
+<p> 这个函数返回标签文本。
+<p> <pre>    void LCDRange::setText( const char *s )
+    {
+    <a name="x2316"></a>    label-&gt;<a href="qlabel.html#setText">setText</a>( s );
+    }
+</pre>
+<p> 这个函数设置标签文本。
+<p> <h3> <a href="t12-cannon-h.html">t12/cannon.h</a>
+</h3>
+<a name="1-3"></a><p> CannonField现在有两个新的信号：hit()和missed()。另外它还包含一个目标。
+<p> 
+
+<p> <pre>        void  newTarget();
+</pre>
+<p> 这个槽在新的位置生成一个新的目标。
+<p> <pre>    signals:
+        void  hit();
+        void  missed();
+</pre>
+<p> hit()信号是当炮弹击中目标的时候被发射的。missed()信号是当炮弹移动超出了窗口部件的右面或者下面的边界时被发射的（例如，当然这种情况下它将不会击中目标）。
+<p> <pre>        void  paintTarget( <a href="qpainter.html">QPainter</a> * );
+</pre>
+<p> 这个私有函数绘制目标。
+<p> <pre>        <a href="qrect.html">QRect</a> targetRect() const;
+</pre>
+<p> 这个私有函数返回一个封装了目标的矩形。
+<p> <pre>        <a href="qpoint.html">QPoint</a> target;
+</pre>
+<p> 这个私有变量包含目标的中心点。
+<p> <h3> <a href="t12-cannon-cpp.html">t12/cannon.cpp</a>
+</h3>
+<a name="1-4"></a><p> 
+
+<p> <pre>    #include &lt;<a href="qdatetime-h.html">qdatetime.h</a>&gt;
+</pre>
+<p> 我们包含了<a href="qdate.html">QDate</a>、<a href="qtime.html">QTime</a>和<a href="qdatetime.html">QDateTime</a>类定义。
+<p> <pre>    #include &lt;stdlib.h&gt;
+</pre>
+<p> 我们包含了stdlib库，因为我们需要rand()函数。
+<p> <pre>        newTarget();
+</pre>
+<p> 这一行已经被添加到了构造函数中。它为目标创建一个“随机的”位置。实际上，newTarget()函数还试图绘制目标。因为我们在一个构造函数中，CannonField窗口部件还是不可以见的。Qt保证在一个隐藏的窗口部件中调用repaint()是没有害处的。
+<p> <pre>    void  CannonField::newTarget()
+    {
+        static bool first_time = TRUE;
+        if ( first_time ) {
+            first_time = FALSE;
+            <a href="qtime.html">QTime</a> midnight( 0, 0, 0 );
+    <a name="x2331"></a><a name="x2330"></a>        srand( midnight.<a href="qtime.html#secsTo">secsTo</a>(QTime::<a href="qtime.html#currentTime">currentTime</a>()) );
+        }
+        <a href="qregion.html">QRegion</a> r( targetRect() );
+        target = QPoint( 200 + rand() % 190,
+                         10  + rand() % 255 );
+    <a name="x2327"></a>    <a href="qwidget.html#repaint">repaint</a>( r.<a href="qrect.html#unite">unite</a>( targetRect() ) );
+    }
+</pre>
+<p> 这个私有函数创建了一个在新的“随机的”位置的目标中心点。
+<p> 我们使用rand()函数来获得随机整数。rand()函数通常会在你每次运行这个程序的时候返回同样一组值。这就会使每次运行的时候目标都出现在同样的位置。为了避免这些，我们必须在这个函数第一次被调用的时候设置一个随机种子。为了避免同样一组数据，随机种子也必须是随机的。解决方法就是使用从午夜到现在的秒数作为一个假的随机值。
+<p> 首先我们创建一个静态布尔型局域变量。静态变量就是在调用函数前后都保证它的值不变。
+<p> <tt>if</tt>测试会成功，因为只有当这个函数第一次被调用的时候，我们在<tt>if</tt>块中把<tt>first_time</tt>设置为FALSE。
+<p> 然后我们创建一个<a href="qtime.html">QTime</a>对象<tt>midnight</tt>，它将会提供时间00:00:00。接下来我们获得从午夜到现在所过的秒数并且使用它作为一个随机种子。请看<a href="qdate.html">QDate</a>、<a href="qtime.html">QTime</a>和<a href="qdatetime.html">QDateTime</a>文档来获得更多的信息。
+<p> 最后我们计算目标的中心点。我们把它放在一个矩形中（x=200，y=35，width=190，height=255），（例如，可能的x和y值是x=200~389和y=35~289）在一个我们把窗口边界的下边界作为y的零点，并且y向上增加，X轴向通常一样，左边界为零点，并且x向右增加的坐标系统中。
+<p> 通过经验，我们发现这都在炮弹的射程之内。
+<p> 注意rand()返回一个>=0的随机整数。
+<p> <pre>    void CannonField::moveShot()
+    {
+        <a href="qregion.html">QRegion</a> r( shotRect() );
+        timerCount++;
+
+        <a href="qrect.html">QRect</a> shotR = shotRect();
+</pre>
+<p> 定时器时间这部分和上一章一样。
+<p> <pre>        if ( shotR.<a href="qrect.html#intersects">intersects</a>( targetRect() ) ) {
+    <a name="x2332"></a>        autoShootTimer-&gt;<a href="qtimer.html#stop">stop</a>();
+            emit hit();
+</pre>
+<p> <tt>if</tt>语句检查炮弹矩形和目标矩形是否相交。如果是的，炮弹击中了目标（哎哟！）。我们停止射击定时器并且发射hit()信号来告诉外界目标已经被破坏，并返回。
+<p> 注意，我们可以在这个点上创建一个新的目标，但是因为CannonField是一个组件，所以我们要把这样的决定留给组件的使用者。
+<p> <pre>    <a name="x2329"></a><a name="x2328"></a>    } else if ( shotR.<a href="qrect.html#x">x</a>() &gt; width() || shotR.<a href="qrect.html#y">y</a>() &gt; height() ) {
+            autoShootTimer-&gt;<a href="qtimer.html#stop">stop</a>();
+            emit missed();
+</pre>
+<p> 这个<tt>if</tt>语句和上一章一样，除了现在它发射missed()信号告诉外界这次失败。
+<p> <pre>        } else {
+</pre>
+<p> 函数的其余部分和以前一样。
+<p> CannonField::paintEvent() is as before, except that this has been
+added:
+<p> <pre>    <a name="x2325"></a>    if ( updateR.<a href="qrect.html#intersects">intersects</a>( targetRect() ) )
+            paintTarget( &amp;p );
+</pre>
+<p> 这两行确认在需要的时候目标也被绘制。
+<p> <pre>    void CannonField::paintTarget( <a href="qpainter.html">QPainter</a> *p )
+    {
+        p-&gt;<a href="qpainter.html#setBrush">setBrush</a>( red );
+        p-&gt;<a href="qpainter.html#setPen">setPen</a>( black );
+        p-&gt;<a href="qpainter.html#drawRect">drawRect</a>( targetRect() );
+    }
+</pre>
+<p> 这个私有函数绘制目标，一个由红色填充，有黑色边框的矩形。
+<p> <pre>    QRect CannonField::targetRect() const
+    {
+        <a href="qrect.html">QRect</a> r( 0, 0, 20, 10 );
+    <a name="x2326"></a>    r.<a href="qrect.html#moveCenter">moveCenter</a>( QPoint(target.x(),height() - 1 - target.y()) );
+        return r;
+    }
+</pre>
+<p> 这个私有函数返回封装目标的矩形。从newTarget()中所得的<tt>target</tt>点使用0点在窗口部件的下边界的y。我们在调用<a href="qrect.html#moveCenter">QRect::moveCenter</a>()之前在窗口坐标中计算这个点。
+<p> 我们选择这个坐标映射的原因是在目标和窗口部件的下边界之间垂直距离。记住这些可以让用户或者程序在任何时候都可以重新定义窗口部件的大小。
+<p> <h3> <a href="t12-main-cpp.html">t12/main.cpp</a>
+</h3>
+<a name="1-5"></a><p> 
+
+<p> 在MyWidget类中没有新的成员了，但是我们稍微改变了一下构造函数来设置新的LCDRange的文本标签。
+<p> <pre>        LCDRange *angle  = new LCDRange( "ANGLE", this, "angle" );
+</pre>
+<p> 我们设置角度的文本标签为“ANGLE”。
+<p> <pre>        LCDRange *force  = new LCDRange( "FORCE", this, "force" );
+</pre>
+<p> 我们设置力量的文本标签为“FORCE”。
+<p> <h2> 行为
+</h2>
+<a name="2"></a><p> 加农炮会向目标射击，当它射中目标的时候，一个新的目标会自动被创建。
+<p> LCDRange窗口部件看起来有一点奇怪——<a href="qvbox.html">QVBox</a>中内置的管理给了标签太多的空间而其它的却不够。我们将会在下一章修正这一点。
+<p> （请看<a href="tutorial1-07.html#compiling">编译</a>来学习如何创建一个makefile和连编应用程序。）
+<p> <h2> 练习
+</h2>
+<a name="3"></a><p> 创建一个作弊的按钮，当按下它的时候，让CannonField画出炮弹在五秒中的轨迹。
+<p> 如果你在上一章做了“圆形炮弹”的练习，试着改变shotRect()为可以返回一个<a href="qregion.html">QRegion</a>的shotRegion()，这样你就可以真正的做到准确碰撞检测。
+<p> 做一个移动目标。
+<p> 确认目标被完全创建在屏幕上。
+<p> 确认加农炮窗口部件不能被重新定义大小，这样目标不是可见的。提示：<a href="qwidget.html#setMinimumSize">QWidget::setMinimumSize</a>()是你的朋友。
+<p> 不容易的是在同一时刻让几个炮弹在空中成为可能。提示：建立一个炮弹对象。
+<p> 现在你可以进行<a href="tutorial1-13.html">第十三章</a>了。
+<p> [<a href="tutorial1-11.html">上一章</a>]
+[<a href="tutorial1-13.html">下一章</a>]
+[<a href="tutorial.html">教程一主页</a>]
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

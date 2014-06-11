@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QValueListConstIterator类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QValueListConstIterator类参考</h1>
+
+<p>QValueListConstIterator类提供了QValueList的常量迭代器。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qvaluelist-h.html">qvaluelist.h</a>&gt;</tt>
+<p><a href="qvaluelistconstiterator-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>typedef T&nbsp;<a href="#value_type"><b>value_type</b></a></div></li>
+<li><div class=fn>typedef const&nbsp;T&nbsp;*&nbsp;<a href="#pointer"><b>pointer</b></a></div></li>
+<li><div class=fn>typedef const&nbsp;T&nbsp;&amp;&nbsp;<a href="#reference"><b>reference</b></a></div></li>
+<li><div class=fn><a href="#QValueListConstIterator"><b>QValueListConstIterator</b></a> ()</div></li>
+<li><div class=fn><a href="#QValueListConstIterator-3"><b>QValueListConstIterator</b></a> ( const&nbsp;QValueListConstIterator&lt;T&gt;&nbsp;&amp;&nbsp;it )</div></li>
+<li><div class=fn><a href="#QValueListConstIterator-4"><b>QValueListConstIterator</b></a> ( const&nbsp;QValueListIterator&lt;T&gt;&nbsp;&amp;&nbsp;it )</div></li>
+<li><div class=fn>bool <a href="#operator-eq-eq"><b>operator==</b></a> ( const&nbsp;QValueListConstIterator&lt;T&gt;&nbsp;&amp;&nbsp;it ) const</div></li>
+<li><div class=fn>bool <a href="#operator!-eq"><b>operator!=</b></a> ( const&nbsp;QValueListConstIterator&lt;T&gt;&nbsp;&amp;&nbsp;it ) const</div></li>
+<li><div class=fn>const T &amp; <a href="#operator*"><b>operator*</b></a> () const</div></li>
+<li><div class=fn>QValueListConstIterator&lt;T&gt; &amp; <a href="#operator++"><b>operator++</b></a> ()</div></li>
+<li><div class=fn>QValueListConstIterator&lt;T&gt; <a href="#operator++-2"><b>operator++</b></a> ( int )</div></li>
+<li><div class=fn>QValueListConstIterator&lt;T&gt; &amp; <a href="#operator--"><b>operator--</b></a> ()</div></li>
+<li><div class=fn>QValueListConstIterator&lt;T&gt; <a href="#operator---2"><b>operator--</b></a> ( int )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QValueListConstIterator类提供了<a href="qvaluelist.html">QValueList</a>的常量迭代器。
+<p> 
+
+<p> 和<a href="qvaluelistiterator.html">QValueListIterator</a>形成对比，这个类是用来遍历一个常量列表的。它不允许对列表中的值进行修改，因为这将会破坏常量的语义。
+<p> 你可以通过使用QValueList中定义的<tt>const_iterator</tt>来创建合适的常量迭代器类型。
+<p> 关于QValueList的迭代器更多的信息，请参考QValueListIterator。
+<p> <p>也可以参考<a href="qvaluelistiterator.html">QValueListIterator</a>、a href="qvaluelist.html">QValueList</a>、<a href="qtl.html">Qt模板库类</a>和<a href="tools.html">非GUI类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="pointer"></a>QValueListConstIterator::pointer</h3> 
+值类型的指针。
+
+<h3 class=fn><a name="reference"></a>QValueListConstIterator::reference</h3> 
+值类型的引用。
+
+<h3 class=fn><a name="value_type"></a>QValueListConstIterator::value_type</h3> 
+值的类型，T。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QValueListConstIterator"></a>QValueListConstIterator::QValueListConstIterator ()
+</h3>
+<p> 创建未定义的迭代器。
+
+<h3 class=fn><a name="QValueListConstIterator-3"></a>QValueListConstIterator::QValueListConstIterator ( const&nbsp;<a href="qvaluelistconstiterator.html">QValueListConstIterator</a>&lt;T&gt;&nbsp;&amp;&nbsp;it )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 构造一个迭代器<em>it</em>的复制。
+
+<h3 class=fn><a name="QValueListConstIterator-4"></a>QValueListConstIterator::QValueListConstIterator ( const&nbsp;<a href="qvaluelistiterator.html">QValueListIterator</a>&lt;T&gt;&nbsp;&amp;&nbsp;it )
+</h3>
+<p> 构造一个迭代器<em>it</em>的复制。
+
+<h3 class=fn>bool <a name="operator!-eq"></a>QValueListConstIterator::operator!= ( const&nbsp;<a href="qvaluelistconstiterator.html">QValueListConstIterator</a>&lt;T&gt;&nbsp;&amp;&nbsp;it ) const
+</h3>
+<p> 比较这个迭代器和<em>it</em>并且如果它们指向不同的项，返回真，否则返回假。
+
+<h3 class=fn>const T &amp; <a name="operator*"></a>QValueListConstIterator::operator* () const
+</h3>
+<p> 星号操作符。返回当前迭代器项的引用。
+
+<h3 class=fn><a href="qvaluelistconstiterator.html">QValueListConstIterator</a>&lt;T&gt;&nbsp;&amp; <a name="operator++"></a>QValueListConstIterator::operator++ ()
+</h3>
+<p> 前置++让当前项后的一项变为当前向并且返回原来的当前项。迭代器不能检测它是否到达了列表末尾。增加这个迭代器就会返回end()导致未定义的结果。
+
+<h3 class=fn><a href="qvaluelistconstiterator.html">QValueListConstIterator</a>&lt;T&gt; <a name="operator++-2"></a>QValueListConstIterator::operator++ ( int )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 后置++让当前项后的一项变为当前向并且返回原来的当前项。迭代器不能检测它是否到达了列表末尾。增加这个迭代器就会返回end()导致未定义的结果。
+
+<h3 class=fn><a href="qvaluelistconstiterator.html">QValueListConstIterator</a>&lt;T&gt;&nbsp;&amp; <a name="operator--"></a>QValueListConstIterator::operator-- ()
+</h3>
+<p> 前置--让当前项前的一项变为当前向并且返回原来的当前项。迭代器不能检测它是否到达了列表开始。增加这个迭代器就会返回begin()导致未定义的结果。
+
+<h3 class=fn><a href="qvaluelistconstiterator.html">QValueListConstIterator</a>&lt;T&gt; <a name="operator---2"></a>QValueListConstIterator::operator-- ( int )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 后置--让当前项前的一项变为当前向并且返回原来的当前项。迭代器不能检测它是否到达了列表开始。增加这个迭代器就会返回begin()导致未定义的结果。
+
+<h3 class=fn>bool <a name="operator-eq-eq"></a>QValueListConstIterator::operator== ( const&nbsp;<a href="qvaluelistconstiterator.html">QValueListConstIterator</a>&lt;T&gt;&nbsp;&amp;&nbsp;it ) const
+</h3>
+<p> 比较这个迭代器和<em>it</em>并且如果它们指向相同的项，返回真，否则返回假。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

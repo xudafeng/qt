@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>适应2000年问题声明</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>适应2000年问题声明</h1>
+
+ 
+<p> Trolltech把<i>适应2000年问题</i>做为一个产品或者产品的一部分的需求，这个产品在关于从1999年12月31日到2000年1月1日，或者一直到2000年2月29日的转换过程中都不应该包含错误。
+<p> 这份文档证明了Qt提供了这样的应用程序接口并且Qt的实现不仅适应2000年问题，也证明Qt的这些应用程序接口的实现没有任何已知问题。
+<p> <h2> Qt提供的应用程序接口
+</h2>
+<a name="1"></a><p> Qt处理日期和时间的几个部分：
+<ul>
+<li> <a href="qdate.html">QDate</a> - 提供日期管理
+<li> <a href="qdatetime.html">QDateTime</a> - 提供日期/时间管理
+<li> <a href="qtime.html">QTime</a> - 提供时间管理（在一个日期内）
+<li> <a href="qtimer.html">QTimer</a> - 提供延时或者定时运行的代码。
+</ul>
+<p> 所有这些类的外部应用程序接口都适应2000年问题：<a href="qdate.html">QDate</a>和<a href="qdatetime.html">QDateTime</a>只提供了4位数字的年的输出，<a href="qtime.html">QTime</a>和<a href="qtimer.html">QTimer</a>不出理年和超过天的问题。
+<p> <h2> Qt实现的问题
+</h2>
+<a name="2"></a><p> Qt中的所有的日期/时间计算和存储都使用天、秒或毫秒的数量，并且都适应2000年问题。
+<p> 这些适用于上述四个类并且也也适用于<a href="qfiledialog.html">QFileDialog</a>（通过时间/日期对文件进行排序）、<a href="qfileinfo.html">QFileInfo</a>（操作文件的时间/日期）和<a href="qapplication.html">QApplication</a>（做大量的内部内务处理）。
+<p> QDate（和QDateTime）中<tt>年/月/日</tt>格式已经验证为正确的有December 31, 1999、January 1, 2000、February 28 and 29, 2000、March 1, 2000、January 1, 2001和March 1, 2001。
+<p> Qt已经验证在操作系统下出现的时间/日期错误（比如时间异常）的情况下都是很强壮的。
+<p> <h2> 系统应用程序接口的使用
+</h2>
+<a name="3"></a><p> 当然不可能的是对Trolltech保证在其中Qt运行是依从的2000年的两个窗口系统和所有操作系统。 然而，Qt不使用为所知道的任何API有任何与2000年相关的错误，或者似乎有任何处于风险。 
+当然，Trolltech不能够保证Qt所运行的窗口系统和所有的操作系统都适应2000年问题。无论如何，Qt都没有使用任何已知的或者看起来有风险的和2000年问题相关的bug。
+
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

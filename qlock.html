@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>QLock Class</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>QLock Class Reference</h1>
+
+<p>The QLock class is a wrapper for a System V shared semaphore.
+<a href="#details">More...</a>
+<p><tt>#include &lt;<a href="qlock_qws-h.html">qlock_qws.h</a>&gt;</tt>
+<p><a href="qlock-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><div class=fn><a href="#QLock"><b>QLock</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;filename, char&nbsp;id, bool&nbsp;create = FALSE )</div></li>
+<li><div class=fn><a href="#~QLock"><b>~QLock</b></a> ()</div></li>
+<li><div class=fn>enum <a href="#Type-enum"><b>Type</b></a> { Read, Write }</div></li>
+<li><div class=fn>bool <a href="#isValid"><b>isValid</b></a> () const</div></li>
+<li><div class=fn>void <a href="#lock"><b>lock</b></a> ( Type&nbsp;t )</div></li>
+<li><div class=fn>void <a href="#unlock"><b>unlock</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#locked"><b>locked</b></a> () const</div></li>
+</ul>
+<hr><a name="details"></a><h2>Detailed Description</h2>
+
+
+The QLock class is a wrapper for a System V shared semaphore.
+<p> 
+
+<p> It is used by Qt/Embedded for synchronizing access to the graphics
+card and shared memory region between processes.
+<p>See also <a href="io.html">Input/Output and Networking</a> and <a href="qws.html">Qt/Embedded</a>.
+
+<hr><h2>Member Type Documentation</h2>
+<h3 class=fn><a name="Type-enum"></a>QLock::Type</h3>
+
+<ul>
+<li><tt>QLock::Read</tt>
+<li><tt>QLock::Write</tt>
+</ul>
+<hr><h2>Member Function Documentation</h2>
+<h3 class=fn><a name="QLock"></a>QLock::QLock ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;filename, char&nbsp;id, bool&nbsp;create = FALSE )
+</h3>
+
+<p> Creates a lock. <em>filename</em> is the file path of the Unix-domain
+socket the Qt/Embedded client is using. <em>id</em> is the name of the
+particular lock to be created on that socket. If <em>create</em> is TRUE
+the lock is to be created (as the Qt/Embedded server does); if <em>create</em> is FALSE the lock should exist already (as the Qt/Embedded
+client expects).
+
+<h3 class=fn><a name="~QLock"></a>QLock::~QLock ()
+</h3>
+
+<p> Destroys a lock
+
+<h3 class=fn>bool <a name="isValid"></a>QLock::isValid () const
+</h3>
+
+<p> Returns TRUE if the lock constructor was succesful; returns FALSE if
+the lock could not be created or was not available to connect to.
+
+<h3 class=fn>void <a name="lock"></a>QLock::lock ( <a href="qlock.html#Type-enum">Type</a>&nbsp;t )
+</h3>
+Locks the semaphore with a lock of type <em>t</em>. Locks can either be
+<a href="#Type-enum">Read</a> or <a href="#Type-enum">Write</a>. If a lock is <a href="#Type-enum">Read</a>, attempts by other
+processes to obtain <a href="#Type-enum">Read</a> locks will succeed, and <a href="#Type-enum">Write</a>
+attempts will block until the lock is unlocked. If locked as <a href="#Type-enum">Write</a>, all attempts to lock by other processes will block until
+the lock is unlocked. Locks are stacked: i.e. a given QLock can be
+locked multiple times by the same process without blocking, and
+will only be unlocked after a corresponding number of <a href="#unlock">unlock</a>()
+calls.
+
+<h3 class=fn>bool <a name="locked"></a>QLock::locked () const
+</h3>
+
+<p> Returns TRUE if the lock is currently held by the current process;
+otherwise returns FALSE.
+
+<h3 class=fn>void <a name="unlock"></a>QLock::unlock ()
+</h3>
+
+<p> Unlocks the semaphore. If other processes were blocking waiting to
+<a href="#lock">lock</a>() the semaphore, one of them will wake up and succeed in
+lock()ing.
+
+<!-- eof -->
+<hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>.
+Copyright &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>. All Rights Reserved.<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

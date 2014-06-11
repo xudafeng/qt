@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt教程一 —— 第十三章：游戏结束</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt教程一 —— 第十三章：游戏结束</h1>
+
+ 
+<p> <center><img src="t13.png" alt="Screenshot of tutorial thirteen"></center> 
+<p> 在这个例子中我们开始研究一个带有记分的真正可玩的游戏。我们给MyWidget一个新的名字（GameBoard）并添加一些槽。
+<p> 我们把定义放在gamebrd.h并把实现放在gamebrd.cpp。
+<p> CannonField现在有了一个游戏结束状态。
+<p> 在LCDRange中的布局问题已经修好了。
+<p> <ul>
+<li> <a href="t13-lcdrange-h.html">t13/lcdrange.h</a>包含LCDRange类定义。
+<li> <a href="t13-lcdrange-cpp.html">t13/lcdrange.cpp</a>包含LCDRange类实现。
+<li> <a href="t13-cannon-h.html">t13/cannon.h</a>包含CannonField类定义。
+<li> <a href="t13-cannon-cpp.html">t13/cannon.cpp</a>包含CannonField类实现。
+<li> <a href="t13-gamebrd-h.html">t13/gamebrd.h</a>包含GameBoard类定义。
+<li> <a href="t13-gamebrd-cpp.html">t13/gamebrd.cpp</a>包含GameBoard类实现。
+<li> <a href="t13-main-cpp.html">t13/main.cpp</a>包含MyWidget和main。
+</ul>
+<p> <h2> 一行一行地解说
+</h2>
+<a name="1"></a><p> <h3> <a href="t13-lcdrange-h.html">t13/lcdrange.h</a>
+</h3>
+<a name="1-1"></a><p> 
+
+<p> <pre>    #include &lt;<a href="qwidget-h.html">qwidget.h</a>&gt;
+
+    class QSlider;
+    class QLabel;
+
+    class LCDRange : public <a href="qwidget.html">QWidget</a>
+</pre>
+<p> 我们继承了<a href="qwidget.html">QWidget</a>而不是<a href="qvbox.html">QVBox</a>。QVBox是非常容易使用的，但是它也显示了它的局域性，所以我们选择使用更加强大和稍微有一些难的<a href="qvboxlayout.html">QVBoxLayout</a>。（和你记忆中的一样，QVBoxLayout不是一个窗口部件，它管理窗口部件。）
+<p> <h3> <a href="t13-lcdrange-cpp.html">t13/lcdrange.cpp</a>
+</h3>
+<a name="1-2"></a><p> 
+
+<p> <pre>    #include &lt;<a href="qlayout-h.html">qlayout.h</a>&gt;
+</pre>
+<p> 我们现在需要包含qlayout.h来获得其它布局管理API。
+<p> <pre>    LCDRange::LCDRange( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qwidget.html">QWidget</a>( parent, name )
+</pre>
+<p> 我们使用一种平常的方式继承QWidget。
+<p> 另外一个构造函数作了同样的改动。init()没有变化，除了我们在最后加了几行：
+<p> <pre>        <a href="qvboxlayout.html">QVBoxLayout</a> * l = new <a href="qvboxlayout.html">QVBoxLayout</a>( this );
+</pre>
+<p> 我们使用所有默认值创建一个QVBoxLayout，管理这个窗口部件的子窗口部件。
+<p> <pre>    <a name="x2333"></a>    l-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( lcd, 1 );
+</pre>
+<p> At the top we add the <a href="qlcdnumber.html">QLCDNumber</a> with a non-zero stretch.
+<p> <pre>        l-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( slider );
+        l-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( label );
+</pre>
+<p> 然后我们添加另外两个，它们都使用默认的零伸展因数。
+<p> 这个伸展控制是<a href="qvboxlayout.html">QVBoxLayout</a>（和<a href="qhboxlayout.html">QHBoxLayout</a>，和<a href="qgridlayout.html">QGridLayout</a>）所提供的，而像<a href="qvbox.html">QVBox</a>这样的类却不提供。在这种情况下我们让QLCDNumber可以伸展，而其它的不可以。
+<p> <h3> <a href="t13-cannon-h.html">t13/cannon.h</a>
+</h3>
+<a name="1-3"></a><p> CannonField现在有一个游戏结束状态和一些新的函数。
+<p> 
+
+<p> <pre>        bool  gameOver() const { return gameEnded; }
+</pre>
+<p> 如果游戏结束了，这个函数返回TRUE，或者如果游戏还在继续，返回FALSE。
+<p> <pre>        void  setGameOver();
+        void  restartGame();
+</pre>
+<p> 这里是两个新槽：setGameOver()和restartGame()。
+<p> <pre>        void  canShoot( bool );
+</pre>
+<p> 这个新的信号表明CannonField使shoot()槽生效的状态。我们将在下面使用它用来使Shoot按钮生效或失效。
+<p> <pre>        bool gameEnded;
+</pre>
+<p> 这个私有变量包含游戏的状态。TRUE说明游戏结束，FALSE说明游戏还将继续。
+<p> <h3> <a href="t13-cannon-cpp.html">t13/cannon.cpp</a>
+</h3>
+<a name="1-4"></a><p> 
+
+<p> <pre>        gameEnded = FALSE;
+</pre>
+<p> 这一行已经被加入到构造函数中。最开始的时候，游戏没有结束（对于玩家是很幸运的 :-）。
+<p> <pre>    void CannonField::shoot()
+    {
+        if ( isShooting() )
+            return;
+        timerCount = 0;
+        shoot_ang = ang;
+        shoot_f = f;
+    <a name="x2339"></a>    autoShootTimer-&gt;<a href="qtimer.html#start">start</a>( 50 );
+        emit canShoot( FALSE );
+    }
+</pre>
+<p> 我们添加一个新的isShooting()函数，所以shoot()使用它替代直接的测试。同样，shoot告诉世界CannonField现在不可以射击。
+<p> <pre>    void CannonField::setGameOver()
+    {
+        if ( gameEnded )
+            return;
+        if ( isShooting() )
+            autoShootTimer-&gt;<a href="qtimer.html#stop">stop</a>();
+        gameEnded = TRUE;
+        <a href="qwidget.html#repaint">repaint</a>();
+    }
+</pre>
+<p> 这个槽终止游戏。它必须被CannonField外面的调用，因为这个窗口部件不知道什么时候终止游戏。这是组件编程中一条重要设计原则。我们选择使组件可以尽可能灵活以适应不同的规则（比如，在一个首先射中十次的人胜利的多人游戏版本可能使用不变的CannonField）。
+<p> 如果游戏已经被终止，我们立即返回。如果游戏会继续到我们的设计完成，设置游戏结束标志，并且重新绘制整个窗口部件。
+<p> <pre>    void CannonField::restartGame()
+    {
+        if ( isShooting() )
+    <a name="x2340"></a>        autoShootTimer-&gt;<a href="qtimer.html#stop">stop</a>();
+        gameEnded = FALSE;
+        <a href="qwidget.html#repaint">repaint</a>();
+        emit canShoot( TRUE );
+    }
+</pre>
+<p> 这个槽开始一个新游戏。如果炮弹还在空中，我们停止设计。然后我们重置<tt>gameEnded</tt>变量并重新绘制窗口部件。
+<p> 就像hit()或miss()一样，moveShot()同时也发射新的canShoot(TRUE)信号。
+<p> CannonField::paintEvent()的修改：
+<p> <pre>    void CannonField::<a href="qwidget.html#paintEvent">paintEvent</a>( <a href="qpaintevent.html">QPaintEvent</a> *e )
+    {
+    <a name="x2337"></a>    <a href="qrect.html">QRect</a> updateR = e-&gt;<a href="qpaintevent.html#rect">rect</a>();
+        <a href="qpainter.html">QPainter</a> p( this );
+
+        if ( gameEnded ) {
+            p.<a href="qpainter.html#setPen">setPen</a>( black );
+    <a name="x2335"></a>        p.<a href="qpainter.html#setFont">setFont</a>( QFont( "Courier", 48, QFont::Bold ) );
+    <a name="x2334"></a>        p.<a href="qpainter.html#drawText">drawText</a>( <a href="qwidget.html#rect">rect</a>(), AlignCenter, "Game Over" );
+        }
+</pre>
+<p> 绘画事件已经通过如果游戏结束，比如<tt>gameEnded</tt>是TRUE，就显示文本“Game Over”而被增强了。我们在这里不怕麻烦来检查更新矩形，是因为在游戏结束的时候速度不是关键性的。
+<p> 为了画文本，我们先设置了黑色的画笔，当画文本的时候，画笔颜色会被用到。接下来我们选择Courier字体中的48号加粗字体。最后我们在窗口部件的矩形中央绘制文本。不幸的是，在一些系统中（特别是使用Unicode的X服务器）它会用一小段时间来载入如此大的字体。因为Qt缓存字体，我们只有第一次使用这个字体的时候才会注意到这一点。
+<p> <pre>    <a name="x2338"></a>    if ( updateR.<a href="qrect.html#intersects">intersects</a>( cannonRect() ) )
+            paintCannon( &amp;p );
+        if ( isShooting() &amp;&amp; updateR.<a href="qrect.html#intersects">intersects</a>( shotRect() ) )
+            paintShot( &amp;p );
+        if ( !gameEnded &amp;&amp; updateR.<a href="qrect.html#intersects">intersects</a>( targetRect() ) )
+            paintTarget( &amp;p );
+    }
+</pre>
+<p> 我们只有在设计的时候画炮弹，在玩游戏的时候画目标（这也就是说，当游戏没有结束的时候）。
+<p> <h3> <a href="t13-gamebrd-h.html">t13/gamebrd.h</a>
+</h3>
+<a name="1-5"></a><p> 这个文件是新的。它包含最后被用来作为MyWidget的GameBoard类的定义。
+<p> 
+
+<p> <pre>    class QPushButton;
+    class LCDRange;
+    class QLCDNumber;
+    class CannonField;
+
+    #include "lcdrange.h"
+    #include "cannon.h"
+
+    class GameBoard : public <a href="qwidget.html">QWidget</a>
+    {
+        <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>
+    public:
+        GameBoard( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+
+    protected slots:
+        void  fire();
+        void  hit();
+        void  missed();
+        void  newGame();
+
+    private:
+        <a href="qlcdnumber.html">QLCDNumber</a>  *hits;
+        <a href="qlcdnumber.html">QLCDNumber</a>  *shotsLeft;
+        CannonField *cannonField;
+    };
+</pre>
+<p> 我们现在已经添加了四个槽。这些槽都是被保护的，只在内部使用。我们也已经加入了两个QLCDNumbers（<tt>hits</tt>和<tt>shotsLeft</tt>）用来显示游戏的状态。
+<p> <h3> <a href="t13-gamebrd-cpp.html">t13/gamebrd.cpp</a>
+</h3>
+<a name="1-6"></a><p> 这个文件是新的。它包含最后被用来作为MyWidget的GameBoard类的实现，
+<p> 
+
+<p> 我们已经在GameBoard的构造函数中做了一些修改。
+<p> <pre>        cannonField = new CannonField( this, "cannonField" );
+</pre>
+<p> <tt>cannonField</tt>现在是一个成员变量，所以我们在使用它的时候要小心地改变它的构造函数。（Trolltech的<em>好</em>程序员从来不会忘记这点，但是我就忘了。告诫程序员－如果“programmor”是拉丁语，至少。无论如何，返回代码。）
+<p> <pre>        <a href="qobject.html#connect">connect</a>( cannonField, SIGNAL(hit()),
+                 this, SLOT(hit()) );
+        <a href="qobject.html#connect">connect</a>( cannonField, SIGNAL(missed()),
+                 this, SLOT(missed()) );
+</pre>
+<p> 这次当炮弹射中或者射失目标的时候，我们想做些事情。所以我们把CannonField的hit()和missed()信号连接到这个类的两个被保护的同名槽。
+<p> <pre>        <a href="qobject.html#connect">connect</a>( shoot, SIGNAL(<a href="qbutton.html#clicked">clicked</a>()), SLOT(fire()) );
+</pre>
+<p> 以前我们直接把Shoot按钮的clicked()信号连接到CannonField的shoot()槽。这次我们想跟踪射击的次数，所以我们把它改为连接到这个类里面一个被保护的槽。
+<p> 注意当你用独立的组件工作的时候，改变程序的行为是多么的容易。
+<p> <pre>        <a href="qobject.html#connect">connect</a>( cannonField, SIGNAL(canShoot(bool)),
+    <a name="x2348"></a>             shoot, SLOT(<a href="qwidget.html#setEnabled">setEnabled</a>(bool)) );
+</pre>
+<p> 我们也使用cannonField的canShoot()信号来适当地使Shoot按钮生效和失效。
+<p> <pre>        QPushButton *restart
+            = new <a href="qpushbutton.html">QPushButton</a>( "&amp;New Game", this, "newgame" );
+        restart-&gt;setFont( QFont( "Times", 18, QFont::Bold ) );
+
+        <a href="qobject.html#connect">connect</a>( restart, SIGNAL(clicked()), this, SLOT(newGame()) );
+</pre>
+<p> 我们创建、设置并且连接这个New Game按钮就像我们对其它按钮所做的一样。点击这个按钮就会激活这个窗口部件的newGame()槽。
+<p> <pre>        hits = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "hits" );
+        shotsLeft = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "shotsleft" );
+        <a href="qlabel.html">QLabel</a> *hitsL = new <a href="qlabel.html">QLabel</a>( "HITS", this, "hitsLabel" );
+        QLabel *shotsLeftL
+            = new <a href="qlabel.html">QLabel</a>( "SHOTS LEFT", this, "shotsleftLabel" );
+</pre>
+<p> 我们创建了四个新的窗口部件。注意我们不怕麻烦的把<a href="qlabel.html">QLabel</a>窗口部件的指针保留到GameBoard类中是因为我们不想再对它们做什么了。当GameBoard窗口部件被销毁的时候，Qt将会删除它们，并且布局类会适当地重新定义它们的大小。
+<p> <pre>        <a href="qhboxlayout.html">QHBoxLayout</a> *topBox = new <a href="qhboxlayout.html">QHBoxLayout</a>;
+    <a name="x2345"></a>    grid-&gt;<a href="qgridlayout.html#addLayout">addLayout</a>( topBox, 0, 1 );
+        topBox-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( shoot );
+        topBox-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( hits );
+        topBox-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( hitsL );
+        topBox-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( shotsLeft );
+        topBox-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( shotsLeftL );
+    <a name="x2342"></a>    topBox-&gt;<a href="qboxlayout.html#addStretch">addStretch</a>( 1 );
+    <a name="x2343"></a>    topBox-&gt;<a href="qboxlayout.html#addWidget">addWidget</a>( restart );
+</pre>
+<p> 右上单元格的窗口部件的数量正在变大。从前它是空的，现在它是完全充足的，我们把它们放到布局中来更好的看到它们。
+<p> 注意我们让所有的窗口部件获得它们更喜欢的大小，改为在New Game按钮的左边加入了一个可以自由伸展的东西。
+<p> <pre>        newGame();
+    }
+</pre>
+<p> 我们已经做完了所有关于GameBoard的构造，所以我们使用newGame()来开始。（newGame()是一个槽，但是就像我们所说的，槽也可以像普通的函数一样使用。）
+<p> <pre>    void GameBoard::fire()
+    {
+        if ( cannonField-&gt;gameOver() || cannonField-&gt;isShooting() )
+            return;
+        shotsLeft-&gt;<a href="qlcdnumber.html#display">display</a>( shotsLeft-&gt;<a href="qlcdnumber.html#intValue">intValue</a>() - 1 );
+        cannonField-&gt;shoot();
+    }
+</pre>
+<p> 这个函数进行射击。如果游戏结束了或者还有一个炮弹在空中，我们立即返回。我们减少炮弹的数量并告诉加农炮进行射击。
+<p> <pre>    void GameBoard::hit()
+    {
+        hits-&gt;<a href="qlcdnumber.html#display">display</a>( hits-&gt;<a href="qlcdnumber.html#intValue">intValue</a>() + 1 );
+        if ( shotsLeft-&gt;<a href="qlcdnumber.html#intValue">intValue</a>() == 0 )
+            cannonField-&gt;setGameOver();
+        else
+            cannonField-&gt;newTarget();
+    }
+</pre>
+<p> 当炮弹击中目标的时候这个槽被激活。我们增加射中的数量。如果没有炮弹了，游戏就结束了。否则，我们会让CannonField生成新的目标。
+<p> <pre>    void GameBoard::missed()
+    {
+    <a name="x2347"></a>    if ( shotsLeft-&gt;<a href="qlcdnumber.html#intValue">intValue</a>() == 0 )
+            cannonField-&gt;setGameOver();
+    }
+</pre>
+<p> 当炮弹射失目标的时候这个槽被激活，如果没有炮弹了，游戏就结束了。
+<p> <pre>    void GameBoard::newGame()
+    {
+    <a name="x2346"></a>    shotsLeft-&gt;<a href="qlcdnumber.html#display">display</a>( 15 );
+        hits-&gt;<a href="qlcdnumber.html#display">display</a>( 0 );
+        cannonField-&gt;restartGame();
+        cannonField-&gt;newTarget();
+    }
+</pre>
+<p> 当用户点击Restart按钮的时候这个槽被激活。它也会被构造函数调用。首先它把炮弹的数量设置为15。注意这里是我们在程序中唯一设置炮弹数量的地方。把它改变为你所想要的游戏规则。接下来我们重置射中的数量，重新开始游戏，并且生成一个新的目标。
+<p> <h3> <a href="t13-main-cpp.html">t13/main.cpp</a>
+</h3>
+<a name="1-7"></a><p> 这个文件仅仅被删掉了一部分。MyWidget没了，并且唯一剩下的是main()函数，除了名称的改变其它都没有改变。
+<p> <h2> 行为
+</h2>
+<a name="2"></a><p> 射中的和剩余炮弹的数量被显示并且程序继续跟踪它们。游戏可以结束了，并且还有一个按钮可以开始一个新游戏。
+<p> （请看<a href="tutorial1-07.html#compiling">编译</a>来学习如何创建一个makefile和连编应用程序。）
+<p> <h2> 练习
+</h2>
+<a name="3"></a><p> 添加一个随机的风的因素并把它显示给用户看。
+<p> 当炮弹击中目标的时候做一些飞溅的效果。
+<p> 实现多个目标。
+<p> 现在你可以进行<a href="tutorial1-14.html">第十四章</a>了。
+<p> [<a href="tutorial1-12.html">上一章</a>]
+[<a href="tutorial1-14.html">下一章</a>]
+[<a href="tutorial.html">教程一主页</a>]
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QPtrListIterator类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QPtrListIterator类参考</h1>
+
+<p>QPtrListIterator类提供了QPtrList集合的迭代器。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qptrlist-h.html">qptrlist.h</a>&gt;</tt>
+<p>被<a href="qobjectlistit.html">QObjectListIt</a>和<a href="qstrlistiterator.html">QStrListIterator</a>继承。
+<p><a href="qptrlistiterator-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QPtrListIterator"><b>QPtrListIterator</b></a> ( const&nbsp;QPtrList&lt;type&gt;&nbsp;&amp;&nbsp;list )</div></li>
+<li><div class=fn><a href="#~QPtrListIterator"><b>~QPtrListIterator</b></a> ()</div></li>
+<li><div class=fn>uint <a href="#count"><b>count</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isEmpty"><b>isEmpty</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#atFirst"><b>atFirst</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#atLast"><b>atLast</b></a> () const</div></li>
+<li><div class=fn>type * <a href="#toFirst"><b>toFirst</b></a> ()</div></li>
+<li><div class=fn>type * <a href="#toLast"><b>toLast</b></a> ()</div></li>
+<li><div class=fn><a href="#operator-type-*"><b>operator type *</b></a> () const</div></li>
+<li><div class=fn>type * <a href="#operator*"><b>operator*</b></a> ()</div></li>
+<li><div class=fn>type * <a href="#current"><b>current</b></a> () const</div></li>
+<li><div class=fn>type * <a href="#operator()"><b>operator()</b></a> ()</div></li>
+<li><div class=fn>type * <a href="#operator++"><b>operator++</b></a> ()</div></li>
+<li><div class=fn>type * <a href="#operator+-eq"><b>operator+=</b></a> ( uint&nbsp;jump )</div></li>
+<li><div class=fn>type * <a href="#operator--"><b>operator--</b></a> ()</div></li>
+<li><div class=fn>type * <a href="#operator--eq"><b>operator-=</b></a> ( uint&nbsp;jump )</div></li>
+<li><div class=fn>QPtrListIterator&lt;type&gt; &amp; <a href="#operator-eq"><b>operator=</b></a> ( const&nbsp;QPtrListIterator&lt;type&gt;&nbsp;&amp;&nbsp;it )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QPtrListIterator类提供了<a href="qptrlist.html">QPtrList</a>集合的迭代器。
+<p> 
+
+<p> 定义一个模板实例QPtrListIterator&lt;X&gt;就创建一个在QPtrList&lt;X&gt;（X*的列表）的一个列表迭代器。
+<p> 下面的实例和<a href="qptrlist.html#example">QPtrList类文档中的实例</a>相似，但是它使用了QPtrListIterator。类Employee是在那里定义的。
+<p> <pre>
+    <a href="qptrlist.html">QPtrList</a>&lt;Employee&gt; list;
+
+    list.<a href="qptrlist.html#append">append</a>( new Employee("John", "Doe", 50000) );
+    list.<a href="qptrlist.html#append">append</a>( new Employee("Jane", "Williams", 80000) );
+    list.<a href="qptrlist.html#append">append</a>( new Employee("Tom", "Jones", 60000) );
+
+    QPtrListIterator&lt;Employee&gt; it( list );
+    Employee *employee;
+    while ( (employee = it.<a href="#current">current</a>()) != 0 ) {
+        ++it;
+        cout &lt;&lt; employee-&gt;surname().latin1() &lt;&lt; ", " &lt;&lt;
+                employee-&gt;forename().latin1() &lt;&lt; " earns " &lt;&lt;
+                employee-&gt;salary() &lt;&lt; endl;
+    }
+  </pre>
+ 
+<p> 输出是
+<pre>
+    Doe, John earns 50000
+    Williams, Jane earns 80000
+    Jones, Tom earns 60000
+  </pre>
+ 
+<p> 使用列表迭代器识别使用<a href="qptrlist.html">QPtrList</a>的成员函数<a href="qptrlist.html#first">first</a>()、<a href="qptrlist.html#next">next</a>()、<a href="qptrlist.html#current">current</a>()等等更加强壮的遍历方法，并且许多迭代器可以同时分别地遍历同一个列表。
+<p> 一个迭代器中有一个它自己的当前列表项并且能够得到下一个和上一个列表项。它不能以任何方式修改这个列表。
+<p> 当一个项从列表中被移除，所有指向这个项地迭代器都会被更新为指向<a href="qptrlist.html#current">QPtrList::current</a>()而避免摇摆引用。
+<p> <p>也可以参考<a href="qptrlist.html">QPtrList</a>、<a href="collection.html">集合类</a>和<a href="tools.html">非GUI 类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QPtrListIterator"></a>QPtrListIterator::QPtrListIterator ( const&nbsp;<a href="qptrlist.html">QPtrList</a>&lt;type&gt;&nbsp;&amp;&nbsp;list )
+</h3>
+为<em>list</em>构造一个迭代器。当前迭代器项被设置为指向<em>list</em>中的第一项。
+
+<h3 class=fn><a name="~QPtrListIterator"></a>QPtrListIterator::~QPtrListIterator ()
+</h3>
+销毁这个迭代器。
+
+<h3 class=fn>bool <a name="atFirst"></a>QPtrListIterator::atFirst () const
+</h3>
+如果当前迭代器项是列表的第一个项，返回真，否则返回假。
+<p>也可以参考<a href="#toFirst">toFirst</a>()和<a href="#atLast">atLast</a>()。
+
+<h3 class=fn>bool <a name="atLast"></a>QPtrListIterator::atLast () const
+</h3>
+如果当前迭代器项是列表的最后一个项，返回真，否则返回假。
+<p>也可以参考<a href="#toLast">toLast</a>()和<a href="#atFirst">atFirst</a>()。
+
+<h3 class=fn>uint <a name="count"></a>QPtrListIterator::count () const
+</h3>
+返回这个迭代器操作的列表的项的数量。
+<p>也可以参考<a href="#isEmpty">isEmpty</a>()。
+<p>实例：<a href="customlayout-example.html#x1393">customlayout/card.cpp</a>。
+
+<h3 class=fn>type * <a name="current"></a>QPtrListIterator::current () const
+</h3>
+返回指向当前迭代器项的指针。如果迭代器被放置到列表的第一项之前或者最后一项之后，返回的是空指针。
+<p>实例：<a href="canvas-example.html#x2725">canvas/canvas.cpp</a>、<a href="customlayout-example.html#x1394">customlayout/card.cpp</a>和<a href="customlayout-example.html#x1352">customlayout/flow.cpp</a>。
+
+<h3 class=fn>bool <a name="isEmpty"></a>QPtrListIterator::isEmpty () const
+</h3>
+如果列表是空的，返回真，否则返回假。
+<p>也可以参考<a href="#count">count</a>()。
+
+<h3 class=fn><a name="operator-type-*"></a>QPtrListIterator::operator type * () const
+</h3>
+抛出操作符。返回指向当前迭代器项的指针。和<a href="#current">current</a>()一样。
+
+<h3 class=fn>type * <a name="operator()"></a>QPtrListIterator::operator() ()
+</h3>
+让当前项后的一项变为当前向并且返回原来的当前项。
+<p> 如果当前迭代器项是列表中的最后一项或者如果它为空，返回空。
+
+<h3 class=fn>type * <a name="operator*"></a>QPtrListIterator::operator* ()
+</h3>
+星号操作符。返回指向当前迭代器项的指针。和<a href="#current">current</a>()一样。
+
+<h3 class=fn>type * <a name="operator++"></a>QPtrListIterator::operator++ ()
+</h3>
+前置++让当前项后的一项变为当前向并且返回原来的当前项。
+<p> 如果当前迭代器项是列表中的最后一项或者如果它为空，返回空。
+
+<h3 class=fn>type * <a name="operator+-eq"></a>QPtrListIterator::operator+= ( uint&nbsp;jump )
+</h3>
+设置当前项跳到当前项之后<em>jump</em>个位置的项并且返回指向那个项的指针。
+<p> 如果那个项已经超过最后一个项或者如果列表为空，它设置当前项为空并且返回空。
+
+<h3 class=fn>type * <a name="operator--"></a>QPtrListIterator::operator-- ()
+</h3>
+前置-让当前向的前一项变为当前向并且返回原来的当前项。
+<p> 如果当前迭代器项是列表中的最后一项或者如果它为空，返回空。
+
+<h3 class=fn>type * <a name="operator--eq"></a>QPtrListIterator::operator-= ( uint&nbsp;jump )
+</h3>
+设置当前项跳到当前项之前<em>jump</em>个位置的项并且返回指向那个项的指针。
+<p> 如果那个项已经超过第一个项或者如果列表为空，它设置当前项为空并且返回空。
+
+<h3 class=fn><a href="qptrlistiterator.html">QPtrListIterator</a>&lt;type&gt;&nbsp;&amp; <a name="operator-eq"></a>QPtrListIterator::operator= ( const&nbsp;<a href="qptrlistiterator.html">QPtrListIterator</a>&lt;type&gt;&nbsp;&amp;&nbsp;it )
+</h3>
+赋值。做迭代器<em>it</em>的复制并且返回这个迭代器的引用。
+
+<h3 class=fn>type * <a name="toFirst"></a>QPtrListIterator::toFirst ()
+</h3>
+设置当前迭代器指向列表中的第一个项并且返回指向这个项的指针。如果列表为空，设置当前项为空并且返回空。
+<p>也可以参考<a href="#toLast">toLast</a>()和<a href="#atFirst">atFirst</a>()。
+
+<h3 class=fn>type * <a name="toLast"></a>QPtrListIterator::toLast ()
+</h3>
+设置当前迭代器指向列表中的最后一个项并且返回指向这个项的指针。如果列表为空，设置当前项为空并且返回空。
+<p>也可以参考<a href="#toFirst">toFirst</a>()和<a href="#atLast">atLast</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

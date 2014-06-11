@@ -1,0 +1,690 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>QtTableView Class</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>QtTableView Class Reference<br><small>[obsolete]</small></h1>
+
+<p>The QtTableView class provides an abstract base for tables.
+<a href="#details">More...</a>
+<p><tt>#include &lt;<a href="qttableview-h.html">qttableview.h</a>&gt;</tt>
+<p>Inherits <a href="qframe.html">QFrame</a>.
+<p>Inherited by <a href="qtmultilineedit.html">QtMultiLineEdit</a>.
+<p><a href="qttableview-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><div class=fn>void <a href="#repaint-2"><b>repaint</b></a> ( bool&nbsp;erase = TRUE )</div></li>
+<li><div class=fn>void <a href="#repaint"><b>repaint</b></a> ( int&nbsp;x, int&nbsp;y, int&nbsp;w, int&nbsp;h, bool&nbsp;erase = TRUE )</div></li>
+<li><div class=fn>void <a href="#repaint-3"><b>repaint</b></a> ( const&nbsp;QRect&nbsp;&amp;&nbsp;r, bool&nbsp;erase = TRUE )</div></li>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><div class=fn><a href="#QtTableView"><b>QtTableView</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = 0 )</div></li>
+<li><div class=fn><a href="#~QtTableView"><b>~QtTableView</b></a> ()</div></li>
+<li><div class=fn>int <a href="#numRows"><b>numRows</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setNumRows"><b>setNumRows</b></a> ( int&nbsp;rows )</div></li>
+<li><div class=fn>int <a href="#numCols"><b>numCols</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setNumCols"><b>setNumCols</b></a> ( int&nbsp;cols )</div></li>
+<li><div class=fn>int <a href="#topCell"><b>topCell</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setTopCell"><b>setTopCell</b></a> ( int&nbsp;row )</div></li>
+<li><div class=fn>int <a href="#leftCell"><b>leftCell</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setLeftCell"><b>setLeftCell</b></a> ( int&nbsp;col )</div></li>
+<li><div class=fn>virtual void <a href="#setTopLeftCell"><b>setTopLeftCell</b></a> ( int&nbsp;row, int&nbsp;col )</div></li>
+<li><div class=fn>int <a href="#xOffset"><b>xOffset</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setXOffset"><b>setXOffset</b></a> ( int&nbsp;x )</div></li>
+<li><div class=fn>int <a href="#yOffset"><b>yOffset</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setYOffset"><b>setYOffset</b></a> ( int&nbsp;y )</div></li>
+<li><div class=fn>virtual void <a href="#setOffset"><b>setOffset</b></a> ( int&nbsp;x, int&nbsp;y, bool&nbsp;updateScrBars = TRUE )</div></li>
+<li><div class=fn>virtual int <a href="#cellWidth"><b>cellWidth</b></a> ( int&nbsp;col )</div></li>
+<li><div class=fn>virtual int <a href="#cellHeight"><b>cellHeight</b></a> ( int&nbsp;row )</div></li>
+<li><div class=fn>int <a href="#cellWidth-2"><b>cellWidth</b></a> () const</div></li>
+<li><div class=fn>int <a href="#cellHeight-2"><b>cellHeight</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setCellWidth"><b>setCellWidth</b></a> ( int&nbsp;cellWidth )</div></li>
+<li><div class=fn>virtual void <a href="#setCellHeight"><b>setCellHeight</b></a> ( int&nbsp;cellHeight )</div></li>
+<li><div class=fn>virtual int <a href="#totalWidth"><b>totalWidth</b></a> ()</div></li>
+<li><div class=fn>virtual int <a href="#totalHeight"><b>totalHeight</b></a> ()</div></li>
+<li><div class=fn>uint <a href="#tableFlags"><b>tableFlags</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#testTableFlags"><b>testTableFlags</b></a> ( uint&nbsp;f ) const</div></li>
+<li><div class=fn>virtual void <a href="#setTableFlags"><b>setTableFlags</b></a> ( uint&nbsp;f )</div></li>
+<li><div class=fn>void <a href="#clearTableFlags"><b>clearTableFlags</b></a> ( uint&nbsp;f = ~0 )</div></li>
+<li><div class=fn>bool <a href="#autoUpdate"><b>autoUpdate</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setAutoUpdate"><b>setAutoUpdate</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>void <a href="#updateCell"><b>updateCell</b></a> ( int&nbsp;row, int&nbsp;col, bool&nbsp;erase = TRUE )</div></li>
+<li><div class=fn>QRect <a href="#cellUpdateRect"><b>cellUpdateRect</b></a> () const</div></li>
+<li><div class=fn>QRect <a href="#viewRect"><b>viewRect</b></a> () const</div></li>
+<li><div class=fn>int <a href="#lastRowVisible"><b>lastRowVisible</b></a> () const</div></li>
+<li><div class=fn>int <a href="#lastColVisible"><b>lastColVisible</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#rowIsVisible"><b>rowIsVisible</b></a> ( int&nbsp;row ) const</div></li>
+<li><div class=fn>bool <a href="#colIsVisible"><b>colIsVisible</b></a> ( int&nbsp;col ) const</div></li>
+<li><div class=fn>QScrollBar * <a href="#verticalScrollBar"><b>verticalScrollBar</b></a> () const</div></li>
+<li><div class=fn>QScrollBar * <a href="#horizontalScrollBar"><b>horizontalScrollBar</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#paintCell"><b>paintCell</b></a> ( QPainter&nbsp;*&nbsp;p, int&nbsp;row, int&nbsp;col ) = 0</div></li>
+<li><div class=fn>virtual void <a href="#setupPainter"><b>setupPainter</b></a> ( QPainter * )</div></li>
+<li><div class=fn>virtual void <a href="#paintEvent"><b>paintEvent</b></a> ( QPaintEvent&nbsp;*&nbsp;e )</div></li>
+<li><div class=fn>int <a href="#findRow"><b>findRow</b></a> ( int&nbsp;yPos ) const</div></li>
+<li><div class=fn>int <a href="#findCol"><b>findCol</b></a> ( int&nbsp;xPos ) const</div></li>
+<li><div class=fn>bool <a href="#rowYPos"><b>rowYPos</b></a> ( int&nbsp;row, int&nbsp;*&nbsp;yPos ) const</div></li>
+<li><div class=fn>bool <a href="#colXPos"><b>colXPos</b></a> ( int&nbsp;col, int&nbsp;*&nbsp;xPos ) const</div></li>
+<li><div class=fn>int <a href="#maxXOffset"><b>maxXOffset</b></a> ()</div></li>
+<li><div class=fn>int <a href="#maxYOffset"><b>maxYOffset</b></a> ()</div></li>
+<li><div class=fn>int <a href="#maxColOffset"><b>maxColOffset</b></a> ()</div></li>
+<li><div class=fn>int <a href="#maxRowOffset"><b>maxRowOffset</b></a> ()</div></li>
+<li><div class=fn>int <a href="#minViewX"><b>minViewX</b></a> () const</div></li>
+<li><div class=fn>int <a href="#minViewY"><b>minViewY</b></a> () const</div></li>
+<li><div class=fn>int <a href="#maxViewX"><b>maxViewX</b></a> () const</div></li>
+<li><div class=fn>int <a href="#maxViewY"><b>maxViewY</b></a> () const</div></li>
+<li><div class=fn>int <a href="#viewWidth"><b>viewWidth</b></a> () const</div></li>
+<li><div class=fn>int <a href="#viewHeight"><b>viewHeight</b></a> () const</div></li>
+<li><div class=fn>void <a href="#scroll"><b>scroll</b></a> ( int&nbsp;xPixels, int&nbsp;yPixels )</div></li>
+<li><div class=fn>void <a href="#updateScrollBars"><b>updateScrollBars</b></a> ()</div></li>
+<li><div class=fn>void <a href="#updateTableSize"><b>updateTableSize</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>Detailed Description</h2>
+
+
+The QtTableView class provides an abstract base for tables.
+<p> <b>This class is obsolete.</b> It is provided to keep old source working. We strongly advise against using it in new code.
+<p> A table view consists of a number of abstract cells organized in rows
+and columns, and a visible part called a view. The cells are identified
+with a row index and a column index. The top-left cell is in row 0,
+column 0.
+<p> The behavior of the widget can be finely tuned using
+<a href="#setTableFlags">setTableFlags</a>(); a typical subclass will consist of little more than a
+call to setTableFlags(), some table content manipulation and an
+implementation of <a href="#paintCell">paintCell</a>().  Subclasses that need cells with
+variable width or height must reimplement <a href="#cellHeight">cellHeight</a>() and/or
+<a href="#cellWidth">cellWidth</a>(). Use <a href="#updateTableSize">updateTableSize</a>() to tell QtTableView when the
+width or height has changed.
+<p> When you read this documentation, it is important to understand the
+distinctions among the four pixel coordinate systems involved.
+<p> <ol type=1>
+<li> The <em>cell</em> coordinates.  (0,0) is the top-left corner of a cell.
+Cell coordinates are used by functions such as paintCell().
+<p> <li> The <em>table</em> coordinates.  (0,0) is the top-left corner of the cell at
+row 0 and column 0. These coordinates are absolute; that is, they are
+independent of what part of the table is visible at the moment. They are
+used by functions such as <a href="#setXOffset">setXOffset</a>() or <a href="#maxYOffset">maxYOffset</a>().
+<p> <li> The <em>widget</em> coordinates. (0,0) is the top-left corner of the widget,
+<em>including</em> the frame.  They are used by functions such as <a href="#repaint">repaint</a>().
+<p> <li> The <em>view</em> coordinates.  (0,0) is the top-left corner of the view, <em>excluding</em> the frame.  This is the least-used coordinate system; it is used by
+functions such as <a href="#viewWidth">viewWidth</a>().  </ol>
+<p> It is rather unfortunate that we have to use four different
+coordinate systems, but there was no alternative to provide a flexible and
+powerful base class.
+<p> Note: The row,column indices are always given in that order,
+i.e., first the vertical (row), then the horizontal (column). This is
+the opposite order of all pixel operations, which take first the
+horizontal (x) and then the vertical (y).
+<p> <img src=qtablevw-m.png> <img src=qtablevw-w.png>
+<p> <b>Warning:</b> the functions <a href="#setNumRows">setNumRows</a>(), <a href="#setNumCols">setNumCols</a>(), <a href="#setCellHeight">setCellHeight</a>(),
+<a href="#setCellWidth">setCellWidth</a>(), <a href="#setTableFlags">setTableFlags</a>() and <a href="#clearTableFlags">clearTableFlags</a>() may cause
+virtual functions such as <a href="#cellWidth">cellWidth</a>() and <a href="#cellHeight">cellHeight</a>() to be called,
+even if <a href="#autoUpdate">autoUpdate</a>() is FALSE.  This may cause errors if relevant
+state variables are not initialized.
+<p> <b>Warning:</b> Experience has shown that use of this widget tends to cause
+more bugs than expected and our analysis indicates that the widget's
+very flexibility is the problem.  If <a href="qscrollview.html">QScrollView</a> or <a href="qlistbox.html">QListBox</a> can
+easily be made to do the job you need, we recommend subclassing
+those widgets rather than QtTableView. In addition, QScrollView makes
+it easy to have child widgets inside tables, which QtTableView
+doesn't support at all.
+<p> <p>See also <a href="qscrollview.html">QScrollView</a> and <a href="guibooks.html#fowler">GUI Design Handbook: Table</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class=fn><a name="QtTableView"></a>QtTableView::QtTableView ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = 0 )<tt> [protected]</tt>
+</h3>
+Constructs a table view.  The <em>parent</em>, <em>name</em> and \f arguments
+are passed to the <a href="qframe.html">QFrame</a> constructor.
+<p> The <a href="#setTableFlags">table flags</a> are all cleared (set to 0).
+Set <tt>Tbl_autoVScrollBar</tt> or <tt>Tbl_autoHScrollBar</tt> to get automatic scroll
+bars and <tt>Tbl_clipCellPainting</tt> to get safe clipping.
+<p> The <a href="#setCellHeight">cell height</a> and <a href="#setCellWidth">cell width</a> are set to 0.
+<p> Frame line shapes (QFrame::HLink and QFrame::VLine) are disallowed;
+see <a href="qframe.html#setFrameStyle">QFrame::setFrameStyle</a>().
+<p> Note that the <em>f</em> argument is <em>not</em> <a href="#setTableFlags">table
+  flags</a> but rather <a href="qwidget.html#QWidget">widget
+  flags.</a>
+<p> 
+<h3 class=fn><a name="~QtTableView"></a>QtTableView::~QtTableView ()<tt> [protected]</tt>
+</h3>
+Destroys the table view.
+
+<h3 class=fn>bool <a name="autoUpdate"></a>QtTableView::autoUpdate () const<tt> [protected]</tt>
+</h3>
+
+<p> Returns TRUE if the view updates itself automatically whenever it
+is changed in some way.
+<p> <p>See also <a href="#setAutoUpdate">setAutoUpdate</a>().
+
+<h3 class=fn>int <a name="cellHeight"></a>QtTableView::cellHeight ( int&nbsp;row )<tt> [virtual protected]</tt>
+</h3>
+Returns the height of row <em>row</em> in pixels.
+<p> This function is virtual and must be reimplemented by subclasses that
+have variable cell heights.  Note that if the total table height
+changes, <a href="#updateTableSize">updateTableSize</a>() must be called.
+<p> <p>See also <a href="#setCellHeight">setCellHeight</a>(), <a href="#cellWidth">cellWidth</a>() and <a href="#totalHeight">totalHeight</a>().
+
+<h3 class=fn>int <a name="cellHeight-2"></a>QtTableView::cellHeight () const<tt> [protected]</tt>
+</h3>
+This is an overloaded member function, provided for convenience. It behaves essentially like the above function.
+<p> Returns the row height, in pixels.  Returns 0 if the rows have
+variable heights.
+<p> <p>See also <a href="#setCellHeight">setCellHeight</a>() and <a href="#cellWidth">cellWidth</a>().
+
+<h3 class=fn><a href="qrect.html">QRect</a> <a name="cellUpdateRect"></a>QtTableView::cellUpdateRect () const<tt> [protected]</tt>
+</h3>
+
+<p> This function should be called only from the <a href="#paintCell">paintCell</a>() function in
+subclasses. It returns the portion of a cell that actually needs to be
+updated in <em>cell</em> coordinates. This is useful only for non-trivial
+paintCell().
+<p> 
+<h3 class=fn>int <a name="cellWidth"></a>QtTableView::cellWidth ( int&nbsp;col )<tt> [virtual protected]</tt>
+</h3>
+Returns the width of column <em>col</em> in pixels.
+<p> This function is virtual and must be reimplemented by subclasses that
+have variable cell widths. Note that if the total table width
+changes, <a href="#updateTableSize">updateTableSize</a>() must be called.
+<p> <p>See also <a href="#setCellWidth">setCellWidth</a>(), <a href="#cellHeight">cellHeight</a>(), <a href="#totalWidth">totalWidth</a>() and <a href="#updateTableSize">updateTableSize</a>().
+
+<h3 class=fn>int <a name="cellWidth-2"></a>QtTableView::cellWidth () const<tt> [protected]</tt>
+</h3>
+This is an overloaded member function, provided for convenience. It behaves essentially like the above function.
+<p> Returns the column width in pixels.	Returns 0 if the columns have
+variable widths.
+<p> <p>See also <a href="#setCellWidth">setCellWidth</a>() and <a href="#cellHeight">cellHeight</a>().
+
+<h3 class=fn>void <a name="clearTableFlags"></a>QtTableView::clearTableFlags ( uint&nbsp;f = ~0 )<tt> [protected]</tt>
+</h3>
+Clears the <a href="#setTableFlags">table flags</a> that are set
+in <em>f</em>.
+<p> Example (clears a single flag):
+<pre>
+    <a href="#clearTableFlags">clearTableFlags</a>( Tbl_snapToGrid );
+  </pre>
+ 
+<p> The default argument clears all flags.
+<p> <p>See also <a href="#setTableFlags">setTableFlags</a>(), <a href="#testTableFlags">testTableFlags</a>() and <a href="#tableFlags">tableFlags</a>().
+
+<h3 class=fn>bool <a name="colIsVisible"></a>QtTableView::colIsVisible ( int&nbsp;col ) const<tt> [protected]</tt>
+</h3>
+Returns TRUE if <em>col</em> is at least partially visible.
+<p>See also <a href="#rowIsVisible">rowIsVisible</a>().
+
+<h3 class=fn>bool <a name="colXPos"></a>QtTableView::colXPos ( int&nbsp;col, int&nbsp;*&nbsp;xPos ) const<tt> [protected]</tt>
+</h3>
+Computes the position in the widget of column <em>col</em>.
+<p> Returns TRUE and stores the result in <em>*xPos</em> (in <em>widget</em>
+coordinates) if the column is visible.  Returns FALSE and does not
+modify <em>*xPos</em> if <em>col</em> is invisible or invalid.
+<p> <p>See also <a href="#rowYPos">rowYPos</a>() and <a href="#findCol">findCol</a>().
+
+<h3 class=fn>int <a name="findCol"></a>QtTableView::findCol ( int&nbsp;xPos ) const<tt> [protected]</tt>
+</h3>
+Returns the index of the column at position <em>xPos</em>, where <em>xPos</em> is
+in <em>widget</em> coordinates.  Returns -1 if <em>xPos</em> is outside the valid
+range.
+<p> <p>See also <a href="#findRow">findRow</a>() and <a href="#colXPos">colXPos</a>().
+
+<h3 class=fn>int <a name="findRow"></a>QtTableView::findRow ( int&nbsp;yPos ) const<tt> [protected]</tt>
+</h3>
+Returns the index of the row at position <em>yPos</em>, where <em>yPos</em> is in
+<em>widget</em> coordinates.  Returns -1 if <em>yPos</em> is outside the valid
+range.
+<p> <p>See also <a href="#findCol">findCol</a>() and <a href="#rowYPos">rowYPos</a>().
+
+<h3 class=fn><a href="qscrollbar.html">QScrollBar</a>&nbsp;* <a name="horizontalScrollBar"></a>QtTableView::horizontalScrollBar () const<tt> [protected]</tt>
+</h3>
+Returns a pointer to the horizontal scroll bar mainly so you can
+<a href="qobject.html#connect">connect</a>() to its signals. Note that the scroll bar works in pixel
+values; use <a href="#findCol">findCol</a>() to translate to cell numbers.
+
+<h3 class=fn>int <a name="lastColVisible"></a>QtTableView::lastColVisible () const<tt> [protected]</tt>
+</h3>
+Returns the index of the last (right) column in the view.
+The index of the first column is 0.
+<p> If no columns are visible it returns -1.  This can happen if the
+view is too narrow for the first column and Tbl_cutCellsH is set.
+<p> <p>See also <a href="#lastRowVisible">lastRowVisible</a>().
+
+<h3 class=fn>int <a name="lastRowVisible"></a>QtTableView::lastRowVisible () const<tt> [protected]</tt>
+</h3>
+Returns the index of the last (bottom) row in the view.
+The index of the first row is 0.
+<p> If no rows are visible it returns -1.	 This can happen if the
+view is too small for the first row and Tbl_cutCellsV is set.
+<p> <p>See also <a href="#lastColVisible">lastColVisible</a>().
+
+<h3 class=fn>int <a name="leftCell"></a>QtTableView::leftCell () const<tt> [protected]</tt>
+</h3>
+
+Returns the index of the first column in the table that is visible in
+the view.  The index of the very leftmost column is 0.
+<p>See also <a href="#topCell">topCell</a>() and <a href="#setLeftCell">setLeftCell</a>().
+
+<h3 class=fn>int <a name="maxColOffset"></a>QtTableView::maxColOffset ()<tt> [protected]</tt>
+</h3>
+Returns the index of the last column, which may be at the left edge
+of the view.
+<p> Depending on the <a href="#setTableFlags">Tbl_scrollLastHCell</a> flag,
+this may or may not be the last column.
+<p> <p>See also <a href="#maxXOffset">maxXOffset</a>() and <a href="#maxRowOffset">maxRowOffset</a>().
+
+<h3 class=fn>int <a name="maxRowOffset"></a>QtTableView::maxRowOffset ()<tt> [protected]</tt>
+</h3>
+Returns the index of the last row, which may be at the top edge of
+the view.
+<p> Depending on the <a href="#setTableFlags">Tbl_scrollLastVCell</a> flag,
+this may or may not be the last row.
+<p> <p>See also <a href="#maxYOffset">maxYOffset</a>() and <a href="#maxColOffset">maxColOffset</a>().
+
+<h3 class=fn>int <a name="maxViewX"></a>QtTableView::maxViewX () const<tt> [protected]</tt>
+</h3>
+Returns the rightmost pixel of the table view in <em>view</em>
+coordinates.	This excludes the frame and any scroll bar, but
+includes blank pixels to the right of the visible table data.
+<p> <p>See also <a href="#maxViewY">maxViewY</a>(), <a href="#viewWidth">viewWidth</a>() and <a href="qframe.html#contentsRect-prop">contentsRect</a>.
+
+<h3 class=fn>int <a name="maxViewY"></a>QtTableView::maxViewY () const<tt> [protected]</tt>
+</h3>
+Returns the bottom pixel of the table view in <em>view</em>
+coordinates.	This excludes the frame and any scroll bar, but
+includes blank pixels below the visible table data.
+<p> <p>See also <a href="#maxViewX">maxViewX</a>(), <a href="#viewHeight">viewHeight</a>() and <a href="qframe.html#contentsRect-prop">contentsRect</a>.
+
+<h3 class=fn>int <a name="maxXOffset"></a>QtTableView::maxXOffset ()<tt> [protected]</tt>
+</h3>
+Returns the maximum horizontal offset within the table of the
+view's left edge in <em>table</em> coordinates.
+<p> This is used mainly to set the horizontal scroll bar's range.
+<p> <p>See also <a href="#maxColOffset">maxColOffset</a>(), <a href="#maxYOffset">maxYOffset</a>() and <a href="#totalWidth">totalWidth</a>().
+
+<h3 class=fn>int <a name="maxYOffset"></a>QtTableView::maxYOffset ()<tt> [protected]</tt>
+</h3>
+Returns the maximum vertical offset within the table of the
+view's top edge in <em>table</em> coordinates.
+<p> This is used mainly to set the vertical scroll bar's range.
+<p> <p>See also <a href="#maxRowOffset">maxRowOffset</a>(), <a href="#maxXOffset">maxXOffset</a>() and <a href="#totalHeight">totalHeight</a>().
+
+<h3 class=fn>int <a name="minViewX"></a>QtTableView::minViewX () const<tt> [protected]</tt>
+</h3>
+Returns the leftmost pixel of the table view in <em>view</em>
+coordinates.	This excludes the frame and any header.
+<p> <p>See also <a href="#maxViewY">maxViewY</a>(), <a href="#viewWidth">viewWidth</a>() and <a href="qframe.html#contentsRect-prop">contentsRect</a>.
+
+<h3 class=fn>int <a name="minViewY"></a>QtTableView::minViewY () const<tt> [protected]</tt>
+</h3>
+Returns the top pixel of the table view in <em>view</em>
+coordinates.	This excludes the frame and any header.
+<p> <p>See also <a href="#maxViewX">maxViewX</a>(), <a href="#viewHeight">viewHeight</a>() and <a href="qframe.html#contentsRect-prop">contentsRect</a>.
+
+<h3 class=fn>int <a name="numCols"></a>QtTableView::numCols () const<tt> [protected]</tt>
+</h3>
+
+Returns the number of columns in the table.
+<p>See also <a href="#numRows">numRows</a>() and <a href="#setNumCols">setNumCols</a>().
+
+<h3 class=fn>int <a name="numRows"></a>QtTableView::numRows () const<tt> [protected]</tt>
+</h3>
+
+Returns the number of rows in the table.
+<p>See also <a href="#numCols">numCols</a>() and <a href="#setNumRows">setNumRows</a>().
+
+<h3 class=fn>void <a name="paintCell"></a>QtTableView::paintCell ( <a href="qpainter.html">QPainter</a>&nbsp;*&nbsp;p, int&nbsp;row, int&nbsp;col )<tt> [pure virtual protected]</tt>
+</h3>
+
+<p> This pure virtual function is called to paint the single cell at <em>(row,col)</em> using <em>p</em>, which is open when <a href="#paintCell">paintCell</a>() is called and
+must remain open.
+<p> The coordinate system is <a href="qpainter.html#translate">translated</a>
+so that the origin is at the top-left corner of the cell to be
+painted, i.e. <em>cell</em> coordinates.  Do not scale or shear the coordinate
+system (or if you do, restore the transformation matrix before you
+return).
+<p> The painter is not clipped by default and for maximum efficiency. For safety,
+call <a href="#setTableFlags">setTableFlags</a>(Tbl_clipCellPainting) to enable clipping.
+<p> <p>See also <a href="#paintEvent">paintEvent</a>() and <a href="#setTableFlags">setTableFlags</a>().
+
+<p>Reimplemented in <a href="qtmultilineedit.html#paintCell">QtMultiLineEdit</a>.
+<h3 class=fn>void <a name="paintEvent"></a>QtTableView::paintEvent ( <a href="qpaintevent.html">QPaintEvent</a>&nbsp;*&nbsp;e )<tt> [virtual protected]</tt>
+</h3>
+Handles paint events, <em>e</em>, for the table view.
+<p> Calls <a href="#paintCell">paintCell</a>() for the cells that needs to be repainted.
+
+<p>Reimplemented from <a href="qframe.html#paintEvent">QFrame</a>.
+<h3 class=fn>void <a name="repaint"></a>QtTableView::repaint ( int&nbsp;x, int&nbsp;y, int&nbsp;w, int&nbsp;h, bool&nbsp;erase = TRUE )
+</h3>
+Repaints the table view directly by calling <a href="#paintEvent">paintEvent</a>() directly
+unless updates are disabled.
+<p> Erases the view area <em>(x,y,w,h)</em> if <em>erase</em> is TRUE. Parameters <em>(x,y)</em> are in <em>widget</em> coordinates.
+<p> If <em>w</em> is negative, it is replaced with <code>width() - x</code>.
+If <em>h</em> is negative, it is replaced with <code>height() - y</code>.
+<p> Doing a <a href="#repaint">repaint</a>() usually is faster than doing an <a href="qwidget.html#update">update</a>(), but
+calling update() many times in a row will generate a single paint
+event.
+<p> At present, QtTableView is the only widget that reimplements <a href="qwidget.html#repaint">repaint()</a>.	 It does this because by
+clearing and then repainting one cell at at time, it can make the
+screen flicker less than it would otherwise.  
+<h3 class=fn>void <a name="repaint-2"></a>QtTableView::repaint ( bool&nbsp;erase = TRUE )
+</h3>
+This is an overloaded member function, provided for convenience. It behaves essentially like the above function.
+<p> Repaints the entire view.
+
+<h3 class=fn>void <a name="repaint-3"></a>QtTableView::repaint ( const&nbsp;<a href="qrect.html">QRect</a>&nbsp;&amp;&nbsp;r, bool&nbsp;erase = TRUE )
+</h3>
+This is an overloaded member function, provided for convenience. It behaves essentially like the above function.
+<p> Replaints rectangle <em>r</em>. If <em>erase</em> is TRUE draws the background
+using the palette's background.
+
+<h3 class=fn>bool <a name="rowIsVisible"></a>QtTableView::rowIsVisible ( int&nbsp;row ) const<tt> [protected]</tt>
+</h3>
+Returns TRUE if <em>row</em> is at least partially visible.
+<p>See also <a href="#colIsVisible">colIsVisible</a>().
+
+<h3 class=fn>bool <a name="rowYPos"></a>QtTableView::rowYPos ( int&nbsp;row, int&nbsp;*&nbsp;yPos ) const<tt> [protected]</tt>
+</h3>
+Computes the position in the widget of row <em>row</em>.
+<p> Returns TRUE and stores the result in <em>*yPos</em> (in <em>widget</em>
+coordinates) if the row is visible.  Returns FALSE and does not modify
+<em>*yPos</em> if <em>row</em> is invisible or invalid.
+<p> <p>See also <a href="#colXPos">colXPos</a>() and <a href="#findRow">findRow</a>().
+
+<h3 class=fn>void <a name="scroll"></a>QtTableView::scroll ( int&nbsp;xPixels, int&nbsp;yPixels )<tt> [protected]</tt>
+</h3>
+Moves the visible area of the table right by <em>xPixels</em> and
+down by <em>yPixels</em> pixels.  Both may be negative.
+<p> <b>Warning:</b> You might find that <a href="qscrollview.html">QScrollView</a> offers a higher-level of
+functionality than using QtTableView and this function.
+<p> This function is <em>not</em> the same as <a href="qwidget.html#scroll">QWidget::scroll</a>(); in particular,
+the signs of <em>xPixels</em> and <em>yPixels</em> have the reverse semantics.
+<p> <p>See also <a href="#setXOffset">setXOffset</a>(), <a href="#setYOffset">setYOffset</a>(), <a href="#setOffset">setOffset</a>(), <a href="#setTopCell">setTopCell</a>() and <a href="#setLeftCell">setLeftCell</a>().
+
+<h3 class=fn>void <a name="setAutoUpdate"></a>QtTableView::setAutoUpdate ( bool&nbsp;enable )<tt> [virtual protected]</tt>
+</h3>
+Sets the auto-update option of the table view to <em>enable</em>.
+<p> If <em>enable</em> is TRUE (this is the default), the view updates itself
+automatically whenever it has changed in some way (for example, when a
+<a href="#setTableFlags">flag</a> is changed).
+<p> If <em>enable</em> is FALSE, the view does NOT repaint itself or update
+its internal state variables when it is changed.  This can be
+useful to avoid flicker during large changes and is singularly
+useless otherwise. Disable auto-update, do the changes, re-enable
+auto-update and call <a href="#repaint">repaint</a>().
+<p> <b>Warning:</b> Do not leave the view in this state for a long time
+(i.e., between events). If, for example, the user interacts with the
+view when auto-update is off, strange things can happen.
+<p> Setting auto-update to TRUE does not repaint the view; you must call
+repaint() to do this.
+<p> <p>See also <a href="#autoUpdate">autoUpdate</a>() and <a href="#repaint">repaint</a>().
+
+<p>Reimplemented in <a href="qtmultilineedit.html#setAutoUpdate">QtMultiLineEdit</a>.
+<h3 class=fn>void <a name="setCellHeight"></a>QtTableView::setCellHeight ( int&nbsp;cellHeight )<tt> [virtual protected]</tt>
+</h3>
+Sets the height in pixels of the table cells to <em>cellHeight</em>.
+<p> Setting it to 0 means that the row height is variable.  When set
+to 0 (this is the default), QtTableView calls the virtual function
+<a href="#cellHeight">cellHeight</a>() to get the height.
+<p> <p>See also <a href="#cellHeight">cellHeight</a>(), <a href="#setCellWidth">setCellWidth</a>(), <a href="#totalHeight">totalHeight</a>() and <a href="#numRows">numRows</a>().
+
+<h3 class=fn>void <a name="setCellWidth"></a>QtTableView::setCellWidth ( int&nbsp;cellWidth )<tt> [virtual protected]</tt>
+</h3>
+Sets the width in pixels of the table cells to <em>cellWidth</em>.
+<p> Setting it to 0 means that the column width is variable.  When
+set to 0 (this is the default) QtTableView calls the virtual function
+<a href="#cellWidth">cellWidth</a>() to get the width.
+<p> <p>See also <a href="#cellWidth">cellWidth</a>(), <a href="#setCellHeight">setCellHeight</a>(), <a href="#totalWidth">totalWidth</a>() and <a href="#numCols">numCols</a>().
+
+<h3 class=fn>void <a name="setLeftCell"></a>QtTableView::setLeftCell ( int&nbsp;col )<tt> [virtual protected]</tt>
+</h3>
+Scrolls the table so that <em>col</em> becomes the leftmost
+column.  The index of the leftmost column is 0.
+<p>See also <a href="#setXOffset">setXOffset</a>(), <a href="#setTopLeftCell">setTopLeftCell</a>() and <a href="#setTopCell">setTopCell</a>().
+
+<h3 class=fn>void <a name="setNumCols"></a>QtTableView::setNumCols ( int&nbsp;cols )<tt> [virtual protected]</tt>
+</h3>
+Sets the number of columns of the table to <em>cols</em> (must be non-negative).
+Does not change <a href="#leftCell">leftCell</a>().
+<p> The table repaints itself automatically if <a href="#autoUpdate">autoUpdate</a>() is set.
+<p> <p>See also <a href="#numCols">numCols</a>(), <a href="#numRows">numRows</a>() and <a href="#setNumRows">setNumRows</a>().
+
+<h3 class=fn>void <a name="setNumRows"></a>QtTableView::setNumRows ( int&nbsp;rows )<tt> [virtual protected]</tt>
+</h3>
+Sets the number of rows of the table to <em>rows</em> (must be non-negative).
+Does not change <a href="#topCell">topCell</a>().
+<p> The table repaints itself automatically if <a href="#autoUpdate">autoUpdate</a>() is set.
+<p> <p>See also <a href="#numCols">numCols</a>(), <a href="#setNumCols">setNumCols</a>() and <a href="#numRows">numRows</a>().
+
+<h3 class=fn>void <a name="setOffset"></a>QtTableView::setOffset ( int&nbsp;x, int&nbsp;y, bool&nbsp;updateScrBars = TRUE )<tt> [virtual protected]</tt>
+</h3>
+Scrolls the table so that <em>(x,y)</em> becomes the top-left pixel
+in the view. Parameters <em>(x,y)</em> are in <em>table</em> coordinates.
+<p> The interaction with <a href="#setTableFlags">Tbl_snapTo*Grid</a>
+is tricky.  If <em>updateScrBars</em> is TRUE, the scroll bars are
+updated.
+<p> <p>See also <a href="#xOffset">xOffset</a>(), <a href="#yOffset">yOffset</a>(), <a href="#setXOffset">setXOffset</a>(), <a href="#setYOffset">setYOffset</a>() and <a href="#setTopLeftCell">setTopLeftCell</a>().
+
+<h3 class=fn>void <a name="setTableFlags"></a>QtTableView::setTableFlags ( uint&nbsp;f )<tt> [virtual protected]</tt>
+</h3>
+Sets the table flags to <em>f</em>.
+<p> If a flag setting changes the appearance of the table, the table is
+repainted if - and only if - <a href="#autoUpdate">autoUpdate</a>() is TRUE.
+<p> The table flags are mostly single bits, though there are some multibit
+flags for convenience. Here is a complete list:
+<p> <dl compact>
+<dt> Tbl_vScrollBar <dd> - The table has a vertical scroll bar.
+<dt> Tbl_hScrollBar <dd> - The table has a horizontal scroll bar.
+<dt> Tbl_autoVScrollBar <dd> - The table has a vertical scroll bar if
+- and only if - the table is taller than the view.
+<dt> Tbl_autoHScrollBar <dd> The table has a horizontal scroll bar if
+- and only if - the table is wider than the view.
+<dt> Tbl_autoScrollBars <dd> - The union of the previous two flags.
+<dt> Tbl_clipCellPainting <dd> - The table uses <a href="qpainter.html#setClipRect">QPainter::setClipRect</a>() to
+make sure that <a href="#paintCell">paintCell</a>() will not draw outside the cell
+boundaries.
+<dt> Tbl_cutCellsV <dd> - The table will never show part of a
+cell at the bottom of the table; if there is not space for all of
+a cell, the space is left blank.
+<dt> Tbl_cutCellsH <dd> - The table will never show part of a
+cell at the right side of the table; if there is not space for all of
+a cell, the space is left blank.
+<dt> Tbl_cutCells <dd> - The union of the previous two flags.
+<dt> Tbl_scrollLastHCell <dd> - When the user scrolls horizontally,
+let him/her scroll the last cell left until it is at the left
+edge of the view.  If this flag is not set, the user can only scroll
+to the point where the last cell is completely visible.
+<dt> Tbl_scrollLastVCell <dd> - When the user scrolls vertically, let
+him/her scroll the last cell up until it is at the top edge of
+the view.  If this flag is not set, the user can only scroll to the
+point where the last cell is completely visible.
+<dt> Tbl_scrollLastCell <dd> - The union of the previous two flags.
+<dt> Tbl_smoothHScrolling <dd> - The table scrolls as smoothly as
+possible when the user scrolls horizontally. When this flag is not
+set, scrolling is done one cell at a time.
+<dt> Tbl_smoothVScrolling <dd> - The table scrolls as smoothly as
+possible when scrolling vertically. When this flag is not set,
+scrolling is done one cell at a time.
+<dt> Tbl_smoothScrolling <dd> - The union of the previous two flags.
+<dt> Tbl_snapToHGrid <dd> - Except when the user is actually scrolling,
+the leftmost column shown snaps to the leftmost edge of the view.
+<dt> Tbl_snapToVGrid <dd> - Except when the user is actually
+scrolling, the top row snaps to the top edge of the view.
+<dt> Tbl_snapToGrid <dd> - The union of the previous two flags.
+</dl>
+<p> You can specify more than one flag at a time using bitwise OR.
+<p> Example:
+<pre>
+    <a href="#setTableFlags">setTableFlags</a>( Tbl_smoothScrolling | Tbl_autoScrollBars );
+  </pre>
+ 
+<p> <b>Warning:</b> The cutCells options (<tt>Tbl_cutCells</tt>, <tt>Tbl_cutCellsH</tt> and
+Tbl_cutCellsV) may cause painting problems when scrollbars are
+enabled. Do not combine cutCells and scrollbars.
+<p> <p>See also <a href="#clearTableFlags">clearTableFlags</a>(), <a href="#testTableFlags">testTableFlags</a>() and <a href="#tableFlags">tableFlags</a>().
+
+<h3 class=fn>void <a name="setTopCell"></a>QtTableView::setTopCell ( int&nbsp;row )<tt> [virtual protected]</tt>
+</h3>
+Scrolls the table so that <em>row</em> becomes the top row.
+The index of the very first row is 0.
+<p>See also <a href="#setYOffset">setYOffset</a>(), <a href="#setTopLeftCell">setTopLeftCell</a>() and <a href="#setLeftCell">setLeftCell</a>().
+
+<h3 class=fn>void <a name="setTopLeftCell"></a>QtTableView::setTopLeftCell ( int&nbsp;row, int&nbsp;col )<tt> [virtual protected]</tt>
+</h3>
+Scrolls the table so that the cell at row <em>row</em> and colum <em>col</em> becomes the top-left cell in the view.  The cell at the extreme
+top left of the table is at position (0,0).
+<p>See also <a href="#setLeftCell">setLeftCell</a>(), <a href="#setTopCell">setTopCell</a>() and <a href="#setOffset">setOffset</a>().
+
+<h3 class=fn>void <a name="setXOffset"></a>QtTableView::setXOffset ( int&nbsp;x )<tt> [virtual protected]</tt>
+</h3>
+Scrolls the table so that <em>x</em> becomes the leftmost pixel in the view.
+The <em>x</em> parameter is in <em>table</em> coordinates.
+<p> The interaction with <a href="#setTableFlags">Tbl_snapToHGrid</a> is tricky.
+<p> <p>See also <a href="#xOffset">xOffset</a>(), <a href="#setYOffset">setYOffset</a>(), <a href="#setOffset">setOffset</a>() and <a href="#setLeftCell">setLeftCell</a>().
+
+<h3 class=fn>void <a name="setYOffset"></a>QtTableView::setYOffset ( int&nbsp;y )<tt> [virtual protected]</tt>
+</h3>
+Scrolls the table so that <em>y</em> becomes the top pixel in the view.
+The <em>y</em> parameter is in <em>table</em> coordinates.
+<p> The interaction with <a href="#setTableFlags">Tbl_snapToVGrid</a> is tricky.
+<p> <p>See also <a href="#yOffset">yOffset</a>(), <a href="#setXOffset">setXOffset</a>(), <a href="#setOffset">setOffset</a>() and <a href="#setTopCell">setTopCell</a>().
+
+<h3 class=fn>void <a name="setupPainter"></a>QtTableView::setupPainter ( <a href="qpainter.html">QPainter</a>&nbsp;* )<tt> [virtual protected]</tt>
+</h3>
+This virtual function is called before painting of table cells
+is started. It can be reimplemented by subclasses that want to
+to set up the painter in a special way and that do not want to
+do so for each cell.
+
+<h3 class=fn>uint <a name="tableFlags"></a>QtTableView::tableFlags () const<tt> [protected]</tt>
+</h3>
+
+<p> Returns the union of the table flags that are currently set.
+<p> <p>See also <a href="#setTableFlags">setTableFlags</a>(), <a href="#clearTableFlags">clearTableFlags</a>() and <a href="#testTableFlags">testTableFlags</a>().
+
+<h3 class=fn>bool <a name="testTableFlags"></a>QtTableView::testTableFlags ( uint&nbsp;f ) const<tt> [protected]</tt>
+</h3>
+
+<p> Returns TRUE if any of the table flags in <em>f</em> are currently set,
+otherwise FALSE.
+<p> <p>See also <a href="#setTableFlags">setTableFlags</a>(), <a href="#clearTableFlags">clearTableFlags</a>() and <a href="#tableFlags">tableFlags</a>().
+
+<h3 class=fn>int <a name="topCell"></a>QtTableView::topCell () const<tt> [protected]</tt>
+</h3>
+
+Returns the index of the first row in the table that is visible in
+the view.  The index of the first row is 0.
+<p>See also <a href="#leftCell">leftCell</a>() and <a href="#setTopCell">setTopCell</a>().
+
+<h3 class=fn>int <a name="totalHeight"></a>QtTableView::totalHeight ()<tt> [virtual protected]</tt>
+</h3>
+Returns the total height of the table in pixels.
+<p> This function is virtual and should be reimplemented by subclasses that
+have variable cell heights and a non-trivial <a href="#cellHeight">cellHeight</a>() function, or a
+large number of rows in the table.
+<p> The default implementation may be slow for very tall tables.
+<p> <p>See also <a href="#cellHeight">cellHeight</a>() and <a href="#totalWidth">totalWidth</a>().
+
+<h3 class=fn>int <a name="totalWidth"></a>QtTableView::totalWidth ()<tt> [virtual protected]</tt>
+</h3>
+Returns the total width of the table in pixels.
+<p> This function is virtual and should be reimplemented by subclasses that
+have variable cell widths and a non-trivial <a href="#cellWidth">cellWidth</a>() function, or a
+large number of columns in the table.
+<p> The default implementation may be slow for very wide tables.
+<p> <p>See also <a href="#cellWidth">cellWidth</a>() and <a href="#totalHeight">totalHeight</a>().
+
+<h3 class=fn>void <a name="updateCell"></a>QtTableView::updateCell ( int&nbsp;row, int&nbsp;col, bool&nbsp;erase = TRUE )<tt> [protected]</tt>
+</h3>
+Repaints the cell at row <em>row</em>, column <em>col</em> if it is inside the view.
+<p> If <em>erase</em> is TRUE, the relevant part of the view is cleared to the
+background color/pixmap before the contents are repainted.
+<p> <p>See also <a href="qwidget.html#visible-prop">visible</a>.
+
+<h3 class=fn>void <a name="updateScrollBars"></a>QtTableView::updateScrollBars ()<tt> [protected]</tt>
+</h3>
+
+<p> Updates the scroll bars' contents and presence to match the table's
+state.  Generally, you should not need to call this.
+<p> <p>See also <a href="#setTableFlags">setTableFlags</a>().
+
+<h3 class=fn>void <a name="updateTableSize"></a>QtTableView::updateTableSize ()<tt> [protected]</tt>
+</h3>
+Updates the scroll bars and internal state.
+<p> Call this function when the table view's total size is changed;
+typically because the result of <a href="#cellHeight">cellHeight</a>() or <a href="#cellWidth">cellWidth</a>() have changed.
+<p> This function does not repaint the widget.
+
+<h3 class=fn><a href="qscrollbar.html">QScrollBar</a>&nbsp;* <a name="verticalScrollBar"></a>QtTableView::verticalScrollBar () const<tt> [protected]</tt>
+</h3>
+Returns a pointer to the vertical scroll bar mainly so you can
+<a href="qobject.html#connect">connect</a>() to its signals.  Note that the scroll bar works in pixel
+values; use <a href="#findRow">findRow</a>() to translate to cell numbers.
+
+<h3 class=fn>int <a name="viewHeight"></a>QtTableView::viewHeight () const<tt> [protected]</tt>
+</h3>
+Returns the height of the table view, as such, in <em>view</em>
+coordinates.  This does not include any header, scroll bar or frame,
+but it does include background pixels below the table data.
+<p> <p>See also <a href="#minViewY">minViewY</a>(), <a href="#maxViewY">maxViewY</a>(), <a href="#viewWidth">viewWidth</a>(), <a href="qframe.html#contentsRect-prop">contentsRect</a> and <a href="#viewRect">viewRect</a>().
+
+<h3 class=fn><a href="qrect.html">QRect</a> <a name="viewRect"></a>QtTableView::viewRect () const<tt> [protected]</tt>
+</h3>
+Returns the rectangle that is the actual table, excluding any
+frame, in <em>widget</em> coordinates.
+
+<h3 class=fn>int <a name="viewWidth"></a>QtTableView::viewWidth () const<tt> [protected]</tt>
+</h3>
+Returns the width of the table view, as such, in <em>view</em>
+coordinates.  This does not include any header, scroll bar or frame,
+but it does include background pixels to the right of the table data.
+<p> <p>See also <a href="#minViewX">minViewX</a>(), <a href="#maxViewX">maxViewX</a>(), <a href="#viewHeight">viewHeight</a>(), <a href="qframe.html#contentsRect-prop">contentsRect</a> and <a href="#viewRect">viewRect</a>().
+
+<h3 class=fn>int <a name="xOffset"></a>QtTableView::xOffset () const<tt> [protected]</tt>
+</h3>
+
+<p> Returns the x coordinate in <em>table</em> coordinates of the pixel that is
+currently on the left edge of the view.
+<p> <p>See also <a href="#setXOffset">setXOffset</a>(), <a href="#yOffset">yOffset</a>() and <a href="#leftCell">leftCell</a>().
+
+<h3 class=fn>int <a name="yOffset"></a>QtTableView::yOffset () const<tt> [protected]</tt>
+</h3>
+
+<p> Returns the y coordinate in <em>table</em> coordinates of the pixel that is
+currently on the top edge of the view.
+<p> <p>See also <a href="#setYOffset">setYOffset</a>(), <a href="#xOffset">xOffset</a>() and <a href="#topCell">topCell</a>().
+
+<!-- eof -->
+<hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>.
+Copyright &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>. All Rights Reserved.<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

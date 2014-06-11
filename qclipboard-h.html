@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>qclipboard.h包含文件</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>qclipboard.h</h1>
+
+<p>这里是qclipboard.h包含文件的所有文本，一字不差。它仅仅用来说明，版权由Trolltech保留。
+<hr>
+<pre>
+/****************************************************************************
+** $Id$
+**
+** Definition of QClipboard class
+**
+** Created : 960430
+**
+** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
+**
+** This file is part of the kernel module of the Qt GUI Toolkit.
+**
+** This file may be distributed under the terms of the Q Public License
+** as defined by Trolltech AS of Norway and appearing in the file
+** LICENSE.QPL included in the packaging of this file.
+**
+** This file may be distributed and/or modified under the terms of the
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
+**
+** Licensees holding valid Qt Enterprise Edition or Qt Professional Edition
+** licenses may use this file in accordance with the Qt Commercial License
+** Agreement provided with the Software.
+**
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+**
+** See http://www.trolltech.com/pricing.html or email sales@trolltech.com for
+**   information about Qt Commercial License Agreements.
+** See http://www.trolltech.com/qpl/ for QPL licensing information.
+** See http://www.trolltech.com/gpl/ for GPL licensing information.
+**
+** Contact info@trolltech.com if any conditions of this licensing are
+** not clear to you.
+**
+**********************************************************************/
+
+#ifndef QCLIPBOARD_H
+#define QCLIPBOARD_H
+
+#ifndef QT_H
+#include "qwindowdefs.h"
+#include "qobject.h"
+#endif // QT_H
+
+#ifndef QT_NO_CLIPBOARD
+
+class QMimeSource;
+
+class Q_EXPORT QClipboard : public QObject
+{
+    Q_OBJECT
+private:
+    QClipboard( QObject *parent=0, const char *name=0 );
+    ~QClipboard();
+
+public:
+    void	clear();
+
+    bool supportsSelection() const;
+    bool ownsSelection() const;
+    bool ownsClipboard() const;
+
+    void setSelectionMode(bool enable);
+    bool selectionModeEnabled() const;
+
+#ifndef QT_NO_MIMECLIPBOARD
+    QMimeSource *data() const;
+    void setData( QMimeSource* );
+#endif
+    
+    QString     text()	 const;
+    QString     text(QCString&amp; subtype) const;
+    void	setText( const QString &amp;);
+    
+#ifndef QT_NO_MIMECLIPBOARD
+    QImage	image() const;
+    QPixmap	pixmap() const;
+    void	setImage( const QImage &amp; );
+    void	setPixmap( const QPixmap &amp; );
+#endif
+signals:
+    void        selectionChanged();
+    void	dataChanged();
+
+    
+private slots:
+    void	ownerDestroyed();
+
+protected:
+    void	connectNotify( const char * );
+    bool	event( QEvent * );
+
+    friend class QApplication;
+    friend class QBaseApplication;
+    friend class QDragManager;
+    friend class QMimeSource;
+
+private:	// Disabled copy constructor and operator=
+#if defined(Q_WS_X11)
+    void clobber();
+#elif defined(Q_WS_MAC)
+    void loadScrap(bool convert);
+    void saveScrap();
+#endif
+
+#if defined(Q_DISABLE_COPY)
+    QClipboard( const QClipboard &amp; );
+    QClipboard &amp;operator=( const QClipboard &amp; );
+#endif
+};
+
+#endif // QT_NO_CLIPBOARD
+
+#endif // QCLIPBOARD_H
+</pre>
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QFontDialog类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QFontDialog类参考</h1>
+
+<p>QFontDialog类提供了可以选择字体的对话框窗口部件。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qfontdialog-h.html">qfontdialog.h</a>&gt;</tt>
+<p>继承了<a href="qdialog.html">QDialog</a>。
+<p><a href="qfontdialog-members.html">所有成员函数的列表。</a>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>QFont <a href="#getFont"><b>getFont</b></a> ( bool&nbsp;*&nbsp;ok, const&nbsp;QFont&nbsp;&amp;&nbsp;initial, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+<li><div class=fn>QFont <a href="#getFont-2"><b>getFont</b></a> ( bool&nbsp;*&nbsp;ok, QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QFontDialog类提供了可以选择字体的对话框窗口部件。
+<p> 使用这个类的常用方法是调用静态函数中的一个，比如，<a href="#getFont">getFont</a>()。
+<p> 实例：
+<p> <pre>
+    bool ok;
+    <a href="qfont.html">QFont</a> font = QFontDialog::<a href="#getFont">getFont</a>(
+                    &amp;ok, QFont( "Helvetica [Cronyx]", 10 ), this );
+    if ( ok ) {
+        // font被设置为用户选择的字体
+    } else {
+        // 用户取消这个对话框，font被设置为初始值，在这里就是Helvetica [Cronyx], 10
+    }
+  </pre>
+ 
+<p> 对话框也可以被用来直接设置窗口部件的字体：
+<pre>
+    myWidget.setFont( QFontDialog::<a href="#getFont">getFont</a>( 0, myWidget.font() ) );
+  </pre>
+ 
+如果用户点击OK，它们选择的字体将被myWidget使用，并且如果点击Cancel，最初的字体被使用。
+<p> <p>也可以参考<a href="qfont.html">QFont</a>、<a href="qfontinfo.html">QFontInfo</a>、<a href="qfontmetrics.html">QFontMetrics</a>和<a href="dialogs.html">对话框类</a>。
+
+<p> <img src=qfontdlg-m.png> <img src=qfontdlg-w.png>
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a href="qfont.html">QFont</a> <a name="getFont"></a>QFontDialog::getFont ( bool&nbsp;*&nbsp;ok, const&nbsp;<a href="qfont.html">QFont</a>&nbsp;&amp;&nbsp;initial, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )<tt> [静态]</tt>
+</h3>
+执行一个模式字体对话框并且返回一个字体。
+<p> 如果用户点击OK，被选择的字体将被返回，并且如果点击Cancel，<em>initial</em>字体被返回。
+<p> 对话框的父对象为<em>parent</em>、名称为<em>name</em>。<em>initial</em>是初始选择的字体。如果<em>ok</em>参数为非零，则如果用户点击OK，<em>*</em><em>ok</em>被设置为真，并且如果用户点击Cancel，就被设置为假。
+<p> 这个静态函数没有完整的QFontDialog对象灵活，但是要方便并且容易使用。
+<p> 实例：
+<pre>
+    bool ok;
+    <a href="qfont.html">QFont</a> font = QFontDialog::<a href="#getFont">getFont</a>( &amp;ok, QFont( "Times", 12 ), this );
+    if ( ok ) {
+        // font被设置为用户选择的字体
+    } else {
+        // 用户取消这个对话框，font被设置为初始值，在这里就是Times, 12
+    }
+  </pre>
+ 
+<p> 对话框也可以被用来直接设置窗口部件的字体：
+<pre>
+    myWidget.setFont( QFontDialog::<a href="#getFont">getFont</a>( 0, myWidget.font() ) );
+  </pre>
+ 
+在这个实例中，如果用户点击OK，它们选择的字体将被使用，并且如果点击Cancel，最初的字体被使用。
+<p>实例：<a href="canvas-chart-example.html#x2598">chart/chartform.cpp</a>、<a href="tutorial2-09.html#x2543">chart/optionsform.cpp</a>、<a href="qfd-example.html#x1967">qfd/fontdisplayer.cpp</a>、<a href="qwerty-example.html#x366">qwerty/qwerty.cpp</a>和<a href="xform-example.html#x1423">xform/xform.cpp</a>。
+
+<h3 class=fn><a href="qfont.html">QFont</a> <a name="getFont-2"></a>QFontDialog::getFont ( bool&nbsp;*&nbsp;ok, <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0 )<tt> [静态]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 执行一个模式字体对话框并且返回一个字体。
+<p> 如果用户点击OK，被选择的字体将被返回，并且如果点击Cancel，Qt默认字体被返回。
+<p> 对话框的父对象为<em>parent</em>、名称为<em>name</em>。<em>initial</em>是初始选择的字体。如果<em>ok</em>参数为非零，则如果用户点击OK，<em>*</em><em>ok</em>被设置为真，并且如果用户点击Cancel，就被设置为假。
+<p> 这个静态函数没有完整的QFontDialog对象灵活，但是要方便并且容易使用。
+<p> 实例：
+<pre>
+    bool ok;
+    <a href="qfont.html">QFont</a> font = QFontDialog::<a href="#getFont">getFont</a>( &amp;ok, this );
+    if ( ok ) {
+        // font被设置为用户选择的字体
+    } else {
+        // 用户取消这个对话框，font被设置为默认应用程序字体，QApplication::<a href="qwidget.html#font-prop">font</a>()
+    }
+  </pre>
+ 
+<p> 
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,522 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QPtrList类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QPtrList类参考</h1>
+
+<p>QPtrList类是一个提供双向链表的模板类。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qptrlist-h.html">qptrlist.h</a>&gt;</tt>
+<p>继承了<a href="qptrcollection.html">QPtrCollection</a>。
+<p>被<a href="qobjectlist.html">QObjectList</a>、<a href="qsortedlist.html">QSortedList</a>和<a href="qstrlist.html">QStrList</a>继承。
+<p><a href="qptrlist-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QPtrList"><b>QPtrList</b></a> ()</div></li>
+<li><div class=fn><a href="#QPtrList-2"><b>QPtrList</b></a> ( const&nbsp;QPtrList&lt;type&gt;&nbsp;&amp;&nbsp;list )</div></li>
+<li><div class=fn><a href="#~QPtrList"><b>~QPtrList</b></a> ()</div></li>
+<li><div class=fn>QPtrList&lt;type&gt; &amp; <a href="#operator-eq"><b>operator=</b></a> ( const&nbsp;QPtrList&lt;type&gt;&nbsp;&amp;&nbsp;list )</div></li>
+<li><div class=fn>bool <a href="#operator-eq-eq"><b>operator==</b></a> ( const&nbsp;QPtrList&lt;type&gt;&nbsp;&amp;&nbsp;list ) const</div></li>
+<li><div class=fn>virtual uint <a href="#count"><b>count</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isEmpty"><b>isEmpty</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#insert"><b>insert</b></a> ( uint&nbsp;index, const&nbsp;type&nbsp;*&nbsp;item )</div></li>
+<li><div class=fn>void <a href="#inSort"><b>inSort</b></a> ( const&nbsp;type&nbsp;*&nbsp;item )</div></li>
+<li><div class=fn>void <a href="#prepend"><b>prepend</b></a> ( const&nbsp;type&nbsp;*&nbsp;item )</div></li>
+<li><div class=fn>void <a href="#append"><b>append</b></a> ( const&nbsp;type&nbsp;*&nbsp;item )</div></li>
+<li><div class=fn>bool <a href="#remove"><b>remove</b></a> ( uint&nbsp;index )</div></li>
+<li><div class=fn>bool <a href="#remove-2"><b>remove</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#remove-3"><b>remove</b></a> ( const&nbsp;type&nbsp;*&nbsp;item )</div></li>
+<li><div class=fn>bool <a href="#removeRef"><b>removeRef</b></a> ( const&nbsp;type&nbsp;*&nbsp;item )</div></li>
+<li><div class=fn>void <a href="#removeNode"><b>removeNode</b></a> ( QLNode&nbsp;*&nbsp;node )</div></li>
+<li><div class=fn>bool <a href="#removeFirst"><b>removeFirst</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#removeLast"><b>removeLast</b></a> ()</div></li>
+<li><div class=fn>type * <a href="#take"><b>take</b></a> ( uint&nbsp;index )</div></li>
+<li><div class=fn>type * <a href="#take-2"><b>take</b></a> ()</div></li>
+<li><div class=fn>type * <a href="#takeNode"><b>takeNode</b></a> ( QLNode&nbsp;*&nbsp;node )</div></li>
+<li><div class=fn>virtual void <a href="#clear"><b>clear</b></a> ()</div></li>
+<li><div class=fn>void <a href="#sort"><b>sort</b></a> ()</div></li>
+<li><div class=fn>int <a href="#find"><b>find</b></a> ( const&nbsp;type&nbsp;*&nbsp;item )</div></li>
+<li><div class=fn>int <a href="#findNext"><b>findNext</b></a> ( const&nbsp;type&nbsp;*&nbsp;item )</div></li>
+<li><div class=fn>int <a href="#findRef"><b>findRef</b></a> ( const&nbsp;type&nbsp;*&nbsp;item )</div></li>
+<li><div class=fn>int <a href="#findNextRef"><b>findNextRef</b></a> ( const&nbsp;type&nbsp;*&nbsp;item )</div></li>
+<li><div class=fn>uint <a href="#contains"><b>contains</b></a> ( const&nbsp;type&nbsp;*&nbsp;item ) const</div></li>
+<li><div class=fn>uint <a href="#containsRef"><b>containsRef</b></a> ( const&nbsp;type&nbsp;*&nbsp;item ) const</div></li>
+<li><div class=fn>type * <a href="#at"><b>at</b></a> ( uint&nbsp;index )</div></li>
+<li><div class=fn>int <a href="#at-2"><b>at</b></a> () const</div></li>
+<li><div class=fn>type * <a href="#current"><b>current</b></a> () const</div></li>
+<li><div class=fn>QLNode * <a href="#currentNode"><b>currentNode</b></a> () const</div></li>
+<li><div class=fn>type * <a href="#getFirst"><b>getFirst</b></a> () const</div></li>
+<li><div class=fn>type * <a href="#getLast"><b>getLast</b></a> () const</div></li>
+<li><div class=fn>type * <a href="#first"><b>first</b></a> ()</div></li>
+<li><div class=fn>type * <a href="#last"><b>last</b></a> ()</div></li>
+<li><div class=fn>type * <a href="#next"><b>next</b></a> ()</div></li>
+<li><div class=fn>type * <a href="#prev"><b>prev</b></a> ()</div></li>
+<li><div class=fn>void <a href="#toVector"><b>toVector</b></a> ( QGVector&nbsp;*&nbsp;vec ) const</div></li>
+</ul>
+<h2>重要的继承成员</h2>
+<ul>
+<li><div class=fn>bool <a href="#autoDelete"><b>autoDelete</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setAutoDelete"><b>setAutoDelete</b></a> ( bool&nbsp;enable )</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual int <a href="#compareItems"><b>compareItems</b></a> ( QPtrCollection::Item&nbsp;item1, QPtrCollection::Item&nbsp;item2 )</div></li>
+<li><div class=fn>virtual QDataStream &amp; <a href="#read"><b>read</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, QPtrCollection::Item&nbsp;&amp;&nbsp;item )</div></li>
+<li><div class=fn>virtual QDataStream &amp; <a href="#write"><b>write</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, QPtrCollection::Item&nbsp;item ) const</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QPtrList类是一个提供双向链表的模板类。
+<p> 
+
+<p> 
+<p> <a href="qvaluelist.html">QValueList</a>是可以替代这个类的的一个可兼容STL的的选择。
+<p> 定义一个模板实例QPtrList&lt;X&gt;就创建了一个操作X（X*）指针的列表。
+<p> 这个列表类是可以索引的并且有一个<a href="#at">当前索引</a>和一个<a href="#current">当前项</a>。第一项对应的是索引0。如果当前项为空，则当前索引为-1。
+<p> 使用<a href="#prepend">prepend</a>()、<a href="#insert">insert</a>()或<a href="#append">append</a>()可以插入项。可以使用<a href="#remove">remove</a>()、<a href="#removeRef">removeRef</a>()、<a href="#removeFirst">removeFirst</a>()和<a href="#removeLast">removeLast</a>()来移除项。你可以使用<a href="#find">find</a>()、<a href="#findNext">findNext</a>()、<a href="#findRef">findRef</a>()或<a href="#findNextRef">findNextRef</a>()来搜索一个项。列表可以使用<a href="#sort">sort</a>()来排序。你可以使用<a href="#contains">contains</a>()或<a href="#containsRef">containsRef</a>()来得到一个项出现的次数。你也可以使用<a href="#current">current</a>()来得到指向当前项的指针，用<a href="#at">at</a>()来得到一个在特定索引位置的项的指针，用<a href="#getFirst">getFirst</a>()和<a href="#getLast">getLast</a>()来得到第一个或最后一个项的指针。你也可以使用<a href="#first">first</a>()、<a href="#last">last</a>()、<a href="#next">next</a>()和<a href="#prev">prev</a>()（它们都会更新current()）来遍历列表。列表的删除属性可以用<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()来设置。
+<p> <a name="example"></a>
+<p> 实例：
+<pre>
+    class Employee
+    {
+    public:
+        Employee() : sn( 0 ) { }
+        Employee( const <a href="qstring.html">QString</a>&amp; forename, const <a href="qstring.html">QString</a>&amp; surname, int salary )
+            : fn( forename ), sn( surname ), sal( salary )
+        { }
+
+        void setSalary( int salary ) { sal = salary; }
+
+        <a href="qstring.html">QString</a> forename() const { return fn; }
+        <a href="qstring.html">QString</a> surname() const { return sn; }
+        int salary() const { return sal; }
+
+    private:
+        <a href="qstring.html">QString</a> fn;
+        <a href="qstring.html">QString</a> sn;
+        int sal;
+    };
+
+    QPtrList&lt;Employee&gt; list;
+    list.<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>( TRUE ); // list列表拥有了这个对象
+
+    list.<a href="#append">append</a>( new Employee("John", "Doe", 50000) );
+    list.<a href="#append">append</a>( new Employee("Jane", "Williams", 80000) );
+    list.<a href="#append">append</a>( new Employee("Tom", "Jones", 60000) );
+
+    Employee *employee;
+    for ( employee = list.<a href="#first">first</a>(); employee; employee = list.<a href="#next">next</a>() )
+        cout &lt;&lt; employee-&gt;surname().latin1() &lt;&lt; ", " &lt;&lt;
+                employee-&gt;forename().latin1() &lt;&lt; " earns " &lt;&lt;
+                employee-&gt;salary() &lt;&lt; endl;
+    cout &lt;&lt; endl;
+
+    // 对于非常大的列表是很没有效率的
+    for ( uint i = 0; i &lt; list.<a href="#count">count</a>(); ++i )
+        if ( list.<a href="#at">at</a>(i) )
+            cout &lt;&lt; list.<a href="#at">at</a>( i )-&gt;surname().latin1() &lt;&lt; endl;
+  </pre>
+ 
+<p> 输出是
+<pre>
+    Doe, John earns 50000
+    Williams, Jane earns 80000
+    Jones, Tom earns 60000
+
+    Doe
+    Williams
+    Jones
+  </pre>
+ 
+<p> QPtrList有几个函数可以遍历列表，但是使用<a href="qptrlistiterator.html">QPtrListIterator</a>会更实用。多重列表的迭代器也可以遍历同一个列表，它们之间以及和当前列表项无关。
+<p> 在上面的例子中，我们调用<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>(TRUE)使自动删除生效就是说列表在移除项的时候一起删除它。默认选项是当它们被移除的时候不被删除，但是我们的例子中对没有列表项没有其它的引用，所以如果不这么做的话会导致内存泄漏。
+<p> 列表项被作为<tt>void*</tt>存储在内部的QLNode终了，它也保存指向前一个和后一个列表项的指针。<a href="#currentNode">currentNode</a>()、<a href="#removeNode">removeNode</a>()和<a href="#takeNode">takeNode</a>()函数可以直接操作QLNode，但是必须仔细使用它们。节点的数据部分可以使用QLNode::getData()得到。
+<p> 当向列表插入一个项的时候，只有指针被复制，而不是项自身，比如，我们做了一个<a href="shclass.html#shallow-copy">浅复制</a>。当一个项被插入时，也是可以让列表复制这个项的所有数据（深复制）。<a href="#insert">insert</a>()、<a href="#inSort">inSort</a>()和<a href="#append">append</a>()在项被插入时调用虚函数<a href="qptrcollection.html#newItem">QPtrCollection::newItem</a>()。如果你想深复制，请继承这个列表并重新实现它。
+<p> 当从列表中移除一个项时，虚函数<a href="qptrcollection.html#deleteItem">QPtrCollection::deleteItem</a>()被调用。QPtrList的默认实现是如果自动删除生效，就删除这个项。
+<p> 虚函数<a href="#compareItems">compareItems</a>()可以被重新实现用来比较两个列表项。这个函数被所有需要比较列表项的列表函数调用，比如<a href="#remove">remove</a>(const type*)。如果你只想处理指针，又可以替代比较指针的函数，比如<a href="#removeRef">removeRef</a>(const type*)。这些函数比那些调用compareItems()的稍微快些。
+<p> <a href="qstrlist-h.html">qstrlist.h</a>中定义的<a href="qstrlist.html">QStrList</a>是一个<tt>char*</tt>的列表。它重新实现了<a href="qptrcollection.html#newItem">newItem</a>()、<a href="qptrcollection.html#deleteItem">deleteItem</a>()和compareItems()。
+<p> <p>也可以参考<a href="qptrlistiterator.html">QPtrListIterator</a>、<a href="collection.html">集合类</a>和<a href="tools.html">非GUI类</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QPtrList"></a>QPtrList::QPtrList ()
+</h3>
+构造一个空的列表。
+
+<h3 class=fn><a name="QPtrList-2"></a>QPtrList::QPtrList ( const&nbsp;<a href="qptrlist.html">QPtrList</a>&lt;type&gt;&nbsp;&amp;&nbsp;list )
+</h3>
+构造一个<em>list</em>的复制。
+<p> <em>list</em>的每一个项都<a href="#append">被添加</a>到这个列表中。只有指针被复制（浅复制）。
+
+<h3 class=fn><a name="~QPtrList"></a>QPtrList::~QPtrList ()
+</h3>
+移除列表中的所有项并且销毁这个列表。
+<p> 访问这个列表的所有列表迭代器都会被重置。
+<p> <p>也可以参考<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()。
+
+<h3 class=fn>void <a name="append"></a>QPtrList::append ( const&nbsp;type&nbsp;*&nbsp;item )
+</h3>
+在列表的最后插入<em>item</em>。
+<p> 被插入的项变为当前列表项。这和<tt>insert( count(), item )</tt>是相同的。
+<p> <em>item</em>必须不是一个空指针。
+<p> <p>也可以参考<a href="#insert">insert</a>()、<a href="#current">current</a>()和<a href="#prepend">prepend</a>()。
+<p>实例：<a href="customlayout-example.html#x1371">customlayout/border.cpp</a>、<a href="customlayout-example.html#x1389">customlayout/card.cpp</a>、<a href="customlayout-example.html#x1348">customlayout/flow.cpp</a>、<a href="grapher-nsplugin-example.html#x2778">grapher/grapher.cpp</a>、<a href="listviews-example.html#x347">listviews/listviews.cpp</a>、<a href="listviews-example.html#x318">listviews/listviews.h</a>和<a href="qwerty-example.html#x385">qwerty/qwerty.cpp</a>。
+
+<h3 class=fn>type * <a name="at"></a>QPtrList::at ( uint&nbsp;index )
+</h3>
+返回一个在列表<em>index</em>位置的项的指针，如果索引超出范围，返回空。
+<p> 如果<em>index</em>有效，设置这个项为当前列表项。有效范围是<tt>0……(count() - 1)</tt>。
+<p> 这个函数是非常有效的。它从第一项、最后一项或当前项中最接近<em>index</em>的开始扫描。
+<p> <p>也可以参考<a href="#current">current</a>()。
+<p>实例：<a href="customlayout-example.html#x1372">customlayout/border.cpp</a>、<a href="customlayout-example.html#x1390">customlayout/card.cpp</a>、<a href="customlayout-example.html#x1349">customlayout/flow.cpp</a>、<a href="dirview-example.html#x1737">dirview/dirview.cpp</a>、<a href="fileiconview-example.html#x863">fileiconview/qfileiconview.cpp</a>、<a href="mdi-example.html#x2035">mdi/application.cpp</a>和<a href="qwerty-example.html#x386">qwerty/qwerty.cpp</a>。
+
+<h3 class=fn>int <a name="at-2"></a>QPtrList::at () const
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回当前列表项的索引。如果当前项为空，返回值为-1。
+<p>也可以参考<a href="#current">current</a>()。
+
+<h3 class=fn>bool <a name="autoDelete"></a>QPtrCollection::autoDelete () const
+</h3>
+<p> 返回自动删除选项的设置。默认为假。
+<p> <p>也可以参考<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()。
+
+<h3 class=fn>void <a name="clear"></a>QPtrList::clear ()<tt> [虚]</tt>
+</h3>
+移除列表中所有项。
+<p> 如果<a href="qptrcollection.html#setAutoDelete">自动删除</a>生效，被移除的项目将被删除。
+<p> 所有访问这个列表的列表迭代器都将被重置。
+<p> <p>也可以参考<a href="#remove">remove</a>()、<a href="#take">take</a>()和<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()。
+<p>从<a href="qptrcollection.html#clear">QPtrCollection</a>中重新实现。
+
+<h3 class=fn>int <a name="compareItems"></a>QPtrList::compareItems ( <a href="qptrcollection.html#Item">QPtrCollection::Item</a>&nbsp;item1, <a href="qptrcollection.html#Item">QPtrCollection::Item</a>&nbsp;item2 )<tt> [虚 保护]</tt>
+</h3>
+<p> 这个虚函数比较两个列表项。
+<p> 返回：
+<ul>
+<li> 如果<em>item1</em>==<em>item2</em>，返回0
+<li> 如果<em>item1</em>!=<em>item2</em>，返回非0
+</ul>
+<p> 这个函数返回<em>int</em>而不是<em>bool</em>，这样可以重新实现返回三个值并且使用它来排序：
+<p> <ul>
+<li> 如果<em>item1</em> == <em>item2</em>，返回0
+<li> 如果<em>item1</em>&gt;<em>item2</em>，返回&gt;0（正整数）
+<li> 如果<em>item1</em>&lt;<em>item2</em>，返回&lt;0（负整数）
+</ul>
+<p> <a href="#inSort">inSort</a>()需要<a href="#compareItems">compareItems</a>()像这里所描述的这样来被实现。
+<p> 这个函数不应该修改列表，因为一些常量函数调用compareItems()。
+<p> 默认实现是比较指针。
+
+<h3 class=fn>uint <a name="contains"></a>QPtrList::contains ( const&nbsp;type&nbsp;*&nbsp;item ) const
+</h3>
+计算并且返回<em>item</em>在列表中出现的次数。
+<p> 当在列表中搜索<em>item</em>时，<a href="#compareItems">compareItems</a>()函数被调用。如果compareItems()没有被重新实现，调用<a href="#containsRef">containsRef</a>()是更有效率的。
+<p> 这个函数不影响当前列表项。
+<p> <p>也可以参考<a href="#containsRef">containsRef</a>()和<a href="#compareItems">compareItems</a>()。
+
+<h3 class=fn>uint <a name="containsRef"></a>QPtrList::containsRef ( const&nbsp;type&nbsp;*&nbsp;item ) const
+</h3>
+计算并且返回<em>item</em>在列表中出现的次数。
+<p> 调用这个函数比<a href="#contains">contains</a>()快多了，因为contains()使用<a href="#compareItems">compareItems</a>()来用<em>item</em>与列表中的每一个项进行比较。这个函数只比较指针。
+<p> 这个函数不影响当前列表项。
+<p> <p>也可以参考<a href="#contains">contains</a>()。
+
+<h3 class=fn>uint <a name="count"></a>QPtrList::count () const<tt> [虚]</tt>
+</h3>
+返回列表中项的数量。
+<p>也可以参考<a href="#isEmpty">isEmpty</a>()。
+<p>实例：<a href="customlayout-example.html#x1373">customlayout/border.cpp</a>、<a href="customlayout-example.html#x1391">customlayout/card.cpp</a>、<a href="customlayout-example.html#x1350">customlayout/flow.cpp</a>、<a href="fileiconview-example.html#x864">fileiconview/qfileiconview.cpp</a>、<a href="grapher-nsplugin-example.html#x2779">grapher/grapher.cpp</a>、<a href="mdi-example.html#x2036">mdi/application.cpp</a>和<a href="qwerty-example.html#x387">qwerty/qwerty.cpp</a>。
+<p>从<a href="qptrcollection.html#count">QPtrCollection</a>中重新实现的。
+
+<h3 class=fn>type * <a name="current"></a>QPtrList::current () const
+</h3>
+返回一个指向当前列表项的指针。当前列表项可能为空（意味着当前索引为-1）。
+<p>也可以参考<a href="#at">at</a>()。
+
+<h3 class=fn>QLNode * <a name="currentNode"></a>QPtrList::currentNode () const
+</h3>
+返回指向当前列表节点的指针。
+<p> 节点可以被保存并且稍后使用<a href="#removeNode">removeNode</a>()移除。这样做的优点是可以直接移除这个项，而不用搜索列表。
+<p> <b>警告：</b>不要调用这个函数，除非你是专家。
+<p> <p>也可以参考<a href="#removeNode">removeNode</a>()、<a href="#takeNode">takeNode</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn>int <a name="find"></a>QPtrList::find ( const&nbsp;type&nbsp;*&nbsp;item )
+</h3>
+找到<em>item</em>在列表中第一次出现的位置。
+<p> 如果这个项被找到，列表会设置当前项指向找到的项，并且返回这个项的索引。如果没有被找到，列表设置当前项为空，当前索引为-1，并且返回-1。
+<p> 当在列表中搜索这个项时，<a href="#compareItems">compareItems</a>()函数被调用。如果compareItems()没有被重新实现，调用<a href="#findRef">findRef</a>()是更有效率的。
+<p> <p>也可以参考<a href="#findNext">findNext</a>()、<a href="#findRef">findRef</a>()、<a href="#compareItems">compareItems</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn>int <a name="findNext"></a>QPtrList::findNext ( const&nbsp;type&nbsp;*&nbsp;item )
+</h3>
+从当前列表项，找到<em>item</em>在列表中下一次出现的位置。
+<p> 如果这个项被找到，列表会设置当前项指向找到的项，并且返回这个项的索引。如果没有被找到，列表设置当前项为空，当前索引为-1，并且返回-1。
+<p> 当在列表中搜索这个项时，<a href="#compareItems">compareItems</a>()函数被调用。如果compareItems()没有被重新实现，调用<a href="#findNextRef">findNextRef</a>()是更有效率的。
+<p> <p>也可以参考<a href="#find">find</a>()、<a href="#findNextRef">findNextRef</a>()、<a href="#compareItems">compareItems</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn>int <a name="findNextRef"></a>QPtrList::findNextRef ( const&nbsp;type&nbsp;*&nbsp;item )
+</h3>
+从当前列表项，找到<em>item</em>在列表中下一次出现的位置。
+<p> 如果这个项被找到，列表会设置当前项指向找到的项，并且返回这个项的索引。如果没有被找到，列表设置当前项为空，当前索引为-1，并且返回-1。
+<p> 调用这个函数比<a href="#findNext">findNext</a>()快得多，因为findNext()是使用<a href="#compareItems">compareItems</a>()来用<em>item</em>与列表中的每一个项进行比较。这个函数只比较指针。
+<p> <p>也可以参考<a href="#findRef">findRef</a>()、<a href="#findNext">findNext</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn>int <a name="findRef"></a>QPtrList::findRef ( const&nbsp;type&nbsp;*&nbsp;item )
+</h3>
+找到<em>item</em>在列表中第一次出现的位置。
+<p> 如果这个项被找到，列表会设置当前项指向找到的项，并且返回这个项的索引。如果没有被找到，列表设置当前项为空，当前索引为-1，并且返回-1。
+<p> 调用这个函数比<a href="#find">find</a>()快得多，因为find()是使用<a href="#compareItems">compareItems</a>()来用<em>item</em>与列表中的每一个项进行比较。这个函数只比较指针。
+<p> <p>也可以参考<a href="#findNextRef">findNextRef</a>()、<a href="#find">find</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn>type * <a name="first"></a>QPtrList::first ()
+</h3>
+返回指向列表中第一个项的指针并且使它成为当前列表项，或者如果列表为空当前项就为空。
+<p>也可以参考<a href="#getFirst">getFirst</a>()、<a href="#last">last</a>()、<a href="#next">next</a>()、<a href="#prev">prev</a>()和<a href="#current">current</a>()。
+<p>实例：<a href="grapher-nsplugin-example.html#x2780">grapher/grapher.cpp</a>、<a href="listviews-example.html#x319">listviews/listviews.h</a>和<a href="showimg-example.html#x1281">showimg/showimg.cpp</a>。
+
+<h3 class=fn>type * <a name="getFirst"></a>QPtrList::getFirst () const
+</h3>
+返回指向列表中第一个项的指针，如果列表为空返回空。
+<p> 这个函数不影响当前列表项。
+<p> <p>也可以参考<a href="#first">first</a>()和<a href="#getLast">getLast</a>()。
+
+<h3 class=fn>type * <a name="getLast"></a>QPtrList::getLast () const
+</h3>
+Returns a pointer to the last item in the list, or null if the
+list is empty.
+返回指向列表中最后一个项的指针，如果列表为空返回空。
+<p> 这个函数不影响当前列表项。
+<p> <p>也可以参考<a href="#last">last</a>()和<a href="#getFirst">getFirst</a>()。
+
+<h3 class=fn>void <a name="inSort"></a>QPtrList::inSort ( const&nbsp;type&nbsp;*&nbsp;item )
+</h3>
+把<em>item</em>插入到列表中它被排序的位置。
+<p> 排序依靠的是虚函数<a href="#compareItems">compareItems</a>()。为了维护这个派逊，所有的项都必须使用<a href="#inSort">inSort</a>()来插入。
+<p> 被插入的项变为当前项。
+<p> <em>item</em>必须不能是一个空指针。
+<p> 请注意inSort()很慢。如果你想先向列表插入很多项，插入完之后再排序，你应该使用<a href="#sort">sort</a>()。inSort()进行了O(n)次比较。这就意味着插入n个项到你的列表需要比较O(n^2)次，而sort()做同样的工作只需要O(n*log n)次。所以只有在你有一个预先排好序的列表并且想向其中插入少量的项时，再使用inSort()。
+<p> <p>也可以参考<a href="#insert">insert</a>()、<a href="#compareItems">compareItems</a>()、<a href="#current">current</a>()和<a href="#sort">sort</a>()。
+
+<h3 class=fn>bool <a name="insert"></a>QPtrList::insert ( uint&nbsp;index, const&nbsp;type&nbsp;*&nbsp;item )
+</h3>
+插入<em>item</em>到列表的<em>index</em>位置。
+<p> 如果成功返回真，或者如果<em>index</em>超出范围返回假。有效的范围是从0到<a href="#count">count</a>()（包括count()）。如果<em>index</em>==count()，项就被添加。
+<p> 被插入的项变为当前项。
+<p> <em>item</em>必须不能是一个空指针。
+<p> <p>也可以参考<a href="#append">append</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn>bool <a name="isEmpty"></a>QPtrList::isEmpty () const
+</h3>
+如果列表是空的，返回真，否则返回假。
+<p> <p>也可以参考<a href="#count">count</a>()。
+
+<h3 class=fn>type * <a name="last"></a>QPtrList::last ()
+</h3>
+返回指向列表最后一项的指针，并且把这一项变为当前列表项，如果列表为空，当前列表项为空。
+<p>也可以参考<a href="#getLast">getLast</a>()、<a href="#first">first</a>()、<a href="#next">next</a>()、<a href="#prev">prev</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn>type * <a name="next"></a>QPtrList::next ()
+</h3>
+返回指向当前项的下一项的指针。如果当前项为空或者它是最后一项，返回空。
+<p> 把下一项作为当前项。如果当前项在这次函数调用之前就是最后一项了，当前项将被设置为空。如果当前项为空，这个函数就什么都不做。
+<p> <p>也可以参考<a href="#first">first</a>()、<a href="#last">last</a>()、<a href="#prev">prev</a>()和<a href="#current">current</a>()。
+<p>实例：<a href="grapher-nsplugin-example.html#x2781">grapher/grapher.cpp</a>、<a href="listviews-example.html#x320">listviews/listviews.h</a>和<a href="showimg-example.html#x1282">showimg/showimg.cpp</a>。
+
+<h3 class=fn><a href="qptrlist.html">QPtrList</a>&lt;type&gt;&nbsp;&amp; <a name="operator-eq"></a>QPtrList::operator= ( const&nbsp;<a href="qptrlist.html">QPtrList</a>&lt;type&gt;&nbsp;&amp;&nbsp;list )
+</h3>
+把<em>list</em>赋值给这个列表并且返回这个列表的引用。
+<p> 这个列表首先被清空，然后<em>list</em>中的每个项都被<a href="#append">添加</a>到这个列表中。只有指针被复制（浅复制），除非<a href="qptrcollection.html#newItem">newItem</a>()被重新实现了。
+
+<h3 class=fn>bool <a name="operator-eq-eq"></a>QPtrList::operator== ( const&nbsp;<a href="qptrlist.html">QPtrList</a>&lt;type&gt;&nbsp;&amp;&nbsp;list ) const
+</h3>
+<p> 把这个列表和<em>list</em>进行比较。如果这个列表包含相同的数据，返回真，否则返回假。
+
+<h3 class=fn>void <a name="prepend"></a>QPtrList::prepend ( const&nbsp;type&nbsp;*&nbsp;item )
+</h3>
+<p> 在列表开始的位置插入<em>item</em>。
+<p> 被插入项变为当前列表项。这和<tt>insert( 0, item )</tt>是相同的。
+<p> <em>item</em>必须不能是一个空指针。
+<p> <p>也可以参考<a href="#append">append</a>()、<a href="#insert">insert</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn>type * <a name="prev"></a>QPtrList::prev ()
+</h3>
+返回指向当前项的前一个项的指针。如果当前项为空或者等于第一项，返回空。
+<p> 把前一项作为当前项。如果当前项在这次函数调用之前就是第一项了，当前项被设置为空。如果当前项为空，这个函数就什么都不做。
+<p> <p>也可以参考<a href="#first">first</a>()、<a href="#last">last</a>()、<a href="#next">next</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="read"></a>QPtrList::read ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, <a href="qptrcollection.html#Item">QPtrCollection::Item</a>&nbsp;&amp;&nbsp;item )<tt> [虚 保护]</tt>
+</h3>
+<p> 从流<em>s</em>中读取一个列表项并且返回流的引用。
+<p> 默认实习是设置<em>item</em>为0。
+<p> <p>也可以参考<a href="#write">write</a>()。
+
+<h3 class=fn>bool <a name="remove"></a>QPtrList::remove ( uint&nbsp;index )
+</h3>
+移除列表中<em>index</em>位置的项。
+<p> 如果成功返回真，或者如果<em>index</em>超出范围返回假。有效范围是<tt>0……(count() - 1)</tt>（包括count()-1）。
+<p> 如果<a href="qptrcollection.html#setAutoDelete">自动删除</a>生效，被移除的项目将被删除。
+<p> 如果被移除的项不是列表中最后一项，被移除的项之后的项变为新的当前列表项。如果最后一项被移除，新的最后一项变为当前项。
+<p> 所有指向被移除项的列表迭代器都将会被指向新的当前项。
+<p> <p>也可以参考<a href="#take">take</a>()、<a href="#clear">clear</a>()、<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()、<a href="#current">current</a>()和<a href="#removeRef">removeRef</a>()。
+
+<h3 class=fn>bool <a name="remove-2"></a>QPtrList::remove ()
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 移除当前列表项。
+<p> 如果成功返回真，或者如果当前项为空，返回假。
+<p> 如果<a href="qptrcollection.html#setAutoDelete">自动删除</a>生效，被移除的项目将被删除。
+<p> 如果被移除的项不是列表中最后一项，被移除的项之后的项变为新的当前列表项。如果最后一项被移除，新的最后一项变为当前项。如果列表为空，当前项为空。
+<p> 所有指向被移除项的列表迭代器都将会被指向新的当前项。
+<p> <p>也可以参考<a href="#take">take</a>()、<a href="#clear">clear</a>()、<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()、<a href="#current">current</a>()和<a href="#removeRef">removeRef</a>()。
+
+<h3 class=fn>bool <a name="remove-3"></a>QPtrList::remove ( const&nbsp;type&nbsp;*&nbsp;item )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 移除列表中第一次出现的<em>item</em>。
+<p> 如果成功返回真，或者如果当前项为空，返回假。
+<p> 如果<a href="qptrcollection.html#setAutoDelete">自动删除</a>生效，被移除的项目将被删除。
+<p> 当在列表中搜索这个项的时候，<a href="#compareItems">compareItems</a>()函数被调用。如果compareItems()没有被重新实现，调用<a href="#removeRef">removeRef</a>()是更加有效率的。
+<p> 如果被移除的项不是列表中最后一项，被移除的项之后的项变为新的当前列表项。如果最后一项被移除，新的最后一项变为当前项。
+<p> 所有指向被移除项的列表迭代器都将会被指向新的当前项。
+<p> <p>也可以参考<a href="#removeRef">removeRef</a>()、<a href="#take">take</a>()、<a href="#clear">clear</a>()、<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()、<a href="#compareItems">compareItems</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn>bool <a name="removeFirst"></a>QPtrList::removeFirst ()
+</h3>
+移除列表中的第一项。如果成功返回真，或者如果列表是空的返回假。
+<p> 如果<a href="qptrcollection.html#setAutoDelete">自动删除</a>生效，被移除的项目将被删除。
+<p> 列表中的第一项变为新的当前列表项。如果列表变空了，当前列表项被设置为空。
+<p> 所有指向被移除项的列表迭代器都将会被指向新的当前项。
+<p> <p>也可以参考<a href="#removeLast">removeLast</a>()、<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()、<a href="#current">current</a>()和<a href="#remove">remove</a>()。
+
+<h3 class=fn>bool <a name="removeLast"></a>QPtrList::removeLast ()
+</h3>
+移除列表中的最后一项。如果成功返回真，或者如果列表是空的返回假。
+<p> 如果<a href="qptrcollection.html#setAutoDelete">自动删除</a>生效，被移除的项目将被删除。
+<p> 列表中的最后一项变为新的当前列表项。如果列表变空了，当前列表项被设置为空。
+<p> 所有指向被移除项的列表迭代器都将会被指向新的当前项。
+<p> <p>也可以参考<a href="#removeFirst">removeFirst</a>()、<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn>void <a name="removeNode"></a>QPtrList::removeNode ( QLNode&nbsp;*&nbsp;node )
+</h3>
+移除列表中的<em>node</em>节点。
+<p> 这个节点必须存在于列表中，否则程序可能会崩溃。
+<p> 如果<a href="qptrcollection.html#setAutoDelete">自动删除</a>生效，被移除的项目将被删除。
+<p> 列表中的第一项变为新的当前列表项。如果列表变空了，当前列表项被设置为空。
+<p> 所有指向被移除的列表迭代器都被指向这项的下一项或者如果被移除的项是最后一项，则指向它的前一项。
+<p> <b>警告：</b>不要调用这个函数，除非你是专家。
+<p> <p>也可以参考<a href="#takeNode">takeNode</a>()、<a href="#currentNode">currentNode</a>()、<a href="#remove">remove</a>()和<a href="#removeRef">removeRef</a>()。
+
+<h3 class=fn>bool <a name="removeRef"></a>QPtrList::removeRef ( const&nbsp;type&nbsp;*&nbsp;item )
+</h3>
+移除列表中第一次出现的<em>item</em>。
+<p> 如果成功返回真，或者如果这个项在列表中没有被找到，返回假。
+<p> 如果<a href="qptrcollection.html#setAutoDelete">自动删除</a>生效，被移除的项目将被删除。
+<p> 列表一直被扫描，直到指针<em>item</em>被找到为止。如果它被发现，它就会被移除。
+<p> 等价于：
+<pre>
+    if ( list.findRef( item ) != -1 )
+        list.remove();
+  </pre>
+ 
+<p> 如果被移除的项不是列表中最后一项，被移除的项之后的项变为新的当前列表项。如果最后一项被移除，新的最后一项变为当前项。如果列表变空了，当前列表项被设置为空。
+<p> 所有指向被移除项的列表迭代器都将会被指向新的当前项。
+<p> <p>也可以参考<a href="#remove">remove</a>()、<a href="#clear">clear</a>()、<a href="qptrcollection.html#setAutoDelete">setAutoDelete</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn>void <a name="setAutoDelete"></a>QPtrCollection::setAutoDelete ( bool&nbsp;enable )
+</h3>
+<p> 如果<em>enable</em>为真，设置集合可以自动删除它的内容，并且如果<em>enable</em>为假，就永远不能删除它们。
+<p> 如果自动删除被打开，当集合本身被删除的时候，集合内所有的项也都被删除。如果只有这个集合指向它的项时，这个方法很方便。
+<p> 为了安全，默认设置是假。如果你把它打开，对于集合的复制你要注意些——你自己也许会发现两个集合删除同一个项。
+<p> 注意在子类中自动删除设置也许会影响其它函数。例如，一个有<a href="#remove">remove</a>()函数的子类将会从它的数据结构中移除这个项，并且如果自动删除生效，也将会删除这个项。
+<p> <p>也可以参考<a href="qptrcollection.html#autoDelete">autoDelete</a>().
+<p>实例：<a href="grapher-nsplugin-example.html#x2777">grapher/grapher.cpp</a>、<a href="scribble-example.html#x945">scribble/scribble.cpp</a>和<a href="bigtable-example.html#x1489">table/bigtable/main.cpp</a>。
+
+<h3 class=fn>void <a name="sort"></a>QPtrList::sort ()
+</h3>
+<p> 使用虚函数<a href="#compareItems">compareItems</a>()的结果排序这个列表。
+<p> 排序中使用堆排序算法。它对n项排序需要O(n*log n)次比较。这是排序问题中接近最佳的解决方案。
+<p> 如果你的列表中的项支持操作符&lt;和操作符==，你最好离开QSortedList，因为它使用这两个操作符为你实现了compareItems()函数。
+<p> <p>也可以参考<a href="#inSort">inSort</a>()。
+
+<h3 class=fn>type * <a name="take"></a>QPtrList::take ( uint&nbsp;index )
+</h3>
+把列表中在<em>index</em>位置的项拿出来，而不删除它（尽管如果<a href="qptrcollection.html#setAutoDelete">自动删除</a>是生效的。）
+<p> 返回指向你从列表中拿出的项的指针，或者如果索引超出范围，返回空。有效范围是<tt>0..(count() - 1)</tt>（包括count()-1）。
+<p> 如果被移除的项不是列表中最后一项，被移除的项之后的项变为新的当前列表项。如果最后一项被移除，新的最后一项变为当前项。如果列表变空了，当前列表项被设置为空。
+<p> 所有指向被移除项的列表迭代器都将会被指向新的当前项。
+<p> <p>也可以参考<a href="#remove">remove</a>()、<a href="#clear">clear</a>()和<a href="#current">current</a>()。
+<p>实例：<a href="customlayout-example.html#x1374">customlayout/border.cpp</a>、<a href="customlayout-example.html#x1392">customlayout/card.cpp</a>和<a href="customlayout-example.html#x1351">customlayout/flow.cpp</a>。
+
+<h3 class=fn>type * <a name="take-2"></a>QPtrList::take ()
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 把列表中在<em>index</em>位置的项拿出来，而不删除它（尽管如果<a href="qptrcollection.html#setAutoDelete">自动删除</a>是生效的。）
+<p> 返回指向你从列表中拿出的项的指针，或者如果索引超出范围，返回空。有效范围是<tt>0..(count() - 1)</tt>（包括count()-1）。
+<p> 如果被移除的项不是列表中最后一项，被移除的项之后的项变为新的当前列表项。如果最后一项被移除，新的最后一项变为当前项。如果列表变空了，当前列表项被设置为空。
+<p> 所有指向被移除项的列表迭代器都将会被指向新的当前项。
+<p> <p>也可以参考<a href="#remove">remove</a>()、<a href="#clear">clear</a>()和<a href="#current">current</a>()。
+
+<h3 class=fn>type * <a name="takeNode"></a>QPtrList::takeNode ( QLNode&nbsp;*&nbsp;node )
+</h3>
+把列表中的节点<em>node</em>拿出来，而不删除它（尽管如果<a href="qptrcollection.html#setAutoDelete">自动删除</a>是生效的。）返回指向你从列表中拿出的项的指针。
+<p> 这个节点必须存在于列表中，否则程序可能会崩溃。
+<p> 列表中的第一项变为新的当前列表项。如果列表变空了，当前列表项被设置为空。
+<p> 所有指向被移除的列表迭代器都被指向这项的下一项或者如果被移除的项是最后一项，则指向它的前一项。
+<p> <b>警告：</b>不要调用这个函数，除非你是专家。
+<p> <p>也可以参考<a href="#removeNode">removeNode</a>()和<a href="#currentNode">currentNode</a>()。
+
+<h3 class=fn>void <a name="toVector"></a>QPtrList::toVector ( QGVector&nbsp;*&nbsp;vec ) const
+</h3>
+存储所有的列表项到矢量<em>vec</em>中。
+<p> 矢量必须和项的类型相同，否则结果将会是不确定的。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="write"></a>QPtrList::write ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, <a href="qptrcollection.html#Item">QPtrCollection::Item</a>&nbsp;item ) const<tt> [虚 保护]</tt>
+</h3>
+<p> 写一个列表项<em>item</em>到流<em>s</em>中并且返回流的引用。
+<p> 默认实现是不做任何事。
+<p> <p>也可以参考<a href="#read">read</a>().
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

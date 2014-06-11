@@ -1,0 +1,657 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QMainWindow类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QMainWindow类参考</h1>
+
+<p> QMainWindow类提供一个有菜单条、锚接窗口（例如工具条）和一个状态条的主应用程序窗口。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qmainwindow-h.html">qmainwindow.h</a>&gt;</tt>
+<p>继承了<a href="qwidget.html">QWidget</a>。
+<p><a href="qmainwindow-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QMainWindow"><b>QMainWindow</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = WType_TopLevel )</div></li>
+<li><div class=fn><a href="#~QMainWindow"><b>~QMainWindow</b></a> ()</div></li>
+<li><div class=fn>QMenuBar * <a href="#menuBar"><b>menuBar</b></a> () const</div></li>
+<li><div class=fn>QStatusBar * <a href="#statusBar"><b>statusBar</b></a> () const</div></li>
+<li><div class=fn>QToolTipGroup * <a href="#toolTipGroup"><b>toolTipGroup</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setCentralWidget"><b>setCentralWidget</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+<li><div class=fn>QWidget * <a href="#centralWidget"><b>centralWidget</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setDockEnabled"><b>setDockEnabled</b></a> ( Dock&nbsp;dock, bool&nbsp;enable )</div></li>
+<li><div class=fn>bool <a href="#isDockEnabled"><b>isDockEnabled</b></a> ( Dock&nbsp;dock ) const</div></li>
+<li><div class=fn>bool <a href="#isDockEnabled-2"><b>isDockEnabled</b></a> ( QDockArea&nbsp;*&nbsp;area ) const</div></li>
+<li><div class=fn>virtual void <a href="#setDockEnabled-2"><b>setDockEnabled</b></a> ( QDockWindow&nbsp;*&nbsp;dw, Dock&nbsp;dock, bool&nbsp;enable )</div></li>
+<li><div class=fn>bool <a href="#isDockEnabled-3"><b>isDockEnabled</b></a> ( QDockWindow&nbsp;*&nbsp;tb, Dock&nbsp;dock ) const</div></li>
+<li><div class=fn>bool <a href="#isDockEnabled-4"><b>isDockEnabled</b></a> ( QDockWindow&nbsp;*&nbsp;dw, QDockArea&nbsp;*&nbsp;area ) const</div></li>
+<li><div class=fn>virtual void <a href="#addDockWindow"><b>addDockWindow</b></a> ( QDockWindow&nbsp;*&nbsp;dockWindow, Dock&nbsp;edge = DockTop, bool&nbsp;newLine = FALSE )</div></li>
+<li><div class=fn>virtual void <a href="#addDockWindow-2"><b>addDockWindow</b></a> ( QDockWindow&nbsp;*&nbsp;dockWindow, const&nbsp;QString&nbsp;&amp;&nbsp;label, Dock&nbsp;edge = DockTop, bool&nbsp;newLine = FALSE )</div></li>
+<li><div class=fn>virtual void <a href="#moveDockWindow"><b>moveDockWindow</b></a> ( QDockWindow&nbsp;*&nbsp;dockWindow, Dock&nbsp;edge = DockTop )</div></li>
+<li><div class=fn>virtual void <a href="#moveDockWindow-2"><b>moveDockWindow</b></a> ( QDockWindow&nbsp;*&nbsp;dockWindow, Dock&nbsp;edge, bool&nbsp;nl, int&nbsp;index, int&nbsp;extraOffset = -1 )</div></li>
+<li><div class=fn>virtual void <a href="#removeDockWindow"><b>removeDockWindow</b></a> ( QDockWindow&nbsp;*&nbsp;dockWindow )</div></li>
+<li><div class=fn>bool <a href="#rightJustification"><b>rightJustification</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#usesBigPixmaps"><b>usesBigPixmaps</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#usesTextLabel"><b>usesTextLabel</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#dockWindowsMovable"><b>dockWindowsMovable</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#opaqueMoving"><b>opaqueMoving</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#getLocation"><b>getLocation</b></a> ( QDockWindow&nbsp;*&nbsp;dw, Dock&nbsp;&amp;&nbsp;dock, int&nbsp;&amp;&nbsp;index, bool&nbsp;&amp;&nbsp;nl, int&nbsp;&amp;&nbsp;extraOffset ) const</div></li>
+<li><div class=fn>QPtrList&lt;QDockWindow&gt; <a href="#dockWindows"><b>dockWindows</b></a> ( Dock&nbsp;dock ) const</div></li>
+<li><div class=fn>QPtrList&lt;QDockWindow&gt; <a href="#dockWindows-2"><b>dockWindows</b></a> () const</div></li>
+<li><div class=fn>void <a href="#lineUpDockWindows"><b>lineUpDockWindows</b></a> ( bool&nbsp;keepNewLines = FALSE )</div></li>
+<li><div class=fn>bool <a href="#isDockMenuEnabled"><b>isDockMenuEnabled</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#hasDockWindow"><b>hasDockWindow</b></a> ( QDockWindow&nbsp;*&nbsp;dw )</div></li>
+<li><div class=fn>void addToolBar ( QDockWindow *, Dock = DockTop, bool&nbsp;newLine = FALSE ) &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>void addToolBar ( QDockWindow *, const&nbsp;QString&nbsp;&amp;&nbsp;label, Dock = DockTop, bool&nbsp;newLine = FALSE ) &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>void moveToolBar ( QDockWindow *, Dock = DockTop ) &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>void moveToolBar ( QDockWindow *, Dock, bool&nbsp;nl, int&nbsp;index, int&nbsp;extraOffset = -1 ) &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>void removeToolBar ( QDockWindow * ) &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>bool toolBarsMovable () const &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>QPtrList&lt;QToolBar&gt; <a href="#toolBars"><b>toolBars</b></a> ( Dock&nbsp;dock ) const</div></li>
+<li><div class=fn>void lineUpToolBars ( bool&nbsp;keepNewLines = FALSE ) &nbsp;<em>（废弃）</em></div></li>
+<li><div class=fn>QDockArea * <a href="#leftDock"><b>leftDock</b></a> () const</div></li>
+<li><div class=fn>QDockArea * <a href="#rightDock"><b>rightDock</b></a> () const</div></li>
+<li><div class=fn>QDockArea * <a href="#topDock"><b>topDock</b></a> () const</div></li>
+<li><div class=fn>QDockArea * <a href="#bottomDock"><b>bottomDock</b></a> () const</div></li>
+<li><div class=fn>virtual bool <a href="#isCustomizable"><b>isCustomizable</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#appropriate"><b>appropriate</b></a> ( QDockWindow&nbsp;*&nbsp;dw ) const</div></li>
+<li><div class=fn>enum <a href="#DockWindows-enum"><b>DockWindows</b></a> { OnlyToolBars, NoToolBars, AllDockWindows }</div></li>
+<li><div class=fn>QPopupMenu * <a href="#createDockWindowMenu"><b>createDockWindowMenu</b></a> ( DockWindows&nbsp;dockWindows = AllDockWindows ) const</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#setRightJustification"><b>setRightJustification</b></a> ( bool )</div></li>
+<li><div class=fn>virtual void <a href="#setUsesBigPixmaps"><b>setUsesBigPixmaps</b></a> ( bool )</div></li>
+<li><div class=fn>virtual void <a href="#setUsesTextLabel"><b>setUsesTextLabel</b></a> ( bool )</div></li>
+<li><div class=fn>virtual void <a href="#setDockWindowsMovable"><b>setDockWindowsMovable</b></a> ( bool )</div></li>
+<li><div class=fn>virtual void <a href="#setOpaqueMoving"><b>setOpaqueMoving</b></a> ( bool )</div></li>
+<li><div class=fn>virtual void <a href="#setDockMenuEnabled"><b>setDockMenuEnabled</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>virtual void <a href="#whatsThis"><b>whatsThis</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#setAppropriate"><b>setAppropriate</b></a> ( QDockWindow&nbsp;*&nbsp;dw, bool&nbsp;a )</div></li>
+<li><div class=fn>virtual void <a href="#customize"><b>customize</b></a> ()</div></li>
+<li><div class=fn>void setToolBarsMovable ( bool ) &nbsp;<em>（废弃）</em></div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#pixmapSizeChanged"><b>pixmapSizeChanged</b></a> ( bool )</div></li>
+<li><div class=fn>void <a href="#usesTextLabelChanged"><b>usesTextLabelChanged</b></a> ( bool )</div></li>
+<li><div class=fn>void <a href="#dockWindowPositionChanged"><b>dockWindowPositionChanged</b></a> ( QDockWindow&nbsp;*&nbsp;dockWindow )</div></li>
+<li><div class=fn>void toolBarPositionChanged ( QToolBar * ) &nbsp;<em>（废弃）</em></div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>bool <a href="#dockWindowsMovable-prop"><b>dockWindowsMovable</b></a>&nbsp;- 锚接窗口是否可以移动</div></li>
+<li><div class=fn>bool <a href="#opaqueMoving-prop"><b>opaqueMoving</b></a>&nbsp;- 锚接窗口是否是被不透明地移动</div></li>
+<li><div class=fn>bool <a href="#rightJustification-prop"><b>rightJustification</b></a>&nbsp;- 主窗口是否右对齐它的锚接窗口</div></li>
+<li><div class=fn>bool <a href="#usesBigPixmaps-prop"><b>usesBigPixmaps</b></a>&nbsp;- 大像素映射是否生效</div></li>
+<li><div class=fn>bool <a href="#usesTextLabel-prop"><b>usesTextLabel</b></a>&nbsp;- 工具条按钮的文本标签是否生效</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#childEvent"><b>childEvent</b></a> ( QChildEvent&nbsp;*&nbsp;e )</div></li>
+</ul>
+<h2>保护槽</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#setUpLayout"><b>setUpLayout</b></a> ()</div></li>
+<li><div class=fn>virtual bool <a href="#showDockMenu"><b>showDockMenu</b></a> ( const&nbsp;QPoint&nbsp;&amp;&nbsp;globalPos )</div></li>
+<li><div class=fn>void <a href="#menuAboutToShow"><b>menuAboutToShow</b></a> ()</div></li>
+</ul>
+<h2>相关函数</h2>
+<ul>
+<li><div class=fn>QTextStream &amp; <a href="#operator-lt-lt"><b>operator&lt;&lt;</b></a> ( QTextStream&nbsp;&amp;&nbsp;ts, const&nbsp;QMainWindow&nbsp;&amp;&nbsp;mainWindow )</div></li>
+<li><div class=fn>QTextStream &amp; <a href="#operator-gt-gt"><b>operator&gt;&gt;</b></a> ( QTextStream&nbsp;&amp;&nbsp;ts, QMainWindow&nbsp;&amp;&nbsp;mainWindow )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+ 
+<p> QMainWindow类提供一个有菜单条、锚接窗口（例如工具条）和一个状态条的主应用程序窗口。
+<p> 
+
+<p> 主窗口通常用在提供一个大的中央窗口部件（例如文本编辑或者绘制画布）以及周围菜单、工具条和一个状态条。QMainWindow常常被继承，因为这使得封装中央部件、菜单和工具条以及窗口状态变得更容易。继承使创建当用户点击菜单项或者工具条按钮时被调用的槽成为可能。你也可以使用<i>Qt设计器</i>来创建主窗口。我们将简要地回顾一下有关添加菜单项和工具条按钮，然后描述QMainWindow自己的便捷。
+<p> <pre>
+    QMainWindow *mw = new QMainWindow;
+    <a href="qtextedit.html">QTextEdit</a> *edit = new <a href="qtextedit.html">QTextEdit</a>( mw, "editor" );
+    edit-&gt;<a href="qwidget.html#setFocus">setFocus</a>();
+    mw-&gt;<a href="qwidget.html#setCaption">setCaption</a>( "Main Window" );
+    mw-&gt;<a href="#setCentralWidget">setCentralWidget</a>( edit );
+    mw-&gt;<a href="qwidget.html#show">show</a>();
+    </pre>
+ 
+<p> QMainWindow可以像上面那样显示地来被创建。中央窗口部件是通过<a href="#setCentralWidget">setCentralWidget</a>()设置地。弹出菜单可以被添加到默认工具条，窗口部件可以被添加到状态条，工具条和锚接窗口可以被添加到任何一个锚接区域。
+<p> 
+
+<pre>        ApplicationWindow * mw = new ApplicationWindow();
+        mw-&gt;<a href="qwidget.html#setCaption">setCaption</a>( "Qt Example - Application" );
+    <a name="x2086"></a>    mw-&gt;<a href="qwidget.html#show">show</a>();
+</pre>
+<p> 上面代码中的ApplicationWindow是我们自己写的QMainWindow的子类，这是一个使用QMainWindow的常用方法。（源代码取自<a href="simple-application-example.html">application/main.cpp</a>、<a href="simple-application-example.html">application/application.cpp</a>、<a href="qaction-application-example.html">action/main.cpp</a>和<a href="qaction-application-example.html">action/application.cpp</a>。）
+<p> 在继承的时候，我们在子类的构造函数中添加菜单项和工具条。如果我们已经直接创建了一个QMainWindow实例，我们可以很容易地通过传递QMainWindow实例代替作为父对象的<em>this</em>指针来添加菜单项和工具条。
+<p> 
+
+<pre>        <a href="qpopupmenu.html">QPopupMenu</a> * help = new <a href="qpopupmenu.html">QPopupMenu</a>( this );
+        <a href="#menuBar">menuBar</a>()-&gt;insertItem( "&amp;Help", help );
+
+        help-&gt;<a href="qmenudata.html#insertItem">insertItem</a>( "&amp;About", this, SLOT(about()), Key_F1 );
+</pre>
+<p> 这里我们添加了有一个菜单项的新菜单。这个菜单已经被插入QMainWindow默认提供的并且可以通过<a href="#menuBar">menuBar</a>()函数访问的菜单条。当这个菜单项被点击时，这个槽被调用。
+<p> 
+
+<pre>        <a href="qtoolbar.html">QToolBar</a> * fileTools = new <a href="qtoolbar.html">QToolBar</a>( this, "file operations" );
+        fileTools-&gt;<a href="qtoolbar.html#setLabel">setLabel</a>( "File Operations" );
+</pre><pre>        QToolButton * fileOpen
+            = new <a href="qtoolbutton.html">QToolButton</a>( openIcon, "Open File", <a href="qstring.html#QString-null">QString::null</a>,
+                               this, SLOT(choose()), fileTools, "open file" );
+</pre>
+<p> 这部分提取显示的是有一个工具条按钮的工具条的创建。QMainWindow为工具条提供了四个锚接区域。当一个工具条被作为QMainWindow（或者继承类）实例 的子对象被创建时，它将会被放置到一个锚接区域中（默认是<a href="qt.html#Dock-enum">Top</a>锚接区域）。当这个工具条按钮被点击时，这个槽被调用。任何锚接窗口可以使用<a href="#addDockWindow">addDockWindow</a>()，或者通过把QMainWindow作为父对象来创建的方法来被添加到一个锚接区域中。
+<p> 
+
+<pre>        e = new <a href="qtextedit.html">QTextEdit</a>( this, "editor" );
+        e-&gt;<a href="qwidget.html#setFocus">setFocus</a>();
+        <a href="#setCentralWidget">setCentralWidget</a>( e );
+        <a href="#statusBar">statusBar</a>()-&gt;message( "Ready", 2000 );
+</pre>
+<p> 创建完菜单和工具条，我们创建一个大的中央窗口部件的实例，给它焦点并且把它设置为主窗口的中央窗口部件。在这个实例中，我们也已经通过<a href="#statusBar">statusBar</a>()函数设置好了状态条，显示初始信息两秒。注意你可以添加其它的窗口部件到状态条重，例如标签，来显示更多的状态信息。详细情况请参考<a href="qstatusbar.html">QStatusBar</a>文档，特别是addWidget()函数。
+<p> 通常我们想让一个工具条按钮和一个菜单项同步。例如，如果用户点击“加粗”工具条按钮，我们希望“加粗”菜单项被选中。这种同步可以通过创建操作并且把它们添加到工具条和菜单上来自动实现。
+<p> 
+
+<pre>        <a href="qaction.html">QAction</a> * fileOpenAction;
+</pre><pre>        fileOpenAction = new <a href="qaction.html">QAction</a>( "Open File", QPixmap( fileopen ), "&amp;Open",
+                                      CTRL+Key_O, this, "open" );
+        <a href="qobject.html#connect">connect</a>( fileOpenAction, SIGNAL( <a href="qaction.html#activated">activated</a>() ) , this, SLOT( choose() ) );
+</pre>
+<p> 这里我们创建了一个有图标的操作，这个图标要用在这个操作所被添加到的菜单和工具条中。我们也给定这个操作一个菜单名称“&Open”和一个键盘快捷键。我们已经建立的这个连接在用户点击这个菜单项<em>或者</em>这个工具条按钮时将会被使用。
+<p> 
+
+<pre>        <a href="qpopupmenu.html">QPopupMenu</a> * file = new <a href="qpopupmenu.html">QPopupMenu</a>( this );
+        <a href="#menuBar">menuBar</a>()-&gt;insertItem( "&amp;File", file );
+</pre><pre>        fileOpenAction-&gt;<a href="qaction.html#addTo">addTo</a>( file );
+</pre>
+<p> 上面这部分提取显示一个弹出菜单的创建。我们把这个菜单添加到QMainWindow的菜单条中并且添加我们的操作。
+<p> 
+
+<pre>        <a href="qtoolbar.html">QToolBar</a> * fileTools = new <a href="qtoolbar.html">QToolBar</a>( this, "file operations" );
+        fileTools-&gt;<a href="qtoolbar.html#setLabel">setLabel</a>( "File Operations" );
+        fileOpenAction-&gt;<a href="qaction.html#addTo">addTo</a>( fileTools );
+</pre>
+<p> 这里我们创建一个作为QMainWindow的子对象的工具条并且把我们的操作添加到这个工具条中。
+<p> 现在我们来探险QMainWindow提供的功能。
+<p> 主窗口将会注意锚接区域和中央窗口部件的几何形状，但是中央窗口部件的其它所有方面都留给你了。如果你指定QMainWindow作为父对象来创建菜单条或者状态条，QMainWindow会自动检测它们，或者你可以使用提供的<a href="#menuBar">menuBar</a>()和<a href="#statusBar">statusBar</a>()函数。如果一个窗口部件也没有，menuBar()和statusBar()函数创建一个合适的窗口部件，并且更新窗口的布局来得到空间。
+<p> QMainWindow提供了一个连接到状态条的<a href="qtooltipgroup.html">QToolTipGroup</a>。<a href="#toolTipGroup">toolTipGroup</a>()函数提供了对默认QToolTipGroup的访问。它不能设置一个不同的工具提示组。
+<p> 新的锚接窗口和工具条可以通过使用<a href="#addDockWindow">addDockWindow</a>()来被添加到QMainWindow中。锚接窗口可以使用<a href="#moveDockWindow">moveDockWindow</a>()来移动并且使用<a href="#removeDockWindow">removeDockWindow</a>()来移除。QMainWindow允许默认锚接窗口（工具条）锚接在所有它的锚接区域中（上、下、左、右）。你可以使用<a href="#setDockEnabled">setDockEnabled</a>()为锚接窗口而使锚接区域生效/失效。当添加或者移动锚接窗口时，你可以指定它们的“边缘”（锚接区域）。当前可用的边缘有：<a href="qt.html#Dock-enum">Top</a>、<a href="qt.html#Dock-enum">Left</a>、<a href="qt.html#Dock-enum">Right</a>、<a href="qt.html#Dock-enum">Bottom</a>、<a href="qt.html#Dock-enum">Minimized</a> （有效地一个“隐藏”锚接区域）和<a href="qt.html#Dock-enum">TornOff</a>（浮动）。关于这些区域的解释请参考<a href="qt.html#Dock-enum">Qt::Dock</a>。注意*ToolBar函数被考虑向后兼容，所有的新代码都应该使用*DockWindow函数。QToolBar是<a href="qdockwindow.html">QDockWindow</a>的子类，所以所有对于锚接窗口能工作地函数对于工具条也一样可以工作。如果用户通过点击锚接窗口地窗口句柄来最小化一个锚接窗口，那么锚接窗口将会被移到<a href="qt.html#Dock-enum">Minimized</a>锚接区域。如果用户点击关闭按钮，那么锚接窗口被隐藏并且只能再次通过使用<a href="#dwm">锚接窗口菜单</a>来再次被显示。
+<p> 一些函数会全局地改变QMainWindow的外观：
+<ul>
+<li>QDockWindow::setHorizontalStretchable()和<a href="qdockwindow.html#setVerticalStretchable">QDockWindow::setVerticalStretchable</a>()被用于指定锚接窗口和工具条是可延伸的。
+<li>setUsesBigPixmaps()被用于设置工具按钮是应该用小像素映射还是大像素映射（更多信息请参考<a href="qiconset.html">QIconSet</a>）。
+<li>setUsesTextLabel()被用于设置工具按钮是否应该在显示像素映射之外还显示文本标签（更多信息请参考<a href="qtoolbutton.html">QToolButton</a>）。
+</ul>
+<p> 用户可以把锚接窗口拖入任何生效的锚接区域中。锚接窗口也可以在一个锚接区域<em>中</em>被拖动，例如重新排列一些工具条的顺序。锚接窗口也可以被拖动出任何锚接区域（取消锚接或者“浮动”）。你可以使用<a href="#setDockWindowsMovable">setDockWindowsMovable</a>()把锚接窗口设置为生效的（默认）和失效的。<a name="dwm">如果用户点击浮动锚接窗口的关闭按钮，然后锚接窗口将会消失。</a>为了重新得到锚接窗口，用户必须右键点击一个锚接区域，弹出一个锚接窗口菜单，然后点击我们要恢复的锚接窗口的名字。可视的锚接窗口在菜单中它们的名字之前有一个勾。锚接窗口菜单会根据<a href="#createDockWindowMenu">createDockWindowMenu</a>()的需要自动被创建。因为它可能不总是适合把一个锚接窗口显示到这个菜单中，<a href="#setAppropriate">setAppropriate</a>()函数被用来告知主窗口这个锚接窗口菜单是否应该包含一个特定的锚接窗口。双击锚接窗口句柄（通常在锚接窗口的左侧）会使这个锚接窗口取消锚接（浮动）。双击浮动锚接窗口的标题栏将会锚接这个浮动的锚接窗口。
+<p> <a href="qt.html#Dock-enum">Minimized</a>边缘是一个隐藏的锚接区域。如果这个锚接区域是生效的，用户可以隐藏（最小化）锚接窗口或者通过点击锚接窗口句柄显示（恢复）一个最小化的锚接窗口。如果用户在一个句柄上方悬浮鼠标光标，锚接窗口的标题会被作为工具提示显示（请参考<a href="qwidget.html#caption">QDockWindow::caption</a>()或<a href="qtoolbar.html#label">QToolBar::label</a>()），所以如果你使<a href="qt.html#Dock-enum">Minimized</a>锚接区域生效，最好为每一个锚接窗口指定一个有意义的标题或者标签。为了能够程序化地最小化一个锚接窗口，请使用一个带有<a href="qt.html#Dock-enum">Minimized</a>边缘的<a href="#moveDockWindow">moveDockWindow</a>()。
+<p> 锚接窗口默认是被透明地移动，也就是在拖动期间，一个边框矩形会在屏幕上被绘制出来呈现锚接窗口在移动时的位置。如果你想让锚接窗口在移动时被正常显示，请使用<a href="#setOpaqueMoving">setOpaqueMoving</a>()。
+<p> 锚接窗口的定位，也就是它的锚接区域和在锚接区域中的位置，可以通过调用<a href="#getLocation">getLocation</a>()来被决定。可移动的锚接窗口可以通过<a href="#lineUpDockWindows">lineUpDockWindows</a>()被排列成一行来使浪费的空间最小化。锚接区域的指针可以由<a href="#topDock">topDock</a>()、<a href="#leftDock">leftDock</a>()、<a href="#rightDock">rightDock</a>()和<a href="#bottomDock">bottomDock</a>()提供。如果<a href="#isCustomizable">isCustomizable</a>()返回真（它默认返回假），一个自定义的菜单项会被添加入弹出的锚接窗口菜单。如果你想提供这个额外的菜单项，重新实现isCustomizable()和<a href="#customize">customize</a>()，例如，允许用户改变和主窗口以及它的工具条和锚接窗口相关的设置。
+<p> 主窗口的菜单条默认是固定的（在上面）。如果你想有一个可移动的菜单条，创建一个<a href="qmenubar.html">QMenuBar</a>作为一个在它自己可移动的锚接窗口中可伸展的窗口部件并且限制这个锚接窗口只在<a href="qt.html#Dock-enum">Top</a>或<a href="qt.html#Dock-enum">Bottom</a>锚接区域存在：
+<p> <pre>
+    <a href="qtoolbar.html">QToolBar</a> *tb = new <a href="qtoolbar.html">QToolBar</a>( this );
+    <a href="#addDockWindow">addDockWindow</a>( tb, tr( "Menubar" ), Top, FALSE );
+    <a href="qmenubar.html">QMenuBar</a> *mb = new <a href="qmenubar.html">QMenuBar</a>( tb );
+    mb-&gt;<a href="qframe.html#setFrameStyle">setFrameStyle</a>( QFrame::NoFrame );
+    tb-&gt;<a href="qtoolbar.html#setStretchableWidget">setStretchableWidget</a>( mb );
+    <a href="#setDockEnabled">setDockEnabled</a>( tb, Left, FALSE );
+    <a href="#setDockEnabled">setDockEnabled</a>( tb, Right, FALSE );
+    </pre>
+ 
+<p> 有多个锚接窗口的应用程序可以选择为了以后（例如，在下个对话中）恢复当前的锚接窗口布局来把它们保存起来。你可以通过使用QMainWindow的流操作符来做到这点。
+<p> 为了保存所有锚接窗口的布局和位置，请这样做：
+<p> <pre>
+  <a href="qfile.html">QFile</a> f( filename );
+  if ( f.<a href="qfile.html#open">open</a>( <a href="qfile.html#open">IO_WriteOnly</a> ) ) {
+      <a href="qtextstream.html">QTextStream</a> ts( &amp;f );
+      ts &lt;&lt; *mainWindow;
+      f.<a href="qfile.html#close">close</a>();
+  }
+  </pre>
+ 
+<p> 为了恢复锚接窗口的位置和大小（通常是当这个应用程序再次开始），请这样做：
+<p> <pre>
+  <a href="qfile.html">QFile</a> f( filename );
+  if ( f.<a href="qfile.html#open">open</a>( <a href="qfile.html#open">IO_ReadOnly</a> ) ) {
+      <a href="qtextstream.html">QTextStream</a> ts( &amp;f );
+      ts &gt;&gt; *mainWindow;
+      f.<a href="qfile.html#close">close</a>();
+  }
+  </pre>
+ 
+<p> <a href="qsettings.html">QSettings</a>类可以和这些流操作符联合使用来存放这个应用程序的设置。
+<p> QMainWindow对锚接窗口和工具条的管理很明显地是由<a href="qdockarea.html">QDockArea</a>在后面完成的。
+<p> 对于多文档界面（MDI），使用<a href="qworkspace.html">QWorkspace</a>作为中央窗口部件。
+<p> 把锚接窗口（例如工具条）添加到QMainWindow的锚接区域是很简单的。如果被提供的锚接区域对于你的应用程序是不够的，我们建议你创建一个<a href="qwidget.html">QWidget</a>的子类并且把你自己的锚接区域（请参考<a href="qdockarea.html">QDockArea</a>）添加到这个子类中，因为QMainWindow只提供了由它提供的标准锚接区域的特定功能。
+<p> <img src=qmainwindow-m.png> <img src=qmainwindow-w.png>
+<p> <p>也可以参考<a href="qtoolbar.html">QToolBar</a>、<a href="qdockwindow.html">QDockWindow</a>、<a href="qstatusbar.html">QStatusBar</a>、<a href="qaction.html">QAction</a>、<a href="qmenubar.html">QMenuBar</a>、<a href="qpopupmenu.html">QPopupMenu</a>、<a href="qtooltipgroup.html">QToolTipGroup</a>、<a href="qdialog.html">QDialog</a>和<a href="application.html">主窗口和相关类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="DockWindows-enum"></a>QMainWindow::DockWindows</h3>
+<p> 右键点击锚接区域会弹出锚接窗口菜单（<a href="#createDockWindowMenu">createDockWindowMenu</a>()被自动调用）。当被调用时，在代码中你可以通过这个枚举变量指定哪些项应该出现在菜单中。
+<ul>
+<li><tt>QMainWindow::OnlyToolBars</tt> - 菜单将会列出所有的工具条，但没有任何其它锚接窗口。
+<li><tt>QMainWindow::NoToolBars</tt> - 菜单将会列出除工具条之外的所有的锚接窗口。
+<li><tt>QMainWindow::AllDockWindows</tt> - 菜单将会列出所有的工具条和其它锚接窗口。（这是默认值。）
+</ul><p> 
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QMainWindow"></a>QMainWindow::QMainWindow ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, WFlags&nbsp;f = WType_TopLevel )
+</h3>  
+构造一个空的主窗口。<em>parent</em>、<em>name</em>和窗口部件标记<em>f</em>被传递给<a href="qwidget.html">QWidget</a>构造函数。
+<p> 默认情况下，窗口部件标记被设置为WType_TopLevel而不是只把它作为QWidget的0。如果你不想让你的QMainWindow为一个顶级窗口部件，你将需要把<em>f</em>设置为0。
+
+<h3 class=fn><a name="~QMainWindow"></a>QMainWindow::~QMainWindow ()
+</h3> 
+销毁这个对象并且释放所有已经分配的资源。
+
+<h3 class=fn>void <a name="addDockWindow"></a>QMainWindow::addDockWindow ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dockWindow, <a href="qt.html#Dock-enum">Dock</a>&nbsp;edge = DockTop, bool&nbsp;newLine = FALSE )<tt> [虚]</tt>
+</h3>  
+把<em>dockWindow</em>添加到<em>edge</em>锚接区域。
+<p> 如果<em>newLine</em>为假（默认），那么<em>dockWindow</em>被添加到<em>edge</em>的末尾。对于垂直边缘，末尾在下面，对于水平边缘（包含<a href="qt.html#Dock-enum">Minimized</a>），末尾在右面。如果<em>newLine</em>为真，会为锚接窗口开始新的一行，并且<em>dockWindow</em>作为第一个（最左面或者最上面）锚接窗口。
+<p> 如果<em>dockWindow</em>被另一个主窗口管理，它首先从那一个窗口中被移除。
+
+<h3 class=fn>void <a name="addDockWindow-2"></a>QMainWindow::addDockWindow ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dockWindow, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label, <a href="qt.html#Dock-enum">Dock</a>&nbsp;edge = DockTop, bool&nbsp;newLine = FALSE )<tt> [虚]</tt>
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 把标签为<em>label</em>的<em>dockWindow</em>添加到<em>edge</em>锚接区域。
+<p> 如果<em>newLine</em>为假（默认），那么<em>dockWindow</em>被添加到<em>edge</em>的末尾。对于垂直边缘，末尾在下面，对于水平边缘（包含<a href="qt.html#Dock-enum">Minimized</a>），末尾在右面。如果<em>newLine</em>为真，会为锚接窗口开始新的一行，并且<em>dockWindow</em>作为第一个（最左面或者最上面）锚接窗口。
+<p> 如果<em>dockWindow</em>被另一个主窗口管理，它首先从那一个窗口中被移除。
+
+<h3 class=fn>void <a name="addToolBar"></a>QMainWindow::addToolBar ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*, <a href="qt.html#Dock-enum">Dock</a> = DockTop, bool&nbsp;newLine = FALSE )
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+
+<h3 class=fn>void <a name="addToolBar-2"></a>QMainWindow::addToolBar ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;label, <a href="qt.html#Dock-enum">Dock</a> = DockTop, bool&nbsp;newLine = FALSE )
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+
+<h3 class=fn>bool <a name="appropriate"></a>QMainWindow::appropriate ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dw ) const
+</h3>
+如果适合在锚接窗口菜单中包含一个可以列出<em>dw</em>锚接窗口的菜单项，返回真，否则返回假。
+<p> 用户可以通过点击菜单项来改变有菜单项的锚接窗口的状态（显示或者隐藏）。
+<p> 调用<a href="#setAppropriate">setAppropriate</a>()来指出一个特定锚接窗口是否应该显示在弹出菜单中。
+<p> <p>也可以参考<a href="#setAppropriate">setAppropriate</a>()。
+
+<h3 class=fn><a href="qdockarea.html">QDockArea</a>&nbsp;* <a name="bottomDock"></a>QMainWindow::bottomDock () const
+</h3> 
+返回<a href="qt.html#Dock-enum">Bottom</a>锚接区域的指针。
+<p> <p>也可以参考<a href="#topDock">topDock</a>()、<a href="#leftDock">leftDock</a>()和<a href="#rightDock">rightDock</a>()。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="centralWidget"></a>QMainWindow::centralWidget () const
+</h3>  
+返回主窗口的中央窗口部件的指针。
+<p> 中央窗口部件就是被上、下、左、右锚接区域环绕的。菜单条在上锚接区域的上面。
+<p> <p>也可以参考<a href="#setCentralWidget">setCentralWidget</a>()。
+<p>实例：<a href="qfd-example.html#x1997">qfd/qfd.cpp</a>。
+
+<h3 class=fn>void <a name="childEvent"></a>QMainWindow::childEvent ( <a href="qchildevent.html">QChildEvent</a>&nbsp;*&nbsp;e )<tt> [虚 保护]</tt>
+</h3>
+监视事件，从<em>e</em>中接收，来保证布局被更新。
+<p>从<a href="qobject.html#childEvent">QObject</a>中重新实现。
+
+<h3 class=fn><a href="qpopupmenu.html">QPopupMenu</a>&nbsp;* <a name="createDockWindowMenu"></a>QMainWindow::createDockWindowMenu ( <a href="qmainwindow.html#DockWindows-enum">DockWindows</a>&nbsp;dockWindows = AllDockWindows ) const
+</h3>  
+创建一个包含所有工具条（如果<em>dockWindows</em>为<a href="#DockWindows-enum">OnlyToolBars</a>）、所有锚接窗口（如果<em>dockWindows</em>为<a href="#DockWindows-enum">NoToolBars</a>）或者所有工具条和锚接窗口（如果<em>dockWindows</em>为<a href="#DockWindows-enum">AllDockWindows</a>——默认）的锚接窗口菜单。
+<p> 当需要的时候，例如当用户右键点击一个锚接区域（假如<a href="#isDockMenuEnabled">isDockMenuEnabled</a>()返回真）时，这个函数被内部调用。如果你想自定义这个行为，你可以重新实现这个函数。
+<p> 呈现工具条和锚接窗口的菜单项是可选择的。可视的锚接窗口被选择的并且隐藏的锚接窗口是被取消选择的。用户点击一个菜单项来改变它的状态（显示或者隐藏这个锚接窗口）。
+<p> 这个列表和状态总是保持最新。
+<p> 在当前上下文（请参考<a href="#setAppropriate">setAppropriate</a>()）中是不适合的工具条和锚接窗口不会在这个菜单中被列出来。
+<p> 这个菜单也有一个把锚接窗口排成一行的菜单选项。
+<p> 如果<a href="#isCustomizable">isCustomizable</a>()返回真，一个Customize的菜单项被添加到菜单中，如果它被点击，就会调用<a href="#customize">customize</a>()。我们提供的isCustomizable()函数返回假并且customize()什么也不做，所以它们必须在子类中被重新实现才能有用。
+
+<h3 class=fn>void <a name="customize"></a>QMainWindow::customize ()<tt> [虚 槽]</tt>
+</h3> 
+当用户点击在锚接窗口菜单中的Customize菜单项时，这个函数被调用。
+<p> 只有在<a href="#isCustomizable">isCustomizable</a>()返回真（默认为假）时，Customize菜单项才会出现。
+<p> 这个函数是有意图的，例如，提供给用户来告诉应用程序他们要自定义主窗口、锚接窗口或者锚接区域的一个手段。
+<p> 默认实现是什么也不做，但是这可能在以后的Qt版本中发生改变。现在默认情况下，Customize菜单项不会显示在右键菜单中。如果你想让这项出现，那么请重新实现isCustomizable()来返回真。
+<p> <p>也可以参考<a href="#isCustomizable">isCustomizable</a>()。
+
+<h3 class=fn>void <a name="dockWindowPositionChanged"></a>QMainWindow::dockWindowPositionChanged ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dockWindow )<tt> [信号]</tt>
+</h3>
+<p> 当<em>dockWindow</em>已经改变位置时，这个信号被发射。当锚接窗口被移入它的锚接区域或者移到另一个锚接区域（包括<a href="qt.html#Dock-enum">Minimized</a>和<tt>TearOff</tt>锚接区域）时，位置的变化发生。
+<p> <p>也可以参考<a href="#getLocation">getLocation</a>()。
+
+<h3 class=fn><a href="qptrlist.html">QPtrList</a>&lt;QDockWindow&gt; <a name="dockWindows"></a>QMainWindow::dockWindows ( <a href="qt.html#Dock-enum">Dock</a>&nbsp;dock ) const
+</h3>  
+返回在<em>dock</em>锚接区域的所有锚接窗口的列表，而不管它们的状态。
+<p> 例如，<a href="qt.html#Dock-enum">TornOff</a>锚接区域可能包含关闭的锚接窗口，但它们会和可视锚接窗口一起被返回。
+
+<h3 class=fn><a href="qptrlist.html">QPtrList</a>&lt;QDockWindow&gt; <a name="dockWindows-2"></a>QMainWindow::dockWindows () const
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回属于主窗口的所有锚接窗口的列表，而不管它们的状态（也就是不考虑它们是否可视）。
+
+<h3 class=fn>bool <a name="dockWindowsMovable"></a>QMainWindow::dockWindowsMovable () const
+</h3>
+<p>如果锚接窗口是可移动的，返回真，否则返回假。详细情况请参考<a href="qmainwindow.html#dockWindowsMovable-prop">“dockWindowsMovable”</a>属性。
+
+<h3 class=fn>bool <a name="getLocation"></a>QMainWindow::getLocation ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dw, <a href="qt.html#Dock-enum">Dock</a>&nbsp;&amp;&nbsp;dock, int&nbsp;&amp;&nbsp;index, bool&nbsp;&amp;&nbsp;nl, int&nbsp;&amp;&nbsp;extraOffset ) const
+</h3>
+找到锚接窗口<em>dw</em>的定位。
+<p> 如果锚接窗口<em>dw</em>在主窗口中被找到，函数返回真并且<em>dock</em>变量为<em>dw</em>所在的锚接区域并且<em>index</em>为<em>dw</em>在锚接区域中的位置索引。如果<em>dw</em>开始一个新行，它也设置<em>nl</em>为真（否则为假），并且<em>extraOffset</em>为<em>dw</em>的位移。
+<p> 如果<em>dw</em>在主窗口中没有被找到，那么这个函数返回真并且<em>dock</em>、<em>index</em>、<em>nl</em>和<em>extraOffset</em>的状态都是不确定的。
+<p> 如果你想保存并且恢复锚接窗口的位置，那么请使用<a href="#operator-gt-gt">operator&gt;&gt;</a>()和<a href="#operator-lt-lt">operator&lt;&lt;</a>()。
+<p> <p>也可以参考<a href="#operator-gt-gt">operator&gt;&gt;</a>()和<a href="#operator-lt-lt">operator&lt;&lt;</a>()。
+
+<h3 class=fn>bool <a name="hasDockWindow"></a>QMainWindow::hasDockWindow ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dw )
+</h3> 
+如果<em>dw</em>是被主窗口知道的锚接窗口，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="isCustomizable"></a>QMainWindow::isCustomizable () const<tt> [虚]</tt>
+</h3>
+如果锚接区域的锚接窗口菜单包含Customize菜单项（当它被点击时，会调用customize()），返回真。默认返回假，也就是弹出菜单不包含Customize菜单选项。如果你希望用户能在锚接窗口菜单中看到它时，你将需要重新实现这个函数并且把它设置为返回真。
+<p> <p>也可以参考<a href="#customize">customize</a>()。
+
+<h3 class=fn>bool <a name="isDockEnabled"></a>QMainWindow::isDockEnabled ( <a href="qt.html#Dock-enum">Dock</a>&nbsp;dock ) const
+</h3>  
+如果<em>dock</em>锚接区域是生效的，返回真，也就是它可以接收用户拖动的锚接窗口，否则返回假。
+<p> <p>也可以参考<a href="#setDockEnabled">setDockEnabled</a>()。
+
+<h3 class=fn>bool <a name="isDockEnabled-2"></a>QMainWindow::isDockEnabled ( <a href="qdockarea.html">QDockArea</a>&nbsp;*&nbsp;area ) const
+</h3>  
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 如果<em>area</em>是生效的，返回真，也就是它可以接收用户拖动的锚接窗口，否则返回假。
+<p> <p>也可以参考<a href="#setDockEnabled">setDockEnabled</a>()。
+
+<h3 class=fn>bool <a name="isDockEnabled-3"></a>QMainWindow::isDockEnabled ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;tb, <a href="qt.html#Dock-enum">Dock</a>&nbsp;dock ) const
+</h3>  
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 如果<em>dock</em>对于锚接窗口<em>tb</em>是生效的，返回真，否则返回假。
+<p> <p>也可以参考<a href="#setDockEnabled">setDockEnabled</a>()。
+
+<h3 class=fn>bool <a name="isDockEnabled-4"></a>QMainWindow::isDockEnabled ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dw, <a href="qdockarea.html">QDockArea</a>&nbsp;*&nbsp;area ) const
+</h3>  
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 如果<em>area</em>对于锚接窗口<em>tb</em>是生效的，返回真，否则返回假。
+<p> <p>也可以参考<a href="#setDockEnabled">setDockEnabled</a>()。
+
+<h3 class=fn>bool <a name="isDockMenuEnabled"></a>QMainWindow::isDockMenuEnabled () const
+</h3>
+<p> 如果锚接窗口菜单是生效的，返回真，否则返回假。
+<p> 这个菜单会列出（<a href="#appropriate">appropriate</a>()）锚接窗口（它们会被显示或者隐藏）并且有一个“Line Up Dock Windows”菜单项。如果<a href="#isCustomizable">isCustomizable</a>()返回真，它也将会有一个“Customize”菜单项。
+<p> <p>也可以参考<a href="#setDockEnabled">setDockEnabled</a>()、<a href="#lineUpDockWindows">lineUpDockWindows</a>()、<a href="#appropriate">appropriate</a>()和<a href="#setAppropriate">setAppropriate</a>()。
+
+<h3 class=fn><a href="qdockarea.html">QDockArea</a>&nbsp;* <a name="leftDock"></a>QMainWindow::leftDock () const
+</h3> 
+返回<a href="qt.html#Dock-enum">Left</a>锚接区域。
+<p>也可以参考<a href="#rightDock">rightDock</a>()、<a href="#topDock">topDock</a>()和<a href="#bottomDock">bottomDock</a>()。
+
+<h3 class=fn>void <a name="lineUpDockWindows"></a>QMainWindow::lineUpDockWindows ( bool&nbsp;keepNewLines = FALSE )
+</h3>
+这个函数将会尽量紧凑地排列在可视的锚接区域（<a href="qt.html#Dock-enum">Top</a>、<a href="qt.html#Dock-enum">Left</a>、<a href="qt.html#Dock-enum">Right</a>和<a href="qt.html#Dock-enum">Bottom</a>）中的锚接窗口。
+<p> 如果<em>keepNewLines</em>为真，所有锚接窗口保持在它们的原有行中。如果<em>keepNewLines</em>为假，那么新行将别移除来达到最可能紧凑的布局。
+<p> 这个方法只有在<a href="#dockWindowsMovable">dockWindowsMovable</a>()返回真的情况下才能够工作。
+
+<h3 class=fn>void <a name="lineUpToolBars"></a>QMainWindow::lineUpToolBars ( bool&nbsp;keepNewLines = FALSE )
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+
+<h3 class=fn>void <a name="menuAboutToShow"></a>QMainWindow::menuAboutToShow ()<tt> [保护 槽]</tt>
+</h3> 
+这个槽会从主窗口的默认铆接菜单中地aboutToShow()信号调用。默认实现是在这个槽中用所有锚接窗口和菜单条来初始化这个菜单。
+<p> 如果你想对这个菜单做小的调节，你可以在这个槽中做到这一点。另外要重新实现<a href="#createDockWindowMenu">createDockWindowMenu</a>()。
+
+<h3 class=fn><a href="qmenubar.html">QMenuBar</a>&nbsp;* <a name="menuBar"></a>QMainWindow::menuBar () const
+</h3>  
+返回这个窗口的菜单条。
+<p> 如果这里一个也没有，那么<a href="#menuBar">menuBar</a>()会创建一个空的菜单条。
+<p> <p>也可以参考<a href="#statusBar">statusBar</a>()。
+
+<h3 class=fn>void <a name="moveDockWindow"></a>QMainWindow::moveDockWindow ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dockWindow, <a href="qt.html#Dock-enum">Dock</a>&nbsp;edge = DockTop )<tt> [虚]</tt>
+</h3>
+把<em>dockWindow</em>移动到<em>edge</em>的末尾。
+<p> 对于垂直边缘，末尾是下面，对于水平边缘（包括<a href="qt.html#Dock-enum">Minimized</a>），末尾是右面。
+<p> 如果<em>dockWindow</em>被另一个主窗口管理，它首先被从那个窗口移除。
+
+<h3 class=fn>void <a name="moveDockWindow-2"></a>QMainWindow::moveDockWindow ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dockWindow, <a href="qt.html#Dock-enum">Dock</a>&nbsp;edge, bool&nbsp;nl, int&nbsp;index, int&nbsp;extraOffset = -1 )<tt> [虚]</tt>
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 把<em>dockWindow</em>移动到<em>edge</em>的<em>index</em>位置。
+<p> 任何在<em>index</em>或者更高位置的锚接窗口的位置数都被增加并且同一行的空间都被向右移（垂直区域的向下移）。
+<p> 如果<em>nl</em>为真，一个新的锚接窗口行会在被移动的锚接窗口所在行下面创建新行，任何和被移动的锚接窗口在一行的并且位置更高的都被移到新行中。
+<p> <em>extraOffset</em>是放在这个锚接窗口和锚接区域的最左面（对于垂直锚接区域是最上面）的距离。（它通常用于恢复锚接窗口的位置为用于曾经拖到的位置。）
+<p> 如果<em>dockWindow</em>被另一个主窗口管理，它首先被从那个窗口移除。
+
+<h3 class=fn>void <a name="moveToolBar"></a>QMainWindow::moveToolBar ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*, <a href="qt.html#Dock-enum">Dock</a> = DockTop )
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+
+<h3 class=fn>void <a name="moveToolBar-2"></a>QMainWindow::moveToolBar ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*, <a href="qt.html#Dock-enum">Dock</a>, bool&nbsp;nl, int&nbsp;index, int&nbsp;extraOffset = -1 )
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+
+<h3 class=fn>bool <a name="opaqueMoving"></a>QMainWindow::opaqueMoving () const
+</h3>
+<p>如果锚接窗口被不透明地移动，返回真，否则返回假。详细情况请参考<a href="qmainwindow.html#opaqueMoving-prop">“opaqueMoving”</a>属性。
+
+<h3 class=fn>void <a name="pixmapSizeChanged"></a>QMainWindow::pixmapSizeChanged ( bool )<tt> [信号]</tt>
+</h3> 
+<p> 只要<a href="#setUsesBigPixmaps">setUsesBigPixmaps</a>()被使用和当前设置不同地值调用时，这个信号就被调用。所有窗口部件都应该对这个变化做出回应，例如工具条按钮必须连接到这个信号。
+
+<h3 class=fn>void <a name="removeDockWindow"></a>QMainWindow::removeDockWindow ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dockWindow )<tt> [虚]</tt>
+</h3>
+假如<em>dockWindow</em>为非零并且被这个主窗口管理，那么从主窗口的锚接区域移除<em>dockWindow</em>。
+
+<h3 class=fn>void <a name="removeToolBar"></a>QMainWindow::removeToolBar ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;* )
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+
+<h3 class=fn><a href="qdockarea.html">QDockArea</a>&nbsp;* <a name="rightDock"></a>QMainWindow::rightDock () const
+</h3> 
+返回<a href="qt.html#Dock-enum">Right</a>锚接区域。
+<p> <p>也可以参考<a href="#leftDock">leftDock</a>()、<a href="#topDock">topDock</a>()和<a href="#bottomDock">bottomDock</a>()。
+
+<h3 class=fn>bool <a name="rightJustification"></a>QMainWindow::rightJustification () const
+</h3>
+<p>如果主窗口正确对齐它的锚接窗口，返回真，否则返回假。详细情况请参考<a href="qmainwindow.html#rightJustification-prop">“rightJustification”</a>属性。
+
+<h3 class=fn>void <a name="setAppropriate"></a>QMainWindow::setAppropriate ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dw, bool&nbsp;a )<tt> [虚 槽]</tt>
+</h3>
+使用这个函数来控制<em>dw</em>锚接窗口的标题是否应该作为一个菜单项显示在列出锚接窗口的锚接窗口菜单中。
+<p> 如果<em>a</em>为真，那么<em>dw</em>将会作为一个菜单项显示在锚接窗口菜单中。用户能够通过点击这个菜单项来改变锚接窗口的状态（显示或者隐藏），根据你的应用程序的状态，这可能是也可能不是适合的。如果<em>a</em>为假，<em>dw</em>将会被显示在弹出菜单中。
+<p> <p>也可以参考<a href="#showDockMenu">showDockMenu</a>()、<a href="#isCustomizable">isCustomizable</a>()和<a href="#customize">customize</a>()。
+
+<h3 class=fn>void <a name="setCentralWidget"></a>QMainWindow::setCentralWidget ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )<tt> [虚]</tt>
+</h3>  
+设置这个窗口的中央窗口部件为<em>w</em>。
+<p> 这个中央窗口部件被上、下、左、右锚接区域环绕。菜单条在上锚接区域的上面。
+<p> <p>也可以参考<a href="#centralWidget">centralWidget</a>()。
+
+<h3 class=fn>void <a name="setDockEnabled"></a>QMainWindow::setDockEnabled ( <a href="qt.html#Dock-enum">Dock</a>&nbsp;dock, bool&nbsp;enable )<tt> [虚]</tt>
+</h3>
+如果<em>enable</em>为真，那么用户可以在<em>dock</em>区域中锚接窗口。如果<em>enable</em>为假，那么用户不可以在<em>dock</em>区域中锚接窗口。
+<p> 用户可以把锚接窗口锚接（拖动）进入任何生效锚接区域。
+
+<h3 class=fn>void <a name="setDockEnabled-2"></a>QMainWindow::setDockEnabled ( <a href="qdockwindow.html">QDockWindow</a>&nbsp;*&nbsp;dw, <a href="qt.html#Dock-enum">Dock</a>&nbsp;dock, bool&nbsp;enable )<tt> [虚]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 如果<em>enable</em>为真，那么用户可以在<em>dock</em>区域中锚接窗口。如果<em>enable</em>为假，那么用户不可以在<em>dock</em>区域中锚接窗口。
+<p> 通常用户可以把锚接窗口锚接（拖动）进入任何生效锚接区域。使用这个函数特定的锚接区域能够对特定地锚接窗口生效（或者失效）。
+
+<h3 class=fn>void <a name="setDockMenuEnabled"></a>QMainWindow::setDockMenuEnabled ( bool&nbsp;b )<tt> [虚 槽]</tt>
+</h3>
+如果<em>b</em>为真，那么在一个锚接窗口或者锚接区域上右键单击将会弹出锚接窗口菜单。如果<em>b</em>为假，那么在一个锚接窗口或者锚接区域上右键单击将不会弹出锚接窗口菜单。
+<p> 这个菜单会列出（<a href="#appropriate">appropriate</a>()）锚接窗口（它们会被显示或者隐藏）并且有一个“Line Up Dock Windows”菜单项。如果<a href="#isCustomizable">isCustomizable</a>()返回真，它也将会有一个“Customize”菜单项。
+<p> <p>也可以参考<a href="#lineUpDockWindows">lineUpDockWindows</a>()和<a href="#isDockMenuEnabled">isDockMenuEnabled</a>()。
+
+<h3 class=fn>void <a name="setDockWindowsMovable"></a>QMainWindow::setDockWindowsMovable ( bool )<tt> [虚 槽]</tt>
+</h3>
+<p>设置锚接窗口是否可以移动。详细情况请参考<a href="qmainwindow.html#dockWindowsMovable-prop">“dockWindowsMovable”</a>属性。
+
+<h3 class=fn>void <a name="setOpaqueMoving"></a>QMainWindow::setOpaqueMoving ( bool )<tt> [虚 槽]</tt>
+</h3>
+<p>设置锚接窗口是否是被不透明地移动。详细情况请参考<a href="qmainwindow.html#opaqueMoving-prop">“opaqueMoving”</a>属性。
+
+<h3 class=fn>void <a name="setRightJustification"></a>QMainWindow::setRightJustification ( bool )<tt> [虚 槽]</tt>
+</h3>
+<p>设置主窗口是否右对齐它的锚接窗口。详细情况请参考<a href="qmainwindow.html#rightJustification-prop">“rightJustification”</a>属性。
+
+<h3 class=fn>void <a name="setToolBarsMovable"></a>QMainWindow::setToolBarsMovable ( bool )<tt> [slot]</tt>
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+
+<h3 class=fn>void <a name="setUpLayout"></a>QMainWindow::setUpLayout ()<tt> [虚 保护 槽]</tt>
+</h3>  
+设置窗口的几何形状管理。当需要的时候，它会被自动调用，所以你不需要调用它。
+
+<h3 class=fn>void <a name="setUsesBigPixmaps"></a>QMainWindow::setUsesBigPixmaps ( bool )<tt> [虚 槽]</tt>
+</h3>
+<p>设置大像素映射是否生效。详细情况请参考<a href="qmainwindow.html#usesBigPixmaps-prop">“usesBigPixmaps”</a>属性。
+
+<h3 class=fn>void <a name="setUsesTextLabel"></a>QMainWindow::setUsesTextLabel ( bool )<tt> [虚 槽]</tt>
+</h3>
+<p>设置工具条按钮的文本标签是否生效。详细情况请参考<a href="qmainwindow.html#usesTextLabel-prop">“usesTextLabel”</a>属性。
+
+<h3 class=fn>bool <a name="showDockMenu"></a>QMainWindow::showDockMenu ( const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;globalPos )<tt> [虚 保护 槽]</tt>
+</h3>
+在<em>globalPos</em>位置显示锚接窗口菜单。这个菜单来出锚接窗口，所以它们可以被显示（或者隐藏）、排列并且可能会被定制。如果这个菜单被显示，返回真，否则返回假。
+<p> 默认实现是使用得到由<a href="#createDockWindowMenu">createDockWindowMenu</a>()创建的锚接窗口。如果你想使用你自己特定的弹出菜单，你可以重新实现createDockWindowMenu()。
+
+<h3 class=fn><a href="qstatusbar.html">QStatusBar</a>&nbsp;* <a name="statusBar"></a>QMainWindow::statusBar () const
+</h3>  
+返回这个窗口的状态条。如果没有的话，<a href="#statusBar">statusBar</a>()会创建一个空的状态条，并且如果需要也创建一个工具提示组。
+<p> <p>也可以参考<a href="#menuBar">menuBar</a>()和<a href="#toolTipGroup">toolTipGroup</a>()。
+<p>实例：<a href="qfd-example.html#x1999">qfd/qfd.cpp</a>。
+
+<h3 class=fn>void <a name="toolBarPositionChanged"></a>QMainWindow::toolBarPositionChanged ( <a href="qtoolbar.html">QToolBar</a>&nbsp;* )<tt> [信号]</tt>
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+
+<h3 class=fn><a href="qptrlist.html">QPtrList</a>&lt;QToolBar&gt; <a name="toolBars"></a>QMainWindow::toolBars ( <a href="qt.html#Dock-enum">Dock</a>&nbsp;dock ) const
+</h3>  
+返回在<em>dock</em>锚接区域的所有工具条的列表，而不管它们的状态。
+<p> 例如，<a href="qt.html#Dock-enum">TornOff</a>锚接区域可能包含关闭的工具条，但是它们会和可视的工具条一起被返回。
+<p> <p>也可以参考<a href="#dockWindows">dockWindows</a>()。
+
+<h3 class=fn>bool <a name="toolBarsMovable"></a>QMainWindow::toolBarsMovable () const
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+
+<h3 class=fn><a href="qtooltipgroup.html">QToolTipGroup</a>&nbsp;* <a name="toolTipGroup"></a>QMainWindow::toolTipGroup () const
+</h3>  
+返回这个窗口的工具提示组。如果没有的话，<a href="#toolTipGroup">toolTipGroup</a>()会自动创建一个空的工具提示组。
+<p> <p>也可以参考<a href="#menuBar">menuBar</a>()和<a href="#statusBar">statusBar</a>()。
+
+<h3 class=fn><a href="qdockarea.html">QDockArea</a>&nbsp;* <a name="topDock"></a>QMainWindow::topDock () const
+</h3> 
+返回<a href="qt.html#Dock-enum">Top</a>锚接区域。
+<p> <p>也可以参考<a href="#bottomDock">bottomDock</a>()、<a href="#leftDock">leftDock</a>()和<a href="#rightDock">rightDock</a>()。
+
+<h3 class=fn>bool <a name="usesBigPixmaps"></a>QMainWindow::usesBigPixmaps () const
+</h3>
+<p>如果大像素映射生效，返回真，否则返回假。详细情况请参考<a href="qmainwindow.html#usesBigPixmaps-prop">“usesBigPixmaps”</a>属性。
+
+<h3 class=fn>bool <a name="usesTextLabel"></a>QMainWindow::usesTextLabel () const
+</h3>
+<p>如果工具条按钮的文本标签生效，返回真，否则返回假。详细情况请参考<a href="qmainwindow.html#usesTextLabel-prop">“usesTextLabel”</a>属性。
+
+<h3 class=fn>void <a name="usesTextLabelChanged"></a>QMainWindow::usesTextLabelChanged ( bool )<tt> [信号]</tt>
+</h3> 
+<p> 只要<a href="#setUsesTextLabel">setUsesTextLabel</a>()使用与当前设置不同的值被调用，这个信号被调用。所有窗口部件应该对这个变化做出回应，例如工具条按钮必须连接到这个信号。
+
+<h3 class=fn>void <a name="whatsThis"></a>QMainWindow::whatsThis ()<tt> [虚 槽]</tt>
+</h3>
+进入“这是什么？”问题模式并且立即返回。
+<p> 这和<a href="qwhatsthis.html#enterWhatsThisMode">QWhatsThis::enterWhatsThisMode</a>()是相同的，但是作为主窗口对象的槽而被重新实现。这个方式可以很容易地用于弹出菜单，例如：
+<p> <pre>
+    <a href="qpopupmenu.html">QPopupMenu</a> * help = new <a href="qpopupmenu.html">QPopupMenu</a>( this );
+    help-&gt;<a href="qmenudata.html#insertItem">insertItem</a>( "What's &amp;This", this , SLOT(<a href="#whatsThis">whatsThis</a>()), SHIFT+Key_F1);
+  </pre>
+ 
+<p> <p>也可以参考<a href="qwhatsthis.html#enterWhatsThisMode">QWhatsThis::enterWhatsThisMode</a>()。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>bool <a name="dockWindowsMovable-prop"></a>dockWindowsMovable</h3> 
+<p>This property holds whether the dock windows are movable.
+这个属性保存的是锚接窗口是否可以移动。
+<p>如果为真（默认），用户可以把可移动的锚接窗口从一个QMainWindow锚接区域移动到另一个，包括<tt>浮动（TearOff）</tt>区域（也就是，锚接窗口就其自身而言作为一个窗口自由地移动）和<a href="qt.html#Dock-enum">Minimized</a>区域（就是锚接窗口的句柄被显示在菜单条下面的地方）。可移动锚接窗口也可以在QMainWindow的锚接区域内被移动，也就是说在一个锚接区域中重新整理它们。
+<p> 如果为假，用户就不能移动任何锚接窗口。
+<p> 默认情况下，锚接窗口是被透明地移动（也就是在拖动的时候，只显示一个边框矩形），但是这个设置可以通过<a href="#setOpaqueMoving">setOpaqueMoving</a>()改变。
+<p> <p>也可以参考<a href="#setDockEnabled">setDockEnabled</a>()和<a href="#opaqueMoving-prop">opaqueMoving</a>。
+<p>通过<a href="#setDockWindowsMovable">setDockWindowsMovable</a>()设置属性值并且通过<a href="#dockWindowsMovable">dockWindowsMovable</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="opaqueMoving-prop"></a>opaqueMoving</h3> 
+<p>这个属性保存的是锚接窗口是否是被不透明地移动。
+<p>如果为真，当主窗口的锚接窗口被移动时，它显示为不透明地。如果为假（默认），它们被透明地显示（也就是一个边框矩形）。
+<p> 工具条和锚接窗口的不透明移动已经被知道有一些问题。我们建议不要在这时使用这一点。我们将在稍后的发布中修改这个行为问题。
+<p>通过<a href="#setOpaqueMoving">setOpaqueMoving</a>()设置属性值并且通过<a href="#opaqueMoving">opaqueMoving</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="rightJustification-prop"></a>rightJustification</h3> 
+<p>这个属性保存的是主窗口是否右对齐它的锚接窗口。
+<p>如果失效（默认），可延伸的锚接窗口被延伸，并且不能延伸的锚接窗口被按它们需要的最小空间进行分配。因为绝大多数锚接窗口是不可延伸的，这通常会导致不对齐的右边缘结果（或者对于垂直的锚接区域是不对齐的下边缘）。如果生效，主窗口将会右对齐它的锚接窗口。
+<p> <p>也可以参考<a href="qdockwindow.html#setVerticalStretchable">QDockWindow::setVerticalStretchable</a>()和<a href="qdockwindow.html#setHorizontalStretchable">QDockWindow::setHorizontalStretchable</a>()。
+<p>通过<a href="#setRightJustification">setRightJustification</a>()设置属性值并且通过<a href="#rightJustification">rightJustification</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="usesBigPixmaps-prop"></a>usesBigPixmaps</h3> 
+<p>这个属性保存的是大像素映射是否生效。
+<p>如果为假（默认），工具按钮将会使用小像素映射，否则大像素映射将被使用。
+<p> 希望对这个设置做出反应的工具按钮和其它窗口部件要对在开始的时候读取正确的状态并且连接到主窗口部件的<a href="#pixmapSizeChanged">pixmapSizeChanged</a>()信号连接起来负责。
+<p>通过<a href="#setUsesBigPixmaps">setUsesBigPixmaps</a>()设置属性值并且通过<a href="#usesBigPixmaps">usesBigPixmaps</a>()来获得属性值。
+
+<h3 class=fn>bool <a name="usesTextLabel-prop"></a>usesTextLabel</h3> 
+<p>这个属性保存的是工具条按钮的文本标签是否生效。
+<p>如果失效（默认），工具按钮将不使用文本标签。如果生效，文本标签将被使用。
+<p> 希望对这个设置做出反应的工具按钮和其它窗口部件要对在开始的时候读取正确的状态并且连接到主窗口部件的<a href="#usesTextLabelChanged">usesTextLabelChanged</a>()信号连接起来负责。
+<p> <p>也可以参考<a href="qtoolbutton.html#usesTextLabel-prop">QToolButton::usesTextLabel</a>。
+<p>通过<a href="#setUsesTextLabel">setUsesTextLabel</a>()设置属性值并且通过<a href="#usesTextLabel">usesTextLabel</a>()来获得属性值。
+
+<hr><h2>相关函数</h2>
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-lt-lt"></a>operator&lt;&lt; ( <a href="qtextstream.html">QTextStream</a>&nbsp;&amp;&nbsp;ts, const&nbsp;<a href="qmainwindow.html">QMainWindow</a>&nbsp;&amp;&nbsp;mainWindow )
+</h3>
+<p> 把QMainWindow <em>mainWindow</em>的锚接区域中的锚接窗口，以及<a href="qt.html#Dock-enum">Minimized</a>和<a href="qt.html#Dock-enum">TornOff</a>锚接窗口的布局（大小和位置）都写到文本流<em>ts</em>中。
+<p> 例如，这可以被用于和<a href="qsettings.html">QSettings</a>联合使用来保存用户的布局。
+<p> <p>也可以参考<a href="#operator-gt-gt">operator&gt;&gt;</a>()。
+
+<h3 class=fn><a href="qtextstream.html">QTextStream</a>&nbsp;&amp; <a name="operator-gt-gt"></a>operator&gt;&gt; ( <a href="qtextstream.html">QTextStream</a>&nbsp;&amp;&nbsp;ts, <a href="qmainwindow.html">QMainWindow</a>&nbsp;&amp;&nbsp;mainWindow )
+</h3>
+<p> 从文本流<em>ts</em>中读入QMainWindow <em>mainWindow</em>的锚接区域中的锚接窗口，以及<a href="qt.html#Dock-enum">Minimized</a>和<a href="qt.html#Dock-enum">TornOff</a>锚接窗口的布局（大小和位置）。恢复锚接窗口和锚接区域的大小和位置。布局信息必须是由<a href="#operator-lt-lt">operator&lt;&lt;</a>()生成的。
+<p> 例如，这可以被用于和<a href="qsettings.html">QSettings</a>联合使用来恢复用户的布局。
+<p> <p>也可以参考<a href="#operator-lt-lt">operator&lt;&lt;</a>()。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>QCheckListItem Class</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>QCheckListItem Class Reference</h1>
+
+<p>The QCheckListItem class provides checkable list view items.
+<a href="#details">More...</a>
+<p><tt>#include &lt;<a href="qlistview-h.html">qlistview.h</a>&gt;</tt>
+<p>Inherits <a href="qlistviewitem.html">QListViewItem</a>.
+<p><a href="qchecklistitem-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><div class=fn>enum <a href="#Type-enum"><b>Type</b></a> { RadioButton, CheckBox, Controller }</div></li>
+<li><div class=fn><a href="#QCheckListItem"><b>QCheckListItem</b></a> ( QCheckListItem&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;text, Type&nbsp;tt = Controller )</div></li>
+<li><div class=fn><a href="#QCheckListItem-2"><b>QCheckListItem</b></a> ( QListViewItem&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;text, Type&nbsp;tt = Controller )</div></li>
+<li><div class=fn><a href="#QCheckListItem-3"><b>QCheckListItem</b></a> ( QListView&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;text, Type&nbsp;tt = Controller )</div></li>
+<li><div class=fn><a href="#QCheckListItem-4"><b>QCheckListItem</b></a> ( QListViewItem&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;text, const&nbsp;QPixmap&nbsp;&amp;&nbsp;p )</div></li>
+<li><div class=fn><a href="#QCheckListItem-5"><b>QCheckListItem</b></a> ( QListView&nbsp;*&nbsp;parent, const&nbsp;QString&nbsp;&amp;&nbsp;text, const&nbsp;QPixmap&nbsp;&amp;&nbsp;p )</div></li>
+<li><div class=fn><a href="#~QCheckListItem"><b>~QCheckListItem</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#paintCell"><b>paintCell</b></a> ( QPainter&nbsp;*&nbsp;p, const&nbsp;QColorGroup&nbsp;&amp;&nbsp;cg, int&nbsp;column, int&nbsp;width, int&nbsp;align )</div></li>
+<li><div class=fn>virtual void <a href="#paintFocus"><b>paintFocus</b></a> ( QPainter&nbsp;*&nbsp;p, const&nbsp;QColorGroup&nbsp;&amp;&nbsp;cg, const&nbsp;QRect&nbsp;&amp;&nbsp;r )</div></li>
+<li><div class=fn>virtual void <a href="#setOn"><b>setOn</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>bool <a href="#isOn"><b>isOn</b></a> () const</div></li>
+<li><div class=fn>Type <a href="#type"><b>type</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#text"><b>text</b></a> () const</div></li>
+<li><div class=fn>virtual int <a href="#rtti"><b>rtti</b></a> () const</div></li>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#activate"><b>activate</b></a> ()</div></li>
+<li><div class=fn>void <a href="#turnOffChild"><b>turnOffChild</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#stateChange"><b>stateChange</b></a> ( bool )</div></li>
+</ul>
+<hr><a name="details"></a><h2>Detailed Description</h2>
+
+
+
+The QCheckListItem class provides checkable list view items.
+<p> QCheckListItems are used in <a href="qlistview.html">QListView</a>s to provide
+<a href="qlistviewitem.html">QListViewItem</a>s that are checkboxes, radio buttons or
+controllers.
+<p> Checkbox and controller check list items may be inserted at any
+level in a list view. Radio button check list items must be children
+of a controller check list item.
+<p> The item can be checked or unchecked with <a href="#setOn">setOn</a>(). Its type can be
+retrieved with <a href="#type">type</a>() and its text retrieved with <a href="#text">text</a>().
+<p> <center><img src="qlistviewitems.png" alt="List View Items"></center> 
+<p> <p>See also <a href="qlistviewitem.html">QListViewItem</a>, <a href="qlistview.html">QListView</a> and <a href="advanced.html">Advanced Widgets</a>.
+
+<hr><h2>Member Type Documentation</h2>
+<h3 class=fn><a name="Type-enum"></a>QCheckListItem::Type</h3> 
+<p> This enum type specifies a QCheckListItem's type:
+<ul>
+<li><tt>QCheckListItem::RadioButton</tt>
+<li><tt>QCheckListItem::CheckBox</tt>
+<li><tt>QCheckListItem::Controller</tt>
+</ul>
+<hr><h2>Member Function Documentation</h2>
+<h3 class=fn><a name="QCheckListItem"></a>QCheckListItem::QCheckListItem ( <a href="qchecklistitem.html">QCheckListItem</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, <a href="qchecklistitem.html#Type-enum">Type</a>&nbsp;tt = Controller )
+</h3>
+Constructs a checkable item with parent <em>parent</em>, text <em>text</em> and type
+<em>tt</em>. Note that a RadioButton must be the child of a Controller,
+otherwise it will not toggle.
+
+<h3 class=fn><a name="QCheckListItem-2"></a>QCheckListItem::QCheckListItem ( <a href="qlistviewitem.html">QListViewItem</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, <a href="qchecklistitem.html#Type-enum">Type</a>&nbsp;tt = Controller )
+</h3>
+Constructs a checkable item with parent <em>parent</em>, text <em>text</em> and type
+<em>tt</em>. Note that this item must <em>not</em> be a RadioButton. Radio
+buttons must be children of a Controller.
+
+<h3 class=fn><a name="QCheckListItem-3"></a>QCheckListItem::QCheckListItem ( <a href="qlistview.html">QListView</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, <a href="qchecklistitem.html#Type-enum">Type</a>&nbsp;tt = Controller )
+</h3>
+Constructs a checkable item with parent <em>parent</em>, text <em>text</em> and type
+<em>tt</em>. Note that <em>tt</em> must <em>not</em> be RadioButton. Radio
+buttons must be children of a Controller.
+<p> 
+<h3 class=fn><a name="QCheckListItem-4"></a>QCheckListItem::QCheckListItem ( <a href="qlistviewitem.html">QListViewItem</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, const&nbsp;<a href="qpixmap.html">QPixmap</a>&nbsp;&amp;&nbsp;p )
+</h3>
+Constructs a Controller item with parent <em>parent</em>, text <em>text</em> and pixmap
+<em>p</em>.
+
+<h3 class=fn><a name="QCheckListItem-5"></a>QCheckListItem::QCheckListItem ( <a href="qlistview.html">QListView</a>&nbsp;*&nbsp;parent, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, const&nbsp;<a href="qpixmap.html">QPixmap</a>&nbsp;&amp;&nbsp;p )
+</h3>
+Constructs a Controller item with parent <em>parent</em>, text <em>text</em> and pixmap
+<em>p</em>.
+
+<h3 class=fn><a name="~QCheckListItem"></a>QCheckListItem::~QCheckListItem ()
+</h3>  Destroys the item, deleting all its children, freeing up all
+allocated resources.
+
+<h3 class=fn>void <a name="activate"></a>QCheckListItem::activate ()<tt> [virtual protected]</tt>
+</h3>
+Toggle check box or set radio button to on.
+
+<p>Reimplemented from <a href="qlistviewitem.html#activate">QListViewItem</a>.
+<h3 class=fn>bool <a name="isOn"></a>QCheckListItem::isOn () const
+</h3> 
+Returns TRUE if the item is toggled on; otherwise returns FALSE.
+
+<h3 class=fn>void <a name="paintCell"></a>QCheckListItem::paintCell ( <a href="qpainter.html">QPainter</a>&nbsp;*&nbsp;p, const&nbsp;<a href="qcolorgroup.html">QColorGroup</a>&nbsp;&amp;&nbsp;cg, int&nbsp;column, int&nbsp;width, int&nbsp;align )<tt> [virtual]</tt>
+</h3> Paints the item using the painter <em>p</em> and the color group <em>cg</em>.
+The item is in column <em>column</em>, has width <em>width</em> and is aligned
+<em>align</em>. (See Qt::AlignmentFlags for valid alignments.)
+
+<p>Reimplemented from <a href="qlistviewitem.html#paintCell">QListViewItem</a>.
+<h3 class=fn>void <a name="paintFocus"></a>QCheckListItem::paintFocus ( <a href="qpainter.html">QPainter</a>&nbsp;*&nbsp;p, const&nbsp;<a href="qcolorgroup.html">QColorGroup</a>&nbsp;&amp;&nbsp;cg, const&nbsp;<a href="qrect.html">QRect</a>&nbsp;&amp;&nbsp;r )<tt> [virtual]</tt>
+</h3> Draws the focus rectangle <em>r</em> using the color group <em>cg</em> on
+the painter <em>p</em>.
+
+<p>Reimplemented from <a href="qlistviewitem.html#paintFocus">QListViewItem</a>.
+<h3 class=fn>int <a name="rtti"></a>QCheckListItem::rtti () const<tt> [virtual]</tt>
+</h3>
+
+<p> Returns 1.
+<p> Make your derived classes return their own values for <a href="#rtti">rtti</a>(), and
+you can distinguish between listview items. You should use values
+greater than 1000 preferably a large random number, to allow for
+extensions to this class.
+<p> 
+<p>Reimplemented from <a href="qlistviewitem.html#rtti">QListViewItem</a>.
+<h3 class=fn>void <a name="setOn"></a>QCheckListItem::setOn ( bool&nbsp;b )<tt> [virtual]</tt>
+</h3>
+Sets the button on if <em>b</em> is TRUE, otherwise sets it off. Maintains
+radio button exclusivity.
+
+<h3 class=fn>void <a name="stateChange"></a>QCheckListItem::stateChange ( bool )<tt> [virtual protected]</tt>
+</h3>
+This virtual function is called when the item changes its on/off state.
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text"></a>QCheckListItem::text () const
+</h3> 
+<p> Returns the text of the item.
+
+<h3 class=fn>void <a name="turnOffChild"></a>QCheckListItem::turnOffChild ()<tt> [protected]</tt>
+</h3>
+If this is a Controller that has RadioButton children, turn off the
+child that is on.
+
+<h3 class=fn><a href="qchecklistitem.html#Type-enum">Type</a> <a name="type"></a>QCheckListItem::type () const
+</h3> 
+<p> Returns the type of this item.
+
+<!-- eof -->
+<hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>.
+Copyright &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>. All Rights Reserved.<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>使用元对象编译器</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>使用元对象编译器</h1>
+
+ 
+<p> <!-- index moc --><a name="moc"></a>
+<p> 元对象编译器，朋友中的moc，是处理Qt的<a href="metaobjects.html">C++扩展</a>的程序。
+<p> 元对象编译器读取一个C++源文件。如果它发现其中的一个或多个类的声明中含有<a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>宏，它就会给这个使用Q_OBJECT宏的类生成另外一个包含<a href="metaobjects.html#meta-object">元对象</a>代码的C++源文件。尤其是，元对象代码对信号/槽机制、运行时类型信息和动态属性系统是需要的。
+<p> 一个被元对象编译器生成的C++源文件必须和这个类的实现一起被编译和连接（或者它被包含到（#include）这个类的源文件中）。
+<p> 如果你是用<a href="qmake-manual.html">qmake</a>来生成你的Makefile文件，当需要的时候，编译规则中需要包含调用元对象编译器，所以你不需要直接使用元对象编译器。关于元对象编译器的更多的背景知识，请看<a href="templates.html">为什么Qt不用模板来实现信号和槽？</a>。
+<p> <h2> 用法
+</h2>
+<a name="1"></a><p> 元对象编译器很典型地和包含下面这样情况地类声明地输入文件一起使用：
+<p> <pre>
+    class MyClass : public <a href="qobject.html">QObject</a>
+    {
+        Q_OBJECT
+    public:
+        MyClass( <a href="qobject.html">QObject</a> * parent=0, const char * name=0 );
+        ~MyClass();
+
+    signals:
+        void mySignal();
+
+    public slots:
+        void mySlot();
+
+    };
+</pre>
+ 
+<p> 除了上述提到地信号和槽，元对象编译器在下一个例子中还将实现对象属性。Q_PROPERTY宏声明了一个对象属性，而Q_ENUMS 声明在这个类中的<a href="properties.html">属性系统</a>中可用的枚举类型的一个列表。在这种特殊的情况下，我们声明了一个枚举类型属性<tt>Priority</tt>，也被称为“priority”，并且读函数为<tt>priority()</tt>，写函数为<tt>setPriority()</tt>。
+<p> <pre>
+    class MyClass : public <a href="qobject.html">QObject</a>
+    {
+        Q_OBJECT
+        Q_PROPERTY( Priority priority READ priority WRITE setPriority )
+        Q_ENUMS( Priority )
+    public:
+        MyClass( <a href="qobject.html">QObject</a> * parent=0, const char * name=0 );
+        ~MyClass();
+
+        enum Priority { High, Low, VeryHigh, VeryLow };
+        void setPriority( Priority );
+        Priority priority() const;
+    };
+</pre>
+ 
+<p> 属性可以通过Q_OVERRIDE宏在子类中进行修改。Q_SETS宏声明了枚举变量可以进行组合操作，也就是说可以一起读或写。另外一个宏，Q_CLASSINFO，用来给类的元对象添加名称/值这样一组数据：
+<p> <pre>
+    class MyClass : public <a href="qobject.html">QObject</a>
+    {
+        Q_OBJECT
+        Q_CLASSINFO( "Author", "Oscar Peterson")
+        Q_CLASSINFO( "Status", "Very nice class")
+    public:
+        MyClass( <a href="qobject.html">QObject</a> * parent=0, const char * name=0 );
+        ~MyClass();
+    };
+</pre>
+ 
+<p> 这三个概念：信号和槽、属性和元对象数据是可以组合在一起的。
+<p> 元对象编译器生成的输出文件必须被编译和连接，就像你的程序中的其它的C++代码一样；否则你的程序的连编将会在最后的连接阶段失败。出于习惯，这种操作是用下述两种方式之一解决的：
+<p> <dl>
+<p> <dt><b>方法一：类的声明放在一个头文件（<em>.h文件</em>）中</b>
+<p> <dd>如果在上述的文件<em>myclass.h</em>中发现类的声明，元对象编译器的输出文件将会被放在一个叫<em>moc_myclass.cpp</em>的文件中。这个文件将会像通常情况一样被编译，作为对象文件的结果是<em>moc_myclass.o</em>（在Unix下）或者<em>moc_myclass.obj</em>（在Windows下）。这个对象接着将会被包含到一个对象文件列表中，它们将会在程序的最后连编阶段被连接在一起。
+<p> <dt><b>方法二：类的声明放在一个实现文件（<em>.cpp文件</em>）中</b>
+<p> <dd>如果上述的文件<em>myclass.cpp</em>中发现类的声明，元对象编译器的输出文件将会被放在一个叫<em>myclass.moc</em>的文件中。这个文件需要被实现文件包含（#include），也就是说<em>myclass.cpp</em>需要包含下面这行
+<pre>
+    #include "myclass.moc"
+</pre>
+ 
+放在所有的代码之后。这样，元对象编译器生成的代码将会和<em>myclass.cpp</em>中普通的类定义一起被编译和连接，所以方法一中的分别编译和连接就是不需要的了。
+<p> </dl>
+方法一是常规的方法。方法二用在你想让实现文件自包含，或者Q_OBJECT类是内部实现的并且在头文件中不可见的这些情况下使用。
+<p> <h2> Makefile中自动使用元对象编译器的方法
+</h2>
+<a name="2"></a><p> 除了最简单的测试程序之外的任何程序，建议自动使用元对象编译器。在你的程序的Makefile文件中加入一些规则，<em>make</em>就会在需要的时候运行元对象编译器和处理元对象编译器的输出。
+<p> 我们建议使用Trolltech的自由makefile生成工具，<a href="qmake-manual.html">qmake</a>，来生成你的Makefile。这个工具可以识别方法一和方法二风格的源文件，并建立一个可以做所有必要的元对象编译操作的Makefile。
+<p> 另一方面如果，你想自己建立你的Makefile，下面是如何包含元对象编译操作的一些提示。
+<p> 对于在头文件中声明了Q_OBJECT宏的类，如果你只使用GNU的make的话，这是一个很有用的makefile规则：
+<p> <pre>
+    moc_%.cpp: %.h
+            moc $&lt; -o $@
+</pre>
+ 
+<p> 如果你想更方便地写makefile，你可以按下面的格式写单独的规则：
+<p> <pre>
+    moc_NAME.cpp: NAME.h
+            moc $&lt; -o $@
+</pre>
+ 
+<p> 你必须记住要把<em>moc_NAME.cpp</em>添加到你的SOURCES（你可以用你喜欢的名字替代）变量中并且把<em>moc_NAME.o</em>或者<em>moc_NAME.obj</em>添加到你的OBJECTS变量中。
+<p> （当我们给我们的C++源文件命名为.cpp时，元对象编译器并不留意，所以只要你喜欢，你可以使用.C、.cc、.CC、.cxx或者甚至.c++。）
+<p> 对于在实现文件（.cpp文件）中声明Q_OBJECT的类，我们建议你使用下面这样的makefile规则：
+<p> <pre>
+    NAME.o: NAME.moc
+
+    NAME.moc: NAME.cpp
+            moc -i $&lt; -o $@
+</pre>
+ 
+<p> 这将会保证make程序会在编译<em>NAME.cpp</em>之前运行元对象编译器。然后你可以把
+<p> <pre>
+    #include "NAME.moc"
+</pre>
+ 
+<p> 放在<em>NAME.cpp</em>的末尾，这样在这个文件中的所有的类声明被完全地知道。
+<p> <h2> 调用元对象编译器moc
+</h2>
+<a name="3"></a><p> 这里是元对象编译器moc所支持地命令行选项：
+<p> <dl>
+<dt> -o <em>file</em> <dd> 将输出写到<em>file</em>而不是标准输出。
+<dt> -f <dd> 强制在输出文件中生成#include声明。文件的名称必须符合<a href="qregexp.html#regular-expression">正则表达式</a>&#92;.[hH][^.]*（也就是说扩展名必须以H或h开始）。这个选项只有在你的头文件没有遵循标准命名法则的时候才有用。
+<dt> -i <dd> 不在输出文件中生成#include声明。当一个C++文件包含一个或多个类声明的时候你也许应该这样使用元对象编译器。然后你应该在.cpp文件中包含（#include）元对象代码。如果-i和-f两个参数都出现，后出现的有效。
+<dt> -nw <dd> 不产生任何警告。不建议使用。
+<dt> -ldbg <dd> 把大量的lex调试信息写到标准输出。
+<dt> -p <em>path</em> <dd> 使元对象编译器生成的（如果有生成的）#include声明的文件名称中预先考虑到<em>path</em>/。
+<dt> -q <em>path</em> <dd> 使元对象编译器在生成的文件中的qt #include文件的名称中预先考虑到<em>path</em>/。
+</dl>
+<p> 你可以明确地告诉元对象编译器不要解析头文件中的成分。它可以识别包含子字符串MOC_SKIP_BEGIN或者MOC_SKIP_END的任何C++注释（//）。它们正如你所期望的那样工作并且你可以把它们划分为若干层次。元对象编译器所看到的最终结果就好像你把一个MOC_SKIP_BEGIN和一个MOC_SKIP_END当中的所有行删除那样。
+<p> <h2> 诊断
+</h2>
+<a name="4"></a><p> 元对象编译器将会警告关于学多在Q_OBJECT类声明中危险的或者不合法的构造。
+<p> 如果你在你的程序的最后连编阶段得到连接错误，说YourClass::className()是未定义的或者YourClass缺乏vtbl，某样东西已经被做错。绝大多数情况下，你忘记了编译或者#include元对象编译器产生的C++代码，或者（在前面的情况下）没有在连接命令中包含那个对象文件。
+<p> <h2> 限制
+</h2>
+<a name="5"></a><p> 元对象编译器并不展开#include或者#define，它简单地忽略它所遇到的所有预处理程序指示。这是遗憾的，但是在实践中它通常情况下不是问题。
+<p> 元对象编译器不处理所有的C++。主要的问题是类模板不能含有信号和槽。这里是一个例子：
+<p> <pre>
+    class SomeTemplate&lt;int&gt; : public <a href="qframe.html">QFrame</a> {
+        Q_OBJECT
+        ...
+    signals:
+        void bugInMocDetected( int );
+    };
+</pre>
+ 
+<p> 次重要的是，后面的构造是不合法的。所有的这些都可以替换为我们通常认为比较好的方案，所以去掉这些限制对于我们来说并不是高优先级的。
+<p> <h3> 多重继承需要把<a href="qobject.html">QObject</a>放在第一个
+</h3>
+<a name="5-1"></a><p> 如果你使用多重继承，元对象编译器假设<em>首先</em>继承的类是QObject的一个子类。也就是说，确信<em>仅仅</em>首先继承的类是QObject。
+<p> <pre>
+    class SomeClass : public <a href="qobject.html">QObject</a>, public OtherClass {
+        ...
+    };
+</pre>
+ 
+<p> （这个限制几乎是不可能去掉的；因为元对象编译器并不展开#include或者#define，它不能发现基类中哪个是QObject。）
+<p> <h3> 函数指针不能作为信号和槽的参数
+</h3>
+<a name="5-2"></a><p> 在你考虑使用函数指针作为信号/槽的参数的大多数情况下，我们认为继承是一个不错的替代方法。这里是一个不合法的语法的例子：
+<p> <pre>
+    class SomeClass : public <a href="qobject.html">QObject</a> {
+        Q_OBJECT
+        ...
+    public slots:
+        // 不合法的
+        void apply( void (*apply)(List *, void *), char * );
+    };
+</pre>
+ 
+<p> 你可以在这样一个限制范围内工作：
+<pre>
+    typedef void (*ApplyFunctionType)( List *, void * );
+
+    class SomeClass : public <a href="qobject.html">QObject</a> {
+        Q_OBJECT
+        ...
+    public slots:
+        void apply( ApplyFunctionType, char * );
+    };
+</pre>
+ 
+<p> 有时用继承和虚函数、信号和槽来替换函数指针是更好的。
+<p> <h3> 友声明不能放在信号部分或者槽部分中
+</h3>
+<a name="5-3"></a><p> 有时它也许会工作，但通常情况下，友声明不能放在信号部分或者槽部分中。把它们替换到私有的、保护的或者公有的部分中。这里是一个不合法的语法的例子：
+<p> <pre>
+    class SomeClass : public <a href="qobject.html">QObject</a> {
+        Q_OBJECT
+        ...
+    signals:
+        friend class ClassTemplate&lt;char&gt;; // 错的
+    };
+</pre>
+ 
+<p> <h3> 信号和槽不能被升级
+</h3>
+<a name="5-4"></a><p> 把继承的成员函数升级为公有状态这一个C++特征并不延伸到包括信号和槽。这里是一个不合法的例子：
+<p> <pre>
+    class Whatever : public <a href="qbuttongroup.html">QButtonGroup</a> {
+        ...
+    public slots:
+        void QButtonGroup::buttonPressed; // 错的
+        ...
+    };
+</pre>
+ 
+<p> QButtonGroup::buttonPressed()槽是保护的。
+<p> C++测验：如果你试图升级一个被重载的保护成员函数将会发生什么？
+<ol type=1>
+<li> 所有的函数都被重载。
+<li> 这不是标准的C++。
+</ol>
+<p> 
+<p> <h3> 类型宏不能被用于信号和槽的参数
+</h3>
+<a name="5-5"></a><p> 因为元对象编译器并不展开#define，在信号和槽中类型宏作为一个参数是不能工作的。这里是一个不合法的例子：
+<p> <pre>
+    #ifdef ultrix
+    #define SIGNEDNESS(a) unsigned a
+    #else
+    #define SIGNEDNESS(a) a
+    #endif
+
+    class Whatever : public <a href="qobject.html">QObject</a> {
+        ...
+    signals:
+        void someSignal( SIGNEDNESS(int) );
+        ...
+    };
+</pre>
+ 
+<p> 不含有参数的#define将会像你所期望的那样工作。
+<p> <h3> 嵌套类不能放在信号部分或者槽部分，也不能含有信号和槽
+</h3>
+<a name="5-6"></a><p> 这里是一个例子：
+<p> <pre>
+    class A {
+        Q_OBJECT
+    public:
+        class B {
+        public slots:   // 错的
+            void b();
+            ...
+        };
+    signals:
+        class B {       // 错的
+            void b();
+            ...
+        }:
+    };
+</pre>
+ 
+<p> <h3> 构造函数不能用于信号部分和槽部分
+</h3>
+<a name="5-7"></a><p> 为什么一个人会把一个构造函数放到信号部分或者槽部分，这对于我们来说都是很神秘的。你无论如何也不能这样做（除去它偶尔能工作的情况）。请把它们放到私有的、保护的或者公有的部分中，它们本该属于的地方。这里是一个不合法的语法的例子：
+<p> <pre>
+    class SomeClass : public <a href="qobject.html">QObject</a> {
+        Q_OBJECT
+    public slots:
+        SomeClass( <a href="qobject.html">QObject</a> *parent, const char *name )
+            : <a href="qobject.html">QObject</a>( parent, name ) { } // 错的
+        ...
+    };
+</pre>
+ 
+<p> <h3> 属性的声明应该放在含有相应的读写函数的公有部分之前
+</h3>
+<a name="5-8"></a><p> 在包含相应的读写函数的公有部分之中和之后声明属性的话，读写函数就不能像所期望的那样工作了。元对象编译器会抱怨不能找到函数或者解析这个类型。这里是一个不合法的语法的例子：
+<p> <pre>
+    class SomeClass : public <a href="qobject.html">QObject</a> {
+        Q_OBJECT
+    public:
+        ...
+        Q_PROPERTY( Priority priority READ priority WRITE setPriority ) // 错的
+        Q_ENUMS( Priority ) // 错的
+        enum Priority { High, Low, VeryHigh, VeryLow };
+        void setPriority( Priority );
+        Priority priority() const;
+        ...
+    };
+</pre>
+ 
+<p> 根据这个限制，你应该在Q_OBJECT之后，在这个类的声明之前声明所有的属性：
+<p> <pre>
+    class SomeClass : public <a href="qobject.html">QObject</a> {
+        Q_OBJECT
+        Q_PROPERTY( Priority priority READ priority WRITE setPriority )
+        Q_ENUMS( Priority )
+    public:
+        ...
+        enum Priority { High, Low, VeryHigh, VeryLow };
+        void setPriority( Priority );
+        Priority priority() const;
+        ...
+    };
+</pre>
+ 
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

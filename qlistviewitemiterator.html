@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>QListViewItemIterator Class</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>QListViewItemIterator Class Reference</h1>
+
+<p>The QListViewItemIterator class provides an iterator for collections of QListViewItems.
+<a href="#details">More...</a>
+<p><tt>#include &lt;<a href="qlistview-h.html">qlistview.h</a>&gt;</tt>
+<p><a href="qlistviewitemiterator-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><div class=fn><a href="#QListViewItemIterator"><b>QListViewItemIterator</b></a> ()</div></li>
+<li><div class=fn><a href="#QListViewItemIterator-2"><b>QListViewItemIterator</b></a> ( QListViewItem&nbsp;*&nbsp;item )</div></li>
+<li><div class=fn><a href="#QListViewItemIterator-3"><b>QListViewItemIterator</b></a> ( const&nbsp;QListViewItemIterator&nbsp;&amp;&nbsp;it )</div></li>
+<li><div class=fn><a href="#QListViewItemIterator-4"><b>QListViewItemIterator</b></a> ( QListView&nbsp;*&nbsp;lv )</div></li>
+<li><div class=fn>QListViewItemIterator &amp; <a href="#operator-eq"><b>operator=</b></a> ( const&nbsp;QListViewItemIterator&nbsp;&amp;&nbsp;it )</div></li>
+<li><div class=fn><a href="#~QListViewItemIterator"><b>~QListViewItemIterator</b></a> ()</div></li>
+<li><div class=fn>QListViewItemIterator &amp; <a href="#operator++"><b>operator++</b></a> ()</div></li>
+<li><div class=fn>const QListViewItemIterator <a href="#operator++-2"><b>operator++</b></a> ( int )</div></li>
+<li><div class=fn>QListViewItemIterator &amp; <a href="#operator+-eq"><b>operator+=</b></a> ( int&nbsp;j )</div></li>
+<li><div class=fn>QListViewItemIterator &amp; <a href="#operator--"><b>operator--</b></a> ()</div></li>
+<li><div class=fn>const QListViewItemIterator <a href="#operator---2"><b>operator--</b></a> ( int )</div></li>
+<li><div class=fn>QListViewItemIterator &amp; <a href="#operator--eq"><b>operator-=</b></a> ( int&nbsp;j )</div></li>
+<li><div class=fn>QListViewItem * <a href="#current"><b>current</b></a> () const</div></li>
+</ul>
+<hr><a name="details"></a><h2>Detailed Description</h2>
+ 
+
+<p> The QListViewItemIterator class provides an iterator for collections of QListViewItems.
+<p> Construct an instance of a QListViewItemIterator, with either a
+<a href="qlistview.html">QListView</a>* or a <a href="qlistviewitem.html">QListViewItem</a>* as argument, to operate on the tree
+of QListViewItems.
+<p> A QListViewItemIterator iterates over all items of a list view. This
+means that it always makes the first child of the current item the new
+current item. If there is no child, the next sibling becomes the new
+current item; and if there is no next sibling, the next sibling of
+the parent becomes current.
+<p> The following example function gets a list of all the items that
+have been selected by the user, storing pointers to the items in a
+QPtrList:
+<pre>
+    <a href="qptrlist.html">QPtrList</a>&lt;QListViewItem&gt; lst;
+    QListViewItemIterator it( lv );
+    while ( it.<a href="#current">current</a>() != 0 ) {
+        if ( it.<a href="#current">current</a>()-&gt;isSelected() )
+            lst.<a href="qptrlist.html#append">append</a>( it.<a href="#current">current</a>() );
+        ++it;
+    }
+  </pre>
+ 
+<p> A QListViewItemIterator provides a convenient and easy way to
+traverse a hierarchical <a href="qlistview.html">QListView</a>.
+<p> Multiple QListViewItemIterators can operate on the tree of
+QListViewItems.  A QListView knows about all iterators operating on
+its QListViewItems.  So when a <a href="qlistviewitem.html">QListViewItem</a> gets removed all
+iterators that point to this item are updated and point to the
+following item if possible, otherwise to a valid item before the
+current one or to 0.
+<p> <p>See also <a href="qlistview.html">QListView</a>, <a href="qlistviewitem.html">QListViewItem</a> and <a href="advanced.html">Advanced Widgets</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class=fn><a name="QListViewItemIterator"></a>QListViewItemIterator::QListViewItemIterator ()
+</h3> Constructs an empty iterator. 
+<h3 class=fn><a name="QListViewItemIterator-2"></a>QListViewItemIterator::QListViewItemIterator ( <a href="qlistviewitem.html">QListViewItem</a>&nbsp;*&nbsp;item )
+</h3> Constructs an iterator for the <a href="qlistview.html">QListView</a> of the <em>item</em>. The
+current iterator item is set to point to the <em>item</em>.
+
+<h3 class=fn><a name="QListViewItemIterator-3"></a>QListViewItemIterator::QListViewItemIterator ( const&nbsp;<a href="qlistviewitemiterator.html">QListViewItemIterator</a>&nbsp;&amp;&nbsp;it )
+</h3> Constructs an iterator for the same <a href="qlistview.html">QListView</a> as <em>it</em>. The
+current iterator item is set to point on the current item of <em>it</em>.
+
+<h3 class=fn><a name="QListViewItemIterator-4"></a>QListViewItemIterator::QListViewItemIterator ( <a href="qlistview.html">QListView</a>&nbsp;*&nbsp;lv )
+</h3> Constructs an iterator for the <a href="qlistview.html">QListView</a> <em>lv</em>. The current
+iterator item is set to point on the first child (<a href="qlistviewitem.html">QListViewItem</a>)
+of <em>lv</em>.
+
+<h3 class=fn><a name="~QListViewItemIterator"></a>QListViewItemIterator::~QListViewItemIterator ()
+</h3> Destroys the iterator.
+
+<h3 class=fn><a href="qlistviewitem.html">QListViewItem</a>&nbsp;* <a name="current"></a>QListViewItemIterator::current () const
+</h3> Returns a pointer to the current item of the iterator.
+
+<p>Examples: <a href="addressbook-example.html#x546">addressbook/centralwidget.cpp</a>, <a href="checklists-example.html#x430">checklists/checklists.cpp</a>, <a href="dirview-example.html#x1734">dirview/dirview.cpp</a> and <a href="ftpclient-example.html#x692">network/ftpclient/ftpview.cpp</a>.
+<h3 class=fn><a href="qlistviewitemiterator.html">QListViewItemIterator</a>&nbsp;&amp; <a name="operator++"></a>QListViewItemIterator::operator++ ()
+</h3> Prefix ++ makes the next item in the <a href="qlistviewitem.html">QListViewItem</a> tree of the
+<a href="qlistview.html">QListView</a> of the iterator the current item and returns it. If the
+current item was the last item in the QListView or null, null is
+returned.
+
+<h3 class=fn>const&nbsp;<a href="qlistviewitemiterator.html">QListViewItemIterator</a> <a name="operator++-2"></a>QListViewItemIterator::operator++ ( int )
+</h3> This is an overloaded member function, provided for convenience. It behaves essentially like the above function.
+<p> Postfix ++ makes the next item in the <a href="qlistviewitem.html">QListViewItem</a> tree of the
+<a href="qlistview.html">QListView</a> of the iterator the current item and returns the item
+which was previously current.
+
+<h3 class=fn><a href="qlistviewitemiterator.html">QListViewItemIterator</a>&nbsp;&amp; <a name="operator+-eq"></a>QListViewItemIterator::operator+= ( int&nbsp;j )
+</h3>
+Sets the current item to the item <em>j</em> positions after the current
+item in the <a href="qlistviewitem.html">QListViewItem</a> hierarchy. If this item is beyond the last
+item, the current item is set to null.
+<p> The new current item (or null, if the new current item is null) is returned.
+
+<h3 class=fn><a href="qlistviewitemiterator.html">QListViewItemIterator</a>&nbsp;&amp; <a name="operator--"></a>QListViewItemIterator::operator-- ()
+</h3>
+Prefix -- makes the previous item in the <a href="qlistviewitem.html">QListViewItem</a> tree of the
+<a href="qlistview.html">QListView</a> of the iterator the current item and returns it. If the
+current item was the last first in the QListView or null, null is
+returned.
+
+<h3 class=fn>const&nbsp;<a href="qlistviewitemiterator.html">QListViewItemIterator</a> <a name="operator---2"></a>QListViewItemIterator::operator-- ( int )
+</h3> This is an overloaded member function, provided for convenience. It behaves essentially like the above function.
+<p> Postfix -- makes the previous item in the <a href="qlistviewitem.html">QListViewItem</a> tree of
+the <a href="qlistview.html">QListView</a> of the iterator the current item and returns the item.
+
+<h3 class=fn><a href="qlistviewitemiterator.html">QListViewItemIterator</a>&nbsp;&amp; <a name="operator--eq"></a>QListViewItemIterator::operator-= ( int&nbsp;j )
+</h3> Sets the current item to the item <em>j</em> positions before the
+current item in the <a href="qlistviewitem.html">QListViewItem</a> hierarchy. If this item is before
+the first item, the current item is set to null.  The new current
+item (or null, if the new current item is null) is returned.
+
+<h3 class=fn><a href="qlistviewitemiterator.html">QListViewItemIterator</a>&nbsp;&amp; <a name="operator-eq"></a>QListViewItemIterator::operator= ( const&nbsp;<a href="qlistviewitemiterator.html">QListViewItemIterator</a>&nbsp;&amp;&nbsp;it )
+</h3> Assignment. Makes a copy of <em>it</em> and returns a reference to its
+iterator.
+
+<!-- eof -->
+<hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>.
+Copyright &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>. All Rights Reserved.<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

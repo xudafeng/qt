@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QDialog类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QDialog类参考</h1>
+
+<p>QDialog类是对话框窗口的基类。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qdialog-h.html">qdialog.h</a>&gt;</tt>
+<p>继承了<a href="qwidget.html">QWidget</a>。
+<p>被<a href="qcolordialog.html">QColorDialog</a>、<a href="qerrormessage.html">QErrorMessage</a>、<a href="qfiledialog.html">QFileDialog</a>、<a href="qfontdialog.html">QFontDialog</a>、<a href="qinputdialog.html">QInputDialog</a>、<a href="qmessagebox.html">QMessageBox</a>、<a href="qprogressdialog.html">QProgressDialog</a>、<a href="qtabdialog.html">QTabDialog</a>和<a href="qwizard.html">QWizard</a>继承。
+<p><a href="qdialog-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QDialog"><b>QDialog</b></a> ( QWidget&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;modal = FALSE, WFlags&nbsp;f = 0 )</div></li>
+<li><div class=fn><a href="#~QDialog"><b>~QDialog</b></a> ()</div></li>
+<li><div class=fn>enum <a href="#DialogCode-enum"><b>DialogCode</b></a> { Rejected, Accepted }</div></li>
+<li><div class=fn>int <a href="#result"><b>result</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#show"><b>show</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setOrientation"><b>setOrientation</b></a> ( Orientation&nbsp;orientation )</div></li>
+<li><div class=fn>Orientation <a href="#orientation"><b>orientation</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setExtension"><b>setExtension</b></a> ( QWidget&nbsp;*&nbsp;extension )</div></li>
+<li><div class=fn>QWidget * <a href="#extension"><b>extension</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setSizeGripEnabled"><b>setSizeGripEnabled</b></a> ( bool )</div></li>
+<li><div class=fn>bool <a href="#isSizeGripEnabled"><b>isSizeGripEnabled</b></a> () const</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>int <a href="#exec"><b>exec</b></a> ()</div></li>
+</ul>
+<h2>属性</h2>
+<ul>
+<li><div class=fn>bool <a href="#sizeGripEnabled-prop"><b>sizeGripEnabled</b></a>&nbsp;- 大小控制是否生效</div></li>
+</ul>
+<h2>保护成员</h2>
+<ul>
+<li><div class=fn>void <a href="#setResult"><b>setResult</b></a> ( int&nbsp;i )</div></li>
+</ul>
+<h2>保护槽</h2>
+<ul>
+<li><div class=fn>virtual void <a href="#done"><b>done</b></a> ( int&nbsp;r )</div></li>
+<li><div class=fn>virtual void <a href="#accept"><b>accept</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#reject"><b>reject</b></a> ()</div></li>
+<li><div class=fn>void <a href="#showExtension"><b>showExtension</b></a> ( bool&nbsp;showIt )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QDialog类是对话框窗口的基类。
+<p> 
+
+
+<p> 对话框窗口是主要用于短期任务以及和用户进行简要通讯的顶级窗口。QDialog可以是模式的也可以是非模式的。QDialog支持<a href="#extensibility">扩展性</a>并且可以提供<a href="#return">返回值</a>。它们可以有<a href="#default">默认按钮</a>。QDialog也可以有一个<a href="qsizegrip.html">QSizeGrip</a>在它的右下角，使用<a href="#setSizeGripEnabled">setSizeGripEnabled</a>()。
+<p> 注意QDialog使用父窗口部件的方法和Qt中其它类稍微不同。对话框总是顶级窗口部件，但是如果它有一个父对象，它的默认位置就是父对象的中间。它也将和父对象共享工具条条目。
+<p> 这里有三种有用的对话框：
+<p> <ol type=1>
+<p> <li> <b>模式</b>对话框就是阻塞同一应用程序中其它可视窗口的输入的对话框：用户必须完成这个对话框中的交互操作并且关闭了它之后才能访问应用程序中的其它任何窗口。模式对话框有它们自己的本地事件循环。用来让用户选择一个文件或者用来设置应用程序参数的对话框通常是模式的。调用<a href="#exec">exec</a>()来显示模式对话框。当用户关闭这个对话框，exec()将提供一个可用的<a href="#return">返回值</a>并且这时流程控制继续从调用exec()的地方进行。通常，我们连接默认按钮，例如“OK”到<a href="#accept">accept</a>()槽并且把“Cancel”连接到<a href="#reject">reject</a>()槽，来使对话框关闭并且返回适当的值。另外我们也可以连接<a href="#done">done</a>()槽，传递给它<a href="#DialogCode-enum">Accepted</a>或<a href="#DialogCode-enum">Rejected</a>。
+<p> <li> <b>非模式</b>对话框是和同一个程序中其它窗口操作无关的对话框。在字处理软件中查找和替换对话框通常是非模式的来允许同时与应用程序主窗口和对话框进行交互。调用<a href="#show">show</a>()来显示非模式对话框。show()立即返回，这样调用代码中的控制流将会继续。在实践中你将会经常调用show()并且在调用show()的函数最后，控制返回主事件循环。
+<p> <li>
+<a name="semimodal"></a>
+“<b>半模式</b>”对话框是立即把控制返回给调用者的模式对话框。半模式对话框没有它们自己的事件循环，所以你将需要周期性地调用<a href="qapplication.html#processEvents">QApplication::processEvents</a>()来让这个半模式对话框有处理它的事件的机会。进程对话框（例如<a href="qprogressdialog.html">QProgressDialog</a>）就是一个实例，在你想让用户能够和进程对话框交互的地方那个，例如撤销一个长期运行的操作，但是需要实际上执行这个操作。半模式对话框模式标记被设置为真并且调用<a href="#show">show</a>()函数来被显示。
+</ol>
+<p> <a name="default"></a>
+<h3> 默认按钮
+</h3>
+<a name="1"></a><p> 对话框的“默认”按钮适当用户按下回车键或者换行键时被按下的按钮。这个按钮用来表示用户接受对话框的设置并且希望关闭这个对话框。使用<a href="qpushbutton.html#setDefault">QPushButton::setDefault</a>()、<a href="qpushbutton.html#isDefault">QPushButton::isDefault</a>()和<a href="qpushbutton.html#autoDefault">QPushButton::autoDefault</a>()来设置并且控制对话框的默认按钮。
+<p> <a name="extensibility"></a>
+<h3> 扩展性
+</h3>
+<a name="1-1"></a><p> 扩展性是可以用两种方式来显示对话框：一个局部对话框用来显示通常最常用的选项，和一个显示所有选项的完全对话框。通常可扩展的对话框将初始化为一个局部对话框，但是有一个“更多”按钮。如果用户点击这个“更多”按钮，完全对话框将会出现。扩展性是由<a href="#setExtension">setExtension</a>()、<a href="#setOrientation">setOrientation</a>()和<a href="#showExtension">showExtension</a>()。
+<p> <a name="return"></a>
+<h3> 返回值（模式对话框）
+</h3>
+<a name="1-2"></a><p> 模式对话框通常用在需要返回值的地方，例如需要分清用户按下“OK”还是“Cancel”。对话框可以通过调用<a href="#accept">accept</a>()或<a href="#reject">reject</a>()槽来被关闭，并且<a href="#exec">exec</a>()将返回适当的<a href="#DialogCode-enum">Accepted</a>或<a href="#DialogCode-enum">Rejected</a>。exec()返回这个对话框的结果。如果窗口还没有被销毁，这个结果也可以通过<a href="#result">result</a>()得到。如果<a href="qt.html#WidgetFlags-enum">WDestructiveClose</a>标记被设置，那么当exec()返回时，对话框被删除。
+<p> <a name="examples"></a>
+<h3> 实例
+</h3>
+<a name="1-3"></a><p> 模式对话框。
+<p> 
+
+<pre>        <a href="qfiledialog.html">QFileDialog</a> *dlg = new <a href="qfiledialog.html">QFileDialog</a>( workingDirectory,
+                <a href="qstring.html#QString-null">QString::null</a>, 0, 0, TRUE );
+    <a name="x2100"></a>    dlg-&gt;<a href="qwidget.html#setCaption">setCaption</a>( QFileDialog::<a href="qobject.html#tr">tr</a>( "Open" ) );
+    <a name="x2098"></a>    dlg-&gt;<a href="qfiledialog.html#setMode">setMode</a>( QFileDialog::ExistingFile );
+        <a href="qstring.html">QString</a> result;
+    <a name="x2096"></a>    if ( dlg-&gt;<a href="#exec">exec</a>() == QDialog::<a href="#DialogCode-enum">Accepted</a> ) {
+    <a name="x2097"></a>        result = dlg-&gt;<a href="qfiledialog.html#selectedFile">selectedFile</a>();
+    <a name="x2099"></a>        workingDirectory = dlg-&gt;<a href="qfiledialog.html#url">url</a>();
+        }
+        delete dlg;
+        return result;
+</pre>
+<p> 非模式对话框。在<a href="#show">show</a>()调用之后，控制返回到主事件循环中。
+
+<pre>    int main( int argc, char **argv )
+    {
+        <a href="qapplication.html">QApplication</a> a( argc, argv );
+</pre><pre>        int scale = 10;
+</pre><pre>        LifeDialog *life = new LifeDialog( scale );
+    <a name="x2103"></a>    a.<a href="qapplication.html#setMainWidget">setMainWidget</a>( life );
+    <a name="x2104"></a>    life-&gt;<a href="qwidget.html#setCaption">setCaption</a>("Qt Example - Life");
+    <a name="x2105"></a>    life-&gt;<a href="qwidget.html#show">show</a>();
+</pre><pre>    <a name="x2102"></a>    return a.<a href="qapplication.html#exec">exec</a>();
+    }
+</pre>
+<p> 半模式对话框的实例请参考<a href="qprogressdialog.html">QProgressDialog</a>文档。
+<p> <p>请参考<a href="qtabdialog.html">QTabDialog</a>、<a href="qwidget.html">QWidget</a>、<a href="qprogressdialog.html">QProgressDialog</a>、<a href="guibooks.html#fowler">GUI Design Handbook: Dialogs, Standard</a>、<a href="abstractwidgets.html">抽象窗口部件类</a>和<a href="dialogs.html">对话框类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="DialogCode-enum"></a>QDialog::DialogCode</h3> 
+<p> 模式对话框返回的值。
+<ul>
+<li><tt>QDialog::Accepted</tt>
+<li><tt>QDialog::Rejected</tt>
+</ul><p> 
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QDialog"></a>QDialog::QDialog ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent = 0, const&nbsp;char&nbsp;*&nbsp;name = 0, bool&nbsp;modal = FALSE, WFlags&nbsp;f = 0 )
+</h3>
+构造一个父对象为<em>parent</em>、名称为<em>name</em>的对话框。
+<p> 如果<em>modal</em>为假（默认），这个对话框是非模式的并且应该使用<a href="#show">show</a>()来被显示。如果<em>modal</em>为真，这个对话框使用<a href="#exec">exec</a>()来被显示，则它是模式的，也就是说会阻塞这个应用程序中其它窗口的输入。如果<em>modal</em>为真并且使用show()来被显示，则它是半模式的。
+<p> 窗口部件<em>f</em>将被传递给<a href="qwidget.html">QWidget</a>的构造函数。
+<p> 如果，例如，我们不想要对话框的标题栏中“这是什么”按钮，在<em>f</em>中传递WStyle_Customize | WStyle_NormalBorder | WStyle_Title | WStyle_SysMenu。
+<p> 我们建议你传递一个非空的父对象。
+<p> <p>请参考<a href="qwidget.html#setWFlags">QWidget::setWFlags</a>()和<a href="qt.html#WidgetFlags-enum">Qt::WidgetFlags</a>。
+
+<h3 class=fn><a name="~QDialog"></a>QDialog::~QDialog ()
+</h3>
+销毁这个对话框，删除它所有的子对象。
+
+<h3 class=fn>void <a name="accept"></a>QDialog::accept ()<tt> [虚 保护 槽]</tt>
+</h3>
+隐藏模式对话框并且设置结果代码为<a href="#DialogCode-enum">Accepted</a>。
+<p>请参考<a href="#reject">reject</a>()和<a href="#done">done</a>()。
+<p>实例：<a href="tutorial2-08.html#x2509">chart/setdataform.cpp</a>。
+
+<h3 class=fn>void <a name="done"></a>QDialog::done ( int&nbsp;r )<tt> [虚 保护 槽]</tt>
+</h3> 
+隐藏模式对话框并且设置结果代码为<em>r</em>。这将使用本地事件循环来完成，并且<a href="#exec">exec</a>()返回<em>r</em>。
+<p> 如果对话框使用<a href="qt.html#WidgetFlags-enum">WDestructiveClose</a>来被设置，<a href="#done">done</a>()也会销毁这个对话框。如果对话框是应用程序的主窗口部件，那么应用程序终止。
+<p> <p>请参考<a href="#accept">accept</a>()、<a href="#reject">reject</a>()、<a href="qapplication.html#mainWidget">QApplication::mainWidget</a>()和<a href="qapplication.html#quit">QApplication::quit</a>()。
+
+<h3 class=fn>int <a name="exec"></a>QDialog::exec ()<tt> [槽]</tt>
+</h3>
+执行模式对话框。控制传递给这个对话框一直到用户关闭它，在本地事件循环完成的点并且函数返回<a href="#DialogCode-enum">DialogCode</a>结果。在用户关闭这个对话框之前，不能和同一应用程序中的其它窗口交互。对于非模式或半模式对话框请使用<a href="#show">show</a>()。
+<p> <p>请参考<a href="#show">show</a>()和<a href="#result">result</a>()。
+<p>实例：<a href="canvas-chart-example.html#x2594">chart/chartform.cpp</a>、<a href="i18n-example.html#x1925">i18n/main.cpp</a>、<a href="qdialog.html#x2096">network/networkprotocol/view.cpp</a>、a href="qdir-example.html#x1805">qdir/qdir.cpp</a>、<a href="showimg-example.html#x1254">showimg/showimg.cpp</a>和<a href="wizard-example.html#x16">wizard/main.cpp</a>。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="extension"></a>QDialog::extension () const
+</h3>
+返回对话框的扩展或者如果没有扩展被定义返回0。
+<p> <p>请参考<a href="#setExtension">setExtension</a>()。
+
+<h3 class=fn>bool <a name="isSizeGripEnabled"></a>QDialog::isSizeGripEnabled () const
+</h3>
+<p>如果大小控制生效，返回真，否则返回假。详细情况请参考<a href="qdialog.html#sizeGripEnabled-prop">“sizeGripEnabled”</a>属性。
+
+<h3 class=fn><a href="qt.html#Orientation-enum">Orientation</a> <a name="orientation"></a>QDialog::orientation () const
+</h3>
+返回对话框的扩展方向。
+<p> <p>请参考<a href="#setOrientation">setOrientation</a>()。
+
+<h3 class=fn>void <a name="reject"></a>QDialog::reject ()<tt> [虚 保护 槽]</tt>
+</h3>
+隐藏模式对话框并且设置结果代码为<a href="#DialogCode-enum">Rejected</a>。
+<p>请参考<a href="#accept">accept</a>()和<a href="#done">done</a>()。
+
+<h3 class=fn>int <a name="result"></a>QDialog::result () const
+</h3>
+<p> 返回模式对话框的结果代码，<a href="#DialogCode-enum">Accepted</a>或<a href="#DialogCode-enum">Rejected</a>。
+<p> 如果对话框使用<a href="qt.html#WidgetFlags-enum">WDestructiveClose</a>标记构造，不要调用这个函数。（无论如何，<a href="#exec">exec</a>()返回结果代码。）
+
+<h3 class=fn>void <a name="setExtension"></a>QDialog::setExtension ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;extension )
+</h3>
+设置窗口部件<em>extension</em>为对话框的扩展，删除任何以前的扩展。对话框拥有扩展的所有权。注意如果传递0，则任何存在的扩展都将被删除。
+<p> 只有当对话框被隐藏时，这个函数才能被调用。
+<p> <p>请参考<a href="#showExtension">showExtension</a>()、<a href="#setOrientation">setOrientation</a>()和<a href="#extension">extension</a>()。
+
+<h3 class=fn>void <a name="setOrientation"></a>QDialog::setOrientation ( <a href="qt.html#Orientation-enum">Orientation</a>&nbsp;orientation )
+</h3>
+如果<em>orientation</em>是<a href="qt.html#Orientation-enum">Horizontal</a>，扩展将会显示在对话框主区域的右面。如果<em>orientation</em>是<a href="qt.html#Orientation-enum">Vertical</a>，扩展将会显示在对话框主区域的下面。
+<p> <p>请参考<a href="#orientation">orientation</a>()和<a href="#setExtension">setExtension</a>()。
+
+<h3 class=fn>void <a name="setResult"></a>QDialog::setResult ( int&nbsp;i )<tt> [保护]</tt>
+</h3>
+<p> 设置模式对话框的结果代码为<em>i</em>。
+
+<h3 class=fn>void <a name="setSizeGripEnabled"></a>QDialog::setSizeGripEnabled ( bool )
+</h3>
+<p>设置大小控制是否生效。详细情况请参考<a href="qdialog.html#sizeGripEnabled-prop">“sizeGripEnabled”</a>属性。
+
+<h3 class=fn>void <a name="show"></a>QDialog::show ()<tt> [虚]</tt>
+</h3>
+显示非模式或半模式对话框。控制立即返回到调用代码中。
+<p> 对话框没有一个本地事件循环，所以你必须定时地调用<a href="qapplication.html#processEvents">QApplication::processEvents</a>()来使对话框能够得到处理它的事件的机会。
+<p> 如果在构造函数中，模式标记被设置为真，对话框将为<a href="#semimodal">半模式</a>。
+<p> <b>警告：</b>
+<p> 在Qt 2.x中，在一个模式对话框中调用<a href="#show">show</a>()进入一个本地事件循环并且像<a href="#exec">exec</a>()一样工作，但是不返回exec()所返回的结果代码。Trolltech已经一直警告这样做是不被建议的。
+<p> <p>请参考<a href="#exec">exec</a>()。
+<p>实例：<a href="movies-example.html#x445">movies/main.cpp</a>、<a href="showimg-example.html#x1255">showimg/showimg.cpp</a>和<a href="sql.html#x2219">sql/overview/form1/main.cpp</a>。
+<p>从<a href="qwidget.html#show">QWidget</a>中重新实现的。
+
+<h3 class=fn>void <a name="showExtension"></a>QDialog::showExtension ( bool&nbsp;showIt )<tt> [保护 槽]</tt>
+</h3>
+如果<em>showIt</em>为真，对话框的扩展被显示，否则扩展被隐藏。
+<p> 这个槽通常被连接到<a href="qpushbutton.html">QPushButton</a>的<a href="qbutton.html#toggled">QButton::toggled</a>()信号上。
+<p> 如果对话框不是可视的，或者没有扩展，则什么都不会发生。
+<p> <p>请参考<a href="#show">show</a>()、<a href="#setExtension">setExtension</a>()和<a href="#setOrientation">setOrientation</a>()。
+
+<hr><h2>属性文档</h2>
+<h3 class=fn>bool <a name="sizeGripEnabled-prop"></a>sizeGripEnabled</h3>
+<p>这个属性保存的是大小控制是否生效。
+<p>当这个属性生效时，<a href="qsizegrip.html">QSizeGrip</a>被放置到对话框的右下角。默认情况下，大小控制失效。
+<p>通过<a href="#setSizeGripEnabled">setSizeGripEnabled</a>()设置属性值并且通过<a href="#isSizeGripEnabled">isSizeGripEnabled</a>()来获得属性值。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

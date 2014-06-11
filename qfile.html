@@ -1,0 +1,397 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QFile类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QFile类参考</h1>
+
+<p>QFile类是一个操作文件的输入/输出设备。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qfile-h.html">qfile.h</a>&gt;</tt>
+<p>继承了 <a href="qiodevice.html">QIODevice</a>。
+<p><a href="qfile-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QFile"><b>QFile</b></a> ()</div></li>
+<li><div class=fn><a href="#QFile-2"><b>QFile</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;name )</div></li>
+<li><div class=fn><a href="#~QFile"><b>~QFile</b></a> ()</div></li>
+<li><div class=fn>QString <a href="#name"><b>name</b></a> () const</div></li>
+<li><div class=fn>void <a href="#setName"><b>setName</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;name )</div></li>
+<li><div class=fn>typedef QCString&nbsp;(*&nbsp;<a href="#EncoderFn"><b>EncoderFn</b></a>&nbsp;)&nbsp;(&nbsp;const&nbsp;QString&nbsp;&amp;&nbsp;fileName&nbsp;)</div></li>
+<li><div class=fn>typedef QString&nbsp;(*&nbsp;<a href="#DecoderFn"><b>DecoderFn</b></a>&nbsp;)&nbsp;(&nbsp;const&nbsp;QCString&nbsp;&amp;&nbsp;localfileName&nbsp;)</div></li>
+<li><div class=fn>bool <a href="#exists-2"><b>exists</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#remove"><b>remove</b></a> ()</div></li>
+<li><div class=fn>virtual bool <a href="#open"><b>open</b></a> ( int&nbsp;m )</div></li>
+<li><div class=fn>bool <a href="#open-2"><b>open</b></a> ( int&nbsp;m, FILE&nbsp;*&nbsp;f )</div></li>
+<li><div class=fn>bool <a href="#open-3"><b>open</b></a> ( int&nbsp;m, int&nbsp;f )</div></li>
+<li><div class=fn>virtual void <a href="#close"><b>close</b></a> ()</div></li>
+<li><div class=fn>virtual void <a href="#flush"><b>flush</b></a> ()</div></li>
+<li><div class=fn>virtual Offset <a href="#size"><b>size</b></a> () const</div></li>
+<li><div class=fn>virtual Offset <a href="#at-2"><b>at</b></a> () const</div></li>
+<li><div class=fn>virtual bool <a href="#at"><b>at</b></a> ( Offset&nbsp;pos )</div></li>
+<li><div class=fn>virtual bool <a href="#atEnd"><b>atEnd</b></a> () const</div></li>
+<li><div class=fn>virtual Q_LONG <a href="#readBlock"><b>readBlock</b></a> ( char&nbsp;*&nbsp;p, Q_ULONG&nbsp;len )</div></li>
+<li><div class=fn>virtual Q_LONG <a href="#readLine"><b>readLine</b></a> ( char&nbsp;*&nbsp;p, Q_ULONG&nbsp;maxlen )</div></li>
+<li><div class=fn>Q_LONG <a href="#readLine-2"><b>readLine</b></a> ( QString&nbsp;&amp;&nbsp;s, Q_ULONG&nbsp;maxlen )</div></li>
+<li><div class=fn>virtual int <a href="#getch"><b>getch</b></a> ()</div></li>
+<li><div class=fn>virtual int <a href="#putch"><b>putch</b></a> ( int&nbsp;ch )</div></li>
+<li><div class=fn>virtual int <a href="#ungetch"><b>ungetch</b></a> ( int&nbsp;ch )</div></li>
+<li><div class=fn>int <a href="#handle"><b>handle</b></a> () const</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>QCString <a href="#encodeName"><b>encodeName</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;fileName )</div></li>
+<li><div class=fn>QString <a href="#decodeName"><b>decodeName</b></a> ( const&nbsp;QCString&nbsp;&amp;&nbsp;localFileName )</div></li>
+<li><div class=fn>void <a href="#setEncodingFunction"><b>setEncodingFunction</b></a> ( EncoderFn&nbsp;f )</div></li>
+<li><div class=fn>void <a href="#setDecodingFunction"><b>setDecodingFunction</b></a> ( DecoderFn&nbsp;f )</div></li>
+<li><div class=fn>bool <a href="#exists"><b>exists</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;fileName )</div></li>
+<li><div class=fn>bool <a href="#remove-2"><b>remove</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;fileName )</div></li>
+</ul>
+<h2>重要的继承成员</h2>
+<ul>
+<li><div class=fn>virtual QByteArray <a href="#readAll"><b>readAll</b></a> ()</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QFile类是一个操作文件的输入/输出设备。
+<p> 
+
+<p> QFile是用来读写二进制文件和文本文件的输入/输出设备。QFile可以自己单独被使用，但是如果和<a href="qdatastream.html">QDataStream</a>或<a href="qtextstream.html">QTextStream</a>一起使用将更加方便。
+<p> 文件名通常可以通过构造函数来传递，但也可以使用<a href="#setName">setName</a>()来设置。你可以通过<a href="#exists">exists</a>()来检查一个文件是否存在并且可以通过<a href="#remove">remove</a>()来移去一个文件。
+<p> 文件可以用<a href="#open">open</a>()来打开、用<a href="#close">close</a>()来关闭、用<a href="#flush">flush</a>()来刷新。数据通常可以使用QDataStream或者QTextStream进行读写，但你也可以使用<a href="#readBlock">readBlock</a>()和<a href="#readLine">readLine</a>()来读，使用<a href="qiodevice.html#writeBlock">writeBlock</a>()来写。QFile也支持<a href="#getch">getch</a>()、 <a href="#ungetch">ungetch</a>()和<a href="#putch">putch</a>()。
+<p> <a href="#size">size</a>()可以返回文件的大小。你可以通过使用<a href="#at">at</a>()函数得到当前文件位置或者移到一个新的文件位置。如果你到了文件的末尾，<a href="#atEnd">atEnd</a>()返回真。<a href="#handle">handle</a>()返回文件句柄。
+<p> 这里是一个使用<a href="qtextstream.html">QTextStream</a>来一行一行地读取一个文本文件的代码段。它会把每一行带上一个行号打印出来。
+<pre>
+    <a href="qstringlist.html">QStringList</a> lines;
+    QFile file( "file.txt" );
+    if ( file.<a href="#open">open</a>( IO_ReadOnly ) ) {
+        <a href="qtextstream.html">QTextStream</a> stream( &amp;file );
+        <a href="qstring.html">QString</a> line;
+        int n = 1;
+        while ( !stream.<a href="qtextstream.html#eof">eof</a>() ) {
+            line = stream.<a href="qtextstream.html#readLine">readLine</a>(); // 不包括“\n”的一行文本
+            printf( "%3d: %s\n", n++, line.<a href="qstring.html#latin1">latin1</a>() );
+            lines += line;
+        }
+        file.<a href="#close">close</a>();
+    }
+  </pre>
+ 
+<p> 写文本也很容易（假设我们有一个行的字符串列表要写）：
+<pre>
+    QFile file( "file.txt" );
+    if ( file.<a href="#open">open</a>( IO_WriteOnly ) ) {
+        <a href="qtextstream.html">QTextStream</a> stream( &amp;file );
+        for ( QStringList::Iterator it = lines.begin(); it != lines.end(); ++it )
+            stream &lt;&lt; *it &lt;&lt; "\n";
+        file.<a href="#close">close</a>();
+    }
+  </pre>
+ 
+<p> <a href="qfileinfo.html">QFileInfo</a>类控制文件的详细信息，比如访问权限、文件日期和文件类型。
+<p> <a href="qdir.html">QDir</a>类管理目录和文件名列表。
+<p> Qt使用Unicode文件名。如果你想在Unix系统上使用你自己的输入/输出，你可以使用<a href="#encodeName">encodeName</a>()（和<a href="#decodeName">decodeName</a>()）来把文件名转换为本地编码。
+<p> 
+<p> <p>也可以参考<a href="qdatastream.html">QDataStream</a>、<a href="qtextstream.html">QTextStream</a>和<a href="io.html">输入/输出和网络</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="DecoderFn"></a>QFile::DecoderFn</h3>
+
+<p> 被<a href="#setDecodingFunction">QFile::setDecodingFunction</a>()使用。
+
+<h3 class=fn><a name="EncoderFn"></a>QFile::EncoderFn</h3>
+
+<p> 被<a href="#setEncodingFunction">QFile::setEncodingFunction</a>()使用。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QFile"></a>QFile::QFile ()
+</h3>
+构造一个没有名称的QFile。
+
+<h3 class=fn><a name="QFile-2"></a>QFile::QFile ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;name )
+</h3>
+构造一个文件名为<em>name</em>的QFile。
+<p>也可以参考<a href="#setName">setName</a>()。
+
+<h3 class=fn><a name="~QFile"></a>QFile::~QFile ()
+</h3>
+析构QFile。调用<a href="#close">close</a>()。
+
+<h3 class=fn>bool <a name="at"></a>QFile::at ( <a href="qiodevice.html#Offset">Offset</a>&nbsp;pos )<tt> [虚]</tt>
+</h3>
+设置文件索引到<em>pos</em>。如果成功，返回真，否则返回假。
+<p> 实例：
+<pre>
+    QFile f( "data.bin" );
+    f.<a href="#open">open</a>( <a href="qfile.html#open">IO_ReadOnly</a> );                      // 索引设置为0
+    f.<a href="#at">at</a>( 100 );                                // 设置索引为100
+    f.<a href="#at">at</a>( f.<a href="#at">at</a>()+50 );                          // 设置索引为150
+    f.<a href="#at">at</a>( f.<a href="#size">size</a>()-80 );                        // 设置索引为EOF之前的80
+    f.<a href="#close">close</a>();
+  </pre>
+ 
+<p> 不带参数使用<a href="#at">at</a>()可以重新得到文件的位移。
+<p> <b>警告：</b>如果文件是使用<a href="qfile.html#open">IO_Append</a>方式打开（<a href="#open">open</a>()）的话，结果是未定义的。
+<p> <p>也可以参考<a href="#size">size</a>()和<a href="#open">open</a>()。
+<p>从<a href="qiodevice.html#at-2">QIODevice</a>中重新实现的。
+
+<h3 class=fn><a href="qiodevice.html#Offset">Offset</a> <a name="at-2"></a>QFile::at () const<tt> [虚]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回文件中的位置。
+<p>也可以参考<a href="#size">size</a>()。
+<p>从<a href="qiodevice.html#at">QIODevice</a>中重新实现的。
+
+<h3 class=fn>bool <a name="atEnd"></a>QFile::atEnd () const<tt> [虚]</tt>
+</h3>
+如果到达文件的末尾，返回真，否则返回假。
+<p>也可以参考<a href="#size">size</a>()。
+<p>从<a href="qiodevice.html#atEnd">QIODevice</a>中重新实现的。
+
+<h3 class=fn>void <a name="close"></a>QFile::close ()<tt> [虚]</tt>
+</h3>
+关闭一个打开的文件。
+<p> 如果一个文件是使用一个存在的文件句柄打开的，那么它不是关闭的。如果这个存在的文件句柄是一个<tt>FILE*</tt>，这个文件被刷新。如果这个存在的文件句柄是一个<tt>int</tt>文件描述符，那么对这个文件将没有操作。
+<p> 一些“在后面写的”文件系统也许会在关闭文件时报告一个未详细说明的错误。这些错误只表明在上一次打开（<a href="#open">open</a>()）之后也许发生了一些错误。在这种情况下，<a href="qiodevice.html#status">status</a>()会在关闭之后（<a href="#close">close</a>()）报告<a href="qiodevice.html#status">IO_UnspecifiedError</a>，否则是<a href="qiodevice.html#status">IO_Ok</a>。
+<p> <p>也可以参考<a href="#open">open</a>()和<a href="#flush">flush</a>()。
+<p>实例：<a href="simple-application-example.html#x1510">application/application.cpp</a>、<a href="tutorial2-07.html#x2495">chart/chartform_files.cpp</a>、<a href="helpviewer-example.html#x988">helpviewer/helpwindow.cpp</a>、<a href="mdi-example.html#x2005">mdi/application.cpp</a>、<a href="qdir-example.html#x1807">qdir/qdir.cpp</a>、<a href="qwerty-example.html#x360">qwerty/qwerty.cpp</a>和<a href="outliner-example.html#x1903">xml/outliner/outlinetree.cpp</a>。
+<p>从<a href="qiodevice.html#close">QIODevice</a>中重新实现的。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="decodeName"></a>QFile::decodeName ( const&nbsp;<a href="qcstring.html">QCString</a>&nbsp;&amp;&nbsp;localFileName )<tt> [静态]</tt>
+</h3>
+这个将会使用<em>localFileName</em>做与<a href="#encodeName">QFile::encodeName</a>()相反的操作。
+<p> <p>也可以参考<a href="#setDecodingFunction">setDecodingFunction</a>()。
+
+<h3 class=fn><a href="qcstring.html">QCString</a> <a name="encodeName"></a>QFile::encodeName ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;fileName )<tt> [静态]</tt>
+</h3>
+当你使用QFile时，在Qt中<a href="qfileinfo.html">QFileInfo</a>和<a href="qdir.html">QDir</a>访问文件系统，你可以使用Unicode文件名。在Unix上，这些文件名被转换为8位的编码。如果你想在Unix上使用你自己的文件输入/输出，你应该使用这个函数来转换文件名。在Windows NT上，Unicode文件名在文件系统中是直接被支持的并且这个函数应该避免使用。在Windows 95上，在这时候非Latin1的场所设置是不被支持的。
+<p> 默认情况下，这个函数把<em>fileName</em>转换为本地的8位编码，这取决于用户的场所设置。对于用户选择的文件名这足够了。应用程序中的文件名硬编码只是需要使用7位ASCII文件名字符。
+<p> 这种转换方案可以使用<a href="#setEncodingFunction">setEncodingFunction</a>()来改变。如果你需要给用户一个存储文件名为utf-8等等情况下，这也许很有用，但是这些文件名可能在这之后对其它应用程序来说是不可识别的。
+<p> <p>也可以参考<a href="#decodeName">decodeName</a>()。
+
+<h3 class=fn>bool <a name="exists"></a>QFile::exists ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;fileName )<tt> [静态]</tt>
+</h3>
+如果给定的文件<em>fileName</em>存在，返回真，否则返回假。
+<p>实例：<a href="tutorial2-05.html#x2468">chart/chartform.cpp</a>、<a href="dirview-example.html#x1714">dirview/dirview.cpp</a>和<a href="helpviewer-example.html#x989">helpviewer/helpwindow.cpp</a>。
+
+<h3 class=fn>bool <a name="exists-2"></a>QFile::exists () const
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 如果这个文件存在，返回真，否则返回假。
+<p>也可以参考<a href="#name">name</a>()。
+
+<h3 class=fn>void <a name="flush"></a>QFile::flush ()<tt> [虚]</tt>
+</h3>
+刷新文件缓存到磁盘。
+<p> <a href="#close">close</a>()也刷新文件缓存。
+<p>从<a href="qiodevice.html#flush">QIODevice</a>中重新实现的。
+
+<h3 class=fn>int <a name="getch"></a>QFile::getch ()<tt> [虚]</tt>
+</h3>
+从文件中读取一个单字节/字符。
+<p> 返回所读的字节/字符，如果到达文件的末尾，返回-1。
+<p> <p>也可以参考<a href="#putch">putch</a>()和<a href="#ungetch">ungetch</a>()。
+<p>从<a href="qiodevice.html#getch">QIODevice</a>中重新实现的。
+
+<h3 class=fn>int <a name="handle"></a>QFile::handle () const
+</h3>
+返回这个文件的文件句柄。
+<p> 如果是一个小的正整数，可以用在像fdopen()和fcntl()这样的C库函数中，也可以用在<a href="qsocketnotifier.html">QSocketNotifier</a>中。
+<p> 如果这个文件没有被打开或者存在错误，<a href="#handle">handle</a>()返回-1。
+<p> <p>也可以参考<a href="qsocketnotifier.html">QSocketNotifier</a>。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="name"></a>QFile::name () const
+</h3>
+返回由<a href="#setName">setName</a>()设置的名称。
+<p>也可以参考<a href="#setName">setName</a>()和<a href="qfileinfo.html#fileName">QFileInfo::fileName</a>()。
+
+<h3 class=fn>bool <a name="open"></a>QFile::open ( int&nbsp;m )<tt> [虚]</tt>
+</h3>
+使用<em>m</em>模式和当前指定的文件名打开文件。如果成功，返回真，否则返回假。
+<p> <!-- index IO_Raw --><!-- index IO_ReadOnly --><!-- index IO_WriteOnly --><!-- index IO_ReadWrite --><!-- index IO_Append --><!-- index IO_Truncate --><!-- index IO_Translate -->
+<p> 模式参数<em>m</em>必须是下列标记的组合：
+<ul>
+<li> <a href="qfile.html#open">IO_Raw</a> 指定直接的（非缓存的）文件访问。
+<li> <a href="qfile.html#open">IO_ReadOnly</a> 以只读模式打开文件。
+<li> <a href="qfile.html#open">IO_WriteOnly</a> 以只写模式（并且截短）打开文件。
+<li> <a href="qfile.html#open">IO_ReadWrite</a> 以读/写模式打开文件，等于<tt>(IO_ReadOnly | IO_WriteOnly)</tt>。
+<li> <a href="qfile.html#open">IO_Append</a> 以附加的模式打开文件。当你想向日志文件写些东西时这个模式非常有用。文件索引被设置到文件末尾。注意如果你在附加模式中使用<a href="#at">at</a>()定位文件索引，结果将是为定义的。
+<li> <a href="qfile.html#open">IO_Truncate</a> 截短文件。
+<li> <a href="qfile.html#open">IO_Translate</a> 在MS-DOS、Windows和OS/2下对文本文件翻译回车和换行。
+</ul>
+<p> 直接访问模式在输入/输出的块操作使用4千字节或更大的情况下使用最好。当每次读小量数据时，缓存访问工作的更好。
+<p> <strong>重要：</strong>当使用缓存的文件工作时，数据没有被立刻写到文件中。调用<a href="#flush">flush</a>()可以确保数据被真正地写完。
+<p> <b>警告：</b>如果你有一个缓存文件以同时读写方式打开，你不要在一次输入操作之后立即输出，反之亦然。你必须在输入和输出操作之间调用flush()或者一次文件定位操作，比如seek()，否则缓存中可能会包含无用信息。
+<p> 如果文件不存在并且指定<a href="qfile.html#open">IO_WriteOnly</a>或<a href="qfile.html#open">IO_ReadWrite</a>时，文件被创建。
+<p> 实例：
+<pre>
+    QFile f1( "/tmp/data.bin" );
+    QFile f2( "readme.txt" );
+    f1.<a href="#open">open</a>( IO_Raw | IO_ReadWrite | IO_Append );
+    f2.<a href="#open">open</a>( IO_ReadOnly | IO_Translate );
+  </pre>
+<p> <p>也可以参考<a href="#name">name</a>()、 <a href="#close">close</a>()、<a href="qiodevice.html#isOpen">isOpen</a>()和<a href="#flush">flush</a>()。
+<p>实例：<a href="qaction-application-example.html#x1067">action/application.cpp</a>、<a href="simple-application-example.html#x1511">application/application.cpp</a>、<a href="tutorial2-07.html#x2496">chart/chartform_files.cpp</a>、<a href="helpviewer-example.html#x990">helpviewer/helpwindow.cpp</a>、<a href="qdir-example.html#x1808">qdir/qdir.cpp</a>、<a href="qwerty-example.html#x361">qwerty/qwerty.cpp</a>和<a href="outliner-example.html#x1904">xml/outliner/outlinetree.cpp</a>。
+<p>从<a href="qiodevice.html#open">QIODevice</a>中重新实现的。
+
+<h3 class=fn>bool <a name="open-2"></a>QFile::open ( int&nbsp;m, FILE&nbsp;*&nbsp;f )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 使用<em>m</em>模式和一个存在的文件句柄<em>f</em>打开文件。如果成功，返回真，否则返回假。
+<p> 实例：
+<pre>
+    #include &lt;stdio.h&gt;
+
+    void printError( const char* msg )
+    {
+        QFile f;
+        f.<a href="#open">open</a>( <a href="qfile.html#open">IO_WriteOnly</a>, stderr );
+        f.<a href="qiodevice.html#writeBlock">writeBlock</a>( msg, qstrlen(msg) );      // 写到标准错误输出（stderr）
+        f.<a href="#close">close</a>();
+    }
+  </pre>
+<p> 当使用这个函数打开一个QFile时，<a href="#close">close</a>()并不真正关闭这个文件，只是刷新它。
+<p> <b>警告：</b>如果<em>f</em>是<tt>标准输入（stdin）</tt>、<tt>标准输出（stdout）</tt>、<tt>标准错误输出（stderr）</tt>，你也许不能搜索。更详细的信息请看<a href="qiodevice.html#isSequentialAccess">QIODevice::isSequentialAccess</a>()。
+<p> <p>也可以参考<a href="#close">close</a>()。
+
+<h3 class=fn>bool <a name="open-3"></a>QFile::open ( int&nbsp;m, int&nbsp;f )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 使用<em>m</em>模式和一个存在的文件描述符<em>f</em>打开文件。如果成功，返回真，否则返回假。
+<p> 当使用这个函数打开一个QFile时，<a href="#close">close</a>()并不真正关闭这个文件。
+<p> 使用这个函数打开一个QFile时，它被自动设置为直接模式，这就意味着文件输入/输出函数是慢的。如果你需要更好的执行效率，请你试着使用其它打开函数。
+<p> <b>警告：</b>如果<em>f</em>是0（stdin）、1（stdout）或2（stderr）其中之一时，你也许不能搜索。<a href="#size">size</a>()被设置为<tt>INT_MAX</tt>（在limits.h文件中）。
+<p> <p>也可以参考<a href="#close">close</a>()。
+
+<h3 class=fn>int <a name="putch"></a>QFile::putch ( int&nbsp;ch )<tt> [虚]</tt>
+</h3>
+写字符<em>ch</em>到文件。
+<p> 返回<em>ch</em>，或者如果发生错误，返回-1。
+<p> <p>也可以参考<a href="#getch">getch</a>()和<a href="#ungetch">ungetch</a>()。
+<p>从<a href="qiodevice.html#putch">QIODevice</a>中重新实现的。
+
+<h3 class=fn><a href="qbytearray.html">QByteArray</a> <a name="readAll"></a>QIODevice::readAll ()<tt> [虚]</tt>
+</h3>
+这个方便的函数返回这个设备中的所有剩余数据。
+
+<h3 class=fn>Q_LONG <a name="readBlock"></a>QFile::readBlock ( char&nbsp;*&nbsp;p, Q_ULONG&nbsp;len )<tt> [虚]</tt>
+</h3>
+从这个文件中读取最多<em>maxlen</em>字节到<em>p</em>并且返回实际读取的字节数量。
+<p> 如果发生严重错误，返回-1。
+<p><b>警告：</b>当一个缓存文件为了读写而打开时，我们已经在使用一些C库时遇到了问题。如果在一个写操作后立即执行一个读操作，读缓存中就会包含无用信息。更可怕的是，一些无用信息被写到文件中。在<a href="#readBlock">readBlock</a>()之前调用<a href="#flush">flush</a>()就可以解决这个问题。
+<p> <p>也可以参考<a href="qiodevice.html#writeBlock">writeBlock</a>()。
+<p>实例：<a href="qwerty-example.html#x362">qwerty/qwerty.cpp</a>。
+<p>从<a href="qiodevice.html#readBlock">QIODevice</a>中重新实现的。
+
+<h3 class=fn>Q_LONG <a name="readLine"></a>QFile::readLine ( char&nbsp;*&nbsp;p, Q_ULONG&nbsp;maxlen )<tt> [虚]</tt>
+</h3>
+读一行文本。
+<p> 从这个文本中读取最多<em>maxlen</em>字节或者行结束符到<em>p</em>，哪个先发生以哪个为准。返回实际读取的字节数量，或者如果发生错误，返回-1。换行将不会被省略。
+<p> 这个函数只对缓存文件有效。避免在以<a href="qfile.html#open">IO_Raw</a>标记方式打开的文件中使用<a href="#readLine">readLine</a>()。
+<p> <p>也可以参考<a href="#readBlock">readBlock</a>()和<a href="qtextstream.html#readLine">QTextStream::readLine</a>()。
+<p>从<a href="qiodevice.html#readLine">QIODevice</a>中重新实现的。
+
+<h3 class=fn>Q_LONG <a name="readLine-2"></a>QFile::readLine ( <a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;s, Q_ULONG&nbsp;maxlen )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 读一行文本。
+<p> 从这个文本中读取最多<em>maxlen</em>字节或者行结束符到字符串<em>s</em>，哪个先发生以哪个为准。返回实际读取的字节数量，或者如果发生错误，返回-1。换行将不会被省略。
+<p> 这个函数只对缓存文件有效。避免在以<a href="qfile.html#open">IO_Raw</a>标记方式打开的文件中使用<a href="#readLine">readLine</a>()。
+<p> 注意这个字符串只能作为无格式的Latin1字节来读，不是Unicode。
+<p> <p>也可以参考<a href="#readBlock">readBlock</a>()和<a href="qtextstream.html#readLine">QTextStream::readLine</a>()。
+
+<h3 class=fn>bool <a name="remove"></a>QFile::remove ()
+</h3>
+移去当前指定文件名的文件。如果成功，返回真，否则返回假。
+<p> 在文件被移去之前，它被关闭。
+
+<h3 class=fn>bool <a name="remove-2"></a>QFile::remove ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;fileName )<tt> [静态]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 移去文件<em>fileName</em>。如果成功，返回真，否则返回假。
+
+<h3 class=fn>void <a name="setDecodingFunction"></a>QFile::setDecodingFunction ( <a href="qfile.html#DecoderFn">DecoderFn</a>&nbsp;f )<tt> [静态]</tt>
+</h3>
+设置8位文件名的译码函数位<em>f</em>。默认使用本地指定的8位编码。
+<p> <p>也可以参考<a href="#encodeName">encodeName</a>()和<a href="#decodeName">decodeName</a>()。
+
+<h3 class=fn>void <a name="setEncodingFunction"></a>QFile::setEncodingFunction ( <a href="qfile.html#EncoderFn">EncoderFn</a>&nbsp;f )<tt> [静态]</tt>
+</h3>
+设置Unicode文件名的编码函数为<em>f</em>。默认使用本地指定的8位编码。
+<p> <p>也可以参考<a href="#encodeName">encodeName</a>()。
+
+<h3 class=fn>void <a name="setName"></a>QFile::setName ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;name )
+</h3>
+设置文件的名称为<em>name</em>。这个名称可以不包含路径，也可以包含相对路径或者绝对路径。
+<p> 如果文件已经被打开，不要调用这个函数。
+<p> 如果文件名没有路径或者使用相对路径，这是使用的路径就是应用程序在<em>调用<a href="#open">open</a>()的时候</em>的当前路径。
+<p> 实例：
+<pre>
+     QFile f;
+     QDir::<a href="qdir.html#setCurrent">setCurrent</a>( "/tmp" );
+     f.<a href="#setName">setName</a>( "readme.txt" );
+     QDir::<a href="qdir.html#setCurrent">setCurrent</a>( "/home" );
+     f.<a href="#open">open</a>( <a href="qfile.html#open">IO_ReadOnly</a> );        // 在Unix下打开“/home/readme.txt”
+  </pre>
+ 
+<p> 注意Qt支持在所有的操作系统中使用目录分隔符“/”。
+<p> <p>也可以参卡<a href="#name">name</a>()、<a href="qfileinfo.html">QFileInfo</a>和<a href="qdir.html">QDir</a>。
+
+<h3 class=fn><a href="qiodevice.html#Offset">Offset</a> <a name="size"></a>QFile::size () const<tt> [虚]</tt>
+</h3>
+返回文件大小。
+<p>也可以参考<a href="#at">at</a>()。
+<p>实例：<a href="statistics-example.html#x2628">table/statistics/statistics.cpp</a>。
+<p>从<a href="qiodevice.html#size">QIODevice</a>中重新实现的。
+
+<h3 class=fn>int <a name="ungetch"></a>QFile::ungetch ( int&nbsp;ch )<tt> [虚]</tt>
+</h3>
+<p> 把字符<em>ch</em>放回到这个文件中并且如果索引位置不是零的话，减一。
+<p> 这个函数正常地被调用就是“撤销”<a href="#getch">getch</a>()操作。
+<p> 返回<em>ch</em>，否则，如果发生错误，返回-1。
+<p> <p>也可以参考<a href="#getch">getch</a>()和<a href="#putch">putch</a>()。
+<p>从<a href="qiodevice.html#ungetch">QIODevice</a>中重新实现的。
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

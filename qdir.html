@@ -1,0 +1,590 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QDir类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QDir类参考</h1>
+
+<p>QDir类提供了访问目录结构和它们的内容的与平台无关的方式。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qdir-h.html">qdir.h</a>&gt;</tt>
+<p><a href="qdir-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>enum <a href="#FilterSpec-enum"><b>FilterSpec</b></a> { Dirs = 0x001, Files = 0x002, Drives = 0x004, NoSymLinks = 0x008, All = 0x007, TypeMask = 0x00F, Readable = 0x010, Writable = 0x020, Executable = 0x040, RWEMask = 0x070, Modified = 0x080, Hidden = 0x100, System = 0x200, AccessMask = 0x3F0, DefaultFilter = -1 }</div></li>
+<li><div class=fn>enum <a href="#SortSpec-enum"><b>SortSpec</b></a> { Name = 0x00, Time = 0x01, Size = 0x02, Unsorted = 0x03, SortByMask = 0x03, DirsFirst = 0x04, Reversed = 0x08, IgnoreCase = 0x10, DefaultSort = -1 }</div></li>
+<li><div class=fn><a href="#QDir"><b>QDir</b></a> ()</div></li>
+<li><div class=fn><a href="#QDir-2"><b>QDir</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;path, const&nbsp;QString&nbsp;&amp;&nbsp;nameFilter = QString::null, int&nbsp;sortSpec = Name | IgnoreCase, int&nbsp;filterSpec = All )</div></li>
+<li><div class=fn><a href="#QDir-3"><b>QDir</b></a> ( const&nbsp;QDir&nbsp;&amp;&nbsp;d )</div></li>
+<li><div class=fn>virtual <a href="#~QDir"><b>~QDir</b></a> ()</div></li>
+<li><div class=fn>QDir &amp; <a href="#operator-eq"><b>operator=</b></a> ( const&nbsp;QDir&nbsp;&amp;&nbsp;d )</div></li>
+<li><div class=fn>QDir &amp; <a href="#operator-eq-2"><b>operator=</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;path )</div></li>
+<li><div class=fn>virtual void <a href="#setPath"><b>setPath</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;path )</div></li>
+<li><div class=fn>virtual QString <a href="#path"><b>path</b></a> () const</div></li>
+<li><div class=fn>virtual QString <a href="#absPath"><b>absPath</b></a> () const</div></li>
+<li><div class=fn>virtual QString <a href="#canonicalPath"><b>canonicalPath</b></a> () const</div></li>
+<li><div class=fn>virtual QString <a href="#dirName"><b>dirName</b></a> () const</div></li>
+<li><div class=fn>virtual QString <a href="#filePath"><b>filePath</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;fileName, bool&nbsp;acceptAbsPath = TRUE ) const</div></li>
+<li><div class=fn>virtual QString <a href="#absFilePath"><b>absFilePath</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;fileName, bool&nbsp;acceptAbsPath = TRUE ) const</div></li>
+<li><div class=fn>virtual bool <a href="#cd"><b>cd</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;dirName, bool&nbsp;acceptAbsPath = TRUE )</div></li>
+<li><div class=fn>virtual bool <a href="#cdUp"><b>cdUp</b></a> ()</div></li>
+<li><div class=fn>QString <a href="#nameFilter"><b>nameFilter</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setNameFilter"><b>setNameFilter</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;nameFilter )</div></li>
+<li><div class=fn>FilterSpec <a href="#filter"><b>filter</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setFilter"><b>setFilter</b></a> ( int&nbsp;filterSpec )</div></li>
+<li><div class=fn>SortSpec <a href="#sorting"><b>sorting</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setSorting"><b>setSorting</b></a> ( int&nbsp;sortSpec )</div></li>
+<li><div class=fn>bool <a href="#matchAllDirs"><b>matchAllDirs</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setMatchAllDirs"><b>setMatchAllDirs</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>uint <a href="#count"><b>count</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#operator[]"><b>operator[]</b></a> ( int&nbsp;index ) const</div></li>
+<li><div class=fn>virtual QStrList encodedEntryList ( int&nbsp;filterSpec = DefaultFilter, int&nbsp;sortSpec = DefaultSort ) const &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>virtual QStrList encodedEntryList ( const&nbsp;QString&nbsp;&amp;&nbsp;nameFilter, int&nbsp;filterSpec = DefaultFilter, int&nbsp;sortSpec = DefaultSort ) const &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>virtual QStringList <a href="#entryList-2"><b>entryList</b></a> ( int&nbsp;filterSpec = DefaultFilter, int&nbsp;sortSpec = DefaultSort ) const</div></li>
+<li><div class=fn>virtual QStringList <a href="#entryList"><b>entryList</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;nameFilter, int&nbsp;filterSpec = DefaultFilter, int&nbsp;sortSpec = DefaultSort ) const</div></li>
+<li><div class=fn>virtual const QFileInfoList * <a href="#entryInfoList-2"><b>entryInfoList</b></a> ( int&nbsp;filterSpec = DefaultFilter, int&nbsp;sortSpec = DefaultSort ) const</div></li>
+<li><div class=fn>virtual const QFileInfoList * <a href="#entryInfoList"><b>entryInfoList</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;nameFilter, int&nbsp;filterSpec = DefaultFilter, int&nbsp;sortSpec = DefaultSort ) const</div></li>
+<li><div class=fn>virtual bool <a href="#mkdir"><b>mkdir</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;dirName, bool&nbsp;acceptAbsPath = TRUE ) const</div></li>
+<li><div class=fn>virtual bool <a href="#rmdir"><b>rmdir</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;dirName, bool&nbsp;acceptAbsPath = TRUE ) const</div></li>
+<li><div class=fn>virtual bool <a href="#isReadable"><b>isReadable</b></a> () const</div></li>
+<li><div class=fn>virtual bool <a href="#exists-2"><b>exists</b></a> () const</div></li>
+<li><div class=fn>virtual bool <a href="#isRoot"><b>isRoot</b></a> () const</div></li>
+<li><div class=fn>virtual bool <a href="#isRelative"><b>isRelative</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#convertToAbs"><b>convertToAbs</b></a> ()</div></li>
+<li><div class=fn>virtual bool <a href="#operator-eq-eq"><b>operator==</b></a> ( const&nbsp;QDir&nbsp;&amp;&nbsp;d ) const</div></li>
+<li><div class=fn>virtual bool <a href="#operator!-eq"><b>operator!=</b></a> ( const&nbsp;QDir&nbsp;&amp;&nbsp;d ) const</div></li>
+<li><div class=fn>virtual bool <a href="#remove"><b>remove</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;fileName, bool&nbsp;acceptAbsPath = TRUE )</div></li>
+<li><div class=fn>virtual bool <a href="#rename"><b>rename</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;oldName, const&nbsp;QString&nbsp;&amp;&nbsp;newName, bool&nbsp;acceptAbsPaths = TRUE )</div></li>
+<li><div class=fn>virtual bool <a href="#exists"><b>exists</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;name, bool&nbsp;acceptAbsPath = TRUE )</div></li>
+</ul>
+<h2>静态公有成员s</h2>
+<ul>
+<li><div class=fn>QString <a href="#convertSeparators"><b>convertSeparators</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;pathName )</div></li>
+<li><div class=fn>const QFileInfoList * <a href="#drives"><b>drives</b></a> ()</div></li>
+<li><div class=fn>char <a href="#separator"><b>separator</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#setCurrent"><b>setCurrent</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;path )</div></li>
+<li><div class=fn>QDir <a href="#current"><b>current</b></a> ()</div></li>
+<li><div class=fn>QDir <a href="#home"><b>home</b></a> ()</div></li>
+<li><div class=fn>QDir <a href="#root"><b>root</b></a> ()</div></li>
+<li><div class=fn>QString <a href="#currentDirPath"><b>currentDirPath</b></a> ()</div></li>
+<li><div class=fn>QString <a href="#homeDirPath"><b>homeDirPath</b></a> ()</div></li>
+<li><div class=fn>QString <a href="#rootDirPath"><b>rootDirPath</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#match-2"><b>match</b></a> ( const&nbsp;QStringList&nbsp;&amp;&nbsp;filters, const&nbsp;QString&nbsp;&amp;&nbsp;fileName )</div></li>
+<li><div class=fn>bool <a href="#match"><b>match</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;filter, const&nbsp;QString&nbsp;&amp;&nbsp;fileName )</div></li>
+<li><div class=fn>QString <a href="#cleanDirPath"><b>cleanDirPath</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;filePath )</div></li>
+<li><div class=fn>bool <a href="#isRelativePath"><b>isRelativePath</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;path )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QDir类提供了访问目录结构和它们的内容的与平台无关的方式。
+<p> 
+<p> QDir用来操作路径名称、关于路径和文件的访问信息和操作底层文件系统。
+<p> QDir使用相对或绝对文件路径来指向一个文件。绝对路径是从目录分隔符“/”或者带有一个驱动器标识（除了在Unix下）。如果你总是使用“/”作为目录分隔符，Qt将会把你的路径转化为符合底层的操作系统的。相对文件名是由一个目录名称或者文件名开始并且指定一个相对于当前路径的路径。
+<p> “当前”路径是指应用程序的工作目录。QDir自己的路径可以通过<a href="#setPath">setPath</a>()设置并且通过<a href="#path">path</a>()获得。
+<p> 一个绝对路径的实例是字符串“/tmp/quartz”，相对路径看起来像是“src/fatlib”。你可以使用函数<a href="#isRelative">isRelative</a>()来检查一个QDir使用的是相对还是绝对文件路径。调用<a href="#convertToAbs">convertToAbs</a>()可以把一个相对的QDir转化为绝对的。使用<a href="#cleanDirPath">cleanDirPath</a>()可以得到一个简化的路径。为了获得没有符号连接或者多余的“..”元素的路径，请使用<a href="#canonicalPath">canonicalPath</a>()。路径可以通过setPath()设置，或者使用<a href="#cd">cd</a>()和<a href="#cdUp">cdUp</a>()来改变。
+<p> QDir提供了几个静态函数，例如，<a href="#setCurrent">setCurrent</a>()设置应用程序的工作目录并且<a href="#currentDirPath">currentDirPath</a>()来获得应用程序的工作目录。访问一些普通的路径是由以下一些静态函数提供的，<a href="#current">current</a>()、<a href="#home">home</a>()和<a href="#root">root</a>()返回QDir对象或者currentDirPath()、<a href="#homeDirPath">homeDirPath</a>()和<a href="#rootDirPath">rootDirPath</a>()返回字符串路径。
+<p> <a href="#count">count</a>()返回目录中的条目数量。通过<a href="#entryList">entryList</a>()可以获得目录中的所有文件和目录的名称的字符串列表。如果你希望得到<a href="qfileinfo.html">QFileInfo</a>指针的列表请使用<a href="#entryInfoList">entryInfoList</a>()。这些函数都可以使用名称过滤器、属性过滤器（例如只读、只要文件不要目录等等）和排列顺序。过滤器和排序可以调用<a href="#setNameFilter">setNameFilter</a>()、<a href="#setFilter">setFilter</a>()和<a href="#setSorting">setSorting</a>()来设置。它们可以通过entryList()和entryInfoList()的参数来指定。
+<p> <a href="#mkdir">mkdir</a>()可以创建一个新目录，<a href="#rename">rename</a>()可以重命名一个目录并且<a href="#rmdir">rmdir</a>()可以移除一个已经存在的目录。<a href="#remove">remove</a>()可以移除一个已经存在的文件。你可以通过<a href="#exists">exists</a>()、<a href="#isReadable">isReadable</a>()和<a href="#isRoot">isRoot</a>()来询问一个目录。
+<p> 使用<a href="#filePath">filePath</a>()可以得到一个带有文件名的路径，并且<a href="#dirName">dirName</a>()可以得到目录名称，这两个函数都不能检测文件或者目录是否存在。
+<p> <a href="#drives">drives</a>()提供根目录的列表，在Unix系统上，这个返回一个只包含根目录“/”的列表，在Windows上，这个列表将包含“C:/”并且还有“D:/”等等。
+<p> 如果你需要一个适应底层操作系统形式的路径，请使用<a href="#convertSeparators">convertSeparators</a>()。
+<p> 实例：
+<p> 请参考一个目录是否存在。
+<pre>
+    QDir d( "example" );                        // “./example”
+    if ( !d.<a href="#exists">exists</a>() )
+        <a href="qapplication.html#qWarning">qWarning</a>( "Cannot find the example directory" );
+  </pre>
+ 
+<p> Traversing directories and reading a file.
+<pre>
+    QDir d = QDir::<a href="#root">root</a>();                      // “/”
+    if ( !d.<a href="#cd">cd</a>("tmp") ) {                       // “/tmp”
+        <a href="qapplication.html#qWarning">qWarning</a>( "Cannot find the \"/tmp\" directory" );
+    } else {
+        <a href="qfile.html">QFile</a> f( d.<a href="#filePath">filePath</a>("ex1.txt") );       // “/tmp/ex1.txt”
+        if ( !f.<a href="qfile.html#open">open</a>(IO_ReadWrite) )
+            <a href="qapplication.html#qWarning">qWarning</a>( "Cannot create the file %s", f.<a href="qfile.html#name">name</a>() );
+    }
+  </pre>
+ 
+<p> 一个列出当前目录中所有文件（不包括符号连接）的程序，按大小排序，小的在前。
+<pre>
+    #include &lt;stdio.h&gt;
+    #include &lt;<a href="qdir-h.html">qdir.h</a>&gt;
+
+    int main( int argc, char **argv )
+    {
+        QDir d;
+        d.<a href="#setFilter">setFilter</a>( QDir::<a href="#FilterSpec-enum">Files</a> | QDir::<a href="#FilterSpec-enum">Hidden</a> | QDir::<a href="#FilterSpec-enum">NoSymLinks</a> );
+        d.<a href="#setSorting">setSorting</a>( QDir::<a href="#SortSpec-enum">Size</a> | QDir::<a href="#SortSpec-enum">Reversed</a> );
+
+        const QFileInfoList *list = d.<a href="#entryInfoList">entryInfoList</a>();
+        QFileInfoListIterator it( *list );
+        <a href="qfileinfo.html">QFileInfo</a> *fi;
+
+        printf( "     Bytes Filename\n" );
+        while ( (fi = it.current()) != 0 ) {
+            printf( "%10li %s\n", fi-&gt;<a href="qfileinfo.html#size">size</a>(), fi-&gt;<a href="qfileinfo.html#fileName">fileName</a>()。latin1() );
+            ++it;
+        }
+        return 0;
+    }
+  </pre>
+ 
+<p>也可以参考<a href="io.html">输入/输出和网络</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="FilterSpec-enum"></a>QDir::FilterSpec</h3> 
+<p> 这个枚举变量描述的是QDir是如何选择目录中的哪些条目被返回的。被指定的过滤器的值可以由下述列表中的值或运算得到：
+<ul>
+<li><tt>QDir::Dirs</tt> - 只列出目录。
+<li><tt>QDir::Files</tt> - 只列出文件。
+<li><tt>QDir::Drives</tt> - 列出磁盘驱动器（在Unix下被忽略）。
+<li><tt>QDir::NoSymLinks</tt> - 不列出符号连接（不支持符号连接的操作系统会忽略它）。
+<li><tt>QDir::All</tt> - 列出目录、文件、驱动器和符号连接（除非你指定系统，这不会列出损坏的符号连接）。
+<li><tt>QDir::TypeMask</tt> - Dirs、Files、Drives和NoSymLink的掩码。
+<li><tt>QDir::Readable</tt> - 列出应用程序可以读访问的文件。
+<li><tt>QDir::Writable</tt> - 列出应用程序可以写访问的文件。
+<li><tt>QDir::Executable</tt> - 列出应用程序可以执行访问的文件。可执行需要由Dirs和Files组合。
+<li><tt>QDir::RWEMask</tt> - Readable、Writable和Executable标记的掩码。
+<li><tt>QDir::Modified</tt> - 只列出已经被修改的文件（在Unix下被忽略）。
+<li><tt>QDir::Hidden</tt> - 列出隐藏文件（在Unix下就是以.开始的文件）。
+<li><tt>QDir::System</tt> - 列出系统文件（在Unix下就是FIFO、套接字和设备文件）。
+<li><tt>QDir::AccessMask</tt> - Readable、Writable、Executable、Modified、Hidden和System标记的掩码。
+<li><tt>QDir::DefaultFilter</tt> - 内部标记
+</ul><p> 如果你不设置<a href="#FilterSpec-enum">Readable</a>、<a href="#FilterSpec-enum">Writable</a>或<a href="#FilterSpec-enum">Executable</a>中的任何一个，QDir将会设置它们三个全部。这使得默认很容易写并且同时也很有用。
+<p> 实例：<tt>Readable|Writable</tt>是指列出应用程序可以读访问、写访问或者两者都可以的所有文件。<tt>Dirs|Drives</tt>是指列出驱动器、目录、所有应用程序可以读、写、执行的文件并且也包括到这些文件/目录的符号连接。
+
+<h3 class=fn><a name="SortSpec-enum"></a>QDir::SortSpec</h3> 
+<p> 这个枚举变量描述的是QDir如何排列由<a href="#entryList">entryList</a>()或<a href="#entryInfoList">entryInfoList</a>()返回的条目。被指定的排列的值可以由下述列表中的值或运算得到：
+<ul>
+<li><tt>QDir::Name</tt> - 按名称排序。
+<li><tt>QDir::Time</tt> - 按时间排序（修改时间）。
+<li><tt>QDir::Size</tt> - 按文件大小排序。
+<li><tt>QDir::Unsorted</tt> - 不排序。
+<li><tt>QDir::SortByMask</tt> - Name、Time和Size的掩码。
+<li><tt>QDir::DirsFirst</tt> - 首先是目录，然后是文件。
+<li><tt>QDir::Reversed</tt> - 相反的排序顺序。
+<li><tt>QDir::IgnoreCase</tt> - 不区分大小写进行排序。
+<li><tt>QDir::DefaultSort</tt> - 内部标记。
+</ul><p> 前四种中你只能指定一个。
+<p> 如果你同时指定<a href="#SortSpec-enum">DirsFirst</a>和<a href="#SortSpec-enum">Reversed</a>，目录仍然会被放在前面，但是按照反向的顺序，文件仍然排在目录后面，当然也是按照反向的顺序。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QDir"></a>QDir::QDir ()
+</h3>
+构造一个指向当前目录的QDir。
+<p>也可以参考<a href="#currentDirPath">currentDirPath</a>()。
+
+<h3 class=fn><a name="QDir-2"></a>QDir::QDir ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;path, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;nameFilter = QString::null, int&nbsp;sortSpec = Name | IgnoreCase, int&nbsp;filterSpec = All )
+</h3>
+构造一个路径为<em>path</em>、名称过滤器为<em>nameFilter</em>并且属性过滤器为<em>filterSpec</em>的QDir。它也使用<em>sortSpec</em>来排列名称。
+<p> 默认的<em>nameFilter</em>是一个空字符串，不包含任何东西，默认的<em>filterSpec</em>是<a href="#FilterSpec-enum">All</a>，也就是说也不包含任何东西。默认的<em>sortSpec</em>是<tt>Name|IgnoreCase</tt>，也就是说不区分大小写按名称排序。
+<p> 下面是列出“/tmp”中所有文件的实例：
+<pre>
+    QDir d( "/tmp" );
+    for ( int i = 0; i &lt; d.<a href="#count">count</a>(); i++ )
+        printf( "%s\n", d[i] );
+  </pre>
+ 
+<p> 如果<em>path</em>为“”或零，QDir使用“.”（当前目录）。如果<em>nameFilter</em>为“”或零，QDir使用“*”（所有文件）。
+<p> 注意<em>path</em>不需要存在。
+<p> <p>也可以参考<a href="#exists">exists</a>()、<a href="#setPath">setPath</a>()、<a href="#setNameFilter">setNameFilter</a>()、<a href="#setFilter">setFilter</a>()和<a href="#setSorting">setSorting</a>()。
+
+<h3 class=fn><a name="QDir-3"></a>QDir::QDir ( const&nbsp;<a href="qdir.html">QDir</a>&nbsp;&amp;&nbsp;d )
+</h3>
+构造一个目录<em>d</em>的复制的QDir。
+<p>也可以参考<a href="#operator-eq">operator=</a>()。
+
+<h3 class=fn><a name="~QDir"></a>QDir::~QDir ()<tt> [虚]</tt>
+</h3>
+销毁QDir并且释放它的资源。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="absFilePath"></a>QDir::absFilePath ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;fileName, bool&nbsp;acceptAbsPath = TRUE ) const<tt> [虚]</tt>
+</h3>
+返回路径中一个文件的绝对路径名称。<em>不</em>检查这个文件是否真的存在于这个目录中。在<em>fileName</em>中多余的分隔符或者“.”和“..”目录将被移除（请参考<a href="#cleanDirPath">cleanDirPath</a>()）。
+<p> 如果<em>acceptAbsPath</em>为真，由分隔符“/”开始的<em>fileName</em>将会被不改变地立即返回。如果<em>acceptAbsPath</em>为假，绝对路径将被被加到<em>fileName</em>的前面并且结果字符串被返回。
+<p> <p>也可以参考<a href="#filePath">filePath</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="absPath"></a>QDir::absPath () const<tt> [虚]</tt>
+</h3>
+返回绝对路径（一个由“/”或驱动器标识开始的路径），可能包含符号连接，但是不会包含“.”、“..”或者多个分隔符。
+<p> <p>也可以参考<a href="#setPath">setPath</a>()、<a href="#canonicalPath">canonicalPath</a>()、<a href="#exists">exists</a>()、<a href="#cleanDirPath">cleanDirPath</a>()、<a href="#dirName">dirName</a>()和<a href="#absFilePath">absFilePath</a>()。
+<p>实例：<a href="fileiconview-example.html#x807">fileiconview/qfileiconview.cpp</a>。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="canonicalPath"></a>QDir::canonicalPath () const<tt> [虚]</tt>
+</h3>
+返回规范的路径，也就是没有符号连接或者多余的“.”、“..”元素的路径。
+<p> 在没有符号连接的系统上，这个函数总是返回和absPath()返回值一样的值。如果规范路径不存在（通常是因为挂起的符号连接）。
+<p> <p>也可以参考<a href="#path">path</a>()、<a href="#absPath">absPath</a>()、<a href="#exists">exists</a>()、<a href="#cleanDirPath">cleanDirPath</a>()、<a href="#dirName">dirName</a>()、<a href="#absFilePath">absFilePath</a>()和<a href="qstring.html#isNull">QString::isNull</a>()。
+
+<h3 class=fn>bool <a name="cd"></a>QDir::cd ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;dirName, bool&nbsp;acceptAbsPath = TRUE )<tt> [虚]</tt>
+</h3>
+改变QDir的目录为<em>dirName</em>。
+<p> 如果<em>acceptAbsPath</em>为真，由分隔符“/”开始的路径将会导致这个函数改变到这个绝对路径。如果<em>acceptAbsPath</em>为假，<em>dirName</em>前面的任何数量的分隔符都将被移除并且这个函数将会进入到<em>dirName</em>中。
+<p> 如果新的路径存在并且是可读的，返回真。注意如果新的目录不存在，逻辑上的<a href="#cd">cd</a>()操作不会被执行。
+<p> 调用cd( ".." )等于调用<a href="#cdUp">cdUp</a>()。
+<p> <p>也可以参考<a href="#cdUp">cdUp</a>()、<a href="#isReadable">isReadable</a>()、<a href="#exists">exists</a>()和<a href="#path">path</a>()。
+<p>实例：<a href="fileiconview-example.html#x879">fileiconview/mainwindow.cpp</a>。
+
+<h3 class=fn>bool <a name="cdUp"></a>QDir::cdUp ()<tt> [虚]</tt>
+</h3>
+改变目录为QDir的当前目录的上一级目录。
+<p> 如果新的路径存在并且是可读的，返回真。注意如果新的目录不存在，逻辑上的<a href="#cdUp">cdUp</a>()操作不会被执行。
+<p> <p>也可以参考<a href="#cd">cd</a>()、<a href="#isReadable">isReadable</a>()、<a href="#exists">exists</a>()和<a href="#path">path</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="cleanDirPath"></a>QDir::cleanDirPath ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;filePath )<tt> [静态]</tt>
+</h3>
+移除<em>filePath</em>的多重目录分隔符“/”并且解析其中的“.”或者“..”。
+<p> 符号连接会被保留。这个函数不返回规范路径，但会是输入的最简化的版本。“./local”变为“local”、“local/../bin”变为“bin”并且“/local/usr/../bin”变为“/local/bin”。
+<p> <p>也可以参考<a href="#absPath">absPath</a>()和<a href="#canonicalPath">canonicalPath</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="convertSeparators"></a>QDir::convertSeparators ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;pathName )<tt> [静态]</tt>
+</h3>
+把<em>pathName</em>里面的“/”分隔符转化为适用于底层操作系统的分隔符。返回转化的字符串。
+<p> 在Windows上，<a href="#convertSeparators">convertSeparators</a>("c:/winnt/system32")返回“c:\winnt\system32”。
+<p> 在一些操作系统上，例如在Unix上，返回的字符串可能和参数是一样的。
+
+<h3 class=fn>void <a name="convertToAbs"></a>QDir::convertToAbs ()<tt> [虚]</tt>
+</h3>
+把目录路经转化为绝对路径。如果它已经是绝对路径了，就什么也不做。
+<p> <p>也可以参考<a href="#isRelative">isRelative</a>()。
+
+<h3 class=fn>uint <a name="count"></a>QDir::count () const
+</h3>
+返回找到的目录和文件的数量。
+<p> Equivalent to <a href="#entryList">entryList</a>()。<a href="#count">count</a>()。
+<p>也可以参考<a href="#operator[]">operator[]</a>()和<a href="#entryList">entryList</a>()。
+
+<h3 class=fn><a href="qdir.html">QDir</a> <a name="current"></a>QDir::current ()<tt> [静态]</tt>
+</h3>
+返回应用程序当前目录。
+<p> 使用<a href="#path">path</a>()来访问QDir对象的路径。
+<p>也可以参考<a href="#currentDirPath">currentDirPath</a>()和<a href="#QDir">QDir::QDir</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="currentDirPath"></a>QDir::currentDirPath ()<tt> [静态]</tt>
+</h3>
+返回应用程序当前目录的绝对路径。
+<p>也可以参考<a href="#current">current</a>()。
+<p>实例：<a href="helpviewer-example.html#x987">helpviewer/helpwindow.cpp</a>和<a href="qdir-example.html#x1806">qdir/qdir.cpp</a>。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="dirName"></a>QDir::dirName () const<tt> [虚]</tt>
+</h3>
+返回目录的名称，这和路径是<em>不同的</em>，例如一个名称为“mail”的目录，也许路径为“/var/spool/mail”。如果目录没有名字（例如，它是根目录），一个零字符串被返回。
+<p> 不会执行检测来确保这个名称的目录真正存在。
+<p> <p>也可以参考<a href="#path">path</a>()、<a href="#absPath">absPath</a>()、<a href="#absFilePath">absFilePath</a>()、<a href="#exists">exists</a>()和<a href="qstring.html#isNull">QString::isNull</a>()。
+
+<h3 class=fn>const QFileInfoList * <a name="drives"></a>QDir::drives ()<tt> [静态]</tt>
+</h3>
+返回这个系统中根目录的列表。在Windows中，这将返回许多包含“”、“”等等的<a href="qfileinfo.html">QFileInfo</a>对象。在其它操作系统，它返回的是只包含一个根目录（例如“/”）的列表。
+<p> 返回的指针的所有权归Qt。调用者<em>不要</em>删除或者修改它。
+<p>实例：<a href="dirview-example.html#x1750">dirview/main.cpp</a>。
+
+<h3 class=fn><a href="qstrlist.html">QStrList</a> <a name="encodedEntryList"></a>QDir::encodedEntryList ( int&nbsp;filterSpec = DefaultFilter, int&nbsp;sortSpec = DefaultSort ) const<tt> [虚]</tt>
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 这个函数被包含是因为可以很容易地从Qt 1.x移植到Qt 3.0，它和<a href="#entryList">entryList</a>()是一样地，但是文件名的编码方式是使用QFile::encodedName()的8位字符串。
+<p> 使用它比使用entryList()更有效率。
+
+<h3 class=fn><a href="qstrlist.html">QStrList</a> <a name="encodedEntryList-2"></a>QDir::encodedEntryList ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;nameFilter, int&nbsp;filterSpec = DefaultFilter, int&nbsp;sortSpec = DefaultSort ) const<tt> [虚]</tt>
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 这是一个重载成员函数，用于提供方便。它的行为基于上面的函数。
+<p> 这个函数被包含是因为可以很容易地从Qt 1.x移植到Qt 3.0，它和<a href="#entryList">entryList</a>()是一样地，但是文件名的编码方式是使用QFile::encodedName()的8位字符串。
+<p> 使用它比使用entryList()更有效率。
+
+<h3 class=fn>const QFileInfoList * <a name="entryInfoList"></a>QDir::entryInfoList ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;nameFilter, int&nbsp;filterSpec = DefaultFilter, int&nbsp;sortSpec = DefaultSort ) const<tt> [虚]</tt>
+</h3>
+返回这个目录中所有目录和文件的<a href="qfileinfo.html">QFileInfo</a>对象的列表，根据<a href="#setSorting">setSorting</a>()排序并且根据<a href="#setFilter">setFilter</a>()和<a href="#setNameFilter">setNameFilter</a>()进行过滤。
+<p> 过滤器和排序的规定可以使用<em>nameFilter</em>、<em>filterSpec</em>和<em>sortSpec</em>参数来指定。
+<p> 如果这个目录是不可读的或者不存在，返回0。
+<p> 返回的指针是一个指向QFileInfoList的常量指针。这个列表归QDir对象所有并且将会在同一个QDir实例下次调用<a href="#entryInfoList">entryInfoList</a>()时被重新使用。如果你想在调用这个函数之后保留这个列表的条目，你将需要复制它们。
+<p> <p>也可以参考<a href="#entryList">entryList</a>()、<a href="#setNameFilter">setNameFilter</a>()、<a href="#setSorting">setSorting</a>()和<a href="#setFilter">setFilter</a>()。
+<p>实例：<a href="dirview-example.html#x1706">dirview/dirview.cpp</a>和<a href="fileiconview-example.html#x808">fileiconview/qfileiconview.cpp</a>。
+
+<h3 class=fn>const QFileInfoList * <a name="entryInfoList-2"></a>QDir::entryInfoList ( int&nbsp;filterSpec = DefaultFilter, int&nbsp;sortSpec = DefaultSort ) const<tt> [虚]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回这个目录中所有目录和文件的<a href="qfileinfo.html">QFileInfo</a>对象的列表，根据<a href="#setSorting">setSorting</a>()排序并且根据<a href="#setFilter">setFilter</a>()和<a href="#setNameFilter">setNameFilter</a>()进行过滤。
+<p> 过滤器和排序的规定可以使用<em>filterSpec</em>和<em>sortSpec</em>参数来指定。
+<p> 如果这个目录是不可读的或者不存在，返回0。
+<p> 返回的指针是一个指向QFileInfoList的常量指针。这个列表归QDir对象所有并且将会在同一个QDir实例下次调用<a href="#entryInfoList">entryInfoList</a>()时被重新使用。如果你想在调用这个函数之后保留这个列表的条目，你将需要复制它们。
+<p> <p>也可以参考<a href="#entryList">entryList</a>()、<a href="#setNameFilter">setNameFilter</a>()、<a href="#setSorting">setSorting</a>()和<a href="#setFilter">setFilter</a>()。
+
+<h3 class=fn><a href="qstringlist.html">QStringList</a> <a name="entryList"></a>QDir::entryList ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;nameFilter, int&nbsp;filterSpec = DefaultFilter, int&nbsp;sortSpec = DefaultSort ) const<tt> [虚]</tt>
+</h3>
+返回这个目录中所有目录和文件的名称的列表，根据<a href="#setSorting">setSorting</a>()排序并且根据<a href="#setFilter">setFilter</a>()和<a href="#setNameFilter">setNameFilter</a>()进行过滤。
+<p> 过滤器和排序的规定可以使用<em>nameFilter</em>、<em>filterSpec</em>和<em>sortSpec</em>参数来指定。
+<p> 如果这个目录是不可读的或者不存在，返回空的列表。。
+<p> <p>也可以参考<a href="#entryInfoList">entryInfoList</a>()、<a href="#setNameFilter">setNameFilter</a>()、<a href="#setSorting">setSorting</a>()和<a href="#setFilter">setFilter</a>()。
+<p>实例：<a href="statistics-example.html#x2627">table/statistics/statistics.cpp</a>。
+
+<h3 class=fn><a href="qstringlist.html">QStringList</a> <a name="entryList-2"></a>QDir::entryList ( int&nbsp;filterSpec = DefaultFilter, int&nbsp;sortSpec = DefaultSort ) const<tt> [虚]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回这个目录中所有目录和文件的名称的列表，根据<a href="#setSorting">setSorting</a>()排序并且根据<a href="#setFilter">setFilter</a>()和<a href="#setNameFilter">setNameFilter</a>()进行过滤。
+<p> 过滤器和排序的规定可以使用<em>filterSpec</em>和<em>sortSpec</em>参数来指定。
+<p> 如果这个目录是不可读的或者不存在，返回空的列表。。
+<p> <p>也可以参考<a href="#entryInfoList">entryInfoList</a>()、<a href="#setNameFilter">setNameFilter</a>()、<a href="#setSorting">setSorting</a>()和<a href="#setFilter">setFilter</a>()。
+
+<h3 class=fn>bool <a name="exists"></a>QDir::exists ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;name, bool&nbsp;acceptAbsPath = TRUE )<tt> [虚]</tt>
+</h3>
+检查文件<em>name</em>的存在性。
+<p> 如果<em>acceptAbsPath</em>为真，由分隔符“/”开始的路径将会使用绝对路径检查这个文件。如果<em>acceptAbsPath</em>为假，<em>name</em>开始的任何数量的分隔符将会被移除并且结果文件名将被检查。
+<p> 如果文件存在，返回真，否则返回假。
+<p> <p>也可以参考<a href="qfileinfo.html#exists">QFileInfo::exists</a>()和<a href="qfile.html#exists">QFile::exists</a>()。
+
+<h3 class=fn>bool <a name="exists-2"></a>QDir::exists () const<tt> [虚]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 如果<em>directory</em>存在，返回真。（如果发现一个同名的文件，这个函数将返回假）。
+<p> <p>也可以参考<a href="qfileinfo.html#exists">QFileInfo::exists</a>()和<a href="qfile.html#exists">QFile::exists</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="filePath"></a>QDir::filePath ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;fileName, bool&nbsp;acceptAbsPath = TRUE ) const<tt> [虚]</tt>
+</h3>
+返回目录中一个文件的路径名称。<em>不</em>检查这个文件是否真的存在于这个目录中。如果QDir是相对的，返回的路径名称也是相对的。<em>fileName</em>中多余的多重分隔符或者“.”和“..”目录将被移除（请参考<a href="#cleanDirPath">cleanDirPath</a>()）。
+<p> 如果<em>acceptAbsPath</em>为真，由分隔符“/”开始的<em>fileName</em>将会被不改变地立即返回。如果<em>acceptAbsPath</em>为假，绝对路径将被被加到<em>fileName</em>的前面并且结果字符串被返回。
+<p> <p>也可以参考<a href="#absFilePath">absFilePath</a>()、<a href="#isRelative">isRelative</a>()和<a href="#canonicalPath">canonicalPath</a>()。
+
+<h3 class=fn><a href="qdir.html#FilterSpec-enum">FilterSpec</a> <a name="filter"></a>QDir::filter () const
+</h3>
+返回由<a href="#setFilter">setFilter</a>()设置的值。
+
+<h3 class=fn><a href="qdir.html">QDir</a> <a name="home"></a>QDir::home ()<tt> [静态]</tt>
+</h3>
+返回主目录。
+<p> 在Windows NT/2000下，这个函数通过连接<tt>HOMEDRIVE</tt>和<tt>HOMEPATH</tt>环境变量来形成这个路径。
+<p> 在Windows 9x和非Windows操作系统，<tt>HOME</tt>环境变量被使用。
+<p> 如果这个环境变量没有被设置，<a href="#rootDirPath">rootDirPath</a>()用来代替它。
+<p> <p>也可以参考<a href="#homeDirPath">homeDirPath</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="homeDirPath"></a>QDir::homeDirPath ()<tt> [静态]</tt>
+</h3>
+<p> 返回用户的主目录的绝对路径。
+<p>也可以参考<a href="#home">home</a>()。
+
+<h3 class=fn>bool <a name="isReadable"></a>QDir::isReadable () const<tt> [虚]</tt>
+</h3>
+如果目录是可读的<em>并且</em>我们可以通过名称打开文件，返回真。如果只有上述一个条件存在，这个函数返回假。
+<b>警告：</b> 这个函数返回的假并不保证这个目录不可访问。
+<p> <p>也可以参考<a href="qfileinfo.html#isReadable">QFileInfo::isReadable</a>()。
+<p>实例：<a href="dirview-example.html#x1707">dirview/dirview.cpp</a>和<a href="fileiconview-example.html#x809">fileiconview/qfileiconview.cpp</a>。
+
+<h3 class=fn>bool <a name="isRelative"></a>QDir::isRelative () const<tt> [虚]</tt>
+</h3>
+如果目录路径是相对于当前路径的，返回真，并且如果路径是绝对的（例如在Unix下，一个路径如果没有以“/”开始就是相对的），返回假。
+<p> <p>也可以参考<a href="#convertToAbs">convertToAbs</a>()。
+
+<h3 class=fn>bool <a name="isRelativePath"></a>QDir::isRelativePath ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;path )<tt> [静态]</tt>
+</h3>
+如果<em>path</em>是相对的，返回真，如果它是绝对的，返回假。
+<p>也可以参考<a href="#isRelative">isRelative</a>()。
+
+<h3 class=fn>bool <a name="isRoot"></a>QDir::isRoot () const<tt> [虚]</tt>
+</h3>
+如果目录是根目录，返回真，否则返回假。
+<p> 注意：如果目录是一个连接到根目录的符号连接，这个函数返回假。如果你想测试这一点，你可以使用<a href="#canonicalPath">canonicalPath</a>()：
+<p> 实例：
+<pre>
+    QDir d( "/tmp/root_link" );
+    d = d.<a href="#canonicalPath">canonicalPath</a>();
+    if ( d.<a href="#isRoot">isRoot</a>() )
+        <a href="qapplication.html#qWarning">qWarning</a>( "It IS a root link!" );
+  </pre>
+ 
+<p> <p>也可以参考<a href="#root">root</a>()和<a href="#rootDirPath">rootDirPath</a>()。
+
+<h3 class=fn>bool <a name="match"></a>QDir::match ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;filter, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;fileName )<tt> [静态]</tt>
+</h3>
+如果<em>fileName</em>与通配符模式<em>filter</em>匹配，返回真。<em>filter</em>也可以包含由空格或者分号分割的多个模式。
+<p> （请参考<a href="qregexp.html#wildcard-matching">QRegExp通配符匹配</a>。）
+<p>也可以参考<a href="qregexp.html#match">QRegExp::match</a>()。
+
+<h3 class=fn>bool <a name="match-2"></a>QDir::match ( const&nbsp;<a href="qstringlist.html">QStringList</a>&nbsp;&amp;&nbsp;filters, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;fileName )<tt> [静态]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 如果<em>fileName</em>与列表<em>filters</em>中的通配符模式匹配，返回真。
+<p> （请参考<a href="qregexp.html#wildcard-matching">QRegExp通配符匹配</a>。）
+<p>也可以参考<a href="qregexp.html#match">QRegExp::match</a>()。
+
+<h3 class=fn>bool <a name="matchAllDirs"></a>QDir::matchAllDirs () const
+</h3>
+返回由<a href="#setMatchAllDirs">setMatchAllDirs</a>()设置的值。
+<p> <p>也可以参考<a href="#setMatchAllDirs">setMatchAllDirs</a>()。
+
+<h3 class=fn>bool <a name="mkdir"></a>QDir::mkdir ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;dirName, bool&nbsp;acceptAbsPath = TRUE ) const<tt> [虚]</tt>
+</h3>
+创建一个目录。
+<p> 如果<em>acceptAbsPath</em>为真，由分隔符“/”开始的<em>dirName</em>将会被不改变地立即返回。如果<em>acceptAbsPath</em>为假，<em>dirName</em>的开始的任意个分隔符将被移除。
+<p> 如果成功，返回真，否则返回假。
+<p> <p>也可以参考<a href="#rmdir">rmdir</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="nameFilter"></a>QDir::nameFilter () const
+</h3>
+返回由<a href="#setNameFilter">setNameFilter</a>()设置的字符串。
+
+<h3 class=fn>bool <a name="operator!-eq"></a>QDir::operator!= ( const&nbsp;<a href="qdir.html">QDir</a>&nbsp;&amp;&nbsp;d ) const<tt> [虚]</tt>
+</h3>
+如果目录<em>d</em>和这个目录是不同的路径或者不同的排序或过滤器设置，返回真，否则返回假。
+<p> 实例：
+<pre>
+    // 当前目录为“/usr/local”
+    QDir d1( "/usr/local/bin" );
+    QDir d2( "bin" );
+    if ( d1 != d2 ) <a href="qapplication.html#qDebug">qDebug</a>( "They differ\n" ); // 这是被打印的
+    </pre>
+ 
+<h3 class=fn><a href="qdir.html">QDir</a>&nbsp;&amp; <a name="operator-eq"></a>QDir::operator= ( const&nbsp;<a href="qdir.html">QDir</a>&nbsp;&amp;&nbsp;d )
+</h3>
+完成一个QDir <em>d</em>的复制并且把它赋给这个QDir。
+
+<h3 class=fn><a href="qdir.html">QDir</a>&nbsp;&amp; <a name="operator-eq-2"></a>QDir::operator= ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;path )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 设置这个目录的路径为给定的<em>path</em>。
+
+<h3 class=fn>bool <a name="operator-eq-eq"></a>QDir::operator== ( const&nbsp;<a href="qdir.html">QDir</a>&nbsp;&amp;&nbsp;d ) const<tt> [虚]</tt>
+</h3>
+如果目录<em>d</em>和这个目录有相同的路径、相同的排序和过滤器，返回真，否则返回假。
+<p> 实例：
+<pre>
+    // 当前目录为“/usr/local”
+    QDir d1( "/usr/local/bin" );
+    QDir d2( "bin" );
+    d2.<a href="#convertToAbs">convertToAbs</a>();
+    if ( d1 == d2 ) <a href="qapplication.html#qDebug">qDebug</a>( "They're the same\n" ); // 这是被打印的
+    </pre>
+ 
+<h3 class=fn><a href="qstring.html">QString</a> <a name="operator[]"></a>QDir::operator[] ( int&nbsp;index ) const
+</h3>
+返回在文件名列表的<em>index</em>位置的文件名。等于<a href="#entryList">entryList</a>().at(index)。
+<p> 如果<em>index</em>超出范围或者entryList()函数失败，返回一个零字符串。
+<p> <p>也可以参考<a href="#count">count</a>()和<a href="#entryList">entryList</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="path"></a>QDir::path () const<tt> [虚]</tt>
+</h3>
+返回这个路径，这也许包含符号连接，但决不会包含多余的“.”、“..”或者多重分隔符。
+<p> 返回的路径可能是相对的也可能是绝对的（请参考<a href="#setPath">setPath</a>()）。
+<p> <p>也可以参考<a href="#setPath">setPath</a>()、<a href="#absPath">absPath</a>()、<a href="#exists">exists</a>()、<a href="#cleanDirPath">cleanDirPath</a>()、<a href="#dirName">dirName</a>()、<a href="#absFilePath">absFilePath</a>()和<a href="#convertSeparators">convertSeparators</a>()。
+
+<h3 class=fn>bool <a name="remove"></a>QDir::remove ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;fileName, bool&nbsp;acceptAbsPath = TRUE )<tt> [虚]</tt>
+</h3>
+移除文件。
+<p> 如果<em>acceptAbsPath</em>为真，由分隔符“/”开始的路径将会移除使用绝对路径的文件。如果<em>acceptAbsPath</em>为假，<em>fileName</em>开始的任意个分隔符将被移除并且结果文件将被移除。
+<p> 如果文件移除成功，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="rename"></a>QDir::rename ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;oldName, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;newName, bool&nbsp;acceptAbsPaths = TRUE )<tt> [虚]</tt>
+</h3>
+重命名一个文件或目录。
+<p> 如果<em>acceptAbsPath</em>为真，由分隔符“/”开始的路径将会重命名使用绝对路径的文件。如果<em>acceptAbsPath</em>为假，<em>fileName</em>开始的任意个分隔符将被移除并且结果文件将被重命名。
+<p> 如果成功，返回真，否则返回假。
+<p> 在绝大多数文件系统中，只有在<em>oldName</em>不存在或者<em>newName</em>和<em>oldName</em>不在同一个分区中，<a href="#rename">rename</a>()才会失败。在Windows下，如果<em>newName</em>已经存在，rename()将会失败。无论如何，还有其它几个原因导致rename()失败。例如，例如在文件系统中如果newName指向一个打开的文件，rename()会失败。
+<p>实例：<a href="fileiconview-example.html#x810">fileiconview/qfileiconview.cpp</a>。
+
+<h3 class=fn>bool <a name="rmdir"></a>QDir::rmdir ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;dirName, bool&nbsp;acceptAbsPath = TRUE ) const<tt> [虚]</tt>
+</h3>
+移除一个目录。
+<p> 如果<em>acceptAbsPath</em>为真，由分隔符“/”开始的路径将会移除使用绝对路径的目录。如果<em>acceptAbsPath</em>为假，<em>dirName</em>开始的任意个分隔符将被移除并且结果目录将被移除。
+<p> 为了使<a href="#rmdir">rmdir</a>()成功，这个目录必须为空。
+<p> 如果成功，返回真，否则返回假。
+<p> <p>也可以参考<a href="#mkdir">mkdir</a>()。
+
+<h3 class=fn><a href="qdir.html">QDir</a> <a name="root"></a>QDir::root ()<tt> [静态]</tt>
+</h3>
+返回根目录。
+<p>也可以参考<a href="#rootDirPath">rootDirPath</a>()和<a href="#drives">drives</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="rootDirPath"></a>QDir::rootDirPath ()<tt> [静态]</tt>
+</h3>
+返回根目录的绝对路径。
+<p> 在Unix操作系统这个返回“/”。在Windows文件系统这个返回“C:/”。
+<p> <p>也可以参考<a href="#root">root</a>()和<a href="#drives">drives</a>()。
+
+<h3 class=fn>char <a name="separator"></a>QDir::separator ()<tt> [静态]</tt>
+</h3>
+返回本地目录分隔符，在Unix下是“/”，在MS-DOS、Windows NT和OS/2下是“&#92;”，在Mac OS下是“:”。
+<p> 你不需要这个函数来构建文件路径。如果你一直使用“/”，Qt将会把你的路径转化为符合底层操作系统的路径的。
+
+<h3 class=fn>bool <a name="setCurrent"></a>QDir::setCurrent ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;path )<tt> [静态]</tt>
+</h3>
+设置你的应用程序的当前工作目录为<em>path</em>。如果目录被成功改变，返回真，否则返回假。
+
+<h3 class=fn>void <a name="setFilter"></a>QDir::setFilter ( int&nbsp;filterSpec )<tt> [虚]</tt>
+</h3>
+设置被<a href="#entryList">entryList</a>()和<a href="#entryInfoList">entryInfoList</a>()使用的过滤器为<em>filterSpec</em>。过滤器被用来指定entryList()和entryInfoList()返回哪些文件。请参考<a href="#FilterSpec-enum">QDir::FilterSpec</a>。
+<p> <p>也可以参考<a href="#filter">filter</a>()和<a href="#setNameFilter">setNameFilter</a>()。
+
+<h3 class=fn>void <a name="setMatchAllDirs"></a>QDir::setMatchAllDirs ( bool&nbsp;enable )<tt> [虚]</tt>
+</h3>
+如果<em>enable</em>为真，那么所有的目录被包含（例如在<a href="#entryList">entryList</a>()中），并且<a href="#nameFilter">nameFilter</a>()仅适用于文件。如果<em>enable</em>为假，那么nameFilter()同时适用于文件和目录。
+<p> <p>也可以参考<a href="#matchAllDirs">matchAllDirs</a>()。
+
+<h3 class=fn>void <a name="setNameFilter"></a>QDir::setNameFilter ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;nameFilter )<tt> [虚]</tt>
+</h3>
+设置<a href="#entryList">entryList</a>()和<a href="#entryInfoList">entryInfoList</a>()使用的名称过滤器为<em>nameFilter</em>。
+<p> <em>nameFilter</em>是一个可以理解“*”和“?”的通配符过滤器。（请参考<a href="qregexp.html#wildcard-matching">QRegExp通配符匹配</a>。）你可以使用单个空格“ ”或者分号“;”来分割几个过滤器条目。
+<p> 例如，如果你想entryList()和entryInfoList()列出所有以“.cpp”和“.h”结尾的文件，你需要使用dir.<a href="#setNameFilter">setNameFilter</a>("*.cpp *.h")或dir.setNameFilter("*.cpp;*.h")。
+<p> <p>也可以参考<a href="#nameFilter">nameFilter</a>()和<a href="#setFilter">setFilter</a>()。
+
+<h3 class=fn>void <a name="setPath"></a>QDir::setPath ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;path )<tt> [虚]</tt>
+</h3>
+设置目录的路径为<em>path</em>。这个路径被清除多余的“.”、“..”和多重分隔符。不会完成检查来确保这个路径的目录是否存在。
+<p> 路径可以是相对的也可以是绝对的。绝对路径是由目录分隔符“/”或驱动器标识开始的（除了Unix下）。相对路径是一个指定了相对于当前目录的目录名称和文件名称。一个绝对路径的实例是“/tmp/quartz”，一个相对路径的实例是“src/fatlib”。
+<p> <p>也可以参考<a href="#path">path</a>()、<a href="#absPath">absPath</a>()、<a href="#exists">exists</a>()、<a href="#cleanDirPath">cleanDirPath</a>()、<a href="#dirName">dirName</a>()、<a href="#absFilePath">absFilePath</a>()、<a href="#isRelative">isRelative</a>()和<a href="#convertToAbs">convertToAbs</a>()。
+
+<h3 class=fn>void <a name="setSorting"></a>QDir::setSorting ( int&nbsp;sortSpec )<tt> [虚]</tt>
+</h3>
+设置<a href="#entryList">entryList</a>()和<a href="#entryInfoList">entryInfoList</a>()使用的排序顺序。
+<p> <em>sortSpec</em>是由<a href="#SortSpec-enum">QDir::SortSpec</a>中的枚举变量的值或运算得到。
+
+<p> <p>也可以参考<a href="#sorting">sorting</a>()和<a href="#SortSpec-enum">SortSpec</a>。
+
+<h3 class=fn><a href="qdir.html#SortSpec-enum">SortSpec</a> <a name="sorting"></a>QDir::sorting () const
+</h3>
+<p> 返回由<a href="#setSorting">setSorting</a>()设置的值。
+<p> <p>也可以参考<a href="#setSorting">setSorting</a>()和<a href="#SortSpec-enum">SortSpec</a>。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

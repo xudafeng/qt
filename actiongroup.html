@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Walkthrough: A Tiny Editor Illustrating QActionGroup</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>Walkthrough: A Tiny Editor Illustrating QActionGroup</h1>
+
+ 
+<p> 
+<p> In the following we will step through a very rudimental 
+<a href="actiongroup-example.html">editor program</a>
+that shows one of the most common uses of the <a href="qactiongroup.html">QActionGroup</a> class:
+how to combine several toggle actions in a way that allows one-of-many choices.
+<p> If you're not yet familiar with the concept of <em>actions</em>,
+please refer to the 
+<A HREF="simple-application-action.html">Simple Application
+Walkthrough featuring <a href="qaction.html">QAction</a></A>.
+<p> <h2>A tiny main program</h2>
+<p> 
+
+<pre>    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include "editor.h"
+
+    int main( int argc, char ** argv)
+    {
+        <a href="qapplication.html">QApplication</a> app( argc, argv );
+        Editor editor;
+        editor.<a href="qwidget.html#setCaption">setCaption</a>( "Qt Example - Actiongroup" );
+        app.<a href="qapplication.html#setMainWidget">setMainWidget</a>( &amp;editor );
+        editor.<a href="qwidget.html#show">show</a>();
+        return app.<a href="qapplication.html#exec">exec</a>();
+    }
+</pre>
+<p> This tiny editor is a very small program. It might be unusual for an 
+editor but it does not even provide the possibility to open a file given 
+as a commandline argument. The reason for this is simple: It has nothing 
+to to with QActionGroups. 
+<p> The crucial point in the above <em>main()</em> is that we make <em>editor</em>, an object
+constructed from a self-written class <em>Editor</em>, the main widget in our
+application. This class is defined in <em>editor.h</em>.
+<p> When you read through the code and happen to be unsure about something: The
+<A HREF="simple-application.html#simplemain">Simple Application Walkthrough</A>
+explains the elements of a typical Qt main program in detail.
+<p> <h2>The interface of the Editor class</h2>
+<p> Before implementing the <em>Editor</em> class we should think about what it
+is supposed to do. Fortunately Qt provides a full-featured rich text editor
+class, <a href="qtextedit.html">QTextEdit</a>. The only thing left for us is to give it a user interface.
+<p> 
+
+<pre>    #include &lt;<a href="qmainwindow-h.html">qmainwindow.h</a>&gt;
+    class QTextEdit;
+    class QAction;
+
+    class Editor : public <a href="qmainwindow.html">QMainWindow</a>
+    {
+        <a href="metaobjects.html#Q_OBJECT">Q_OBJECT</a>
+
+    public:
+        Editor();
+
+    private slots:
+        void setFontColor( <a href="qaction.html">QAction</a> * );
+
+    private:
+        <a href="qtextedit.html">QTextEdit</a> * editor;
+        <a href="qaction.html">QAction</a> * setRedFont;
+    };
+</pre>
+<p> As we look for a means to implement one-of-many choices, a nice example would
+involve two buttons that make the user change the font color: If he or she
+invokes the <em>setRedFont</em> action the font color changes from default black
+to red.  
+<p> To do this color change we need a slot, <em>setFontColor()</em> that takes care 
+about the signal the action emits.
+<p> The <em>Editor</em> class itself is derived from <a href="qmainwindow.html">QMainWindow</a>. Only the constructor
+might be called from outside the class. 
+<p> <h2>Action!</h2>
+<p> 
+
+<p> <pre>    #include "editor.h"
+
+    #include &lt;<a href="qtextedit-h.html">qtextedit.h</a>&gt;
+    #include &lt;<a href="qmenubar-h.html">qmenubar.h</a>&gt;
+    #include &lt;<a href="qpopupmenu-h.html">qpopupmenu.h</a>&gt;
+    #include &lt;<a href="qtoolbar-h.html">qtoolbar.h</a>&gt;
+    #include &lt;<a href="qaction-h.html">qaction.h</a>&gt;
+</pre>
+<p> It's not that much that we need for our tiny editor: <a href="qtextedit.html">QTextEdit</a>, <a href="qmenubar.html">QMenuBar</a>,
+<a href="qtoolbar.html">QToolBar</a>, <a href="qpopupmenu.html">QPopupMenu</a> and last but not least <a href="qaction.html">QAction</a> and <a href="qactiongroup.html">QActionGroup</a> from 
+<em>qaction.h</em>. 
+<p> <pre>    Editor::Editor()
+        : <a href="qmainwindow.html">QMainWindow</a>( 0, "main window")
+    {
+        <a href="qactiongroup.html">QActionGroup</a> * colors = new <a href="qactiongroup.html">QActionGroup</a>( this, "colors", TRUE );
+</pre>
+<p> If one of the buttons is on, the other one must be off. The easiest way to
+to this is to create an action group, <em>colors</em>, that controls this 
+exclusive behaviour.
+This is done by setting the third argument of the QActionGroup constructor to
+<em>TRUE</em> (we could omit it because it's the default). 
+As simple as this we get an <em>exclusive</em> action group that will look after
+its member actions and switch off all other toggle actions except the one 
+that is on. 
+<p> <pre>        <a href="qaction.html">QAction</a> * setBlackFont = new <a href="qaction.html">QAction</a>( "black", QPixmap( (const char**)black_xpm ),
+                                              "Font color: black", CTRL+Key_B,
+                                              colors, "blackfontcolor", TRUE );
+</pre>
+<p> Then we create our first action, the one that sets the font color back
+to default black. It is called <em>setBlackFont</em> and is equipped with a descriptive 
+<a href="qaction.html#text">QAction::text</a>() reading <em>black</em>, a <a href="qaction.html#menuText">QAction::menuText</a>() reading 
+<em>Font color: black</em>, a <a href="qaction.html#iconSet">QAction::iconSet</a>()
+derived from the pixmap <em>black_xpm</em> and <em>ALT+B</em> as keyboard accelerator.
+<p> The last argument of the action constructor, <em>TRUE</em>, is responsible 
+for making <em>setBlackFont</em>  a toggle action
+that can be switched on or off. Most importantly <em>setBlackFont</em> becomes a member
+of the <em>colors</em> action group at creation time: <em>colors</em> is defined to
+be its parent.
+<p> <pre>        setRedFont = new <a href="qaction.html">QAction</a>( "red", QPixmap( (const char**)red_xpm ), "Font color: red",
+                                  CTRL+Key_R, colors, "redfontcolor", TRUE );
+</pre>
+<p> The same way we create the other toggle action, <em>setRedFont</em>, as a child of 
+<em>colors</em>.
+<p> Whenever one of the two members of the <em>colors</em> group emits the <a href="qaction.html#toggled">QAction::toggled</a>() signal
+the <a href="qactiongroup.html">QActionGroup</a> is notified internally and emits the <a href="qactiongroup.html#selected">QActionGroup::selected</a>() signal
+in turn. <a href="qactiongroup.html#selected">QActionGroup::selected</a>() carries the action that caused the signal as its argument.
+<p> All we have to do now is to connect this signal to a slot that changes
+the font color to red or black depending on the toggled action:
+<p> <pre>    <a name="x2084"></a><a name="x2083"></a>    QObject::<a href="qobject.html#connect">connect</a>( colors, SIGNAL( <a href="qactiongroup.html#selected">selected</a>( <a href="qaction.html">QAction</a> * ) ),
+                          this, SLOT( setFontColor( <a href="qaction.html">QAction</a> * ) ) );
+</pre>
+<p> This is the entire trick.
+Thus let's recall what we have done so far: We created two toggle actions,
+<em>setRedFont</em> and <em>setBlackFont</em>. Because they are children of an
+<em>exclusive</em> QActionGroup named <em>colors</em> it is impossible for the user
+to type red and black at the same time: Whenever he or she invokes
+one of the actions the other one changes state to off, <em>colors</em>
+emits a <a href="qactiongroup.html#selected">QActionGroup::selected</a>() signal and the <em>setFontColor()</em> slot takes care
+of it.
+<p> All we have to do now is to add our two actions to the <em>Editor</em> window.
+<p> <pre>        <a href="qtoolbar.html">QToolBar</a> * toolbar = new <a href="qtoolbar.html">QToolBar</a>( this, "toolbar" );
+</pre>
+<p> First we create a tool bar.
+<p> <pre>        colors-&gt;<a href="qactiongroup.html#addTo">addTo</a>( toolbar );
+</pre>
+<p> But instead of adding each action manually we simply add their
+parent action group to <em>toolbar</em> and are done. <em>colors</em> makes sure
+that <em>setBlackFont</em> and <em>setRedFont</em> find themselves presented
+in the tool bar: <em>setBlackFont</em> as a tool button decorated with the 
+<em>black_xpm</em> pixmap on the left, <em>setRedFont</em> (because it was
+added to <em>colors</em> later) to its right.
+<p> <pre>        <a href="qpopupmenu.html">QPopupMenu</a> * font = new <a href="qpopupmenu.html">QPopupMenu</a>( this );
+        <a href="qmainwindow.html#menuBar">menuBar</a>()-&gt;insertItem( "&amp;Font", font );
+</pre>
+<p> Next we create a popup menu and insert it into the menu bar
+under the <em>Font</em> entry.
+<p> In a menu with this name a user would certainly expect to find more
+than just two entries to change the font color. You might want to
+add other font related actions in the future, and therefore it 
+would be nice to group <em>setBlackFont</em> and <em>setRedFont</em> in 
+a submenu entirely dedicated to the purpose of changing font
+colors.
+<p> With an action group this is easy. We simply tell <em>colors</em>
+to group together all of its members in a single submenu:
+<p> <pre>        colors-&gt;<a href="qactiongroup.html#setUsesDropDown">setUsesDropDown</a>( TRUE );
+</pre>
+<p> This however causes a problem: a submenu entry must have a
+menu text, and up to now we don't have any.
+<p> When we recall that action groups intrinsically are QActions
+themselves the solution becomes obvious:
+<p> <pre>        colors-&gt;<a href="qaction.html#setMenuText">setMenuText</a>( "Font Color" );
+</pre>
+<p> We simply assign the menu text <em>Font</em> <em>Color</em> to <em>colors</em>.
+<p> The rest is business as usual:
+<p> <pre>        colors-&gt;<a href="qactiongroup.html#addTo">addTo</a>( font );
+</pre>
+<p> We add the new and improved <a href="qactiongroup.html">QActionGroup</a> as a submenu to
+the <em>font</em> popup menu.
+<p> <pre>        editor = new <a href="qtextedit.html">QTextEdit</a>( this, "editor" );
+</pre>
+<p> Last but not least we create the heart of <em>Editor</em>,
+the rich text editor ...
+<p> <pre>        <a href="qmainwindow.html#setCentralWidget">setCentralWidget</a>( editor );
+</pre>
+<p> ... and make it the central widget in our window.
+<p> <pre>    }
+</pre>
+<p> The only thing left to implement is the <em>setFontColor</em> slot
+that is responsible for changing the font color to red
+or black depending on which action was toggled on.
+<p> <A NAME="setFontColor()"></A>
+<pre>    void Editor::setFontColor( <a href="qaction.html">QAction</a> * coloraction )
+    {
+</pre>
+<p> As the <a href="qactiongroup.html#selected">QActionGroup::selected</a>() signal carries the
+relevant action as its argument, the first thing we have to do
+is to preserve it in the <em>coloraction</em> variable for later use.
+<p> <pre>        if ( coloraction == setRedFont )
+            editor-&gt;<a href="qtextedit.html#setColor">setColor</a>( red );
+</pre>
+<p> If <em>coloraction</em> is the same as <em>setRedFont</em> we change the <em>editor</em>'s 
+font color to <em>red</em>.
+<p> <pre>        else
+            editor-&gt;<a href="qtextedit.html#setColor">setColor</a>( black );
+</pre>
+<p> Otherwise it is set to <em>black</em>.
+<p> <pre>    }
+</pre><p>See also <a href="step-by-step-examples.html">Step-by-step Examples</a>.
+
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

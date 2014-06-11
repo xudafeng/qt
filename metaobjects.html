@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>元对象系统</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>元对象系统</h1>
+
+ 
+<p> <!-- index meta object --><a name="meta-object"></a><!-- index Q_OBJECT --><a name="Q_OBJECT"></a>
+<p> Qt中的元对象系统是用来处理对象间通讯的信号/槽机制、运行时的类型信息和
+动态属性系统。
+<p> 它基于下列三类：
+<ol type=1>
+<li> <a href="qobject.html">QObject</a>类；
+<li> 类声明中的私有段中的Q_OBJECT宏；
+<li> <a href="moc.html">元对象编译器（moc）</a>。
+</ol>
+<p> <em><a href="moc.html#moc">moc</a></em>读取C++源文件。如果它发现其中包
+含一个或多个类的声明中含有Q_OBJECT宏，它就会给含有Q_OBJECT宏的类生成另一个
+含有元对象代码的C++源文件。这个生成的源文件可以被类的源文件包含（#include）
+到或者和这个类的实现一起编译和连接。
+<p> 除了提供对象间通讯的<a href="signalsandslots.html">信号和槽</a>机制之
+外（介绍这个系统的主要原因），QObject中的元对象代码实现其它特征：
+<p> <ul>
+<p> <li> <a href="qobject.html#className">className()</a>函数在运行的时候以
+字符串返回类的名称，不需要C++编译器中的本地运行类型信息（RTTI）的支持。
+<p> <li> <a href="qobject.html#inherits">inherits()</a>函数返回这个对象是否
+是一个继承于<a href="qobject.html">QObject</a>继承树中一个特定类的类的实例。
+<p> <li> <a href="qobject.html#tr">tr()</a>和<a href="qobject.html#trUtf8">trUtf8()</a>
+两个函数是用于<a href="i18n.html#internationalization">国际化</a>中的字符串翻译。
+<p> <li> <a href="qobject.html#setProperty">setProperty()</a>和<a href="qobject.html#property">property()</a>两个函数是用来通过名称动态设置和
+获得<a href="properties.html">对象属性</a>的。
+<p> <li> <a href="qobject.html#metaObject">metaObject()</a>函数返回这个类
+所关联的<a href="qmetaobject.html">元对象</a>。
+<p> </ul>
+<p> 虽然你使用QObject作为一个基类而不使用Q_OBJECT宏和元对象代码是可以的，
+但是如果Q_OBJECT宏没有被使用，那么这里的信号和槽以及其它特征描述都不会被
+提供。根据元对象系统的观点，一个没有元代码的QObject的子类和它含有元对象代
+码的最近的祖先相同。举例来说就是，className()将不会返回你的类的实际名称，
+返回的是它的这个祖先的名称。我们<em>强烈</em>建议<a href="qobject.html">QObject</a>
+的所有子类使用Q_OBJECT宏，而不管它们是否实际使用了信号、槽和属性。
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>Qt/嵌入式的虚拟帧缓冲</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt/嵌入式的虚拟帧缓冲</h1>
+
+ 
+<p> 虚拟帧缓冲允许在你的桌面机器上开发Qt/嵌入式程序，而不用在命令台和X11之间来回切换。
+<p> The virtual framebuffer is located in <tt>$QTDIR/tools/qvfb</tt>.
+<p> <h2> 使用虚拟帧缓冲
+</h2>
+<a name="1"></a><p> <ol type=1> 
+<li> 确认<tt>$QTDIR/src/tools/qconfig.h</tt>中的QT_NO_QWS_VFB是<em>没有</em>被定义的，并且编译Qt/Embedded库。
+<li> 把<tt>qvfb</tt>作为一个普通的Qt/X11应用程序来编译并且运行它。<em>不要</em>把它作为一个Qt/嵌入式应用程序来编译。
+<li> 启动一个Qt/嵌入式主程序（比如，使用QApplication::GuiServer标志来构造一个<a href="qapplication.html">QApplication</a>或者在命令行下使用-qws参数）。你将会需要指定你所要使用虚拟帧缓冲驱动的服务器，例如：
+<pre>
+    widgets -qws -display QVFb:0
+    </pre>
+ 
+<li> 你也可以设置<tt>QWS_DISPLAY</tt>环境变量为<tt>QVFb:0</tt>。
+</ol>
+<p> <tt>qvfb</tt>支持下列命令行参数：
+<p> <ul>
+<li> <tt>-width width</tt> 
+<p> 虚拟帧缓冲的宽度（默认：240）。
+<p> <li> <tt>-height height</tt> 
+<p> 虚拟帧缓冲的高度（默认：320）。
+<p> <li> <tt>-depth depth</tt> 
+<p> 虚拟帧缓冲的色深（1、8或者32，默认：8）。
+<p> <li> <tt>-nocursor</tt> 
+<p> 在帧缓冲窗口不显示X11光标。
+<p> <li> <tt>-qwsdisplay :id</tt> 
+<p> 提供的Qt/嵌入式显示id（默认：0）。
+<p> </ul>
+<p> <h2> 虚拟帧缓冲设计
+</h2>
+<a name="2"></a><p> 虚拟帧缓冲使用了共享存储区域（虚拟的帧缓冲）来模拟帧缓冲并且在一个窗口中（<tt>qvfb</tt>）模拟一个应用来显示帧缓冲。显示的区域被周期性的改变和更新，所以你会看到帧缓冲的不连续的快照，而不是每一个单独的绘画操作。因为这个原因的绘画问题，比如闪烁，知道程序在使用真正的帧缓冲而运行的时候就不会再出现了。
+<p> 目标刷新速度可以通过<b>View|Refresh Rate</b>菜单项来设置。这将会倒置<tt>qvfb</tt>更加频繁地检查要被刷新的区域。速度仅仅是一个目标。如果一个小的绘画操作完成了，帧缓冲将不会在绘画事件之间显示任何更新。如果一个应用程序正在显示一个动画，更新将会更频繁，并且应用程序和<tt>qvfb</tt>将会争夺处理器时间。
+<p> 鼠标和键盘事件通过命名管道传递给Qt/嵌入式主程序处理。
+<p> 虚拟帧缓冲只是一个开发工具。在虚拟帧缓冲设计中没有考虑任何安全问题。在产品环境中应该避免这个问题，QT_NO_QWS_VFB在产品库中应该是被定义的。
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

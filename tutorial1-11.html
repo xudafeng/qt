@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt教程一 —— 第十一章：给它一个炮弹</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt教程一 —— 第十一章：给它一个炮弹</h1>
+
+ 
+<p> <center><img src="t11.png" alt="Screenshot of tutorial eleven"></center> 
+<p> 在这个例子里我们介绍了一个定时器来实现动画的射击。
+<p> <ul>
+<li> <a href="t11-lcdrange-h.html">t11/lcdrange.h</a>包含LCDRange类定义。
+<li> <a href="t11-lcdrange-cpp.html">t11/lcdrange.cpp</a>包含LCDRange类实现。
+<li> <a href="t11-cannon-h.html">t11/cannon.h</a>包含CannonField类定义。
+<li> <a href="t11-cannon-cpp.html">t11/cannon.cpp</a>包含CannonField类实现。
+<li> <a href="t11-main-cpp.html">t11/main.cpp</a>包含MyWidget和main。
+</ul>
+<p> <h2> 一行一行地解说
+</h2>
+<a name="1"></a><p> <h3> <a href="t11-cannon-h.html">t11/cannon.h</a>
+</h3>
+<a name="1-1"></a><p> CannonField现在就有了射击能力。
+<p> 
+
+<p> <pre>        void  shoot();
+</pre>
+<p> 当炮弹不在空中中，调用这个槽就会使加农炮射击。
+<p> <pre>    private slots:
+        void  moveShot();
+</pre>
+<p> 当炮弹正在空中时，这个私有槽使用一个<a href="qtimer.html">定时器</a>来移动射击。
+<p> <pre>    private:
+        void  paintShot( <a href="qpainter.html">QPainter</a> * );
+</pre>
+<p> 这个函数来画射击。
+<p> <pre>        <a href="qrect.html">QRect</a> shotRect() const;
+</pre>
+<p> 当炮弹正在空中的时候，这个私有函数返回封装它所占用空间的矩形，否则它就返回一个没有定义的矩形。
+<p> <pre>        int timerCount;
+        <a href="qtimer.html">QTimer</a> * autoShootTimer;
+        float shoot_ang;
+        float shoot_f;
+    };
+</pre>
+<p> 这些私有变量包含了描述射击的信息。<tt>timerCount</tt>保留了射击进行后的时间。<tt>shoot_ang</tt>是加农炮射击时的角度，<tt>shoot_f</tt>是射击时加农炮的力量。
+<p> <h3> <a href="t11-cannon-cpp.html">t11/cannon.cpp</a>
+</h3>
+<a name="1-2"></a><p> 
+
+<p> <pre>    #include &lt;math.h&gt;
+</pre>
+<p> 我们包含了数学库，因为我们需要使用sin()和cos()函数。
+<p> <pre>    CannonField::CannonField( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qwidget.html">QWidget</a>( parent, name )
+    {
+        ang = 45;
+        f = 0;
+        timerCount = 0;
+        autoShootTimer = new <a href="qtimer.html">QTimer</a>( this, "movement handler" );
+    <a name="x2311"></a>    <a href="qobject.html#connect">connect</a>( autoShootTimer, SIGNAL(<a href="qtimer.html#timeout">timeout</a>()),
+                 this, SLOT(moveShot()) );
+        shoot_ang = 0;
+        shoot_f = 0;
+        <a href="qwidget.html#setPalette">setPalette</a>( QPalette( QColor( 250, 250, 200) ) );
+    }
+</pre>
+<p> 我们初始化我们新的私有变量并且把<a href="qtimer.html#timeout">QTimer::timeout</a>()信号和我们的moveShot()槽相连。我们会在定时器超时的时候移动射击。
+<p> <pre>    void CannonField::shoot()
+    {
+    <a name="x2308"></a>    if ( autoShootTimer-&gt;<a href="qtimer.html#isActive">isActive</a>() )
+            return;
+        timerCount = 0;
+        shoot_ang = ang;
+        shoot_f = f;
+    <a name="x2309"></a>    autoShootTimer-&gt;<a href="qtimer.html#start">start</a>( 50 );
+    }
+</pre>
+<p> 只要炮弹不在空中，这个函数就会进行一次射击。<tt>timerCount</tt>被重新设置为零。<tt>shoot_ang</tt>和<tt>shoot_f</tt>设置为当前加农炮的角度和力量。最后，我们开始这个定时器。
+<p> <pre>    void CannonField::moveShot()
+    {
+        <a href="qregion.html">QRegion</a> r( shotRect() );
+        timerCount++;
+
+        <a href="qrect.html">QRect</a> shotR = shotRect();
+
+    <a name="x2307"></a>    if ( shotR.<a href="qrect.html#x">x</a>() &gt; width() || shotR.<a href="qrect.html#y">y</a>() &gt; height() )
+    <a name="x2310"></a>        autoShootTimer-&gt;<a href="qtimer.html#stop">stop</a>();
+        else
+    <a name="x2305"></a>        r = r.<a href="qrect.html#unite">unite</a>( QRegion( shotR ) );
+        <a href="qwidget.html#repaint">repaint</a>( r );
+    }
+</pre>
+<p> moveShot()是一个移动射击的槽，当<a href="qtimer.html">QTimer</a>开始的时候，每50毫秒被调用一次。
+<p> 它的任务就是计算新的位置，重新画屏幕并把炮弹放到新的位置，并且如果需要的话，停止定时器。
+<p> 首先我们使用<a href="qregion.html">QRegion</a>来保留旧的shotRect()。<a href="qregion.html">QRegion</a>可以保留任何种类的区域，并且我们可以用它来简化绘画过程。shotRect()返回现在炮弹所在的矩形——稍后我们会详细介绍。
+<p> 然后我们增加<tt>timerCount</tt>，用它来实现炮弹在它的轨迹中移动的每一步。
+<p> 下一步我们算出新的炮弹的矩形。
+<p> 如果炮弹已经移动到窗口部件的右面或者下面的边界，我们停止定时器或者添加新的shotRect()到QRegion。
+<p> 最后，我们重新绘制QRegion。这将会发送一个单一的绘画事件，但仅仅有一个到两个举行需要刷新。
+<p> <pre>    void CannonField::<a href="qwidget.html#paintEvent">paintEvent</a>( <a href="qpaintevent.html">QPaintEvent</a> *e )
+    {
+    <a name="x2301"></a>    <a href="qrect.html">QRect</a> updateR = e-&gt;<a href="qpaintevent.html#rect">rect</a>();
+        <a href="qpainter.html">QPainter</a> p( this );
+
+    <a name="x2302"></a>    if ( updateR.<a href="qrect.html#intersects">intersects</a>( cannonRect() ) )
+            paintCannon( &amp;p );
+        if ( autoShootTimer-&gt;<a href="qtimer.html#isActive">isActive</a>() &amp;&amp;
+             updateR.<a href="qrect.html#intersects">intersects</a>( shotRect() ) )
+            paintShot( &amp;p );
+    }
+</pre>
+<p> 绘画事件函数在前一章中已经被分成两部分了。现在我们得到的新的矩形区域需要绘画，检查加农炮和/或炮弹是否相交，并且如果需要的话，调用paintCannon()和/或paintShot()。
+<p> <pre>    void CannonField::paintShot( <a href="qpainter.html">QPainter</a> *p )
+    {
+        p-&gt;<a href="qpainter.html#setBrush">setBrush</a>( black );
+        p-&gt;<a href="qpainter.html#setPen">setPen</a>( NoPen );
+    <a name="x2298"></a>    p-&gt;<a href="qpainter.html#drawRect">drawRect</a>( shotRect() );
+    }
+</pre>
+<p> 这个私有函数画一个黑色填充的矩形作为炮弹。
+<p> 我们把paintCannon()的实现放到一边，它和前一章中的paintEvent()一样。
+<p> <pre>    QRect CannonField::shotRect() const
+    {
+        const double gravity = 4;
+
+        double time      = timerCount / 4.0;
+        double velocity  = shoot_f;
+        double radians   = shoot_ang*3.14159265/180;
+
+        double velx      = velocity*cos( radians );
+        double vely      = velocity*sin( radians );
+    <a name="x2304"></a>    double x0        = ( barrelRect.<a href="qrect.html#right">right</a>()  + 5 )*cos(radians);
+        double y0        = ( barrelRect.<a href="qrect.html#right">right</a>()  + 5 )*sin(radians);
+        double x         = x0 + velx*time;
+        double y         = y0 + vely*time - 0.5*gravity*time*time;
+
+        <a href="qrect.html">QRect</a> r = QRect( 0, 0, 6, 6 );
+    <a name="x2303"></a>    r.<a href="qrect.html#moveCenter">moveCenter</a>( QPoint( qRound(x), height() - 1 - qRound(y) ) );
+        return r;
+    }
+</pre>
+<p> 这个私有函数计算炮弹的中心点并且返回封装炮弹的矩形。它除了使用自动增加所过去的时间的<tt>timerCount</tt>之外，还使用初始时的加农炮的力量和角度。
+<p> 运算公式使用的是有重力的环境下光滑运动的经典牛顿公式。简单地说，我们已经选择忽略爱因斯坦理论的结果。
+<p> 我们在一个y坐标向上增加的坐标系统中计算中心点。在我们计算出中心点之后，我们构造一个6*6大小的<a href="qrect.html">QRect</a>，并把它的中心移动到我们上面所计算出的中心点。同样的操作我们把这个点移动到窗口部件的坐标系统（请看<a href="coordsys.html">坐标系统</a>）。
+<p> qRound()函数是一个在qglobal.h中定义的内嵌函数（被其它所有Qt头文件包含）。qRound()把一个双精度实数变为最接近的整数。
+<p> <h3> <a href="t11-main-cpp.html">t11/main.cpp</a>
+</h3>
+<a name="1-3"></a><p> 
+
+<p> <pre>    class MyWidget: public <a href="qwidget.html">QWidget</a>
+    {
+    public:
+        MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+    };
+</pre>
+<p> 唯一的增加是Shoot按钮。
+<p> <pre>        <a href="qpushbutton.html">QPushButton</a> *shoot = new <a href="qpushbutton.html">QPushButton</a>( "&amp;Shoot", this, "shoot" );
+        shoot-&gt;<a href="qwidget.html#setFont">setFont</a>( QFont( "Times", 18, QFont::Bold ) );
+</pre>
+<p> 在构造函数中我们创建和设置Shoot按钮就像我们对Quit按钮所做的那样。注意构造函数的第一个参数是按钮的文本，并且第三个是窗口部件的名称。
+<p> <pre>        <a href="qobject.html#connect">connect</a>( shoot, SIGNAL(<a href="qbutton.html#clicked">clicked</a>()), cannonField, SLOT(shoot()) );
+</pre>
+<p> 把Shoot按钮的clicked()信号和CannonField的shoot()槽连接起来。
+<p> <h2> 行为
+</h2>
+<a name="2"></a><p> The cannon can shoot, but there's nothing to shoot at.
+<p> （请看<a href="tutorial1-07.html#compiling">编译</a>来学习如何创建一个makefile和连编应用程序。）
+<p> <h2> 练习
+</h2>
+<a name="3"></a><p> 用一个填充的圆来表示炮弹。提示：<a href="qpainter.html#drawEllipse">QPainter::drawEllipse</a>()会对你有所帮助。
+<p> 当炮弹在空中的时候，改变加农炮的颜色。
+<p> 现在你可以进行<a href="tutorial1-12.html">第十二章</a>了。
+<p> [<a href="tutorial1-10.html">上一章</a>]
+[<a href="tutorial1-12.html">下一章</a>]
+[<a href="tutorial.html">教程一主页</a>]
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

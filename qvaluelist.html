@@ -1,0 +1,577 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QValueList类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QValueList类参考</h1>
+
+<p>QValueList类是一个提供双向链表的基于值的模板类。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qvaluelist-h.html">qvaluelist.h</a>&gt;</tt>
+<p>被<a href="qcanvasitemlist.html">QCanvasItemList</a>、<a href="qstringlist.html">QStringList</a>和<a href="qvaluestack.html">QValueStack</a>继承。
+<p><a href="qvaluelist-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn>typedef QValueListIterator&lt;T&gt;&nbsp;<a href="#iterator"><b>iterator</b></a></div></li>
+<li><div class=fn>typedef QValueListConstIterator&lt;T&gt;&nbsp;<a href="#const_iterator"><b>const_iterator</b></a></div></li>
+<li><div class=fn>typedef T&nbsp;<a href="#value_type"><b>value_type</b></a></div></li>
+<li><div class=fn>typedef value_type&nbsp;*&nbsp;<a href="#pointer"><b>pointer</b></a></div></li>
+<li><div class=fn>typedef const&nbsp;value_type&nbsp;*&nbsp;<a href="#const_pointer"><b>const_pointer</b></a></div></li>
+<li><div class=fn>typedef value_type&nbsp;&amp;&nbsp;<a href="#reference"><b>reference</b></a></div></li>
+<li><div class=fn>typedef const&nbsp;value_type&nbsp;&amp;&nbsp;<a href="#const_reference"><b>const_reference</b></a></div></li>
+<li><div class=fn>typedef size_t&nbsp;<a href="#size_type"><b>size_type</b></a></div></li>
+<li><div class=fn><a href="#QValueList"><b>QValueList</b></a> ()</div></li>
+<li><div class=fn><a href="#QValueList-2"><b>QValueList</b></a> ( const&nbsp;QValueList&lt;T&gt;&nbsp;&amp;&nbsp;l )</div></li>
+<li><div class=fn><a href="#QValueList-3"><b>QValueList</b></a> ( const&nbsp;std::list&lt;T&gt;&nbsp;&amp;&nbsp;l )</div></li>
+<li><div class=fn><a href="#~QValueList"><b>~QValueList</b></a> ()</div></li>
+<li><div class=fn>QValueList&lt;T&gt; &amp; <a href="#operator-eq"><b>operator=</b></a> ( const&nbsp;QValueList&lt;T&gt;&nbsp;&amp;&nbsp;l )</div></li>
+<li><div class=fn>QValueList&lt;T&gt; &amp; <a href="#operator-eq-2"><b>operator=</b></a> ( const&nbsp;std::list&lt;T&gt;&nbsp;&amp;&nbsp;l )</div></li>
+<li><div class=fn>bool <a href="#operator-eq-eq-2"><b>operator==</b></a> ( const&nbsp;std::list&lt;T&gt;&nbsp;&amp;&nbsp;l ) const</div></li>
+<li><div class=fn>bool <a href="#operator-eq-eq"><b>operator==</b></a> ( const&nbsp;QValueList&lt;T&gt;&nbsp;&amp;&nbsp;l ) const</div></li>
+<li><div class=fn>bool <a href="#operator!-eq"><b>operator!=</b></a> ( const&nbsp;QValueList&lt;T&gt;&nbsp;&amp;&nbsp;l ) const</div></li>
+<li><div class=fn>iterator <a href="#begin-2"><b>begin</b></a> ()</div></li>
+<li><div class=fn>const_iterator <a href="#begin"><b>begin</b></a> () const</div></li>
+<li><div class=fn>iterator <a href="#end"><b>end</b></a> ()</div></li>
+<li><div class=fn>const_iterator <a href="#end-2"><b>end</b></a> () const</div></li>
+<li><div class=fn>iterator <a href="#insert"><b>insert</b></a> ( iterator&nbsp;it, const&nbsp;T&nbsp;&amp;&nbsp;x )</div></li>
+<li><div class=fn>uint <a href="#remove-2"><b>remove</b></a> ( const&nbsp;T&nbsp;&amp;&nbsp;x )</div></li>
+<li><div class=fn>void <a href="#clear"><b>clear</b></a> ()</div></li>
+<li><div class=fn>QValueList&lt;T&gt; &amp; <a href="#operator-lt-lt"><b>operator&lt;&lt;</b></a> ( const&nbsp;T&nbsp;&amp;&nbsp;x )</div></li>
+<li><div class=fn>size_type <a href="#size"><b>size</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#empty"><b>empty</b></a> () const</div></li>
+<li><div class=fn>void <a href="#push_front"><b>push_front</b></a> ( const&nbsp;T&nbsp;&amp;&nbsp;x )</div></li>
+<li><div class=fn>void <a href="#push_back"><b>push_back</b></a> ( const&nbsp;T&nbsp;&amp;&nbsp;x )</div></li>
+<li><div class=fn>iterator <a href="#erase"><b>erase</b></a> ( iterator&nbsp;it )</div></li>
+<li><div class=fn>iterator <a href="#erase-2"><b>erase</b></a> ( iterator&nbsp;first, iterator&nbsp;last )</div></li>
+<li><div class=fn>reference <a href="#front"><b>front</b></a> ()</div></li>
+<li><div class=fn>const_reference <a href="#front-2"><b>front</b></a> () const</div></li>
+<li><div class=fn>reference <a href="#back"><b>back</b></a> ()</div></li>
+<li><div class=fn>const_reference <a href="#back-2"><b>back</b></a> () const</div></li>
+<li><div class=fn>void <a href="#pop_front"><b>pop_front</b></a> ()</div></li>
+<li><div class=fn>void <a href="#pop_back"><b>pop_back</b></a> ()</div></li>
+<li><div class=fn>void <a href="#insert-2"><b>insert</b></a> ( iterator&nbsp;pos, size_type&nbsp;n, const&nbsp;T&nbsp;&amp;&nbsp;x )</div></li>
+<li><div class=fn>QValueList&lt;T&gt; <a href="#operator+"><b>operator+</b></a> ( const&nbsp;QValueList&lt;T&gt;&nbsp;&amp;&nbsp;l ) const</div></li>
+<li><div class=fn>QValueList&lt;T&gt; &amp; <a href="#operator+-eq"><b>operator+=</b></a> ( const&nbsp;QValueList&lt;T&gt;&nbsp;&amp;&nbsp;l )</div></li>
+<li><div class=fn>iterator <a href="#fromLast-2"><b>fromLast</b></a> ()</div></li>
+<li><div class=fn>const_iterator <a href="#fromLast"><b>fromLast</b></a> () const</div></li>
+<li><div class=fn>bool <a href="#isEmpty"><b>isEmpty</b></a> () const</div></li>
+<li><div class=fn>iterator <a href="#append"><b>append</b></a> ( const&nbsp;T&nbsp;&amp;&nbsp;x )</div></li>
+<li><div class=fn>iterator <a href="#prepend"><b>prepend</b></a> ( const&nbsp;T&nbsp;&amp;&nbsp;x )</div></li>
+<li><div class=fn>iterator <a href="#remove"><b>remove</b></a> ( iterator&nbsp;it )</div></li>
+<li><div class=fn>T &amp; <a href="#first"><b>first</b></a> ()</div></li>
+<li><div class=fn>const T &amp; <a href="#first-2"><b>first</b></a> () const</div></li>
+<li><div class=fn>T &amp; <a href="#last"><b>last</b></a> ()</div></li>
+<li><div class=fn>const T &amp; <a href="#last-2"><b>last</b></a> () const</div></li>
+<li><div class=fn>T &amp; <a href="#operator[]-2"><b>operator[]</b></a> ( size_type&nbsp;i )</div></li>
+<li><div class=fn>const T &amp; <a href="#operator[]"><b>operator[]</b></a> ( size_type&nbsp;i ) const</div></li>
+<li><div class=fn>iterator <a href="#at-2"><b>at</b></a> ( size_type&nbsp;i )</div></li>
+<li><div class=fn>const_iterator <a href="#at"><b>at</b></a> ( size_type&nbsp;i ) const</div></li>
+<li><div class=fn>iterator <a href="#find"><b>find</b></a> ( const&nbsp;T&nbsp;&amp;&nbsp;x )</div></li>
+<li><div class=fn>const_iterator <a href="#find-2"><b>find</b></a> ( const&nbsp;T&nbsp;&amp;&nbsp;x ) const</div></li>
+<li><div class=fn>iterator <a href="#find-3"><b>find</b></a> ( iterator&nbsp;it, const&nbsp;T&nbsp;&amp;&nbsp;x )</div></li>
+<li><div class=fn>const_iterator <a href="#find-4"><b>find</b></a> ( const_iterator&nbsp;it, const&nbsp;T&nbsp;&amp;&nbsp;x ) const</div></li>
+<li><div class=fn>int <a href="#findIndex"><b>findIndex</b></a> ( const&nbsp;T&nbsp;&amp;&nbsp;x ) const</div></li>
+<li><div class=fn>size_type <a href="#contains"><b>contains</b></a> ( const&nbsp;T&nbsp;&amp;&nbsp;x ) const</div></li>
+<li><div class=fn>size_type <a href="#count"><b>count</b></a> () const</div></li>
+<li><div class=fn>QValueList&lt;T&gt; &amp; <a href="#operator+-eq-2"><b>operator+=</b></a> ( const&nbsp;T&nbsp;&amp;&nbsp;x )</div></li>
+<li><div class=fn>typedef QValueListIterator&lt;T&gt;&nbsp;<a href="#Iterator"><b>Iterator</b></a></div></li>
+<li><div class=fn>typedef QValueListConstIterator&lt;T&gt;&nbsp;<a href="#ConstIterator"><b>ConstIterator</b></a></div></li>
+</ul>
+<h2>相关函数</h2>
+<ul>
+<li><div class=fn>QDataStream &amp; <a href="#operator-gt-gt"><b>operator&gt;&gt;</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, QValueList&lt;T&gt;&nbsp;&amp;&nbsp;l )</div></li>
+<li><div class=fn>QDataStream &amp; <a href="#operator-lt-lt-2"><b>operator&lt;&lt;</b></a> ( QDataStream&nbsp;&amp;&nbsp;s, const&nbsp;QValueList&lt;T&gt;&nbsp;&amp;&nbsp;l )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QValueList类是一个提供双向链表的基于值的模板类。
+<p> 
+
+
+
+<p> QValueList是一个像STL一样的列表容器的Qt的实现。如果标准<tt>列表</tt>不能提供时，你可以在你的应用程序中使用它。QValueList是<a href="qtl.html">Qt模板库</a>的一部分。
+<p> QValueList&lt;T&gt;定义了一个创建了一个全部为类T的值的列表的一个模板实例。注意QValueList不是存储指针为列表的成员，它保存每个成员的复制。这也就是为什么这些类被称为“基于值”，而<a href="qptrlist.html">QPtrList</a>和<a href="qdict.html">QDict</a>是“基于指针”。
+<p> QValueList包含并管理一个类型为T的对象的集合并且提供允许找到被包含的对象的迭代器。QValueList拥有它的项。关于更多的所有权语义，请参考<a href="qptrcollection.html">QPtrCollection</a>和其它一些基于指针的容器类。
+<p> 一些类不能在QValueList中使用，例如，所有继承于<a href="qobject.html">QObject</a>的类和那些所有实现窗口部件的类。只有值可以用在QValueList中。一个类作为值必须提供以下几点：
+<p> <ul>
+<li> 一个复制构造函数
+<li> 一个赋值操作符
+<li> 一个默认构造函数，比如构造函数中没有使用任何参数。
+</ul>
+<p> 注意在没有明确的版本被提供的时候，C++默认实现操作符和复制函数。在很多情况下，这就足够了。
+<p> QValueList的函数命名和其它Qt类是一致的（比如，<a href="#count">count</a>()、<a href="#isEmpty">isEmpty</a>()）。QValueList也提供兼容STL算法的一些函数，比如<a href="#size">size</a>()和<a href="#empty">empty</a>()。已经熟悉STL的<tt>list</tt>的程序员也可以使用这些函数。
+<p> 实例：
+<pre>
+class Employee
+{
+public:
+    Employee(): sn(0) {}
+    Employee( const <a href="qstring.html">QString</a>&amp; forename, const <a href="qstring.html">QString</a>&amp; surname, int salary )
+        : fn(forename), sn(surname), sal(salary)
+    {}
+
+    <a href="qstring.html">QString</a> forename() const { return fn; }
+    <a href="qstring.html">QString</a> surname() const { return sn; }
+    int salary() const { return sal; }
+    void setSalary( int salary ) { sal = salary; }
+private:
+    <a href="qstring.html">QString</a> fn;
+    <a href="qstring.html">QString</a> sn;
+    int sal;
+};
+
+    typedef QValueList&lt;Employee&gt; EmployeeList;
+    EmployeeList list;
+
+    list.append( Employee("John", "Doe", 50000) );
+    list.append( Employee("Jane", "Williams", 80000) );
+    list.append( Employee("Tom", "Jones", 60000) );
+
+    Employee mary( "Mary", "Hawthorne", 90000 );
+    list.append( mary );
+    mary.setSalary( 100000 );
+
+    EmployeeList::<a href="#iterator">iterator</a> it;
+    for ( it = list.begin(); it != list.end(); ++it )
+        cout &lt;&lt; (*it).surname().latin1() &lt;&lt; ", " &lt;&lt;
+                (*it).forename().latin1() &lt;&lt; " earns " &lt;&lt;
+                (*it).salary() &lt;&lt; endl;
+
+    // 输出：
+    // Doe, John earns 50000
+    // Williams, Jane earns 80000
+    // Hawthorne, Mary earns 90000
+    // Jones, Tom earns 60000
+  </pre>
+ 
+<p> 注意最后对Mary的薪水的改变并没有影响列表中的值，这是因为列表中创建了一个Mary条目的复制。
+<p> 这里有几种方法在列表中找到项。<a href="#begin">begin</a>()和<a href="#end">end</a>()函数返回列表中开始和结尾的迭代器。迭代器的优点是你可以通过对迭代器加/减就可以实现从当前位置向前/后移动了。end()返回的迭代器指向的是容器中最后一个之后的值。结尾之后的迭代器也是和列表关联的，它属于列表，尽管它是<em>不</em>可以解除引用的，<a href="qwmatrix.html#operator*-5">operator*</a>()不能返回一个被良好定义的值。如果列表是空的（<a href="#empty">empty</a>()），begin()和end()返回的值一样。
+<p> 另一个在列表中找到项的方法是使用<a href="qtl.html#qFind">qFind()</a>算法。比如：
+<p> <pre>
+    QValueList&lt;int&gt; list;
+    ...
+    QValueList&lt;int&gt;::<a href="#iterator">iterator</a> it = qFind( list.<a href="#begin">begin</a>(), list.<a href="#end">end</a>(), 3 );
+    if ( it != list.<a href="#end">end</a>() )
+        // it指向被找到的项。
+</pre>
+ 
+<p> 同一时间在列表中使用多个迭代器是安全的。如果列表中的一些成员被移除，只有那些指向被移除的成员的迭代器变为无效。向列表中插入项不会使任何一个迭代器无效。为了方便，函数<a href="#last">last</a>()返回列表中最后一个项的引用，并且<a href="#first">first</a>()返回第一个项的引用。如果列表为空（empty()），last()和first()都会有未定义的行为发生（你的应用程序将会崩溃或者会做一些不可预知的事情）。使用last()和first()时需要注意，比如：
+<p> <pre>
+    QValueList&lt;int&gt; list;
+    list.<a href="#append">append</a>( 1 );
+    list.<a href="#append">append</a>( 2 );
+    list.<a href="#append">append</a>( 3 );
+    ...
+    if ( !list.<a href="#empty">empty</a>() ) {
+        // OK, modify the first item
+        int&amp; i = list.<a href="#first">first</a>();
+        i = 18;
+    }
+    ...
+    QValueList&lt;double&gt; dlist;
+    double d = dlist.<a href="#last">last</a>(); // undefined
+</pre>
+ 
+<p> 因为QValueList是基于值的，所以在删除列表中的项时，就没有什么要注意的了。列表保存它自己的复制并且如果相应的项或者列表本身被删除时，列表会释放它们。你可以使用<a href="#clear">clear</a>()来强制列表释放它所有的项。
+<p> QValueList是<a href="shclass.html#shared-implicitly">隐含地共享</a>，这也就是说它能够在一个固定时间被复制。如果多个QValueList实例共享相同的数据并且一个需要修改它的内容，这个修改实例将会产生一个复制并且只修改它自己的复制，因此它对其它实例来说是无效的。这就是常说的“写时复制”。如果一个QValueList是在一个多线程程序中被使用，你必须保护所有对列表的访问。请参考<a href="qmutex.html">QMutex</a>。
+<p> 向列表中插入项有好几个方法。<a href="#prepend">prepend</a>()和<a href="#append">append</a>()函数分别把项插入到列表的开始和结尾。<a href="#insert">insert</a>()函数有好几种方式并且可以被用来向列表中的特定位置插入一个或多个项。
+<p> 从列表中移除项也有好几个方法。<a href="#remove">remove</a>()函数有好几种方式并且可以用来移除列表中的特定项。remove()函数可以根据特定的项的值来找到这个项并且删除它。
+<p> 列表可以使用sort()函数来排序，或者使用<a href="qtl.html">Qt模板库</a>来排序。比如使用qHeapSort()：
+<p> 实例：
+<pre>
+    QValueList&lt;int&gt; l;
+    l.<a href="#append">append</a>( 5 );
+    l.<a href="#append">append</a>( 8 );
+    l.<a href="#append">append</a>( 3 );
+    l.<a href="#append">append</a>( 4 );
+    qHeapSort( l );
+  </pre>
+ 
+<p> <p>也可以参考<a href="qvaluelistiterator.html">QValueListIterator</a>、<a href="qtl.html">Qt模板库类</a>、<a href="shared.html">隐含地和明示地共享类</a>和<a href="tools.html">非GUI类</a>。
+
+<hr><h2>函数类型文档</h2>
+<h3 class=fn><a name="ConstIterator"></a>QValueList::ConstIterator</h3> 
+<p> 这个迭代器是<a href="qvaluelistconstiterator.html">QValueListConstIterator</a>的一个实例，类型和QValueList一样。换句话说，如果你QValueList&lt;int&gt;这样示例，ConstIterator就是QValueListConstIterator&lt;int&gt;。几个成员函数使用它，比如<a href="#begin">QValueList::begin</a>()，它返回一个指向列表中第一个项的迭代器。
+<p> 在功能上，它和Iterator基本一样。唯一的区别是你不能使用ConstIterator做非常量操作并且如果你使用ConstIterator，编译器经常会产生更好的代码。
+<p> <p>也可以参考<a href="qvaluelistiterator.html">QValueListIterator</a>和<a href="#Iterator">Iterator</a>。
+
+<h3 class=fn><a name="Iterator"></a>QValueList::Iterator</h3> 
+<p> 这个迭代器是<a href="qvaluelistiterator.html">QValueListIterator</a>的一个实例，类型和QValueList一样。换句话说，如果你QValueList&lt;int&gt;这样示例，Iterator就是QValueListIterator&lt;int&gt;。几个成员函数使用它，比如<a href="#begin">QValueList::begin</a>()，它返回一个指向列表中第一个项的迭代器。
+<p> 在功能上，它和ConstIterator基本一样。唯一的区别是你不能使用ConstIterator做非常量操作并且如果你使用ConstIterator，编译器经常会产生更好的代码。
+<p> <p>也可以参考<a href="qvaluelistiterator.html">QValueListIterator</a>和<a href="#ConstIterator">ConstIterator</a>。
+
+<h3 class=fn><a name="const_iterator"></a>QValueList::const_iterator</h3> 
+列表的常量迭代器类型，<a href="qvaluelistconstiterator.html">QValueListConstIterator</a>。
+
+<h3 class=fn><a name="const_pointer"></a>QValueList::const_pointer</h3> 
+指向T类型的常量指针。
+
+<h3 class=fn><a name="const_reference"></a>QValueList::const_reference</h3> 
+T类型的常量引用。
+
+<h3 class=fn><a name="iterator"></a>QValueList::iterator</h3> 
+列表的迭代器类型，<a href="qvaluelistiterator.html">QValueListIterator</a>。
+
+<h3 class=fn><a name="pointer"></a>QValueList::pointer</h3> 
+指向T类型的指针。
+
+<h3 class=fn><a name="reference"></a>QValueList::reference</h3> 
+T类型的引用。
+
+<h3 class=fn><a name="size_type"></a>QValueList::size_type</h3> 
+一个无符号整数类型，用来说明变量的大小。
+
+<h3 class=fn><a name="value_type"></a>QValueList::value_type</h3> 
+存储在列表中的对象的类型，T。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QValueList"></a>QValueList::QValueList ()
+</h3>
+构造一个空的列表。
+
+<h3 class=fn><a name="QValueList-2"></a>QValueList::QValueList ( const&nbsp;<a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp;&nbsp;l )
+</h3>
+<p> 构造一个<em>l</em>的复制。
+<p> 这个操作使用了O(1)时间，因为QValueList是<a href="shclass.html#shared-implicitly">隐含地共享</a>。
+<p> 第一次对列表的修改会使用O(n)时间。
+
+<h3 class=fn><a name="QValueList-3"></a>QValueList::QValueList ( const&nbsp;std::list&lt;T&gt;&nbsp;&amp;&nbsp;l )
+</h3> 
+<p> 构造一个<em>l</em>的复制。
+<p> 这个构造函数提供了和STL容器的兼容。
+
+<h3 class=fn><a name="~QValueList"></a>QValueList::~QValueList ()
+</h3>
+<p> 销毁这个列表。在列表中的值的引用和这个列表的所有迭代器都会变为无效。注意检查一个迭代器是否有效将是不可能的——因为QValueList已经为效率而优化了，而不是为错误检查。
+
+<h3 class=fn><a href="qvaluelist.html#iterator">iterator</a> <a name="append"></a>QValueList::append ( const&nbsp;T&nbsp;&amp;&nbsp;x )
+</h3>
+<p> 在列表结尾插入<em>x</em>。
+<p> <p>也可以参考<a href="#insert">insert</a>()和<a href="#prepend">prepend</a>()。
+<p>实例：<a href="checklists-example.html#x432">checklists/checklists.cpp</a>和<a href="simple-qfont-demo-walkthrough.html#x2125">fonts/simple-qfont-demo/viewer.cpp</a>。
+
+<h3 class=fn><a href="qvaluelist.html#const_iterator">const_iterator</a> <a name="at"></a>QValueList::at ( <a href="qvaluelist.html#size_type">size_type</a>&nbsp;i ) const
+</h3>
+<p> 返回指向列表中位置为<em>i</em>的项的迭代器，或者如果索引超出范围，返回<a href="#end">end</a>()。
+<p> <b>警告：</b>这个函数使用的是线性搜索并且对于大的列表这将会非常慢。QValueList没有对随机项访问进行优化。如果你需要随机访问，请使用一个不同的容易，比如<a href="qvaluevector.html">QValueVector</a>。
+
+<h3 class=fn><a href="qvaluelist.html#iterator">iterator</a> <a name="at-2"></a>QValueList::at ( <a href="qvaluelist.html#size_type">size_type</a>&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回指向列表中位置为<em>i</em>的项的迭代器，或者如果索引超出范围，返回<a href="#end">end</a>()。
+
+<h3 class=fn><a href="qvaluelist.html#reference">reference</a> <a name="back"></a>QValueList::back ()
+</h3> 
+<p> 返回指向最后一个项的引用。如果列表中没有最后一个项（比如，<a href="#empty">empty</a>()返回真），返回值是未定义的。
+<p> 这个函数的提供是为了兼容STL。它和<a href="#last">last</a>()是一样的。
+<p> <p>也可以参考<a href="#front">front</a>()。
+
+<h3 class=fn><a href="qvaluelist.html#const_reference">const_reference</a> <a name="back-2"></a>QValueList::back () const
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+
+<h3 class=fn><a href="qvaluelist.html#const_iterator">const_iterator</a> <a name="begin"></a>QValueList::begin () const
+</h3>
+<p> 返回指向列表中第一个项的迭代器。如果列表为空，这个迭代器等于<a href="#end">end</a>()。
+<p>也可以参考<a href="#first">first</a>()和<a href="#end">end</a>()。
+<p>实例：<a href="tutorial2-06.html#x2493">chart/canvasview.cpp</a>、<a href="tutorial2-03.html#x2457">chart/element.cpp</a>、<a href="checklists-example.html#x433">checklists/checklists.cpp</a>、<a href="simple-qfont-demo-walkthrough.html#x2126">fonts/simple-qfont-demo/viewer.cpp</a>、<a href="ftpclient-example.html#x694">network/ftpclient/ftpview.cpp</a>、<a href="statistics-example.html#x2636">table/statistics/statistics.cpp</a>和<a href="themes-example.html#x304">themes/themes.cpp</a>。
+
+<h3 class=fn><a href="qvaluelist.html#iterator">iterator</a> <a name="begin-2"></a>QValueList::begin ()
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回指向列表中第一个项的迭代器。如果列表为空，这个迭代器等于<a href="#end">end</a>()。
+<p>也可以参考<a href="#first">first</a>()和<a href="#end">end</a>()。
+
+<h3 class=fn>void <a name="clear"></a>QValueList::clear ()
+</h3>
+<p> 移除列表中所有的项。
+<p> <p>也可以参考<a href="#remove">remove</a>()。
+
+<h3 class=fn><a href="qvaluelist.html#size_type">size_type</a> <a name="contains"></a>QValueList::contains ( const&nbsp;T&nbsp;&amp;&nbsp;x ) const
+</h3>
+<p> 返回列表中值<em>x</em>出现的次数。
+
+<h3 class=fn><a href="qvaluelist.html#size_type">size_type</a> <a name="count"></a>QValueList::count () const
+</h3>
+<p> 返回列表中项的数量。
+<p> <p>也可以参考<a href="#isEmpty">isEmpty</a>()。
+<p>实例：<a href="tutorial2-03.html#x2458">chart/element.cpp</a>和<a href="statistics-example.html#x2637">table/statistics/statistics.cpp</a>。
+
+<h3 class=fn>bool <a name="empty"></a>QValueList::empty () const
+</h3> 
+<p> 如果列表中没有包含任何项，返回真，否则返回假。
+<p> <p>也可以参考<a href="#size">size</a>()。
+
+<h3 class=fn><a href="qvaluelist.html#iterator">iterator</a> <a name="end"></a>QValueList::end ()
+</h3>
+<p> 返回一个指向列表中最后一项之后的迭代器。如果列表为空，这个迭代器等于<a href="#begin">begin</a>()。
+<p> <p>也可以参考<a href="#last">last</a>()和<a href="#begin">begin</a>()。
+<p>实例：<a href="tutorial2-06.html#x2494">chart/canvasview.cpp</a>、<a href="tutorial2-03.html#x2459">chart/element.cpp</a>、<a href="checklists-example.html#x434">checklists/checklists.cpp</a>、<a href="simple-qfont-demo-walkthrough.html#x2127">fonts/simple-qfont-demo/viewer.cpp</a>、<a href="ftpclient-example.html#x695">network/ftpclient/ftpview.cpp</a>、<a href="sql.html#x2197">sql/overview/insert/main.cpp</a>和<a href="statistics-example.html#x2638">table/statistics/statistics.cpp</a>。
+
+<h3 class=fn><a href="qvaluelist.html#const_iterator">const_iterator</a> <a name="end-2"></a>QValueList::end () const
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回一个指向列表中最后一项之后的迭代器。如果列表为空，这个迭代器等于<a href="#begin">begin</a>()。
+<p> <p>也可以参考<a href="#last">last</a>()和<a href="#begin">begin</a>()。
+
+<h3 class=fn><a href="qvaluelist.html#iterator">iterator</a> <a name="erase"></a>QValueList::erase ( <a href="qvaluelist.html#iterator">iterator</a>&nbsp;it )
+</h3> 
+<p> 从列表中移除<em>it</em>所指向的项。除了<em>it</em>之外其它指向相同项的迭代器一样都无效了。返回一个指向<em>it</em>之后的下一个项的迭代器，或者如果没有这样的项，返回<a href="#end">end</a>()。
+<p> 这个函数的提供是为了兼容STL。它等于<a href="#remove">remove</a>()。
+
+<h3 class=fn><a href="qvaluelist.html#iterator">iterator</a> <a name="erase-2"></a>QValueList::erase ( <a href="qvaluelist.html#iterator">iterator</a>&nbsp;first, <a href="qvaluelist.html#iterator">iterator</a>&nbsp;last )
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 删除从<em>first</em>到<em>last</em>的所有项（不包括<em>last</em>）。除了指向被移除项的迭代器，其它迭代器都有效。返回<em>last</em>。
+
+<h3 class=fn><a href="qvaluelist.html#iterator">iterator</a> <a name="find"></a>QValueList::find ( const&nbsp;T&nbsp;&amp;&nbsp;x )
+</h3>
+<p> 返回指向列表中第一次出现<em>x</em>的迭代器。
+<p> 如果没有项匹配，返回<a href="#end">end</a>()。
+
+<h3 class=fn><a href="qvaluelist.html#const_iterator">const_iterator</a> <a name="find-2"></a>QValueList::find ( const&nbsp;T&nbsp;&amp;&nbsp;x ) const
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回指向列表中第一次出现<em>x</em>的迭代器。
+<p> 如果没有项匹配，返回<a href="#end">end</a>()。
+
+<h3 class=fn><a href="qvaluelist.html#iterator">iterator</a> <a name="find-3"></a>QValueList::find ( <a href="qvaluelist.html#iterator">iterator</a>&nbsp;it, const&nbsp;T&nbsp;&amp;&nbsp;x )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回指向列表中从<em>it</em>开始第一次出现<em>x</em>的迭代器。
+<p> 如果没有项匹配，返回<a href="#end">end</a>()。
+
+<h3 class=fn><a href="qvaluelist.html#const_iterator">const_iterator</a> <a name="find-4"></a>QValueList::find ( <a href="qvaluelist.html#const_iterator">const_iterator</a>&nbsp;it, const&nbsp;T&nbsp;&amp;&nbsp;x ) const
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回指向列表中从<em>it</em>开始第一次出现<em>x</em>的迭代器。
+<p> 如果没有项匹配，返回<a href="#end">end</a>()。
+
+<h3 class=fn>int <a name="findIndex"></a>QValueList::findIndex ( const&nbsp;T&nbsp;&amp;&nbsp;x ) const
+</h3>
+<p> 返回列表中值<em>x</em>第一次出现的索引。如果没有项匹配，返回-1。
+
+<h3 class=fn>T &amp; <a name="first"></a>QValueList::first ()
+</h3>
+<p> 返回第一个项的引用。如果列表中没有第一个项（比如，<a href="#empty">empty</a>()返回真），返回值是未定义的。
+<p> <p>也可以参考<a href="#last">last</a>()。
+<p>实例：<a href="mail-example.html#x765">network/mail/smtp.cpp</a>。
+
+<h3 class=fn>const T &amp; <a name="first-2"></a>QValueList::first () const
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+
+<h3 class=fn><a href="qvaluelist.html#const_iterator">const_iterator</a> <a name="fromLast"></a>QValueList::fromLast () const
+</h3>
+<p> 返回指向列表中最后一项的迭代器，或者如果列表中没有最后一项，返回<a href="#end">end</a>()。
+<p> 可以使用end()函数替换。例如：
+<p> <pre>
+    QValueList&lt;int&gt; l;
+    ……
+    QValueList&lt;int&gt;::<a href="#iterator">iterator</a> it = l.<a href="#end">end</a>();
+    --it;
+    if ( it != <a href="#end">end</a>() )
+        // ……
+</pre>
+ 
+<p> 
+<h3 class=fn><a href="qvaluelist.html#iterator">iterator</a> <a name="fromLast-2"></a>QValueList::fromLast ()
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 返回指向列表中最后一项的迭代器，或者如果列表中没有最后一项，返回<a href="#end">end</a>()。
+<p> 可以使用end()函数替换。例如：
+<p> <pre>
+    QValueList&lt;int&gt; l;
+    ……
+    QValueList&lt;int&gt;::<a href="#iterator">iterator</a> it = l.<a href="#end">end</a>();
+    --it;
+    if ( it != <a href="#end">end</a>() )
+        // ……
+</pre>
+ 
+<p> 
+<h3 class=fn><a href="qvaluelist.html#reference">reference</a> <a name="front"></a>QValueList::front ()
+</h3> 
+<p> 返回列表中第一个项的引用。如果列表中没有第一个项（比如，<a href="#empty">empty</a>()返回真），返回值是为定义的。
+<p> 这个函数的提供是为了兼容STL。它等于<a href="#first">first</a>()。
+<p> <p>也可以参考<a href="#back">back</a>()。
+
+<h3 class=fn><a href="qvaluelist.html#const_reference">const_reference</a> <a name="front-2"></a>QValueList::front () const
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+
+<h3 class=fn><a href="qvaluelist.html#iterator">iterator</a> <a name="insert"></a>QValueList::insert ( <a href="qvaluelist.html#iterator">iterator</a>&nbsp;it, const&nbsp;T&nbsp;&amp;&nbsp;x )
+</h3>
+<p> 在迭代器<em>it</em>之前插入值<em>x</em>。
+<p> 返回指向被插入项的迭代器。
+<p> <p>也可以参考<a href="#append">append</a>()和<a href="#prepend">prepend</a>()。
+<p>实例：<a href="themes-example.html#x306">themes/themes.cpp</a>。
+
+<h3 class=fn>void <a name="insert-2"></a>QValueList::insert ( <a href="qvaluelist.html#iterator">iterator</a>&nbsp;pos, <a href="qvaluelist.html#size_type">size_type</a>&nbsp;n, const&nbsp;T&nbsp;&amp;&nbsp;x )
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 在位置<em>pos</em>之前，插入<em>x</em>的<em>n</em>个复制。
+
+<h3 class=fn>bool <a name="isEmpty"></a>QValueList::isEmpty () const
+</h3>
+<p> 如果列表没有包含任何项，返回真，否则返回假。
+<p> <p>也可以参考<a href="#count">count</a>()。
+<p>实例：<a href="simple-qfont-demo-walkthrough.html#x2128">fonts/simple-qfont-demo/viewer.cpp</a>、<a href="ftpclient-example.html#x683">network/ftpclient/ftpmainwindow.cpp</a>和<a href="mail-example.html#x766">network/mail/smtp.cpp</a>。
+
+<h3 class=fn>T &amp; <a name="last"></a>QValueList::last ()
+</h3>
+<p> 返回列表中最后一项的引用。如果列表中没有最后一项（比如，<a href="#empty">empty</a>()返回真），返回值是为定义的。
+
+<h3 class=fn>const T &amp; <a name="last-2"></a>QValueList::last () const
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+
+<h3 class=fn>bool <a name="operator!-eq"></a>QValueList::operator!= ( const&nbsp;<a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp;&nbsp;l ) const
+</h3>
+<p> 比较两个列表。
+<p> 如果这个列表和<em>l</em>不等，返回真，否则返回假。
+
+<h3 class=fn><a href="qvaluelist.html">QValueList</a>&lt;T&gt; <a name="operator+"></a>QValueList::operator+ ( const&nbsp;<a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp;&nbsp;l ) const
+</h3>
+<p> 创建一个新的列表并且用这个列表的项来填充它。然后<em>l</em>项被添加。返回新的列表。
+
+<h3 class=fn><a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp; <a name="operator+-eq"></a>QValueList::operator+= ( const&nbsp;<a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp;&nbsp;l )
+</h3>
+<p> 向这个列表添加<em>l</em>项。返回这个列表的引用。
+
+<h3 class=fn><a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp; <a name="operator+-eq-2"></a>QValueList::operator+= ( const&nbsp;T&nbsp;&amp;&nbsp;x )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 向这个列表添加值<em>x</em>。返回这个列表的引用。
+
+<h3 class=fn><a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp; <a name="operator-lt-lt"></a>QValueList::operator&lt;&lt; ( const&nbsp;T&nbsp;&amp;&nbsp;x )
+</h3>
+<p> 在列表末尾添加值<em>x</em>。返回这个列表的引用。
+
+<h3 class=fn><a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp; <a name="operator-eq"></a>QValueList::operator= ( const&nbsp;<a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp;&nbsp;l )
+</h3>
+<p> 把<em>l</em>赋值给这个列表并且返回这个列表的引用。
+<p> 当前列表的所有迭代器都因为这个操作而变为无效。这个赋值操作消耗O(1)时间，因为QValueList是<a href="shclass.html#implicitly-shared">隐含地共享</a>
+
+<h3 class=fn><a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp; <a name="operator-eq-2"></a>QValueList::operator= ( const&nbsp;std::list&lt;T&gt;&nbsp;&amp;&nbsp;l )
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 把<em>l</em>的内容赋值给这个列表。
+<p> 当前列表的所有迭代器都因为这个操作而变为无效。
+
+<h3 class=fn>bool <a name="operator-eq-eq"></a>QValueList::operator== ( const&nbsp;<a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp;&nbsp;l ) const
+</h3>
+<p> 比较两个列表。
+<p> 如果这个列表和<em>l</em>相等，返回真，否则返回假。
+
+<h3 class=fn>bool <a name="operator-eq-eq-2"></a>QValueList::operator== ( const&nbsp;std::list&lt;T&gt;&nbsp;&amp;&nbsp;l ) const
+</h3> 
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 如果这个列表和<em>l</em>相等，返回真，否则返回假。
+<p> 这个操作符的提供是为了和STL容器兼容。
+
+<h3 class=fn>const T &amp; <a name="operator[]"></a>QValueList::operator[] ( <a href="qvaluelist.html#size_type">size_type</a>&nbsp;i ) const
+</h3>
+<p> 返回列表中索引为<em>i</em>的项的常量引用。由你来决定检查它是否真的存在。你可以很容易地使用<a href="#count">count</a>()函数做到这一点。无论如何，这个操作符没有检查<em>i</em>是否在范围之内并且如果它不存在，将会递送未定义的结果。
+<p> <b>警告：</b>这个函数使用的是线性搜索并且对于大的列表这将会非常慢。QValueList没有对随机项访问进行优化。如果你需要随机访问，请使用一个不同的容易，比如<a href="qvaluevector.html">QValueVector</a>。
+
+<h3 class=fn>T &amp; <a name="operator[]-2"></a>QValueList::operator[] ( <a href="qvaluelist.html#size_type">size_type</a>&nbsp;i )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> Returns a non-const reference to the item with index <em>i</em>.
+
+<h3 class=fn>void <a name="pop_back"></a>QValueList::pop_back ()
+</h3> 
+<p> 移除列表中的最后一项。如果没有最后一项，这个操作是未定义的。
+<p> 这个函数的提供是为了兼容STL。
+
+<h3 class=fn>void <a name="pop_front"></a>QValueList::pop_front ()
+</h3> 
+<p> 移除列表中的第一个项。如果没有第一个项，这个操作是未定义的。
+<p> 这个函数的提供是为了兼容STL。
+
+<h3 class=fn><a href="qvaluelist.html#iterator">iterator</a> <a name="prepend"></a>QValueList::prepend ( const&nbsp;T&nbsp;&amp;&nbsp;x )
+</h3>
+<p> 在列表的开始插入<em>x</em>。
+<p> <p>也可以参考<a href="#insert">insert</a>()和<a href="#append">append</a>()。
+
+<h3 class=fn>void <a name="push_back"></a>QValueList::push_back ( const&nbsp;T&nbsp;&amp;&nbsp;x )
+</h3> 
+<p> 在列表的末尾插入<em>x</em>。
+<p> 这个函数的提供是为了兼容STL。它等于<a href="#append">append</a>()。
+
+<h3 class=fn>void <a name="push_front"></a>QValueList::push_front ( const&nbsp;T&nbsp;&amp;&nbsp;x )
+</h3> 
+<p> 在列表的开始插入<em>x</em>。
+<p> 这个函数的提供是为了兼容STL。它等于<a href="#prepend">prepend</a>()。
+
+<h3 class=fn><a href="qvaluelist.html#iterator">iterator</a> <a name="remove"></a>QValueList::remove ( <a href="qvaluelist.html#iterator">iterator</a>&nbsp;it )
+</h3>
+<p> 移除列表中<em>it</em>所指向的项。除了<em>it</em>之外其它指向相同项的迭代器一样都无效了。返回一个指向<em>it</em>之后的下一个项的迭代器，或者如果没有这样的项，返回<a href="#end">end</a>()。
+<p> <p>也可以参考<a href="#clear">clear</a>()。
+
+<h3 class=fn>uint <a name="remove-2"></a>QValueList::remove ( const&nbsp;T&nbsp;&amp;&nbsp;x )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 移除所有值为<em>x</em>的项并且返回被移除项的数量。
+
+<h3 class=fn><a href="qvaluelist.html#size_type">size_type</a> <a name="size"></a>QValueList::size () const
+</h3> 
+<p> Returns the number of items in the list.
+<p> 这个函数的提供是为了兼容STL。它等于<a href="#count">count</a>()。
+<p> <p>也可以参考<a href="#empty">empty</a>()。
+<p>实例：<a href="ftpclient-example.html#x696">network/ftpclient/ftpview.cpp</a>。
+
+<hr><h2>相关函数</h2>
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-lt-lt-2"></a>operator&lt;&lt; ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, const&nbsp;<a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp;&nbsp;l )
+</h3>
+<p> 写一个列表<em>l</em>到流<em>s</em>中。存储在列表中的类型T也必须实现了这个操作符。
+
+<h3 class=fn><a href="qdatastream.html">QDataStream</a>&nbsp;&amp; <a name="operator-gt-gt"></a>operator&gt;&gt; ( <a href="qdatastream.html">QDataStream</a>&nbsp;&amp;&nbsp;s, <a href="qvaluelist.html">QValueList</a>&lt;T&gt;&nbsp;&amp;&nbsp;l )
+</h3>
+<p> 从流<em>s</em>中读取一个列表<em>l</em>。存储在列表中的类型T也必须实现了这个操作符。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

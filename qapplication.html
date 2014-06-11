@@ -1,0 +1,1409 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>QApplication类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QApplication类参考</h1>
+
+<p>QApplication类管理图形用户界面应用程序的控制流和主要设置。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;</tt>
+<p>继承了<a href="qobject.html">QObject</a>。
+<p>被<a href="qxtapplication.html">QXtApplication</a>继承。
+<p><a href="qapplication-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QApplication"><b>QApplication</b></a> ( int&nbsp;&amp;&nbsp;argc, char&nbsp;**&nbsp;argv )</div></li>
+<li><div class=fn><a href="#QApplication-2"><b>QApplication</b></a> ( int&nbsp;&amp;&nbsp;argc, char&nbsp;**&nbsp;argv, bool&nbsp;GUIenabled )</div></li>
+<li><div class=fn>enum <a href="#Type-enum"><b>Type</b></a> { Tty, GuiClient, GuiServer }</div></li>
+<li><div class=fn><a href="#QApplication-3"><b>QApplication</b></a> ( int&nbsp;&amp;&nbsp;argc, char&nbsp;**&nbsp;argv, Type&nbsp;type )</div></li>
+<li><div class=fn><a href="#QApplication-4"><b>QApplication</b></a> ( Display&nbsp;*&nbsp;dpy, HANDLE&nbsp;visual = 0, HANDLE&nbsp;colormap = 0 )</div></li>
+<li><div class=fn><a href="#QApplication-5"><b>QApplication</b></a> ( Display&nbsp;*&nbsp;dpy, int&nbsp;argc, char&nbsp;**&nbsp;argv, HANDLE&nbsp;visual = 0, HANDLE&nbsp;colormap = 0 )</div></li>
+<li><div class=fn>virtual <a href="#~QApplication"><b>~QApplication</b></a> ()</div></li>
+<li><div class=fn>int <a href="#argc"><b>argc</b></a> () const</div></li>
+<li><div class=fn>char ** <a href="#argv"><b>argv</b></a> () const</div></li>
+<li><div class=fn>Type <a href="#type"><b>type</b></a> () const</div></li>
+<li><div class=fn>enum <a href="#ColorSpec-enum"><b>ColorSpec</b></a> { NormalColor = 0, CustomColor = 1, ManyColor = 2 }</div></li>
+<li><div class=fn>QWidget * <a href="#mainWidget"><b>mainWidget</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#setMainWidget"><b>setMainWidget</b></a> ( QWidget&nbsp;*&nbsp;mainWidget )</div></li>
+<li><div class=fn>virtual void <a href="#polish"><b>polish</b></a> ( QWidget&nbsp;*&nbsp;w )</div></li>
+<li><div class=fn>QWidget * <a href="#focusWidget"><b>focusWidget</b></a> () const</div></li>
+<li><div class=fn>QWidget * <a href="#activeWindow"><b>activeWindow</b></a> () const</div></li>
+<li><div class=fn>int <a href="#exec"><b>exec</b></a> ()</div></li>
+<li><div class=fn>void <a href="#processEvents"><b>processEvents</b></a> ()</div></li>
+<li><div class=fn>void <a href="#processEvents-2"><b>processEvents</b></a> ( int&nbsp;maxtime )</div></li>
+<li><div class=fn>void <a href="#processOneEvent"><b>processOneEvent</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#hasPendingEvents"><b>hasPendingEvents</b></a> ()</div></li>
+<li><div class=fn>int <a href="#enter_loop"><b>enter_loop</b></a> ()</div></li>
+<li><div class=fn>void <a href="#exit_loop"><b>exit_loop</b></a> ()</div></li>
+<li><div class=fn>int <a href="#loopLevel"><b>loopLevel</b></a> () const</div></li>
+<li><div class=fn>virtual bool <a href="#notify"><b>notify</b></a> ( QObject&nbsp;*&nbsp;receiver, QEvent&nbsp;*&nbsp;e )</div></li>
+<li><div class=fn>void <a href="#setDefaultCodec"><b>setDefaultCodec</b></a> ( QTextCodec&nbsp;*&nbsp;codec )</div></li>
+<li><div class=fn>QTextCodec * <a href="#defaultCodec"><b>defaultCodec</b></a> () const</div></li>
+<li><div class=fn>void <a href="#installTranslator"><b>installTranslator</b></a> ( QTranslator&nbsp;*&nbsp;mf )</div></li>
+<li><div class=fn>void <a href="#removeTranslator"><b>removeTranslator</b></a> ( QTranslator&nbsp;*&nbsp;mf )</div></li>
+<li><div class=fn>enum <a href="#Encoding-enum"><b>Encoding</b></a> { DefaultCodec, UnicodeUTF8 }</div></li>
+<li><div class=fn>QString <a href="#translate"><b>translate</b></a> ( const&nbsp;char&nbsp;*&nbsp;context, const&nbsp;char&nbsp;*&nbsp;sourceText, const&nbsp;char&nbsp;*&nbsp;comment = 0, Encoding&nbsp;encoding = DefaultCodec ) const</div></li>
+<li><div class=fn>virtual bool <a href="#macEventFilter"><b>macEventFilter</b></a> ( EventRef )</div></li>
+<li><div class=fn>virtual bool <a href="#winEventFilter"><b>winEventFilter</b></a> ( MSG * )</div></li>
+<li><div class=fn>virtual bool <a href="#x11EventFilter"><b>x11EventFilter</b></a> ( XEvent * )</div></li>
+<li><div class=fn>int <a href="#x11ProcessEvent"><b>x11ProcessEvent</b></a> ( XEvent&nbsp;*&nbsp;event )</div></li>
+<li><div class=fn>virtual bool <a href="#qwsEventFilter"><b>qwsEventFilter</b></a> ( QWSEvent * )</div></li>
+<li><div class=fn>void <a href="#qwsSetCustomColors"><b>qwsSetCustomColors</b></a> ( QRgb&nbsp;*&nbsp;colorTable, int&nbsp;start, int&nbsp;numColors )</div></li>
+<li><div class=fn>void <a href="#winFocus"><b>winFocus</b></a> ( QWidget&nbsp;*&nbsp;widget, bool&nbsp;gotFocus )</div></li>
+<li><div class=fn>bool <a href="#isSessionRestored"><b>isSessionRestored</b></a> () const</div></li>
+<li><div class=fn>QString <a href="#sessionId"><b>sessionId</b></a> () const</div></li>
+<li><div class=fn>virtual void <a href="#commitData"><b>commitData</b></a> ( QSessionManager&nbsp;&amp;&nbsp;sm )</div></li>
+<li><div class=fn>virtual void <a href="#saveState"><b>saveState</b></a> ( QSessionManager&nbsp;&amp;&nbsp;sm )</div></li>
+<li><div class=fn>void <a href="#wakeUpGuiThread"><b>wakeUpGuiThread</b></a> ()</div></li>
+<li><div class=fn>void <a href="#lock"><b>lock</b></a> ()</div></li>
+<li><div class=fn>void <a href="#unlock"><b>unlock</b></a> ( bool&nbsp;wakeUpGui = TRUE )</div></li>
+<li><div class=fn>bool <a href="#locked"><b>locked</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#tryLock"><b>tryLock</b></a> ()</div></li>
+</ul>
+<h2>公有槽</h2>
+<ul>
+<li><div class=fn>void <a href="#quit"><b>quit</b></a> ()</div></li>
+<li><div class=fn>void <a href="#closeAllWindows"><b>closeAllWindows</b></a> ()</div></li>
+</ul>
+<h2>信号</h2>
+<ul>
+<li><div class=fn>void <a href="#lastWindowClosed"><b>lastWindowClosed</b></a> ()</div></li>
+<li><div class=fn>void <a href="#aboutToQuit"><b>aboutToQuit</b></a> ()</div></li>
+<li><div class=fn>void <a href="#guiThreadAwake"><b>guiThreadAwake</b></a> ()</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>QStyle &amp; <a href="#style"><b>style</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setStyle"><b>setStyle</b></a> ( QStyle&nbsp;*&nbsp;style )</div></li>
+<li><div class=fn>QStyle * <a href="#setStyle-2"><b>setStyle</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;style )</div></li>
+<li><div class=fn>int <a href="#colorSpec"><b>colorSpec</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setColorSpec"><b>setColorSpec</b></a> ( int&nbsp;spec )</div></li>
+<li><div class=fn>QCursor * <a href="#overrideCursor"><b>overrideCursor</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setOverrideCursor"><b>setOverrideCursor</b></a> ( const&nbsp;QCursor&nbsp;&amp;&nbsp;cursor, bool&nbsp;replace = FALSE )</div></li>
+<li><div class=fn>void <a href="#restoreOverrideCursor"><b>restoreOverrideCursor</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#hasGlobalMouseTracking"><b>hasGlobalMouseTracking</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setGlobalMouseTracking"><b>setGlobalMouseTracking</b></a> ( bool&nbsp;enable )</div></li>
+<li><div class=fn>QPalette <a href="#palette"><b>palette</b></a> ( const&nbsp;QWidget&nbsp;*&nbsp;w = 0 )</div></li>
+<li><div class=fn>void <a href="#setPalette"><b>setPalette</b></a> ( const&nbsp;QPalette&nbsp;&amp;&nbsp;palette, bool&nbsp;informWidgets = FALSE, const&nbsp;char&nbsp;*&nbsp;className = 0 )</div></li>
+<li><div class=fn>QFont <a href="#font"><b>font</b></a> ( const&nbsp;QWidget&nbsp;*&nbsp;w = 0 )</div></li>
+<li><div class=fn>void <a href="#setFont"><b>setFont</b></a> ( const&nbsp;QFont&nbsp;&amp;&nbsp;font, bool&nbsp;informWidgets = FALSE, const&nbsp;char&nbsp;*&nbsp;className = 0 )</div></li>
+<li><div class=fn>QFontMetrics <a href="#fontMetrics"><b>fontMetrics</b></a> ()</div></li>
+<li><div class=fn>QWidgetList * <a href="#allWidgets"><b>allWidgets</b></a> ()</div></li>
+<li><div class=fn>QWidgetList * <a href="#topLevelWidgets"><b>topLevelWidgets</b></a> ()</div></li>
+<li><div class=fn>QDesktopWidget * <a href="#desktop"><b>desktop</b></a> ()</div></li>
+<li><div class=fn>QWidget * <a href="#activePopupWidget"><b>activePopupWidget</b></a> ()</div></li>
+<li><div class=fn>QWidget * <a href="#activeModalWidget"><b>activeModalWidget</b></a> ()</div></li>
+<li><div class=fn>QClipboard * <a href="#clipboard"><b>clipboard</b></a> ()</div></li>
+<li><div class=fn>QWidget * <a href="#widgetAt"><b>widgetAt</b></a> ( int&nbsp;x, int&nbsp;y, bool&nbsp;child = FALSE )</div></li>
+<li><div class=fn>QWidget * <a href="#widgetAt-2"><b>widgetAt</b></a> ( const&nbsp;QPoint&nbsp;&amp;&nbsp;pos, bool&nbsp;child = FALSE )</div></li>
+<li><div class=fn>void <a href="#exit"><b>exit</b></a> ( int&nbsp;retcode = 0 )</div></li>
+<li><div class=fn>bool <a href="#sendEvent"><b>sendEvent</b></a> ( QObject&nbsp;*&nbsp;receiver, QEvent&nbsp;*&nbsp;event )</div></li>
+<li><div class=fn>void <a href="#postEvent"><b>postEvent</b></a> ( QObject&nbsp;*&nbsp;receiver, QEvent&nbsp;*&nbsp;event )</div></li>
+<li><div class=fn>void <a href="#sendPostedEvents"><b>sendPostedEvents</b></a> ( QObject&nbsp;*&nbsp;receiver, int&nbsp;event_type )</div></li>
+<li><div class=fn>void <a href="#sendPostedEvents-2"><b>sendPostedEvents</b></a> ()</div></li>
+<li><div class=fn>void <a href="#removePostedEvents"><b>removePostedEvents</b></a> ( QObject&nbsp;*&nbsp;receiver )</div></li>
+<li><div class=fn>bool <a href="#startingUp"><b>startingUp</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#closingDown"><b>closingDown</b></a> ()</div></li>
+<li><div class=fn>void <a href="#flushX"><b>flushX</b></a> ()</div></li>
+<li><div class=fn>void <a href="#flush"><b>flush</b></a> ()</div></li>
+<li><div class=fn>void <a href="#syncX"><b>syncX</b></a> ()</div></li>
+<li><div class=fn>void <a href="#beep"><b>beep</b></a> ()</div></li>
+<li><div class=fn>void setWinStyleHighlightColor ( const&nbsp;QColor&nbsp;&amp;&nbsp;c ) &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>const QColor &amp; winStyleHighlightColor () &nbsp;<em>(obsolete)</em></div></li>
+<li><div class=fn>void <a href="#setDesktopSettingsAware"><b>setDesktopSettingsAware</b></a> ( bool&nbsp;on )</div></li>
+<li><div class=fn>bool <a href="#desktopSettingsAware"><b>desktopSettingsAware</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setCursorFlashTime"><b>setCursorFlashTime</b></a> ( int&nbsp;msecs )</div></li>
+<li><div class=fn>int <a href="#cursorFlashTime"><b>cursorFlashTime</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setDoubleClickInterval"><b>setDoubleClickInterval</b></a> ( int&nbsp;ms )</div></li>
+<li><div class=fn>int <a href="#doubleClickInterval"><b>doubleClickInterval</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setWheelScrollLines"><b>setWheelScrollLines</b></a> ( int&nbsp;n )</div></li>
+<li><div class=fn>int <a href="#wheelScrollLines"><b>wheelScrollLines</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setGlobalStrut"><b>setGlobalStrut</b></a> ( const&nbsp;QSize&nbsp;&amp;&nbsp;strut )</div></li>
+<li><div class=fn>QSize <a href="#globalStrut"><b>globalStrut</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setLibraryPaths"><b>setLibraryPaths</b></a> ( const&nbsp;QStringList&nbsp;&amp;&nbsp;paths )</div></li>
+<li><div class=fn>QStringList <a href="#libraryPaths"><b>libraryPaths</b></a> ()</div></li>
+<li><div class=fn>void <a href="#addLibraryPath"><b>addLibraryPath</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;path )</div></li>
+<li><div class=fn>void <a href="#removeLibraryPath"><b>removeLibraryPath</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;path )</div></li>
+<li><div class=fn>void <a href="#setStartDragTime"><b>setStartDragTime</b></a> ( int&nbsp;ms )</div></li>
+<li><div class=fn>int <a href="#startDragTime"><b>startDragTime</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setStartDragDistance"><b>setStartDragDistance</b></a> ( int&nbsp;l )</div></li>
+<li><div class=fn>int <a href="#startDragDistance"><b>startDragDistance</b></a> ()</div></li>
+<li><div class=fn>void <a href="#setReverseLayout"><b>setReverseLayout</b></a> ( bool&nbsp;b )</div></li>
+<li><div class=fn>bool <a href="#reverseLayout"><b>reverseLayout</b></a> ()</div></li>
+<li><div class=fn>int <a href="#horizontalAlignment"><b>horizontalAlignment</b></a> ( int&nbsp;align )</div></li>
+<li><div class=fn>bool <a href="#isEffectEnabled"><b>isEffectEnabled</b></a> ( Qt::UIEffect&nbsp;effect )</div></li>
+<li><div class=fn>void <a href="#setEffectEnabled"><b>setEffectEnabled</b></a> ( Qt::UIEffect&nbsp;effect, bool&nbsp;enable = TRUE )</div></li>
+<li><div class=fn>QWSDecoration &amp; <a href="#qwsDecoration"><b>qwsDecoration</b></a> ()</div></li>
+<li><div class=fn>void <a href="#qwsSetDecoration"><b>qwsSetDecoration</b></a> ( QWSDecoration&nbsp;*&nbsp;d )</div></li>
+<li><div class=fn>WindowsVersion <a href="#winVersion"><b>winVersion</b></a> ()</div></li>
+</ul>
+<h2>相关函数</h2>
+<ul>
+<li><div class=fn>void <a href="#qAddPostRoutine"><b>qAddPostRoutine</b></a> ( QtCleanUpFunction&nbsp;p )</div></li>
+<li><div class=fn>const char * <a href="#qVersion"><b>qVersion</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#qSysInfo"><b>qSysInfo</b></a> ( int&nbsp;*&nbsp;wordSize, bool&nbsp;*&nbsp;bigEndian )</div></li>
+<li><div class=fn>void <a href="#qDebug"><b>qDebug</b></a> ( const&nbsp;char&nbsp;*&nbsp;msg, ... )</div></li>
+<li><div class=fn>void <a href="#qWarning"><b>qWarning</b></a> ( const&nbsp;char&nbsp;*&nbsp;msg, ... )</div></li>
+<li><div class=fn>void <a href="#qFatal"><b>qFatal</b></a> ( const&nbsp;char&nbsp;*&nbsp;msg, ... )</div></li>
+<li><div class=fn>void <a href="#qSystemWarning"><b>qSystemWarning</b></a> ( const&nbsp;char&nbsp;*&nbsp;msg, int&nbsp;code )</div></li>
+<li><div class=fn>void <a href="#Q_ASSERT"><b>Q_ASSERT</b></a> ( bool&nbsp;test )</div></li>
+<li><div class=fn>void <a href="#Q_CHECK_PTR"><b>Q_CHECK_PTR</b></a> ( void&nbsp;*&nbsp;p )</div></li>
+<li><div class=fn>QtMsgHandler <a href="#qInstallMsgHandler"><b>qInstallMsgHandler</b></a> ( QtMsgHandler&nbsp;h )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+QApplication类管理图形用户界面应用程序的控制流和主要设置。
+<p> 它包含主事件循环，在其中来自窗口系统和其它资源的所有事件被处理和调度。它也处理应用程序的初始化和结束，并且提供对话管理。它也处理绝大多数系统范围和应用程序范围的设置。
+<p> 对于任何一个使用Qt的图形用户界面应用程序，都正好存在一个QApplication对象，而不论这个应用程序在同一时间内是不是有0、1、2或更多个窗口。
+<p> QApplication对象是可以通过全局变量<tt>qApp</tt>访问。它的负责的主要范围有：
+<ul>
+<p> <li> 它使用用户的桌面设置，例如<a href="#palette">palette</a>()、<a href="#font">font</a>()和<a href="#doubleClickInterval">doubleClickInterval</a>()来初始化应用程序。如果用户改变全局桌面，例如通过一些控制面板，它会对这些属性保持跟踪。
+<p> <li> 它执行事件处理，也就是说它从低下的窗口系统接收事件并且把它们分派给相关的窗口部件。通过使用<a href="#sendEvent">sendEvent</a>()和<a href="#postEvent">postEvent</a>()，你可以发送你自己的事件到窗口部件。
+<p> <li> 它分析命令行参数并且根据它们设置内部状态。关于这点的详细情况请参考下面的<a href="#QApplication">构造函数文档</a>。
+<p> <li> 它定义了由<a href="qstyle.html">QStyle</a>对象封装的应用程序的观感。在运行状态下，可以通过<a href="#setStyle">setStyle</a>()来改变。
+<p> <li> 它指定了应用程序如何分配颜色。详细情况请参考<a href="#setColorSpec">setColorSpec</a>()。
+<p> <li> 它定义了默认文本编码（请参考<a href="#setDefaultCodec">setDefaultCodec</a>()）并且提供了通过<a href="#translate">translate</a>()用户可见的<a href="i18n.html#localization">本地化</a>字符串。
+<p> <li> 它提供了一些像<a href="#desktop">desktop</a>()和<a href="#clipboard">clipboard</a>()这样的魔术般的对象。
+<p> <li> 它知道应用程序的窗口。你可以使用<a href="#widgetAt">widgetAt</a>()来询问在一个确定点上存在哪个窗口部件，得到一个<a href="#topLevelWidgets">topLevelWidgets</a>()（顶级窗口部件）的列表和通过<a href="#closeAllWindows">closeAllWindows</a>()来关闭所有窗口，等等。
+<p> <li> 它管理应用程序的鼠标光标处理，请参考<a href="#setOverrideCursor">setOverrideCursor</a>()和<a href="#setGlobalMouseTracking">setGlobalMouseTracking</a>()。
+<p> <li> 在X窗口系统上，它提供刷新和同步通讯流的函数，请参考<a href="#flushX">flushX</a>()和<a href="#syncX">syncX</a>()。
+<p> <li> 它提供复杂的<a href="session.html">对话管理</a>支持。这使得当用户注销时，它可以让应用程序很好地结束，如果无法终止，撤消关闭进程并且甚至为未来的对话保留整个应用程序的状态。详细情况请参考<a href="#isSessionRestored">isSessionRestored</a>()、<a href="#sessionId">sessionId</a>()、<a href="#commitData">commitData</a>()和<a href="#saveState">saveState</a>()。
+<p> </ul>
+<p> <a href="simple-application.html">应用程序排演实例</a>包含了一个QApplication通常用法的典型完整的main()。
+<p> 因为QApplication对象做了如此多的初始化，它<em>必须</em>在所有与用户界面相关的其它类被创建之前被创建。
+<p> 因为它也处理命令行参数，在应用程序中对<tt>argv</tt>解释和修改<em>之前</em>创建它通常是一个好主意。（注意，也对于X11，<a href="#setMainWidget">setMainWidget</a>()可以根据<tt>-geometry</tt>选项来改变主窗口部件。为了保持这个功能，你必须在setMainWidget()和它的任何重载之前设置你的默认。）
+<p> <center><table cellpadding="4" cellspacing="2" border="0">
+<tr bgcolor="#a2c511"> <th valign="top" colspan="2" rowspan="1"> 函数分组
+<tr bgcolor="#f0f0f0">
+<td valign="top" width="15%">系统设置
+<td valign="top" width="85%">
+<a href="#desktopSettingsAware">desktopSettingsAware</a>()、<a href="#setDesktopSettingsAware">setDesktopSettingsAware</a>()、<a href="#cursorFlashTime">cursorFlashTime</a>()、<a href="#setCursorFlashTime">setCursorFlashTime</a>()、<a href="#doubleClickInterval">doubleClickInterval</a>()、<a href="#setDoubleClickInterval">setDoubleClickInterval</a>()、<a href="#wheelScrollLines">wheelScrollLines</a>()、<a href="#setWheelScrollLines">setWheelScrollLines</a>()、<a href="#palette">palette</a>()、<a href="#setPalette">setPalette</a>()、<a href="#font">font</a>()、<a href="#setFont">setFont</a>()、<a href="#fontMetrics">fontMetrics</a>()。
+<tr bgcolor="#d0d0d0">
+<td valign="top">事件处理
+<td valign="top">
+<a href="#exec">exec</a>()、<a href="#processEvents">processEvents</a>()、<a href="#enter_loop">enter_loop</a>()、<a href="#exit_loop">exit_loop</a>()、<a href="#exit">exit</a>()、<a href="#quit">quit</a>()。
+<a href="#sendEvent">sendEvent</a>()、<a href="#postEvent">postEvent</a>()、<a href="#sendPostedEvents">sendPostedEvents</a>()、<a href="#removePostedEvents">removePostedEvents</a>()、<a href="#hasPendingEvents">hasPendingEvents</a>()、<a href="#notify">notify</a>()、<a href="#macEventFilter">macEventFilter</a>()、<a href="#qwsEventFilter">qwsEventFilter</a>()、<a href="#x11EventFilter">x11EventFilter</a>()、<a href="#x11ProcessEvent">x11ProcessEvent</a>()、<a href="#winEventFilter">winEventFilter</a>()。
+<tr bgcolor="#f0f0f0">
+<td valign="top">图形用户界面风格
+<td valign="top">
+<a href="#style">style</a>()、<a href="#setStyle">setStyle</a>()、<a href="#polish">polish</a>()。
+<tr bgcolor="#d0d0d0">
+<td valign="top">颜色使用
+<td valign="top">
+<a href="#colorSpec">colorSpec</a>()、<a href="#setColorSpec">setColorSpec</a>()、<a href="#qwsSetCustomColors">qwsSetCustomColors</a>()。
+<tr bgcolor="#f0f0f0">
+<td valign="top">文本处理
+<td valign="top">
+<a href="#setDefaultCodec">setDefaultCodec</a>()、<a href="#installTranslator">installTranslator</a>()、<a href="#removeTranslator">removeTranslator</a>()、<a href="#translate">translate</a>()。
+<tr bgcolor="#d0d0d0">
+<td valign="top">窗口部件
+<td valign="top">
+<a href="#mainWidget">mainWidget</a>()、<a href="#setMainWidget">setMainWidget</a>()、<a href="#allWidgets">allWidgets</a>()、<a href="#topLevelWidgets">topLevelWidgets</a>()、<a href="#desktop">desktop</a>()、<a href="#activePopupWidget">activePopupWidget</a>()、<a href="#activeModalWidget">activeModalWidget</a>()、<a href="#clipboard">clipboard</a>()、<a href="#focusWidget">focusWidget</a>()、<a href="#winFocus">winFocus</a>()、<a href="#activeWindow">activeWindow</a>()、<a href="#widgetAt">widgetAt</a>()。
+<tr bgcolor="#f0f0f0">
+<td valign="top">高级光标处理
+<td valign="top">
+<a href="#hasGlobalMouseTracking">hasGlobalMouseTracking</a>()、<a href="#setGlobalMouseTracking">setGlobalMouseTracking</a>()、<a href="#overrideCursor">overrideCursor</a>()、<a href="#setOverrideCursor">setOverrideCursor</a>()、<a href="#restoreOverrideCursor">restoreOverrideCursor</a>()。
+<tr bgcolor="#d0d0d0">
+<td valign="top">X窗口系统同步
+<td valign="top">
+<a href="#flushX">flushX</a>()、<a href="#syncX">syncX</a>()。
+<tr bgcolor="#f0f0f0">
+<td valign="top">对话管理
+<td valign="top">
+<a href="#isSessionRestored">isSessionRestored</a>()、<a href="#sessionId">sessionId</a>()、<a href="#commitData">commitData</a>()、<a href="#saveState">saveState</a>()。
+<tr bgcolor="#d0d0d0">
+<td valign="top">线程
+<td valign="top">
+<a href="#lock">lock</a>()、<a href="#unlock">unlock</a>()、<a href="#locked">locked</a>()、<a href="#tryLock">tryLock</a>()、<a href="#wakeUpGuiThread">wakeUpGuiThread</a>()。
+<tr bgcolor="#f0f0f0">
+<td valign="top">杂项
+<td valign="top">
+<a href="#closeAllWindows">closeAllWindows</a>()、<a href="#startingUp">startingUp</a>()、<a href="#closingDown">closingDown</a>()、<a href="#type">type</a>()。
+</table></center>
+<p> <em>非图形用户界面程序：</em>虽然Qt没有为写非图形用户界面程序而优化设计，不创建QApplication也可以使用<a href="tools.html">它的一些类</a>。如果你想在一个非图形用户界面服务器和一个图形用户界面客户端之间共享代码，这点很有用。
+<p>也可以参考<a href="application.html">主窗口和相关类</a>。
+
+<hr><h2>成员类型文档</h2>
+<h3 class=fn><a name="ColorSpec-enum"></a>QApplication::ColorSpec</h3>
+<p> 这个枚举变量定义了应用程序的颜色分配策略：
+<ul>
+<li><tt>QApplication::NormalColor</tt> - 默认的颜色分配策略
+<li><tt>QApplication::CustomColor</tt> - 在X11下和NormalColor一样，在Windows下根据需要为调色板分配颜色
+<li><tt>QApplication::ManyColor</tt> - 使用上千种颜色的应用程序的正确选择
+</ul><p> 完整细节请参考<a href="#setColorSpec">setColorSpec</a>()。
+
+<h3 class=fn><a name="Encoding-enum"></a>QApplication::Encoding</h3> 
+<p> 这个枚举变量为<a href="#translate">translate</a>()定义了字符串参数的8位编码。
+<ul>
+<li><tt>QApplication::DefaultCodec</tt> - <a href="#defaultCodec">defaultCodec</a>()的编码（如果没有被设置就是Latin-1）
+<li><tt>QApplication::UnicodeUTF8</tt> - UTF-8
+</ul><p> <p>也可以参考<a href="qobject.html#tr">QObject::tr</a>()、<a href="qobject.html#trUtf8">QObject::trUtf8</a>()和<a href="qstring.html#fromUtf8">QString::fromUtf8</a>()。
+
+<h3 class=fn><a name="Type-enum"></a>QApplication::Type</h3>
+<p> 这个枚举变量定义了QApplication的类型：
+<ul>
+<li><tt>QApplication::Tty</tt> - 控制台应用程序
+<li><tt>QApplication::GuiClient</tt> - 图形用户界面客户端应用程序
+<li><tt>QApplication::GuiServer</tt> - 图形用户界面服务器应用程序
+</ul>
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QApplication"></a>QApplication::QApplication ( int&nbsp;&amp;&nbsp;argc, char&nbsp;**&nbsp;argv )
+</h3>
+初始化窗口系统并且使用在<em>argv</em>中的<em>argc</em>个命令行参数构造一个应用程序对象。
+<p> 全局指针<tt>qApp</tt>指向这个应用程序对象。应该只有一个应用程序对象被创建。
+<p> 这个应用程序对象必须在任何<a href="qpaintdevice.html">绘制设备</a>（包括窗口部件、像素映射、位图等等）之前被构造。
+<p> 注意<em>argc</em>和<em>argv</em>也可以被改变。Qt会移除它能够识别的命令行参数。原来的<em>argc</em>和<em>argv</em>稍后可以通过<tt>qApp-&gt;argc()</tt>和<tt>qApp-&gt;argv()</tt>来访问。<a href="#argv">argv</a>()的文档中包含如何处理命令行参数的详细描述。
+<p> Qt调试选项（如果Qt被使用被定义的QT_NO_DEBUG标记进行编译，这些选项就是不可用的）：
+<ul>
+<li> -nograb，告诉Qt永远不要捕获鼠标或者键盘。
+<li> -dograb （只有在X11下），在调试器下运行可能导致和-nograb冲突，使用-dograb来覆盖。
+<li> -sync （只有在X11下），为了调试切换为同步模式。
+</ul>
+<p> 更详细的解释请参考<a href="debug.html">调试技术</a>。
+<p> 所有的Qt程序自动支持下面这些命令行选项：
+<ul>
+<li> -style= <em>style</em>，设置应用程序图形用户界面风格。可能的值有<tt>motif</tt>、<tt>windows</tt>和<tt>platinum</tt>。如果你使用其它风格编译Qt或者有作为插件编译了其它风格，那么它们都可以被用作<tt>-style</tt>命令行选项。
+<li> -style <em>style</em>，这个和上面的一样。
+<li> -session= <em>session</em>，从以前的<a href="session.html">对话</a>中重新载入应用程序。
+<li> -session <em>session</em>，这个和上面的一样。
+</ul>
+<p> X11版本的Qt也支持传统的X11命令行选项：
+<ul>
+<li> -display <em>display</em>，设置X显示（默认为$DISPLAY）。
+<li> -geometry <em>geometry</em>，设置<a href="#setMainWidget">主窗口部件</a>的客户端位置和大小。
+<li> -fn或者<tt>-font</tt> <em>font</em>，定义应用程序的字体。这个字体必须使用X逻辑字体描述来北指定。
+<li> -bg或者<tt>-background</tt> <em>color</em>，设置默认背景色和应用程序调色板（亮的和暗的阴影将被计算出来）。
+<li> -fg或者<tt>-foreground</tt> <em>color</em>，设置默认前景色。
+<li> -btn或者<tt>-button</tt> <em>color</em>，设置默认按钮颜色。
+<li> -name <em>name</em>，设置应用程序名称。
+<li> -title <em>title</em>，设置应用程序标题。
+<li> -visual <tt>TrueColor</tt>，强制应用程序在8位显示上使用真彩图像。
+<li> -ncols <em>count</em>，如果应用程序使用<a href="#ColorSpec-enum">QApplication::ManyColor</a>颜色规格，在8位显示中限制颜色立方体重分配的颜色。如果<em>count</em>为216，那么一个6x6x6的颜色立方体将被使用（也就是说6级红色，6级绿色和6级蓝色），对于其它值，与2x3x1立方体成比例的立方体将被使用。
+<li> -cmap，导致应用程序在8位显示上安装一个私有的颜色映射。
+</ul>
+<p> <p>也可以参考<a href="#argc">argc</a>()和<a href="#argv">argv</a>()。
+
+<h3 class=fn><a name="QApplication-2"></a>QApplication::QApplication ( int&nbsp;&amp;&nbsp;argc, char&nbsp;**&nbsp;argv, bool&nbsp;GUIenabled )
+</h3>
+构造一个使用<em>argv</em>中<em>argc</em>个命令行参数的应用程序对象。如果<em>GUIenabled</em>为真，图形用户界面应用程序被构造，否则非图形用户界面（命令行）应用程序被创建。
+<p> 对于没有图形用户界面的程序，设置<em>GUIenabled</em>为假可以在没有窗口系统的情况下运行。
+<p> 在X11下，如果<em>GUIenabled</em>为真，窗口系统被初始化。如果<em>GUIenabled</em>为假，应用程序不连接X服务器。在Windows和Macintosh，现在窗口系统总是被初始化，而不管<em>GUIenabled</em>的值。在Qt未来的版本这也许会改变。
+<p> 对于线程配置（也就是说当Qt已经被作为线程库建立），应用程序全局互斥量在构造函数中将被锁定并且当使用<a href="#exec">exec</a>()进入事件循环中时解锁。如果你不调用exec()，你必须明显地对这个互斥量解锁，否则你将会在应用程序退出时得到警告。
+<p> 下面这个例子显示如何创建在可能情况下使用图形界面的应用程序。
+<pre>
+  int main( int argc, char **argv )
+  {
+#ifdef Q_WS_X11
+    bool useGUI = getenv( "DISPLAY" ) != 0;
+#else
+    bool useGUI = TRUE;
+#endif
+    QApplication app(argc, argv, useGUI);
+
+    if ( useGUI ) {
+       //开始图形用户界面版本
+       ...
+    } else {
+       //开始非图形用户界面版本
+       ...
+    }
+    return app.<a href="#exec">exec</a>();
+  }
+</pre>
+ 
+
+<h3 class=fn><a name="QApplication-3"></a>QApplication::QApplication ( int&nbsp;&amp;&nbsp;argc, char&nbsp;**&nbsp;argv, <a href="qapplication.html#Type-enum">Type</a>&nbsp;type )
+</h3>
+构造一个使用<em>argv</em>中<em>argc</em>个命令行参数的应用程序对象。
+<p> 对于Qt/Embedded，在<em>type</em>传递<a href="#Type-enum">QApplication::GuiServer</a>参数将会使这个应用程序变为服务器（相当于使用-qws参数运行）。
+
+<h3 class=fn><a name="QApplication-4"></a>QApplication::QApplication ( Display&nbsp;*&nbsp;dpy, HANDLE&nbsp;visual = 0, HANDLE&nbsp;colormap = 0 )
+</h3>
+创建一个应用程序，给定一个已经打开显示的<em>dpy</em>。如果<em>visual</em>和<em>colormap</em>非零，应用程序将使用它们作为默认的Visual和Colormap上下文。
+<p> 这个只在X11上有效。
+
+<h3 class=fn><a name="QApplication-5"></a>QApplication::QApplication ( Display&nbsp;*&nbsp;dpy, int&nbsp;argc, char&nbsp;**&nbsp;argv, HANDLE&nbsp;visual = 0, HANDLE&nbsp;colormap = 0 )
+</h3>
+创建使用<em>argv</em>中<em>argc</em>个命令行参数的一个应用程序，给定一个已经打开显示的<em>dpy</em>。如果<em>visual</em>和<em>colormap</em>非零，应用程序将使用它们作为默认的Visual和Colormap上下文
+<p> 这个只在X11上有效。
+
+<h3 class=fn><a name="~QApplication"></a>QApplication::~QApplication ()<tt> [虚]</tt>
+</h3>
+清空由这个应用程序分配的任何窗口系统资源。设置全局变量<tt>qApp</tt>为0。
+
+<h3 class=fn>void <a name="aboutToQuit"></a>QApplication::aboutToQuit ()<tt> [信号]</tt>
+</h3>
+<p> 当应用程序要退出主事件循环时，这个信号被发射。这也许发生在应用程序中调用<a href="#quit">quit</a>()之后，或者当用户关闭整个桌面对话时。
+<p> 如果你的应用程序在清空的最后一刻要做些什么，这个信号特别重要。注意在这种状态下没有任何用户交互。
+<p> <p>也可以参考<a href="#quit">quit</a>()。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="activeModalWidget"></a>QApplication::activeModalWidget ()<tt> [静态]</tt>
+</h3>
+返回激活的模式窗口部件。
+<p> 模式对话框是特殊的顶级窗口部件，它是<a href="qdialog.html">QDialog</a>的子类，在构造函数中把模式参数设置为真。用户只有在关闭了模式窗口部件之后才能继续这个程序的其它部分。
+<p> 模式窗口部件被组织在一个栈中。这个函数返回栈顶的激活窗口部件。
+<p> <p>也可以参考<a href="#activePopupWidget">activePopupWidget</a>()和<a href="#topLevelWidgets">topLevelWidgets</a>()。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="activePopupWidget"></a>QApplication::activePopupWidget ()<tt> [静态]</tt>
+</h3>
+返回激活弹出窗口部件。
+<p> 弹出窗口部件是特殊的顶级窗口部件，它设置了窗口部件标记<a href="qt.html#WidgetFlags-enum">WType_Popup</a>，例如<a href="qpopupmenu.html">QPopupMenu</a>窗口部件。当应用程序打开一个弹出窗口部件，所有的事件都被发送给弹出窗口部件。在弹出窗口部件被关闭之前，普通窗口部件和模式对话框都不能被访问。
+<p> 当弹出窗口部件被显示时，只有其它弹出窗口部件可以被打开。弹出窗口部件被组织在一个栈中。这个函数返回栈顶的弹出窗口部件。
+<p> <p>也可以参考<a href="#activeModalWidget">activeModalWidget</a>()和<a href="#topLevelWidgets">topLevelWidgets</a>()。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="activeWindow"></a>QApplication::activeWindow () const
+</h3>
+<p> 返回拥有键盘输入焦点的应用程序顶级窗口，或者如果没有应用程序窗口拥有焦点，返回0。注意尽管可能没有<a href="#focusWidget">focusWidget</a>()，仍然有可能<a href="#activeWindow">activeWindow</a>()，例如如果在窗口中没有窗口部件接收键盘事件。
+<p> <p>也可以参考<a href="qwidget.html#setFocus">QWidget::setFocus</a>()、<a href="qwidget.html#focus-prop">QWidget::focus</a>和<a href="#focusWidget">focusWidget</a>()。
+<p>实例：<a href="mail-example.html#x750">network/mail/smtp.cpp</a>。
+
+<h3 class=fn>void <a name="addLibraryPath"></a>QApplication::addLibraryPath ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;path )<tt> [静态]</tt>
+</h3>
+把<em>path</em>添加到库路径列表的末尾。如果<em>path</em>为空或者已经在路径列表中，路径列表不会被改变。默认路径列表包含一个单一的条目<tt>$QTDIR/plugins</tt>。
+<p> <p>也可以参考<a href="#removeLibraryPath">removeLibraryPath</a>()、<a href="#libraryPaths">libraryPaths</a>()和<a href="#setLibraryPaths">setLibraryPaths</a>()。
+
+<h3 class=fn>QWidgetList * <a name="allWidgets"></a>QApplication::allWidgets ()<tt> [静态]</tt>
+</h3>
+返回应用程序中所有窗口部件的列表。
+<p> 这个列表必须使用<tt>new</tt>来被创建并且必须被调用者删除。
+<p> 如果没有窗口部件，这个列表为空（<a href="qptrlist.html#isEmpty">QPtrList::isEmpty</a>()）。
+<p> 注意一些窗口部件也许被隐藏。
+<p> 更新所有窗口部件的实例：
+<pre>
+    QWidgetList  *list = QApplication::<a href="#allWidgets">allWidgets</a>();
+    QWidgetListIt it( *list );         // 遍历窗口部件
+    <a href="qwidget.html">QWidget</a> * w;
+    while ( (w=it.current()) != 0 ) {  // 对于每一个窗口部件……
+        ++it;
+        w-&gt;<a href="qwidget.html#update">update</a>();
+    }
+    delete list;                      // 删除这个列表，不是这个窗口部件
+  </pre>
+ 
+<p> QWidgetList类在<tt>qwidgetlist.h</tt>头文件中被定义。
+<p> <b>警告：</b>一旦你用完了这个列表，就删除它。列表中的窗口部件也许会在任何时候被其它删除。
+<p> <p>也可以参考<a href="#topLevelWidgets">topLevelWidgets</a>()、<a href="qwidget.html#visible-prop">QWidget::visible</a>和<a href="qptrlist.html#isEmpty">QPtrList::isEmpty</a>()。
+
+<h3 class=fn>int <a name="argc"></a>QApplication::argc () const
+</h3>
+<p> 返回命令行参数的数量。
+<p> <a href="#argv">argv</a>()的文档描述了如何处理命令行参数。
+<p> <p>也可以参考<a href="#argv">argv</a>()和<a href="#QApplication">QApplication::QApplication</a>()。
+<p>实例：<a href="tutorial2-04.html#x2460">chart/main.cpp</a>和<a href="scribble-example.html#x926">scribble/scribble.cpp</a>。
+
+<h3 class=fn>char ** <a name="argv"></a>QApplication::argv () const
+</h3>
+<p> 返回命令行参数矢量。
+<p> <tt>argv()[0]</tt>是程序名称，<tt>argv()[1]</tt>是第一个参数并且<tt>argv()[argc()-1]</tt>是最后一个参数。
+<p> QApplication对象是通过从<tt>main()</tt>函数传递的<em>argc</em>和<em>argv</em>被构造的。一些参数被作为Qt选项识别并且从参数矢量中移除。例如，X11版本的Qt知道<tt>-display</tt>、<tt>-font</tt>和其它一些选项。
+<p> 实例：
+<pre>
+    // showargs.cpp - 在列表框中显示程序参数
+
+    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include &lt;<a href="qlistbox-h.html">qlistbox.h</a>&gt;
+
+    int main( int argc, char **argv )
+    {
+        QApplication a( argc, argv );
+        <a href="qlistbox.html">QListBox</a> b;
+        a.<a href="#setMainWidget">setMainWidget</a>( &amp;b );
+        for ( int i = 0; i &lt; a.<a href="#argc">argc</a>(); i++ )  // a.<a href="#argc">argc</a>() == argc
+            b.<a href="qlistbox.html#insertItem">insertItem</a>( a.<a href="#argv">argv</a>()[i] );      // a.<a href="#argv">argv</a>()[i] == argv[i]
+        b.<a href="qwidget.html#show">show</a>();
+        return a.<a href="#exec">exec</a>();
+    }
+  </pre>
+ 
+<p> 如果你在X11下运行<tt>showargs -display unix:0 -font 9x15bold hello world</tt>，列表框中包含三个字符串“showargs”、“hello”和“world”。
+<p> <p>也可以参考<a href="#argc">argc</a>()和<a href="#QApplication">QApplication::QApplication</a>()。
+<p>实例：<a href="tutorial2-04.html#x2461">chart/main.cpp</a>和<a href="scribble-example.html#x927">scribble/scribble.cpp</a>。
+
+<h3 class=fn>void <a name="beep"></a>QApplication::beep ()<tt> [静态]</tt>
+</h3>
+使铃发声，使用默认音量和声音。
+
+<h3 class=fn><a href="qclipboard.html">QClipboard</a>&nbsp;* <a name="clipboard"></a>QApplication::clipboard ()<tt> [静态]</tt>
+</h3>
+返回应用程序全局剪贴板的指针。
+<p>实例：<a href="showimg-example.html#x1246">showimg/showimg.cpp</a>。
+
+<h3 class=fn>void <a name="closeAllWindows"></a>QApplication::closeAllWindows ()<tt> [槽]</tt>
+</h3>
+关闭所有顶级窗口。
+<p> 这个函数对于有很多顶级窗口部件的应用程序相当有用。例如，它可以被和文件菜单中的“Quit”条目连接，正如下面的代码实例：
+<p> <pre>
+    // “Quit”菜单条目应该试图关闭所有窗口
+    <a href="qpopupmenu.html">QPopupMenu</a>* file = new <a href="qpopupmenu.html">QPopupMenu</a>( this );
+    file-&gt;<a href="qmenudata.html#insertItem">insertItem</a>( "&amp;Quit", qApp, SLOT(<a href="#closeAllWindows">closeAllWindows</a>()), CTRL+Key_Q );
+
+    // 当最后一个窗口被关闭，应用程序应该退出
+    <a href="qobject.html#connect">connect</a>( qApp, SIGNAL( <a href="#lastWindowClosed">lastWindowClosed</a>() ), qApp, SLOT( <a href="#quit">quit</a>() ) );
+  </pre>
+ 
+<p> 窗口是被按随机顺序关闭的，直到一个窗口不接受关闭事件。
+<p> <p>也可以参考<a href="qwidget.html#close">QWidget::close</a>()、<a href="qwidget.html#closeEvent">QWidget::closeEvent</a>()、<a href="#lastWindowClosed">lastWindowClosed</a>()、<a href="#quit">quit</a>()、<a href="#topLevelWidgets">topLevelWidgets</a>()和<a href="qwidget.html#isTopLevel-prop">QWidget::isTopLevel</a>。
+<p>实例：<a href="qaction-application-example.html#x1063">action/application.cpp</a>、<a href="simple-application-example.html#x1507">application/application.cpp</a>、<a href="helpviewer-example.html#x981">helpviewer/helpwindow.cpp</a>、<a href="mdi-example.html#x2004">mdi/application.cpp</a>和<a href="qwerty-example.html#x356">qwerty/qwerty.cpp</a>。
+
+<h3 class=fn>bool <a name="closingDown"></a>QApplication::closingDown ()<tt> [静态]</tt>
+</h3>
+如果应用程序对象正在被销毁，返回真，否则返回假。
+<p> <p>也可以参考<a href="#startingUp">startingUp</a>()。
+
+<h3 class=fn>int <a name="colorSpec"></a>QApplication::colorSpec ()<tt> [静态]</tt>
+</h3>
+返回颜色规格。
+<p>也可以参考<a href="#setColorSpec">QApplication::setColorSpec</a>()。
+<p>实例：<a href="showimg-example.html#x1247">showimg/showimg.cpp</a>。
+
+<h3 class=fn>void <a name="commitData"></a>QApplication::commitData ( <a href="qsessionmanager.html">QSessionManager</a>&nbsp;&amp;&nbsp;sm )<tt> [虚]</tt>
+</h3>
+<p> 这个函数处理对话管理。当<a href="qsessionmanager.html">QSessionManager</a>想让应用程序提交它的所有数据时，它被调用。
+<p> 通常这意味着在得到用户的许可之后保存所有打开的文件。此外你可能想提供让用户可以撤销这个关闭的选择。
+<p> 注意你不应该在这个函数中退出这个应用程序。相反，对话管理器在这之后也许会，也许不会这样做，依赖上下文。
+<p> <b>警告：</b>在这个函数中，不能有任何用户交互，<em>除非</em>你请求对话管理器<em>sm</em>明确的允许。详细情况和使用实例请参考<a href="qsessionmanager.html#allowsInteraction">QSessionManager::allowsInteraction</a>()和<a href="qsessionmanager.html#allowsErrorInteraction">QSessionManager::allowsErrorInteraction</a>()。
+<p> 默认实现请求交互并且发送一个关闭事件给所有可视的顶级窗口部件。如果任何一个事件被拒绝，那么关闭被撤销。
+<p> <p>也可以参考<a href="#isSessionRestored">isSessionRestored</a>()、<a href="#sessionId">sessionId</a>()和<a href="#saveState">saveState</a>()。
+
+<h3 class=fn>int <a name="cursorFlashTime"></a>QApplication::cursorFlashTime ()<tt> [静态]</tt>
+</h3>
+返回文本关标闪烁（闪亮）的时间，以毫秒为单位。闪烁时间是显示、转化和恢复脱字符显示所使用的时间。
+<p> 在X11上的默认值是1000毫秒。在Windows上，使用控制面板的值。
+<p> 窗口部件不应该存储这个值，因为它可能在任何时候被用户改变全局桌面设置而改变。
+<p> <p>也可以参考<a href="#setCursorFlashTime">setCursorFlashTime</a>()。
+
+<h3 class=fn><a href="qtextcodec.html">QTextCodec</a>&nbsp;* <a name="defaultCodec"></a>QApplication::defaultCodec () const
+</h3>
+返回默认的编解码器（请参考<a href="#setDefaultCodec">setDefaultCodec</a>()）。默认返回0（没有编解码器）。
+
+<h3 class=fn><a href="qdesktopwidget.html">QDesktopWidget</a>&nbsp;* <a name="desktop"></a>QApplication::desktop ()<tt> [静态]</tt>
+</h3>
+返回桌面窗口部件（也调用根窗口）。
+<p> 桌面窗口部件对于获得屏幕大小很有用。在桌面上绘制也是可能的。我们建议不要假设可以在桌面上绘制，因为它不能在所有的操作系统上工作。
+<p> <pre>
+    <a href="qdesktopwidget.html">QDesktopWidget</a> *d = QApplication::<a href="#desktop">desktop</a>();
+    int w = d-&gt;<a href="qwidget.html#width">width</a>();     // 返回桌面宽度
+    int h = d-&gt;<a href="qwidget.html#height">height</a>();    // 返回桌面高度
+  </pre>
+<p>实例：<a href="canvas-example.html#x2734">canvas/main.cpp</a>、<a href="desktop-example.html#x1759">desktop/desktop.cpp</a>、<a href="helpviewer-example.html#x1040">helpviewer/main.cpp</a>、<a href="i18n-example.html#x1917">i18n/main.cpp</a>、<a href="qmag-example.html#x1618">qmag/qmag.cpp</a>、<a href="qwerty-example.html#x412">qwerty/main.cpp</a>和<a href="scribble-example.html#x974">scribble/main.cpp</a>。
+
+<h3 class=fn>bool <a name="desktopSettingsAware"></a>QApplication::desktopSettingsAware ()<tt> [静态]</tt>
+</h3>
+返回由<a href="#setDesktopSettingsAware">setDesktopSettingsAware</a>()设置的值，默认返回真。
+<p> <p>也可以参考<a href="#setDesktopSettingsAware">setDesktopSettingsAware</a>()。
+
+<h3 class=fn>int <a name="doubleClickInterval"></a>QApplication::doubleClickInterval ()<tt> [静态]</tt>
+</h3>
+返回双击的最大持续时间。
+<p> 在X11上默认值为400毫秒。在Windows上，使用控制面板的值。
+<p> <p>也可以参考<a href="#setDoubleClickInterval">setDoubleClickInterval</a>()。
+
+<h3 class=fn>int <a name="enter_loop"></a>QApplication::enter_loop ()
+</h3>
+这个函数进入主事件循环（递归地）。除非你真的直到你正在做什么，否则请不要调用它。
+<p> <p>也可以参考<a href="#exit_loop">exit_loop</a>()和<a href="#loopLevel">loopLevel</a>()。
+
+<h3 class=fn>int <a name="exec"></a>QApplication::exec ()
+</h3>
+进入主事件循环并且等待，直到<a href="#exit">exit</a>()被调用或者主窗口部件被销毁，并且返回值被设置为exit()（如果通过<a href="#quit">quit</a>()，exit()被调用，为0）。
+<p> 需要调用这个函数来开始事件处理。主事件循环从窗口系统中接收事件并且把它们分派给应用程序窗口部件。
+<p> 通常来说，在调用<a href="#exec">exec</a>()之前，没有用户交互可以发生。作为一个特例，像<a href="qmessagebox.html">QMessageBox</a>这样的模式对话框可以在调用exec()之前使用，因为模式对话框调用exec()来开始本地事件循环。
+<p> 为了使你的应用程序执行空闲处理，例如，只要没有未处理地事件，执行一个特殊的函数，使用<a href="qtimer.html">QTimer</a>，0超时。更高级的空闲处理方案可以使用<a href="#processEvents">processEvents</a>()来完成。
+<p> <p>也可以参考<a href="#quit">quit</a>()、<a href="#exit">exit</a>()、<a href="#processEvents">processEvents</a>()和<a href="#setMainWidget">setMainWidget</a>()。
+<p>实例：<a href="biff-example.html#x1948">biff/main.cpp</a>、<a href="tutorial2-04.html#x2462">chart/main.cpp</a>、<a href="simple-qfont-demo-walkthrough.html#x2133">fonts/simple-qfont-demo/simple-qfont-demo.cpp</a>、<a href="qdialog.html#x2102">life/main.cpp</a>、<a href="tutorial1-01.html#x2270">t1/main.cpp</a>、<a href="tutorial1-04.html#x2290">t4/main.cpp</a>和<a href="outliner-example.html#x1907">xml/outliner/main.cpp</a>。
+
+<h3 class=fn>void <a name="exit"></a>QApplication::exit ( int&nbsp;retcode = 0 )<tt> [静态]</tt>
+</h3>
+告诉应用程序退出，伴随一个返回代码。
+<p> 在这个函数被调用之后，应用程序离开主事件循环并且从<a href="#exec">exec</a>()调用之后返回。exec()函数返回<em>retcode</em>。
+<p> 根据习惯，为0的<em>retcode</em>意味着成功，并且任何非零的值意味着错误。
+<p> 注意与同名的C库函数不同，这个函数<em>返回</em>到调用者——它的事件处理结束。
+<p> <p>也可以参考<a href="#quit">quit</a>()和<a href="#exec">exec</a>()。
+<p>实例：<a href="canvas-chart-example.html#x2592">chart/chartform.cpp</a>和<a href="picture-example.html#x74">picture/picture.cpp</a>。
+
+<h3 class=fn>void <a name="exit_loop"></a>QApplication::exit_loop ()
+</h3>
+这个函数从到主事件循环的递归调用中退出。不要调用它，除非你是一个专家。
+<p> <p>也可以参考<a href="#enter_loop">enter_loop</a>()和<a href="#loopLevel">loopLevel</a>()。
+
+<h3 class=fn>void <a name="flush"></a>QApplication::flush ()<tt> [静态]</tt>
+</h3>
+刷新窗口系统指定事件队列。
+<p> 如果在异步的窗口系统，例如X11，或者双缓存的窗口系统，例如Mac OS X的不返回事件循环的循环中正在做图形变化，并且你想立即显现这些变化（比如，Splash Screen），请调用这个函数。
+<p> <p>也可以参考<a href="#flushX">flushX</a>()、<a href="#sendPostedEvents">sendPostedEvents</a>()和<a href="qpainter.html#flush">QPainter::flush</a>()。
+
+<h3 class=fn>void <a name="flushX"></a>QApplication::flushX ()<tt> [静态]</tt>
+</h3>
+在X11实现中刷新X事件队列。这通常会立即返回。在其它平台上不会做任何事。
+<p> <p>也可以参考<a href="#syncX">syncX</a>()。
+<p>实例：<a href="xform-example.html#x1416">xform/xform.cpp</a>。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="focusWidget"></a>QApplication::focusWidget () const
+</h3>
+<p> 返回拥有键盘输入焦点的应用程序窗口部件，或者在这个应用程序中没有窗口部件拥有焦点，返回0。
+<p> <p>也可以参考<a href="qwidget.html#setFocus">QWidget::setFocus</a>()、<a href="qwidget.html#focus-prop">QWidget::focus</a>和<a href="#activeWindow">activeWindow</a>()。
+
+<h3 class=fn><a href="qfont.html">QFont</a> <a name="font"></a>QApplication::font ( const&nbsp;<a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w = 0 )<tt> [静态]</tt>
+</h3>
+返回窗口部件<em>w</em>的默认字体，或者如果<em>w</em>为0，返回默认应用程序字体。
+<p> <p>也可以参考<a href="#setFont">setFont</a>()、<a href="#fontMetrics">fontMetrics</a>()和<a href="qwidget.html#font-prop">QWidget::font</a>。
+<p>实例：<a href="qfd-example.html#x1965">qfd/fontdisplayer.cpp</a>、<a href="themes-example.html#x224">themes/metal.cpp</a>和<a href="themes-example.html#x281">themes/themes.cpp</a>。
+
+<h3 class=fn><a href="qfontmetrics.html">QFontMetrics</a> <a name="fontMetrics"></a>QApplication::fontMetrics ()<tt> [静态]</tt>
+</h3>
+返回应用程序字体的显示（屏幕）字体规格。
+<p> <p>也可以参考<a href="#font">font</a>()、<a href="#setFont">setFont</a>()、<a href="qwidget.html#fontMetrics">QWidget::fontMetrics</a>()和<a href="qpainter.html#fontMetrics">QPainter::fontMetrics</a>()。
+
+<h3 class=fn><a href="qsize.html">QSize</a> <a name="globalStrut"></a>QApplication::globalStrut ()<tt> [静态]</tt>
+</h3>
+<p> 返回应用程序的全局strut。
+<p> strut是任何用户可以交互的图形交互界面元素的最小维数的大小对象。例如，没有按钮应该被重新定义大小小于全局strut大小。
+<p> <p>也可以参考<a href="#setGlobalStrut">setGlobalStrut</a>()。
+
+<h3 class=fn>void <a name="guiThreadAwake"></a>QApplication::guiThreadAwake ()<tt> [信号]</tt>
+</h3>
+<p> 当图形用户界面线程要处理一个事件循环的周期，这个信号被发射。
+<p> <p>也可以参考<a href="#wakeUpGuiThread">wakeUpGuiThread</a>()。
+
+<h3 class=fn>bool <a name="hasGlobalMouseTracking"></a>QApplication::hasGlobalMouseTracking ()<tt> [静态]</tt>
+</h3>
+<p> 如果全局鼠标跟踪生效，返回真，否则返回假。
+<p> <p>也可以参考<a href="#setGlobalMouseTracking">setGlobalMouseTracking</a>()。
+
+<h3 class=fn>bool <a name="hasPendingEvents"></a>QApplication::hasPendingEvents ()
+</h3>
+如果有未处理的事件，这个函数返回真，否则返回假。未处理的事件可以是来自于窗口系统，也可以是使用<a href="#postEvent">QApplication::postEvent</a>()发送的事件。
+
+<h3 class=fn>int <a name="horizontalAlignment"></a>QApplication::horizontalAlignment ( int&nbsp;align )<tt> [静态]</tt>
+</h3>
+<p> 去掉垂直对齐标记并且根据使用的语言把AlignAuto的对齐方式<em>align</em>转换为AlignLeft或者AlignRight。其它水平对齐标记不被改变而留下。
+
+<h3 class=fn>void <a name="installTranslator"></a>QApplication::installTranslator ( <a href="qtranslator.html">QTranslator</a>&nbsp;*&nbsp;mf )
+</h3>
+添加消息文件<em>mf</em>到翻译所用的消息文件列表。
+<p> 可以安装多种消息文件。翻译会在最后安装的消息文件中搜索，然后是紧接着最后的，并且继续，一直到最先安装的。一旦找到匹配的翻译，搜索就停止。
+<p> <p>也可以参考<a href="#removeTranslator">removeTranslator</a>()、<a href="#translate">translate</a>()和<a href="qtranslator.html#load">QTranslator::load</a>()。
+<p>实例：<a href="i18n-example.html#x1919">i18n/main.cpp</a>。
+
+<h3 class=fn>bool <a name="isEffectEnabled"></a>QApplication::isEffectEnabled ( <a href="qt.html#UIEffect-enum">Qt::UIEffect</a>&nbsp;effect )<tt> [静态]</tt>
+</h3>
+如果<em>effect</em>生效，返回真，否则返回假。
+<p> 默认，Qt将视图使用桌面设置。调用<a href="#setDesktopSettingsAware">setDesktopSettingsAware</a>(FALSE)可以防止这一点。
+<p> <p>也可以参考<a href="#setEffectEnabled">setEffectEnabled</a>()和<a href="qt.html#UIEffect-enum">Qt::UIEffect</a>。
+
+<h3 class=fn>bool <a name="isSessionRestored"></a>QApplication::isSessionRestored () const
+</h3>
+<p> 如果应用程序已经从以前的对方中恢复，返回真，否则返回假。
+<p> <p>也可以参考<a href="#sessionId">sessionId</a>()、<a href="#commitData">commitData</a>()和<a href="#saveState">saveState</a>()。
+
+<h3 class=fn>void <a name="lastWindowClosed"></a>QApplication::lastWindowClosed ()<tt> [信号]</tt>
+</h3>
+<p> 当用户关闭最后一个顶级窗口时，这个信号被发射。
+<p> 当你的应用程序有很多顶级窗口部件，而没有主窗口部件时，这个信号很有用。你可以把它和<a href="#quit">quit</a>()槽连接起来。
+<p> 为了方便，对于短暂的顶级窗口部件，例如弹出菜单和对话框，这个信号<em>不</em>被发射。
+<p> <p>也可以参考<a href="#mainWidget">mainWidget</a>()、<a href="#topLevelWidgets">topLevelWidgets</a>()、<a href="qwidget.html#isTopLevel-prop">QWidget::isTopLevel</a>和<a href="qwidget.html#close">QWidget::close</a>()。
+<p>实例：<a href="qaction-application-example.html#x1100">action/main.cpp</a>、<a href="addressbook-example.html#x556">addressbook/main.cpp</a>、<a href="tutorial2-04.html#x2463">chart/main.cpp</a>、<a href="helpviewer-example.html#x1042">helpviewer/main.cpp</a>、<a href="qwerty-example.html#x414">qwerty/main.cpp</a>和<a href="showimg-example.html#x1297">showimg/main.cpp</a>。
+
+<h3 class=fn><a href="qstringlist.html">QStringList</a> <a name="libraryPaths"></a>QApplication::libraryPaths ()<tt> [静态]</tt>
+</h3>
+返回当动态载入库的时候，应用程序将搜索的路径列表。如果没有路径被设置，<tt>$QTDIR/plugins</tt>将作为唯一的条目被返回。
+<p> 如果你想遍历这个列表，你应该遍历一个复制，例如：
+<pre>
+    <a href="qstringlist.html">QStringList</a> list = app.libraryPaths();
+    QStringList::Iterator it = list.<a href="qvaluelist.html#begin">begin</a>();
+    while( it != list.<a href="qvaluelist.html#end">end</a>() ) {
+        myProcessing( *it );
+        ++it;
+    }
+    </pre>
+ 
+<p> 关于如何使用库路径的详细情况请参考<a href="plugins-howto.html">插件文档</a>。
+<p> <p>也可以参考<a href="#setLibraryPaths">setLibraryPaths</a>()、<a href="#addLibraryPath">addLibraryPath</a>()、<a href="#removeLibraryPath">removeLibraryPath</a>()和<a href="qlibrary.html">QLibrary</a>。
+
+<h3 class=fn>void <a name="lock"></a>QApplication::lock ()
+</h3> 
+<p> 锁住Qt库互斥量。如果另外一个线程已经锁住这个互斥量，那么这个调用线程将会阻塞，直到其它线程对这个互斥量解锁。
+<p> <p>也可以参考<a href="#unlock">unlock</a>()、<a href="#locked">locked</a>()和<a href="threads.html">Qt中的线程支持</a>。
+
+<h3 class=fn>bool <a name="locked"></a>QApplication::locked ()
+</h3> 
+<p> 如果Qt库互斥量被不同的线程锁住，返回真，否则返回假。
+<p> <b>警告：</b>由于在被支持的平台上，递归互斥量的实现不同，在以前锁住互斥量的同一个线程中调用这个函数将会给出不确定的结果。
+<p> <p>也可以参考<a href="#lock">lock</a>()、<a href="#unlock">unlock</a>()和<a href="threads.html">Qt中的线程支持</a>。
+
+<h3 class=fn>int <a name="loopLevel"></a>QApplication::loopLevel () const
+</h3>
+返回当前循环水平。
+<p> <p>也可以参考<a href="#enter_loop">enter_loop</a>()和<a href="#exit_loop">exit_loop</a>()。
+
+<h3 class=fn>bool <a name="macEventFilter"></a>QApplication::macEventFilter ( EventRef )<tt> [虚]</tt>
+</h3>
+这个虚函数只在Macintosh下被实现。
+<p> 如果你创建一个继承QApplication并且重新实现这个函数的应用程序，你可以直接访问从Mac OS接收的所有Carbon事件。
+<p> 如果你想停止正在处理的事件，返回真。对于普通事件分派，返回假。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="mainWidget"></a>QApplication::mainWidget () const
+</h3>
+<p> 返回主应用程序窗口部件，如果没有主窗口部件，返回0。
+<p> <p>也可以参考<a href="#setMainWidget">setMainWidget</a>()。
+
+<h3 class=fn>bool <a name="notify"></a>QApplication::notify ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;receiver, <a href="qevent.html">QEvent</a>&nbsp;*&nbsp;e )<tt> [虚]</tt>
+</h3>
+把事件<em>e</em>发送给<em>receiver</em>：<em>receiver</em>->event(<em>e</em>)。返回接收者的事件处理器返回值。
+<p> 对于确定类型的事件（例如鼠标和键盘事件），如果接收者对这个事件没有兴趣（也就是说它返回假），事件将被传播给接收者的父对象一直到顶级对象。
+<p> 这里有事件被处理的五种不同方法，重新实现这个函数是其中的一个。所有这五种途径如下：
+<ol type=1>
+<li> 重新实现这个函数。这是一个非常强大，提供了完整控制，但只能是qApp的子类。
+<p> <li> 在qApp上安装事件过滤器。这样的事件过滤器可以为所有窗口部件处理所有的事件，所以它和重新实现<a href="#notify">notify</a>()一样强大；此外，可以有超过一个的应用程序全局事件过滤器。全局事件过滤器甚至可以看到<a href="qwidget.html#isEnabled">失效的窗口部件</a>的鼠标事件，并且如果<a href="#setGlobalMouseTracking">全局鼠标跟踪</a>生效，它可以见到所有窗口部件的鼠标移动事件。
+<p> <li> 重新实现<a href="qobject.html#event">QObject::event</a>()（就像<a href="qwidget.html">QWidget</a>做的那样）。如果你这样做来得到Tab键按下，并且你会在任何窗口部件特定的事件过滤器之前看到这个事件。
+<p> <li> 在一个对象中安装事件过滤器。这样的事件过滤器可以得到除了Tab和Shift-Tab键按下之外的所有事件。
+<p> <li> 重新实现paintEvent()、mousePressEvent()和其它。这是最普通、最容易并且最不强大的方式。
+</ol>
+<p> <p>也可以参考<a href="qobject.html#event">QObject::event</a>()和<a href="qobject.html#installEventFilter">installEventFilter</a>()。
+
+<h3 class=fn><a href="qcursor.html">QCursor</a>&nbsp;* <a name="overrideCursor"></a>QApplication::overrideCursor ()<tt> [静态]</tt>
+</h3>
+<p> 返回激活的应用程序强制光标。
+<p> 如果没有应用程序关标被指定（也就是说内部光标栈为空），这个函数返回0。
+<p> <p>也可以参考<a href="#setOverrideCursor">setOverrideCursor</a>()和<a href="#restoreOverrideCursor">restoreOverrideCursor</a>()。
+
+<h3 class=fn><a href="qpalette.html">QPalette</a> <a name="palette"></a>QApplication::palette ( const&nbsp;<a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w = 0 )<tt> [静态]</tt>
+</h3>
+返回默认应用程序调色板的指针。这个一直是应用程序的调色板，也就是说返回的指针被保证为非零。
+<p> 如果被传递的窗口部件<em>w</em>，返回这个窗口部件的默认调色板。这个可能是，也可能不是应用程序调色板。在绝大多数情况下，普通类型的窗口部件没有特殊调色板，但是一个需要注意的例外是在Windows下的弹出菜单，如果用户在显示设置中为菜单定义了特定背景色。
+<p> <p>也可以参考<a href="#setPalette">setPalette</a>()和<a href="qwidget.html#palette-prop">QWidget::palette</a>。
+<p>实例：<a href="desktop-example.html#x1761">desktop/desktop.cpp</a>、<a href="themes-example.html#x225">themes/metal.cpp</a>和<a href="themes-example.html#x146">themes/wood.cpp</a>。
+
+<h3 class=fn>void <a name="polish"></a>QApplication::polish ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w )<tt> [虚]</tt>
+</h3>
+在窗口部件<em>w</em>被显示<em>之前</em>，初始化它的外观。
+<p> 通常当窗口部件被抛光时，它们会自动调用这个函数。它也可以被用来做窗口部件的基于风格的主要定制。
+<p> 注意你不会被<a href="qwidget.html">QWidget</a>的公有函数限制。相反，基于像<a href="qobject.html#className">QObject::className</a>()这些元信息，你可以对任何种类的窗口部件进行定制。
+<p> <p>也可以参考<a href="qstyle.html#polish">QStyle::polish</a>()、<a href="qwidget.html#polish">QWidget::polish</a>()、<a href="#setPalette">setPalette</a>()和<a href="#setFont">setFont</a>()。
+
+<h3 class=fn>void <a name="postEvent"></a>QApplication::postEvent ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;receiver, <a href="qevent.html">QEvent</a>&nbsp;*&nbsp;event )<tt> [静态]</tt>
+</h3>
+把事件<em>event</em>添加为对象<em>receiver</em>的接收对象，把它添加到事件队列中并且立即返回。
+<p> 这个时间必须在堆中被分配，因为递送事件队列将会得到事件的所有权并且一旦它被递送就删除它。
+<p> 当控制返回主事件循环，存储在队列中的所有事件将被使用<a href="#notify">notify</a>()函数发送。
+<p> <p>也可以参考<a href="#sendEvent">sendEvent</a>()、<a href="qthread.html#postEvent">QThread::postEvent</a>()和<a href="#notify">notify</a>()。
+
+<h3 class=fn>void <a name="processEvents"></a>QApplication::processEvents ()
+</h3>
+处理未处理的事件，在3秒内或者直到没有没有更多的事件要处理，看哪一个更短。
+<p> 偶尔当你的程序很忙来处理一个长期操作（例如，复制文件），你可以调用这个函数。
+<p> <p>也可以参考<a href="#exec">exec</a>()和<a href="qtimer.html">QTimer</a>。
+<p>实例：<a href="fileiconview-example.html#x805">fileiconview/qfileiconview.cpp</a>。
+
+<h3 class=fn>void <a name="processEvents-2"></a>QApplication::processEvents ( int&nbsp;maxtime )
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 处理未处理的事件，在<em>maxtime</em>毫秒内或者直到没有没有更多的事件要处理，看哪一个更短。
+<p> 偶尔当你的程序很忙来处理一个长期操作（例如，复制文件），你可以调用这个函数。
+<p> <p>也可以参考<a href="#exec">exec</a>()和<a href="qtimer.html">QTimer</a>。
+
+<h3 class=fn>void <a name="processOneEvent"></a>QApplication::processOneEvent ()
+</h3>
+等待一个事件的发生，处理它，然后返回。
+<p> 这个函数对于使Qt能够适应事件处理必须移植到已经存在的程序循环中很有用处。
+<p> 在新的应用程序中使用这个函数可能意味着设计的问题。
+<p> <p>也可以参考<a href="#processEvents">processEvents</a>()、<a href="#exec">exec</a>()和<a href="qtimer.html">QTimer</a>。
+
+<h3 class=fn>void <a name="quit"></a>QApplication::quit ()<tt> [槽]</tt>
+</h3>
+告诉应用程序退出，并且返回代码为0（成功）。相当于调用<a href="#exit">QApplication::exit</a>( 0 )。
+<p> 把<a href="#lastWindowClosed">lastWindowClosed</a>()信号和<a href="#quit">quit</a>()连接起来是很普通的，并且你也可以经常把比如<a href="qbutton.html#clicked">QButton::clicked</a>()或者<a href="qaction.html">QAction</a>、<a href="qpopupmenu.html">QPopupMenu</a>或<a href="qmenubar.html">QMenuBar</a>中的信号和它连接起来。
+<p> 实例：
+<pre>
+    <a href="qpushbutton.html">QPushButton</a> *quitButton = new <a href="qpushbutton.html">QPushButton</a>( "Quit" );
+    <a href="qobject.html#connect">connect</a>( quitButton, SIGNAL(<a href="qbutton.html#clicked">clicked</a>()), qApp, SLOT(<a href="#quit">quit</a>()) );
+  </pre>
+<p> <p>也可以参考<a href="#exit">exit</a>()、<a href="#aboutToQuit">aboutToQuit</a>()、<a href="#lastWindowClosed">lastWindowClosed</a>()和<a href="qaction.html">QAction</a>。
+<p>实例：<a href="addressbook-example.html#x557">addressbook/main.cpp</a>、<a href="helpviewer-example.html#x1043">helpviewer/main.cpp</a>、<a href="qwerty-example.html#x415">qwerty/main.cpp</a>、<a href="showimg-example.html#x1298">showimg/main.cpp</a>、<a href="tutorial1-02.html#x2275">t2/main.cpp</a>、<a href="tutorial1-04.html#x2291">t4/main.cpp</a>和<a href="tutorial1-06.html#x2308">t6/main.cpp</a>。
+
+<h3 class=fn><a href="qwsdecoration.html">QWSDecoration</a>&nbsp;&amp; <a name="qwsDecoration"></a>QApplication::qwsDecoration ()<tt> [静态]</tt>
+</h3>
+返回装饰窗口所使用的<a href="qwsdecoration.html">QWSDecoration</a>。
+<p> 这个方法是不可移植的。它<em>只</em>在Qt/Embedded中有效。
+<p> <p>也可以参考<a href="qwsdecoration.html">QWSDecoration</a>。
+
+<h3 class=fn>bool <a name="qwsEventFilter"></a>QApplication::qwsEventFilter ( QWSEvent * )<tt> [虚]</tt>
+</h3>
+这个虚函数只在Qt/Embedded下实现。
+<p> 如果你创建一个继承QApplication并且重新实现这个函数的一个应用程序，你可以直接处理从QWS（Q窗口系统）进程接收的说有QWS事件。
+<p> 如果你想停止要处理的事件，返回真。对于普通事件分派，返回假。
+
+<h3 class=fn>void <a name="qwsSetCustomColors"></a>QApplication::qwsSetCustomColors ( QRgb&nbsp;*&nbsp;colorTable, int&nbsp;start, int&nbsp;numColors )
+</h3>
+设置Qt/Embedded定制颜色表。
+<p> Qt/Embedded在8位显示时分配一个标准的216颜色立方体。它保留了40个颜色可以用来在任何客户端连接之前由QWS主进程设置一个自定义颜色表。
+<p> <em>colorTable</em>是任何最多为40的自定义颜色数组。<em>start</em>是开始索引（0－39），并且<em>numColors</em>是要设置的颜色数量（1－40）。
+<p> 这个方法是不可移植的。它<em>只</em>在Qt/Embedded有效。
+
+<h3 class=fn>void <a name="qwsSetDecoration"></a>QApplication::qwsSetDecoration ( <a href="qwsdecoration.html">QWSDecoration</a>&nbsp;*&nbsp;d )<tt> [静态]</tt>
+</h3>
+设置用来装饰Qt/Embedded窗口的<a href="qwsdecoration.html">QWSDecoration</a>的继承类为<em>d</em>。
+<p> 这个方法是不可移植的。它<em>只</em>在Qt/Embedded有效。
+<p> <p>也可以参考<a href="qwsdecoration.html">QWSDecoration</a>。
+
+<h3 class=fn>void <a name="removeLibraryPath"></a>QApplication::removeLibraryPath ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;path )<tt> [静态]</tt>
+</h3>
+从库路径列表中移除<em>path</em>。如果<em>path</em>为空或者它不在列表中，列表不被改变。
+<p> <p>也可以参考<a href="#addLibraryPath">addLibraryPath</a>()、<a href="#libraryPaths">libraryPaths</a>()和<a href="#setLibraryPaths">setLibraryPaths</a>()。
+
+<h3 class=fn>void <a name="removePostedEvents"></a>QApplication::removePostedEvents ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;receiver )<tt> [静态]</tt>
+</h3>
+移除所有使用<a href="#postEvent">postEvent</a>()递送给<em>receiver</em>的事件。
+<p> 这些事件<em>不被</em>分派，相反它们会从队列中被移除。你应该永远不需要调用这个函数。如果你调用了，要直到杀掉事件可能导致<em>receiver</em>破坏一个或多个变量。
+
+<h3 class=fn>void <a name="removeTranslator"></a>QApplication::removeTranslator ( <a href="qtranslator.html">QTranslator</a>&nbsp;*&nbsp;mf )
+</h3>
+从这个应用程序所使用的消息文件的列表中移除消息文件<em>mf</em>。（它不会从文件系统中删除这个消息文件。）
+<p> <p>也可以参考<a href="#installTranslator">installTranslator</a>()、<a href="#translate">translate</a>()和<a href="qobject.html#tr">QObject::tr</a>()。
+<p>实例：<a href="i18n-example.html#x1921">i18n/main.cpp</a>。
+
+<h3 class=fn>void <a name="restoreOverrideCursor"></a>QApplication::restoreOverrideCursor ()<tt> [静态]</tt>
+</h3>
+撤销最近一次的<a href="#setOverrideCursor">setOverrideCursor</a>()。
+<p> 如果setOverrideCursor()已经被调用两次，调用<a href="#restoreOverrideCursor">restoreOverrideCursor</a>()会激活第一个光标设置。第二次调用这个函数会恢复初始窗口部件的光标。
+<p> <p>也可以参考<a href="#setOverrideCursor">setOverrideCursor</a>()和<a href="#overrideCursor">overrideCursor</a>()。
+<p>实例：<a href="showimg-example.html#x1249">showimg/showimg.cpp</a>。
+
+<h3 class=fn>bool <a name="reverseLayout"></a>QApplication::reverseLayout ()<tt> [静态]</tt>
+</h3>
+如果所有的对话框和窗口部件都将会被按镜像的方式被放置（从右到左），返回真。如果是按从左到右的方式，返回假。
+<p> <p>也可以参考<a href="#setReverseLayout">setReverseLayout</a>()。
+
+<h3 class=fn>void <a name="saveState"></a>QApplication::saveState ( <a href="qsessionmanager.html">QSessionManager</a>&nbsp;&amp;&nbsp;sm )<tt> [虚]</tt>
+</h3>
+<p> 这个函数处理对话管理。当<a href="qsessionmanager.html">对话管理器</a>想让应用程序为未来的对话保存它的状态时，它被调用。
+<p> 例如，文本编辑器将会创建一个包含编辑缓存的当前内容的临时文件，光标的位置和当前编辑对话的其它特征。
+<p> <p> 注意你不应该在这个函数中退出这个应用程序。相反，对话管理器在这之后也许会，也许不会这样做，依赖上下文。此外，绝大多数对话管理器将会在应用程序已经被开始之后立即请求一个状态保存。这允许对话管理器来知道应用程序的重启策略。
+<p> <b>警告：</b>在这个函数中，不能有任何用户交互，<em>除非</em>你请求对话管理器<em>sm</em>明确的允许。详细情况和使用实例请参考<a href="qsessionmanager.html#allowsInteraction">QSessionManager::allowsInteraction</a>()和<a href="qsessionmanager.html#allowsErrorInteraction">QSessionManager::allowsErrorInteraction</a>()。
+<p> <p>也可以参考<a href="#isSessionRestored">isSessionRestored</a>()、<a href="#sessionId">sessionId</a>()和<a href="#commitData">commitData</a>()。
+
+<h3 class=fn>bool <a name="sendEvent"></a>QApplication::sendEvent ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;receiver, <a href="qevent.html">QEvent</a>&nbsp;*&nbsp;event )<tt> [静态]</tt>
+</h3>
+<p> 使用<a href="#notify">notify</a>()函数直接发送事件<em>event</em>给接受者<em>receiver</em>。返回由事件处理器返回的值。
+<p> 这个事件在它被发送时，<em>不能</em>被删除。通常的访问方式是在栈中创建这个事件，例如：
+<pre>
+    <a href="qmouseevent.html">QMouseEvent</a> me( QEvent::MouseButtonPress, pos, 0, 0 );
+    QApplication::<a href="#sendEvent">sendEvent</a>( mainWindow, &amp;me );
+    </pre>
+ 
+如果你在堆中创建这个事件，你就必须删除它。
+<p> <p>也可以参考<a href="#postEvent">postEvent</a>()和<a href="#notify">notify</a>()。
+<p>实例：<a href="popup-example.html#x1568">popup/popup.cpp</a>。
+
+<h3 class=fn>void <a name="sendPostedEvents"></a>QApplication::sendPostedEvents ( <a href="qobject.html">QObject</a>&nbsp;*&nbsp;receiver, int&nbsp;event_type )<tt> [静态]</tt>
+</h3>
+立即分派由<a href="#postEvent">QApplication::postEvent</a>()以前已经排队的并且是发给对象<em>receiver</em>，事件类型是<em>event_type</em>的所有事件。
+<p> 注意来自窗口系统的事件<em>不能</em>被这个函数分派，但是可以用<a href="#processEvents">processEvents</a>()。
+
+<h3 class=fn>void <a name="sendPostedEvents-2"></a>QApplication::sendPostedEvents ()<tt> [静态]</tt>
+</h3> 
+分派所有递送事件，也就是清空事件队列。这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="sessionId"></a>QApplication::sessionId () const
+</h3>
+<p> 返回当前对话的标识符。
+<p> 如果应用程序已经从一个较早的对话中恢复，这个标识符就和那个先前的对话一样。
+<p> 对话标识符已经被保证对于不同的应用程序和同一个应用程序的不同实例都是唯一的。
+<p> <p>也可以参考<a href="#isSessionRestored">isSessionRestored</a>()、<a href="#commitData">commitData</a>()和<a href="#saveState">saveState</a>()。
+
+<h3 class=fn>void <a name="setColorSpec"></a>QApplication::setColorSpec ( int&nbsp;spec )<tt> [静态]</tt>
+</h3>
+设置应用程序的颜色策略为<em>spec</em>。
+<p> 颜色策略控制着当在一个显示颜色总数有限制的情况下运行应用程序如何分配颜色，例如8位/256色显示。
+<p> 颜色策略必须在你创建QApplication对象之前设置。
+<p> 选项有：
+<ul>
+<li> QApplication::NormalColor。这是默认颜色分配策略。如果你的应用程序使用按钮、菜单、文本和少量颜色的像素映射，请使用这个选项。在这个选项中，应用程序使用系统全局颜色。这对于X11下的绝大多数应用程序都工作得很好，但是在Windows机器上，它也许会导致非标准颜色的抖动。
+<li> QApplication::CustomColor。如果你的应用程序需要少量的自定义颜色，请使用这个选项。在X11下，这个选项和NormalColor一样。在Windows下，Qt创建一个Windows调色板并且在根据需要在上面分配颜色。
+<li> QApplication::ManyColor。如果你的应用程序使用非常大量的颜色（例如，它需要几千种颜色），请使用这个选项。在X11下，效果是：
+<ul>
+<li> 对于最多256色真彩色视的256色显示，默认视被显示，并且颜色被分配到一个颜色立方体重。颜色立方体是6*6*6（216色）“网页调色板”<sup>*</sup>，但是颜色的数量可以通过<em>-ncols</em>选项改变。用户可以通过<a href="#QApplication">-visual</a>选项强制应用程序使用真彩色视。
+<li> 对于超过256色的真彩色视的256色显示，就是用这个视。例如，Silicon Graphics的X服务器具有这个特征。它们提供8位视作为默认，但是可以当请求的时候可以递送真彩色。
+</ul>
+在Windows下，Qt创建一个Windows调色板并且用一个颜色立方体填充它。
+</ul>
+<p> 要知道CustomColor和ManyColor选择也许会导致颜色映射闪烁：当背景窗口将看起来不够吸引人的时候，前景应用程序得到（绝大多数）可用的颜色。
+<p> 实例：
+<pre>
+  int main( int argc, char **argv )
+  {
+      QApplication::<a href="#setColorSpec">setColorSpec</a>( QApplication::<a href="#ColorSpec-enum">ManyColor</a> );
+      QApplication a( argc, argv );
+      ...
+  }
+  </pre>
+ 
+<p> <a href="qcolor.html">QColor</a>提供对于控制颜色分配合释放某一种颜色的更多功能。详细信息请参考<a href="qcolor.html#enterAllocContext">QColor::enterAllocContext</a>()。
+<p> 为了检查你以什么模式结束，当QApplication对象存在的时候，调用<a href="qcolor.html#numBitPlanes">QColor::numBitPlanes</a>()。一个大于8的值（通常是16、24或32）意味着真彩色。
+<p> <sup>*</sup> 0x00, 0x33, 0x66, 0x99, 0xCC, or 0xFF.
+<sup>*</sup> Qt使用的颜色立方体有216色，它的红、绿和蓝组成部分总是下面的值之一：0x00、0x33、0x66、0x99、0xCC或0xFF。
+<p> <p>也可以参考<a href="#colorSpec">colorSpec</a>()、<a href="qcolor.html#numBitPlanes">QColor::numBitPlanes</a>()和<a href="qcolor.html#enterAllocContext">QColor::enterAllocContext</a>()。
+<p>实例：<a href="helpviewer-example.html#x1044">helpviewer/main.cpp</a>、<a href="showimg-example.html#x1299">showimg/main.cpp</a>、<a href="tutorial1-09.html#x2334">t9/main.cpp</a>、<a href="tetrix-example.html#x314">tetrix/tetrix.cpp</a>和<a href="themes-example.html#x308">themes/main.cpp</a>。
+
+<h3 class=fn>void <a name="setCursorFlashTime"></a>QApplication::setCursorFlashTime ( int&nbsp;msecs )<tt> [静态]</tt>
+</h3>
+设置文本光标闪烁（闪亮）时间为<em>msecs</em>毫秒。闪烁时间是显示、转化和恢复脱字符显示所使用的时间。通常文本光标是显示<em>msecs/2</em>毫秒，然后隐藏<em>msecs/2</em>毫秒，但是这可能会变化。
+<p> 注意在Microsoft Windows上，调用这个函数会设置所有窗口的光标闪烁时间。
+<p> <p>也可以参考<a href="#cursorFlashTime">cursorFlashTime</a>()。
+
+<h3 class=fn>void <a name="setDefaultCodec"></a>QApplication::setDefaultCodec ( <a href="qtextcodec.html">QTextCodec</a>&nbsp;*&nbsp;codec )
+</h3>
+设置应用程序的默认编解码器为<em>codec</em>。
+<p> 如果程序中的文字引用文本不是Latin1编码，这个函数可以用来设置合适的编码。例如，韩国程序员开发的软件在程序中对所有文本可以使用eucKR，这种情况下，main()函数可能看起来像这样：
+<p> <pre>
+    int main(int argc, char** argv)
+    {
+        QApplication app(argc, argv);
+        ... install any additional codecs ...
+        app.<a href="#setDefaultCodec">setDefaultCodec</a>( QTextCodec::<a href="qtextcodec.html#codecForName">codecForName</a>("eucKR") );
+        ...
+    }
+  </pre>
+ 
+<p> 注意，这<em>不是</em><em>用户</em>来选择编码的方式。例如，把一个包含英语字符串的应用程序转换为韩语，所需要做的一切就是对于所有的英语字符串通过<a href="qobject.html#tr">tr</a>()传递并且载入翻译文件。有关<a href="i18n.html#internationalization">国际化</a>的详细情况，请参考<a href="i18n.html">Qt国际化文档</a>。
+<p> 注意也有一些Qt内置类为不同的字符串调用tr()。这些字符串使用英语，所以对于完整的翻译，编解码器将被这些字符串需要。
+
+<h3 class=fn>void <a name="setDesktopSettingsAware"></a>QApplication::setDesktopSettingsAware ( bool&nbsp;on )<tt> [静态]</tt>
+</h3>
+默认情况下，Qt将试图使用底下的窗口系统的桌面设置中当前标准颜色、字体等等并且对于所有相关窗口部件使用它们。这种行为可以通过把<em>on</em>设置为假，调用这个函数来关闭。
+<p> This static function must be called before creating the QApplication
+object, like this:
+<p> <pre>
+  int main( int argc, char** argv ) {
+    QApplication::<a href="#setDesktopSettingsAware">setDesktopSettingsAware</a>( FALSE ); // 我知道什么比用户的更好
+    QApplication myApp( argc, argv ); // 使用默认字体&amp;颜色
+    ...
+  }
+  </pre>
+ 
+<p> <p>也可以参考<a href="#desktopSettingsAware">desktopSettingsAware</a>()。
+
+<h3 class=fn>void <a name="setDoubleClickInterval"></a>QApplication::setDoubleClickInterval ( int&nbsp;ms )<tt> [静态]</tt>
+</h3>
+设置区别一个双击和两次单击的时间限度为<em>ms</em>毫秒。
+<p> 注意在Microsoft Windows上，调用这个函数会设置所有窗口的双击间隔。
+<p> <p>也可以参考<a href="#doubleClickInterval">doubleClickInterval</a>()。
+
+<h3 class=fn>void <a name="setEffectEnabled"></a>QApplication::setEffectEnabled ( <a href="qt.html#UIEffect-enum">Qt::UIEffect</a>&nbsp;effect, bool&nbsp;enable = TRUE )<tt> [静态]</tt>
+</h3>
+如果<em>enable</em>为真，使用户界面效果<em>effect</em>生效，否则这个效果将不被使用。
+<p> <p>也可以参考<a href="#isEffectEnabled">isEffectEnabled</a>()、<a href="qt.html#UIEffect-enum">Qt::UIEffect</a>和<a href="#setDesktopSettingsAware">setDesktopSettingsAware</a>()。
+
+<h3 class=fn>void <a name="setFont"></a>QApplication::setFont ( const&nbsp;<a href="qfont.html">QFont</a>&nbsp;&amp;&nbsp;font, bool&nbsp;informWidgets = FALSE, const&nbsp;char&nbsp;*&nbsp;className = 0 )<tt> [静态]</tt>
+</h3> 
+改变应用程序默认字体为<em>font</em>。如果<em>informWidgets</em>为真，那么存在的窗口部件将会被通知有关这个变化并且也许会根据新的应用程序设置来调整它们自己。如果<em>informWidgets</em>为假，改变只对新创建的窗口部件生效。如果<em>className</em>被传递，那么改变只对继承<em>className</em>的类适用（由<a href="qobject.html#inherits">QObject::inherits</a>()报告的）。
+<p> 当应用程序启动时，默认字体依赖于窗口系统。它非常依赖于窗口系统的版本和本地设置。这个函数让我们不顾默认字体，但是这种不顾也许是一个坏主意，因为，例如，一些本地设置需要支持它的一些特殊字符需要特大字体。
+<p> <p>也可以参考<a href="#font">font</a>()、<a href="#fontMetrics">fontMetrics</a>()和<a href="qwidget.html#font-prop">QWidget::font</a>。
+<p>实例：<a href="desktop-example.html#x1762">desktop/desktop.cpp</a>、<a href="qfd-example.html#x1995">qfd/qfd.cpp</a>、<a href="showimg-example.html#x1300">showimg/main.cpp</a>、<a href="themes-example.html#x226">themes/metal.cpp</a>和<a href="themes-example.html#x283">themes/themes.cpp</a>。
+
+<h3 class=fn>void <a name="setGlobalMouseTracking"></a>QApplication::setGlobalMouseTracking ( bool&nbsp;enable )<tt> [静态]</tt>
+</h3>
+如果<em>enable</em>为真，使全局鼠标跟踪生效，或者如果<em>enable</em>为假，使它失效。
+<p> 使全局鼠标跟踪生效将使窗口部件时间过滤器或者应用程序事件过滤器能够获得所有的鼠标移动事件，尽管当没有按键被按下的时候。这对于特殊图形用户界面元件，比如工具提示，是很有用的。
+<p> 全局鼠标跟踪不会影响窗口部件和它们的mouseMoveEvent()。对于一个要在按键不被按下时得到鼠标移动事件的窗口部件，它必须做<a href="qwidget.html#setMouseTracking">QWidget::setMouseTracking</a>(TRUE)。
+<p> 这个函数使用内部计数器。每一个<a href="#setGlobalMouseTracking">setGlobalMouseTracking</a>(TRUE)都必须有一个相对应的setGlobalMouseTracking(FALSE)：
+<pre>
+        // 在这点，全局鼠标跟踪是关闭的
+        QApplication::<a href="#setGlobalMouseTracking">setGlobalMouseTracking</a>( TRUE );
+        QApplication::<a href="#setGlobalMouseTracking">setGlobalMouseTracking</a>( TRUE );
+        QApplication::<a href="#setGlobalMouseTracking">setGlobalMouseTracking</a>( FALSE );
+        // 在这点，它仍然是打开的
+        QApplication::<a href="#setGlobalMouseTracking">setGlobalMouseTracking</a>( FALSE );
+        // 但是现在它是关的
+    </pre>
+ 
+<p> <p>也可以参考<a href="#hasGlobalMouseTracking">hasGlobalMouseTracking</a>()和<a href="qwidget.html#mouseTracking-prop">QWidget::mouseTracking</a>。
+
+<h3 class=fn>void <a name="setGlobalStrut"></a>QApplication::setGlobalStrut ( const&nbsp;<a href="qsize.html">QSize</a>&nbsp;&amp;&nbsp;strut )<tt> [静态]</tt>
+</h3>
+设置应用程序全局strut为<em>strut</em>。
+<p> strut是任何用户可以交互的图形交互界面元素的最小维数的大小对象。例如，没有按钮应该被重新定义大小小于全局strut大小。
+<p> 当重新实现用于在触摸屏或者类似输入输出设备的图形用户界面控制时，strut的大小应该被考虑。
+<p> 实例：
+<pre>
+  QSize&amp; WidgetClass::sizeHint() const
+  {
+      return QSize( 80, 25 ).expandedTo( QApplication::<a href="#globalStrut">globalStrut</a>() );
+  }
+  </pre>
+ 
+<p> <p>也可以参考<a href="#globalStrut">globalStrut</a>()。
+
+<h3 class=fn>void <a name="setLibraryPaths"></a>QApplication::setLibraryPaths ( const&nbsp;<a href="qstringlist.html">QStringList</a>&nbsp;&amp;&nbsp;paths )<tt> [静态]</tt>
+</h3>
+设置当载入库的时候搜索的目录列表为<em>paths</em>。如果<em>paths</em>为空，搜索列表不会被改变，否则所有的存在的路径将被删除并且路径列表将由<em>paths</em>中给定的路径组成。
+<p> <p>也可以参考<a href="#libraryPaths">libraryPaths</a>()、<a href="#addLibraryPath">addLibraryPath</a>()、<a href="#removeLibraryPath">removeLibraryPath</a>()和<a href="qlibrary.html">QLibrary</a>。
+
+<h3 class=fn>void <a name="setMainWidget"></a>QApplication::setMainWidget ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;mainWidget )<tt> [虚]</tt>
+</h3>
+设置应用程序的主窗口部件为<em>mainWidget</em>。
+<p> 主窗口部件的绝大部分责任和任何其它窗口部件一样，除了如果它被删除，应用程序就退出。
+<p> 你也可以不需要主窗口部件，把<a href="#lastWindowClosed">lastWindowClosed</a>()连接到<a href="#quit">quit</a>()是一个替换方法。
+<p> 对于X11，这个函数也可以根据<em>-geometry</em>命令行参数来移动和改变主窗口部件的大小，所以你应该在调用<a href="#setMainWidget">setMainWidget</a>()之前设置默认几何形状（使用<a href="qwidget.html#setGeometry">QWidget::setGeometry</a>()）。
+<p> <p>也可以参考<a href="#mainWidget">mainWidget</a>()、<a href="#exec">exec</a>()和<a href="#quit">quit</a>()。
+<p>实例：<a href="canvas-example.html#x2738">canvas/main.cpp</a>、<a href="tutorial2-04.html#x2464">chart/main.cpp</a>、<a href="simple-qfont-demo-walkthrough.html#x2134">fonts/simple-qfont-demo/simple-qfont-demo.cpp</a>、<a href="qdialog.html#x2103">life/main.cpp</a>、<a href="tutorial1-01.html#x2271">t1/main.cpp</a>、<a href="tutorial1-04.html#x2292">t4/main.cpp</a>和<a href="outliner-example.html#x1908">xml/outliner/main.cpp</a>。
+
+<h3 class=fn>void <a name="setOverrideCursor"></a>QApplication::setOverrideCursor ( const&nbsp;<a href="qcursor.html">QCursor</a>&nbsp;&amp;&nbsp;cursor, bool&nbsp;replace = FALSE )<tt> [静态]</tt>
+</h3>
+设置应用程序强制光标为<em>cursor</em>。
+<p> 应用程序强制光标是为了显示应用程序是在特定状态下，例如在一个操作期间也许会占用一些时间。
+<p> 这个光标将在所有应用程序的窗口部件中被显示，直到<a href="#restoreOverrideCursor">restoreOverrideCursor</a>()或者另一个<a href="#setOverrideCursor">setOverrideCursor</a>()被调用。
+<p> 应用程序光标被存储到内部栈中。setOverrideCursor()把光标压到栈中，并且restoreOverrideCursor()把激活的光标从栈中弹出。每一个setOverrideCursor()都必须最后有一个对应的restoreOverrideCursor()跟着，否则栈将永远不会被清空。
+<p> 如果<em>replace</em>为真，新的光标将替换最近一个强制光标（栈将保持它的深度）。如果<em>replace</em>为假，新的光标将被要到栈顶。
+<p> 实例：
+<pre>
+        QApplication::<a href="#setOverrideCursor">setOverrideCursor</a>( Qt::<a href="qt.html#CursorShape-enum">WaitCursor</a> );
+        calculateHugeMandelbrot();              // 消耗时间……
+        QApplication::<a href="#restoreOverrideCursor">restoreOverrideCursor</a>();
+    </pre>
+ 
+<p> <p>也可以参考<a href="#overrideCursor">overrideCursor</a>()、<a href="#restoreOverrideCursor">restoreOverrideCursor</a>()和<a href="qwidget.html#cursor-prop">QWidget::cursor</a>。
+<p>实例：<a href="showimg-example.html#x1250">showimg/showimg.cpp</a>。
+
+<h3 class=fn>void <a name="setPalette"></a>QApplication::setPalette ( const&nbsp;<a href="qpalette.html">QPalette</a>&nbsp;&amp;&nbsp;palette, bool&nbsp;informWidgets = FALSE, const&nbsp;char&nbsp;*&nbsp;className = 0 )<tt> [静态]</tt>
+</h3>
+改变应用程序默认调色板为<em>palette</em>。如果<em>informWidgets</em>为真，那么存在的窗口部件将会被通知有关这个变化并且也许会根据新的应用程序设置来调整它们自己。如果<em>informWidgets</em>为假，改变只对新创建的窗口部件生效。
+<p> 如果<em>className</em>被传递，那么改变只对继承<em>className</em>的类适用（由<a href="qobject.html#inherits">QObject::inherits</a>()报告的）。如果<em>className</em>为0，变化将影响所有窗口部件，这样会强制覆盖以前任何类的特定调色板。
+<p> 这个调色板会根据<a href="qstyle.html#polish">QStyle::polish</a>()中当前的图形用户界面风格而被改变。
+<p> <p>也可以参考<a href="qwidget.html#palette-prop">QWidget::palette</a>、<a href="#palette">palette</a>()和<a href="qstyle.html#polish">QStyle::polish</a>()。
+<p>实例：<a href="i18n-example.html#x1923">i18n/main.cpp</a>、<a href="themes-example.html#x227">themes/metal.cpp</a>、<a href="themes-example.html#x284">themes/themes.cpp</a>和<a href="themes-example.html#x147">themes/wood.cpp</a>。
+
+<h3 class=fn>void <a name="setReverseLayout"></a>QApplication::setReverseLayout ( bool&nbsp;b )<tt> [静态]</tt>
+</h3>
+如果<em>b</em>为真，所有的对话框和窗口部件可以按镜像方式布置，这是阿拉伯语和希伯来语等从右到左的语言需要的。如果<em>b</em>为假，对话框和窗口部件被按从左到右布置。
+<p> <p>也可以参考<a href="#reverseLayout">reverseLayout</a>()。
+
+<h3 class=fn>void <a name="setStartDragDistance"></a>QApplication::setStartDragDistance ( int&nbsp;l )<tt> [静态]</tt>
+</h3>
+设置拖动开始之后的距离为<em>l</em>像素。
+<p> <p>也可以参考<a href="#startDragDistance">startDragDistance</a>()。
+
+<h3 class=fn>void <a name="setStartDragTime"></a>QApplication::setStartDragTime ( int&nbsp;ms )<tt> [静态]</tt>
+</h3>
+设置拖动开始之后的时间为<em>ms</em>毫秒。
+<p> <p>也可以参考<a href="#startDragTime">startDragTime</a>()。
+
+<h3 class=fn>void <a name="setStyle"></a>QApplication::setStyle ( <a href="qstyle.html">QStyle</a>&nbsp;*&nbsp;style )<tt> [静态]</tt>
+</h3>
+设置应用程序的图形用户界面风格为<em>style</em>。风格对象的所有权被移交给QApplication，所以当应用程序退出时或者当新的风格被设置时QApplication会删除这个风格对象。
+<p> 用法实例：
+<pre>
+    QApplication::<a href="#setStyle">setStyle</a>( new QWindowStyle );
+  </pre>
+ 
+<p> 当切换应用程序风格时，颜色调色板被设置回初始颜色或者系统默认。这是因为某一种风格不得不让颜色调色板完全适应风格的指导的需要。
+<p> <p>也可以参考<a href="#style">style</a>()、<a href="qstyle.html">QStyle</a>、<a href="#setPalette">setPalette</a>()和<a href="#desktopSettingsAware">desktopSettingsAware</a>()。
+<p>实例：<a href="themes-example.html#x285">themes/themes.cpp</a>。
+
+<h3 class=fn><a href="qstyle.html">QStyle</a>&nbsp;* <a name="setStyle-2"></a>QApplication::setStyle ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;style )<tt> [静态]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+<p> 使用<a href="qstylefactory.html">QStyleFactory</a>来为<em>style</em>创建一个<a href="qstyle.html">QStyle</a>对象。
+<p> 这个字符串必须是<a href="qstylefactory.html#keys">QStyleFactory::keys</a>()之一，通常是“windows”、“motif”、“cde”、“motifplus”、“platinum”、“sgi”和“compact”。根据平台，“windowsxp”、“aqua”或“macintosh”也是可以用的。
+<p> 如果一个未知的<em>style</em>被传递，返回0。
+
+<h3 class=fn>void <a name="setWheelScrollLines"></a>QApplication::setWheelScrollLines ( int&nbsp;n )<tt> [静态]</tt>
+</h3>
+设置当鼠标滚轮旋转时滚动的行数为<em>n</em>。
+<p> 如果这个数字超过某一个窗口部件中可视的行数，窗口部件应该把这个滚动操作解释为单一的上/下翻页的操作来替代。
+<p> <p>也可以参考<a href="#wheelScrollLines">wheelScrollLines</a>()。
+
+<h3 class=fn>void <a name="setWinStyleHighlightColor"></a>QApplication::setWinStyleHighlightColor ( const&nbsp;<a href="qcolor.html">QColor</a>&nbsp;&amp;&nbsp;c )<tt> [静态]</tt>
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 在窗口风格中，为了应用程序中的所有窗口部件，设置颜色用来遮蔽选择。如果这个颜色被改变了，所有的窗口部件都将被重新绘制。
+<p> 默认颜色是<tt>darkBlue</tt>。
+<p>也可以参考<a href="#winStyleHighlightColor">winStyleHighlightColor</a>()。
+
+<h3 class=fn>int <a name="startDragDistance"></a>QApplication::startDragDistance ()<tt> [静态]</tt>
+</h3>
+如果你在你的应用程序中支持拖放并且一个拖动应该在一个鼠标点击并且移动鼠标一定距离之后才开始，你应该使用这个方法返回的值作为那个距离。
+<p> 例如，如果鼠标点击的位置被存储在<tt>startPos</tt>并且当前位置（例如，在鼠标移动事件中）是<tt>currPos</tt>，你可以发现拖动是否开始的代码如下：
+<pre>
+  if ( ( startPos - currPos ).manhattanLength() &gt;
+       QApplication::<a href="#startDragDistance">startDragDistance</a>() )
+    startTheDrag();
+  </pre>
+ 
+<p> Qt内部使用这个值，例如在<a href="qfiledialog.html">QFileDialog</a>中。
+<p> 这个值默认是4像素。
+<p> <p>也可以参考<a href="#setStartDragDistance">setStartDragDistance</a>()、<a href="#startDragTime">startDragTime</a>()和<a href="qpoint.html#manhattanLength">QPoint::manhattanLength</a>()。
+
+<h3 class=fn>int <a name="startDragTime"></a>QApplication::startDragTime ()<tt> [静态]</tt>
+</h3>
+如果你在你的应用程序中支持拖放并且一个拖动应该在一个鼠标点击并且经过一段时间之后才开始，你应该使用这个方法返回的值作为那个拖延（以毫秒为单位）。
+<p> Qt也是在内部使用这个拖延，例如在QTextView和<a href="qlineedit.html">QLineEdit</a>中来开始一个拖动。
+<p> 默认值是500毫秒。
+<p> <p>也可以参考<a href="#setStartDragTime">setStartDragTime</a>()和<a href="#startDragDistance">startDragDistance</a>()。
+
+<h3 class=fn>bool <a name="startingUp"></a>QApplication::startingUp ()<tt> [静态]</tt>
+</h3>
+如果应用程序对象还没有被创建，返回真，否则返回假。
+<p> <p>也可以参考<a href="#closingDown">closingDown</a>()。
+
+<h3 class=fn><a href="qstyle.html">QStyle</a>&nbsp;&amp; <a name="style"></a>QApplication::style ()<tt> [静态]</tt>
+</h3>
+返回应用程序的风格对象。
+<p> <p>也可以参考<a href="#setStyle">setStyle</a>()和<a href="qstyle.html">QStyle</a>。
+
+<h3 class=fn>void <a name="syncX"></a>QApplication::syncX ()<tt> [静态]</tt>
+</h3>
+在X11中实现与X服务器的同步。这通常会占用一些时间。在其它平台上不做任何事。
+<p> <p>也可以参考<a href="#flushX">flushX</a>()。
+
+<h3 class=fn>QWidgetList * <a name="topLevelWidgets"></a>QApplication::topLevelWidgets ()<tt> [静态]</tt>
+</h3>
+返回应用程序中顶级窗口部件的列表。
+<p> 这个列表是使用<tt>new</tt>创建的并且必须由调用者删除。
+<p> 如果没有顶级窗口部件，这个列表是空的（<a href="qptrlist.html#isEmpty">QPtrList::isEmpty</a>()）。
+<p> 注意一些顶级窗口部件也许被隐藏了，例如如果当前没有工具提示被显示的工具提示。
+<p> 实例：
+<pre>
+    // 显示所有隐藏的顶级窗口部件。
+    QWidgetList  *list = QApplication::<a href="#topLevelWidgets">topLevelWidgets</a>();
+    QWidgetListIt it( *list );  // 遍历窗口部件
+    <a href="qwidget.html">QWidget</a> * w;
+    while ( (w=it.current()) != 0 ) {   // 对每一个顶级窗口部件
+        ++it;
+        if ( !w-&gt;<a href="qwidget.html#isVisible">isVisible</a>() )
+            w-&gt;<a href="qwidget.html#show">show</a>();
+    }
+    delete list;                // 删除这个列表，而不是窗口部件
+  </pre>
+ 
+<p> <b>警告：</b> 只要你用完了这个列表，就删除它。列表中的窗口部件也许会在任何时候被其他人删除。
+<p> <p>也可以参考<a href="#allWidgets">allWidgets</a>()、<a href="qwidget.html#isTopLevel-prop">QWidget::isTopLevel</a>、<a href="qwidget.html#visible-prop">QWidget::visible</a>和<a href="qptrlist.html#isEmpty">QPtrList::isEmpty</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="translate"></a>QApplication::translate ( const&nbsp;char&nbsp;*&nbsp;context, const&nbsp;char&nbsp;*&nbsp;sourceText, const&nbsp;char&nbsp;*&nbsp;comment = 0, <a href="qapplication.html#Encoding-enum">Encoding</a>&nbsp;encoding = DefaultCodec ) const
+</h3>
+通过查询安装的消息文件，返回<em>sourceText</em>的翻译文本。消息文件被搜索的顺序是从最近安装的开始到最先安装的。
+<p> <a href="qobject.html#tr">QObject::tr</a>()和<a href="qobject.html#trUtf8">QObject::trUtf8</a>()提供了更方便的这种功能。
+<p> <em>context</em>通常是一个类名（例如，“MyDialog”）并且<em>sourceText</em>是英语文本或者一个短的标识文本，如果输出文本很长（就像帮助文本那样的）。
+<p> <em>comment</em>是消除歧义的注释，当相同的<em>sourceText</em>在同样的上下文情况下被用在不同的规则中。默认情况下，它是零。<em>encoding</em>表明字符串的8位编码方式。
+<p> 关于上下文和注释的更多信息请参考<a href="qtranslator.html">QTranslator</a>文档。
+<p> 如果消息文件中没有包含<em>context</em>中<em>sourceText</em>的翻译，这个函数返回一个和<em>sourceText</em>相等的<a href="qstring.html">QString</a>。<em>sourceText</em>的编码方式由<em>encoding</em>指定，它默认为<a href="#Encoding-enum">DefaultCodec</a>。
+<p> 这个函数不是虚的。你可以使用继承<a href="qtranslator.html">QTranslator</a>这样的替代翻译技术。
+<p> <p>也可以参考<a href="qobject.html#tr">QObject::tr</a>()、<a href="#installTranslator">installTranslator</a>()和<a href="#defaultCodec">defaultCodec</a>()。
+
+<h3 class=fn>bool <a name="tryLock"></a>QApplication::tryLock ()
+</h3> 
+<p> 试图锁定Qt库互斥量，并且立即返回。如果锁已经被获得，这个函数返回真。如果另外一个线程已经锁定了这个互斥量，这个函数返回假，而不是等待这个互斥量什么时候可用。
+<p> 在另外一个线程能够成功地锁定它之前，这个互斥量必须使用<a href="#unlock">unlock</a>()解锁。
+<p> <p>也可以参考<a href="#lock">lock</a>()、<a href="#unlock">unlock</a>()和<a href="threads.html">Qt中的线程支持</a>。
+
+<h3 class=fn><a href="qapplication.html#Type-enum">Type</a> <a name="type"></a>QApplication::type () const
+</h3>
+返回应用程序的类型，Tty、GuiClient或GuiServer。
+
+<h3 class=fn>void <a name="unlock"></a>QApplication::unlock ( bool&nbsp;wakeUpGui = TRUE )
+</h3> 
+<p> 对Qt库互斥量解锁。如果<em>wakeUpGui</em>为真（默认），那么图形用户界面线程将被<a href="#wakeUpGuiThread">QApplication::wakeUpGuiThread</a>()唤醒。
+<p> <p>也可以参考<a href="#lock">lock</a>()、<a href="#locked">locked</a>()和<a href="threads.html">Qt中的线程支持</a>。
+
+<h3 class=fn>void <a name="wakeUpGuiThread"></a>QApplication::wakeUpGuiThread ()
+</h3> 
+<p> 唤醒图形用户界面线程。
+<p> <p>也可以参考<a href="#guiThreadAwake">guiThreadAwake</a>()和<a href="threads.html">Qt中的线程支持</a>。
+
+<h3 class=fn>int <a name="wheelScrollLines"></a>QApplication::wheelScrollLines ()<tt> [静态]</tt>
+</h3>
+返回当鼠标滚轮被旋转时，滚动的行数。
+<p> <p>也可以参考<a href="#setWheelScrollLines">setWheelScrollLines</a>()。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="widgetAt"></a>QApplication::widgetAt ( int&nbsp;x, int&nbsp;y, bool&nbsp;child = FALSE )<tt> [静态]</tt>
+</h3>
+返回在全局屏幕位置<em>(x, y)</em>处的窗口部件的指针，或者如果没有Qt窗口部件在那里返回0。
+<p> 如果<em>child</em>为假并且在位置<em>(x, y)</em>处有一个子窗口部件，包含它的顶级窗口部件将被返回。如果<em>child</em>为真，则在位置<em>(x, y)</em>处的子窗口部件被返回。
+<p> 这个函数通常是相当慢的。
+<p> <p>也可以参考<a href="qcursor.html#pos">QCursor::pos</a>()、<a href="qwidget.html#grabMouse">QWidget::grabMouse</a>()和<a href="qwidget.html#grabKeyboard">QWidget::grabKeyboard</a>()。
+
+<h3 class=fn><a href="qwidget.html">QWidget</a>&nbsp;* <a name="widgetAt-2"></a>QApplication::widgetAt ( const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;pos, bool&nbsp;child = FALSE )<tt> [静态]</tt>
+</h3>
+这是一个重载成员函数，提供了方便。它的行为基本上和上面的函数相同。
+返回在全局屏幕位置<em>pos</em>处的窗口部件的指针，或者如果没有Qt窗口部件在那里返回0。
+<p> 如果<em>child</em>为假并且在位置<em>pos</em>处有一个子窗口部件，包含它的顶级窗口部件将被返回。如果<em>child</em>为真，则在位置<em>pos</em>处的子窗口部件被返回。
+
+<h3 class=fn>bool <a name="winEventFilter"></a>QApplication::winEventFilter ( MSG * )<tt> [虚]</tt>
+</h3>
+消息程序在每次接受到消息时调用这个函数。如果你想处理Qt不处理的窗口消息<em>msg</em>，请重新实现这个函数。
+
+<h3 class=fn>void <a name="winFocus"></a>QApplication::winFocus ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;widget, bool&nbsp;gotFocus )
+</h3>
+如果<em>gotFocus</em>为真，<em>widget</em>将变为激活窗口。否则这个激活窗口将被重新设置为NULL。
+
+<h3 class=fn>const&nbsp;<a href="qcolor.html">QColor</a>&nbsp;&amp; <a name="winStyleHighlightColor"></a>QApplication::winStyleHighlightColor ()<tt> [静态]</tt>
+</h3>
+<p> <b>这个函数是废弃的。</b>它的提供只是为了保证旧代码能够工作。我们强烈建议在新代码中不要使用它。
+<p> 返回在窗口风格中用来遮蔽选择的颜色。
+<p> <p>也可以参考<a href="#setWinStyleHighlightColor">setWinStyleHighlightColor</a>()。
+
+<h3 class=fn><a href="qt.html#WindowsVersion-enum">WindowsVersion</a> <a name="winVersion"></a>QApplication::winVersion ()<tt> [静态]</tt>
+</h3>
+<p> 返回当前运行的Windows操作系统的版本：
+<p> <ul>
+<li> Qt::WV_95 - Windows 95
+<li> Qt::WV_98 - Windows 98
+<li> Qt::WV_Me - Windows Me
+<li> Qt::WV_NT - Windows NT 4.x
+<li> Qt::WV_2000 - Windows 2000 （NT5）
+<li> Qt::WV_XP - Windows XP
+</ul>
+<p> 注意这个函数只对Qt的Windows版本实现了。
+
+<h3 class=fn>bool <a name="x11EventFilter"></a>QApplication::x11EventFilter ( XEvent * )<tt> [虚]</tt>
+</h3>
+这个虚函数只在X11下实现了。
+<p> 如果你创建一个继承QApplication的应用程序并且重新实现这个函数，你可以直接访问从X服务器接收的所有X事件。
+<p> 如果你想停止正在处理的事件，返回真，否则对于普通事件分派返回假。
+<p> <p>也可以参考<a href="#x11ProcessEvent">x11ProcessEvent</a>()。
+
+<h3 class=fn>int <a name="x11ProcessEvent"></a>QApplication::x11ProcessEvent ( XEvent&nbsp;*&nbsp;event )
+</h3>
+这个函数做不同的X<em>event</em>的核心处理，通常把Qt事件分派到正确的目的地。
+<p> 如果这个时间被特殊处理消耗，返回1，如果<em>event</em>被普通处理消耗，返回0，并且如果<em>event</em>是针对不可识别的窗口部件，返回-1。
+<p> <p>也可以参考<a href="#x11EventFilter">x11EventFilter</a>()。
+
+<hr><h2>相关函数</h2>
+<h3 class=fn>void <a name="Q_ASSERT"></a>Q_ASSERT ( bool&nbsp;test )
+</h3>
+如果<em>test</em>为假，打印一个包含源代码文件名和行号的警告信息。
+<p> 这是一个qglobal.h中定义的宏。
+<p> Q_ASSERT对于在你的程序中测试所需条件是很有用的。
+<p> 实例：
+<pre>
+    //
+    // File: div.cpp
+    //
+
+    #include &lt;<a href="qglobal-h.html">qglobal.h</a>&gt;
+
+    int divide( int a, int b )
+    {
+        <a href="#Q_ASSERT">Q_ASSERT</a>( b != 0 );                     // 这是第9行
+        return a/b;
+    }
+  </pre>
+ 
+<p> 如果<tt>b</tt>为0，Q_ASSERT语句将会使用<a href="#qWarning">qWarning</a>()函数输出下面的消息：
+<pre>
+    ASSERT: "b == 0" in div.cpp (9)
+  </pre>
+ 
+<p> <p>也可以参考<a href="#qWarning">qWarning</a>()和<a href="debug.html">调试</a>。
+
+<h3 class=fn>void <a name="Q_CHECK_PTR"></a>Q_CHECK_PTR ( void&nbsp;*&nbsp;p )
+</h3>
+如果<em>p</em>为零，一个致命的消息说程序用完了内存并且退出。如果<em>p</em>为非零，什么也不发生。
+<p> 这是一个qglobal.h中定义的宏。
+<p> 实例：
+<pre>
+    int *a;
+    <a href="#Q_CHECK_PTR">Q_CHECK_PTR</a>( a = new int[80] );     // 不要这样做！
+      // 应该这样做：
+    a = new int[80];
+    <a href="#Q_CHECK_PTR">Q_CHECK_PTR</a>( a );                   // 这是正确的
+  </pre>
+ 
+<p> <p>也可以参考<a href="#qFatal">qFatal</a>()和<a href="debug.html">调试</a>。
+
+<h3 class=fn>void <a name="qAddPostRoutine"></a>qAddPostRoutine ( QtCleanUpFunction&nbsp;p )
+</h3>
+<p> 添加一个将被QApplication析构函数中调用的全局日常事务。这个函数通常用来添加在整个程序范围的功能的清理的日常事务。
+<p> 这个由<em>p</em>给定的函数不应该有任何参数并且什么也不返回，就像这样：
+<pre>
+    static int *global_ptr = 0;
+
+    static void cleanup_ptr()
+    {
+        delete [] global_ptr;
+        global_ptr = 0;
+    }
+
+    void init_ptr()
+    {
+        global_ptr = new int[100];      // 分配数据
+        <a href="#qAddPostRoutine">qAddPostRoutine</a>( cleanup_ptr ); // 稍后删除
+    }
+  </pre>
+ 
+<p> 注意对于一个应用程序范围或者模块范围的清理，<a href="#qAddPostRoutine">qAddPostRoutine</a>()通常是不适合的。人们倾向于使用动态模块加载，并且在例如QApplication析构函数被调用的很早之前就卸载那些模块。
+<p> 对于模块和库，使用引用计数的初始化管理器或者Qt的父子对象删除机制也许更好。这里是一个使用父子对象机制，在正确时间调用清理函数的私有类的实例：
+<p> <pre>
+    class MyPrivateInitStuff: public <a href="qobject.html">QObject</a> {
+    private:
+        MyPrivateInitStuff( <a href="qobject.html">QObject</a> * parent ): <a href="qobject.html">QObject</a>( parent) {
+            // 这里是初始化
+        }
+        MyPrivateInitStuff * p;
+
+    public:
+        static MyPrivateInitStuff * initStuff( <a href="qobject.html">QObject</a> * parent ) {
+            if ( !p )
+                p = new MyPrivateInitStuff( parent );
+            return p;
+        }
+
+        ~MyPrivateInitStuff() {
+            // 在这里清理（“后面的日常事务”）
+        }
+    }
+  </pre>
+ 
+<p> 通过选择正确的父窗口部件/对象，这会在非常正确的时候完成清理模块数据的任务。
+
+<h3 class=fn>void <a name="qDebug"></a>qDebug ( const&nbsp;char&nbsp;*&nbsp;msg, ... )
+</h3>
+<p> 
+打印调试消息<em>msg</em>，或者调用消息处理器（如果它已经被安装）。
+<p> 这个函数使用一个格式化字符串和参数列表，和C中的printf()函数很相似。
+<p> 实例：
+<pre>
+    <a href="#qDebug">qDebug</a>( "my window handle = %x", myWidget-&gt;id() );
+  </pre>
+ 
+<p> 在X11下，这个文本被打印到标准错误输出。在Windows下，这个文本被打印到调试器。
+<p> <b>警告：</b>内部缓存被限制为8196字节（包括0结束符）。
+<p> <p>也可以参考<a href="#qWarning">qWarning</a>()、<a href="#qFatal">qFatal</a>()、<a href="#qInstallMsgHandler">qInstallMsgHandler</a>()和<a href="debug.html">Debugging</a>。
+
+<h3 class=fn>void <a name="qFatal"></a>qFatal ( const&nbsp;char&nbsp;*&nbsp;msg, ... )
+</h3>
+<p> 
+打印致命消息<em>msg</em>，或者调用消息处理器（如果它已经被安装）。
+<p> 这个函数使用一个格式化字符串和参数列表，和C中的printf()函数很相似。
+<p> 实例：
+<pre>
+    int divide( int a, int b )
+    {
+        if ( b == 0 )                           // 程序错误
+            <a href="#qFatal">qFatal</a>( "divide: cannot divide by zero" );
+        return a/b;
+    }
+  </pre>
+ 
+<p> 在X11下，这个文本被打印到标准错误输出。在Windows下，这个文本被打印到调试器。
+<p> <b>警告：</b>内部缓存被限制为8196字节（包括0结束符）。
+<p> <p>也可以参考<a href="#qDebug">qDebug</a>()、<a href="#qWarning">qWarning</a>()、<a href="#qInstallMsgHandler">qInstallMsgHandler</a>()和<a href="debug.html">Debugging</a>。
+
+<h3 class=fn>QtMsgHandler <a name="qInstallMsgHandler"></a>qInstallMsgHandler ( QtMsgHandler&nbsp;h )
+</h3>
+安装Qt消息处理器<em>h</em>。返回以前定义的的消息处理器的指针。
+<p> 消息处理器是一个打印调试消息、警告和致命错误消息的函数。Qt库（调试版）包含在发生内部错误（通常是无效函数参数）时要打印的数百条警告消息。如果你实现了你自己的消息处理器，你就得到这些消息的完全控制。
+<p> 默认消息处理器在X11下把消息打印到标准输出，在Windows下打印到调试器。如果是一个致命消息，应用程序立即异常中断。
+<p> 只能有一个消息处理器被定义，因为它通常在应用程序范围基础上控制调试输出。
+<p> 恢复消息处理器，调用<tt>qInstallMsgHandler(0)</tt>。
+<p> 实例：
+<pre>
+    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;
+
+    void myMessageOutput( QtMsgType type, const char *msg )
+    {
+        switch ( type ) {
+            case QtDebugMsg:
+                fprintf( stderr, "Debug: %s\n", msg );
+                break;
+            case QtWarningMsg:
+                fprintf( stderr, "警告： %s\n", msg );
+                break;
+            case QtFatalMsg:
+                fprintf( stderr, "Fatal: %s\n", msg );
+                abort();                        // 决定把核心倒出
+        }
+    }
+
+    int main( int argc, char **argv )
+    {
+        <a href="#qInstallMsgHandler">qInstallMsgHandler</a>( myMessageOutput );
+        QApplication a( argc, argv );
+        ...
+        return a.<a href="#exec">exec</a>();
+    }
+  </pre>
+ 
+<p> <p>也可以参考<a href="#qDebug">qDebug</a>()、<a href="#qWarning">qWarning</a>()、<a href="#qFatal">qFatal</a>()和<a href="debug.html">调试</a>。
+
+<h3 class=fn>bool <a name="qSysInfo"></a>qSysInfo ( int&nbsp;*&nbsp;wordSize, bool&nbsp;*&nbsp;bigEndian )
+</h3>
+获取有关系统的信息。
+<p> 在<em>wordSize</em>中以位为单位返回系统字大小（通常位32）。如果这是一个以高位在前的机器，<em>bigEndian</em>被设置为真，或者如果这是一个以低位在前的机器，被设置为假。
+<p> 在调试模式下，如果计算机是真正的怪异（例如对于16位和32位整数是不同的在前方式）这个函数调用<a href="#qFatal">qFatal</a>()输出一个信息，在发布模式下，它返回假。
+
+<h3 class=fn>void <a name="qSystemWarning"></a>qSystemWarning ( const&nbsp;char&nbsp;*&nbsp;msg, int&nbsp;code )
+</h3>
+<p> 打印消息<em>msg</em>并且使用<em>code</em>来获得系统特定错误消息。当<em>code</em>为-1（默认），如果可能系统最后一个错误代码将被使用。使用这个方法来处理平台特定应用编程接口调用的失败。
+<p> 当Qt在QT_NO_DEBUG被定义的情况下，这个函数什么都不做。
+
+<h3 class=fn>const char * <a name="qVersion"></a>qVersion ()
+</h3>
+返回Qt库的版本号，通常为“1.44”或“2.3.0”等。
+
+<h3 class=fn>void <a name="qWarning"></a>qWarning ( const&nbsp;char&nbsp;*&nbsp;msg, ... )
+</h3>
+
+<p> 
+打印警告消息<em>msg</em>，或者调用消息处理器（如果它已经被安装）。
+<p> 这个函数使用一个格式化字符串和参数列表，和C中的printf()函数很相似。
+<p> 实例：
+<pre>
+    void f( int c )
+    {
+        if ( c &gt; 200 )
+            <a href="#qWarning">qWarning</a>( "f: bad argument, c == %d", c );
+    }
+  </pre>
+ 
+<p> 在X11下，这个文本被打印到标准错误输出。在Windows下，这个文本被打印到调试器。
+<p> <b>警告：</b>内部缓存被限制为8196字节（包括0结束符）。
+<p> <p>也可以参考<a href="#qDebug">qDebug</a>()、<a href="#qFatal">qFatal</a>()、<a href="#qInstallMsgHandler">qInstallMsgHandler</a>()和<a href="debug.html">Debugging</a>。
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

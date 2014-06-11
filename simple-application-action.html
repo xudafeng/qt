@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Walkthrough: A Simple Application with Actions</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>Walkthrough: A Simple Application with Actions</h1>
+
+ 
+<p> 
+<p> While reading through the implementation of the 
+<A HREF="simple-application.html#ApplicationWindow"><em>ApplicationWindow</em> constructor</A> 
+you have maybe asked yourself: "The <em>fileOpen</em> tool-button
+in the toolbar does exactly the same thing as the <em>File->Open</em> menu-entry.
+Their "What's this?" help is the same, the icons common, the same
+slot is connected to both them ...
+Shouldn't it be possible to save some code and don't invent
+the wheel twice?"
+<p> Indeed, it is. In modern GUI-application programming you will use
+so called <em>actions</em> to do this. An action collects all the
+common items (icon, tooltip, menu-entry text, shortcuts, "What's this?" help-text
+and what to do -- the actual action) together. Whenever this action is required
+(in the toolbar, as a menu-entry) all the programmer has to do is
+to insert the action in the respective toolbar or menu. 
+Its appearance (as a tool-button or a menu-entry) is something, the
+programmer does not has to worry about -- it's obvious from the context.
+<p> With the <a href="qaction.html">QAction</a> class, Qt provides you with everything you need 
+to use this striking concept. So let's write an 
+<em>ApplicationWindow</em> constructor that makes use of actions.
+<p> <h2>The ApplicationWindow constructor with Actions</h2>
+<p> 
+
+<p> <a name="ApplicationWindow"></a>
+<pre>    ApplicationWindow::ApplicationWindow()
+        : <a href="qmainwindow.html">QMainWindow</a>( 0, "example application main window", WDestructiveClose )
+    {
+        printer = new <a href="qprinter.html">QPrinter</a>;
+</pre>
+<p> Nothing new so far. But with the next lines...
+<p> <pre>        <a href="qaction.html">QAction</a> * fileNewAction;
+        <a href="qaction.html">QAction</a> * fileOpenAction;
+        <a href="qaction.html">QAction</a> * fileSaveAction, * fileSaveAsAction, * filePrintAction;
+        <a href="qaction.html">QAction</a> * fileCloseAction, * fileQuitAction;
+</pre>
+<p> ... the difference becomes obvious. Here we define the actions our application
+is supposed to undertake: it should create a new editor-instance (<em>fileNewAction</em>),
+open a file, save a file, save it under a different name, print the
+content of the editor, close an editor window and quit the entire application.
+<p> <pre>        fileNewAction = new <a href="qaction.html">QAction</a>( "New", "&amp;New", CTRL+Key_N, this, "new" );
+</pre>
+<p> The first one has the name <em>new</em> and can be reached via the accelerator <em>Ctrl+N</em>.
+When used as a menu-entry it will provide the entry <em>New</em> and can be reached 
+via the accelerator <em>Alt-N</em> (<em>&N</em>). As we won't set a special tooltip-text, the
+text <em>New</em> with the accelerator <em>Ctrl+N</em> in brackets will show up when
+a user holds the mouse over a tool-button and does nothing.
+<p> <pre>        <a href="qobject.html#connect">connect</a>( fileNewAction, SIGNAL( <a href="qaction.html#activated">activated</a>() ) , this,
+                 SLOT( newDoc() ) );
+</pre>
+<p> When the action becomes activated (the user chooses the respective 
+menu-entry or clicks an appropriate tool-button), it connects to the
+<A HREF="simple-application.html#newDoc()"><em>newDoc()</A></em> slot.  
+<p> <pre>        fileOpenAction = new <a href="qaction.html">QAction</a>( "Open File", QPixmap( fileopen ), "&amp;Open",
+                                      CTRL+Key_O, this, "open" );
+        <a href="qobject.html#connect">connect</a>( fileOpenAction, SIGNAL( <a href="qaction.html#activated">activated</a>() ) , this, SLOT( choose() ) );
+</pre>
+<p> The same way we create an <em>Open</em> <em>File</em> action and connect its <em>activated()</em> signal
+to the <A HREF="simple-application.html#choose()"><em>choose()</A></em> slot.
+There is however a novelty: the <em>fileOpenAction</em> (unlike <em>fileNewAction</em>)
+is assigned a pixmap (the one included with the <em>fileopen.xpm</em> file). 
+<p> <pre>        const char * fileOpenText = "&lt;p&gt;&lt;img source=\"fileopen\"&gt; "
+                         "Click this button to open a &lt;em&gt;new file&lt;/em&gt;. &lt;br&gt;"
+                         "You can also select the &lt;b&gt;Open&lt;/b&gt; command "
+                         "from the &lt;b&gt;File&lt;/b&gt; menu.&lt;/p&gt;";
+</pre>
+<p> For the <em>fileOpenAction</em> we want to provide "What's This?" help and therefore
+define an appropriate rich-text. 
+<p> <pre>    <a name="x2072"></a>    QMimeSourceFactory::<a href="qmimesourcefactory.html#defaultFactory">defaultFactory</a>()-&gt;setPixmap( "fileopen",
+    <a name="x2070"></a>                          fileOpenAction-&gt;<a href="qaction.html#iconSet">iconSet</a>().pixmap() );
+</pre>
+<p> As <em>fileOpenText</em> makes use of a pixmap, we have to inform the rich-text
+engine that it should provide the pixmap defined for <em>fileOpenAction</em> 
+whenever a rich-text
+asks for an image-source named <em>fileopen</em>.
+<p> The slightly complex procedure to gain the pixmap from the action is
+due to the fact that a <a href="qaction.html">QAction</a> is not simply assigned a pixmap but an
+entire iconset. A <a href="qiconset.html">QIconSet</a> provides up to six pixmaps suited for
+different sizes (large, small) and modes (active, disabled etc.).
+As we initially fed <em>fileOpenAction</em> with just one pixmap its iconset
+will be calculated from it automatically. 
+<p> For simplicity reasons we want the icon in the "What's this?" text to be the same we 
+used in the <em>fileOpenAction</em> constructor. This is done by using
+<a href="qiconset.html#pixmap">QIconSet::pixmap</a>() upon <em>fileOpenAction</em>'s <em>iconSet()</em>.
+<p> <pre>    <a name="x2071"></a>    fileOpenAction-&gt;<a href="qaction.html#setWhatsThis">setWhatsThis</a>( fileOpenText );
+</pre>
+<p> Finally we assign "What's this?" help to the <em>fileOpenAction</em>.
+<p> <pre>        fileSaveAction = new <a href="qaction.html">QAction</a>( "Save File", QPixmap( filesave ),
+                                      "&amp;Save", CTRL+Key_S, this, "save" );
+        <a href="qobject.html#connect">connect</a>( fileSaveAction, SIGNAL( <a href="qaction.html#activated">activated</a>() ) , this, SLOT( save() ) );
+
+        const char * fileSaveText = "&lt;p&gt;Click this button to save the file you "
+                         "are editing. You will be prompted for a file name.\n"
+                         "You can also select the &lt;b&gt;Save&lt;/b&gt; command "
+                         "from the &lt;b&gt;File&lt;/b&gt; menu.&lt;/p&gt;";
+        fileSaveAction-&gt;<a href="qaction.html#setWhatsThis">setWhatsThis</a>( fileSaveText );
+</pre>
+<p> The same way we create a <em>Save</em> <em>File</em> action with a pixmap, "What's this?" help
+and the more common items like menu-entry text and accelerator. Note
+that we don't have to bother with the rich-text engine because the
+pixmap is not used in <em>fileSaveText</em>. When activated
+the <em>fileSaveAction</em> will call the 
+<A HREF="simple-application.html#save()"><em>save()</A></em> slot. 
+<p> <pre>        fileSaveAsAction = new <a href="qaction.html">QAction</a>( "Save File As", "Save &amp;as", 0,  this,
+                                        "save as" );
+        <a href="qobject.html#connect">connect</a>( fileSaveAsAction, SIGNAL( <a href="qaction.html#activated">activated</a>() ) , this,
+                 SLOT( saveAs() ) );
+        fileSaveAsAction-&gt;<a href="qaction.html#setWhatsThis">setWhatsThis</a>( fileSaveText );
+</pre>
+<p> For the <em>Save</em> <em>File</em> <em>As</em> action we reuse <em>fileSaveText</em> but do without a
+pixmap. On activation, this action calls the 
+<A HREF="simple-application.html#saveAs()"><em>saveAs()</A></em> slot.   
+<p> <pre>        filePrintAction = new <a href="qaction.html">QAction</a>( "Print File", QPixmap( fileprint ),
+                                       "&amp;Print", CTRL+Key_P, this, "print" );
+        <a href="qobject.html#connect">connect</a>( filePrintAction, SIGNAL( <a href="qaction.html#activated">activated</a>() ) , this,
+                 SLOT( print() ) );
+
+        const char * filePrintText = "Click this button to print the file you "
+                         "are editing.\n You can also select the Print "
+                         "command from the File menu.";
+        filePrintAction-&gt;<a href="qaction.html#setWhatsThis">setWhatsThis</a>( filePrintText );
+</pre>
+<p> The <em>Print</em> <em>File</em> action -- with an <em>activated()</em> signal connected to 
+<A HREF="simple-application.html#printer"><em>print()</A></em> -- looks very much
+like <em>fileSaveText</em>.
+<p> <pre>        fileCloseAction = new <a href="qaction.html">QAction</a>( "Close", "&amp;Close", CTRL+Key_W, this,
+                                       "close" );
+        <a href="qobject.html#connect">connect</a>( fileCloseAction, SIGNAL( <a href="qaction.html#activated">activated</a>() ) , this,
+                 SLOT( <a href="qwidget.html#close">close</a>() ) );
+        fileQuitAction = new <a href="qaction.html">QAction</a>( "Quit", "&amp;Quit", CTRL+Key_Q, this,
+                                      "quit" );
+        <a href="qobject.html#connect">connect</a>( fileQuitAction, SIGNAL( <a href="qaction.html#activated">activated</a>() ) , qApp,
+                 SLOT( <a href="qapplication.html#closeAllWindows">closeAllWindows</a>() ) );
+</pre>
+<p> For the last two actions, <em>fileCloseAction</em> and <em>fileQuitAction</em>, we do it the
+easy way: no "What's this?", no pixmaps. Thus we have defined all the
+actions we need.
+<p> The only thing left is to use them as menu- and toolbar-entries. 
+<p> <pre>        // populate a tool bar with some actions
+
+        <a href="qtoolbar.html">QToolBar</a> * fileTools = new <a href="qtoolbar.html">QToolBar</a>( this, "file operations" );
+        fileTools-&gt;<a href="qtoolbar.html#setLabel">setLabel</a>( "File Operations" );
+</pre>
+<p> First we create a toolbar in <em>this</em> window
+and define a caption for it. 
+<p> As actions that weren't assigned a pixmap are quite useless in a toolbar
+we'll restrict ourselves to three tool-buttons for opening, saving 
+and printing files.
+<p> <pre>        fileOpenAction-&gt;<a href="qaction.html#addTo">addTo</a>( fileTools );
+</pre>
+<p> The first tool-button is easily installed: All we have to do 
+is to add the <em>fileOpenAction</em> to the <em>fileTools</em> toolbar.
+<p> <pre>        fileSaveAction-&gt;<a href="qaction.html#addTo">addTo</a>( fileTools );
+        filePrintAction-&gt;<a href="qaction.html#addTo">addTo</a>( fileTools );
+</pre>
+<p> The same easy procedure applies to <em>fileSaveAction</em> and <em>filePrintAction</em>.
+<p> <pre>        (void)QWhatsThis::whatsThisButton( fileTools );
+</pre>
+<p> To provide the user with a means to toggle his or her mouse in "What's this?" mode,
+we need a fourth icon in the toolbar: the (predefined) "What's this?" button.
+<p> <pre>        // populate a menu with all actions
+
+        <a href="qpopupmenu.html">QPopupMenu</a> * file = new <a href="qpopupmenu.html">QPopupMenu</a>( this );
+        <a href="qmainwindow.html#menuBar">menuBar</a>()-&gt;insertItem( "&amp;File", file );
+</pre>
+<p> Next we install the newly created <em>file</em> popup-menu in the menu bar.
+After we're done with this, we populate the menu ...
+<p> <pre>        fileNewAction-&gt;<a href="qaction.html#addTo">addTo</a>( file );
+        fileOpenAction-&gt;<a href="qaction.html#addTo">addTo</a>( file );
+        fileSaveAction-&gt;<a href="qaction.html#addTo">addTo</a>( file );
+        fileSaveAsAction-&gt;<a href="qaction.html#addTo">addTo</a>( file );
+</pre>
+<p> ... with some menu-entries derived from actions, ...
+<p> <pre>        file-&gt;<a href="qmenudata.html#insertSeparator">insertSeparator</a>();
+</pre>
+<p> ... a separator ...
+<p> <pre>        filePrintAction-&gt;<a href="qaction.html#addTo">addTo</a>( file );
+        file-&gt;<a href="qmenudata.html#insertSeparator">insertSeparator</a>();
+        fileCloseAction-&gt;<a href="qaction.html#addTo">addTo</a>( file );
+        fileQuitAction-&gt;<a href="qaction.html#addTo">addTo</a>( file );
+</pre>
+<p> ... and more actions and separators.
+<p> The rest of the constructor ...
+<p> <pre>        <a href="qmainwindow.html#menuBar">menuBar</a>()-&gt;insertSeparator();
+
+        // add a help menu
+
+        <a href="qpopupmenu.html">QPopupMenu</a> * help = new <a href="qpopupmenu.html">QPopupMenu</a>( this );
+        <a href="qmainwindow.html#menuBar">menuBar</a>()-&gt;insertItem( "&amp;Help", help );
+        help-&gt;<a href="qmenudata.html#insertItem">insertItem</a>( "&amp;About", this, SLOT(about()), Key_F1 );
+        help-&gt;<a href="qmenudata.html#insertItem">insertItem</a>( "About &amp;Qt", this, SLOT(aboutQt()) );
+        help-&gt;<a href="qmenudata.html#insertSeparator">insertSeparator</a>();
+        help-&gt;<a href="qmenudata.html#insertItem">insertItem</a>( "What's &amp;This", this, SLOT(<a href="qmainwindow.html#whatsThis">whatsThis</a>()),
+                          SHIFT+Key_F1 );
+
+        // create and define the central widget
+
+        e = new <a href="qtextedit.html">QTextEdit</a>( this, "editor" );
+        e-&gt;<a href="qwidget.html#setFocus">setFocus</a>();
+        <a href="qmainwindow.html#setCentralWidget">setCentralWidget</a>( e );
+        <a href="qmainwindow.html#statusBar">statusBar</a>()-&gt;message( "Ready", 2000 );
+
+        <a href="qwidget.html#resize">resize</a>( 450, 600 );
+    }
+</pre>
+<p> ... is exactly the same as in the 
+<A HREF="simple-application.html#common_constructor">tool-button and menu-entry version</A>.
+<p> <p>See also <a href="step-by-step-examples.html">Step-by-step Examples</a>.
+
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

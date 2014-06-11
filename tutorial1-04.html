@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>Qt教程一 —— 第四章：使用窗口部件</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>Qt教程一 —— 第四章：使用窗口部件</h1>
+
+ 
+<p> <center><img src="t4.png" alt="Screenshot of tutorial four"></center> 
+<p> 这个例子显示了如何创建一个你自己的窗口部件，描述如何控制一个窗口部件的最小大小和最大大小，并且介绍了窗口部件的名称。
+<p> <pre>/****************************************************************
+**
+** Qt教程一 - 4
+**
+****************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+
+
+class MyWidget : public <a href="qwidget.html">QWidget</a>
+{
+public:
+    MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+};
+
+
+<a name="f549"></a>MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    <a href="qwidget.html#setMinimumSize">setMinimumSize</a>( 200, 120 );
+    <a href="qwidget.html#setMaximumSize">setMaximumSize</a>( 200, 120 );
+
+    <a href="qpushbutton.html">QPushButton</a> *quit = new <a href="qpushbutton.html">QPushButton</a>( "Quit", this, "quit" );
+    quit-&gt;<a href="qwidget.html#setGeometry">setGeometry</a>( 62, 40, 75, 30 );
+    quit-&gt;<a href="qwidget.html#setFont">setFont</a>( QFont( "Times", 18, QFont::Bold ) );
+
+    <a href="qobject.html#connect">connect</a>( quit, SIGNAL(<a href="qbutton.html#clicked">clicked</a>()), qApp, SLOT(<a href="qapplication.html#quit">quit</a>()) );
+}
+
+
+int main( int argc, char **argv )
+{
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+    MyWidget w;
+    w.<a href="qwidget.html#setGeometry">setGeometry</a>( 100, 100, 200, 120 );
+    a.<a href="qapplication.html#setMainWidget">setMainWidget</a>( &amp;w );
+    w.<a href="qwidget.html#show">show</a>();
+    return a.<a href="qapplication.html#exec">exec</a>();
+}
+</pre>
+
+
+
+<p> <h2> 一行一行地解说
+</h2>
+<a name="1"></a><p> <pre>    class MyWidget : public <a href="qwidget.html">QWidget</a>
+    {
+    public:
+        MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+    };
+</pre>
+<p> 这里我们创建了一个新类。因为这个类继承了<a href="qwidget.html">QWidget</a>，所以新类是一个窗口部件，并且可以最为一个顶层窗口或者子窗口部件（像第三章里面的按钮）。
+<p> 这个类只有一个成员函数，构造函数（加上从QWidget继承来的成员函数）。这个构造函数是一个标准的Qt窗口部件构造函数，当你创建窗口部件时，你应该总是包含一个相似的构造函数。
+<p> 第一个参数是它的父窗口部件。为了生成一个顶层窗口，你指定一个空指针作为父窗口部件。就像你看到的那样，这个窗口部件默认地被认做是一个顶层窗口。
+<p> 第二个参数是这个窗口部件的名称。这个<em>不是</em>显示在窗口标题栏或者按钮上的文本。这只是分配给窗口部件的一个名称，以后可以用来<a href="qobject.html#queryList">查找</a>这个窗口部件，并且这里还有一个<a href="qobject.html#dumpObjectTree">方便的调试功能</a>可以完整地列出窗口部件层次。
+<p> <pre>    MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qwidget.html">QWidget</a>( parent, name )
+</pre>
+<p> 构造函数的实现从这里开始。像大多数窗口部件一样，它把<tt>parent</tt>和<tt>name</tt>传递给了<a href="qwidget.html">QWidget</a>的构造函数。
+<p> <pre>    {
+        <a href="qwidget.html#setMinimumSize">setMinimumSize</a>( 200, 120 );
+        <a href="qwidget.html#setMaximumSize">setMaximumSize</a>( 200, 120 );
+</pre>
+<p> 因为这个窗口部件不知道如何处理重新定义大小，我们把它的最小大小和最大大小设置为相等的值，这样我们就确定了它的大小。在下一章，我们将演示窗口部件如何响应用户的重新定义大小事件。
+<p> <pre>        <a href="qpushbutton.html">QPushButton</a> *quit = new <a href="qpushbutton.html">QPushButton</a>( "Quit", this, "quit" );
+    <a name="x2240"></a>    quit-&gt;<a href="qwidget.html#setGeometry">setGeometry</a>( 62, 40, 75, 30 );
+    <a name="x2239"></a>    quit-&gt;<a href="qwidget.html#setFont">setFont</a>( QFont( "Times", 18, QFont::Bold ) );
+</pre>
+<p> 这里我们创建并设置了这个窗口部件的一个名称为“quit”的子窗口部件（新窗口部件的父窗口部件是<tt>this</tt>）。这个窗口部件名称和按钮文本没有关系，只是在这一情况下碰巧相似。
+<p> 注意<tt>quit</tt>是这个构造函数中的局部变量。MyWidget不能跟踪它，但Qt可以，当MyWidget被删除的时候，默认地它也会被删除。这就是为什么MyWidget不需要一个析构函数的原因。（另外一方面，如果你选择删除一个子窗口部件，也没什么坏处，这个子窗口部件会自动告诉Qt它即将死亡。）
+<p> setGeometry()调用和上一章的move()和resize()是一样的。
+<p> <pre>    <a name="x2238"></a><a name="x2236"></a>    <a href="qobject.html#connect">connect</a>( quit, SIGNAL(<a href="qbutton.html#clicked">clicked</a>()), qApp, SLOT(<a href="qapplication.html#quit">quit</a>()) );
+    }
+</pre>
+<p> 因为MyWidget类不知道这个应用程序对象，它不得不连接到Qt的指针，<tt>qApp</tt>。
+<p> 一个窗口部件就是一个软件组件并且它应该尽量少地知道关于它的环境，因为它应该尽可能的通用和可重用。
+<p> 知道了应用程序的名称将会打破上述原则，所以在一个组件，比如MyWidget，需要和应用程序对象对话的这种情况下，Qt提供了一个别名，qApp。
+<p> <pre>    int main( int argc, char **argv )
+    {
+        <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+        MyWidget w;
+        w.<a href="qwidget.html#setGeometry">setGeometry</a>( 100, 100, 200, 120 );
+    <a name="x2237"></a>    a.<a href="qapplication.html#setMainWidget">setMainWidget</a>( &amp;w );
+    <a name="x2241"></a>    w.<a href="qwidget.html#show">show</a>();
+    <a name="x2235"></a>    return a.<a href="qapplication.html#exec">exec</a>();
+    }
+</pre>
+<p> 这里我们举例说明了我们的新子窗口部件，把它设置为主窗口部件，并且执行这个应用程序。
+<p> <h2> 行为
+</h2>
+<a name="2"></a><p> 这个程序和上一章的在行为上非常相似。不同点是我们实现的方式。无论如何它的行为还是有一些小差别。试试改变它的大小，你会看到什么？
+<p> （请看<a href="tutorial1-01.html#compiling">编译</a>来学习如何创建一个makefile和连编应用程序。）
+<p> <h2> 练习
+</h2>
+<a name="3"></a><p> 试着在main()中创建另一个MyWidget对象。发生了什么？
+<p> 试着添加更多的按钮或者把除了<a href="qpushbutton.html">QPushButton</a>之外的东西放到窗口部件中。
+<p> 现在你可以进行<a href="tutorial1-05.html">第五章</a>了。
+<p> [<a href="tutorial1-03.html">上一章</a>]
+[<a href="tutorial1-05.html">下一章</a>]
+[<a href="tutorial.html">教程一主页</a>]
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>
+

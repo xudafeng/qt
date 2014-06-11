@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>对象树和对象所有权</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>对象树和对象所有权</h1>
+
+ 
+<p> <a href="qobject.html">QObject</a>在对象树中组织它们自己。当你以另外一个对象作为
+父对象来创建一个<a href="qobject.html">QObject</a>时，它就被添加到父对象的<a href="qobject.html#children">children()</a>
+列表中，并且当父对象被删除的时候，它也会被删除。这种机制很好的适合了图形用户
+界面应用对象的需要。例如，一个<a href="qaccel.html">QAccel</a>(键盘快捷键)是相关窗口的子对象，当用户
+关闭该窗口的时候，这个快捷键也被删除了。
+<p> 静态函数<a href="qobject.html#objectTrees">QObject::objectTrees()</a>提供了访问当前存在的所有跟对象的方法。
+<p> <a href="qwidget.html">QWidget</a>，在屏幕上显示的任何东西的基类，扩展着父-子对象关系。一个子
+对象通常就是一个子窗口部件，也就是说，它被显示在父对象的坐标系统中并且
+在图象上由父对象的边界夹住。例如，当一个应用程序在一个消息框被关闭之后
+删除这个消息框时，消息框的按钮和标签正如我们所想要的也被删除了，因为这些
+按钮和标签都是消息框的子对象。
+<p> 你也可以自己删除子对象，这样它们就会把它们自己从它们的父对象中移除。例如，
+当用户移除工具条可以导致应用程序删除它的一个<a href="qtoolbar.html">QToolBar</a>对象，在这种情况
+工具条的<a href="qmainwindow.html">QMainWindow</a>父对象会检测到这种变化并因此而重新构成屏幕空间。
+<p> 当一个应用程序的看起来或者运行起来有些奇怪的时候，调试函数<a href="qobject.html#dumpObjectTree">QObject::dumpObjectTree()</a>
+和<a href="qobject.html#dumpObjectInfo">QObject::dumpObjectInfo()</a>是经常有用的。
+<p> 
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

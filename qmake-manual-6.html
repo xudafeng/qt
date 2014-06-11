@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>qmake高级概念</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<p align="right">[<a href="qmake-manual-5.html">上一章：qmake概念</a>] [<a href="qmake-manual.html">qmake首页</a>] [<a href="qmake-manual-7.html">下一章：qmake命令参考</a>]</p>
+<h2 align="center">qmake高级概念</h2>
+<h3><a name="1"></a>qmake高级概念</h3>
+<p>迄今为止，我们见到的<em>qmake</em>项目文件都非常简单，仅仅是一些<em>name = value</em>和<em>name += value</em>的列表行。<em>qmake</em>提供了很多更强大的功能，比如你可以使用一个简单的项目文件来为多个平台生成makefile。</p>
+<h3><a name="2"></a>操作符</h3>
+<p>到目前为止，你已经看到在项目文件中使用的<em>=</em>操作符和<em>+=</em>操作符。这里能够提供更多的可供使用的操作符，但是其中的一些需要谨慎地使用，因为它们也许会比你期待的改变的更多。</p>
+<h4><a name="2-1"></a>“=”操作符</h4>
+<p>这个操作符简单分配一个值给一个变量。使用方法如下：</p>
+<pre>
+    TARGET = myapp
+</pre>
+<p>这将会设置TARGET变量为<em>myapp</em>。这将会删除原来对TARGET的任何设置。</p>
+<h4><a name="2-2"></a>“+=”操作符</h4>
+<p>这个操作符将会向一个变量的值的列表中添加一个值。使用方法如下：</p>
+<pre>
+    DEFINES += QT_DLL
+</pre>
+<p>这将会把QT_DLL添加到被放到makefile中的预处理定义的列表中。</p>
+<h4><a name="2-3"></a>“-=”操作符</h4>
+<p>这个操作符将会从一个变量的值的列表中移去一个值。使用方法如下：</p>
+<pre>
+    DEFINES -= QT_DLL
+</pre>
+<p>这将会从被放到makefile中的预处理定义的列表中移去QT_DLL。</p>
+<h4><a name="2-4"></a>“*=”操作符</h4>
+<p>这个操作符仅仅在一个值不存在于一个变量的值的列表中的时候，把它添加进去。使用方法如下：</p>
+<pre>
+    DEFINES *= QT_DLL
+</pre>
+<p>只用在QT_DLL没有被定义在预处理定义的列表中时，它才会被添加进去。</p>
+<h4><a name="2-5"></a>“~=”操作符</h4>
+<p>这个操作符将会替换任何与指定的值的正则表达式匹配的任何值。使用方法如下：</p>
+<pre>
+    DEFINES ~= s/QT_[DT].+/QT
+</pre>
+<p>这将会用QT来替代任何以QT_D或QT_T开头的变量中的QT_D或QT_T。</p>
+<h3><a name="3"></a>作用域</h3>
+<p>作用域和“if”语句很相似，如果某个条件为真，作用域中的设置就会被处理。作用域使用方法如下：</p>
+<pre>
+    win32 {
+        DEFINES += QT_DLL
+    }
+</pre>
+<p>上面的代码的作用是，如果在Windows平台上使用<em>qmake</em>，QT_DLL定义就会被添加到makefile中。如果在Windows平台以外的平台上使用<em>qmake</em>，这个定义就会被忽略。你也可以使用qmake执行一个单行的条件/任务，就像这样：</p>
+<pre>
+    win32:DEFINES += QT_DLL
+</pre>
+<p>比如，假设我们想在<em>除了</em>Windows平台意外的所有平台处理些什么。我们想这样使用作用域来达到这种否定效果：</p>
+<pre>
+    !win32 {
+        DEFINES += QT_DLL
+    }
+</pre>
+<p>CONFIG行中的任何条目也都是一个作用域。比如，你这样写：</p>
+<pre>
+    CONFIG += warn_on
+</pre>
+<p>你将会得到一个称作“warn_on”的作用域。这样将会使在不丢失特定条件下可能所需的所有自定义设置的条件下，很容易地修改项目中的配置。因为你可能把你自己的值放到CONFIG行中，这将会为你的makefile而提供给你一个非常强大的配置工具。比如：</p>
+<pre>
+    CONFIG += qt warn_on debug
+    debug {
+        TARGET = myappdebug
+    }
+    release {
+        TARGET = myapp
+    }
+</pre>
+<p>在上面的代码中，两个作用域被创建，它们依赖于CONFIG行中设置的是什么。在这个例子中，<em>debug</em>在CONFIG行中，所以TARGET变量被设置为<em>myappdebug</em>。如果<em>release</em>在CONFIG行中，那么TARGET变量将会被设置为<em>myapp</em>。</p>
+<p>当然也可以在处理一些设置之前检查两个事物。例如，如果你想检查平台是否是Windows并且线程设置是否被设定，你可以这样写：</p>
+<pre>
+    win32 {
+        thread {
+            DEFINES += QT_THREAD_SUPPORT
+        }
+    }
+</pre>
+<p>为了避免写出许多嵌套作用域，你可以这样使用冒号来嵌套作用域：</p>
+<pre>
+    win32:thread {
+        DEFINES += QT_THREAD_SUPPORT
+    }
+</pre>
+<p>一旦一个测试被执行，你也许也要做else/elseif操作。这种情况下，你可以很容易地写出复杂的测试。这需要使用特殊的“else”作用域，它可以和其它作用域进行组合（也可以向上面一样使用冒号），比如：</p>
+<pre>
+    win32:thread {
+        DEFINES += QT_THREAD_SUPPORT
+    } else:debug {
+        DEFINES += QT_NOTHREAD_DEBUG
+    } else {
+        warning("Unknown configuration")
+    }
+</pre>
+<h3><a name="4"></a>变量</h3>
+<p>到目前为止我们遇到的变量都是系统变量，比如<em>DEFINES</em>、<em>SOURCES</em>和<em>HEADERS</em>。你也可以为你自己创建自己的变量，这样你就可以在作用域中使用它们了。创建自己的变量很容易，只要命名它并且分配一些东西给它。比如：</p>
+<pre>
+    MY_VARIABLE = value
+</pre>
+<p>现在你对你自己的变量做什么是没有限制的，同样地，<em>qmake</em>将会忽略它们，除非需要在一个作用域中考虑它们。</p>
+<p>你也可以通过在其它任何一个变量的变量名前加$$来把这个变量的值分配给当前的变量。例如：</p>
+<pre>
+    MY_DEFINES = $$DEFINES
+</pre>
+<p>现在MY_DEFINES变量包含了项目文件在这点时DEFINES变量的值。这也和下面的语句一样：</p>
+<pre> 
+    MY_DEFINES = $${DEFINES}
+</pre>
+<p>第二种方法允许你把一个变量和其它变量连接起来，而不用使用空格。<em>qmake</em>将允许一个变量包含任何东西（包括$(VALUE)，可以直接在makefile中直接放置，并且允许它适当地扩张，通常是一个环境变量）。无论如何，如果你需要立即设置一个环境变量，然后你就可以使用$$()方法。比如：</p>
+<pre>
+    MY_DEFINES = $$(ENV_DEFINES)
+</pre>
+<p>这将会设置MY_DEFINES为环境变量ENV_DEFINES传递给.pro文件地值。另外你可以在替换的变量里调用内置函数。这些函数（不会和下一节中列举的测试函数混淆）列出如下：</p>
+<h4><a name="4-1"></a>join( variablename, glue, before, after )</h4>
+<p>这将会在<em>variablename</em>的各个值中间加入glue。如果这个变量的值为非空，那么就会在值的前面加一个前缀<em>before</em>和一个后缀<em>after</em>。只有<em>variablename</em>是必须的字段，其它默认情况下为空串。如果你需要在<em>glue</em>、<em>before</em>或者<em>after</em>中使用空格的话，你必须提供它们。</p>
+<h4><a name="4-2"></a>member( variablename, position )</h4>
+<p>这将会放置<em>variablename</em>的列表中的<em>position</em>位置的值。如果<em>variablename</em>不够长，这将会返回一个空串。<em>variablename</em>是唯一必须的字段，如果没有指定位置，则默认为列表中的第一个值。</p>
+<h4><a name="4-3"></a>find( variablename, substr )</h4>
+<p>这将会放置<em>variablename</em>中所有匹配<em>substr</em>的值。<em>substr</em>也可以是正则表达式，而因此将被匹配。</p>
+<pre>
+    MY_VAR = one two three four
+    MY_VAR2 = $$join(MY_VAR, " -L", -L) -Lfive
+    MY_VAR3 = $$member(MY_VAR, 2) $$find(MY_VAR, t.*)
+</pre>
+<p>MY_VAR2将会包含“-Lone -Ltwo -Lthree -Lfour -Lfive”，并且MYVAR3将会包含“three two three”。</p>
+<h4><a name="4-4"></a>system( program_and_args )</h4>
+<p>这将会返回程序执行在标准输出/标准错误输出的内容，并且正像平时所期待地分析它。比如你可以使用这个来询问有关平台的信息。</p>
+<pre>
+    UNAME = $$system(uname -s)
+    contains( UNAME, [lL]inux ):message( This looks like Linux ($$UNAME) to me )
+</pre>
+<h3><a name="5"></a>测试函数</h3>
+<p><em>qmake</em>提供了可以简单执行，但强大测试的内置函数。这些测试也可以用在作用域中（就像上面一样），在一些情况下，忽略它的测试值，它自己使用测试函数是很有用的。</p>
+<h4><a name="5-1"></a>contains( variablename, value )</h4>
+<p>如果<em>value</em>存在于一个被叫做<em>variablename</em>的变量的值的列表中，那么这个作用域中的设置将会被处理。例如：</p>
+<pre>
+    contains( CONFIG, thread ) {
+        DEFINES += QT_THREAD_SUPPORT
+    }
+</pre>
+<p>如果<em>thread</em>存在于<em>CONFIG</em>变量的值的列表中时，那么QT_THREAD_SUPPORT将会被加入到<em>DEFINES</em>变量的值的列表中。</p>
+<h4><a name="5-2"></a>count( variablename, number )</h4>
+<p>如果<em>number</em>与一个被叫做<em>variablename</em>的变量的值的数量一致，那么这个作用域中的设置将会被处理。例如：</p>
+<pre>
+    count( DEFINES, 5 ) {
+        CONFIG += debug
+    }
+</pre>
+<h4><a name="5-3"></a>error( string )</h4>
+<p>这个函数输出所给定的字符串，然后会使<em>qmake</em>退出。例如：</p>
+<pre>
+    error( "An error has occured" )
+</pre>
+<p>文本“An error has occured”将会被显示在控制台上并且<em>qmake</em>将会退出。</p>
+<h4><a name="5-4"></a>exists( filename )</h4>
+<p>如果指定文件存在，那么这个作用域中的设置将会被处理。例如：</p>
+<pre>
+    exists( /local/qt/qmake/main.cpp ) {
+        SOURCES += main.cpp
+    }
+</pre>
+<p>如果<em>/local/qt/qmake/main.cpp</em>存在，那么main.cpp将会被添加到源文件列表中。</p>
+<p>注意可以不用考虑平台使用“/”作为目录的分隔符。</p>
+<h4><a name="5-5"></a>include( filename )</h4>
+<p>项目文件在这一点时包含这个文件名的内容，所以指定文件中的任何设置都将会被处理。例如：</p>
+<pre> 
+    include( myotherapp.pro )
+</pre>
+<p><em>myotherapp.pro</em>项目文件中的任何设置现在都会被处理。</p>
+<h4><a name="5-6"></a>isEmpty( variablename )</h4>
+<p>这和使用count( variablename, 0 )是一样的。如果叫做<em>variablename</em>的变量没有任何元素，那么这个作用域中的设置将会被处理。例如：</p>
+<pre>
+    isEmpty( CONFIG ) {
+        CONFIG += qt warn_on debug
+    }
+</pre>
+<h4><a name="5-7"></a>message( string )</h4>
+<p>这个函数只是简单地在控制台上输出消息。</p>
+<pre>
+    message( "This is a message" )
+</pre>
+<p>文本“This is a message”被输出到控制台上并且对于项目文件的处理将会继续进行。</p>
+<h4><a name="5-8"></a>system( command )</h4>
+<p>特定指令被执行并且如果它返回一个1的退出值，那么这个作用域中的设置将会被处理。例如：</p>
+<pre>
+    system( ls /bin ) {
+        SOURCES += bin/main.cpp
+        HEADERS += bin/main.h
+    }
+</pre>
+<p>所以如果命令<em>ls /bin</em>返回1，那么<em>bin/main.cpp</em>将被添加到源文件列表中并且<em>bin/main.h</em>将被添加到头文件列表中。</p>
+<h4><a name="5-9"></a>infile( filename, var, val )</h4>
+<p>如果<em>filename</em>文件（当它被qmake自己解析时）包含一个值为<em>val</em>的变量<em>var</em>，那么这个函数将会返回成功。你也可以不传递第三个参数（<em>val</em>），这时函数将只测试文件中是否分配有这样一个变量<em>var</em>。</p>
+<!-- eof -->
+<p align="right">[<a href="qmake-manual-5.html">上一章：qmake概念</a>] [<a href="qmake-manual.html">qmake首页</a>] [<a href="qmake-manual-7.html">下一章：qmake命令参考</a>]</p>
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

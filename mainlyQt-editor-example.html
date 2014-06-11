@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Editors in a Qt main window</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">Home</font></a>
+ | <a href="classes.html">
+<font color="#004faf">All&nbsp;Classes</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">Main&nbsp;Classes</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">Annotated</font></a>
+ | <a href="groups.html">
+<font color="#004faf">Grouped&nbsp;Classes</font></a>
+ | <a href="functions.html">
+<font color="#004faf">Functions</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table><h1 align=center>Editors in a Qt main window</h1>
+
+ 
+<p> 
+<p> 
+<p> This example shows two simple text editors, with most of the
+program written in Qt. One editor is a Qt QMultiLineEdit, the
+other is an Athena Widgets text widget. They are bound together
+in a Qt main window.
+<p> <hr>
+<p> Implementation:
+<p> <pre>#include &lt;<a href="qmainwindow-h.html">qmainwindow.h</a>&gt;
+#include &lt;<a href="qmultilineedit-h.html">qmultilineedit.h</a>&gt;
+#include &lt;<a href="qpainter-h.html">qpainter.h</a>&gt;
+#include &lt;<a href="qmessagebox-h.html">qmessagebox.h</a>&gt;
+#include &lt;<a href="qpopupmenu-h.html">qpopupmenu.h</a>&gt;
+#include &lt;<a href="qmenubar-h.html">qmenubar.h</a>&gt;
+#include &lt;<a href="qsplitter-h.html">qsplitter.h</a>&gt;
+#include "qxt.h"
+#include &lt;X11/IntrinsicP.h&gt;
+#include &lt;X11/Shell.h&gt;
+#include &lt;X11/StringDefs.h&gt;
+#include &lt;X11/Xaw/AsciiText.h&gt;
+
+static const char* QTEDMSG =
+    "This is a Qt widget.\nIt is a QMultiLineEdit.";
+
+static const char* XTEDMSG =
+    "This is an Xt widget.\nIt is an asciiTextWidgetClass.";
+
+
+class EncapsulatedXtWidget : public <a href="qxtwidget.html">QXtWidget</a> {
+    Widget editor;
+public:
+    EncapsulatedXtWidget(QWidget* parent) :
+        <a href="qxtwidget.html">QXtWidget</a>( "shell", topLevelShellWidgetClass, parent )
+    {
+        Arg args[20];
+        Cardinal nargs=0;
+        XtSetArg(args[nargs], XtNeditType, XawtextEdit); nargs++;
+        XtSetArg(args[nargs], XtNstring, XTEDMSG);       nargs++;
+        editor = XtCreateWidget( "editor", asciiTextWidgetClass, xtWidget(), args, nargs);
+        XtRealizeWidget( editor );
+        XtMapWidget( editor );
+    }
+    void resizeEvent( <a href="qresizeevent.html">QResizeEvent</a>* e )
+    {
+<a name="x2565"></a>        QXtWidget::<a href="qwidget.html#resizeEvent">resizeEvent</a>( e );
+        XtResizeWidget( editor, width(), height(), 2 );
+    }
+};
+
+
+class TwoEditors : public <a href="qmainwindow.html">QMainWindow</a> {
+    <a href="qmultilineedit.html">QMultiLineEdit</a>* qtchild;
+    EncapsulatedXtWidget* xtchild;
+
+public:
+    TwoEditors() :
+        <a href="qmainwindow.html">QMainWindow</a>( 0, "mainWindow")
+    {
+        <a href="qpopupmenu.html">QPopupMenu</a>* file = new <a href="qpopupmenu.html">QPopupMenu</a>( this );
+        file-&gt;<a href="qmenudata.html#insertItem">insertItem</a>("E&amp;xit", qApp, SLOT( <a href="qapplication.html#quit">quit</a>() ) );
+        menuBar()-&gt;insertItem( "&amp;File", file );
+        statusBar();
+        <a href="qsplitter.html">QSplitter</a>* splitter = new <a href="qsplitter.html">QSplitter</a>( this );
+<a name="x2563"></a>        splitter-&gt;<a href="qsplitter.html#setOpaqueResize">setOpaqueResize</a>( TRUE );
+        setCentralWidget( splitter );
+        xtchild = new EncapsulatedXtWidget( splitter );
+        qtchild = new <a href="qmultilineedit.html">QMultiLineEdit</a>( splitter );
+        qtchild-&gt;<a href="qtextedit.html#setText">setText</a>(QTEDMSG);
+    }
+
+};
+
+int main(int argc, char** argv)
+{
+    <a href="qxtapplication.html">QXtApplication</a> app(argc, argv, "TwoEditors");
+    TwoEditors m;
+    app.<a href="qapplication.html#setMainWidget">setMainWidget</a>(&amp;m);
+    m.<a href="qwidget.html#show">show</a>();
+    return app.<a href="qapplication.html#exec">exec</a>();
+}
+</pre>
+
+<p> <p>See also <a href="xt-motif-examples.html">Qt Xt/Motif Support Extension</a>.
+
+<!-- eof -->
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a><td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td align=right><div align=right>Qt version 3.0.5</div>
+</table></div></address>
+</body>
+</html>

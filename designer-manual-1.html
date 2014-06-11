@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Translator" content="Hackerjun">
+
+<title></title>
+<style type="text/css"><!--
+h3.fn，span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<p align="right">[<a href="designer-manual.html">Qt设计器首页</a>] [<a href="designer-manual-2.html">下一章：创建一个Qt应用程序</a>]</p>
+<h2 align="center">前言</h2>
+<h3><a name="1"></a>介绍</h3>
+<p>这本参考手册是有关于<em>Qt设计器</em>的，<em>Qt设计器</em>是用来设计和实现用户界面并能够在多平台下使用的一种工具。<em>Qt设计器</em>可以使用户界面设计实验变得简单。在任何时候你可以要求所生成的代码去重建<em>Qt设计器</em>产生的用户界面文件，并可以根据你的喜好来改变你的设计。假如你使用的是先前的版本，你将发现在新的版本下自己可以立即进入工作，因为新的版本在界面上基本没有什么变化。但是你将发现根据你们的反馈而开发出的新的部件和新的或者改进的功能。</p>
+<p><em>Qt设计器</em>帮助你使用部局工具在运行时自动的移动和缩放你的部件（Windows中的术语<em>控件</em>）来构建用户界面。最终界面是既好用又好看，使最终用户拥有一个舒适的操作环境并且能够方便的进行参数选择。<em>Qt设计器</em>支持信号和槽机制以使部件间能够进行有效的通信。<em>Qt设计器</em>包含一个代码编辑器，使你能够在合成的代码里面嵌入自己定制的槽。那些更喜欢使用手工方法分解合成代码的朋友也能够继续使用基类，因为从第一版的<em>Qt设计器</em>开始就把这些基类移植进去了。</p>
+<p>这本手册通过讲述开发例程来向你介绍<em>Qt设计器。</em>一开始的六章是设计指南，而且各自间都尽可能设计成是独立的。接下来要介绍的是除了首章以外的每一章，并假定你已经熟悉了第一章的内容，该章包含使用<em>Qt设计器</em>创建一个Qt应用程序的基础。以下是便各章的简要概述：</p>
+<ul><li><p>第一章，<a href="designer-manual-2.html">创建一个Qt应用程序</a>，通过带着你一步一步的创建一个小但功能完整的应用程序来介绍<em>Qt设计器</em>的使用。按照着这种方法你将学到如何创建一个窗体并且向窗体中添加部件。在你阅读这一章的过程中你将使用窗体和属性编辑器来定制你的应用程序，并且学习怎样使用部局工具来对一个窗体进行部局。你也将学到如何使用信号和槽机制和<em>Qt设计器</em>的内建代码编辑器来制造应用程序的各种功能。我们也将解释如何使用<tt><strong>qmake</strong></tt>来生成Makefile，以致于你能够编译和运行应用程序。</p>
+<li><p>第二章，<a href="designer-manual-3.html">创建含有工具栏和菜单的主窗口</a>，我们将创建一个简单的文本编辑器。通过写这个应用程序你将学到如何使用菜单栏和工具栏来创建一个主窗口。我们将看到如何使用Qt的内建功能来处理一般任务(e.g. 复制粘贴操作)还将看到如何为我们自己的菜单栏选项和工具栏按钮创建我们自己的功能。</p>
+<li><p>第三章，<a href="designer-manual-4.html">走近设计器</a>，提供有关<em>Qt设计器</em>的信息如相关的开发应用程序，并且还对<em>Qt设计器</em>背后的一些基本原理进行解释。</p>
+<li><p>第四章，<a href="designer-manual-5.html">派生类和动态对话框</a>， 将展示如何派生一个窗体；这将让你清楚的通过执行关键代码的功能来分解用户界面。本章中还附加有关<tt>qmake</tt>和 <tt>uic</tt>的信息。本章也将阐述如何使用<b>QWidgetFactory</b>把<!-- index .ui --><tt>.ui</tt>文件放进你的应用程序从而动态的加载对话框和如何访问这些对话框的部件和派生部件。</p>
+<li><p>第五章，<a href="designer-manual-6.html">创建自定义窗口部件</a>，告诉你如何才能创建自定义部件。既有在第一版的<em>Qt设计器</em>中就被介绍的简单方法，又有像利用插件这种新的更有效的的方法都在这一章里被介绍了。</p>
+<li><p>第六章， <a href="designer-manual-7.html">创建数据库应用程序</a>介绍了Qt的SQL类并且带着你通过一个实例来演示如何执行查询和如何设置主要关系的细节，深入讲解和处理外关键字。</p>
+<li><p>第七章，<a href="designer-manual-8.html">定制和集成Qt设计器</a>，聚焦<em>Qt设计器</em>本身，向你展示如何定制设计器，如何使用可视化工作室集成设计器和如何创建一个Makefiles。</p>
+</ul><p>这剩下的章节提供了一些参考资料，用以讲述<em>Qt设计器</em>的菜单选项、工具栏、快捷键以及对话框等的细节。</p>
+<h3><a name="2"></a>你所应该知道的</h3>
+<p>该手册假定你已经有了一些有关C++和Qt应用程序开发框架的基础。假如你需要学习C++或者Qt，这儿有大量的C++的书可供使用和少量的但是数量却在不断增长的有关Qt的书。你可以尝试一下大量伴随着Qt的联机文档和许多例程。</p>
+<p>企业版的Qt包含了SQL模块。在<a href="designer-manual-7.html">创建数据库应用程序</a>一章里我们演示了如何使用<em>Qt设计器</em>来编写SQL应用程序；这一章需要一些SQL和关系数据库的知识。</p>
+<h3><a name="3"></a><em>Qt设计器</em>中的新东西</h3>
+<p>该版本的<em>Qt设计器</em>较其前一版本来说增加了更加多的功能。自己定制的槽功能代码可以直接在<em>Qt设计器</em>中编辑；操作工具栏、菜单栏就可以创建主窗口了；部局可以结合使用分解器；一些插件还允许你把大量的自定义部件进行打包并且在<em>Qt设计器</em>中可以使用他们。从对用户界面微小的改善到提高效率还有很多其它增强功能被结使在里面，例如在一个应用程序里的所有窗体可以有效的共享像素映射。</p>
+<p>该版本的<em>Qt设计器</em>创建的工程文件使得开关在一个应用程序中的所有窗体变得十分简单，而且仍然保持了一个通常的数据库设置和映象。通过对派生类的全面支持，为直接在<em>Qt设计器</em>中编写代码带来了很多的益处，这些知识已经全面涵盖在<a href="designer-manual-4.html">走近设计器</a>一章中了。</p>
+<p>还介绍了一个新的库<tt>libqui</tt>，该库允许你在运行时从<em>Qt设计器</em>的<tt>.ui</tt>文件中自动加载对话框。这允计你提供给你的应用程序用户相当可观的自定义界面自由度，否则就需要使用C++了。</p>
+<p>如果你仅仅想要一个简单而功能强大的单对话框可视设计工具，虽然新版本的<em>Qt设计器</em>介绍了新的进阶和技术但你可以忽略这些方面并且正确的使用与Qt 2.x相同的方法。</p>
+<p align="center"><img align="middle" src="designer.png" width="1007" height="816">
+</p>
+<blockquote><p align="center"><em>Qt设计器</em></p></blockquote>
+<h3><a name="4"></a>反馈</h3>
+<p>如果你关于这个手册有一些注释、建议、批评或者适当的赞美，请访问<tt>doc@trolltech.com</tt>让我们知道。关于Qt或者<em>Qt设计器</em>的bug报告可以发送至<tt>Qt-bugs@trolltech.com</tt>。你也许也想要加入专门由开发者阅读和捐献的<em>Qt-interest</em>邮件列表；请访问<a href="http://www.trolltech.com">http://www.trolltech.com</a>以了解更多的细节。</p>
+<p></p>
+<!-- eof -->
+<p align="right">[<a href="designer-manual.html">Qt设计器首页</a>] [<a href="designer-manual-2.html">下一章：创建一个Qt应用程序</a>]</p>
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:hackerjun</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>

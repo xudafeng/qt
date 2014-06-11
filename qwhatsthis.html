@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta name="Qt zh_CN Documents Website" content="http://www.qiliang.net/qt">
+<title>QWhatsThis类</title>
+<style type="text/css"><!--
+h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm; }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+body { background: #ffffff; color: black; font-family: "Times New Roman" }
+--></style>
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr bgcolor="#E5E5E5">
+<td valign=center>
+ <a href="index.html">
+<font color="#004faf">主页</font></a>
+ | <a href="classes.html">
+<font color="#004faf">所有的类</font></a>
+ | <a href="mainclasses.html">
+<font color="#004faf">主要的类</font></a>
+ | <a href="annotated.html">
+<font color="#004faf">注释的类</font></a>
+ | <a href="groups.html">
+<font color="#004faf">分组的类</font></a>
+ | <a href="functions.html">
+<font color="#004faf">函数</font></a>
+</td>
+<td align="right" valign="center"><img src="logo32.png" align="right" width="64" height="32" border="0"></td></tr></table>
+<h1 align=center>QWhatsThis类参考</h1>
+
+<p>QWhatsThis类提供了任何一个窗口部件的简单描述，比如，回答“这是什么？”的问题。
+<a href="#details">详情请见……</a>
+<p><tt>#include &lt;<a href="qwhatsthis-h.html">qwhatsthis.h</a>&gt;</tt>
+<p>继承了<a href="qt.html">Qt</a>。
+<p><a href="qwhatsthis-members.html">所有成员函数的列表。</a>
+<h2>公有成员</h2>
+<ul>
+<li><div class=fn><a href="#QWhatsThis"><b>QWhatsThis</b></a> ( QWidget&nbsp;*&nbsp;widget )</div></li>
+<li><div class=fn>virtual <a href="#~QWhatsThis"><b>~QWhatsThis</b></a> ()</div></li>
+<li><div class=fn>virtual QString <a href="#text"><b>text</b></a> ( const QPoint &amp; )</div></li>
+<li><div class=fn>virtual bool <a href="#clicked"><b>clicked</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;href )</div></li>
+</ul>
+<h2>静态公有成员</h2>
+<ul>
+<li><div class=fn>void <a href="#add"><b>add</b></a> ( QWidget&nbsp;*&nbsp;widget, const&nbsp;QString&nbsp;&amp;&nbsp;text )</div></li>
+<li><div class=fn>void <a href="#remove"><b>remove</b></a> ( QWidget&nbsp;*&nbsp;widget )</div></li>
+<li><div class=fn>QString <a href="#textFor"><b>textFor</b></a> ( QWidget&nbsp;*&nbsp;w, const&nbsp;QPoint&nbsp;&amp;&nbsp;pos = QPoint ( ), bool&nbsp;includeParents = FALSE )</div></li>
+<li><div class=fn>QToolButton * <a href="#whatsThisButton"><b>whatsThisButton</b></a> ( QWidget&nbsp;*&nbsp;parent )</div></li>
+<li><div class=fn>void <a href="#enterWhatsThisMode"><b>enterWhatsThisMode</b></a> ()</div></li>
+<li><div class=fn>bool <a href="#inWhatsThisMode"><b>inWhatsThisMode</b></a> ()</div></li>
+<li><div class=fn>void <a href="#leaveWhatsThisMode"><b>leaveWhatsThisMode</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text = QString::null, const&nbsp;QPoint&nbsp;&amp;&nbsp;pos = QCursor::pos ( ), QWidget&nbsp;*&nbsp;w = 0 )</div></li>
+<li><div class=fn>void <a href="#display"><b>display</b></a> ( const&nbsp;QString&nbsp;&amp;&nbsp;text, const&nbsp;QPoint&nbsp;&amp;&nbsp;pos = QCursor::pos ( ), QWidget&nbsp;*&nbsp;w = 0 )</div></li>
+</ul>
+<hr><a name="details"></a><h2>详细描述</h2>
+
+
+QWhatsThis类提供了任何一个窗口部件的简单描述，比如，回答“这是什么？”的问题。
+<p> 
+
+<p> “这是什么？”帮助是提供给用户关于功能、用法、背景等等不同水平的从短的工具指南到完全的文本浏览帮助窗口的应用程序的<a href="helpsystem.html#online-help">在线帮助</a>系统的一部分。
+<p> QWhatsThis是当用户询问“这是什么？”时提供的弹出的具有说明性文本的一个单一窗口。这样做的默认方法是把焦点移动到相关窗口部件并且按下Shift+F1。帮助文本就会立即出现，一旦用户做了其它什么事情，它就消失了。
+<p> （注意如果其它地方的快捷键是Shift+F1的话，这个机制就不能工作了。）
+<p> 为了给一个窗口部件添加“这是什么？”文本，你只要对它简单地调用<a href="#add">QWhatsThis::add</a>()就可以了。比如，给一个菜单项分配文本，调用<a href="qmenudata.html#setWhatsThis">QMenuData::setWhatsThis</a>()，对于一个全局快捷键，调用<a href="qaccel.html#setWhatsThis">QAccel::setWhatsThis</a>()并且如果你正在使用操作，使用<a href="qaction.html#setWhatsThis">QAction::setWhatsThis</a>()。
+<p> 这个文本可以是纯文本，也可以是多信息文本。如果你指定了一个多信息文本格式的字符串，它将被使用默认的样式表来显示。这样还可以使用嵌入的图片。详细情况请参考<a href="qstylesheet.html#defaultSheet">QStyleSheet::defaultSheet</a>()。
+<p> 
+
+<pre>        const char * fileOpenText = "&lt;p&gt;&lt;img source=\"fileopen\"&gt; "
+                         "Click this button to open a &lt;em&gt;new file&lt;/em&gt;. &lt;br&gt;"
+                         "You can also select the &lt;b&gt;Open&lt;/b&gt; command "
+                         "from the &lt;b&gt;File&lt;/b&gt; menu.&lt;/p&gt;";
+    <a name="x2072"></a>    QMimeSourceFactory::<a href="qmimesourcefactory.html#defaultFactory">defaultFactory</a>()-&gt;setPixmap( "fileopen",
+    <a name="x2070"></a>                          fileOpenAction-&gt;<a href="qaction.html#iconSet">iconSet</a>().pixmap() );
+    <a name="x2071"></a>    fileOpenAction-&gt;<a href="qaction.html#setWhatsThis">setWhatsThis</a>( fileOpenText );
+</pre>
+<p> （对于上面的代码更详细的解释请参考<a href="simple-application-action.html">具有QAction特征的简单应用程序的排演</a>。）
+<p> 另一个进入“这是什么？”模式的方法是使用已经由<a href="#whatsThisButton">QWhatsThis::whatsThisButton</a>()做好的工具条按钮。通过调用这个上下文帮助按钮（在下面图片中右面的第一个），用户切换到“这是什么？”模式。如果现在你在窗口部件上点击，适当的帮助文本就会被显示。当帮助被给出或者用户按下Esc时，这个模式就离开了。
+<p> <img src="whatsthis.png" width="284" height="246">
+<p> 如果你正在使用<a href="qmainwindow.html">QMainWindow</a>，你也可以使用<a href="qmainwindow.html#whatsThis">QMainWindow::whatsThis</a>()槽来从菜单项中调用这个模式。
+<p> 为了更多的控制，你可以为一个特定窗口部件创建一个专用的QWhatsThis对象。通过继承和重新实现<a href="#text">QWhatsThis::text</a>()，它可能具有不同的帮助文本，依赖于鼠标点击的位置。通过重新实现<a href="#clicked">QWhatsThis::clicked</a>()，在帮助文本中使用超链接也是可能的。
+<p> 如果你想手工地控制窗口部件的“这是什么？”的行为，请参考<a href="qwidget.html#customWhatsThis">QWidget::customWhatsThis</a>()。
+<p> 使用<a href="#remove">QWhatsThis::remove</a>()可以移除这是什么对象，尽管这很少需要，因为当窗口部件被销毁时它会被自动地移除。
+<p> <p>也可以参考<a href="qtooltip.html">QToolTip</a>和<a href="helpsystem.html">帮助系统</a>。
+
+<hr><h2>成员函数文档</h2>
+<h3 class=fn><a name="QWhatsThis"></a>QWhatsThis::QWhatsThis ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;widget )
+</h3>
+为<em>widget</em>构造一个动态的“这是什么？”对象。当被传递的窗口部件被销毁时，这个对象被删除。
+<p> 当这个窗口部件被用户查询时，这个QWhatsThis的<a href="#text">text</a>()函数将会被调用来提供适当的文本，而不是使用由<a href="#add">add</a>()提供的文本。
+
+<h3 class=fn><a name="~QWhatsThis"></a>QWhatsThis::~QWhatsThis ()<tt> [虚]</tt>
+</h3>
+销毁这个对象并释放任何被分配的资源。
+
+<h3 class=fn>void <a name="add"></a>QWhatsThis::add ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;widget, const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text )<tt> [静态]</tt>
+</h3>  
+为<em>widget</em>添加<em>text</em>作为“这是什么？”帮助。如果这个文本是多信息文本格式（比如，它包含标高），它将被使用默认的样式表<a href="qstylesheet.html#defaultSheet">QStyleSheet::defaultSheet</a>()来显示。
+<p> 如果这个窗口部件后来被销毁，这个文本也被销毁，所以它不需要被明显地移除。
+<p> <p>也可以参考<a href="#remove">remove</a>()。
+<p>实例：<a href="simple-application-example.html#x1542">application/application.cpp</a>和<a href="mdi-example.html#x2044">mdi/application.cpp</a>。
+
+<h3 class=fn>bool <a name="clicked"></a>QWhatsThis::clicked ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;href )<tt> [虚]</tt>
+</h3>  
+<p> 当用户在“这是什么？”窗口中点击鼠标时，这个虚函数被调用。<em>href</em>是用户所点击的连接，如果没有连接，就是<a href="qstring.html#QString-null">QString::null</a>。
+<p> 如果函数返回真（默认），“这是什么？”窗口被关闭，否则它仍保留可视。
+<p> 默认实现是忽略<em>href</em>并且返回真。
+
+<h3 class=fn>void <a name="display"></a>QWhatsThis::display ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text, const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;pos = QCursor::pos ( ), <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w = 0 )<tt> [静态]</tt>
+</h3>
+在全局屏幕的帮助窗口中位置<em>pos</em>显示<em>text</em>。
+<p> 如果窗口部件<em>w</em>不为零并且已经有了自己专有的QWhatsThis对象，当用户在帮助文本的超链接上点击时，这个对象将会接收<a href="#clicked">clicked</a>()消息。
+<p> <p>也可以参考<a href="#clicked">QWhatsThis::clicked</a>()。
+
+<h3 class=fn>void <a name="enterWhatsThisMode"></a>QWhatsThis::enterWhatsThisMode ()<tt> [静态]</tt>
+</h3>
+进入“这是什么？”模式并且立即返回。
+<p> Qt将会安装一个特定的光标并且取代鼠标输入直到用户在某处点击为止。然后它显示任何可以提供的帮助并且切换出“这是什么？”模式。最后，Qt在鼠标左键不再点击的点移除特定光标和帮助窗口，然后回复通常的事件处理。
+<p> 用户也可以使用Esc键离开“这是什么？”模式。
+<p> <p>也可以参考<a href="#inWhatsThisMode">inWhatsThisMode</a>()和<a href="#leaveWhatsThisMode">leaveWhatsThisMode</a>()。
+
+<h3 class=fn>bool <a name="inWhatsThisMode"></a>QWhatsThis::inWhatsThisMode ()<tt> [静态]</tt>
+</h3>
+如果应用程序在“这是什么？”模式中，返回真，否则返回假。
+<p> <p>也可以参考<a href="#enterWhatsThisMode">enterWhatsThisMode</a>()和<a href="#leaveWhatsThisMode">leaveWhatsThisMode</a>()。
+
+<h3 class=fn>void <a name="leaveWhatsThisMode"></a>QWhatsThis::leaveWhatsThisMode ( const&nbsp;<a href="qstring.html">QString</a>&nbsp;&amp;&nbsp;text = QString::null, const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;pos = QCursor::pos ( ), <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w = 0 )<tt> [静态]</tt>
+</h3>
+离开“这是什么？”问题模式。
+<p> 这个函数被支持<a href="qwidget.html#customWhatsThis">QWidget::customWhatsThis</a>()的窗口部件内部使用，应用程序通常不会调用它。有一个QPopupMenu这样的窗口部件的实例：菜单还在“这是什么？”模式正常工作，但也为个别的菜单项提供帮助文本。
+<p> 如果<em>text</em>不是一个零字符串，“这是什么？”帮助窗口将在全局屏幕的位置<em>pos</em>处被显示。如果窗口部件<em>w</em>非零并且它有自己专有的QWhatsThis对象，当用户点击帮助文本中的超链接时，这个对象将收到<a href="#clicked">clicked</a>()消息。
+<p> <p>也可以参考<a href="#inWhatsThisMode">inWhatsThisMode</a>()、<a href="#enterWhatsThisMode">enterWhatsThisMode</a>()和<a href="#clicked">QWhatsThis::clicked</a>()。
+
+<h3 class=fn>void <a name="remove"></a>QWhatsThis::remove ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;widget )<tt> [静态]</tt>
+</h3>
+移除和<em>widget</em>相关的“这是什么？”帮助。如果这个窗口部件被销毁，这也会自动发生。
+<p>也可以参考<a href="#add">add</a>()。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="text"></a>QWhatsThis::text ( const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp; )<tt> [虚]</tt>
+</h3>
+虚函数返回这个“这是什么？”对象文档的窗口部件在位置<em>p</em>的文本。如果在这个位置没有“这是什么？”文本，<a href="qstring.html#QString-null">QString::null</a>被返回。
+<p> 默认实现是返回QString::null。
+
+<h3 class=fn><a href="qstring.html">QString</a> <a name="textFor"></a>QWhatsThis::textFor ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;w, const&nbsp;<a href="qpoint.html">QPoint</a>&nbsp;&amp;&nbsp;pos = QPoint ( ), bool&nbsp;includeParents = FALSE )<tt> [静态]</tt>
+</h3>
+为窗口部件<em>w</em>返回这是什么的文本，或者如果对于这个窗口部件没有任何“这是什么？”帮助，返回一个零字符串。<em>pos</em>包含鼠标位置，这很有用，例如，如果你已经继承来使文本根据这个位置进行显示。
+<p> 如果<em>includeParents</em>为真，父窗口部件将也被考虑进去。
+<p> <p>也可以参考<a href="#add">add</a>()。
+
+<h3 class=fn><a href="qtoolbutton.html">QToolButton</a>&nbsp;* <a name="whatsThisButton"></a>QWhatsThis::whatsThisButton ( <a href="qwidget.html">QWidget</a>&nbsp;*&nbsp;parent )<tt> [静态]</tt>
+</h3>
+当点击时，创建一个预定义进入“这是什么？”模式的<a href="qtoolbutton.html">QToolButton</a>。你通常可以使用菜单条作为它的<em>parent</em>。
+<pre>
+     (void) QWhatsThis::whatsThisButton( my_help_tool_bar );
+  </pre>
+ 
+
+<!-- eof -->
+<hr><p>
+这个文件是<a href="index.html">Qt工具包</a>一部分。
+版权所有 &copy; 1995-2002
+<a href="http://www.trolltech.com/">Trolltech</a>。保留所有权利。
+<p><address><hr><div align=center>
+<table width=100% cellspacing=0 border=0><tr>
+<td>Copyright &copy; 2002 
+<a href="http://www.trolltech.com">Trolltech</a>
+<td><a href="http://www.trolltech.com/trademarks.html">Trademarks</a>
+<td><a href="zh_CN.html">译者:Cavendish</a>
+<td align=right><div align=right>Qt 3.0.5版</div>
+</table></div></address>
+</body>
+</html>
